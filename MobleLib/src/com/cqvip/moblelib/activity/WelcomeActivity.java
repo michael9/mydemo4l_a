@@ -17,15 +17,20 @@ public class WelcomeActivity extends Activity {
     ImageView welcomimg=null;
     AnimationDrawable animator = null;
     Timer timer_sys_check;
+    
     int n=0;
     private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
             switch (msg.what) {
             case 1:
                n++;
-               if(n==5)
-                   animator.start();     
-               if(n>24)
+//               if(n==2)
+//                   animator.start();     
+               
+               if(welcomimg.isShown()&&!animator.isRunning())
+            	   animator.start();
+               
+               if(n>155)
                {
                    finish();
 //               overridePendingTransition(R.anim.activty_fade,
@@ -33,6 +38,7 @@ public class WelcomeActivity extends Activity {
                }
                 break;
             }
+       
         }
     };
     
@@ -54,7 +60,7 @@ public class WelcomeActivity extends Activity {
 		welcomimg=(ImageView)findViewById(R.id.welcome_img);
 		welcomimg.setBackgroundResource(R.anim.welcome_anim);
 		animator = (AnimationDrawable) welcomimg.getBackground();
-	
+		
 	}
 	
 	@Override
@@ -62,7 +68,7 @@ public class WelcomeActivity extends Activity {
 	    // TODO Auto-generated method stub
 	    super.onResume();	    	    
         timer_sys_check=new Timer();
-        timer_sys_check.schedule(new Page_check_task(), 0,100);  
+        timer_sys_check.schedule(new Page_check_task(), 0,20);  
 	}
 
 }
