@@ -1,0 +1,8 @@
+<RelativeLayout android:padding="13.0dip" 
+    android:id="@+id/linemore" 
+    android:layout_width="fill_parent" 
+    android:layout_height="fill_parent"
+   xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textColor="#ff333333" android:gravity="center" android:id="@+id/footer_txt" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="更多" android:singleLine="true" android:layout_centerInParent="true" />
+    <ProgressBar android:id="@+id/footer_progress" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:layout_toRightOf="@id/footer_txt" android:layout_centerInParent="true" style="?@android:attr/progressBarStyleSmallInverse" />
+</RelativeLayout>

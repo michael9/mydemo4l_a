@@ -1,0 +1,64 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_list"
+    android:orientation="vertical"
+    tools:context=".BorrowAndOrderActivity" >
+
+    <include
+        android:id="@+id/borrow_title"
+        layout="@layout/header" />
+
+    <LinearLayout
+        android:id="@+id/borrow_title_lay"
+        android:layout_width="fill_parent"
+        android:layout_height="48dp" >
+
+        <TextView
+            android:id="@+id/borrow_title_txt"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:text="借阅"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/order_title_txt"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:text="预约"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/order_title_txt"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:text="预约"
+            android:textSize="16sp"
+            android:visibility="invisible" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/cursor"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="matrix"
+        android:src="@drawable/eg_cursor" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/borrow_vPager"
+        android:layout_width="wrap_content"
+        android:layout_height="0dip"
+        android:layout_gravity="center"
+        android:layout_weight="1.0"
+        android:background="#00000000"
+        android:flipInterval="30"
+        android:persistentDrawingCache="animation" />
+
+</LinearLayout>

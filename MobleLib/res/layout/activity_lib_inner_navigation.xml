@@ -1,0 +1,64 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/readerserve_title"
+        layout="@layout/header" />
+
+    <LinearLayout
+        android:id="@+id/ll_floors"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/readerserve_title"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <TextView 
+            android:id="@+id/tv_floor_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/silvergray"
+            android:padding="2dp"
+            android:text="@string/floor_one"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_floor_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/silvergray"
+            android:padding="2dp"
+            android:text="@string/floor_two"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_floor_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/silvergray"
+            android:padding="2dp"
+            android:text="@string/floor_three"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/fl_navigation"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/ll_floors" >
+
+        <com.cqvip.moblelib.view.PinchableImageView
+            android:id="@+id/mPinchableImageView"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            >
+        </com.cqvip.moblelib.view.PinchableImageView>
+    </FrameLayout>
+
+</RelativeLayout>

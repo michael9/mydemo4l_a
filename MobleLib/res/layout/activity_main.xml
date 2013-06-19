@@ -1,0 +1,50 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_page"
+    tools:context=".MainMenuActivity" >
+<!--
+    <SurfaceView
+        android:id="@+id/main_anim_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />-->
+
+    <com.cqvip.moblelib.view.StableGridView
+        android:id="@+id/grid_main"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:horizontalSpacing="10.0dip"
+        android:isScrollContainer="false"
+        android:layoutAnimation="@anim/layout_wave_scale"
+        android:listSelector="@drawable/transparent"
+        android:numColumns="3"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="20.0dip" />
+
+    <SlidingDrawer
+        android:id="@+id/sd"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:content="@+id/myContent"
+        android:handle="@+id/iv"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:id="@+id/iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/person_new_icon" />
+
+        <ListView
+            android:id="@+id/myContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/eg_whatsnew_btn_nor"
+            android:gravity="center"
+            />
+    </SlidingDrawer>
+
+</RelativeLayout>

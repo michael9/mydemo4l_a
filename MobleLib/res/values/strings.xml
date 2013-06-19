@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">MobleLib</string>
+    <string name="action_settings">Settings</string>
+    <string name="zx_phone">咨询电话:     02366879630</string>
+    <string name="main_guide">入馆指南</string>
+    <string name="main_search">馆藏查询</string>
+    <string name="main_server">读者服务</string>
+    <string name="main_ebook">电子资源</string>
+    <string name="main_readingguide">推荐阅读</string>
+    <string name="main_bookcomment">参考咨询</string>
+    <string name="main_ebookstore">个人中心</string>
+    <string name="main_notice">馆内公告</string>
+    <string name="main_borrow">借阅管理</string>
+    <string name="main_order">书友圈</string>
+    <string name="guide_needknow">入馆须知</string>
+    <string name="guide_cardguide">办证指南</string>
+    <string name="guide_time">开馆时间</string>
+    <string name="guide_readerknow">读者须知</string>
+    <string name="guide_server">服务介绍</string>
+    <string name="guide_transport">交通指南</string>
+    <string name="guide_navigation">馆内导航</string>
+    <string name="guide_problem">常见问题</string>
+    <string name="title_activity_entance_guide">入馆指南</string>
+    <string name="title_activity_book_search">馆藏查询</string>
+    <string name="title_activity_reader_service">读者服务</string>
+    <string name="serv_readerinfo">读者信息</string>
+    <string name="serv_favorite">我的收藏</string>
+    <string name="serv_myattention">我的关注</string>
+    <string name="serv_bookorder">图书预约</string>
+    <string name="serv_myintroduceread">我的荐读</string>
+    <string name="serv_myintroducebuy">我的荐购</string>
+    <string name="serv_myquestion">我的提问</string>
+    <string name="title_activity_ebook_activiy">电子资料</string>
+    <string name="title_activity_result_for_search">查询结果</string>
+    <string name="title_activity_suggested_reading">推荐阅读</string>
+    <string name="title_activity_ref_service">参考咨询</string>
+    <string name="title_activity_personal_center">个人中心</string>
+    <string name="title_activity_announce">馆内公告</string>
+    <string name="title_activity_borrow_and_order">借阅管理</string>
+    <string name="title_activity_group_of_readers">书友圈</string>
+    <string name="suggestread_proffession">专家推荐</string>
+    <string name="suggestread_topcomment">热门评论</string>
+    <string name="suggestread_rank">借阅排行</string>
+    <string name="suggestread_ebookrand">电子资源下载排行</string>
+    <string name="suggestread_newbook">新书通报</string>
+    <string name="announce_innermove">馆内动态</string>
+    <string name="announce_out">业界活动</string>
+    <string name="announce_inneractive">馆内活动</string>
+    <string name="announce_speech">讲座安排</string>
+    <string name="floor_one">一楼</string>
+    <string name="floor_two">二楼</string>
+    <string name="floor_three">三楼</string>
+    
+    <string name="item_author">作者:</string>
+    <string name="item_publish">出版社</string>
+    <string name="item_time">出版时间:</string>
+    <string name="item_describe">简介:</string>
+    
+     <string name="item_barcode">条码号:</string>
+    <string name="item_callno">索取号：</string>
+    <string name="item_price">价格:</string>
+    <string name="item_brtime">借出时间:</string>
+    <string name="item_retime">还回日期:</string>
+    <string name="item_renew">续借</string>
+    
+    
+    <string name="title_activity_detail_text">DetailTextActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_welcome">WelcomeActivity</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_result_on_search">ResultOnSearchActivity</string>
+    <string name="title_activity_detail_book">DetailBookActivity</string>
+
+    
+</resources>

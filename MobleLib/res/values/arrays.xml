@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+     <!-- Used in View -->
+    <string-array name="searchtype">
+        <item>全部</item>
+        <item>中文</item>
+        <item>西文</item>
+        <item>征订</item>
+    </string-array>
+</resources>

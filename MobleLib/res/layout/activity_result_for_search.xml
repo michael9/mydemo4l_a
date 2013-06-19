@@ -1,0 +1,17 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_hdip"
+    tools:context=".ResultForSearchActivity" >
+    <include android:id="@+id/result_title" layout="@layout/header" />
+<ListView 
+    android:layout_below="@+id/result_title"
+    android:id="@+id/re_list"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+     android:divider="@android:color/white" 
+    ></ListView>
+    
+
+</RelativeLayout>

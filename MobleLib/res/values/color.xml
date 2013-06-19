@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#00000000</color>
+    <color name="black">#FFFFFFFF</color>
+    <color name="divider_color">#a9a9a9</color>
+    
+    <drawable name="nonecolor">#00FFFFFF</drawable>
+    <drawable name="aa">#cccc00</drawable>
+    <drawable name="bb">#ff6666</drawable>
+    
+    <drawable name="LightSkyBlue">#87CEFA</drawable>
+    <drawable name="DeepSkyBlue">#00BFFF</drawable>
+    <drawable name="silvergray">#a9a9a9</drawable>
+    <drawable name="GreenYellow">#ADFF2F</drawable>
+    
+    <drawable name="titlegreen">#73cfeca0</drawable>
+    <drawable name="btngreen">#ffcfeca0</drawable>
+    <drawable name="transparent">#00000000</drawable>
+</resources>

@@ -1,0 +1,50 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".ResultOnSearchActivity" >
+
+   <RelativeLayout
+            android:id="@+id/searchbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/search_bar"
+            android:orientation="horizontal" >
+
+            <EditText
+                android:id="@+id/search_et"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:singleLine="true"
+                android:background="@null"
+                android:imeOptions="actionSearch"
+                android:ems="10"
+                android:hint="请输入关键词搜索"
+                android:maxLines="2" />
+
+            <ImageView
+                android:id="@+id/search_seach_btn"
+                android:layout_width="33dp"
+                android:layout_height="33dp"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="5.0dip"
+                android:layout_marginTop="1.0dip"
+                android:background="@drawable/eg_search" />
+        </RelativeLayout>
+    
+    <ListView 
+    android:layout_below="@+id/searchbar"
+    android:id="@+id/search_res_lv"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+     android:divider="@color/divider_color" 
+     android:dividerHeight="0.5dp"
+    ></ListView>
+
+</RelativeLayout>
