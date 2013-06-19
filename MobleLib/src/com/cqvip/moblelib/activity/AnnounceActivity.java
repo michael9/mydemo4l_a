@@ -29,7 +29,7 @@ public class AnnounceActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		//hejun
-		//maqz232dfddfd
+		//maqz232dfddfdsdfff2222
 		requestWindowFeature( Window.FEATURE_NO_TITLE );
 		setContentView(R.layout.activity_announce);
 		View v = findViewById(R.id.readerserve_title);
