@@ -59,6 +59,8 @@ public class MainMenuActivity extends Activity implements IBookManagerActivity {
 	private LinearLayout login_status_ll;
 	private ScrollView login_form_sv;
 	private boolean islogin = false;
+	private StableGridView gridview;
+	static public boolean cantouch;
 
 	private int width, height;
 	// private SurfaceView main_anim_background;
@@ -137,7 +139,7 @@ public class MainMenuActivity extends Activity implements IBookManagerActivity {
 		// sh = main_anim_background.getHolder();
 		// mtr = new Timer();
 		// mtr.schedule(task, 1000, 50);
-		StableGridView gridview = (StableGridView) findViewById(R.id.grid_main);
+		gridview = (StableGridView) findViewById(R.id.grid_main);
 		final GridViewImgAdapter adapter = new GridViewImgAdapter(this);
 		gridview.setAdapter(adapter);
 		// gridview.setOnItemClickListener(new OnItemClickListener() {
@@ -286,7 +288,8 @@ public class MainMenuActivity extends Activity implements IBookManagerActivity {
 	protected void onResume() {
 		super.onResume();
 		init();
-	}
+		cantouch=true;
+		}
 
 	private final Class[] activities = { EntanceGuideActivity.class,
 			BookSearchActivity.class, EBookActiviy.class,
@@ -297,7 +300,7 @@ public class MainMenuActivity extends Activity implements IBookManagerActivity {
 	public class GridViewImgAdapter extends BaseAdapter {
 
 		private Context mContext;
-
+		
 		// 定义整型数组 即图片源
 
 		private Integer[] mImageIds = { R.drawable.sy_anniu_03,
@@ -322,6 +325,7 @@ public class MainMenuActivity extends Activity implements IBookManagerActivity {
 		public GridViewImgAdapter(Context c) {
 			mContext = c;
 		}
+		
 
 		// private int clickTemp = -1;
 		//
@@ -377,16 +381,25 @@ public class MainMenuActivity extends Activity implements IBookManagerActivity {
 			img.setOnTouchListener(new View.OnTouchListener() {
 				@Override
 				public boolean onTouch(View v, MotionEvent event) {
-					switch (event.getAction()) {
+					
+					
+					
+					switch (event.getAction()) {					
 					case MotionEvent.ACTION_DOWN:
 						img.setImageResource(mImageIds_big[temp_position]);
 						Log.i("MainMenuActivity", "ACTION_DOWN");
 						break;
 					case MotionEvent.ACTION_UP:
 						img.setImageResource(mImageIds[temp_position]);
+						
+						if(!MainMenuActivity.cantouch)
+							break;
+						
+						
 						Intent intent = new Intent();
 						intent.setClass(context, activities[temp_position]);
 						startActivity(intent);
+						MainMenuActivity.cantouch=false;
 						Log.i("MainMenuActivity", "ACTION_UP");
 						break;
 					default:
