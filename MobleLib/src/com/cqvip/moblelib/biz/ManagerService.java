@@ -92,6 +92,10 @@ public class ManagerService extends Service implements Runnable{
 			String time = manager.getContent(Task.TASK_E_TIME);
 			msg.obj = time;
 			break;	
+		case Task.TASK_E_READER:
+			String read = manager.getContent(Task.TASK_E_READER);
+			msg.obj = read;
+			break;	
 		case Task.TASK_E_SERVICE:
 			String service = manager.getContent(Task.TASK_E_SERVICE);
 			msg.obj = service;
@@ -142,25 +146,31 @@ public class ManagerService extends Service implements Runnable{
 				break;	
 			case Task.TASK_E_NOTICE:
 				//获取读者信息
-				IBookManagerActivity notice = (IBookManagerActivity) ManagerService.getActivityByName("DetailBookActivity");
+				IBookManagerActivity notice = (IBookManagerActivity) ManagerService.getActivityByName("DetailTextActivity");
 				//刷新
 				notice.refresh(DetailTextActivity.E_NOTICE,msg.obj);
 				break;	
 			case Task.TASK_E_CARDGUID:
 				//获取读者信息
-				IBookManagerActivity card = (IBookManagerActivity) ManagerService.getActivityByName("DetailBookActivity");
+				IBookManagerActivity card = (IBookManagerActivity) ManagerService.getActivityByName("DetailTextActivity");
 				//刷新
 				card.refresh(DetailTextActivity.E_CARDGUID,msg.obj);
 				break;	
 			case Task.TASK_E_TIME:
 				//获取读者信息
-				IBookManagerActivity time = (IBookManagerActivity) ManagerService.getActivityByName("DetailBookActivity");
+				IBookManagerActivity time = (IBookManagerActivity) ManagerService.getActivityByName("DetailTextActivity");
 				//刷新
 				time.refresh(DetailTextActivity.E_TIME,msg.obj);
 				break;	
+			case Task.TASK_E_READER:
+				//获取读者信息
+				IBookManagerActivity reader = (IBookManagerActivity) ManagerService.getActivityByName("DetailTextActivity");
+				//刷新
+				reader.refresh(DetailTextActivity.E_READER,msg.obj);
+				break;	
 			case Task.TASK_E_SERVICE:
 				//获取读者信息
-				IBookManagerActivity service = (IBookManagerActivity) ManagerService.getActivityByName("DetailBookActivity");
+				IBookManagerActivity service = (IBookManagerActivity) ManagerService.getActivityByName("DetailTextActivity");
 				//刷新
 				service.refresh(DetailTextActivity.E_SERVICE,msg.obj);
 				break;	

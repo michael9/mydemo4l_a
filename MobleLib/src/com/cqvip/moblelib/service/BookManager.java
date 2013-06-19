@@ -3,6 +3,7 @@ package com.cqvip.moblelib.service;
 import java.util.List;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
@@ -218,20 +219,38 @@ public class BookManager {
 	 */
 	public String getContent(int type) throws BookException{
 		String result =null;
+		String str = null;
 		switch(type){
 		case Task.TASK_E_NOTICE:
 			result = http.requestUrl(getBaseURL()+"/library/guide/notice.aspx", getBaseget(), null);
+			str = formResult(result);
 			break;
 		case Task.TASK_E_CARDGUID:
 			result = http.requestUrl(getBaseURL()+"/library/guide/cardguide.aspx", getBaseget(), null);
+			str = formResult(result);
 			break;
 		case Task.TASK_E_TIME:
+			result = http.requestUrl(getBaseURL()+"/library/guide/time.aspx", getBaseget(), null);
+			str = formResult(result);
+			break;
+		case Task.TASK_E_READER:
 			result = http.requestUrl(getBaseURL()+"/library/guide/reader.aspx", getBaseget(), null);
+			str = formResult(result);
 			break;
 		case Task.TASK_E_SERVICE:
 			result = http.requestUrl(getBaseURL()+"/library/guide/service.aspx", getBaseget(), null);
+			str = formResult(result);
 			break;
 		}
-		return result;
+		return str;
+	}
+
+	private String formResult(String result) throws BookException {
+		try {
+			JSONObject json = new JSONObject(result);
+			return json.getString("content");
+		} catch (JSONException e) {
+			throw new BookException(e);
+		}
 	}
 }
