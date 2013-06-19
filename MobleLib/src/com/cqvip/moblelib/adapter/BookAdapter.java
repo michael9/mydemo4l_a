@@ -23,6 +23,9 @@ public class BookAdapter extends BaseAdapter{
 		this.context = context;
 		this.lists = lists;
 	}
+	public List<Book> getLists(){
+		return lists;
+	}
 	/**
 	 * 底部更多按钮，返回+1
 	 */

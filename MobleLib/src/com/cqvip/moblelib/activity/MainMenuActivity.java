@@ -99,15 +99,14 @@ public class MainMenuActivity extends Activity implements IBookManagerActivity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-		Intent intent = new Intent(MainMenuActivity.this, WelcomeActivity.class);
-		startActivity(intent);
+//		Intent intent = new Intent(MainMenuActivity.this, WelcomeActivity.class);
+//		startActivity(intent);
 
 		Display display = getWindowManager().getDefaultDisplay();
 		width = display.getWidth();
 		height = display.getHeight();
 		setContentView(R.layout.activity_main);
 		context = this;
-		ManagerService.allActivity.add(this);
 		init_drawer();
 		// 读取SharedPreferences中需要的数据
 
@@ -138,7 +137,6 @@ public class MainMenuActivity extends Activity implements IBookManagerActivity {
 		// sh = main_anim_background.getHolder();
 		// mtr = new Timer();
 		// mtr.schedule(task, 1000, 50);
-
 		StableGridView gridview = (StableGridView) findViewById(R.id.grid_main);
 		final GridViewImgAdapter adapter = new GridViewImgAdapter(this);
 		gridview.setAdapter(adapter);

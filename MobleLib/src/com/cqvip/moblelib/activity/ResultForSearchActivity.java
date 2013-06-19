@@ -1,11 +1,9 @@
 package com.cqvip.moblelib.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 import android.view.Window;
-import android.widget.Button;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -51,7 +49,17 @@ public class ResultForSearchActivity extends BaseActivity {
 		
 		listview = (ListView)findViewById(R.id.re_list);
 		listview.setAdapter(new BookAdapter(this));
-		
+		listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int postion,
+					long id) {
+				
+				
+				
+				
+			}
+		});
 	}
 
 

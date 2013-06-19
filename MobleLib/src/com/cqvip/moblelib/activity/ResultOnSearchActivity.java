@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
@@ -49,6 +50,8 @@ public class ResultOnSearchActivity extends Activity implements IBookManagerActi
 		listview = (ListView)findViewById(R.id.search_res_lv);
 		listview.setOnItemClickListener((OnItemClickListener)this);
 		ManagerService.allActivity.add(this);
+		
+		
 		imgsearch.setOnClickListener(new View.OnClickListener() {
 				
 				@Override
@@ -150,8 +153,16 @@ public class ResultOnSearchActivity extends Activity implements IBookManagerActi
 			getHomePage(key,page+1,DEFAULT_COUNT,1);
 			page = page+1;
 		}else{
-			Intent _intent = new Intent(context,DetailBookActivity.class);
-			startActivity(_intent);
+			Book book = adapter.getLists().get(positon);
+			if(book!=null){
+				Log.i("ResultOnSearchActivity",book.toString());
+				Intent _intent = new Intent(context,DetailBookActivity.class);
+				Bundle bundle = new Bundle();
+				bundle.putSerializable("book", book);
+				_intent.putExtra("detaiinfo", bundle);
+				startActivity(_intent);
+			}
+			
 //			Book book =  lists.get(position-1);
 //			if(book!=null){
 //			Bundle bundle = new Bundle();
