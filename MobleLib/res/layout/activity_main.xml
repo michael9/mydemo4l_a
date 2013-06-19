@@ -2,13 +2,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_page"
+    android:background="@drawable/bg_list"
     tools:context=".MainMenuActivity" >
 <!--
     <SurfaceView
         android:id="@+id/main_anim_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />-->
+        <ImageView 
+             android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/main_log_img"
+            />
 
     <com.cqvip.moblelib.view.StableGridView
         android:id="@+id/grid_main"
