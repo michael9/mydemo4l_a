@@ -12,6 +12,10 @@ import com.cqvip.moblelib.net.BookException;
 public class BorrowBook{
 
     private String recordno;//记录编号
+	public void setReturndate(String returndate) {
+		this.returndate = returndate;
+	}
+
 	private String barcode;
 	private String title;//标题
 	private String callno;//取书号
@@ -56,6 +60,10 @@ public class BorrowBook{
 	public String getTitle() {
 		return title;
 	}
+	public void setRenew(int renew) {
+		this.renew = renew;
+	}
+
 	public String getCallno() {
 		return callno;
 	}

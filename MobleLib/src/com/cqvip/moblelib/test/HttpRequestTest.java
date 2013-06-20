@@ -13,6 +13,7 @@ import com.cqvip.moblelib.model.Book;
 import com.cqvip.moblelib.model.BookLoc;
 import com.cqvip.moblelib.model.BorrowBook;
 import com.cqvip.moblelib.model.Reader;
+import com.cqvip.moblelib.model.ShortBook;
 import com.cqvip.moblelib.net.BookException;
 import com.cqvip.moblelib.net.BookParameters;
 import com.cqvip.moblelib.service.BookManager;
@@ -181,6 +182,37 @@ public class HttpRequestTest extends AndroidTestCase {
 			e.printStackTrace();
 		}
 	}
+	/**
+	 * ²âÊÔÐø½è
+	 */
+	public void testReNew(){
+		BookManager man = new BookManager();
+		String userid = "0440061012345"	;
+		String barcode = "04400696111860" ;
+		try {
+			ShortBook res = man.reNew(userid,barcode);
+			Log.i("mobile",res.getMessage());
+		} catch (BookException e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
+	public void testChangePwd(){
+		BookManager man = new BookManager();
+		String userid = "0441200001098"	;
+		String newpwd = "888888" ;
+		String oldpwd = "88888888" ;
+		try {
+			String res = man.changPassword(userid, newpwd, oldpwd);
+			Log.i("mobile",res);
+		} catch (BookException e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
 	public void testGetBookDetail(){
 		BookManager man = new BookManager();
 		try {
