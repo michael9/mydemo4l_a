@@ -3,25 +3,28 @@ package com.cqvip.moblelib.scan;
 import java.io.IOException;
 import java.util.Vector;
 
-import com.cqvip.moblelib.R;
-import com.cqvip.moblelib.activity.ResultOnSearchActivity;
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.Result;
-
 import android.app.Activity;
-import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
+import android.graphics.Rect;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
+import android.view.View;
+import android.view.Window;
 import android.widget.TextView;
+
+import com.cqvip.moblelib.R;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.Result;
 
 public class CaptureActivity extends Activity implements Callback {
 
@@ -36,21 +39,42 @@ public class CaptureActivity extends Activity implements Callback {
 	private boolean playBeep;
 	private static final float BEEP_VOLUME = 0.10f;
 	private boolean vibrate;
+	public static  int statusBarHeight;
 
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
 		setContentView(R.layout.scan);
 		//初始化 CameraManager
 		CameraManager.init(getApplication());
-
 		viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);
 		txtResult = (TextView) findViewById(R.id.txtResult);
+		//获取状态栏高度
+		txtResult.post(new Runnable() {
+            public void run() {
+                    init_statusheight();
+            }
+    });
+		
 		hasSurface = false;
 		inactivityTimer = new InactivityTimer(this);
 	}
 
+	 private void init_statusheight(){
+         Rect rect = new Rect();
+         Window window = getWindow();
+         txtResult.getWindowVisibleDisplayFrame(rect);
+         // 状态栏的高度
+        statusBarHeight = rect.top;
+//         // 标题栏跟状态栏的总体高度
+//         int contentViewTop = window.findViewById(Window.ID_ANDROID_CONTENT).getTop();
+//         // 标题栏的高度：用上面的值减去状态栏的高度及为标题栏高度
+//         int titleBarHeight = contentViewTop - statusBarHeight;
+//         System.out.println(statusBarHeight+"..."+contentViewTop+"..."+titleBarHeight);
+ }
+	
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -142,12 +166,8 @@ public class CaptureActivity extends Activity implements Callback {
 		inactivityTimer.onActivity();
 		viewfinderView.drawResultBitmap(barcode);
 		 playBeepSoundAndVibrate();
-//		txtResult.setText(obj.getBarcodeFormat().toString() + ":"
-//				+ obj.getText());
-		Intent intent=new Intent(CaptureActivity.this,ResultOnSearchActivity.class);
-		intent.putExtra("ISBN", obj.getText());
-		startActivity(intent);
-		finish();
+		txtResult.setText(obj.getBarcodeFormat().toString() + ":"
+				+ obj.getText());
 	}
 
 	private void initBeepSound() {
