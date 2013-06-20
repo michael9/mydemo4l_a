@@ -166,8 +166,12 @@ public class CaptureActivity extends Activity implements Callback {
 		inactivityTimer.onActivity();
 		viewfinderView.drawResultBitmap(barcode);
 		 playBeepSoundAndVibrate();
-		txtResult.setText(obj.getBarcodeFormat().toString() + ":"
-				+ obj.getText());
+//		txtResult.setText(obj.getBarcodeFormat().toString() + ":"
+//				+ obj.getText());
+		Intent intent=new Intent(CaptureActivity.this,ResultOnSearchActivity.class);
+		intent.putExtra("ISBN", obj.getText());
+		startActivity(intent);
+		finish();
 	}
 
 	private void initBeepSound() {
