@@ -3,6 +3,7 @@ package com.cqvip.moblelib.scan;
 import java.io.IOException;
 import java.util.Vector;
 
+
 import com.cqvip.moblelib.R;
 import com.cqvip.moblelib.activity.ResultOnSearchActivity;
 import com.google.zxing.BarcodeFormat;
