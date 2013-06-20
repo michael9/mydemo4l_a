@@ -150,8 +150,9 @@
         </activity>
         <activity
         
-            android:name="com.cqvip.moblelib.activity.WelcomeActivity2"
+            android:name="com.cqvip.moblelib.activity.WelcomeActivity"
             android:theme="@style/NoTtitleAndAnimation" >
+            
         </activity>
         <activity
             
