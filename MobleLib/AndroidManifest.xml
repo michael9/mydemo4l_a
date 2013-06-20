@@ -149,7 +149,7 @@
             android:label="@string/title_activity_detail_book" >
         </activity>
         <activity
-            
+        
             android:name="com.cqvip.moblelib.activity.WelcomeActivity"
             android:theme="@style/NoTtitleAndAnimation" >
         </activity>
