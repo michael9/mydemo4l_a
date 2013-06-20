@@ -16,20 +16,18 @@
 
 package com.cqvip.moblelib.scan;
 
+import java.io.IOException;
+
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.PixelFormat;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.hardware.Camera;
 import android.os.Build;
 import android.os.Handler;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.SurfaceHolder;
-
-
-import java.io.IOException;
+import android.view.Window;
 
 /**
  * This object wraps the Camera service object and expects to be the only one talking to it. The
@@ -224,20 +222,26 @@ public final class CameraManager {
       if (camera == null) {
         return null;
       }
-      int width = screenResolution.x * 3 / 4;
-      if (width < MIN_FRAME_WIDTH) {
-        width = MIN_FRAME_WIDTH;
-      } else if (width > MAX_FRAME_WIDTH) {
-        width = MAX_FRAME_WIDTH;
-      }
-      int height = screenResolution.y * 3 / 4;
-      if (height < MIN_FRAME_HEIGHT) {
-        height = MIN_FRAME_HEIGHT;
-      } else if (height > MAX_FRAME_HEIGHT) {
-        height = MAX_FRAME_HEIGHT;
-      }
-      int leftOffset = (screenResolution.x - width) / 2;
-      int topOffset = (screenResolution.y - height) / 2;
+      
+      int leftOffset =screenResolution.x/ 10;
+      int topOffset = screenResolution.y/10;
+      Log.i("CameraManager1", ""+leftOffset);
+      Log.i("CameraManager2", ""+topOffset);
+      int width = screenResolution.x-2*leftOffset;
+      Log.i("CameraManager3", ""+screenResolution.x);
+//      if (width < MIN_FRAME_WIDTH) {
+//        width = MIN_FRAME_WIDTH;
+//      } else if (width > MAX_FRAME_WIDTH) {
+//        width = MAX_FRAME_WIDTH;
+//      }
+      int height = screenResolution.y -2*topOffset-CaptureActivity.statusBarHeight;
+      Log.i("CameraManager4", ""+screenResolution.y);
+//      if (height < MIN_FRAME_HEIGHT) {
+//        height = MIN_FRAME_HEIGHT;
+//      } else if (height > MAX_FRAME_HEIGHT) {
+//        height = MAX_FRAME_HEIGHT;
+//      }
+      
       framingRect = new Rect(leftOffset, topOffset, leftOffset + width, topOffset + height);
       Log.d(TAG, "Calculated framing rect: " + framingRect);
     }
