@@ -14,6 +14,7 @@ import com.cqvip.moblelib.activity.DetailTextActivity;
 import com.cqvip.moblelib.activity.ResultOnSearchActivity;
 import com.cqvip.moblelib.base.IBookManagerActivity;
 import com.cqvip.moblelib.model.Book;
+import com.cqvip.moblelib.model.BookLoc;
 import com.cqvip.moblelib.model.BorrowBook;
 import com.cqvip.moblelib.model.Reader;
 import com.cqvip.moblelib.model.Result;
@@ -100,6 +101,10 @@ public class ManagerService extends Service implements Runnable{
 			String service = manager.getContent(Task.TASK_E_SERVICE);
 			msg.obj = service;
 			break;	
+		case Task.TASK_BOOK_INFO:
+			BookLoc binfo = manager.getBookDetail((String)task.getTaskParam().get("id"));
+			msg.obj = binfo;
+			break;	
 			
 			}
 		}catch(Exception e){
@@ -173,6 +178,12 @@ public class ManagerService extends Service implements Runnable{
 				IBookManagerActivity service = (IBookManagerActivity) ManagerService.getActivityByName("DetailTextActivity");
 				//刷新
 				service.refresh(DetailTextActivity.E_SERVICE,msg.obj);
+				break;	
+			case Task.TASK_BOOK_INFO:
+				//获取读者信息
+				IBookManagerActivity binfo = (IBookManagerActivity) ManagerService.getActivityByName("DetailBookActivity");
+				//刷新
+				binfo.refresh(msg.obj);
 				break;	
 			}
 		}

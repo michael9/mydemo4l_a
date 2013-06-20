@@ -10,6 +10,7 @@ import android.util.Log;
 
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.model.Book;
+import com.cqvip.moblelib.model.BookLoc;
 import com.cqvip.moblelib.model.BorrowBook;
 import com.cqvip.moblelib.model.Reader;
 import com.cqvip.moblelib.net.BookException;
@@ -179,5 +180,17 @@ public class HttpRequestTest extends AndroidTestCase {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	public void testGetBookDetail(){
+		BookManager man = new BookManager();
+		try {
+			BookLoc b = man.getBookDetail("1402882");
+			
+			Log.i("mobile",b.toString());
+		} catch (BookException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 }

@@ -1,8 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout  
+     android:layout_width="match_parent"
+    android:layout_height="match_parent"
+     android:background="@drawable/bg_list"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <ImageView   android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:src="@drawable/main_log_img"
+    android:layout_alignParentBottom="true"
+    android:layout_marginBottom="8dp"
+    />
+
 <com.cqvip.moblelib.view.mylinearlayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-     android:background="@drawable/bg_list"
+    
     android:orientation="vertical" android:id="@+id/myll">
 
     <include
@@ -13,6 +27,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:background="@drawable/a30"
         android:orientation="vertical"
         android:paddingBottom="9.0dip"
         android:paddingLeft="9.0dip"
@@ -300,3 +315,5 @@
     </LinearLayout>
 
 </com.cqvip.moblelib.view.mylinearlayout>
+
+</RelativeLayout>

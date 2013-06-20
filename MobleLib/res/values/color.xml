@@ -22,5 +22,5 @@
     <drawable name="titlegreen">#73cfeca0</drawable>
     <drawable name="btngreen">#ffcfeca0</drawable>
     <drawable name="transparent">#00000000</drawable>
-
+    <drawable name="a30" >#30ffffff</drawable>
 </resources>

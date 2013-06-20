@@ -16,6 +16,15 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- scan -->
+    <uses-permission android:name="android.permission.CAMERA" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" >
+    </uses-permission>
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
 
     <application
         android:allowBackup="true"
@@ -26,7 +35,7 @@
             android:name="com.cqvip.moblelib.activity.MainMenuActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Black.NoTitleBar"
+            android:theme="@android:style/Theme.Light.NoTitleBar"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -141,7 +150,12 @@
         </activity>
         <activity
             android:name="com.cqvip.moblelib.activity.WelcomeActivity"
-            android:theme="@android:style/Theme.Black.NoTitleBar" >
+            android:theme="@style/NoTtitleAndAnimation" >
+        </activity>
+        <activity
+            android:name="com.cqvip.moblelib.scan.CaptureActivity"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
     </application>
 

@@ -39,6 +39,7 @@ import com.cqvip.moblelib.base.IBookManagerActivity;
 import com.cqvip.moblelib.biz.ManagerService;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.model.Book;
+import com.cqvip.moblelib.scan.CaptureActivity;
 import com.cqvip.moblelib.view.StableGridView;
 import com.cqvip.utils.Tool;
 
@@ -61,7 +62,7 @@ public class BookSearchActivity extends BaseActivity {
 	private Context context;
 	private ViewPager mPager;//Ò³¿¨ÄÚÈÝ
 	private List<View> listViews; // TabÒ³ÃæÁÐ±í
-	private ImageView cursor;// ¶¯»­Í¼Æ¬
+	private ImageView cursor,scan_iv;// ¶¯»­Í¼Æ¬
 	private TextView t1, t2;// Ò³¿¨Í·±ê
 	private int currIndex = 0;// µ±Ç°Ò³¿¨±àºÅ
 	private int offset = 0;// ¶¯»­Í¼Æ¬Æ«ÒÆÁ¿
@@ -87,11 +88,19 @@ public class BookSearchActivity extends BaseActivity {
 		TextView title = (TextView)v.findViewById(R.id.txt_header);
 		title.setText(R.string.main_search);
 		ImageView back = (ImageView)v.findViewById(R.id.img_back_header);
+		scan_iv=(ImageView)findViewById(R.id.scan_iv);
 		back.setOnClickListener(new View.OnClickListener() {
-			
 			@Override
 			public void onClick(View v) {
 				finish();
+			}
+		});
+		
+		scan_iv.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent=new Intent(BookSearchActivity.this, CaptureActivity.class);
+				startActivityForResult(intent, 100);
 			}
 		});
 //		InitImageView();

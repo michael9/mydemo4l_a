@@ -27,6 +27,7 @@ public class Book implements Serializable  {
 	private String classno;
 	
 	private String subject;//关键字
+	private String u_publish;//关键字
 	private String u_cover;//图片
 	private String u_page;//页数
 	private String u_price;//价格
@@ -70,9 +71,13 @@ public class Book implements Serializable  {
 			u_isbn = json.getString("u_isbn");
 			u_cover = json.getString("u_cover");
 			u_title = json.getString("u_title");
+			u_publish = json.getString("u_publish");
 		} catch (JSONException e) {
 			throw new BookException(e);
 		}
+	}
+	public String getU_publish() {
+		return u_publish;
 	}
 	public String getAuthor() {
 		return author;

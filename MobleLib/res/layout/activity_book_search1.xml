@@ -1,17 +1,20 @@
-<LinearLayout 
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@drawable/bg_list"
+    android:orientation="vertical"
     tools:context=".BookSearchActivity" >
-    <include android:id="@+id/seach_title" layout="@layout/header" />
-    
-  <LinearLayout
+
+    <include
+        android:id="@+id/seach_title"
+        layout="@layout/header" />
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:gravity="center"
+        android:orientation="horizontal"
         android:paddingBottom="9.0dip"
         android:paddingLeft="9.0dip"
         android:paddingRight="9.0dip"
@@ -21,6 +24,7 @@
             android:id="@+id/searchbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:background="@drawable/search_bar"
             android:orientation="horizontal" >
 
@@ -29,12 +33,12 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:singleLine="true"
                 android:background="@null"
-                android:imeOptions="actionSearch"
                 android:ems="10"
                 android:hint="请输入关键词搜索"
-                android:maxLines="2" />
+                android:imeOptions="actionSearch"
+                android:maxLines="2"
+                android:singleLine="true" />
 
             <ImageView
                 android:id="@+id/search_seach_btn"
@@ -47,14 +51,22 @@
                 android:background="@drawable/eg_search" />
         </RelativeLayout>
 
-        <ListView
-            android:visibility="gone"
-            android:layout_marginTop="8.0dip"
-             android:background="@drawable/linearlayout_shape1"
-            android:id="@+id/choice_check_list"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" >
-        </ListView>
+        <ImageView
+            android:id="@+id/scan_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:src="@drawable/eg_price_icon" />
     </LinearLayout>
+
+    <ListView
+        android:id="@+id/choice_check_list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8.0dip"
+        android:background="@drawable/linearlayout_shape1"
+        android:visibility="gone" >
+    </ListView>
 
 </LinearLayout>

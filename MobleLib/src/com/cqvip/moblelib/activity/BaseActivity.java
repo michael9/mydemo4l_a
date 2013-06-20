@@ -11,6 +11,7 @@ import android.view.MotionEvent;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.widget.Toast;
 
+
 public class BaseActivity extends Activity {
 	private GestureDetector mGestureDetector;
 

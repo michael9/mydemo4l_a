@@ -15,6 +15,7 @@ public class Task {
 	public static final int TASK_E_TIME= 8;//开管时间
 	public static final int TASK_E_READER= 9;//开管时间
 	public static final int TASK_E_SERVICE= 10;//服务介绍
+	public static final int TASK_BOOK_INFO= 11;//服务介绍
 	
 	
 	public Task(int id, Map param) {

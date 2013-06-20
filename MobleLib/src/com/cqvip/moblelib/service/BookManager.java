@@ -8,6 +8,7 @@ import org.json.JSONObject;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.Book;
+import com.cqvip.moblelib.model.BookLoc;
 import com.cqvip.moblelib.model.BorrowBook;
 import com.cqvip.moblelib.model.Reader;
 import com.cqvip.moblelib.model.Result;
@@ -243,6 +244,21 @@ public class BookManager {
 			break;
 		}
 		return str;
+	}
+	
+	/**
+	 * 获取书籍的馆藏信息
+	 * @param recordid
+	 * @return
+	 * @throws BookException
+	 */
+	public BookLoc getBookDetail(String recordid) throws BookException{
+		BookParameters params = new BookParameters();
+		params.add("recordid", recordid);
+		params.add("tablename", "bibliosm");//书籍
+		String result = http.requestUrl(getBaseURL()+"/library/bookquery/detail.aspx", getBasepost(), params);
+		return new BookLoc(result);
+		
 	}
 
 	private String formResult(String result) throws BookException {

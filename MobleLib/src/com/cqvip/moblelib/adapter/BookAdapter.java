@@ -13,6 +13,11 @@ import android.widget.TextView;
 import com.cqvip.moblelib.R;
 import com.cqvip.moblelib.model.Book;
 
+/**
+ * 
+ * @author luojiang
+ *
+ */
 public class BookAdapter extends BaseAdapter{
 	private Context context;
 	private List<Book> lists;
