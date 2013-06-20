@@ -9,6 +9,7 @@ import com.cqvip.moblelib.biz.Task;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.text.Html;
 import android.view.Menu;
 import android.view.View;
@@ -23,7 +24,7 @@ public class DetailTextActivity extends BaseActivity implements IBookManagerActi
 	public static final int E_TIME = 3;
 	public static final int E_READER = 4;
 	public static final int E_SERVICE = 5;
-	
+	private ProgressDialog progressDialog;  
 	private int type;
 	private TextView t1,content;
 	@Override
@@ -35,6 +36,8 @@ public class DetailTextActivity extends BaseActivity implements IBookManagerActi
 		t1 = (TextView)v.findViewById(R.id.txt_header);
 		ImageView back = (ImageView)v.findViewById(R.id.img_back_header);
 		ManagerService.allActivity.add(this);
+		progressDialog=new ProgressDialog(this, ProgressDialog.STYLE_SPINNER);
+		
 		back.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -47,9 +50,11 @@ public class DetailTextActivity extends BaseActivity implements IBookManagerActi
 		//title = (TextView)findViewById(R.id.title_txt);
 		content = (TextView)findViewById(R.id.content_txt);
 		type = getIntent().getIntExtra("enter",0);
+		
+		progressDialog.show();
 		switch(type){
 		case 1:
-			t1.setText(R.string.guide_needknow);
+			t1.setText(R.string.guide_needknow);		
 			getContent(E_NOTICE);
 			//content.setText("1、进入外借处、阅览室（区）须持重庆图书馆读者证。\n 2、请注意仪表，勿穿背心、拖鞋入馆。\n 3、随身携带的包及其它与借阅无关的物品请寄放存包处。请勿携带书包、个人书刊资料及食品等进入阅览室（读者自修室除外）。");
 			break;
@@ -134,6 +139,7 @@ public class DetailTextActivity extends BaseActivity implements IBookManagerActi
 
 	@Override
 	public void refresh(Object... obj) {
+		progressDialog.dismiss();
 		Integer type = (Integer)obj[0];
 		String res = (String) obj[1];
 		

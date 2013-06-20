@@ -17,30 +17,35 @@ import com.cqvip.moblelib.model.BookLoc;
 public class DetailBookActivity extends Activity implements IBookManagerActivity {
 
 	private Book dBook;
-	private TextView baseinfo,loc;
+	private TextView baseinfo,loc,textView10;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_detail_book);
+		
 		Bundle bundle = getIntent().getBundleExtra("detaiinfo");
 		dBook = (Book)bundle.getSerializable("book");
 		baseinfo = (TextView) findViewById(R.id.bookinfo_txt);
 		loc = (TextView) findViewById(R.id.loc_txt);
+		textView10=(TextView)findViewById(R.id.textView10);
 		
 		ManagerService.allActivity.add(this);
 		if(dBook.getRecordid()!=null){
 			getLocalinfo(dBook.getRecordid());
 		}
-		baseinfo.setText("ÌâÃû:"+dBook.getU_title()+"\n"
-				+"×÷Õß"+dBook.getAuthor()+"\n"
-				+"³ö°æÉç"+dBook.getU_publish()+"\n"
-				+"Ë÷ÊéºÅ"+dBook.getCallno()+"\n"
-				+"·ÖÀàºÅ"+dBook.getClassno()+"\n"
-				+"ISBN"+dBook.getIsbn()+"\n"
-				+"¼Û¸ñ"+dBook.getU_price()+"\n"
-				+"¹Ø¼ü´Ê"+dBook.getSubject()+"\n"
-				+"¼ò½é"+dBook.getU_abstract()+"\n"
+		
+		
+		baseinfo.setText("��"+dBook.getU_title()+"��\n"
+				+"����:"+dBook.getAuthor()+"\n"
+				+"������:"+dBook.getU_publish()+"\n"
+				+""+dBook.getCallno()+"\n"
+				+""+dBook.getClassno()+"\n"
+				+"ISBN:"+dBook.getIsbn()+"\n"
+				+"�۸�:"+dBook.getU_price()+"\n"
+				+""+dBook.getSubject()+"\n"
+//				+"¼ò½é"+dBook.getU_abstract()+"\n"
 				);
+		textView10.setText(dBook.getU_abstract());
 	}
 
 	private void getLocalinfo(String recordid) {
