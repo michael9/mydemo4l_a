@@ -85,6 +85,8 @@
                 android:layout_marginRight="20.0dip"
                 android:src="@drawable/eg_arrow" />
         </LinearLayout>
+        
+		<!--  
         <LinearLayout android:layout_marginTop="-1dp"
             android:background="@drawable/linearlayout_shape2"
             android:id="@+id/attentionLayout"
@@ -118,6 +120,8 @@
                 android:layout_marginRight="20.0dip"
                 android:src="@drawable/eg_arrow" />
         </LinearLayout>
+        -->
+        <!--  
 		 <LinearLayout android:layout_marginTop="-1dp"
             android:background="@drawable/linearlayout_shape2"
             android:id="@+id/attentionLayout"
@@ -151,6 +155,8 @@
                 android:layout_marginRight="20.0dip"
                 android:src="@drawable/eg_arrow" />
         </LinearLayout>
+        -->
+        <!--  
         <LinearLayout android:layout_marginTop="-1dp"
             android:background="@drawable/linearlayout_shape2"
             android:id="@+id/myreadLayout"
@@ -184,7 +190,8 @@
                 android:layout_marginRight="20.0dip"
                 android:src="@drawable/eg_arrow" />
         </LinearLayout>
-
+-->
+<!--   
         <LinearLayout android:layout_marginTop="-1dp"
             android:background="@drawable/linearlayout_shape2"
             android:id="@+id/mybyLayout"
@@ -218,7 +225,8 @@
                 android:layout_marginRight="20.0dip"
                 android:src="@drawable/eg_arrow" />
         </LinearLayout>
-
+-->
+<!--  
         <LinearLayout android:layout_marginTop="-1dp"
             android:background="@drawable/linearlayout_shape_down"
             android:id="@+id/serverLayout"
@@ -252,6 +260,7 @@
                 android:layout_marginRight="20.0dip"
                 android:src="@drawable/eg_arrow" />
         </LinearLayout>
+        -->
     </LinearLayout>
 
 </LinearLayout>
