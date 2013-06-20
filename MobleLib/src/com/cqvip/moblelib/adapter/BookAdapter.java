@@ -76,7 +76,8 @@ public class BookAdapter extends BaseAdapter{
 			TextView publishyear;//出版时间
 			ImageView img;//时间图片 不用修改
 			//TextView u_page;//页数
-			TextView u_abstract;//简介
+//			TextView u_abstract;//简介
+			TextView isbn;
 			
 			}
 	
@@ -99,7 +100,8 @@ public class BookAdapter extends BaseAdapter{
 			holder.publisher = (TextView) convertView.findViewById(R.id.re_addr_txt);
 			holder.publishyear = (TextView) convertView.findViewById(R.id.re_time_txt);
 			holder.img = (ImageView) convertView.findViewById(R.id.re_book_img);
-			holder.u_abstract = (TextView) convertView.findViewById(R.id.re_hot_txt);
+//			holder.u_abstract = (TextView) convertView.findViewById(R.id.re_hot_txt);
+			holder.isbn=(TextView) convertView.findViewById(R.id.re_hot_txt);
 		
 			convertView.setTag(holder);
 		}else{
@@ -114,7 +116,8 @@ public class BookAdapter extends BaseAdapter{
 	        holder.author.setText(author+book.getAuthor());
 	        holder.publisher.setText(publish+book.getPublisher());
 	        holder.publishyear.setText(time+book.getPublishyear());
-	        holder.u_abstract.setText(describe+book.getU_abstract());
+//	        holder.u_abstract.setText(describe+book.getU_abstract());
+	        holder.isbn.setText("ISBN:"+book.getIsbn());
 		
 		return convertView;
 	}
