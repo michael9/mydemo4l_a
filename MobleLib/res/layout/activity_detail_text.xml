@@ -18,8 +18,11 @@
      android:layout_below="@+id/seach_title"
       android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginBottom="15dp"
-    android:layout_marginTop="15dp"
+    android:layout_marginBottom="20dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:background="@drawable/text_bck"
      >
 	<TextView
            android:id="@+id/content_txt"
