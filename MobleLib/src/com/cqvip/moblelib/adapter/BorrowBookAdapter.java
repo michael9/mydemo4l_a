@@ -1,5 +1,6 @@
 package com.cqvip.moblelib.adapter;
 
+import java.util.HashMap;
 import java.util.List;
 
 import android.content.Context;
@@ -10,6 +11,9 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.cqvip.moblelib.R;
+import com.cqvip.moblelib.biz.ManagerService;
+import com.cqvip.moblelib.biz.Task;
+import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.BorrowBook;
 
 public class BorrowBookAdapter extends BaseAdapter{
@@ -82,7 +86,7 @@ public class BorrowBookAdapter extends BaseAdapter{
 			holder.borrowtime = (TextView) convertView.findViewById(R.id.br_brtime_txt);
 			holder.returntime = (TextView) convertView.findViewById(R.id.br_retime_txt);
 			holder.price = (TextView) convertView.findViewById(R.id.br_price_txt);
-			//holder.renew = (TextView) convertView.findViewById(R.id.re_hot_txt);
+			holder.renew = (TextView) convertView.findViewById(R.id.re_brrenew_txt);
 		
 			convertView.setTag(holder);
 		}else{
@@ -93,13 +97,35 @@ public class BorrowBookAdapter extends BaseAdapter{
 		   String borrowtime =  context.getResources().getString(R.string.item_brtime);
 		   String returntime = context.getResources().getString(R.string.item_retime);
 		   String price = context.getResources().getString(R.string.item_price);
-			BorrowBook book = lists.get(position);
+			final BorrowBook book = lists.get(position);
 	        holder.title.setText(book.getTitle());
 	        holder.barcode.setText(barcode+book.getBarcode());
 	        holder.callno.setText(callno+book.getCallno());
 	        holder.price.setText(price+book.getPrice());
 	        holder.borrowtime.setText(borrowtime+book.getLoandate());
 	        holder.returntime.setText(returntime+book.getReturndate());
+	        //判断是否续借过
+	        if(book.getRenew()!=0){
+	        	holder.renew.setVisibility(View.GONE);
+	        }else{
+	        	if(holder.renew.getVisibility()==View.GONE){
+	        		holder.renew.setVisibility(View.VISIBLE);
+	        		holder.renew.setOnClickListener(new View.OnClickListener() {
+						
+						@Override
+						public void onClick(View v) {
+							//发送续借请求
+							HashMap map = new HashMap();
+							map.put("userid", GlobleData.userid);
+							map.put("barcode", book.getBarcode());
+							Task task = new Task(Task.TASK_BOOK_RENEW, map);
+							ManagerService.addNewTask(task);
+						}
+					});
+	        		
+	        	}
+	        }
+	        
 		
 		return convertView;
 	}

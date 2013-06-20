@@ -10,8 +10,10 @@ import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.Book;
 import com.cqvip.moblelib.model.BookLoc;
 import com.cqvip.moblelib.model.BorrowBook;
+import com.cqvip.moblelib.model.EBook;
 import com.cqvip.moblelib.model.Reader;
 import com.cqvip.moblelib.model.Result;
+import com.cqvip.moblelib.model.ShortBook;
 import com.cqvip.moblelib.model.User;
 import com.cqvip.moblelib.net.BookException;
 import com.cqvip.moblelib.net.BookParameters;
@@ -149,20 +151,6 @@ public class BookManager {
 		String result = http.requestUrl(getBaseURL() + "/library/user/borrowlist.aspx",getBaseget(), params);
 		return BorrowBook.formList(result);
 	}
-	/**
-	 * 单本续借图书接口
-	 * 
-	 * @param url
-	 * @param method
-	 * @param params
-	 * @return
-	 * @throws BookException
-	 */
-	public String Renew(String bookId) throws BookException {
-		BookParameters params = new BookParameters();
-		params.add("id", bookId);
-		return http.requestUrl(getBaseURL(), getBasepost(), params);
-	}
 
 	/**
 	 * 用户基本信息查询接口
@@ -260,7 +248,56 @@ public class BookManager {
 		return new BookLoc(result);
 		
 	}
-
+	
+	/**
+	 * 续借
+	 * @param userind
+	 * @param barcode
+	 * @return
+	 * @throws BookException
+	 */
+	public ShortBook reNew(String userind,String barcode) throws BookException{
+		BookParameters params = new BookParameters();
+		params.add("userind", userind);
+		params.add("barcode", barcode);//书籍
+		String result = http.requestUrl(getBaseURL()+"/library/user/renew.aspx", getBasepost(), params);
+		return new ShortBook(Task.TASK_BOOK_RENEW,result);
+	}
+	
+	/**
+	 * 修改密码
+	 * @param userid 
+	 * @param newcode
+	 * @param oldcode
+	 * @return
+	 * @throws BookException 
+	 */
+	public String changPassword(String userid,String newcode,String oldcode) throws BookException{
+		BookParameters params = new BookParameters();
+		params.add("userid", userid);
+		params.add("newcode", newcode);//新密码
+		params.add("oldcode", oldcode);//旧密码
+		String result = http.requestUrl(getBaseURL()+"/library/user/password.aspx", getBasepost(), params);
+		return result;
+		
+	}
+	
+	/**
+	 * 查询电子资料
+	 * @param key
+	 * @param type
+	 * @return
+	 * @throws BookException
+	 */
+	public List<EBook> queryEBook(String key,String type) throws BookException{
+		BookParameters params = new BookParameters();
+		params.add("userid", key);
+		params.add("newcode", type);//新密码
+		String result = http.requestUrl(getBaseURL()+"/library/user/password.aspx", getBasepost(), params);
+		return null;
+		
+	}
+	
 	private String formResult(String result) throws BookException {
 		try {
 			JSONObject json = new JSONObject(result);
