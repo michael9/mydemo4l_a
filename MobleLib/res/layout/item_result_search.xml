@@ -5,7 +5,10 @@
     android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android">
   <!--图书-->
-    <ImageView android:id="@+id/re_book_img"  android:saveEnabled="true" 
+    <ImageView
+        android:background="@android:color/white"
+        android:padding="2dp"
+         android:id="@+id/re_book_img"  android:saveEnabled="true" 
         android:layout_width="wrap_content" android:layout_height="wrap_content"
          android:layout_marginLeft="5.0dip" android:layout_marginTop="5.0dip"
           android:layout_alignParentTop="true" android:layout_alignParentLeft="true" 

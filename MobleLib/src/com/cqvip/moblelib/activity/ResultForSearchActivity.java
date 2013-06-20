@@ -32,7 +32,6 @@ public class ResultForSearchActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		requestWindowFeature( Window.FEATURE_NO_TITLE );
 		setContentView(R.layout.activity_result_for_search);
 		View v = findViewById(R.id.result_title);
 		TextView title = (TextView)v.findViewById(R.id.txt_header);

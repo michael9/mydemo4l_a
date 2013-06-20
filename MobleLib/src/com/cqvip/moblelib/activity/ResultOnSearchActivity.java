@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -34,23 +36,27 @@ public class ResultOnSearchActivity extends Activity implements IBookManagerActi
 	public static final int GETNEXTPAGE = 2;
 	public static final int DEFAULT_COUNT = 10;
 	private EditText edit;
-	private ImageView imgsearch;
+	private ImageButton imgsearch;
 	private Context context;
 	private ListView listview;
 	private String key;
 	private int page=1;
 	private BookAdapter adapter;
+	private ProgressDialog progressDialog;  
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_result_on_search);
 		context = this;
-		imgsearch = (ImageView)findViewById(R.id.search_seach_btn);
+		imgsearch = (ImageButton)findViewById(R.id.search_seach_btn);
 		edit = (EditText)findViewById(R.id.search_et);
 		listview = (ListView)findViewById(R.id.search_res_lv);
 		listview.setOnItemClickListener((OnItemClickListener)this);
 		ManagerService.allActivity.add(this);
+		progressDialog=new ProgressDialog(this, ProgressDialog.STYLE_SPINNER);
 		
+		edit.setText(getIntent().getStringExtra("ISBN"));
 		
 		imgsearch.setOnClickListener(new View.OnClickListener() {
 				
@@ -69,9 +75,11 @@ public class ResultOnSearchActivity extends Activity implements IBookManagerActi
 						return ;
 					}
 					getHomePage(edit.getText().toString().trim(),page,DEFAULT_COUNT,0);
-					Tool.ShowMessages(context, "开始搜索");
+//					Tool.ShowMessages(context, "开始搜索");
+					progressDialog.show();
 				}
 			});
+		
 		  edit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 				
 			  @Override
@@ -130,6 +138,7 @@ public class ResultOnSearchActivity extends Activity implements IBookManagerActi
 	@Override
 	public void refresh(Object... obj) {
 		//显示
+		progressDialog.dismiss();
 		int type = (Integer)obj[0];
 		List<Book> lists = (List<Book>)obj[1];
 		if(type == GETFIRSTPAGE ){
