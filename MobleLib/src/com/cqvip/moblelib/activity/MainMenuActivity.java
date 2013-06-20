@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -69,7 +70,7 @@ public class MainMenuActivity extends Activity implements IBookManagerActivity {
 	// private Bitmap b1, b2;
 	// private float postx;
 	// private int drawbackgroud = 0;
-	private Dialog dialog;
+	Dialog dialog;
 
 	// TimerTask task = new TimerTask() {
 	// public void run() {
@@ -237,13 +238,15 @@ public class MainMenuActivity extends Activity implements IBookManagerActivity {
 	}
 
 	private void showLoginDialog() {
-		dialog = new Dialog(context);
-		dialog.setContentView(R.layout.activity_login);
-		Button btn = (Button) dialog.findViewById(R.id.sign_in_button);
-		_id = (AutoCompleteTextView) dialog.findViewById(R.id.ed_loginname);
-		_pwd = (EditText) dialog.findViewById(R.id.ed_loginpwd);
-		login_status_ll = (LinearLayout) dialog.findViewById(R.id.login_status);
-		login_form_sv = (ScrollView) dialog.findViewById(R.id.login_form);
+		cantouch=true;
+		
+		View view=LayoutInflater.from(context).inflate(R.layout.activity_login, null);
+		dialog = new AlertDialog.Builder(this).setView(view).create();
+		Button btn = (Button) view.findViewById(R.id.sign_in_button);
+		_id = (AutoCompleteTextView) view.findViewById(R.id.ed_loginname);
+		_pwd = (EditText) view.findViewById(R.id.ed_loginpwd);
+		login_status_ll = (LinearLayout) view.findViewById(R.id.login_status);
+		login_form_sv = (ScrollView) view.findViewById(R.id.login_form);
 
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
 				android.R.layout.simple_dropdown_item_1line,
@@ -258,11 +261,14 @@ public class MainMenuActivity extends Activity implements IBookManagerActivity {
 				// TODO Auto-generated method stub
 				name = _id.getText().toString().trim();
 				pwd = _pwd.getText().toString();
+				Log.i("MainMenuActivity", name+"--"+pwd);
 				HashMap map = new HashMap();
 				map.put("id", name);
 				map.put("pwd", pwd);
 				Task tsHome = new Task(Task.TASK_LOGIN, map);
+				ManagerService.allActivity.add(MainMenuActivity.this);
 				ManagerService.addNewTask(tsHome);
+				
 				// 显示进度条
 				login_status_ll.setVisibility(View.VISIBLE);
 				login_form_sv.setVisibility(View.GONE);
@@ -287,10 +293,25 @@ public class MainMenuActivity extends Activity implements IBookManagerActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		init();
 		cantouch=true;
+		Log.i("MainMenuActivity", "onResume");
+		init();
 		}
 
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		Log.i("MainMenuActivity", "onPause");
+	}
+	
+	@Override
+	protected void onStop() {
+		// TODO Auto-generated method stub
+		super.onStop();
+		Log.i("MainMenuActivity", "onStop");
+	}
+	
 	private final Class[] activities = { EntanceGuideActivity.class,
 			BookSearchActivity.class, EBookActiviy.class,
 			SuggestedReadingActivity.class, RefServiceActivity.class,
@@ -381,9 +402,6 @@ public class MainMenuActivity extends Activity implements IBookManagerActivity {
 			img.setOnTouchListener(new View.OnTouchListener() {
 				@Override
 				public boolean onTouch(View v, MotionEvent event) {
-					
-					
-					
 					switch (event.getAction()) {					
 					case MotionEvent.ACTION_DOWN:
 						img.setImageResource(mImageIds_big[temp_position]);
@@ -391,15 +409,21 @@ public class MainMenuActivity extends Activity implements IBookManagerActivity {
 						break;
 					case MotionEvent.ACTION_UP:
 						img.setImageResource(mImageIds[temp_position]);
-						
 						if(!MainMenuActivity.cantouch)
 							break;
-						
-						
+						MainMenuActivity.cantouch=false;
 						Intent intent = new Intent();
 						intent.setClass(context, activities[temp_position]);
-						startActivity(intent);
-						MainMenuActivity.cantouch=false;
+						if(temp_position==5){
+							 if (islogin) {
+							 startActivity(intent);
+							 } else {
+							 showLoginDialog();
+							 }
+						}else{
+							startActivity(intent);
+						}
+						
 						Log.i("MainMenuActivity", "ACTION_UP");
 						break;
 					default:
