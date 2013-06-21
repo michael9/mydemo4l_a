@@ -15,6 +15,7 @@ import com.cqvip.moblelib.biz.ManagerService;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.BorrowBook;
+import com.cqvip.utils.Tool;
 
 public class BorrowBookAdapter extends BaseAdapter{
 
@@ -103,28 +104,33 @@ public class BorrowBookAdapter extends BaseAdapter{
 	        holder.callno.setText(callno+book.getCallno());
 	        holder.price.setText(price+book.getPrice());
 	        holder.borrowtime.setText(borrowtime+book.getLoandate());
-	        holder.returntime.setText(returntime+book.getReturndate());
-	        //判断是否续借过
 	        if(book.getRenew()!=0){
-	        	holder.renew.setVisibility(View.GONE);
+	        holder.returntime.setText(returntime+book.getReturndate()+context.getString(R.string.alreadyrenew));
 	        }else{
+	        	holder.returntime.setText(returntime+book.getReturndate());
+	        }
+	        //判断是否续借过
+//	        if(book.getRenew()!=0){
+//	        	holder.renew.setVisibility(View.GONE);
+//	        }else{
 	        	if(holder.renew.getVisibility()==View.GONE){
 	        		holder.renew.setVisibility(View.VISIBLE);
+	        	}
 	        		holder.renew.setOnClickListener(new View.OnClickListener() {
 						
 						@Override
 						public void onClick(View v) {
 							//发送续借请求
 							HashMap map = new HashMap();
-							map.put("userid", GlobleData.userid);
+							map.put("userid", GlobleData.readerid);
 							map.put("barcode", book.getBarcode());
 							Task task = new Task(Task.TASK_BOOK_RENEW, map);
 							ManagerService.addNewTask(task);
+							Tool.ShowMessages(context,context.getString(R.string.beginrenew));
 						}
 					});
-	        		
-	        	}
-	        }
+	        	
+	    //   }
 	        
 		
 		return convertView;

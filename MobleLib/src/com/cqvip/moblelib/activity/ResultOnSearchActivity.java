@@ -76,7 +76,7 @@ public class ResultOnSearchActivity extends Activity implements IBookManagerActi
 					}
 					getHomePage(edit.getText().toString().trim(),page,DEFAULT_COUNT,0);
 //					Tool.ShowMessages(context, "开始搜索");
-					progressDialog.show();
+//					progressDialog.show();
 				}
 			});
 		
@@ -98,7 +98,8 @@ public class ResultOnSearchActivity extends Activity implements IBookManagerActi
 					//网络访问,获取首页
 					page = 1;
 					getHomePage(edit.getText().toString().trim(),1,DEFAULT_COUNT,0);
-					Tool.ShowMessages(context, "开始搜索");
+//					Tool.ShowMessages(context, "开始搜索");
+//					progressDialog.show();
 					return true;
 				}
 
@@ -111,6 +112,7 @@ public class ResultOnSearchActivity extends Activity implements IBookManagerActi
 	 * @param count
 	 */
 	private void getHomePage(String key,int page ,int count,int type) {
+		progressDialog.show();
 		HashMap map=new HashMap();
 		map.put("key", key);
 		map.put("page", page);
@@ -146,6 +148,10 @@ public class ResultOnSearchActivity extends Activity implements IBookManagerActi
 			adapter = new BookAdapter(context,lists);
 			listview.setAdapter(adapter);
 			
+		}
+		else
+		{
+			Tool.ShowMessages(context, "不好意思，没有找到你想找的资源！");
 		}
 		}else if(type == GETNEXTPAGE){
 			adapter.addMoreData(lists);

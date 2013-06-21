@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-     android:background="@drawable/bg_list"
+    android:background="@drawable/bg_list"
     android:orientation="vertical" >
 
     <include
@@ -12,22 +12,32 @@
     <FrameLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" android:padding="5dp">
+        android:layout_height="match_parent"
+        android:padding="10dp" >
 
-        <ImageView
-            android:id="@+id/picture"
+        <RelativeLayout
+            android:id="@+id/readerinfo_f_lay"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="fitCenter"
-            android:src="@drawable/readerinfocard1" />
+            android:background="@drawable/reader_card1"
+             >
+        </RelativeLayout>
 
-        <ListView
-            android:id="@android:id/list"
+        <RelativeLayout
+            android:id="@+id/readerinfo_b_lay"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:listSelector="@drawable/transparent"
-            android:persistentDrawingCache="animation|scrolling"
-            android:visibility="gone" />
+            android:background="@drawable/reader_card2"
+            >
+
+            <ListView
+                android:id="@android:id/list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:listSelector="@drawable/transparent"
+                android:padding="12dp"
+                android:persistentDrawingCache="animation|scrolling" />
+        </RelativeLayout>
     </FrameLayout>
 
 </LinearLayout>

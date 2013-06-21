@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -31,11 +32,14 @@ import android.widget.ScrollView;
 import android.widget.SlidingDrawer;
 import android.widget.TextView;
 
+import com.cqvip.dao.DaoException;
 import com.cqvip.moblelib.R;
 import com.cqvip.moblelib.base.IBookManagerActivity;
 import com.cqvip.moblelib.biz.ManagerService;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
+import com.cqvip.moblelib.db.MUserDao;
+import com.cqvip.moblelib.entity.MUser;
 import com.cqvip.moblelib.model.Result;
 import com.cqvip.moblelib.model.User;
 import com.cqvip.moblelib.view.StableGridView;
@@ -62,6 +66,7 @@ public class MainMenuActivity extends Activity implements IBookManagerActivity {
 	private boolean islogin = false;
 	private StableGridView gridview;
 	static public boolean cantouch;
+	private MUserDao dao;
 
 	private int width, height;
 	// private SurfaceView main_anim_background;
@@ -111,6 +116,7 @@ public class MainMenuActivity extends Activity implements IBookManagerActivity {
 		setContentView(R.layout.activity_main);
 		context = this;
 		init_drawer();
+		dao = new MUserDao(this);
 		// 读取SharedPreferences中需要的数据
 
 		// preferences = getSharedPreferences("count",MODE_PRIVATE);
@@ -235,6 +241,31 @@ public class MainMenuActivity extends Activity implements IBookManagerActivity {
 		// }
 		//
 		// });
+		init_login();
+	}
+
+	private void init_login() {
+		if(dao==null){
+	 dao = new MUserDao(context);
+		}
+		try {
+			MUser user = dao.queryInfo();
+			if(user!=null){
+				//用户已经登陆
+				//后台自动登陆
+			Log.i("database","数据库获取书籍成功"+user.getCardno()+user.getReaderno());
+				GlobleData.userid = user.getCardno();
+				GlobleData.readerid = user.getReaderno();
+				islogin = true;
+				
+			}
+		} catch (DaoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
 	}
 
 	private void showLoginDialog() {
@@ -250,7 +281,7 @@ public class MainMenuActivity extends Activity implements IBookManagerActivity {
 
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
 				android.R.layout.simple_dropdown_item_1line,
-				new String[] { "0441200001098" });
+				new String[] { "0441200001098","0440061012345"});
 		_id.setThreshold(0);
 		_id.setAdapter(adapter);
 
@@ -449,11 +480,29 @@ public class MainMenuActivity extends Activity implements IBookManagerActivity {
 		Result res = (Result) obj[0];
 		if (res.getSuccess()) {
 			islogin = true;
+			
+			User user = (User) obj[0];
+			GlobleData.userid = user.getCardno();
+			GlobleData.readerid = user.getReaderno();
+			MUser muser = new MUser();
+			muser.setCardno(user.getCardno());
+			muser.setReaderno(user.getReaderno());
+			muser.setPwd(pwd);
+			muser.setName(user.getName());
+			if(dao==null){
+				 dao = new MUserDao(context);
+					}
+			try {
+				//dao.delInfo(muser.getCardno());
+				dao.saveInfo(muser);
+				Log.i("database","存储成功");
+			} catch (DaoException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			if (dialog.isShowing()) {
 				dialog.dismiss();
 			}
-			User user = (User) obj[0];
-			GlobleData.userid = user.getCardno();
 			// 提示登陆成功
 			Tool.ShowMessages(context, "登陆成功");
 		} else {
@@ -478,19 +527,20 @@ public class MainMenuActivity extends Activity implements IBookManagerActivity {
 	// 抽屉
 	private SlidingDrawer sd;
 	private ImageView iv;
-	private ListView lv;
-	private static final String[] PHOTOS_NAMES = new String[] { "Lyon",
-			"Livermore", "Tahoe Pier", "Lake Tahoe", "Grand Canyon", "Bodie" };
+//	private ListView lv;
+//	private static final String[] PHOTOS_NAMES = new String[] { "Lyon",
+//			"Livermore", "Tahoe Pier", "Lake Tahoe", "Grand Canyon", "Bodie" };
 
 	private void init_drawer() {
-		lv = (ListView) findViewById(R.id.myContent);
+//		lv = (ListView) findViewById(R.id.myContent);
 		sd = (SlidingDrawer) findViewById(R.id.sd);
 		iv = (ImageView) findViewById(R.id.iv);
-		lv.setLayoutParams(new ListView.LayoutParams(width, height / 2));
+
+	
 		// MyAdapter adapter=new
 		// MyAdapter(this,items,icons);//自定义MyAdapter来实现图标加item的显示效果
-		lv.setAdapter(new ArrayAdapter<String>(this,
-				android.R.layout.simple_list_item_1, PHOTOS_NAMES));
+//		lv.setAdapter(new ArrayAdapter<String>(this,
+//				android.R.layout.simple_list_item_1, PHOTOS_NAMES));
 		sd.setOnDrawerOpenListener(new SlidingDrawer.OnDrawerOpenListener()// 开抽屉
 		{
 			@Override
