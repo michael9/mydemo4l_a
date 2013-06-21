@@ -37,7 +37,7 @@ public class FlipImageView extends ImageView implements View.OnClickListener,
 
 	private Drawable mDrawable;
 
-	private Drawable mFlippedDrawable;
+//	private Drawable mFlippedDrawable;
 
 	private FlipAnimator mAnimation;
 
@@ -57,8 +57,8 @@ public class FlipImageView extends ImageView implements View.OnClickListener,
 	}
 
 	private void init(Context context, AttributeSet attrs, int defStyle) {
-		mFlippedDrawable = getResources().getDrawable(
-				R.drawable.readerinfocard2);
+//		mFlippedDrawable = getResources().getDrawable(
+//				R.drawable.readerinfocard2);
 		mDrawable = getDrawable();
 
 		mAnimation = new FlipAnimator();
@@ -68,12 +68,12 @@ public class FlipImageView extends ImageView implements View.OnClickListener,
 
 		setOnClickListener(this);
 
-		setImageDrawable(mIsFlipped ? mFlippedDrawable : mDrawable);
+//		setImageDrawable(mIsFlipped ? mFlippedDrawable : mDrawable);
 
 	}
 
 	public void toggleFlip() {
-		mAnimation.setToDrawable(mIsFlipped ? mDrawable : mFlippedDrawable);
+//		mAnimation.setToDrawable(mIsFlipped ? mDrawable : mFlippedDrawable);
 		startAnimation(mAnimation);
 		mIsFlipped = !mIsFlipped;
 	}
