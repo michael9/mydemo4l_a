@@ -12,6 +12,7 @@ import com.cqvip.moblelib.biz.ManagerService;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.BorrowBook;
+import com.cqvip.moblelib.model.ShortBook;
 import com.cqvip.utils.Tool;
 
 import android.os.Bundle;
@@ -31,6 +32,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -54,7 +56,8 @@ import android.widget.Toast;
  */
 public class BorrowAndOrderActivity extends BaseActivity implements IBookManagerActivity{
 
-	
+	public static final int BORROWLIST = 1;
+	public static final int RENEW = 2;
 	private Context context;
 	private ViewPager mPager;//页卡内容
 	private List<View> listViews; // Tab页面列表
@@ -64,7 +67,8 @@ public class BorrowAndOrderActivity extends BaseActivity implements IBookManager
 	private int offset = 0;// 动画图片偏移量
 	private int bmpW;// 动画图片宽度
 	private ListView listview;
-	
+	private BorrowBookAdapter adapter;
+	private List<BorrowBook>  lists;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -78,6 +82,10 @@ public class BorrowAndOrderActivity extends BaseActivity implements IBookManager
 		//ImageView history = (ImageView)v.findViewById(R.id.btn_right_header);
 		//history.setVisibility(View.VISIBLE);
 		//history.setImageResource(R.drawable.lscx);
+		if(adapter!=null){
+			
+			
+		}
 		listview = (ListView)findViewById(R.id.borrow_list);
 		init();
 		back.setOnClickListener(new View.OnClickListener() {
@@ -94,7 +102,17 @@ public class BorrowAndOrderActivity extends BaseActivity implements IBookManager
 //				
 //			}
 //		});
+		listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int postion,
+					long id) {
+				
+				
+			}
+		}) ;
+	
+		
 		
 		
 	}
@@ -116,12 +134,42 @@ public class BorrowAndOrderActivity extends BaseActivity implements IBookManager
 
 	@Override
 	public void refresh(Object... obj) {
-		List<BorrowBook> borrow = (List<BorrowBook>)obj[0];
-		if(borrow==null){
-		   Tool.ShowMessages(context, "查询无记录");
-		}else {
-			listview.setAdapter(new BorrowBookAdapter(context,borrow));
+		Integer type = (Integer)obj[0];
+		switch(type){
+		case BORROWLIST:
+			lists = (List<BorrowBook>)obj[1];
+			if(lists==null){
+			   Tool.ShowMessages(context, "查询无记录");
+			}else {
+				adapter = new BorrowBookAdapter(context,lists);
+				listview.setAdapter(adapter);
+			}
+			break;
+			
+		case RENEW:
+			//成功
+			ShortBook result = (ShortBook)obj[1];
+			if(result!=null){
+				if(result.getSucesss().equals("true")){
+				for(int i=0;i<lists.size();i++){
+					if(result.getId() == lists.get(i).getBarcode()){
+						lists.get(i).setRenew(1);
+						lists.get(i).setReturndate(result.getDate()+"(已续借)");
+						adapter.notifyDataSetChanged();
+					}else{
+						Tool.ShowMessages(context, result.getMessage());
+					}
+					}
+				}
+				
+			}
+			
+			
+			
+			break;
+			
 		}
+		
 		
 	}
 }
