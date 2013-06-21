@@ -7,6 +7,11 @@ import android.content.Context;
 import com.cqvip.dao.DaoException;
 import com.cqvip.moblelib.entity.MUser;
 
+/**
+ * 用户信息，dao
+ * @author luojiang
+ *
+ */
 public class MUserDao extends Dao{
 
 	

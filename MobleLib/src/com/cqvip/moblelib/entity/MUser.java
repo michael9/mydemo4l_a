@@ -3,6 +3,11 @@ package com.cqvip.moblelib.entity;
 import com.cqvip.dao.Model;
 import com.cqvip.dao.PrimaryKey;
 
+/**
+ * 用户实体类
+ * @author luojiang
+ *
+ */
 public class MUser extends Model{
 
 	private Integer id;//自增id

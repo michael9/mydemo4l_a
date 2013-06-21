@@ -13,6 +13,11 @@ import com.cqvip.moblelib.biz.ManagerService;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.utils.PackageUtils;
 
+/**
+ * dao，提供数据库增删改查
+ * @author luojiang
+ *
+ */
 public class Dao extends MDAO{
 
 	private Context context;
