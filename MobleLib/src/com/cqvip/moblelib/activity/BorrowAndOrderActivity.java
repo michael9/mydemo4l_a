@@ -126,7 +126,7 @@ public class BorrowAndOrderActivity extends BaseActivity implements IBookManager
 			Tool.ShowMessages(context, "用户没有登陆");
 		}else{
 		HashMap map = new HashMap();
-		map.put("id", GlobleData.userid);
+		map.put("id", GlobleData.readerid);
 		Task tsHome = new Task(Task.TASK_BORROW_LIST, map);
 		ManagerService.addNewTask(tsHome);
 		}
@@ -159,13 +159,9 @@ public class BorrowAndOrderActivity extends BaseActivity implements IBookManager
 					}else{
 						Tool.ShowMessages(context, result.getMessage());
 					}
-					}
+				  }
 				}
-				
 			}
-			
-			
-			
 			break;
 			
 		}

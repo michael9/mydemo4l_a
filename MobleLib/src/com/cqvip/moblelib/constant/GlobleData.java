@@ -7,6 +7,7 @@ public class GlobleData {
 	
 	
 	public static String userid;
+	public static String readerid;
 	
 	
 	

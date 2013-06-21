@@ -109,11 +109,6 @@ public class HttpRequestTest extends AndroidTestCase {
 		
 	}
 	/**
-	 * 测试续借
-	 */
-	
-	public void testRenew(){}
-	/**
 	 * 测试获取读者信息
 	 */
 	public void testReaderInfo(){

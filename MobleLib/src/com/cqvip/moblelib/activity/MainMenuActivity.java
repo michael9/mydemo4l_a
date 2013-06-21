@@ -454,6 +454,7 @@ public class MainMenuActivity extends Activity implements IBookManagerActivity {
 			}
 			User user = (User) obj[0];
 			GlobleData.userid = user.getCardno();
+			GlobleData.readerid = user.getReaderno();
 			// 提示登陆成功
 			Tool.ShowMessages(context, "登陆成功");
 		} else {

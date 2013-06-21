@@ -63,7 +63,9 @@
     <string name="item_price">价格:</string>
     <string name="item_brtime">借出时间:</string>
     <string name="item_retime">还回日期:</string>
-    <string name="item_renew">续借</string>
+    <string name="item_renew">续借..</string>
+    <string name="alreadyrenew">(已续借)</string>
+    <string name="beginrenew">开始续借</string>
     
     
     <string name="title_activity_detail_text">DetailTextActivity</string>

@@ -48,19 +48,19 @@
            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/re_book_img"
-             android:layout_marginTop="5.0dip"
-             android:layout_marginLeft="5.0dip"
-              android:layout_marginBottom="5.0dip" >
+             android:layout_marginBottom="5.0dip" >
 
 
 
-
-            <TextView android:textSize="16.0sp" 
+<!-- 	续借 -->
+            <TextView android:textSize="18.0sp" 
                     android:text="@string/item_renew"
+                     android:textColor="#ff7c953c" 
+                     android:padding="5.0dip"
 					 android:id="@+id/re_brrenew_txt" 
 					 android:layout_width="wrap_content" 
 					 android:layout_height="wrap_content" 
-					 android:layout_marginRight="5.0dip"  
+					 android:layout_marginRight="20.0dp"  
 					 android:layout_alignParentRight="true"
 					 
 					 />

@@ -198,7 +198,7 @@ public class ManagerService extends Service implements Runnable{
 				IBookManagerActivity pwd = (IBookManagerActivity) ManagerService.getActivityByName("DetailBookActivity");
 				pwd.refresh(msg.obj);
 				break;	
-				//Ðø½è
+				//½èÔÄÁÐ±í
 			case Task.TASK_BORROW_LIST:
 				IBookManagerActivity borrowlist = (IBookManagerActivity) ManagerService.getActivityByName("BorrowAndOrderActivity");
 				borrowlist.refresh(BorrowAndOrderActivity.BORROWLIST,msg.obj);
