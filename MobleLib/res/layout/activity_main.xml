@@ -31,8 +31,9 @@
 
     <SlidingDrawer
         android:id="@+id/sd"
-        android:layout_width="fill_parent"
-        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:layout_alignParentBottom="true"
         android:content="@+id/myContent"
         android:handle="@+id/iv"
         android:orientation="vertical" >
@@ -45,8 +46,8 @@
 
         <ListView
             android:id="@+id/myContent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
             android:background="@drawable/eg_whatsnew_btn_nor"
             android:gravity="center"
             />

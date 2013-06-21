@@ -5,7 +5,10 @@ import java.util.HashMap;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.animation.AccelerateInterpolator;
@@ -14,6 +17,7 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.cqvip.moblelib.R;
@@ -28,18 +32,16 @@ import com.cqvip.moblelib.utils.Rotate3dAnimation;
 import com.cqvip.utils.Tool;
 
 public class ReaderinfoActivity extends Activity implements
-		IBookManagerActivity, AdapterView.OnItemClickListener,
-		View.OnClickListener {
+		IBookManagerActivity {
 
 	private Context context;
 	private ListView mList;
 	private ViewGroup mContainer;
-	private ImageView mImageView;
+	private RelativeLayout readerinfo_f_lay, readerinfo_b_lay;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		context = this;
 		setContentView(R.layout.readerinfo);
 		TextView title = (TextView) findViewById(R.id.txt_header);
@@ -55,25 +57,48 @@ public class ReaderinfoActivity extends Activity implements
 		});
 
 		init();
-		
+
 		mList = (ListView) findViewById(android.R.id.list);
-		mImageView = (ImageView) findViewById(R.id.picture);
 		mContainer = (ViewGroup) findViewById(R.id.container);
 
-	
-		mList.setOnItemClickListener(this);
+		readerinfo_f_lay = (RelativeLayout) findViewById(R.id.readerinfo_f_lay);
+		readerinfo_f_lay.setOnClickListener(new OnClickListener() {
 
-		// Prepare the ImageView
-		mImageView.setClickable(true);
-		mImageView.setFocusable(true);
-		mImageView.setOnClickListener(this);
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				applyRotation(0, 0, 90);
+			}
+		});
+
+		readerinfo_b_lay = (RelativeLayout) findViewById(R.id.readerinfo_b_lay);
+		readerinfo_b_lay.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				applyRotation(-1, 0, -90);
+			}
+		});
+
+		readerinfo_b_lay.setVisibility(View.GONE);
+
+		mList.setOnTouchListener(new OnTouchListener() {
+
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				// TODO Auto-generated method stub
+				applyRotation(-1, 0, -90);
+				return false;
+			}
+		});
 
 		// Since we are caching large views, we want to keep their cache
 		// between each animation
 		mContainer
 				.setPersistentDrawingCache(ViewGroup.PERSISTENT_ANIMATION_CACHE);
 	}
-	
+
 	/**
 	 * Setup a new 3D rotation on the container view.
 	 * 
@@ -100,16 +125,6 @@ public class ReaderinfoActivity extends Activity implements
 		rotation.setAnimationListener(new DisplayNextView(position));
 
 		mContainer.startAnimation(rotation);
-	}
-
-	public void onItemClick(AdapterView parent, View v, int position, long id) {
-		// Pre-load the image then start the animation
-		// mImageView.setImageResource(PHOTOS_RESOURCES[position]);
-		applyRotation(position, 0, -90);
-	}
-
-	public void onClick(View v) {
-		applyRotation(-1, 0, 90);
 	}
 
 	/**
@@ -152,18 +167,17 @@ public class ReaderinfoActivity extends Activity implements
 			Rotate3dAnimation rotation;
 
 			if (mPosition > -1) {
-				mList.setVisibility(View.GONE);
-				mImageView.setVisibility(View.VISIBLE);
-				mImageView.requestFocus();
-
-				rotation = new Rotate3dAnimation(90, 0, centerX, centerY,
-						310.0f, false);
-			} else {
-				mImageView.setVisibility(View.GONE);
-				mList.setVisibility(View.VISIBLE);
-				mList.requestFocus();
+				readerinfo_f_lay.setVisibility(View.GONE);
+				readerinfo_b_lay.setVisibility(View.VISIBLE);
+				readerinfo_b_lay.requestFocus();
 
 				rotation = new Rotate3dAnimation(-90, 0, centerX, centerY,
+						310.0f, false);
+			} else {
+				readerinfo_b_lay.setVisibility(View.GONE);
+				readerinfo_f_lay.setVisibility(View.VISIBLE);
+				readerinfo_f_lay.requestFocus();
+				rotation = new Rotate3dAnimation(90, 0, centerX, centerY,
 						310.0f, false);
 			}
 
@@ -175,29 +189,32 @@ public class ReaderinfoActivity extends Activity implements
 		}
 	}
 
-	//获取读者信息
+	// 获取读者信息
 	@Override
 	public void init() {
-		if(GlobleData.userid !=null){
-		ManagerService.allActivity.add(this);
-		HashMap map=new HashMap();
-		map.put("userid", GlobleData.userid );
-		Task tsHome;
-		 tsHome=new Task(Task.TASK_GET_READERINFO,map);
-		ManagerService.addNewTask(tsHome);
+		if (GlobleData.userid != null) {
+			ManagerService.allActivity.add(this);
+			HashMap map = new HashMap();
+			map.put("userid", GlobleData.userid);
+			Task tsHome;
+			tsHome = new Task(Task.TASK_GET_READERINFO, map);
+			ManagerService.addNewTask(tsHome);
 		}
 	}
 
-	private String[]  values;
-	private final String[]  attrs={"姓名：","注册日期：","证号：","启用日期：","终止日期：","证状态：","电话：","地址："};
-	
+	private String[] values;
+	private final String[] attrs = { "姓名：", "注册日期：", "证号：", "启用日期：", "终止日期：",
+			"证状态：", "电话：", "地址：" };
+
 	@Override
 	public void refresh(Object... obj) {
-		Reader  reader = (Reader) obj[0];
-		String[] values={reader.getName(),reader.getRegdate(),reader.getUsername(),reader.getCardbegdate(),
-				reader.getCardenddate(),reader.getStatus(),reader.getPhone(),reader.getAddress()};
-		this.values=values;
-		mList.setAdapter(new ReaderInfoAdapter(this,attrs,values));
+		Reader reader = (Reader) obj[0];
+		String[] values = { reader.getName(), reader.getRegdate(),
+				reader.getUsername(), reader.getCardbegdate(),
+				reader.getCardenddate(), reader.getStatus(), reader.getPhone(),
+				reader.getAddress() };
+		this.values = values;
+		mList.setAdapter(new ReaderInfoAdapter(this, attrs, values));
 	}
 
 }
