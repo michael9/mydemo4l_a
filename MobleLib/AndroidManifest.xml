@@ -151,6 +151,11 @@
             android:name="com.cqvip.moblelib.scan.CaptureActivity"
             android:screenOrientation="landscape"
              android:theme="@android:style/Theme.Light.NoTitleBar" />
+        
+        <activity
+            android:name="com.cqvip.moblelib.activity.MyFavorActivity"
+            android:screenOrientation="portrait"
+             android:theme="@android:style/Theme.Light.NoTitleBar" />
             
     </application>
 

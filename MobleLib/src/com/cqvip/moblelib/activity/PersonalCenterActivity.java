@@ -27,6 +27,7 @@ import com.cqvip.moblelib.R;
  */
 public class PersonalCenterActivity extends BaseActivity {
 private LinearLayout readerinfoLayout;
+private LinearLayout favorLayout;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -35,11 +36,22 @@ private LinearLayout readerinfoLayout;
 		setContentView(R.layout.activity_personal_center);
 		//∂¡’ﬂ–≈œ¢
 		readerinfoLayout=(LinearLayout) findViewById(R.id.readerinfoLayout);
+		favorLayout=(LinearLayout) findViewById(R.id.favorLayout);
 		readerinfoLayout.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				Intent intent=new Intent(PersonalCenterActivity.this, ReaderinfoActivity.class);
+				startActivity(intent);
+				//overridePendingTransition(R.anim.slide_left_in, R.anim.slide_right_out);	
+			}
+		});
+		
+		favorLayout.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent=new Intent(PersonalCenterActivity.this, MyFavorActivity.class);
 				startActivity(intent);
 				//overridePendingTransition(R.anim.slide_left_in, R.anim.slide_right_out);	
 			}

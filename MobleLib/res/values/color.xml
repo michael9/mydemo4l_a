@@ -15,8 +15,8 @@
     <drawable name="nonecolor">#00FFFFFF</drawable>
     <drawable name="aa">#cccc00</drawable>
     <drawable name="bb">#ff6666</drawable>
-    <drawable name="LightSkyBlue">#87CEFA</drawable>
-    <drawable name="DeepSkyBlue">#00BFFF</drawable>
+    <drawable name="LightSkyBlue">#7387CEFA</drawable>
+    <drawable name="DeepSkyBlue">#7300BFFF</drawable>
     <drawable name="silvergray">#a9a9a9</drawable>
     <drawable name="GreenYellow">#ADFF2F</drawable>
     <drawable name="titlegreen">#73cfeca0</drawable>

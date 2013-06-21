@@ -72,6 +72,11 @@
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_result_on_search">ResultOnSearchActivity</string>
     <string name="title_activity_detail_book">DetailBookActivity</string>
+    
+    <string name="title_section1">图书</string>
+    <string name="title_section2">期刊</string>
+    <string name="title_section3">文档</string>
+    <string name="title_section4">多媒体</string>
 
     
 </resources>
