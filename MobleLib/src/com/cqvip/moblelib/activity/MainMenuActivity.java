@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -479,19 +480,20 @@ public class MainMenuActivity extends Activity implements IBookManagerActivity {
 	// 抽屉
 	private SlidingDrawer sd;
 	private ImageView iv;
-	private ListView lv;
-	private static final String[] PHOTOS_NAMES = new String[] { "Lyon",
-			"Livermore", "Tahoe Pier", "Lake Tahoe", "Grand Canyon", "Bodie" };
+//	private ListView lv;
+//	private static final String[] PHOTOS_NAMES = new String[] { "Lyon",
+//			"Livermore", "Tahoe Pier", "Lake Tahoe", "Grand Canyon", "Bodie" };
 
 	private void init_drawer() {
-		lv = (ListView) findViewById(R.id.myContent);
+//		lv = (ListView) findViewById(R.id.myContent);
 		sd = (SlidingDrawer) findViewById(R.id.sd);
 		iv = (ImageView) findViewById(R.id.iv);
-		lv.setLayoutParams(new ListView.LayoutParams(width, height / 2));
+
+	
 		// MyAdapter adapter=new
 		// MyAdapter(this,items,icons);//自定义MyAdapter来实现图标加item的显示效果
-		lv.setAdapter(new ArrayAdapter<String>(this,
-				android.R.layout.simple_list_item_1, PHOTOS_NAMES));
+//		lv.setAdapter(new ArrayAdapter<String>(this,
+//				android.R.layout.simple_list_item_1, PHOTOS_NAMES));
 		sd.setOnDrawerOpenListener(new SlidingDrawer.OnDrawerOpenListener()// 开抽屉
 		{
 			@Override
