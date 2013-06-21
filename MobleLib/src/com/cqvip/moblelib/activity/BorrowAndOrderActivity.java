@@ -150,22 +150,20 @@ public class BorrowAndOrderActivity extends BaseActivity implements IBookManager
 			//成功
 			ShortBook result = (ShortBook)obj[1];
 			if(result!=null){
-				if(result.getSucesss().equals("true")){
+//				if(result.getSucesss().equals("true")){
 				for(int i=0;i<lists.size();i++){
-					if(result.getId() == lists.get(i).getBarcode()){
+					if(result.getId().equals(lists.get(i).getBarcode())){
 						lists.get(i).setRenew(1);
-						lists.get(i).setReturndate(result.getDate()+"(已续借)");
+						lists.get(i).setReturndate(result.getDate()+getResources().getString(R.string.alreadyrenew));
 						adapter.notifyDataSetChanged();
-					}else{
-						Tool.ShowMessages(context, result.getMessage());
+						break;
 					}
 				  }
-				}
+//				}
+				Tool.ShowMessages(context, result.getMessage());
 			}
 			break;
 			
 		}
-		
-		
 	}
 }

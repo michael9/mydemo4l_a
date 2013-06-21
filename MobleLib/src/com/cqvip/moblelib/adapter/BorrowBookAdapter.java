@@ -110,9 +110,9 @@ public class BorrowBookAdapter extends BaseAdapter{
 	        	holder.returntime.setText(returntime+book.getReturndate());
 	        }
 	        //判断是否续借过
-	        if(book.getRenew()!=0){
-	        	holder.renew.setVisibility(View.GONE);
-	        }else{
+//	        if(book.getRenew()!=0){
+//	        	holder.renew.setVisibility(View.GONE);
+//	        }else{
 	        	if(holder.renew.getVisibility()==View.GONE){
 	        		holder.renew.setVisibility(View.VISIBLE);
 	        	}
@@ -122,7 +122,7 @@ public class BorrowBookAdapter extends BaseAdapter{
 						public void onClick(View v) {
 							//发送续借请求
 							HashMap map = new HashMap();
-							map.put("userid", GlobleData.userid);
+							map.put("userid", GlobleData.readerid);
 							map.put("barcode", book.getBarcode());
 							Task task = new Task(Task.TASK_BOOK_RENEW, map);
 							ManagerService.addNewTask(task);
@@ -130,7 +130,7 @@ public class BorrowBookAdapter extends BaseAdapter{
 						}
 					});
 	        	
-	        }
+	    //   }
 	        
 		
 		return convertView;

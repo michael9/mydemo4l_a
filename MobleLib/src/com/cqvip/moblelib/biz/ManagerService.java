@@ -14,6 +14,7 @@ import com.cqvip.moblelib.activity.BorrowAndOrderActivity;
 import com.cqvip.moblelib.activity.DetailTextActivity;
 import com.cqvip.moblelib.activity.ResultOnSearchActivity;
 import com.cqvip.moblelib.base.IBookManagerActivity;
+import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.Book;
 import com.cqvip.moblelib.model.BookLoc;
 import com.cqvip.moblelib.model.BorrowBook;
@@ -237,6 +238,9 @@ public class ManagerService extends Service implements Runnable{
 		super.onCreate();
 		Log.i("service", "========onCreate=========");
 		mainService=this;
+		if(GlobleData.datas.get(GlobleData.SERVER)==null){
+		GlobleData.datas.put(GlobleData.SERVER, this);
+		}
 		Thread t=new Thread(this);
 		t.start();
 	}
@@ -246,7 +250,6 @@ public class ManagerService extends Service implements Runnable{
 	public void run() {
 		while(isrun){ 
 		Task lasttask=null;
-		  Log.d("service", "..............run");
 		  synchronized(allTask)
 		  {//╫схннЯ	
 		    if(allTask.size()>0)
