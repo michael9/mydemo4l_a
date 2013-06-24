@@ -78,16 +78,18 @@ public class MUserDao extends Dao{
 	 */
 	public MUser queryInfo(String id) throws DaoException{
 		 StringBuilder where = new StringBuilder();
-		   MUser result = null;
+		   List<MUser> result = null;
 		   where.append("cardno=");
 		   where.append(id);
 		try {
-			result = (MUser) this.query(where.toString(), MUser.class);
+			result = this.query(where.toString(), MUser.class);
 		} catch (DaoException e) {
 			throw new DaoException(e.getType());
 		}
-		return result;
+		if(result==null||result.size()<=0){
+			return null;
+		}
+		return result.get(0);
 	}
 	
-
 }
