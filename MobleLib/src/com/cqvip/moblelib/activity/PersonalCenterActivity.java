@@ -46,7 +46,7 @@ private Context context;
 		//∂¡’ﬂ–≈œ¢
 		readerinfoLayout=(LinearLayout) findViewById(R.id.readerinfoLayout);
 		favorLayout=(LinearLayout) findViewById(R.id.favorLayout);
-		logoutLayout=(LinearLayout) findViewById(R.id.loginoutLayout);
+		logoutLayout=(LinearLayout) findViewById(R.id.logoutLayout);
 		
 		readerinfoLayout.setOnClickListener(new View.OnClickListener() {
 			
