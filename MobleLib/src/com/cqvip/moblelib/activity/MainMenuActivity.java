@@ -325,7 +325,7 @@ public class MainMenuActivity extends Activity implements IBookManagerActivity {
 		// dialog.show();
 		Intent intent = new Intent(MainMenuActivity.this, ActivityDlg.class);
 		intent.putExtra("ACTIONID", id);
-		startActivityForResult(intent, 0);
+		startActivityForResult(intent, id);
 	}
 
 	@Override
@@ -429,7 +429,7 @@ public class MainMenuActivity extends Activity implements IBookManagerActivity {
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			final ImageView img;
-			final int temp_position = position;
+//			final int temp_position = position;
 			if (convertView == null) {
 				// 给ImageView设置资源
 				convertView = LayoutInflater.from(mContext).inflate(
@@ -448,27 +448,31 @@ public class MainMenuActivity extends Activity implements IBookManagerActivity {
 			img = (ImageView) convertView.findViewById(R.id.img_main);
 			TextView tx = (TextView) convertView.findViewById(R.id.txt_main);
 			tx.setText(getString(mTitle[position]));
-			img.setImageResource(mImageIds[temp_position]);
+			img.setImageResource(mImageIds[position]);
+			img.setTag(position);
 
 			img.setOnTouchListener(new View.OnTouchListener() {
 				@Override
 				public boolean onTouch(View v, MotionEvent event) {
+					
+					int tag=(Integer)v.getTag();
+					
 					switch (event.getAction()) {
 					case MotionEvent.ACTION_DOWN:
-						img.setImageResource(mImageIds_big[temp_position]);
+						img.setImageResource(mImageIds_big[tag]);
 						Log.i("MainMenuActivity", "ACTION_DOWN");
 						break;
 					case MotionEvent.ACTION_UP:
-						img.setImageResource(mImageIds[temp_position]);
+						img.setImageResource(mImageIds[tag]);
 						if (!MainMenuActivity.cantouch)
 							break;
 						MainMenuActivity.cantouch = false;
 						Intent intent = new Intent();						
-						switch (temp_position) {
+						switch (tag) {
 						case 0:
 						case 1:
 						case 2:
-							intent.setClass(context, activities[temp_position]);
+							intent.setClass(context, activities[tag]);
 							startActivity(intent);
 							break;
 
@@ -486,14 +490,14 @@ public class MainMenuActivity extends Activity implements IBookManagerActivity {
 						case 7:
 						case 8:
 							if (islogin) {
-								intent.setClass(context, activities[temp_position]);
+								intent.setClass(context, activities[tag]);
 								startActivity(intent);
 							} else {
-								showLoginDialog(temp_position);
+								showLoginDialog(tag);
 							}
 							break;
 						case 6:
-							intent.setClass(context, activities[temp_position]);
+							intent.setClass(context, activities[tag]);
 							startActivity(intent);
 							break;
 

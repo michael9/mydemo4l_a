@@ -5,6 +5,7 @@
     android:gravity="center"
     android:background="#90ffffff" >
     
+  
     
      <RelativeLayout
         android:id="@+id/msg_box_layout"
@@ -66,31 +67,7 @@
         android:layout_centerInParent="true"
         android:background="@drawable/dlg_bg" 
         android:visibility="gone">
-        
-              <!-- Login progress -->
-    <LinearLayout 
-        android:id="@+id/login_status"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:visibility="gone" >
 
-        <ProgressBar
-            style="?android:attr/progressBarStyleLarge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp" />
-
-        <TextView
-            android:id="@+id/login_status_message"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:fontFamily="sans-serif-light"
-            android:text="登陆中..."
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-    </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -173,5 +150,8 @@
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
+    
+            
+           
 
 </RelativeLayout>

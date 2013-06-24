@@ -3,6 +3,7 @@ package com.cqvip.moblelib.activity;
 import java.util.HashMap;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -34,9 +35,10 @@ public class ActivityDlg extends Activity implements IBookManagerActivity {
 	private EditText log_in_passwords;
 	private AutoCompleteTextView log_in_username;
 	private Button login_btn, cancel_btn,ok_btn;
-	private LinearLayout login_status_ll;
+//	private LinearLayout login_status_ll;
 	private MUserDao dao;
 	private TextView msg_box_txt;
+	private  ProgressDialog progressDialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +48,11 @@ public class ActivityDlg extends Activity implements IBookManagerActivity {
 
 		msg_box_layout=(RelativeLayout)findViewById(R.id.msg_box_layout);
 		login_layout = (RelativeLayout) findViewById(R.id.log_in_layout);
+//		login_status_ll = (LinearLayout) findViewById(R.id.login_status);
 		msg_box_layout.setVisibility(View.GONE);
 		login_layout.setVisibility(View.GONE);
+		progressDialog=new ProgressDialog(ActivityDlg.this,ProgressDialog.STYLE_SPINNER);
+//		login_status_ll.setVisibility(View.GONE);
 		
 		switch (getIntent().getIntExtra("ACTIONID", 0)) {
 		
@@ -66,10 +71,10 @@ public class ActivityDlg extends Activity implements IBookManagerActivity {
 	String name, pwd;
 
 	private void login() {
-		msg_box_layout.setVisibility(View.VISIBLE);
+		login_layout.setVisibility(View.VISIBLE);
 		log_in_username = (AutoCompleteTextView) findViewById(R.id.log_in_username);
 		log_in_passwords = (EditText) findViewById(R.id.log_in_passwords);
-		login_status_ll = (LinearLayout) findViewById(R.id.login_status);
+//		login_status_ll = (LinearLayout) findViewById(R.id.login_status);
 		login_btn = (Button)findViewById(R.id.login_ok_btn);
 		cancel_btn = (Button)findViewById(R.id.login_cancel_btn);
 		
@@ -87,8 +92,9 @@ public class ActivityDlg extends Activity implements IBookManagerActivity {
 				ManagerService.allActivity.add(ActivityDlg.this);
 				ManagerService.addNewTask(tsHome);
 
-				login_layout.setVisibility(View.GONE);
-				login_status_ll.setVisibility(View.VISIBLE);
+				progressDialog.show();
+//				login_layout.setVisibility(View.GONE);
+//				login_status_ll.setVisibility(View.VISIBLE);
 			}
 		});
 		
@@ -158,6 +164,7 @@ public class ActivityDlg extends Activity implements IBookManagerActivity {
 	@Override
 	public void refresh(Object... obj) {
 		// 取消进度条
+		progressDialog.dismiss();
 		Result res = (Result) obj[0];
 		if (res.getSuccess()) {
 			MainMenuActivity.islogin = true;
