@@ -7,9 +7,11 @@ import com.cqvip.moblelib.base.IBookManagerActivity;
 import com.cqvip.moblelib.biz.ManagerService;
 import com.cqvip.moblelib.biz.Task;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.text.Html;
 import android.view.Menu;
 import android.view.View;
@@ -80,7 +82,7 @@ public class DetailTextActivity extends BaseActivity implements IBookManagerActi
 		case 6:
 			t1.setText(R.string.guide_transport);
 			//title.setText("");
-			content.setText("");
+//			content.setText("");
 			break;
 //		case 7:
 //			

@@ -3,6 +3,7 @@ package com.cqvip.moblelib.activity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -31,7 +32,6 @@ public class EntanceGuideActivity extends BaseActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.part_guide);
 		context = this;
 		initialView();
@@ -120,12 +120,13 @@ public class EntanceGuideActivity extends BaseActivity {
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(context, DetailTextActivity.class);
-				intent.putExtra("enter", 6);
-				startActivity(intent);
+//				Intent intent = new Intent(context, DetailTextActivity.class);
+//				intent.putExtra("enter", 6);
+//				startActivity(intent);
 				// overridePendingTransition(R.anim.slide_right_in,
 				// R.anim.slide_left_out);
-
+				Intent intent=new Intent(Intent.ACTION_VIEW,Uri.parse("http://j.map.baidu.com/6V_Ii"));
+				startActivity(intent);			
 			}
 		});
 		// l7.setOnClickListener(new View.OnClickListener() {
