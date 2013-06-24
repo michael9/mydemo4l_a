@@ -1,15 +1,22 @@
 package com.cqvip.moblelib.activity;
 
-import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.cqvip.dao.DaoException;
 import com.cqvip.moblelib.R;
+import com.cqvip.moblelib.constant.GlobleData;
+import com.cqvip.moblelib.db.MUserDao;
+import com.cqvip.utils.Tool;
 
 /**
  * <p>
@@ -28,15 +35,19 @@ import com.cqvip.moblelib.R;
 public class PersonalCenterActivity extends BaseActivity {
 private LinearLayout readerinfoLayout;
 private LinearLayout favorLayout;
+private LinearLayout logoutLayout;
+private Context context;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
 		requestWindowFeature( Window.FEATURE_NO_TITLE );
 		setContentView(R.layout.activity_personal_center);
+		context = this;
 		//读者信息
 		readerinfoLayout=(LinearLayout) findViewById(R.id.readerinfoLayout);
 		favorLayout=(LinearLayout) findViewById(R.id.favorLayout);
+		logoutLayout=(LinearLayout) findViewById(R.id.logoutLayout);
+		
 		readerinfoLayout.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -54,6 +65,37 @@ private LinearLayout favorLayout;
 				Intent intent=new Intent(PersonalCenterActivity.this, MyFavorActivity.class);
 				startActivity(intent);
 				//overridePendingTransition(R.anim.slide_left_in, R.anim.slide_right_out);	
+			}
+		});
+		
+		logoutLayout.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				//弹出对话框，确认是否退出
+				AlertDialog.Builder builder = new AlertDialog.Builder(context)
+				.setTitle(R.string.title_tips)
+				.setMessage(R.string.confirm_quit)
+				.setPositiveButton(getString(R.string.confirm_ok), new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						// 清楚数据库，账号信息
+						MUserDao dao = new MUserDao(context);
+						try {
+							dao.delInfo(GlobleData.userid);
+						} catch (DaoException e) {
+							Log.i("PersonalCenterActivity","===注销失败=");
+							e.printStackTrace();
+						}
+						//返回登录界面
+						finish();
+						//提示注销成功
+						Tool.ShowMessages(context, "注销成功");
+						
+					}
+				}).setNegativeButton(getString(R.string.confirm_quit),null);
+				builder.create().show();
 			}
 		});
 	
