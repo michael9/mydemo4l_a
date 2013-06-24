@@ -2,32 +2,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:background="#90ffffff" >
-    
-      <!-- Login progress -->
-    <LinearLayout 
+    android:background="#90ffffff"
+    android:gravity="center" >
+
+    <!-- Login progress -->
+
+    <LinearLayout
         android:id="@+id/login_status"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:visibility="gone" >
+        android:gravity="center"
+        android:orientation="horizontal"
+         >
 
-        <ProgressBar
-            style="?android:attr/progressBarStyleLarge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp" />
+         <ImageView  
+        android:id="@+id/iv_loading"  
+        android:layout_width="wrap_content"  
+        android:layout_height="wrap_content"  
+        android:src="@drawable/loading"  
+        android:scaleType="center">  
+        </ImageView> 
 
         <TextView
             android:id="@+id/login_status_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:fontFamily="sans-serif-light"
-            android:text="登陆中..."
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:text="登陆中..." android:textColor="@color/black"/>
     </LinearLayout>
 
     <RelativeLayout

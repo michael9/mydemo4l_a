@@ -7,9 +7,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LinearInterpolator;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
@@ -33,6 +37,7 @@ public class ActivityDlg extends Activity implements IBookManagerActivity {
 	private View login_btn, cancel_btn;
 	private LinearLayout login_status_ll;
 	private MUserDao dao;
+	private ImageView iv_loading;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +51,7 @@ public class ActivityDlg extends Activity implements IBookManagerActivity {
 		login_status_ll = (LinearLayout) findViewById(R.id.login_status);
 		login_btn = findViewById(R.id.login_btn);
 		cancel_btn = findViewById(R.id.cancel_btn);
+		iv_loading=(ImageView) findViewById(R.id.iv_loading);
 		dao = new MUserDao(this);
 		switch (getIntent().getIntExtra("ACTIONID", 0)) {
 		case 0:
@@ -73,6 +79,12 @@ public class ActivityDlg extends Activity implements IBookManagerActivity {
 				ManagerService.allActivity.add(ActivityDlg.this);
 				ManagerService.addNewTask(tsHome);
 
+				Animation operatingAnim = AnimationUtils.loadAnimation(ActivityDlg.this, R.anim.loadingrotate);
+				LinearInterpolator lin = new LinearInterpolator();
+				operatingAnim.setInterpolator(lin);
+				if (operatingAnim != null) {
+					iv_loading.startAnimation(operatingAnim);
+				}
 				login_layout.setVisibility(View.GONE);
 				login_status_ll.setVisibility(View.VISIBLE);
 			}
@@ -86,6 +98,13 @@ public class ActivityDlg extends Activity implements IBookManagerActivity {
 		});
 	}
 
+@Override
+protected void onDestroy() {
+	// TODO Auto-generated method stub
+	super.onDestroy();
+		iv_loading.clearAnimation();
+}
+	
 	@Override
 	public void init() {
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
