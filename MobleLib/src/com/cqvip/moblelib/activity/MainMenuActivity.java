@@ -269,8 +269,21 @@ public class MainMenuActivity extends Activity implements IBookManagerActivity{
 		
 		
 	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+		if(resultCode==0)
+		{
+		Intent intent = new Intent();
+		intent.setClass(context, activities[requestCode]);
+		startActivity(intent);
+		}
+		
+	}
 
-	private void showLoginDialog() {
+	private void showLoginDialog(int id) {
 		cantouch=true;
 		
 //		View view=LayoutInflater.from(context).inflate(R.layout.activity_login, null);
@@ -309,8 +322,8 @@ public class MainMenuActivity extends Activity implements IBookManagerActivity{
 //		});
 //		dialog.show();
 		Intent intent=new Intent(MainMenuActivity.this,ActivityDlg.class);
-		intent.putExtra("ACTIONID", 0);
-		startActivity(intent);
+		intent.putExtra("ACTIONID", id);
+		startActivityForResult(intent, 0);
 	}
 
 	@Override
@@ -450,13 +463,12 @@ public class MainMenuActivity extends Activity implements IBookManagerActivity{
 						MainMenuActivity.cantouch=false;
 						Intent intent = new Intent();
 						intent.setClass(context, activities[temp_position]);
-						if(temp_position==5){
-							
-//							 if (islogin) {
-//							 startActivity(intent);
-//							 } else {
-							 showLoginDialog();
-						//	 }
+						if(temp_position==5||temp_position==7||temp_position==8){
+							 if (islogin) {
+							 startActivity(intent);
+							 } else {
+							 showLoginDialog(temp_position);
+							 }
 						}else{
 							startActivity(intent);
 						}
@@ -551,14 +563,14 @@ public class MainMenuActivity extends Activity implements IBookManagerActivity{
 		{
 			@Override
 			public void onDrawerOpened() {
-				iv.setImageResource(R.drawable.person_new_icon);// 响应开抽屉事件
+//				iv.setImageResource(R.drawable.person_new_icon);// 响应开抽屉事件
 																// ，把图片设为向下的
 			}
 		});
 		sd.setOnDrawerCloseListener(new SlidingDrawer.OnDrawerCloseListener() {
 			@Override
 			public void onDrawerClosed() {
-				iv.setImageResource(R.drawable.person_new_icon);// 响应关抽屉事件
+//				iv.setImageResource(R.drawable.person_new_icon);// 响应关抽屉事件
 			}
 		});
 	}
