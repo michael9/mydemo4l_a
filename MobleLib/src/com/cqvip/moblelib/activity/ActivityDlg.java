@@ -54,7 +54,10 @@ public class ActivityDlg extends Activity implements IBookManagerActivity {
 		iv_loading=(ImageView) findViewById(R.id.iv_loading);
 		dao = new MUserDao(this);
 		switch (getIntent().getIntExtra("ACTIONID", 0)) {
-		case 0:
+		
+		case 5:
+		case 7:
+		case 8:
 			login() ;
 			break;
 
@@ -93,7 +96,7 @@ public class ActivityDlg extends Activity implements IBookManagerActivity {
 		cancel_btn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				finish();
+				winexit(1);
 			}
 		});
 	}
@@ -123,6 +126,12 @@ protected void onDestroy() {
 		}
 	}
 
+	void winexit(int flag)
+	{
+		ActivityDlg.this.setResult(flag);
+		finish();
+	}
+	
 	@Override
 	public void refresh(Object... obj) {
 		// 取消进度条
@@ -153,8 +162,8 @@ protected void onDestroy() {
 			// dialog.dismiss();
 			// }
 			// 提示登陆成功
-			Tool.ShowMessages(this, "登陆成功");
-			finish();
+//			Tool.ShowMessages(this, "登陆成功");
+			winexit(0);
 		} else {
 			MainMenuActivity.islogin = false;
 			// dialog.dismiss();
