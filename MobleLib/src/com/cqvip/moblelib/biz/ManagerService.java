@@ -155,7 +155,7 @@ public class ManagerService extends Service implements Runnable{
 			super.handleMessage(msg);
 			switch(msg.what){
 			case Task.TASK_LOGIN:
-				IBookManagerActivity ibook = (IBookManagerActivity) ManagerService.getActivityByName("MainMenuActivity");
+				IBookManagerActivity ibook = (IBookManagerActivity) ManagerService.getActivityByName("ActivityDlg");
 				ibook.refresh(msg.obj);
 			break;
 			case Task.TASK_GET_READERINFO:

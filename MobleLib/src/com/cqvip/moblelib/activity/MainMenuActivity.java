@@ -1,5 +1,6 @@
 package com.cqvip.moblelib.activity;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 import android.annotation.SuppressLint;
@@ -10,6 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -53,7 +55,7 @@ import com.cqvip.utils.Tool;
  * 
  * @author LHP,LJ
  */
-public class MainMenuActivity extends Activity implements IBookManagerActivity {
+public class MainMenuActivity extends Activity implements IBookManagerActivity{
 
 	private SharedPreferences preferences;
 	private Context context;
@@ -63,7 +65,7 @@ public class MainMenuActivity extends Activity implements IBookManagerActivity {
 	private EditText _pwd;
 	private LinearLayout login_status_ll;
 	private ScrollView login_form_sv;
-	private boolean islogin = false;
+	static boolean islogin = false;
 	private StableGridView gridview;
 	static public boolean cantouch;
 	private MUserDao dao;
@@ -454,7 +456,7 @@ public class MainMenuActivity extends Activity implements IBookManagerActivity {
 //							 startActivity(intent);
 //							 } else {
 							 showLoginDialog();
-//							 }
+						//	 }
 						}else{
 							startActivity(intent);
 						}
