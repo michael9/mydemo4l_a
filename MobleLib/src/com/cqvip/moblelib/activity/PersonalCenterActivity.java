@@ -94,7 +94,7 @@ private Context context;
 						Tool.ShowMessages(context, "×¢Ïú³É¹¦");
 						
 					}
-				}).setNegativeButton(getString(R.string.confirm_quit),null);
+				}).setNegativeButton(getString(R.string.confirm_cancel),null);
 				builder.create().show();
 			}
 		});
