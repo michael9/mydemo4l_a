@@ -75,7 +75,7 @@ public class MainMenuActivity extends Activity implements IBookManagerActivity {
 	// private Bitmap b1, b2;
 	// private float postx;
 	// private int drawbackgroud = 0;
-	Dialog dialog;
+//	Dialog dialog;
 
 	// TimerTask task = new TimerTask() {
 	// public void run() {
@@ -271,41 +271,44 @@ public class MainMenuActivity extends Activity implements IBookManagerActivity {
 	private void showLoginDialog() {
 		cantouch=true;
 		
-		View view=LayoutInflater.from(context).inflate(R.layout.activity_login, null);
-		dialog = new AlertDialog.Builder(this).setView(view).create();
-		Button btn = (Button) view.findViewById(R.id.sign_in_button);
-		_id = (AutoCompleteTextView) view.findViewById(R.id.ed_loginname);
-		_pwd = (EditText) view.findViewById(R.id.ed_loginpwd);
-		login_status_ll = (LinearLayout) view.findViewById(R.id.login_status);
-		login_form_sv = (ScrollView) view.findViewById(R.id.login_form);
-
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-				android.R.layout.simple_dropdown_item_1line,
-				new String[] { "0441200001098","0440061012345"});
-		_id.setThreshold(0);
-		_id.setAdapter(adapter);
-
-		btn.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				name = _id.getText().toString().trim();
-				pwd = _pwd.getText().toString();
-				Log.i("MainMenuActivity", name+"--"+pwd);
-				HashMap map = new HashMap();
-				map.put("id", name);
-				map.put("pwd", pwd);
-				Task tsHome = new Task(Task.TASK_LOGIN, map);
-				ManagerService.allActivity.add(MainMenuActivity.this);
-				ManagerService.addNewTask(tsHome);
-				
-				// 显示进度条
-				login_status_ll.setVisibility(View.VISIBLE);
-				login_form_sv.setVisibility(View.GONE);
-			}
-		});
-		dialog.show();
+//		View view=LayoutInflater.from(context).inflate(R.layout.activity_login, null);
+//		dialog = new AlertDialog.Builder(this).setView(view).create();
+//		Button btn = (Button) view.findViewById(R.id.sign_in_button);
+//		_id = (AutoCompleteTextView) view.findViewById(R.id.ed_loginname);
+//		_pwd = (EditText) view.findViewById(R.id.ed_loginpwd);
+//		login_status_ll = (LinearLayout) view.findViewById(R.id.login_status);
+//		login_form_sv = (ScrollView) view.findViewById(R.id.login_form);
+//
+//		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+//				android.R.layout.simple_dropdown_item_1line,
+//				new String[] { "0441200001098","0440061012345"});
+//		_id.setThreshold(0);
+//		_id.setAdapter(adapter);
+//
+//		btn.setOnClickListener(new View.OnClickListener() {
+//
+//			@Override
+//			public void onClick(View v) {
+//				// TODO Auto-generated method stub
+//				name = _id.getText().toString().trim();
+//				pwd = _pwd.getText().toString();
+//				Log.i("MainMenuActivity", name+"--"+pwd);
+//				HashMap map = new HashMap();
+//				map.put("id", name);
+//				map.put("pwd", pwd);
+//				Task tsHome = new Task(Task.TASK_LOGIN, map);
+//				ManagerService.allActivity.add(MainMenuActivity.this);
+//				ManagerService.addNewTask(tsHome);
+//				
+//				// 显示进度条
+//				login_status_ll.setVisibility(View.VISIBLE);
+//				login_form_sv.setVisibility(View.GONE);
+//			}
+//		});
+//		dialog.show();
+		Intent intent=new Intent(MainMenuActivity.this,ActivityDlg.class);
+		intent.putExtra("ACTIONID", 0);
+		startActivity(intent);
 	}
 
 	@Override
@@ -325,7 +328,7 @@ public class MainMenuActivity extends Activity implements IBookManagerActivity {
 	protected void onResume() {
 		super.onResume();
 		cantouch=true;
-		Log.i("MainMenuActivity", "onResume");
+//		Log.i("MainMenuActivity", "onResume");
 		init();
 		}
 
@@ -333,14 +336,14 @@ public class MainMenuActivity extends Activity implements IBookManagerActivity {
 	protected void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
-		Log.i("MainMenuActivity", "onPause");
+//		Log.i("MainMenuActivity", "onPause");
 	}
 	
 	@Override
 	protected void onStop() {
 		// TODO Auto-generated method stub
 		super.onStop();
-		Log.i("MainMenuActivity", "onStop");
+//		Log.i("MainMenuActivity", "onStop");
 	}
 	
 	private final Class[] activities = { EntanceGuideActivity.class,
@@ -446,11 +449,12 @@ public class MainMenuActivity extends Activity implements IBookManagerActivity {
 						Intent intent = new Intent();
 						intent.setClass(context, activities[temp_position]);
 						if(temp_position==5){
-							 if (islogin) {
-							 startActivity(intent);
-							 } else {
+							
+//							 if (islogin) {
+//							 startActivity(intent);
+//							 } else {
 							 showLoginDialog();
-							 }
+//							 }
 						}else{
 							startActivity(intent);
 						}
@@ -500,14 +504,14 @@ public class MainMenuActivity extends Activity implements IBookManagerActivity {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			if (dialog.isShowing()) {
-				dialog.dismiss();
-			}
+//			if (dialog.isShowing()) {
+//				dialog.dismiss();
+//			}
 			// 提示登陆成功
 			Tool.ShowMessages(context, "登陆成功");
 		} else {
 			islogin = false;
-			dialog.dismiss();
+//			dialog.dismiss();
 			// 提示登陆失败
 			Tool.ShowMessages(context, res.getMessage());
 		}
