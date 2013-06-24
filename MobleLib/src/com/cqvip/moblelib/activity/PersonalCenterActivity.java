@@ -79,6 +79,7 @@ private Context context;
 				intent.putExtra("BTN_CANCEL", 1);
 				startActivityForResult(intent, 1);
 				//弹出对话框，确认是否退出
+				//overridePendingTransition(R.anim.slide_left_in, R.anim.slide_right_out);	
 //				AlertDialog.Builder builder = new AlertDialog.Builder(context)
 //				.setTitle(R.string.title_tips)
 //				.setMessage(R.string.confirm_quit)

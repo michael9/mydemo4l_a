@@ -3,6 +3,7 @@ package com.cqvip.moblelib.db;
 import java.util.List;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.cqvip.dao.DaoException;
 import com.cqvip.moblelib.entity.MUser;
@@ -39,7 +40,7 @@ public class MUserDao extends Dao{
 	 * @throws DaoException 
 	 */
 	public void delInfo(String id) throws DaoException{
-		MUser user = queryInfo(id);
+		MUser user = queryInfo();
 		if(user==null){
 			return; 
 		}
@@ -79,7 +80,7 @@ public class MUserDao extends Dao{
 	public MUser queryInfo(String id) throws DaoException{
 		 StringBuilder where = new StringBuilder();
 		   List<MUser> result = null;
-		   where.append("cardno=");
+		   where.append("cardno = ");
 		   where.append(id);
 		try {
 			result = this.query(where.toString(), MUser.class);
@@ -89,6 +90,7 @@ public class MUserDao extends Dao{
 		if(result==null||result.size()<=0){
 			return null;
 		}
+		//Log.i("database","list"+result.size());
 		return result.get(0);
 	}
 	
