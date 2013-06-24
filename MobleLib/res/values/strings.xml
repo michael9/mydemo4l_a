@@ -9,7 +9,7 @@
     <string name="main_server">读者服务</string>
     <string name="main_ebook">电子资源</string>
     <string name="main_readingguide">推荐阅读</string>
-    <string name="main_bookcomment">参考咨询</string>
+    <string name="main_bookcomment"></string><!--参考咨询  -->
     <string name="main_ebookstore">个人中心</string>
     <string name="main_notice">馆内公告</string>
     <string name="main_borrow">借阅管理</string>
