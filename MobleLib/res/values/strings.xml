@@ -28,6 +28,7 @@
     <string name="serv_readerinfo">读者信息</string>
      <string name="serv_logout">注销登录</string>
     <string name="serv_favorite">我的收藏</string>
+    <string name="serv_logout">注销</string>
     <string name="serv_myattention">我的关注</string>
     <string name="serv_bookorder">图书预约</string>
     <string name="serv_myintroduceread">我的荐读</string>
@@ -80,6 +81,10 @@
     <string name="title_section2">期刊</string>
     <string name="title_section3">文档</string>
     <string name="title_section4">多媒体</string>
+    <string name="title_tips">提示</string>
+    <string name="confirm_quit">确定注销此账号?</string>
+    <string name="confirm_ok">确定</string>
+    <string name="confirm_cancel">取消</string>
 
     
 </resources>
