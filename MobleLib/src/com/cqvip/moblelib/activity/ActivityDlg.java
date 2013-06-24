@@ -7,11 +7,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.cqvip.dao.DaoException;
 import com.cqvip.moblelib.R;
@@ -27,12 +30,13 @@ import com.cqvip.utils.Tool;
 
 public class ActivityDlg extends Activity implements IBookManagerActivity {
 
-	private RelativeLayout login_layout;
+	private RelativeLayout login_layout,msg_box_layout;
 	private EditText log_in_passwords;
 	private AutoCompleteTextView log_in_username;
-	private View login_btn, cancel_btn;
+	private Button login_btn, cancel_btn,ok_btn;
 	private LinearLayout login_status_ll;
 	private MUserDao dao;
+	private TextView msg_box_txt;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -40,30 +44,37 @@ public class ActivityDlg extends Activity implements IBookManagerActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_dlg);
 
+		msg_box_layout=(RelativeLayout)findViewById(R.id.msg_box_layout);
 		login_layout = (RelativeLayout) findViewById(R.id.log_in_layout);
-		log_in_username = (AutoCompleteTextView) findViewById(R.id.log_in_username);
-		log_in_passwords = (EditText) findViewById(R.id.log_in_passwords);
-		login_status_ll = (LinearLayout) findViewById(R.id.login_status);
-		login_btn = findViewById(R.id.login_btn);
-		cancel_btn = findViewById(R.id.cancel_btn);
-		dao = new MUserDao(this);
+		msg_box_layout.setVisibility(View.GONE);
+		login_layout.setVisibility(View.GONE);
+		
 		switch (getIntent().getIntExtra("ACTIONID", 0)) {
+		
+		case 0:
+			showmsg();
+			break;
 		
 		case 5:
 		case 7:
 		case 8:
 			login() ;
 			break;
-
-		default:
-			break;
 		}
-		 init();
 	}
 
 	String name, pwd;
 
 	private void login() {
+		msg_box_layout.setVisibility(View.VISIBLE);
+		log_in_username = (AutoCompleteTextView) findViewById(R.id.log_in_username);
+		log_in_passwords = (EditText) findViewById(R.id.log_in_passwords);
+		login_status_ll = (LinearLayout) findViewById(R.id.login_status);
+		login_btn = (Button)findViewById(R.id.login_ok_btn);
+		cancel_btn = (Button)findViewById(R.id.login_cancel_btn);
+		
+		dao = new MUserDao(this);
+				
 		login_btn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -87,8 +98,39 @@ public class ActivityDlg extends Activity implements IBookManagerActivity {
 				winexit(1);
 			}
 		});
+		init();
 	}
 
+	private void showmsg(){
+		msg_box_layout.setVisibility(View.VISIBLE);
+		 cancel_btn=(Button)findViewById(R.id.dlg_cancel_btn);
+		 ok_btn=(Button)findViewById(R.id.dlg_ok_btn);
+		 msg_box_txt=(TextView)findViewById(R.id.msg_box_txt);
+		 
+		 cancel_btn.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				winexit(1);
+			}
+		});
+		 ok_btn.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				winexit(0);
+			}
+		});
+		 
+		 msg_box_txt.setText(getIntent().getStringExtra("MSGBODY"));
+		 if(getIntent().getIntExtra("BTN_CANCEL", 0)==0){
+			 cancel_btn.setVisibility(View.GONE);			 
+		 }
+				 
+	}
+	
 	@Override
 	public void init() {
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,

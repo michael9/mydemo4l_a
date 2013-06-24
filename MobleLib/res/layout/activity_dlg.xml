@@ -5,7 +5,69 @@
     android:gravity="center"
     android:background="#90ffffff" >
     
-      <!-- Login progress -->
+    
+     <RelativeLayout
+        android:id="@+id/msg_box_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/dlg_bg" 
+        >
+        
+         <LinearLayout  
+             android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+       
+      
+        android:orientation="vertical">
+             
+             <TextView 
+                 android:id="@+id/msg_box_txt"  
+                 android:text="MESSAGE"
+                 android:textSize="20dp"
+                  android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+                 android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+             
+              <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="20dp"
+                android:gravity="right"
+                android:orientation="horizontal" >
+
+                <Button
+                    android:id="@+id/dlg_cancel_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="33dp"
+                    android:background="@drawable/btn_dlg"
+                    android:text="取消" />
+
+                <Button
+                    android:id="@+id/dlg_ok_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="33dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/btn_dlg"
+                    android:text="确定" />
+            </LinearLayout>
+             
+         </LinearLayout>
+        </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/log_in_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/dlg_bg" 
+        android:visibility="gone">
+        
+              <!-- Login progress -->
     <LinearLayout 
         android:id="@+id/login_status"
         android:layout_width="fill_parent"
@@ -29,13 +91,6 @@
             android:text="登陆中..."
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </LinearLayout>
-
-    <RelativeLayout
-        android:id="@+id/log_in_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:background="@drawable/dlg_bg" >
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -102,14 +157,14 @@
                 android:orientation="horizontal" >
 
                 <Button
-                    android:id="@+id/cancel_btn"
+                    android:id="@+id/login_cancel_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="33dp"
                     android:background="@drawable/btn_dlg"
                     android:text="取消" />
 
                 <Button
-                    android:id="@+id/login_btn"
+                    android:id="@+id/login_ok_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="33dp"
                     android:layout_marginLeft="10dp"
