@@ -35,7 +35,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:background="@drawable/dlg_bg" >
+        android:background="@drawable/dlg_bg" 
+        android:visibility="gone">
+
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -102,14 +104,14 @@
                 android:orientation="horizontal" >
 
                 <Button
-                    android:id="@+id/cancel_btn"
+                    android:id="@+id/login_cancel_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="33dp"
                     android:background="@drawable/btn_dlg"
                     android:text="取消" />
 
                 <Button
-                    android:id="@+id/login_btn"
+                    android:id="@+id/login_ok_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="33dp"
                     android:layout_marginLeft="10dp"
@@ -118,5 +120,8 @@
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
+    
+            
+           
 
 </RelativeLayout>

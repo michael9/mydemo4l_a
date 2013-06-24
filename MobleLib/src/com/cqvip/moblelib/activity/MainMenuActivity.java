@@ -55,7 +55,7 @@ import com.cqvip.utils.Tool;
  * 
  * @author LHP,LJ
  */
-public class MainMenuActivity extends Activity implements IBookManagerActivity{
+public class MainMenuActivity extends Activity implements IBookManagerActivity {
 
 	private SharedPreferences preferences;
 	private Context context;
@@ -71,13 +71,14 @@ public class MainMenuActivity extends Activity implements IBookManagerActivity{
 	private MUserDao dao;
 
 	private int width, height;
+
 	// private SurfaceView main_anim_background;
 	// private SurfaceHolder sh;
 	// private Timer mtr;
 	// private Bitmap b1, b2;
 	// private float postx;
 	// private int drawbackgroud = 0;
-//	Dialog dialog;
+	// Dialog dialog;
 
 	// TimerTask task = new TimerTask() {
 	// public void run() {
@@ -107,7 +108,7 @@ public class MainMenuActivity extends Activity implements IBookManagerActivity{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-//		requestWindowFeature(Window.);
+		// requestWindowFeature(Window.);
 
 		Intent intent = new Intent(MainMenuActivity.this, WelcomeActivity.class);
 		startActivity(intent);
@@ -247,70 +248,84 @@ public class MainMenuActivity extends Activity implements IBookManagerActivity{
 	}
 
 	private void init_login() {
-		if(dao==null){
-	 dao = new MUserDao(context);
+		if (dao == null) {
+			dao = new MUserDao(context);
 		}
 		try {
 			MUser user = dao.queryInfo();
-			if(user!=null){
-				//用户已经登陆
-				//后台自动登陆
-			Log.i("database","数据库获取书籍成功"+user.getCardno()+user.getReaderno());
+			if (user != null) {
+				// 用户已经登陆
+				// 后台自动登陆
+				Log.i("database",
+						"数据库获取书籍成功" + user.getCardno() + user.getReaderno());
 				GlobleData.userid = user.getCardno();
 				GlobleData.readerid = user.getReaderno();
 				islogin = true;
-				
+
 			}
 		} catch (DaoException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		
+
 	}
 
-	private void showLoginDialog() {
-		cantouch=true;
-		
-//		View view=LayoutInflater.from(context).inflate(R.layout.activity_login, null);
-//		dialog = new AlertDialog.Builder(this).setView(view).create();
-//		Button btn = (Button) view.findViewById(R.id.sign_in_button);
-//		_id = (AutoCompleteTextView) view.findViewById(R.id.ed_loginname);
-//		_pwd = (EditText) view.findViewById(R.id.ed_loginpwd);
-//		login_status_ll = (LinearLayout) view.findViewById(R.id.login_status);
-//		login_form_sv = (ScrollView) view.findViewById(R.id.login_form);
-//
-//		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-//				android.R.layout.simple_dropdown_item_1line,
-//				new String[] { "0441200001098","0440061012345"});
-//		_id.setThreshold(0);
-//		_id.setAdapter(adapter);
-//
-//		btn.setOnClickListener(new View.OnClickListener() {
-//
-//			@Override
-//			public void onClick(View v) {
-//				// TODO Auto-generated method stub
-//				name = _id.getText().toString().trim();
-//				pwd = _pwd.getText().toString();
-//				Log.i("MainMenuActivity", name+"--"+pwd);
-//				HashMap map = new HashMap();
-//				map.put("id", name);
-//				map.put("pwd", pwd);
-//				Task tsHome = new Task(Task.TASK_LOGIN, map);
-//				ManagerService.allActivity.add(MainMenuActivity.this);
-//				ManagerService.addNewTask(tsHome);
-//				
-//				// 显示进度条
-//				login_status_ll.setVisibility(View.VISIBLE);
-//				login_form_sv.setVisibility(View.GONE);
-//			}
-//		});
-//		dialog.show();
-		Intent intent=new Intent(MainMenuActivity.this,ActivityDlg.class);
-		intent.putExtra("ACTIONID", 0);
-		startActivity(intent);
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+		if (resultCode == 0) {
+			Intent intent = new Intent();
+			intent.setClass(context, activities[requestCode]);
+			startActivity(intent);
+		}
+
+	}
+
+	private void showLoginDialog(int id) {
+		cantouch = true;
+
+		// View
+		// view=LayoutInflater.from(context).inflate(R.layout.activity_login,
+		// null);
+		// dialog = new AlertDialog.Builder(this).setView(view).create();
+		// Button btn = (Button) view.findViewById(R.id.sign_in_button);
+		// _id = (AutoCompleteTextView) view.findViewById(R.id.ed_loginname);
+		// _pwd = (EditText) view.findViewById(R.id.ed_loginpwd);
+		// login_status_ll = (LinearLayout)
+		// view.findViewById(R.id.login_status);
+		// login_form_sv = (ScrollView) view.findViewById(R.id.login_form);
+		//
+		// ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+		// android.R.layout.simple_dropdown_item_1line,
+		// new String[] { "0441200001098","0440061012345"});
+		// _id.setThreshold(0);
+		// _id.setAdapter(adapter);
+		//
+		// btn.setOnClickListener(new View.OnClickListener() {
+		//
+		// @Override
+		// public void onClick(View v) {
+		// // TODO Auto-generated method stub
+		// name = _id.getText().toString().trim();
+		// pwd = _pwd.getText().toString();
+		// Log.i("MainMenuActivity", name+"--"+pwd);
+		// HashMap map = new HashMap();
+		// map.put("id", name);
+		// map.put("pwd", pwd);
+		// Task tsHome = new Task(Task.TASK_LOGIN, map);
+		// ManagerService.allActivity.add(MainMenuActivity.this);
+		// ManagerService.addNewTask(tsHome);
+		//
+		// // 显示进度条
+		// login_status_ll.setVisibility(View.VISIBLE);
+		// login_form_sv.setVisibility(View.GONE);
+		// }
+		// });
+		// dialog.show();
+		Intent intent = new Intent(MainMenuActivity.this, ActivityDlg.class);
+		intent.putExtra("ACTIONID", id);
+		startActivityForResult(intent, id);
 	}
 
 	@Override
@@ -329,25 +344,25 @@ public class MainMenuActivity extends Activity implements IBookManagerActivity{
 	@Override
 	protected void onResume() {
 		super.onResume();
-		cantouch=true;
-//		Log.i("MainMenuActivity", "onResume");
+		cantouch = true;
+		// Log.i("MainMenuActivity", "onResume");
 		init();
-		}
+	}
 
 	@Override
 	protected void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
-//		Log.i("MainMenuActivity", "onPause");
+		// Log.i("MainMenuActivity", "onPause");
 	}
-	
+
 	@Override
 	protected void onStop() {
 		// TODO Auto-generated method stub
 		super.onStop();
-//		Log.i("MainMenuActivity", "onStop");
+		// Log.i("MainMenuActivity", "onStop");
 	}
-	
+
 	private final Class[] activities = { EntanceGuideActivity.class,
 			BookSearchActivity.class, EBookActiviy.class,
 			SuggestedReadingActivity.class, RefServiceActivity.class,
@@ -357,24 +372,25 @@ public class MainMenuActivity extends Activity implements IBookManagerActivity{
 	public class GridViewImgAdapter extends BaseAdapter {
 
 		private Context mContext;
-		
+
 		// 定义整型数组 即图片源
 
 		private Integer[] mImageIds = { R.drawable.sy_anniu_03,
 				R.drawable.sy_anniu_05, R.drawable.sy_anniu_07,
-				R.drawable.sy_anniu_12, R.drawable.sy_anniu_13,
+				R.drawable.sy_anniu_12, R.drawable.ic_launcher,//R.drawable.sy_anniu_13
 				R.drawable.sy_anniu_14, R.drawable.sy_anniu_18,
 				R.drawable.sy_anniu_19, R.drawable.sy_anniu_20 };
 
 		private Integer[] mImageIds_big = { R.drawable.sy_anniu_03big,
 				R.drawable.sy_anniu_05big, R.drawable.sy_anniu_07big,
-				R.drawable.sy_anniu_12big, R.drawable.sy_anniu_13big,
+				R.drawable.sy_anniu_12big, R.drawable.ic_launcher,//
 				R.drawable.sy_anniu_14big, R.drawable.sy_anniu_18big,
 				R.drawable.sy_anniu_19big, R.drawable.sy_anniu_20big };
 
 		private int[] mTitle = { R.string.main_guide, R.string.main_search,
 				R.string.main_ebook, R.string.main_readingguide,
-				R.string.main_bookcomment, R.string.main_ebookstore,
+				R.string.main_bookcomment,//R.string.main_bookcomment
+				R.string.main_ebookstore,
 				R.string.main_notice, R.string.main_borrow, R.string.main_order
 
 		};
@@ -382,7 +398,6 @@ public class MainMenuActivity extends Activity implements IBookManagerActivity{
 		public GridViewImgAdapter(Context c) {
 			mContext = c;
 		}
-		
 
 		// private int clickTemp = -1;
 		//
@@ -414,7 +429,7 @@ public class MainMenuActivity extends Activity implements IBookManagerActivity{
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			final ImageView img;
-			final int temp_position = position;
+//			final int temp_position = position;
 			if (convertView == null) {
 				// 给ImageView设置资源
 				convertView = LayoutInflater.from(mContext).inflate(
@@ -433,35 +448,62 @@ public class MainMenuActivity extends Activity implements IBookManagerActivity{
 			img = (ImageView) convertView.findViewById(R.id.img_main);
 			TextView tx = (TextView) convertView.findViewById(R.id.txt_main);
 			tx.setText(getString(mTitle[position]));
-			img.setImageResource(mImageIds[temp_position]);
+			img.setImageResource(mImageIds[position]);
+			img.setTag(position);
 
 			img.setOnTouchListener(new View.OnTouchListener() {
 				@Override
 				public boolean onTouch(View v, MotionEvent event) {
-					switch (event.getAction()) {					
+					
+					int tag=(Integer)v.getTag();
+					
+					switch (event.getAction()) {
 					case MotionEvent.ACTION_DOWN:
-						img.setImageResource(mImageIds_big[temp_position]);
+						img.setImageResource(mImageIds_big[tag]);
 						Log.i("MainMenuActivity", "ACTION_DOWN");
 						break;
 					case MotionEvent.ACTION_UP:
-						img.setImageResource(mImageIds[temp_position]);
-						if(!MainMenuActivity.cantouch)
+						img.setImageResource(mImageIds[tag]);
+						if (!MainMenuActivity.cantouch)
 							break;
-						MainMenuActivity.cantouch=false;
-						Intent intent = new Intent();
-						intent.setClass(context, activities[temp_position]);
-						if(temp_position==5){
-							
-//							 if (islogin) {
-//							 startActivity(intent);
-//							 } else {
-							 showLoginDialog();
-						//	 }
-						}else{
+						MainMenuActivity.cantouch = false;
+						Intent intent = new Intent();						
+						switch (tag) {
+						case 0:
+						case 1:
+						case 2:
+							intent.setClass(context, activities[tag]);
 							startActivity(intent);
+							break;
+
+						case 3:
+							intent.setClass(context, ActivityDlg.class);
+							intent.putExtra("ACTIONID", 0);
+							intent.putExtra("MSGBODY", "该项正在紧张开发中...");
+							intent.putExtra("BTN_CANCEL", 0);
+							startActivity(intent);
+							break;
+						case 4:
+							MainMenuActivity.cantouch=true;
+							break;
+						case 5:
+						case 7:
+						case 8:
+							if (islogin) {
+								intent.setClass(context, activities[tag]);
+								startActivity(intent);
+							} else {
+								showLoginDialog(tag);
+							}
+							break;
+						case 6:
+							intent.setClass(context, activities[tag]);
+							startActivity(intent);
+							break;
+
+						default:
+							break;
 						}
-						
-						Log.i("MainMenuActivity", "ACTION_UP");
 						break;
 					default:
 						break;
@@ -486,7 +528,7 @@ public class MainMenuActivity extends Activity implements IBookManagerActivity{
 		Result res = (Result) obj[0];
 		if (res.getSuccess()) {
 			islogin = true;
-			
+
 			User user = (User) obj[0];
 			GlobleData.userid = user.getCardno();
 			GlobleData.readerid = user.getReaderno();
@@ -495,25 +537,25 @@ public class MainMenuActivity extends Activity implements IBookManagerActivity{
 			muser.setReaderno(user.getReaderno());
 			muser.setPwd(pwd);
 			muser.setName(user.getName());
-			if(dao==null){
-				 dao = new MUserDao(context);
-					}
+			if (dao == null) {
+				dao = new MUserDao(context);
+			}
 			try {
-				//dao.delInfo(muser.getCardno());
+				// dao.delInfo(muser.getCardno());
 				dao.saveInfo(muser);
-				Log.i("database","存储成功");
+				Log.i("database", "存储成功");
 			} catch (DaoException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-//			if (dialog.isShowing()) {
-//				dialog.dismiss();
-//			}
+			// if (dialog.isShowing()) {
+			// dialog.dismiss();
+			// }
 			// 提示登陆成功
 			Tool.ShowMessages(context, "登陆成功");
 		} else {
 			islogin = false;
-//			dialog.dismiss();
+			// dialog.dismiss();
 			// 提示登陆失败
 			Tool.ShowMessages(context, res.getMessage());
 		}
@@ -533,32 +575,30 @@ public class MainMenuActivity extends Activity implements IBookManagerActivity{
 	// 抽屉
 	private SlidingDrawer sd;
 	private ImageView iv;
-//	private ListView lv;
-//	private static final String[] PHOTOS_NAMES = new String[] { "Lyon",
-//			"Livermore", "Tahoe Pier", "Lake Tahoe", "Grand Canyon", "Bodie" };
+
+	// private ListView lv;
+	// private static final String[] PHOTOS_NAMES = new String[] { "Lyon",
+	// "Livermore", "Tahoe Pier", "Lake Tahoe", "Grand Canyon", "Bodie" };
 
 	private void init_drawer() {
-//		lv = (ListView) findViewById(R.id.myContent);
+		// lv = (ListView) findViewById(R.id.myContent);
 		sd = (SlidingDrawer) findViewById(R.id.sd);
 		iv = (ImageView) findViewById(R.id.iv);
 
-	
 		// MyAdapter adapter=new
 		// MyAdapter(this,items,icons);//自定义MyAdapter来实现图标加item的显示效果
-//		lv.setAdapter(new ArrayAdapter<String>(this,
-//				android.R.layout.simple_list_item_1, PHOTOS_NAMES));
+		// lv.setAdapter(new ArrayAdapter<String>(this,
+		// android.R.layout.simple_list_item_1, PHOTOS_NAMES));
 		sd.setOnDrawerOpenListener(new SlidingDrawer.OnDrawerOpenListener()// 开抽屉
 		{
 			@Override
 			public void onDrawerOpened() {
-				iv.setImageResource(R.drawable.person_new_icon);// 响应开抽屉事件
-																// ，把图片设为向下的
+				// ，把图片设为向下的
 			}
 		});
 		sd.setOnDrawerCloseListener(new SlidingDrawer.OnDrawerCloseListener() {
 			@Override
 			public void onDrawerClosed() {
-				iv.setImageResource(R.drawable.person_new_icon);// 响应关抽屉事件
 			}
 		});
 	}
