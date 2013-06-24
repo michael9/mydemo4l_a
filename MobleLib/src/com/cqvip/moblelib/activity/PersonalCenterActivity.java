@@ -88,6 +88,8 @@ private Context context;
 							Log.i("PersonalCenterActivity","===注销失败=");
 							e.printStackTrace();
 						}
+						//设置登录标识
+						MainMenuActivity.islogin = false;
 						//返回登录界面
 						finish();
 						//提示注销成功
