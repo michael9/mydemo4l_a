@@ -48,6 +48,9 @@ private Context context;
 		favorLayout=(LinearLayout) findViewById(R.id.favorLayout);
 		logoutLayout=(LinearLayout) findViewById(R.id.logoutLayout);
 		
+		TextView title = (TextView)findViewById(R.id.txt_header);
+		title.setText(R.string.main_ebookstore);
+		
 		readerinfoLayout.setOnClickListener(new View.OnClickListener() {
 			
 			@Override

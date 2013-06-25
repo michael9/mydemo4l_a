@@ -274,7 +274,7 @@ public class MainMenuActivity extends Activity implements IBookManagerActivity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
-		if (resultCode == 0) {
+		if (resultCode == 0&&islogin) {
 			Intent intent = new Intent();
 			intent.setClass(context, activities[requestCode]);
 			startActivity(intent);
