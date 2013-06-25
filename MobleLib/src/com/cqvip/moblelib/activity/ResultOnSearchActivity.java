@@ -28,6 +28,7 @@ import com.cqvip.moblelib.base.IBookManagerActivity;
 import com.cqvip.moblelib.biz.ManagerService;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.model.Book;
+import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.utils.Tool;
 
 public class ResultOnSearchActivity extends Activity implements IBookManagerActivity,OnItemClickListener {
@@ -42,7 +43,7 @@ public class ResultOnSearchActivity extends Activity implements IBookManagerActi
 	private String key;
 	private int page=1;
 	private BookAdapter adapter;
-	private ProgressDialog progressDialog;  
+	private CustomProgressDialog customProgressDialog;  
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +55,7 @@ public class ResultOnSearchActivity extends Activity implements IBookManagerActi
 		listview = (ListView)findViewById(R.id.search_res_lv);
 		listview.setOnItemClickListener((OnItemClickListener)this);
 		ManagerService.allActivity.add(this);
-		progressDialog=new ProgressDialog(this, ProgressDialog.STYLE_SPINNER);
+		customProgressDialog=CustomProgressDialog.createDialog(this);
 		
 		edit.setText(getIntent().getStringExtra("ISBN"));
 		
@@ -112,7 +113,7 @@ public class ResultOnSearchActivity extends Activity implements IBookManagerActi
 	 * @param count
 	 */
 	private void getHomePage(String key,int page ,int count,int type) {
-		progressDialog.show();
+		customProgressDialog.show();
 		HashMap map=new HashMap();
 		map.put("key", key);
 		map.put("page", page);
@@ -140,7 +141,7 @@ public class ResultOnSearchActivity extends Activity implements IBookManagerActi
 	@Override
 	public void refresh(Object... obj) {
 		//œ‘ æ
-		progressDialog.dismiss();
+		customProgressDialog.dismiss();
 		int type = (Integer)obj[0];
 		List<Book> lists = (List<Book>)obj[1];
 		if(type == GETFIRSTPAGE ){

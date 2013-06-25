@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -31,7 +32,8 @@ import com.cqvip.utils.Tool;
 
 public class ActivityDlg extends Activity implements IBookManagerActivity {
 
-	private RelativeLayout login_layout,msg_box_layout;
+	private RelativeLayout login_layout;
+	private LinearLayout msg_box_layout;
 	private EditText log_in_passwords;
 	private AutoCompleteTextView log_in_username;
 	private Button login_btn, cancel_btn,ok_btn;
@@ -46,7 +48,7 @@ public class ActivityDlg extends Activity implements IBookManagerActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_dlg);
 
-		msg_box_layout=(RelativeLayout)findViewById(R.id.msg_box_layout);
+		msg_box_layout=(LinearLayout)findViewById(R.id.msg_box_layout);
 		login_layout = (RelativeLayout) findViewById(R.id.log_in_layout);
 //		login_status_ll = (LinearLayout) findViewById(R.id.login_status);
 		msg_box_layout.setVisibility(View.GONE);
