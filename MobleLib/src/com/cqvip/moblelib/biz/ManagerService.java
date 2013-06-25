@@ -19,6 +19,7 @@ import com.cqvip.moblelib.model.Book;
 import com.cqvip.moblelib.model.BookLoc;
 import com.cqvip.moblelib.model.BorrowBook;
 import com.cqvip.moblelib.model.EBook;
+import com.cqvip.moblelib.model.EbookDetail;
 import com.cqvip.moblelib.model.Reader;
 import com.cqvip.moblelib.model.Result;
 import com.cqvip.moblelib.model.ShortBook;
@@ -132,8 +133,23 @@ public class ManagerService extends Service implements Runnable{
 			break;	
 			//查询电子书14
 		case Task.TASK_QUERY_EBOOK:
-			List<EBook> ebooks = manager.queryEBook((String)task.getTaskParam().get("key"),(String)task.getTaskParam().get("type"));
+			List<EBook> ebooks = manager.queryEBook((String)task.getTaskParam().get("key"),(Integer)task.getTaskParam().get("page"),(Integer)task.getTaskParam().get("count"));
 			msg.obj = ebooks;
+			break;	
+			//查询电子书更多
+		case Task.TASK_QUERY_EBOOK_MORE:
+			List<EBook> moreebooks = manager.queryEBook((String)task.getTaskParam().get("key"),(Integer)task.getTaskParam().get("page"),(Integer)task.getTaskParam().get("count"));
+			msg.obj = moreebooks;
+			break;	
+			//查询电子书详细
+		case Task.TASK_QUERY_EBOOK_DETAIL:
+			EbookDetail ebookDetail = manager.queryEBookDetail((String)task.getTaskParam().get("lngid"));
+			msg.obj = ebookDetail;
+			break;
+			//查询电子书下载地址
+		case Task.TASK_EBOOK_DOWN:
+			List<ShortBook> down = manager.articledown((String)task.getTaskParam().get("lngid"));
+			msg.obj = down;
 			break;	
 			
 			}
@@ -218,6 +234,21 @@ public class ManagerService extends Service implements Runnable{
 			case Task.TASK_QUERY_EBOOK:
 				IBookManagerActivity ebooks = (IBookManagerActivity) ManagerService.getActivityByName("EBookActiviy");
 				ebooks.refresh(msg.obj);
+				break;	
+				//查询电子书更多
+			case Task.TASK_QUERY_EBOOK_MORE:
+				IBookManagerActivity ebooksmore = (IBookManagerActivity) ManagerService.getActivityByName("EBookActiviy");
+				ebooksmore.refresh(msg.obj);
+				break;	
+				//查询电子书详细
+			case Task.TASK_QUERY_EBOOK_DETAIL:
+				IBookManagerActivity ebooksDtail = (IBookManagerActivity) ManagerService.getActivityByName("EBookActiviy");
+				ebooksDtail.refresh(msg.obj);
+				break;	
+				//下载电子书
+			case Task.TASK_EBOOK_DOWN:
+				IBookManagerActivity down = (IBookManagerActivity) ManagerService.getActivityByName("EBookActiviy");
+				down.refresh(msg.obj);
 				break;	
 			}
 		}

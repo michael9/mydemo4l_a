@@ -19,7 +19,9 @@ public class Task {
 	public static final int TASK_BOOK_RENEW= 12;//续借
 	public static final int TASK_USER_PWD= 13;//修改密码
 	public static final int TASK_QUERY_EBOOK= 14;//查询电子书
-	public static final int TASK_EBOOK_DOWN= 15;//查询电子书
+	public static final int TASK_QUERY_EBOOK_MORE= 15;//查询更多电子书
+	public static final int TASK_QUERY_EBOOK_DETAIL= 16;//电子书详细
+	public static final int TASK_EBOOK_DOWN= 17;//查询下载地址
 	
 	
 	

@@ -49,7 +49,7 @@ public class ShortBook {
 		
 	}
 	
-	public List<ShortBook> formList(int type,String result) throws BookException{
+	public static List<ShortBook> formList(int type,String result) throws BookException{
 		
 	    List<ShortBook> books = null;
 	try {
@@ -89,6 +89,12 @@ public class ShortBook {
 
 	public String getMessage() {
 		return message;
+	}
+
+	@Override
+	public String toString() {
+		return "ShortBook [sucesss=" + sucesss + ", id=" + id + ", date="
+				+ date + ", message=" + message + "]";
 	}
 	
 	
