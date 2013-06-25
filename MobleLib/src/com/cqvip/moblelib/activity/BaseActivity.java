@@ -14,7 +14,6 @@ import android.widget.Toast;
 
 public class BaseActivity extends Activity {
 	private GestureDetector mGestureDetector;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

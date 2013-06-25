@@ -171,4 +171,11 @@ public class BorrowAndOrderActivity extends BaseActivity implements IBookManager
 			
 		}
 	}
+	
+	@Override
+	public void onError() {
+		if(progressDialog!=null&&progressDialog.isShowing()){
+			progressDialog.dismiss();
+		}
+	}
 }

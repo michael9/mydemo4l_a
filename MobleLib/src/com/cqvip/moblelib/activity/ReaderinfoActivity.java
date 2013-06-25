@@ -31,7 +31,7 @@ import com.cqvip.moblelib.model.Result;
 import com.cqvip.moblelib.utils.Rotate3dAnimation;
 import com.cqvip.utils.Tool;
 
-public class ReaderinfoActivity extends Activity implements
+public class ReaderinfoActivity extends BaseActivity implements
 		IBookManagerActivity {
 
 	private Context context;
@@ -217,4 +217,10 @@ public class ReaderinfoActivity extends Activity implements
 		mList.setAdapter(new ReaderInfoAdapter(this, attrs, values));
 	}
 
+	@Override
+	public void onError() {
+//		if(progressDialog!=null&&iserror&&progressDialog.isShowing()){
+//			progressDialog.dismiss();
+//		}
+	}
 }

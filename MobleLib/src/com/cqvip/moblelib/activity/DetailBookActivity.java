@@ -14,7 +14,7 @@ import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.model.Book;
 import com.cqvip.moblelib.model.BookLoc;
 
-public class DetailBookActivity extends Activity implements IBookManagerActivity {
+public class DetailBookActivity extends BaseActivity implements IBookManagerActivity {
 
 	private Book dBook;
 	private TextView baseinfo,loc,textView10;
@@ -82,4 +82,10 @@ public class DetailBookActivity extends Activity implements IBookManagerActivity
 		
 	}
 
+	@Override
+	public void onError() {
+//		if(progressDialog!=null&&iserror&&progressDialog.isShowing()){
+//			progressDialog.dismiss();
+//		}
+	}
 }
