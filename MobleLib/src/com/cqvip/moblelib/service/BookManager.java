@@ -11,6 +11,7 @@ import com.cqvip.moblelib.model.Book;
 import com.cqvip.moblelib.model.BookLoc;
 import com.cqvip.moblelib.model.BorrowBook;
 import com.cqvip.moblelib.model.EBook;
+import com.cqvip.moblelib.model.EbookDetail;
 import com.cqvip.moblelib.model.Reader;
 import com.cqvip.moblelib.model.Result;
 import com.cqvip.moblelib.model.ShortBook;
@@ -289,13 +290,38 @@ public class BookManager {
 	 * @return
 	 * @throws BookException
 	 */
-	public List<EBook> queryEBook(String key,String type) throws BookException{
+	public List<EBook> queryEBook(String key,int page,int count) throws BookException{
 		BookParameters params = new BookParameters();
-		params.add("userid", key);
-		params.add("newcode", type);//新密码
-		String result = http.requestUrl(getBaseURL()+"/library/user/password.aspx", getBasepost(), params);
-		return null;
+		params.add("title", key);
+		params.add("curpage", page+"");//新密码
+		params.add("perpage",count+"" );//旧密码
+		String result = http.requestUrl(getBaseURL()+"/zk/searchtemp.aspx", getBasepost(), params);
+		return EBook.formList(result);
 		
+	}
+	/**
+	 * 查询电子资源详细
+	 * @param lngid
+	 * @return
+	 * @throws BookException
+	 */
+	public EbookDetail queryEBookDetail(String lngid) throws BookException{
+		BookParameters params = new BookParameters();
+		params.add("lngid", lngid);
+		String result = http.requestUrl(getBaseURL()+"/zk/detailtemp.aspx", getBasepost(), params);
+		return EbookDetail.formObject(result);
+	}
+	/**
+	 * 获取电子资料下载地址
+	 * @param lngid
+	 * @return 地址集合
+	 * @throws BookException
+	 */
+	public List<ShortBook> articledown(String lngid) throws BookException{
+		BookParameters params = new BookParameters();
+		params.add("lngid", lngid);
+		String result = http.requestUrl(getBaseURL()+"/zk/articledowntemp.aspx", getBasepost(), params);
+		return ShortBook.formList(Task.TASK_EBOOK_DOWN, result);
 	}
 	
 	private String formResult(String result) throws BookException {
