@@ -2,13 +2,13 @@
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
     <style name="AppBaseTheme" parent="android:Theme.Light">
         <!--
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
+            backward-compatibility can go here.
         -->
     </style>
 
@@ -17,15 +17,16 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 
-    <style name="NoTtitleAndAnimation" parent="@style/AppTheme" >
+    <style name="NoTtitleAndAnimation" parent="@style/AppTheme">
         <item name="android:windowAnimationStyle">@style/AnimationActivity</item>
     </style>
-   <style name="AnimationActivity">
+
+    <style name="AnimationActivity">
         <item name="android:activityOpenEnterAnimation">@anim/slide_right_in</item>
         <item name="android:activityOpenExitAnimation">@anim/slide_left_out</item>
         <item name="android:activityCloseEnterAnimation">@anim/slide_left_in</item>
         <item name="android:activityCloseExitAnimation">@anim/slide_right_out</item>
-         <item name="android:taskOpenEnterAnimation">@anim/slide_right_in</item>
+        <item name="android:taskOpenEnterAnimation">@anim/slide_right_in</item>
         <item name="android:taskOpenExitAnimation">@anim/slide_left_out</item>
         <item name="android:taskCloseEnterAnimation">@anim/slide_left_in</item>
         <item name="android:taskCloseExitAnimation">@anim/slide_right_out</item>
@@ -34,9 +35,23 @@
         <item name="android:taskToBackEnterAnimation">@anim/slide_left_in</item>
         <item name="android:taskToBackExitAnimation">@anim/slide_right_out</item>
     </style>
-     <style name="LoginFormContainer">
+
+    <style name="LoginFormContainer">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:padding">16dp</item>
     </style>
+
+    <style name="CustomDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+    </style>
+    <style name="CustomProgressDialog" parent="@style/CustomDialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
 </resources>
