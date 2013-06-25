@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.xml.sax.DTDHandler;
 
 import android.test.AndroidTestCase;
 import android.util.Log;
@@ -12,6 +13,8 @@ import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.model.Book;
 import com.cqvip.moblelib.model.BookLoc;
 import com.cqvip.moblelib.model.BorrowBook;
+import com.cqvip.moblelib.model.EBook;
+import com.cqvip.moblelib.model.EbookDetail;
 import com.cqvip.moblelib.model.Reader;
 import com.cqvip.moblelib.model.ShortBook;
 import com.cqvip.moblelib.net.BookException;
@@ -219,5 +222,53 @@ public class HttpRequestTest extends AndroidTestCase {
 			e.printStackTrace();
 		}
 		
+	}
+	public void testQueryEbook(){
+	BookManager man = new BookManager();
+		
+		List<EBook> result=null;
+		try {
+			result = man.queryEBook("cad",1,10);
+		} catch (BookException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		if(result!=null){
+			for(int i = 0;i<result.size();i++){
+				Log.i("mobile",result.get(i).toString());
+			}
+		}
+		
+	}
+	public void testArticleDown(){
+		BookManager man = new BookManager();
+		
+		List<ShortBook> result=null;
+		try {
+			result = man.articledown("45487094");
+		} catch (BookException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		if(result!=null){
+			for(int i = 0;i<result.size();i++){
+				Log.i("mobile",result.get(i).toString());
+			}
+		}
+		
+	}
+	public void queryEbookDetail(){
+BookManager man = new BookManager();
+		
+		EbookDetail result=null;
+		try {
+			result = man.queryEBookDetail("45487094");
+		} catch (BookException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		if(result!=null){
+				Log.i("mobile",result.toString());
+		}
 	}
 }

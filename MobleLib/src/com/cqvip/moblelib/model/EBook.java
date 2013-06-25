@@ -7,9 +7,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.util.Log;
+
 import com.cqvip.moblelib.net.BookException;
 
 public class EBook {
+	
 	
 		    private String lngid;
 		    private String gch;
@@ -167,6 +170,20 @@ public class EBook {
 			
 			
 		}
-	    
+
+			@Override
+			public String toString() {
+				return "EBook [lngid=" + lngid + ", gch=" + gch + ", years="
+						+ years + ", num=" + num + ", vol=" + vol
+						+ ", title_c=" + title_c + ", title_e=" + title_e
+						+ ", keyword_c=" + keyword_c + ", keyword_e="
+						+ keyword_e + ", name_c=" + name_c + ", name_e="
+						+ name_e + ", remark_c=" + remark_c + ", remark_e="
+						+ remark_e + ", classtype=" + classtype + ", writer="
+						+ writer + ", organ=" + organ + ", beginpage="
+						+ beginpage + ", endpage=" + endpage + ", pagecount="
+						+ pagecount + ", pdfsize=" + pdfsize + "]";
+			}
 	
+			
 }

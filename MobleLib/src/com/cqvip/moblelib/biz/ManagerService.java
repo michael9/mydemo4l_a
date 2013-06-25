@@ -19,6 +19,7 @@ import com.cqvip.moblelib.model.Book;
 import com.cqvip.moblelib.model.BookLoc;
 import com.cqvip.moblelib.model.BorrowBook;
 import com.cqvip.moblelib.model.EBook;
+import com.cqvip.moblelib.model.EbookDetail;
 import com.cqvip.moblelib.model.Reader;
 import com.cqvip.moblelib.model.Result;
 import com.cqvip.moblelib.model.ShortBook;
@@ -152,6 +153,110 @@ public class ManagerService extends Service implements Runnable {
 				msg.obj = ebooks;
 				break;
 
+	
+	 //添加任务
+    public static void addNewTask(Task ts)
+    {
+    	allTask.add(ts);
+    }
+   
+    
+    //更新UI
+    
+    
+    
+    //执行任务
+    public void doTask(Task task){
+    	Message msg = hander.obtainMessage();
+		msg.what = task.getTaskID();//刷新uI
+		try{
+			switch(task.getTaskID()){
+			//登陆1
+		case Task.TASK_LOGIN:
+			Result result = manager.login((String)task.getTaskParam().get("id"),(String)task.getTaskParam().get("pwd"));
+			msg.obj = result;
+			break;
+			//获取读者信息2
+		case Task.TASK_GET_READERINFO:
+			Reader reader = manager.getReaderInfo((String)task.getTaskParam().get("userid"));
+			msg.obj = reader;
+			break;	
+			//查询书籍信息3
+		case Task.TASK_QUERY_BOOK:
+			List<Book> books = manager.getBookSearch((String)task.getTaskParam().get("key"),(Integer)task.getTaskParam().get("page"),(Integer)task.getTaskParam().get("count"));
+			msg.obj = books;
+			break;	
+			//查询更多4
+		case Task.TASK_QUERY_MORE:
+			List<Book> more = manager.getBookSearch((String)task.getTaskParam().get("key"),(Integer)task.getTaskParam().get("page"),(Integer)task.getTaskParam().get("count"));
+			msg.obj = more;
+			break;	
+			//入馆须知5
+		case Task.TASK_E_NOTICE:
+			String notic = manager.getContent(Task.TASK_E_NOTICE);
+			msg.obj = notic;
+			break;	
+			//馆内公告6
+		case Task.TASK_E_CARDGUID:
+			String card = manager.getContent(Task.TASK_E_CARDGUID);
+			msg.obj = card;
+			break;	
+			//开馆时间7
+		case Task.TASK_E_TIME:
+			String time = manager.getContent(Task.TASK_E_TIME);
+			msg.obj = time;
+			break;	
+			//读者须知8
+		case Task.TASK_E_READER:
+			String read = manager.getContent(Task.TASK_E_READER);
+			msg.obj = read;
+			break;	
+			//服务介绍9
+		case Task.TASK_E_SERVICE:
+			String service = manager.getContent(Task.TASK_E_SERVICE);
+			msg.obj = service;
+			break;	
+			//获取书详细信息10
+		case Task.TASK_BOOK_INFO:
+			BookLoc binfo = manager.getBookDetail((String)task.getTaskParam().get("id"));
+			msg.obj = binfo;
+			break;	
+			//修改密码11
+		case Task.TASK_USER_PWD:
+			String sucess = manager.changPassword((String)task.getTaskParam().get("userid"),(String)task.getTaskParam().get("newcode"),(String)task.getTaskParam().get("oldcode"));
+			msg.obj = sucess;
+			break;
+			//借阅图书信息12
+		case Task.TASK_BORROW_LIST:
+			List<BorrowBook> borrowlist = manager.getLoanList((String)task.getTaskParam().get("id"));
+			msg.obj = borrowlist;
+			break;		
+			//续借13
+		case Task.TASK_BOOK_RENEW:
+			ShortBook renew = manager.reNew((String)task.getTaskParam().get("userid"),(String)task.getTaskParam().get("barcode"));
+			msg.obj = renew;
+			break;	
+			//查询电子书14
+		case Task.TASK_QUERY_EBOOK:
+			List<EBook> ebooks = manager.queryEBook((String)task.getTaskParam().get("key"),(Integer)task.getTaskParam().get("page"),(Integer)task.getTaskParam().get("count"));
+			msg.obj = ebooks;
+			break;	
+			//查询电子书更多
+		case Task.TASK_QUERY_EBOOK_MORE:
+			List<EBook> moreebooks = manager.queryEBook((String)task.getTaskParam().get("key"),(Integer)task.getTaskParam().get("page"),(Integer)task.getTaskParam().get("count"));
+			msg.obj = moreebooks;
+			break;	
+			//查询电子书详细
+		case Task.TASK_QUERY_EBOOK_DETAIL:
+			EbookDetail ebookDetail = manager.queryEBookDetail((String)task.getTaskParam().get("lngid"));
+			msg.obj = ebookDetail;
+			break;
+			//查询电子书下载地址
+		case Task.TASK_EBOOK_DOWN:
+			List<ShortBook> down = manager.articledown((String)task.getTaskParam().get("lngid"));
+			msg.obj = down;
+			break;	
+			
 			}
 		} catch (BookException e) {
 			msg.arg1 = e.getStatusCode();
@@ -251,18 +356,22 @@ public class ManagerService extends Service implements Runnable {
 				IBookManagerActivity ebooks = (IBookManagerActivity) ManagerService
 						.getActivityByName("EBookActiviy");
 				ebooks.refresh(msg.obj);
-				break;
-			}
-		}
-
-	};
-
-	// 根据名字取集合内activity更新
-	public static IBookManagerActivity getActivityByName(String name) {
-		IBookManagerActivity ibookActivity = null;
-		for (IBookManagerActivity ib : allActivity) {
-			if (ib.getClass().getName().indexOf(name) >= 0) {
-				ibookActivity = ib;
+				break;	
+				//查询电子书更多
+			case Task.TASK_QUERY_EBOOK_MORE:
+				IBookManagerActivity ebooksmore = (IBookManagerActivity) ManagerService.getActivityByName("EBookActiviy");
+				ebooksmore.refresh(msg.obj);
+				break;	
+				//查询电子书详细
+			case Task.TASK_QUERY_EBOOK_DETAIL:
+				IBookManagerActivity ebooksDtail = (IBookManagerActivity) ManagerService.getActivityByName("EBookActiviy");
+				ebooksDtail.refresh(msg.obj);
+				break;	
+				//下载电子书
+			case Task.TASK_EBOOK_DOWN:
+				IBookManagerActivity down = (IBookManagerActivity) ManagerService.getActivityByName("EBookActiviy");
+				down.refresh(msg.obj);
+				break;	
 			}
 		}
 		return ibookActivity;
