@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,6 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.cqvip.moblelib.R;
-import com.cqvip.moblelib.activity.ActivityDlg;
 import com.cqvip.moblelib.biz.ManagerService;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
@@ -106,44 +104,29 @@ public class BorrowBookAdapter extends BaseAdapter{
 	        holder.callno.setText(callno+book.getCallno());
 	        holder.price.setText(price+book.getPrice());
 	        holder.borrowtime.setText(borrowtime+book.getLoandate());
-	        holder.renew.setTag(position);
 	        if(book.getRenew()!=0){
 	        holder.returntime.setText(returntime+book.getReturndate()+context.getString(R.string.alreadyrenew));
-	        holder.renew.setTextColor(context.getResources().getColor(R.color.txt_red));
 	        }else{
 	        	holder.returntime.setText(returntime+book.getReturndate());
-	        	 holder.renew.setTextColor(context.getResources().getColor(R.color.green_light));
 	        }
 	        //判断是否续借过
 //	        if(book.getRenew()!=0){
 //	        	holder.renew.setVisibility(View.GONE);
 //	        }else{
-//	        	if(holder.renew.getVisibility()==View.GONE){
-//	        		holder.renew.setVisibility(View.VISIBLE);
-//	        	}
+	        	if(holder.renew.getVisibility()==View.GONE){
+	        		holder.renew.setVisibility(View.VISIBLE);
+	        	}
 	        		holder.renew.setOnClickListener(new View.OnClickListener() {
 						
 						@Override
 						public void onClick(View v) {
 							//发送续借请求
-							int p=(Integer)v.getTag();
-							if( (lists.get(p)).getRenew()==0)
-							{
 							HashMap map = new HashMap();
 							map.put("userid", GlobleData.readerid);
 							map.put("barcode", book.getBarcode());
 							Task task = new Task(Task.TASK_BOOK_RENEW, map);
 							ManagerService.addNewTask(task);
 							Tool.ShowMessages(context,context.getString(R.string.beginrenew));
-							}
-							else
-							{
-								Intent intent=new Intent(context,ActivityDlg.class);
-								intent.putExtra("ACTIONID", 0);
-								intent.putExtra("MSGBODY", "该本图书已经续借过.\r\n图书只能续借一次.\r\n请注意到期归还。\r\n谢谢！");
-								intent.putExtra("BTN_CANCEL", 0);
-								context.startActivity(intent);
-							}
 						}
 					});
 	        	

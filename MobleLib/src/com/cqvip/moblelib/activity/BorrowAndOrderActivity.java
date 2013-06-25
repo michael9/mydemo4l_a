@@ -13,7 +13,6 @@ import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.BorrowBook;
 import com.cqvip.moblelib.model.ShortBook;
-import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.utils.Tool;
 
 import android.os.Bundle;
@@ -70,7 +69,6 @@ public class BorrowAndOrderActivity extends BaseActivity implements IBookManager
 	private ListView listview;
 	private BorrowBookAdapter adapter;
 	private List<BorrowBook>  lists;
-	private CustomProgressDialog customProgressDialog;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -84,8 +82,6 @@ public class BorrowAndOrderActivity extends BaseActivity implements IBookManager
 		//ImageView history = (ImageView)v.findViewById(R.id.btn_right_header);
 		//history.setVisibility(View.VISIBLE);
 		//history.setImageResource(R.drawable.lscx);
-		customProgressDialog=CustomProgressDialog.createDialog(this);
-		
 		if(adapter!=null){
 			
 			
@@ -125,7 +121,6 @@ public class BorrowAndOrderActivity extends BaseActivity implements IBookManager
 
 	@Override
 	public void init() {
-		customProgressDialog.show();
 		ManagerService.allActivity.add(this);
 		if(GlobleData.userid==null){
 			Tool.ShowMessages(context, "用户没有登陆");
@@ -139,7 +134,6 @@ public class BorrowAndOrderActivity extends BaseActivity implements IBookManager
 
 	@Override
 	public void refresh(Object... obj) {
-		customProgressDialog.dismiss();
 		Integer type = (Integer)obj[0];
 		switch(type){
 		case BORROWLIST:

@@ -6,7 +6,6 @@ import com.cqvip.moblelib.R.menu;
 import com.cqvip.moblelib.base.IBookManagerActivity;
 import com.cqvip.moblelib.biz.ManagerService;
 import com.cqvip.moblelib.biz.Task;
-import com.cqvip.moblelib.view.CustomProgressDialog;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -27,7 +26,7 @@ public class DetailTextActivity extends BaseActivity implements IBookManagerActi
 	public static final int E_TIME = 3;
 	public static final int E_READER = 4;
 	public static final int E_SERVICE = 5;
-	private  CustomProgressDialog customProgressDialog;
+	private ProgressDialog progressDialog;  
 	private int type;
 	private TextView t1,content;
 	@Override
@@ -39,7 +38,7 @@ public class DetailTextActivity extends BaseActivity implements IBookManagerActi
 		t1 = (TextView)v.findViewById(R.id.txt_header);
 		ImageView back = (ImageView)v.findViewById(R.id.img_back_header);
 		ManagerService.allActivity.add(this);
-		customProgressDialog=CustomProgressDialog.createDialog(this);
+		progressDialog=new ProgressDialog(this, ProgressDialog.STYLE_SPINNER);
 		
 		back.setOnClickListener(new View.OnClickListener() {
 			
@@ -54,7 +53,7 @@ public class DetailTextActivity extends BaseActivity implements IBookManagerActi
 		content = (TextView)findViewById(R.id.content_txt);
 		type = getIntent().getIntExtra("enter",0);
 		
-		customProgressDialog.show();
+		progressDialog.show();
 		switch(type){
 		case 1:
 			t1.setText(R.string.guide_needknow);		
@@ -142,7 +141,7 @@ public class DetailTextActivity extends BaseActivity implements IBookManagerActi
 
 	@Override
 	public void refresh(Object... obj) {
-		customProgressDialog.dismiss();
+		progressDialog.dismiss();
 		Integer type = (Integer)obj[0];
 		String res = (String) obj[1];
 		

@@ -13,7 +13,6 @@ public class MUser extends Model{
 	private Integer id;//自增id
 	private String cardno;//用户id
 	private String pwd;//密码
-	
 	private String readerno;//读者id
 	private String name;//用户名
 	
