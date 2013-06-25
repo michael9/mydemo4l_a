@@ -13,7 +13,6 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -27,6 +26,7 @@ import com.cqvip.moblelib.db.MUserDao;
 import com.cqvip.moblelib.entity.MUser;
 import com.cqvip.moblelib.model.Result;
 import com.cqvip.moblelib.model.User;
+import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.utils.Tool;
 
 public class ActivityDlg extends Activity implements IBookManagerActivity {
@@ -38,7 +38,7 @@ public class ActivityDlg extends Activity implements IBookManagerActivity {
 //	private LinearLayout login_status_ll;
 	private MUserDao dao;
 	private TextView msg_box_txt;
-	private  ProgressDialog progressDialog;
+	private  CustomProgressDialog customProgressDialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +51,8 @@ public class ActivityDlg extends Activity implements IBookManagerActivity {
 //		login_status_ll = (LinearLayout) findViewById(R.id.login_status);
 		msg_box_layout.setVisibility(View.GONE);
 		login_layout.setVisibility(View.GONE);
-		progressDialog=new ProgressDialog(ActivityDlg.this,ProgressDialog.STYLE_SPINNER);
+		customProgressDialog = CustomProgressDialog.createDialog(this);
+		//customProgressDialog.setMessage("正在加载中...");
 //		login_status_ll.setVisibility(View.GONE);
 		
 		switch (getIntent().getIntExtra("ACTIONID", 0)) {
@@ -92,7 +93,7 @@ public class ActivityDlg extends Activity implements IBookManagerActivity {
 				ManagerService.allActivity.add(ActivityDlg.this);
 				ManagerService.addNewTask(tsHome);
 
-				progressDialog.show();
+				customProgressDialog.show();
 //				login_layout.setVisibility(View.GONE);
 //				login_status_ll.setVisibility(View.VISIBLE);
 			}
@@ -164,7 +165,7 @@ public class ActivityDlg extends Activity implements IBookManagerActivity {
 	@Override
 	public void refresh(Object... obj) {
 		// 取消进度条
-		progressDialog.dismiss();
+		customProgressDialog.dismiss();
 		Result res = (Result) obj[0];
 		if (res.getSuccess()) {
 			MainMenuActivity.islogin = true;
