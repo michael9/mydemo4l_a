@@ -380,8 +380,8 @@ public class MainMenuActivity extends BaseActivity implements IBookManagerActivi
 
 		private Integer[] mImageIds = { R.drawable.sy_anniu_03,
 				R.drawable.sy_anniu_05, R.drawable.sy_anniu_07,
-				R.drawable.sy_anniu_12, R.drawable.ic_launcher,//R.drawable.sy_anniu_13
-				R.drawable.sy_anniu_14, R.drawable.sy_anniu_18,
+				R.drawable.sy_anniu_12, R.drawable.sy_anniu_14,//R.drawable.sy_anniu_13
+				R.drawable.ic_launcher, R.drawable.sy_anniu_18,
 				R.drawable.sy_anniu_19, R.drawable.sy_anniu_20 };
 
 		private Integer[] mImageIds_big = { R.drawable.sy_anniu_03big,
@@ -392,8 +392,8 @@ public class MainMenuActivity extends BaseActivity implements IBookManagerActivi
 
 		private int[] mTitle = { R.string.main_guide, R.string.main_search,
 				R.string.main_ebook, R.string.main_readingguide,
-				R.string.main_bookcomment,//R.string.main_bookcomment
-				R.string.main_ebookstore,
+				R.string.main_ebookstore,//R.string.main_bookcomment
+				R.string.serv_favorite,
 				R.string.main_notice, R.string.main_borrow, R.string.main_order
 
 		};
