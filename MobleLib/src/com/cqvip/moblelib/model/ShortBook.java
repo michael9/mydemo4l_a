@@ -1,5 +1,9 @@
 package com.cqvip.moblelib.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -32,9 +36,44 @@ public class ShortBook {
 				throw new BookException(e);
 			}
 			break;
+		case Task.TASK_EBOOK_DOWN:
+			try {
+				JSONObject json = new JSONObject(result);
+				date = json.getString("svrurl");
+				message = json.getString("svrname");
+			} catch (JSONException e) {
+				throw new BookException(e);
+			}
+			break;
 		}
 		
 	}
+	
+	public List<ShortBook> formList(int type,String result) throws BookException{
+		
+	    List<ShortBook> books = null;
+	try {
+		JSONObject json = new JSONObject(result);
+	     if(!json.getBoolean("success")){
+	    	 return null;
+	     }
+		JSONArray ary = json.getJSONArray("serverinfo");
+		 int count = ary.length();
+		 if(count <=0){
+			 return null;
+		 }
+		 books = new ArrayList<ShortBook>(count);
+		 for(int i = 0;i<count;i++){
+			 books.add(new ShortBook(type,ary.getJSONObject(i).toString()));
+		 }
+		 return books;
+	} catch (JSONException e) {
+		throw new BookException(e);
+	}
+	
+		
+	}
+	
 	
 	public String getSucesss() {
 		return sucesss;

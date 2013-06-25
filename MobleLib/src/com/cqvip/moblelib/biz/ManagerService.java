@@ -22,6 +22,7 @@ import com.cqvip.moblelib.model.EBook;
 import com.cqvip.moblelib.model.Reader;
 import com.cqvip.moblelib.model.Result;
 import com.cqvip.moblelib.model.ShortBook;
+import com.cqvip.moblelib.net.BookException;
 import com.cqvip.moblelib.service.BookManager;
 
 /**
@@ -136,9 +137,13 @@ public class ManagerService extends Service implements Runnable{
 			break;	
 			
 			}
+		}catch(BookException e){
+			msg.arg1 =  e.getStatusCode();
+			//msg.what = e.getStatusCode();
+			Log.i("getStatusCode()","==========stack======="+msg.what);
 		}catch(Exception e){
-			e.printStackTrace();
 			msg.what = -100;
+			Log.i("getStatusCode()","==========stack=======-100");
 		}	
 		//·¢ËÍ¸üÐÂUI
 		hander.sendMessage(msg);
