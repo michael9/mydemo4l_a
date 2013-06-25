@@ -55,7 +55,7 @@ import com.cqvip.utils.Tool;
  * 
  * @author LHP,LJ
  */
-public class MainMenuActivity extends Activity implements IBookManagerActivity {
+public class MainMenuActivity extends BaseActivity implements IBookManagerActivity {
 
 	private SharedPreferences preferences;
 	private Context context;
@@ -332,13 +332,16 @@ public class MainMenuActivity extends Activity implements IBookManagerActivity {
 	public void init() {
 		// 初始化 service
 		// 检查网络是否可用
-		if (Tool.checkNetWork(context)) {
-			if (!ManagerService.isrun) {
-				ManagerService.isrun = true;
-				Intent it = new Intent(this, ManagerService.class);
-				this.startService(it);
-			}
+        if (Tool.checkNetWork(context)) {
+			
 		}
+        
+		if (!ManagerService.isrun) {
+			ManagerService.isrun = true;
+			Intent it = new Intent(this, ManagerService.class);
+			this.startService(it);
+		}
+		
 	}
 
 	@Override
@@ -603,4 +606,10 @@ public class MainMenuActivity extends Activity implements IBookManagerActivity {
 		});
 	}
 
+	@Override
+	public void onError() {
+//		if(progressDialog!=null&&iserror&&progressDialog.isShowing()){
+//			progressDialog.dismiss();
+//		}
+	}
 }

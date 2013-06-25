@@ -30,7 +30,7 @@ import com.cqvip.moblelib.model.User;
 import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.utils.Tool;
 
-public class ActivityDlg extends Activity implements IBookManagerActivity {
+public class ActivityDlg extends BaseActivity implements IBookManagerActivity {
 
 	private RelativeLayout login_layout;
 	private LinearLayout msg_box_layout;
@@ -202,6 +202,13 @@ public class ActivityDlg extends Activity implements IBookManagerActivity {
 			// dialog.dismiss();
 			// ÌáÊ¾µÇÂ½Ê§°Ü
 			Tool.ShowMessages(this, res.getMessage());
+		}
+	}
+
+	@Override
+	public void onError() {
+		if(customProgressDialog!=null&&customProgressDialog.isShowing()){
+			customProgressDialog.dismiss();
 		}
 	}
 }

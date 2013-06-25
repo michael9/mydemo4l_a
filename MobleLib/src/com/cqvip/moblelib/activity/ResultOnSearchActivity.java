@@ -31,7 +31,7 @@ import com.cqvip.moblelib.model.Book;
 import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.utils.Tool;
 
-public class ResultOnSearchActivity extends Activity implements IBookManagerActivity,OnItemClickListener {
+public class ResultOnSearchActivity extends BaseActivity implements IBookManagerActivity,OnItemClickListener {
 	
 	public static final int GETFIRSTPAGE = 1;
 	public static final int GETNEXTPAGE = 2;
@@ -188,5 +188,10 @@ public class ResultOnSearchActivity extends Activity implements IBookManagerActi
 			}
 		}
 		
-
+	@Override
+	public void onError() {
+		if(progressDialog!=null&&progressDialog.isShowing()){
+			progressDialog.dismiss();
+		}
+	}
 }
