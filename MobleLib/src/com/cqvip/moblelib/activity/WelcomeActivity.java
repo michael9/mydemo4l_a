@@ -33,8 +33,7 @@ public class WelcomeActivity extends Activity {
                if(n>155)
                {
                    finish();
-//               overridePendingTransition(R.anim.activty_fade,
-//                       R.anim.activty_fade_out_immediately);
+              
                }
                 break;
             }
@@ -69,6 +68,13 @@ public class WelcomeActivity extends Activity {
 	    super.onResume();	    	    
         timer_sys_check=new Timer();
         timer_sys_check.schedule(new Page_check_task(), 0,20);  
+	}
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		 overridePendingTransition(R.anim.slide_fade_in,
+                 R.anim.slide_fade_out);
 	}
 
 }

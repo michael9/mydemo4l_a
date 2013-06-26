@@ -442,6 +442,8 @@ public class MainMenuActivity extends BaseActivity implements IBookManagerActivi
 		// TODO Auto-generated method stub
 		super.onPause();
 		// Log.i("MainMenuActivity", "onPause");
+		 overridePendingTransition(R.anim.slide_fade_in,
+                 R.anim.slide_fade_out);
 	}
 
 	@Override
