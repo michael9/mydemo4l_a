@@ -166,11 +166,6 @@ public class EBookSearchActivity extends Activity implements IBookManagerActivit
 //			startActivityForResult(_intent, 1);
 			}
 		}
-	@Override
-	public void onError() {
-		// TODO Auto-generated method stub
-		
-	}
 		
 
 }
