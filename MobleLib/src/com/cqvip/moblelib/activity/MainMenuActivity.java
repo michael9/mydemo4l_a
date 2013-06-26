@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
 import android.view.Display;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -274,10 +275,29 @@ public class MainMenuActivity extends BaseActivity implements IBookManagerActivi
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
-		if (resultCode == 0&&islogin) {
-			Intent intent = new Intent();
-			intent.setClass(context, activities[requestCode]);
-			startActivity(intent);
+		
+		switch (requestCode) {
+		case 4:
+		case 5:
+		case 7:
+		case 8:
+			if (resultCode == 0&&islogin) {
+				Intent intent = new Intent();
+				intent.setClass(context, activities[requestCode]);
+				startActivity(intent);
+			}
+			break;
+			
+		case 104:
+			if(resultCode==0)
+			{
+				finish();
+				  android.os.Process.killProcess(android.os.Process.myPid());
+			}
+			break;
+
+		default:
+			break;
 		}
 
 	}
@@ -328,6 +348,21 @@ public class MainMenuActivity extends BaseActivity implements IBookManagerActivi
 		startActivityForResult(intent, id);
 	}
 
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// TODO Auto-generated method stub
+		if(keyCode==4)
+		{
+			Intent intent=new Intent(MainMenuActivity.this,ActivityDlg.class);
+			intent.putExtra("ACTIONID", 0);
+			intent.putExtra("MSGBODY", "确定退出龙岗图书馆吗？");
+			intent.putExtra("BTN_CANCEL", 1);
+			startActivityForResult(intent, 104);
+			
+		}
+		return super.onKeyDown(keyCode, event);
+	}
+	
 	@Override
 	public void init() {
 		// 初始化 service
