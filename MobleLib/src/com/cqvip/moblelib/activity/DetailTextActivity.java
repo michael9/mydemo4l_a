@@ -72,7 +72,7 @@ public class DetailTextActivity extends BaseActivity implements IBookManagerActi
 			break;
 		case 4:
 			t1.setText(R.string.guide_readerknow);
-			getContent(E_SERVICE);
+			getContent(E_READER);
 			//content.setText("");
 			break;
 		case 5:
