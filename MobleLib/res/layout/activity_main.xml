@@ -45,13 +45,16 @@
             android:scaleType="fitXY"
             android:src="@drawable/sh" />
 
-        <ListView
-            android:id="@+id/myContent"
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:background="@drawable/eg_whatsnew_btn_nor"
-            android:gravity="center"
-            />
+       <RelativeLayout
+  			android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/myContent">
+           <WebView
+               android:id="@+id/adwebview"
+                 android:layout_width="match_parent"
+            android:layout_height="match_parent"
+               /> 
+       </RelativeLayout>
     </SlidingDrawer>
 
 </RelativeLayout>
