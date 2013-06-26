@@ -141,7 +141,7 @@ public class ResultOnSearchActivity extends BaseActivity implements IBookManager
 		int type = (Integer)obj[0];
 		List<Book> lists = (List<Book>)obj[1];
 		if(type == GETFIRSTPAGE ){
-		if(lists!=null){
+			if(lists!=null&&!lists.isEmpty()){
 			adapter = new BookAdapter(context,lists);
 			listview.setAdapter(adapter);
 			
@@ -151,7 +151,11 @@ public class ResultOnSearchActivity extends BaseActivity implements IBookManager
 			Tool.ShowMessages(context, "不好意思，没有找到你想找的资源！");
 		}
 		}else if(type == GETNEXTPAGE){
-			adapter.addMoreData(lists);
+			if(lists!=null&&!lists.isEmpty()){
+				adapter.addMoreData(lists);
+				}else{
+					Tool.ShowMessages(context, "没有更多内容可供加载");
+				}
 		}
 	}
 	@Override

@@ -128,13 +128,17 @@ public class EBookSearchActivity extends Activity implements IBookManagerActivit
 		int type = (Integer)obj[0];
 		List<EBook> lists = (List<EBook>)obj[1];
 		if(type == GETFIRSTPAGE ){
-		if(lists!=null){
+		if(lists!=null&&!lists.isEmpty()){
 			adapter = new EbookAdapter(context,lists);
 			listview.setAdapter(adapter);
 			
 		}
 		}else if(type == GETNEXTPAGE){
+			if(lists!=null&&!lists.isEmpty()){
 			adapter.addMoreData(lists);
+			}else{
+				Tool.ShowMessages(context, "没有更多内容可供加载");
+			}
 		}
 	}
 	@Override
