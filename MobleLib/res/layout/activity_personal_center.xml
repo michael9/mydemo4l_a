@@ -55,6 +55,7 @@
         </LinearLayout>
 
 
+        
         <LinearLayout
             android:id="@+id/favorLayout"
             android:layout_width="fill_parent"
@@ -62,6 +63,7 @@
             android:layout_marginTop="-1dp"
             android:background="@drawable/linearlayout_shape2"
             android:gravity="center"
+            android:visibility="gone"
             android:orientation="horizontal" >
 
             <ImageView
