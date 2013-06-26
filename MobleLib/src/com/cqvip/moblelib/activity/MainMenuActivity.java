@@ -2,7 +2,6 @@ package com.cqvip.moblelib.activity;
 
 import java.io.Serializable;
 import java.util.HashMap;
-import java.util.Timer;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -12,8 +11,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.os.Parcelable;
 import android.util.Log;
 import android.view.Display;
@@ -24,7 +21,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
-import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -74,41 +70,6 @@ public class MainMenuActivity extends BaseActivity implements IBookManagerActivi
 	private StableGridView gridview;
 	static public boolean cantouch;
 	private MUserDao dao;
-	private WebView adwebview;
-	
-	private Timer mtimer;
-	private int mtimern;
-	// 抽屉
-		private SlidingDrawer sd;
-//		private ImageView iv;
-	Handler handler=new Handler(){
-		  public void handleMessage(Message msg) {
-			  
-			switch (msg.what) {
-			
-			case 0:
-				sd.open();
-			
-				break;
-			case 1:
-				sd.close();
-				mtimer.cancel();
-				break;
-
-			default:
-				break;
-			}
-		  }
-	};
-	
-	 
-    class time_check_task extends java.util.TimerTask {
-        @Override
-        public void run() {
-        	handler.sendEmptyMessage(mtimern);
-        	mtimern++;
-        }
-    }
 
 	private int width, height;
 
@@ -158,10 +119,7 @@ public class MainMenuActivity extends BaseActivity implements IBookManagerActivi
 		height = display.getHeight();
 		setContentView(R.layout.activity_main);
 		context = this;
-		sd = (SlidingDrawer) findViewById(R.id.sd);
-		adwebview=(WebView)findViewById(R.id.adwebview);
-		adwebview.getSettings().setSupportZoom(true);
-		adwebview.loadUrl("http://www.szlglib.com.cn/uploads/Image/2013/06/24/20130624154214468.jpg");
+		init_drawer();
 		dao = new MUserDao(this);
 		// 读取SharedPreferences中需要的数据
 
@@ -288,8 +246,6 @@ public class MainMenuActivity extends BaseActivity implements IBookManagerActivi
 		//
 		// });
 		init_login();
-		mtimer=new Timer();
-		mtimer.schedule(new time_check_task(), 8*1000,6*1000);
 	}
 
 	private void init_login() {
@@ -429,7 +385,6 @@ public class MainMenuActivity extends BaseActivity implements IBookManagerActivi
 		cantouch = true;
 		// Log.i("MainMenuActivity", "onResume");
 		init();
-		
 	}
 
 	@Override
@@ -653,10 +608,35 @@ public class MainMenuActivity extends BaseActivity implements IBookManagerActivi
 
 	}
 
-	@Override
-	public void onError() {
-//		if(progressDialog!=null&&iserror&&progressDialog.isShowing()){
-//			progressDialog.dismiss();
-//		}
+	// 抽屉
+	private SlidingDrawer sd;
+	private ImageView iv;
+
+	// private ListView lv;
+	// private static final String[] PHOTOS_NAMES = new String[] { "Lyon",
+	// "Livermore", "Tahoe Pier", "Lake Tahoe", "Grand Canyon", "Bodie" };
+
+	private void init_drawer() {
+		// lv = (ListView) findViewById(R.id.myContent);
+		sd = (SlidingDrawer) findViewById(R.id.sd);
+		iv = (ImageView) findViewById(R.id.iv);
+
+		// MyAdapter adapter=new
+		// MyAdapter(this,items,icons);//自定义MyAdapter来实现图标加item的显示效果
+		// lv.setAdapter(new ArrayAdapter<String>(this,
+		// android.R.layout.simple_list_item_1, PHOTOS_NAMES));
+		sd.setOnDrawerOpenListener(new SlidingDrawer.OnDrawerOpenListener()// 开抽屉
+		{
+			@Override
+			public void onDrawerOpened() {
+				// ，把图片设为向下的
+			}
+		});
+		sd.setOnDrawerCloseListener(new SlidingDrawer.OnDrawerCloseListener() {
+			@Override
+			public void onDrawerClosed() {
+			}
+		});
 	}
+
 }
