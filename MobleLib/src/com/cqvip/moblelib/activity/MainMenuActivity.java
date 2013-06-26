@@ -1,20 +1,17 @@
 package com.cqvip.moblelib.activity;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Timer;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.Display;
 import android.view.KeyEvent;
@@ -22,19 +19,12 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
-import android.view.Window;
 import android.webkit.WebView;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.SlidingDrawer;
 import android.widget.TextView;
@@ -47,8 +37,7 @@ import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.db.MUserDao;
 import com.cqvip.moblelib.entity.MUser;
-import com.cqvip.moblelib.model.Result;
-import com.cqvip.moblelib.model.User;
+import com.cqvip.moblelib.model.ShortBook;
 import com.cqvip.moblelib.view.StableGridView;
 import com.cqvip.utils.Tool;
 
@@ -75,6 +64,7 @@ public class MainMenuActivity extends BaseActivity implements IBookManagerActivi
 	static public boolean cantouch;
 	private MUserDao dao;
 	private WebView adwebview;
+	String updata_url;
 	
 	private Timer mtimer;
 	private int mtimern;
@@ -92,9 +82,12 @@ public class MainMenuActivity extends BaseActivity implements IBookManagerActivi
 				break;
 			case 1:
 				sd.close();
-				mtimer.cancel();
+				//检查更新	
+				if (Tool.checkNetWork(context)) {
+		        	startCheckUpdate();
+				}
+			mtimer.cancel();
 				break;
-
 			default:
 				break;
 			}
@@ -114,7 +107,7 @@ public class MainMenuActivity extends BaseActivity implements IBookManagerActivi
         	mtimern++;
         }
     }
-
+    
 	private int width, height;
 
 	// private SurfaceView main_anim_background;
@@ -295,8 +288,10 @@ public class MainMenuActivity extends BaseActivity implements IBookManagerActivi
 		init_login();
 		mtimer=new Timer();
 		mtimer.schedule(new time_check_task(), 8*1000,6*1000);
+		
+		init();
 	}
-
+	
 	private void init_login() {
 		if (dao == null) {
 			dao = new MUserDao(context);
@@ -342,6 +337,15 @@ public class MainMenuActivity extends BaseActivity implements IBookManagerActivi
 			{
 				finish();
 				  android.os.Process.killProcess(android.os.Process.myPid());
+			}
+			break;
+			
+		case 105:
+			if(resultCode==0)
+			{
+				Uri uri = Uri.parse(updata_url); 
+				Intent intent =new Intent(Intent.ACTION_VIEW, uri);
+				startActivity(intent);
 			}
 			break;
 
@@ -413,29 +417,35 @@ public class MainMenuActivity extends BaseActivity implements IBookManagerActivi
 	}
 	
 	@Override
+	protected void onResume() {
+		super.onResume();
+		cantouch = true;
+		// Log.i("MainMenuActivity", "onResume");			
+	}
+	
+	@Override
 	public void init() {
 		// 初始化 service
-		// 检查网络是否可用
-        if (Tool.checkNetWork(context)) {
-			
-		}
-        
 		if (!ManagerService.isrun) {
 			ManagerService.isrun = true;
 			Intent it = new Intent(this, ManagerService.class);
 			this.startService(it);
 		}
-		
+		// 检查网络是否可用
+        if (Tool.checkNetWork(context)) {
+        	
+		}
+       
 	}
 
-	@Override
-	protected void onResume() {
-		super.onResume();
-		cantouch = true;
-		// Log.i("MainMenuActivity", "onResume");
-		init();
-		
+	
+	private void startCheckUpdate() {		
+		ManagerService.allActivity.add(this);
+		HashMap map = new HashMap();
+		Task tsHome = new Task(Task.TASK_REFRESH, map);
+		ManagerService.addNewTask(tsHome);
 	}
+	
 
 	@Override
 	protected void onPause() {
@@ -608,44 +618,31 @@ public class MainMenuActivity extends BaseActivity implements IBookManagerActivi
 		}
 
 	}
+	
 
 	@Override
 	public void refresh(Object... obj) {
-		// 取消进度条
-		Result res = (Result) obj[0];
-		if (res.getSuccess()) {
-			islogin = true;
-
-			User user = (User) obj[0];
-			GlobleData.userid = user.getCardno();
-			GlobleData.readerid = user.getReaderno();
-			MUser muser = new MUser();
-			muser.setCardno(user.getCardno());
-			muser.setReaderno(user.getReaderno());
-			muser.setPwd(pwd);
-			muser.setName(user.getName());
-			if (dao == null) {
-				dao = new MUserDao(context);
-			}
+		ShortBook shortBook  = (ShortBook) obj[0];
+		if (shortBook.getSucesss().equals("true")) {
+			int remoteversion=Integer.parseInt(shortBook.getId());
+			updata_url=shortBook.getDate();
+			//比较版本号下载更新
+			int versioncode=0;
 			try {
-				// dao.delInfo(muser.getCardno());
-				dao.saveInfo(muser);
-				Log.i("database", "存储成功");
-			} catch (DaoException e) {
+				versioncode=this.getPackageManager().getPackageInfo("com.cqvip.moblelib", 0).versionCode;
+				Log.i("mainmenu", "versioncode="+versioncode);
+			} catch (NameNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			// if (dialog.isShowing()) {
-			// dialog.dismiss();
-			// }
-			// 提示登陆成功
-			Tool.ShowMessages(context, "登陆成功");
-		} else {
-			islogin = false;
-			// dialog.dismiss();
-			// 提示登陆失败
-			Tool.ShowMessages(context, res.getMessage());
-		}
+			if(remoteversion>versioncode){
+				Intent intent=new Intent(MainMenuActivity.this,ActivityDlg.class);
+				intent.putExtra("ACTIONID", 0);
+				intent.putExtra("MSGBODY", "有更新版本，确定是否更新？");
+				intent.putExtra("BTN_CANCEL", 1);
+				startActivityForResult(intent, 105);
+			}
+		} 
 	}
 
 	@Override

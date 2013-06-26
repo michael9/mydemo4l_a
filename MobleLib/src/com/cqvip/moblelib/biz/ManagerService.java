@@ -224,7 +224,11 @@ public class ManagerService extends Service implements Runnable {
 				down.refresh(msg.obj);
 				break;	
 			case Task.TASK_REFRESH:
-				IBookManagerActivity refresh= (IBookManagerActivity) ManagerService.getActivityByName("EBookActiviy");
+				IBookManagerActivity refresh= (IBookManagerActivity) ManagerService.getActivityByName("MainMenuActivity");
+				if (msg.arg1 != 0) {//不提示失败信息
+					msg.arg1=0;
+					break;
+				}
 				refresh.refresh(msg.obj);
 				break;	
 			
