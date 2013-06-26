@@ -271,4 +271,20 @@ BookManager man = new BookManager();
 				Log.i("mobile",result.toString());
 		}
 	}
+	
+	/**
+	 * ²âÊÔ¸üÐÂ
+	 */
+	public void testRefresh(){
+		BookManager man = new BookManager();
+		
+		try {
+			ShortBook res = man.getVerionCode();
+			Log.i("mobile",res.toString());
+		} catch (BookException e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
 }
