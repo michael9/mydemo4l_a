@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">MobleLib</string>
+    <string name="app_name">龙岗图书馆</string>
     <string name="action_settings">Settings</string>
     <string name="zx_phone">咨询电话:     02366879630</string>
     <string name="main_guide">入馆指南</string>
@@ -96,4 +96,9 @@
     <string name="ebook_abstrac">简介:</string>
 
     
+    <!-- 异常提示 -->
+	<string name="loginfail">登录失败</string>
+    <string name="loadfail">加载失败</string>
+    <string name="renewfail">续借失败</string>
+    <string name="modifyfail">修改失败</string>
 </resources>

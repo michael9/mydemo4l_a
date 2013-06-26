@@ -3,8 +3,6 @@ package com.cqvip.moblelib.activity;
 import java.util.HashMap;
 import java.util.List;
 
-import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,7 +16,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -43,7 +40,6 @@ public class ResultOnSearchActivity extends BaseActivity implements IBookManager
 	private String key;
 	private int page=1;
 	private BookAdapter adapter;
-	private CustomProgressDialog progressDialog;  
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +51,7 @@ public class ResultOnSearchActivity extends BaseActivity implements IBookManager
 		listview = (ListView)findViewById(R.id.search_res_lv);
 		listview.setOnItemClickListener((OnItemClickListener)this);
 		ManagerService.allActivity.add(this);
-		progressDialog=CustomProgressDialog.createDialog(this);
+		customProgressDialog=CustomProgressDialog.createDialog(this);
 		
 		edit.setText(getIntent().getStringExtra("ISBN"));
 		
@@ -113,7 +109,7 @@ public class ResultOnSearchActivity extends BaseActivity implements IBookManager
 	 * @param count
 	 */
 	private void getHomePage(String key,int page ,int count,int type) {
-		progressDialog.show();
+		customProgressDialog.show();
 		HashMap map=new HashMap();
 		map.put("key", key);
 		map.put("page", page);
@@ -141,7 +137,7 @@ public class ResultOnSearchActivity extends BaseActivity implements IBookManager
 	@Override
 	public void refresh(Object... obj) {
 		//œ‘ æ
-		progressDialog.dismiss();
+		customProgressDialog.dismiss();
 		int type = (Integer)obj[0];
 		List<Book> lists = (List<Book>)obj[1];
 		if(type == GETFIRSTPAGE ){
@@ -189,10 +185,4 @@ public class ResultOnSearchActivity extends BaseActivity implements IBookManager
 			}
 		}
 		
-	@Override
-	public void onError() {
-		if(progressDialog!=null&&progressDialog.isShowing()){
-			progressDialog.dismiss();
-		}
-	}
 }

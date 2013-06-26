@@ -70,7 +70,6 @@ public class BorrowAndOrderActivity extends BaseActivity implements IBookManager
 	private ListView listview;
 	private BorrowBookAdapter adapter;
 	private List<BorrowBook>  lists;
-	private CustomProgressDialog progressDialog;  
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -84,7 +83,7 @@ public class BorrowAndOrderActivity extends BaseActivity implements IBookManager
 		//ImageView history = (ImageView)v.findViewById(R.id.btn_right_header);
 		//history.setVisibility(View.VISIBLE);
 		//history.setImageResource(R.drawable.lscx);
-		progressDialog=CustomProgressDialog.createDialog(this);
+		customProgressDialog=CustomProgressDialog.createDialog(this);
 		if(adapter!=null){
 			
 			
@@ -124,7 +123,7 @@ public class BorrowAndOrderActivity extends BaseActivity implements IBookManager
 
 	@Override
 	public void init() {
-		progressDialog.show();
+		customProgressDialog.show();
 		ManagerService.allActivity.add(this);
 		if(GlobleData.userid==null){
 			Tool.ShowMessages(context, "用户没有登陆");
@@ -138,7 +137,7 @@ public class BorrowAndOrderActivity extends BaseActivity implements IBookManager
 
 	@Override
 	public void refresh(Object... obj) {
-		progressDialog.dismiss();
+		customProgressDialog.dismiss();
 		Integer type = (Integer)obj[0];
 		switch(type){
 		case BORROWLIST:
@@ -172,10 +171,4 @@ public class BorrowAndOrderActivity extends BaseActivity implements IBookManager
 		}
 	}
 	
-	@Override
-	public void onError() {
-		if(progressDialog!=null&&progressDialog.isShowing()){
-			progressDialog.dismiss();
-		}
-	}
 }

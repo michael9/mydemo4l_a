@@ -2,6 +2,7 @@ package com.cqvip.moblelib.activity;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Timer;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -11,15 +12,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.os.Parcelable;
 import android.util.Log;
 import android.view.Display;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
+import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -69,6 +74,46 @@ public class MainMenuActivity extends BaseActivity implements IBookManagerActivi
 	private StableGridView gridview;
 	static public boolean cantouch;
 	private MUserDao dao;
+	private WebView adwebview;
+	
+	private Timer mtimer;
+	private int mtimern;
+	// 抽屉
+		private SlidingDrawer sd;
+//		private ImageView iv;
+	Handler handler=new Handler(){
+		  public void handleMessage(Message msg) {
+			  
+			switch (msg.what) {
+			
+			case 0:
+				sd.open();
+			
+				break;
+			case 1:
+				sd.close();
+				mtimer.cancel();
+				break;
+
+			default:
+				break;
+			}
+		  }
+	};
+	
+	@Override
+	public boolean onTouchEvent(MotionEvent ev) {
+		return false;
+
+	}
+	 
+    class time_check_task extends java.util.TimerTask {
+        @Override
+        public void run() {
+        	handler.sendEmptyMessage(mtimern);
+        	mtimern++;
+        }
+    }
 
 	private int width, height;
 
@@ -118,7 +163,10 @@ public class MainMenuActivity extends BaseActivity implements IBookManagerActivi
 		height = display.getHeight();
 		setContentView(R.layout.activity_main);
 		context = this;
-		init_drawer();
+		sd = (SlidingDrawer) findViewById(R.id.sd);
+		adwebview=(WebView)findViewById(R.id.adwebview);
+		adwebview.getSettings().setSupportZoom(true);
+		adwebview.loadUrl("http://www.szlglib.com.cn/uploads/Image/2013/06/24/20130624154214468.jpg");
 		dao = new MUserDao(this);
 		// 读取SharedPreferences中需要的数据
 
@@ -245,6 +293,8 @@ public class MainMenuActivity extends BaseActivity implements IBookManagerActivi
 		//
 		// });
 		init_login();
+		mtimer=new Timer();
+		mtimer.schedule(new time_check_task(), 8*1000,6*1000);
 	}
 
 	private void init_login() {
@@ -274,10 +324,29 @@ public class MainMenuActivity extends BaseActivity implements IBookManagerActivi
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
-		if (resultCode == 0&&islogin) {
-			Intent intent = new Intent();
-			intent.setClass(context, activities[requestCode]);
-			startActivity(intent);
+		
+		switch (requestCode) {
+		case 4:
+		case 5:
+		case 7:
+		case 8:
+			if (resultCode == 0&&islogin) {
+				Intent intent = new Intent();
+				intent.setClass(context, activities[requestCode]);
+				startActivity(intent);
+			}
+			break;
+			
+		case 104:
+			if(resultCode==0)
+			{
+				finish();
+				  android.os.Process.killProcess(android.os.Process.myPid());
+			}
+			break;
+
+		default:
+			break;
 		}
 
 	}
@@ -329,6 +398,21 @@ public class MainMenuActivity extends BaseActivity implements IBookManagerActivi
 	}
 
 	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// TODO Auto-generated method stub
+		if(keyCode==4)
+		{
+			Intent intent=new Intent(MainMenuActivity.this,ActivityDlg.class);
+			intent.putExtra("ACTIONID", 0);
+			intent.putExtra("MSGBODY", "确定退出龙岗图书馆吗？");
+			intent.putExtra("BTN_CANCEL", 1);
+			startActivityForResult(intent, 104);
+			
+		}
+		return super.onKeyDown(keyCode, event);
+	}
+	
+	@Override
 	public void init() {
 		// 初始化 service
 		// 检查网络是否可用
@@ -350,6 +434,7 @@ public class MainMenuActivity extends BaseActivity implements IBookManagerActivi
 		cantouch = true;
 		// Log.i("MainMenuActivity", "onResume");
 		init();
+		
 	}
 
 	@Override
@@ -368,8 +453,8 @@ public class MainMenuActivity extends BaseActivity implements IBookManagerActivi
 
 	private final Class[] activities = { EntanceGuideActivity.class,
 			BookSearchActivity.class, EBookActiviy.class,
-			SuggestedReadingActivity.class, RefServiceActivity.class,
-			PersonalCenterActivity.class, AnnounceActivity.class,
+			SuggestedReadingActivity.class, PersonalCenterActivity.class,
+			MyFavorActivity.class, AnnounceActivity.class,
 			BorrowAndOrderActivity.class, GroupOfReadersActivity.class };
 
 	public class GridViewImgAdapter extends BaseAdapter {
@@ -380,20 +465,20 @@ public class MainMenuActivity extends BaseActivity implements IBookManagerActivi
 
 		private Integer[] mImageIds = { R.drawable.sy_anniu_03,
 				R.drawable.sy_anniu_05, R.drawable.sy_anniu_07,
-				R.drawable.sy_anniu_12, R.drawable.ic_launcher,//R.drawable.sy_anniu_13
-				R.drawable.sy_anniu_14, R.drawable.sy_anniu_18,
+				R.drawable.sy_anniu_12, R.drawable.sy_anniu_14,
+				R.drawable.sy_anniu_21, R.drawable.sy_anniu_18,
 				R.drawable.sy_anniu_19, R.drawable.sy_anniu_20 };
 
 		private Integer[] mImageIds_big = { R.drawable.sy_anniu_03big,
 				R.drawable.sy_anniu_05big, R.drawable.sy_anniu_07big,
-				R.drawable.sy_anniu_12big, R.drawable.ic_launcher,//
-				R.drawable.sy_anniu_14big, R.drawable.sy_anniu_18big,
+				R.drawable.sy_anniu_12big, 
+				R.drawable.sy_anniu_14big,R.drawable.sy_anniu_21big, R.drawable.sy_anniu_18big,
 				R.drawable.sy_anniu_19big, R.drawable.sy_anniu_20big };
 
 		private int[] mTitle = { R.string.main_guide, R.string.main_search,
 				R.string.main_ebook, R.string.main_readingguide,
-				R.string.main_bookcomment,//R.string.main_bookcomment
-				R.string.main_ebookstore,
+				R.string.main_ebookstore,//R.string.main_bookcomment
+				R.string.serv_favorite,
 				R.string.main_notice, R.string.main_borrow, R.string.main_order
 
 		};
@@ -487,8 +572,6 @@ public class MainMenuActivity extends BaseActivity implements IBookManagerActivi
 							startActivity(intent);
 							break;
 						case 4:
-							MainMenuActivity.cantouch=true;
-							break;
 						case 5:
 						case 7:
 						case 8:
@@ -575,41 +658,5 @@ public class MainMenuActivity extends BaseActivity implements IBookManagerActivi
 
 	}
 
-	// 抽屉
-	private SlidingDrawer sd;
-	private ImageView iv;
 
-	// private ListView lv;
-	// private static final String[] PHOTOS_NAMES = new String[] { "Lyon",
-	// "Livermore", "Tahoe Pier", "Lake Tahoe", "Grand Canyon", "Bodie" };
-
-	private void init_drawer() {
-		// lv = (ListView) findViewById(R.id.myContent);
-		sd = (SlidingDrawer) findViewById(R.id.sd);
-		iv = (ImageView) findViewById(R.id.iv);
-
-		// MyAdapter adapter=new
-		// MyAdapter(this,items,icons);//自定义MyAdapter来实现图标加item的显示效果
-		// lv.setAdapter(new ArrayAdapter<String>(this,
-		// android.R.layout.simple_list_item_1, PHOTOS_NAMES));
-		sd.setOnDrawerOpenListener(new SlidingDrawer.OnDrawerOpenListener()// 开抽屉
-		{
-			@Override
-			public void onDrawerOpened() {
-				// ，把图片设为向下的
-			}
-		});
-		sd.setOnDrawerCloseListener(new SlidingDrawer.OnDrawerCloseListener() {
-			@Override
-			public void onDrawerClosed() {
-			}
-		});
-	}
-
-	@Override
-	public void onError() {
-//		if(progressDialog!=null&&iserror&&progressDialog.isShowing()){
-//			progressDialog.dismiss();
-//		}
-	}
 }
