@@ -1,6 +1,9 @@
 package com.cqvip.moblelib.activity;
 
+import com.cqvip.moblelib.R;
+import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.moblelib.view.mylinearlayout;
+import com.cqvip.utils.Tool;
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,9 +14,10 @@ import android.view.MotionEvent;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.widget.Toast;
 
-
 public class BaseActivity extends Activity {
 	private GestureDetector mGestureDetector;
+	protected CustomProgressDialog customProgressDialog;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -51,4 +55,22 @@ public class BaseActivity extends Activity {
 
 	}
 
+	public void onError(int a) {
+		if (customProgressDialog != null && customProgressDialog.isShowing()) {
+			customProgressDialog.dismiss();
+		}
+		if (a == 1) {// µÇÂ¼Ê§°Ü
+			Tool.ShowMessages(this, getResources()
+					.getString(R.string.loginfail));
+		} else if (a == 2) {// ¼ÓÔØÊ§°Ü
+			Tool.ShowMessages(this, getResources()
+					.getString(R.string.loadfail));
+		} else if (a == 3) {// Ðø½èÊ§°Ü
+			Tool.ShowMessages(this, getResources()
+					.getString(R.string.renewfail));
+		} else if (a == 4) {// ÐÞ¸ÄÊ§°Ü
+			Tool.ShowMessages(this, getResources()
+					.getString(R.string.modifyfail));
+		}
+	}
 }

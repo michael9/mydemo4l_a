@@ -10,6 +10,8 @@ import android.os.IBinder;
 import android.os.Message;
 import android.util.Log;
 
+import com.cqvip.moblelib.activity.ActivityDlg;
+import com.cqvip.moblelib.activity.BaseActivity;
 import com.cqvip.moblelib.activity.BorrowAndOrderActivity;
 import com.cqvip.moblelib.activity.DetailTextActivity;
 import com.cqvip.moblelib.activity.ResultOnSearchActivity;
@@ -67,7 +69,7 @@ public class ManagerService extends Service implements Runnable {
 				IBookManagerActivity ibook = (IBookManagerActivity) ManagerService
 						.getActivityByName("ActivityDlg");
 				if (msg.arg1 != 0) {
-					ibook.onError();
+					doException(1,msg, "ActivityDlg");
 					break;
 				}
 				ibook.refresh(msg.obj);
@@ -75,85 +77,149 @@ public class ManagerService extends Service implements Runnable {
 			case Task.TASK_GET_READERINFO:
 				IBookManagerActivity readinfo = (IBookManagerActivity) ManagerService
 						.getActivityByName("ReaderinfoActivity");
+				if (msg.arg1 != 0) {
+					doException(2,msg, "ReaderinfoActivity");
+					break;
+				}
 				readinfo.refresh(msg.obj);
 				break;
 			case Task.TASK_QUERY_BOOK:
 				IBookManagerActivity book = (IBookManagerActivity) ManagerService
 						.getActivityByName("ResultOnSearchActivity");
+				if (msg.arg1 != 0) {
+					doException(2,msg, "ResultOnSearchActivity");
+					break;
+				}
 				book.refresh(ResultOnSearchActivity.GETFIRSTPAGE, msg.obj);
 				break;
 			case Task.TASK_QUERY_MORE:
 				IBookManagerActivity more = (IBookManagerActivity) ManagerService
 						.getActivityByName("ResultOnSearchActivity");
+				if (msg.arg1 != 0) {
+					doException(2,msg, "ResultOnSearchActivity");
+					break;
+				}
 				more.refresh(ResultOnSearchActivity.GETNEXTPAGE, msg.obj);
 				break;
 			case Task.TASK_E_NOTICE:
 				IBookManagerActivity notice = (IBookManagerActivity) ManagerService
 						.getActivityByName("DetailTextActivity");
+				if (msg.arg1 != 0) {
+					doException(2,msg, "DetailTextActivity");
+					break;
+				}
 				notice.refresh(DetailTextActivity.E_NOTICE, msg.obj);
 				break;
 			case Task.TASK_E_CARDGUID:
 				IBookManagerActivity card = (IBookManagerActivity) ManagerService
 						.getActivityByName("DetailTextActivity");
+				if (msg.arg1 != 0) {
+					doException(2,msg, "DetailTextActivity");
+					break;
+				}
 				card.refresh(DetailTextActivity.E_CARDGUID, msg.obj);
 				break;
 			case Task.TASK_E_TIME:
 				IBookManagerActivity time = (IBookManagerActivity) ManagerService
 						.getActivityByName("DetailTextActivity");
+				if (msg.arg1 != 0) {
+					doException(2,msg, "DetailTextActivity");
+					break;
+				}
 				time.refresh(DetailTextActivity.E_TIME, msg.obj);
 				break;
 			case Task.TASK_E_READER:
 				IBookManagerActivity reader = (IBookManagerActivity) ManagerService
 						.getActivityByName("DetailTextActivity");
+				if (msg.arg1 != 0) {
+					doException(2,msg, "DetailTextActivity");
+					break;
+				}
 				reader.refresh(DetailTextActivity.E_READER, msg.obj);
 				break;
 			case Task.TASK_E_SERVICE:
 				IBookManagerActivity service = (IBookManagerActivity) ManagerService
 						.getActivityByName("DetailTextActivity");
+				if (msg.arg1 != 0) {
+					doException(2,msg, "DetailTextActivity");
+					break;
+				}
 				service.refresh(DetailTextActivity.E_SERVICE, msg.obj);
 				break;
 			case Task.TASK_BOOK_INFO:
 				IBookManagerActivity binfo = (IBookManagerActivity) ManagerService
 						.getActivityByName("DetailBookActivity");
+				if (msg.arg1 != 0) {
+					doException(2,msg, "DetailTextActivity");
+					break;
+				}
 				binfo.refresh(msg.obj);
 				break;
 			// 修改密码
 			case Task.TASK_USER_PWD:
 				IBookManagerActivity pwd = (IBookManagerActivity) ManagerService
 						.getActivityByName("DetailBookActivity");
+				if (msg.arg1 != 0) {
+					doException(4,msg, "DetailTextActivity");
+					break;
+				}
 				pwd.refresh(msg.obj);
 				break;
 			// 借阅列表
 			case Task.TASK_BORROW_LIST:
 				IBookManagerActivity borrowlist = (IBookManagerActivity) ManagerService
 						.getActivityByName("BorrowAndOrderActivity");
+				if (msg.arg1 != 0) {
+					doException(2,msg, "BorrowAndOrderActivity");
+					break;
+				}
 				borrowlist.refresh(BorrowAndOrderActivity.BORROWLIST, msg.obj);
 				break;
 			// 续借
 			case Task.TASK_BOOK_RENEW:
 				IBookManagerActivity renew = (IBookManagerActivity) ManagerService
 						.getActivityByName("BorrowAndOrderActivity");
+				if (msg.arg1 != 0) {
+					doException(3,msg, "BorrowAndOrderActivity");
+					break;
+				}
 				renew.refresh(BorrowAndOrderActivity.RENEW, msg.obj);
 				break;
 			// 查询电子书
 			case Task.TASK_QUERY_EBOOK:
 				IBookManagerActivity ebooks = (IBookManagerActivity) ManagerService
 						.getActivityByName("EBookActiviy");
+				if (msg.arg1 != 0) {
+					doException(2,msg, "EBookActiviy");
+					break;
+				}
 				ebooks.refresh(msg.obj);
 				break;	
 				//查询电子书更多
 			case Task.TASK_QUERY_EBOOK_MORE:
 				IBookManagerActivity ebooksmore = (IBookManagerActivity) ManagerService.getActivityByName("EBookActiviy");
+				if (msg.arg1 != 0) {
+					doException(2,msg, "EBookActiviy");
+					break;
+				}
 				ebooksmore.refresh(msg.obj);
 				break;	
 				//查询电子书详细
 			case Task.TASK_QUERY_EBOOK_DETAIL:
 				IBookManagerActivity ebooksDtail = (IBookManagerActivity) ManagerService.getActivityByName("EBookActiviy");
+				if (msg.arg1 != 0) {
+					doException(2,msg, "EBookActiviy");
+					break;
+				}
 				ebooksDtail.refresh(msg.obj);
 				break;	
 				//下载电子书
 			case Task.TASK_EBOOK_DOWN:
 				IBookManagerActivity down = (IBookManagerActivity) ManagerService.getActivityByName("EBookActiviy");
+				if (msg.arg1 != 0) {
+					doException(2,msg, "EBookActiviy");
+					break;
+				}
 				down.refresh(msg.obj);
 				break;	
 			
@@ -161,6 +227,14 @@ public class ManagerService extends Service implements Runnable {
 	    }
 	};
 	
+	private void doException(int type,Message msg, String c_name) {
+		if (msg.arg1 != 0) {
+			BaseActivity baseActivity = (BaseActivity) ManagerService
+					.getActivityByName(c_name);
+			baseActivity.onError(type);
+			msg.arg1 = 0;
+		}
+	}
 		
     //执行任务
     public void doTask(Task task){
@@ -256,7 +330,7 @@ public class ManagerService extends Service implements Runnable {
 			
 			}
 		} catch (BookException e) {
-			msg.arg1 = e.getStatusCode();
+			msg.arg1 = -100;
 			// msg.what = e.getStatusCode();
 			Log.i("getStatusCode()", "==========stack=======" + msg.what);
 		} catch (Exception e) {

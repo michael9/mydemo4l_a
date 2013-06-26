@@ -217,10 +217,4 @@ public class ReaderinfoActivity extends BaseActivity implements
 		mList.setAdapter(new ReaderInfoAdapter(this, attrs, values));
 	}
 
-	@Override
-	public void onError() {
-//		if(progressDialog!=null&&iserror&&progressDialog.isShowing()){
-//			progressDialog.dismiss();
-//		}
-	}
 }

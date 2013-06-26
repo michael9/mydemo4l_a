@@ -82,10 +82,4 @@ public class DetailBookActivity extends BaseActivity implements IBookManagerActi
 		
 	}
 
-	@Override
-	public void onError() {
-//		if(progressDialog!=null&&iserror&&progressDialog.isShowing()){
-//			progressDialog.dismiss();
-//		}
-	}
 }
