@@ -155,9 +155,9 @@ public class EBookSearchActivity extends Activity implements IBookManagerActivit
 			EBook book = adapter.getLists().get(positon);
 			if(book!=null){
 				Log.i("ResultOnSearchActivity",book.toString());
-				Intent _intent = new Intent(context,DetailBookActivity.class);
+				Intent _intent = new Intent(context,EbookDetailActivity.class);
 				Bundle bundle = new Bundle();
-				bundle.putSerializable("book", book);
+				bundle.putSerializable("ebook", book);
 				_intent.putExtra("detaiinfo", bundle);
 				startActivity(_intent);
 			}

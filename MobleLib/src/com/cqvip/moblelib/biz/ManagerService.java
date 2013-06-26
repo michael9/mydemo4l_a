@@ -216,9 +216,9 @@ public class ManagerService extends Service implements Runnable {
 				break;	
 				//下载电子书
 			case Task.TASK_EBOOK_DOWN:
-				IBookManagerActivity down = (IBookManagerActivity) ManagerService.getActivityByName("EBookActiviy");
+				IBookManagerActivity down = (IBookManagerActivity) ManagerService.getActivityByName("EbookDetailActivity");
 				if (msg.arg1 != 0) {
-					doException(2,msg, "EBookActiviy");
+					doException(2,msg, "EbookDetailActivity");
 					break;
 				}
 				down.refresh(msg.obj);
