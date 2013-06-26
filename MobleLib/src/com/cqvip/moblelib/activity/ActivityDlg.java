@@ -40,7 +40,6 @@ public class ActivityDlg extends BaseActivity implements IBookManagerActivity {
 //	private LinearLayout login_status_ll;
 	private MUserDao dao;
 	private TextView msg_box_txt;
-	private  CustomProgressDialog customProgressDialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -204,11 +203,5 @@ public class ActivityDlg extends BaseActivity implements IBookManagerActivity {
 			Tool.ShowMessages(this, res.getMessage());
 		}
 	}
-
-	@Override
-	public void onError() {
-		if(customProgressDialog!=null&&customProgressDialog.isShowing()){
-			customProgressDialog.dismiss();
-		}
-	}
+	
 }

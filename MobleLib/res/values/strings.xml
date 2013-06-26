@@ -59,7 +59,7 @@
     <string name="item_time">出版时间:</string>
     <string name="item_describe">简介:</string>
     
-     <string name="item_barcode">条码号:</string>
+    <string name="item_barcode">条码号:</string>
     <string name="item_callno">索取号：</string>
     <string name="item_price">价格:</string>
     <string name="item_brtime">借出时间:</string>
@@ -84,6 +84,10 @@
     <string name="confirm_quit">确定注销此账号?</string>
     <string name="confirm_ok">确定</string>
     <string name="confirm_cancel">取消</string>
-
     
+    <!-- 异常提示 -->
+	<string name="loginfail">登录失败</string>
+    <string name="loadfail">加载失败</string>
+    <string name="renewfail">续借失败</string>
+    <string name="modifyfail">修改失败</string>
 </resources>

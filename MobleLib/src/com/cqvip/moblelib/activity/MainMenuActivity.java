@@ -639,10 +639,4 @@ public class MainMenuActivity extends BaseActivity implements IBookManagerActivi
 		});
 	}
 
-	@Override
-	public void onError() {
-//		if(progressDialog!=null&&iserror&&progressDialog.isShowing()){
-//			progressDialog.dismiss();
-//		}
-	}
 }
