@@ -142,7 +142,7 @@ public class BorrowAndOrderActivity extends BaseActivity implements IBookManager
 		switch(type){
 		case BORROWLIST:
 			lists = (List<BorrowBook>)obj[1];
-			if(lists==null){
+			if(lists==null||lists.isEmpty()){
 			   Tool.ShowMessages(context, "²éÑ¯ÎÞ¼ÇÂ¼");
 			}else {
 				adapter = new BorrowBookAdapter(context,lists);

@@ -100,6 +100,7 @@ public class BorrowBook{
 	    	 return null;
 	     }
 		dateObj = json.getJSONObject("loanlist");	
+		if(dateObj.getInt("loannum")>0){
 		JSONArray ary = dateObj.getJSONArray("recordlist");
 		 int count = ary.length();
 		 if(count <=0){
@@ -110,6 +111,9 @@ public class BorrowBook{
 			 books.add(new BorrowBook(ary.getJSONObject(i)));
 		 }
 		 return books;
+		}else{
+			return null;
+		}
 	} catch (JSONException e) {
 		throw new BookException(e);
 	}
