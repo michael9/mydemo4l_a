@@ -25,11 +25,11 @@ public class BaseActivity extends Activity {
 				new MyGestrueListener(this));
 	}
 
-	@Override
-	public boolean onTouchEvent(MotionEvent ev) {
-		return mGestureDetector.onTouchEvent(ev);
-
-	}
+//	@Override
+//	public boolean onTouchEvent(MotionEvent ev) {
+//		return mGestureDetector.onTouchEvent(ev);
+//
+//	}
 
 	class MyGestrueListener extends SimpleOnGestureListener {
 		private Context mContext;
