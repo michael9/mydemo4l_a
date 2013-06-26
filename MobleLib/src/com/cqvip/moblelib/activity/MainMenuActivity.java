@@ -94,11 +94,7 @@ public class MainMenuActivity extends BaseActivity implements IBookManagerActivi
 		  }
 	};
 	
-	@Override
-	public boolean onTouchEvent(MotionEvent ev) {
-		return false;
-
-	}
+	
 	 
     class time_check_task extends java.util.TimerTask {
         @Override
