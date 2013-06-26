@@ -368,8 +368,8 @@ public class MainMenuActivity extends BaseActivity implements IBookManagerActivi
 
 	private final Class[] activities = { EntanceGuideActivity.class,
 			BookSearchActivity.class, EBookActiviy.class,
-			SuggestedReadingActivity.class, RefServiceActivity.class,
-			PersonalCenterActivity.class, AnnounceActivity.class,
+			SuggestedReadingActivity.class, PersonalCenterActivity.class,
+			MyFavorActivity.class, AnnounceActivity.class,
 			BorrowAndOrderActivity.class, GroupOfReadersActivity.class };
 
 	public class GridViewImgAdapter extends BaseAdapter {
@@ -386,8 +386,8 @@ public class MainMenuActivity extends BaseActivity implements IBookManagerActivi
 
 		private Integer[] mImageIds_big = { R.drawable.sy_anniu_03big,
 				R.drawable.sy_anniu_05big, R.drawable.sy_anniu_07big,
-				R.drawable.sy_anniu_12big, R.drawable.ic_launcher,//
-				R.drawable.sy_anniu_14big, R.drawable.sy_anniu_18big,
+				R.drawable.sy_anniu_12big, //
+				R.drawable.sy_anniu_14big,R.drawable.ic_launcher, R.drawable.sy_anniu_18big,
 				R.drawable.sy_anniu_19big, R.drawable.sy_anniu_20big };
 
 		private int[] mTitle = { R.string.main_guide, R.string.main_search,
@@ -487,8 +487,6 @@ public class MainMenuActivity extends BaseActivity implements IBookManagerActivi
 							startActivity(intent);
 							break;
 						case 4:
-							MainMenuActivity.cantouch=true;
-							break;
 						case 5:
 						case 7:
 						case 8:

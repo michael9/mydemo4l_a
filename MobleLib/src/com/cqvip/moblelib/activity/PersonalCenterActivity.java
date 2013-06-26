@@ -50,6 +50,15 @@ private Context context;
 		
 		TextView title = (TextView)findViewById(R.id.txt_header);
 		title.setText(R.string.main_ebookstore);
+		ImageView back = (ImageView) findViewById(R.id.img_back_header);
+		back.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				finish();
+				// overridePendingTransition(R.anim.slide_left_in,
+				// R.anim.slide_right_out);
+			}
+		});
 		
 		readerinfoLayout.setOnClickListener(new View.OnClickListener() {
 			

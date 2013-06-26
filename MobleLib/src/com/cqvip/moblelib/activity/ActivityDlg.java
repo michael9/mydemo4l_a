@@ -62,7 +62,7 @@ public class ActivityDlg extends BaseActivity implements IBookManagerActivity {
 		case 0:
 			showmsg();
 			break;
-		
+		case 4:
 		case 5:
 		case 7:
 		case 8:
