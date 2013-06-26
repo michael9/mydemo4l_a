@@ -1,17 +1,23 @@
 package com.cqvip.moblelib.activity;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.cqvip.moblelib.R;
+import com.cqvip.moblelib.scan.CaptureActivity;
 
 /**
  * <p>
@@ -58,6 +64,31 @@ public class EBookActiviy extends BaseActivity {
 		lv.setAdapter(adapter);
 		lv.setItemsCanFocus(false);
 		lv.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+		
+		ImageView scan_iv=(ImageView)findViewById(R.id.ebook_seach_img);
+		scan_iv.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent=new Intent(EBookActiviy.this, EBookSearchActivity.class);
+				startActivity(intent);
+			}
+		});
+//		InitImageView();
+//		InitTextView();
+//		InitViewPager();
+//		
+		 final EditText et = (EditText)findViewById(R.id.ebook_edit);
+		    et.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+					imm.hideSoftInputFromWindow(et.getWindowToken(), 0);
+					Intent intent = new Intent(EBookActiviy.this,EBookSearchActivity.class) ;
+					startActivity(intent);
+				}
+			});
+		
 		
 	}
 

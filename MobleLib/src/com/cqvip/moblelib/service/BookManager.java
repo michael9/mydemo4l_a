@@ -324,6 +324,16 @@ public class BookManager {
 		return ShortBook.formList(Task.TASK_EBOOK_DOWN, result);
 	}
 	
+	/**
+	 * 获取更新版本号
+	 * @return
+	 * @throws BookException
+	 */
+	public ShortBook getVerionCode() throws BookException{
+		String result = http.requestUrl(getBaseURL()+"/library/base/versiontemp.aspx", getBasepost(),null);
+		return new ShortBook(Task.TASK_REFRESH, result);
+	}
+	
 	private String formResult(String result) throws BookException {
 		try {
 			JSONObject json = new JSONObject(result);

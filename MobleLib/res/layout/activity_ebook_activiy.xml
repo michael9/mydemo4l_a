@@ -37,7 +37,7 @@
                 android:maxLines="2" />
 
             <ImageView
-                android:id="@+id/ebook_seach_btn"
+                android:id="@+id/ebook_seach_img"
                 android:layout_width="33dp"
                 android:layout_height="33dp"
                 android:layout_alignParentRight="true"

@@ -45,6 +45,17 @@ public class ShortBook {
 				throw new BookException(e);
 			}
 			break;
+		case Task.TASK_REFRESH:
+			try {
+				JSONObject json = new JSONObject(result);
+				sucesss = json.getString("success");
+				id = json.getString("version");
+				date = json.getString("url");
+				message = json.getString("message");
+			} catch (JSONException e) {
+				throw new BookException(e);
+			}
+			break;
 		}
 		
 	}

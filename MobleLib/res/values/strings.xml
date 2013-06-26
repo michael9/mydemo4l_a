@@ -61,6 +61,11 @@
     
      <string name="item_barcode">条码号:</string>
     <string name="item_callno">索取号：</string>
+    <string name="item_loc">馆藏地址：</string>
+    <string name="item_status">状态：</string>
+    <string name="item_volume">期卷：</string>
+    <string name="item_cirtype">流通类别：</string>
+    
     <string name="item_price">价格:</string>
     <string name="item_brtime">借出时间:</string>
     <string name="item_retime">还回日期:</string>
@@ -84,6 +89,11 @@
     <string name="confirm_quit">确定注销此账号?</string>
     <string name="confirm_ok">确定</string>
     <string name="confirm_cancel">取消</string>
+    
+    <string name="ebook_page">页数:</string>
+    <string name="ebook_orang">来源:</string>
+    <string name="ebook_type">格式:</string>
+    <string name="ebook_abstrac">简介:</string>
 
     
 </resources>

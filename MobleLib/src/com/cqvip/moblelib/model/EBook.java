@@ -1,5 +1,6 @@
 package com.cqvip.moblelib.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,10 +12,13 @@ import android.util.Log;
 
 import com.cqvip.moblelib.net.BookException;
 
-public class EBook {
+public class EBook implements Serializable{
 	
-	
-		    private String lngid;
+		    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7393037851968299461L;
+			private String lngid;
 		    private String gch;
 		    private String years;
 		    private int num;

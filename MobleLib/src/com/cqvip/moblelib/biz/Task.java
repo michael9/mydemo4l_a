@@ -22,6 +22,7 @@ public class Task {
 	public static final int TASK_QUERY_EBOOK_MORE= 15;//查询更多电子书
 	public static final int TASK_QUERY_EBOOK_DETAIL= 16;//电子书详细
 	public static final int TASK_EBOOK_DOWN= 17;//查询下载地址
+	public static final int TASK_REFRESH= 18;//更新
 	
 	
 	

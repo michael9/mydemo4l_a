@@ -12,6 +12,7 @@ import android.util.Log;
 
 import com.cqvip.moblelib.activity.BorrowAndOrderActivity;
 import com.cqvip.moblelib.activity.DetailTextActivity;
+import com.cqvip.moblelib.activity.EBookSearchActivity;
 import com.cqvip.moblelib.activity.ResultOnSearchActivity;
 import com.cqvip.moblelib.base.IBookManagerActivity;
 import com.cqvip.moblelib.constant.GlobleData;
@@ -138,13 +139,13 @@ public class ManagerService extends Service implements Runnable {
 			// 查询电子书
 			case Task.TASK_QUERY_EBOOK:
 				IBookManagerActivity ebooks = (IBookManagerActivity) ManagerService
-						.getActivityByName("EBookActiviy");
-				ebooks.refresh(msg.obj);
+						.getActivityByName("EBookSearchActivity");
+				ebooks.refresh(EBookSearchActivity.GETFIRSTPAGE,msg.obj);
 				break;	
 				//查询电子书更多
 			case Task.TASK_QUERY_EBOOK_MORE:
-				IBookManagerActivity ebooksmore = (IBookManagerActivity) ManagerService.getActivityByName("EBookActiviy");
-				ebooksmore.refresh(msg.obj);
+				IBookManagerActivity ebooksmore = (IBookManagerActivity) ManagerService.getActivityByName("EBookSearchActivity");
+				ebooksmore.refresh(EBookSearchActivity.GETNEXTPAGE,msg.obj);
 				break;	
 				//查询电子书详细
 			case Task.TASK_QUERY_EBOOK_DETAIL:
@@ -155,6 +156,10 @@ public class ManagerService extends Service implements Runnable {
 			case Task.TASK_EBOOK_DOWN:
 				IBookManagerActivity down = (IBookManagerActivity) ManagerService.getActivityByName("EBookActiviy");
 				down.refresh(msg.obj);
+				break;	
+			case Task.TASK_REFRESH:
+				IBookManagerActivity refresh= (IBookManagerActivity) ManagerService.getActivityByName("EBookActiviy");
+				refresh.refresh(msg.obj);
 				break;	
 			
 		   }
@@ -252,6 +257,11 @@ public class ManagerService extends Service implements Runnable {
 		case Task.TASK_EBOOK_DOWN:
 			List<ShortBook> down = manager.articledown((String)task.getTaskParam().get("lngid"));
 			msg.obj = down;
+			break;	
+			//更新版本号18
+		case Task.TASK_REFRESH:
+			ShortBook refresh = manager.getVerionCode();
+			msg.obj = refresh;
 			break;	
 			
 			}

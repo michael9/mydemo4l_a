@@ -77,7 +77,9 @@ public class DetailBookActivity extends BaseActivity implements IBookManagerActi
 					+"Ë÷ÊéºÅ"+book.getCallno()+"\n"
 					+"µØÖ·"+book.getLocal()+"\n"
 					+"¾íÆÚ"+book.getVolume()+"\n"
-					+"ÀàÐÍ"+book.getCirtype()+"\n");
+					+"ÀàÐÍ"+book.getCirtype()+"\n"
+					+getString(R.string.item_status)+book.getStatus()
+					);
 		}
 		
 	}
