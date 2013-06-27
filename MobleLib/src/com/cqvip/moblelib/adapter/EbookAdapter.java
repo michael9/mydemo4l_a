@@ -107,7 +107,8 @@ public class EbookAdapter extends BaseAdapter{
 			holder.u_abstract = (TextView) convertView.findViewById(R.id.txt_abst);
 			holder.type=(TextView) convertView.findViewById(R.id.re_hot_txt);
 			holder.l_abst = (LinearLayout)convertView.findViewById(R.id.ll_abstract);
-		    holder.favorite = (Button)convertView.findViewById(R.id.btn_item_result_search_share);
+			holder.btn_item_result_search_share = (Button)convertView.findViewById(R.id.btn_item_result_search_share);
+		    holder.favorite = (Button)convertView.findViewById(R.id.btn_item_result_search_collect);
 			convertView.setTag(holder);
 		}else{
 			holder = (ViewHolder) convertView.getTag();
@@ -127,8 +128,26 @@ public class EbookAdapter extends BaseAdapter{
 	        holder.type.setText(type+"PDF");
 	        holder.l_abst.setVisibility(View.VISIBLE);
 	        holder.u_abstract.setText(describe+book.getRemark_c());
-	        holder.favorite.setText("收藏");
+	        holder.favorite.setVisibility(View.VISIBLE);
 	      
+	        holder.btn_item_result_search_share.setTag(position);
+	        holder.btn_item_result_search_share.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					
+				int pos=(Integer)v.getTag();
+				Intent intent=new Intent(Intent.ACTION_SEND);    
+				intent.setType("image/*");  
+				intent.putExtra(Intent.EXTRA_SUBJECT, "图书分享");    				
+				intent.putExtra(Intent.EXTRA_TEXT, ("好书分享:"+(lists.get(pos)).getTitle_c()+
+						"\r\n作者:"+(lists.get(pos)).getWriter()+
+						"\r\n出版日期:"+(lists.get(pos)).getYears()));    
+				intent.putExtra(Intent.EXTRA_STREAM, Uri.decode("http://www.szlglib.com.cn/images/logo.jpg")); //分享图片"http://www.szlglib.com.cn/images/logo.jpg"
+				context.startActivity(Intent.createChooser(intent, "分享到"));  
+				
+				}
+			});
 		
 		return convertView;
 	}

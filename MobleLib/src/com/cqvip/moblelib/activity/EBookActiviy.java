@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -65,9 +66,11 @@ public class EBookActiviy extends BaseActivity {
 		ListView lv = (ListView)findViewById(R.id.ebook_search_list);
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_multiple_choice,EBOOKTYPE);
 		lv.setAdapter(adapter);
-		lv.setItemsCanFocus(false);
-		lv.setItemChecked(0, true);
 		lv.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+		lv.setItemsCanFocus(false);
+		lv.setItemChecked(0, true);	
+		lv.setEnabled(false);
+		lv.setFocusable(false);
 		
 		ImageView scan_iv=(ImageView)findViewById(R.id.ebook_seach_img);
 		scan_iv.setOnClickListener(new View.OnClickListener() {
