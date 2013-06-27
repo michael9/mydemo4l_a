@@ -298,7 +298,7 @@ public class ManagerService extends Service implements Runnable {
 			break;	
 			//获取书详细信息10
 		case Task.TASK_BOOK_INFO:
-			BookLoc binfo = manager.getBookDetail((String)task.getTaskParam().get("id"));
+			List<BookLoc> binfo = manager.getBookDetail((String)task.getTaskParam().get("id"));
 			msg.obj = binfo;
 			break;	
 			//修改密码11
@@ -345,11 +345,8 @@ public class ManagerService extends Service implements Runnable {
 			}
 		} catch (BookException e) {
 			msg.arg1 = -100;
-			// msg.what = e.getStatusCode();
-			Log.i("getStatusCode()", "==========stack=======" + msg.what);
 		} catch (Exception e) {
 			msg.arg1 = -100;
-			Log.i("getStatusCode()", "==========stack=======-100");
 		}finally{
 			// 发送更新UI
 			hander.sendMessage(msg);

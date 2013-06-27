@@ -1,8 +1,13 @@
 package com.cqvip.moblelib.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import android.util.Log;
 
 import com.cqvip.moblelib.net.BookException;
 
@@ -21,12 +26,8 @@ public class BookLoc {
 	private String volume;//ÆÚ¾í
 	private String cirtype;//ÀàÐÍ
 	
-	public BookLoc(String result) throws BookException{
+	public BookLoc(JSONObject json) throws BookException{
 		try {
-			JSONObject js = new JSONObject(result);
-			JSONObject jso = js.getJSONObject("article");
-			JSONArray ary = jso.getJSONArray("districtlist");
-			JSONObject json = ary.getJSONObject(0).getJSONArray("serviceaddrlist").getJSONObject(0).getJSONArray("articlelist").getJSONObject(0);
 			
 			barcode = json.getString("barcode");
 			callno = json.getString("callno");
@@ -35,9 +36,47 @@ public class BookLoc {
 			volume = json.getString("volume");
 			cirtype = json.getString("cirtype");
 		} catch (JSONException e) {
+			e.printStackTrace();
 			throw new BookException(e);
 		}
 	}
+	
+	
+    public static List<BookLoc> formList(String result) throws BookException{
+		
+		
+	    List<BookLoc> books = null;
+	try {
+		JSONObject js = new JSONObject(result);
+	     if(!js.getBoolean("success")){
+	    	 return null;
+	     }
+	     JSONObject jso = js.getJSONObject("article");
+		 JSONArray ary = jso.getJSONArray("districtlist");
+		 if(ary.length()<=0){
+			 return null;
+		 }
+		 JSONArray array = ary.getJSONObject(0).getJSONArray("serviceaddrlist");
+		 if(array.length()<=0){
+			 return null;
+		 }
+		 JSONArray json = array.getJSONObject(0).getJSONArray("articlelist");
+		 int count = json.length();
+		 if(count <=0){
+			 return null;
+		 }
+		 books = new ArrayList<BookLoc>(count);
+		 for(int i = 0;i<count;i++){
+			 books.add(new BookLoc(json.getJSONObject(i)));
+		 }
+		 return books;
+	} catch (JSONException e) {
+		throw new BookException(e);
+	}
+	
+	
+	
+}
 	
 	public String getBarcode() {
 		return barcode;

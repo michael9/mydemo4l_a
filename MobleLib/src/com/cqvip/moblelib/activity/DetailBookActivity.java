@@ -1,13 +1,18 @@
 package com.cqvip.moblelib.activity;
 
 import java.util.HashMap;
+import java.util.List;
 
-import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.View;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.cqvip.moblelib.R;
+import com.cqvip.moblelib.adapter.BookLocAdapter;
 import com.cqvip.moblelib.base.IBookManagerActivity;
 import com.cqvip.moblelib.biz.ManagerService;
 import com.cqvip.moblelib.biz.Task;
@@ -18,15 +23,23 @@ public class DetailBookActivity extends BaseActivity implements IBookManagerActi
 
 	private Book dBook;
 	private TextView baseinfo,loc,textView10;
+	private ListView listview;
+	private BookLocAdapter adapter;
+	private Context context;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_detail_book);
+		setContentView(R.layout.activity_location_book);
+		context = this;
+		listview = (ListView)findViewById(R.id.loc_list);
+		View v = LayoutInflater.from(this).inflate(R.layout.activity_detail_book, null);
+		listview.addHeaderView(v);
 		
 		Bundle bundle = getIntent().getBundleExtra("detaiinfo");
 		dBook = (Book)bundle.getSerializable("book");
 		baseinfo = (TextView) findViewById(R.id.bookinfo_txt);
-		loc = (TextView) findViewById(R.id.loc_txt);
+		//loc = (TextView) findViewById(R.id.loc_txt);
 		textView10=(TextView)findViewById(R.id.textView10);
 		
 		ManagerService.allActivity.add(this);
@@ -36,16 +49,20 @@ public class DetailBookActivity extends BaseActivity implements IBookManagerActi
 		
 		
 		baseinfo.setText("°∂"+dBook.getU_title()+"°∑\n"
-				+"◊˜’ﬂ:"+dBook.getAuthor()+"\n"
-				+"≥ˆ∞Ê…Á:"+dBook.getU_publish()+"\n"
-				+""+dBook.getCallno()+"\n"
-				+""+dBook.getClassno()+"\n"
+				+getString(R.string.item_author)+dBook.getAuthor()+"\n"
+				+getString(R.string.item_publish)+dBook.getU_publish()+"\n"
+				+getString(R.string.item_callno)+dBook.getCallno()+"\n"
+				+getString(R.string.item_classno)+dBook.getClassno()+"\n"
 				+"ISBN:"+dBook.getIsbn()+"\n"
-				+"º€∏Ò:"+dBook.getU_price()+"\n"
-				+""+dBook.getSubject()+"\n"
+				+getString(R.string.item_price)+dBook.getU_price()+"\n"
+				+getString(R.string.item_subject)+dBook.getSubject()+"\n"
 //				+"¬º√≤¬Ω√©"+dBook.getU_abstract()+"\n"
 				);
 		textView10.setText(dBook.getU_abstract());
+		
+		//listview.setAdapter(adapter);
+		
+		
 	}
 
 	private void getLocalinfo(String recordid) {
@@ -71,15 +88,18 @@ public class DetailBookActivity extends BaseActivity implements IBookManagerActi
 
 	@Override
 	public void refresh(Object... obj) {
-		BookLoc book = (BookLoc)obj[0];
-		if(book!=null){
-			loc.setText("√å√µ√Ç√´¬∫√Ö:"+book.getBarcode()+"\n"
-					+"√ã√∑√ä√©¬∫√Ö"+book.getCallno()+"\n"
-					+"¬µ√ò√ñ¬∑"+book.getLocal()+"\n"
-					+"¬æ√≠√Ü√ö"+book.getVolume()+"\n"
-					+"√Ä√†√ê√ç"+book.getCirtype()+"\n"
-					+getString(R.string.item_status)+book.getStatus()
-					);
+		List<BookLoc> list = (List<BookLoc>)obj[0];
+		if(list!=null&&!list.isEmpty()){
+//			BookLoc book = list.get(0);
+//			loc.setText(getString(R.string.item_barcode)+book.getBarcode()+"\n"
+//					+getString(R.string.item_callno)+book.getCallno()+"\n"
+//					+getString(R.string.item_loc)+book.getLocal()+"\n"
+//					+getString(R.string.item_volume)+book.getVolume()+"\n"
+//					+getString(R.string.item_cirtype)+book.getCirtype()+"\n"
+//					+getString(R.string.item_status)+book.getStatus()
+//					);
+			adapter = new BookLocAdapter(context,list);
+			listview.setAdapter(adapter);
 		}
 		
 	}
