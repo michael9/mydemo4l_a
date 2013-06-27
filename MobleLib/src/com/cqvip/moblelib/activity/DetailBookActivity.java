@@ -23,7 +23,7 @@ import com.cqvip.moblelib.view.CustomProgressDialog;
 public class DetailBookActivity extends BaseActivity implements IBookManagerActivity {
 
 	private Book dBook;
-	private TextView baseinfo,loc,textView10;
+	private TextView loc,textView10;
 	private ListView listview;
 	private BookLocAdapter adapter;
 	private Context context;
@@ -31,15 +31,15 @@ public class DetailBookActivity extends BaseActivity implements IBookManagerActi
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_location_book);
+		setContentView(R.layout.activity_detail_book);
 		context = this;
 		listview = (ListView)findViewById(R.id.loc_list);
-		View v = LayoutInflater.from(this).inflate(R.layout.activity_detail_book, null);
-		listview.addHeaderView(v);
+//		View v = LayoutInflater.from(this).inflate(R.layout.activity_detail_book, null);
+//		listview.addHeaderView(v);
 		
 		Bundle bundle = getIntent().getBundleExtra("detaiinfo");
 		dBook = (Book)bundle.getSerializable("book");
-		baseinfo = (TextView) findViewById(R.id.bookinfo_txt);
+//		baseinfo = (TextView) findViewById(R.id.bookinfo_txt);
 		//loc = (TextView) findViewById(R.id.loc_txt);
 		textView10=(TextView)findViewById(R.id.textView10);
 		customProgressDialog=CustomProgressDialog.createDialog(this);
@@ -50,7 +50,17 @@ public class DetailBookActivity extends BaseActivity implements IBookManagerActi
 		}
 		
 		
-		baseinfo.setText("¡¶"+dBook.getU_title()+"¡·\n"
+//		baseinfo.setText("¡¶"+dBook.getU_title()+"¡·\n"
+//				+getString(R.string.item_author)+dBook.getAuthor()+"\n"
+//				+getString(R.string.item_publish)+dBook.getU_publish()+"\n"
+//				+getString(R.string.item_callno)+dBook.getCallno()+"\n"
+//				+getString(R.string.item_classno)+dBook.getClassno()+"\n"
+//				+"ISBN:"+dBook.getIsbn()+"\n"
+//				+getString(R.string.item_price)+dBook.getU_price()+"\n"
+//				+getString(R.string.item_subject)+dBook.getSubject()+"\n"
+////				+"Â¼Ã²Â½Ã©"+dBook.getU_abstract()+"\n"
+//				);
+		textView10.setText("¡¶"+dBook.getU_title()+"¡·\n"
 				+getString(R.string.item_author)+dBook.getAuthor()+"\n"
 				+getString(R.string.item_publish)+dBook.getU_publish()+"\n"
 				+getString(R.string.item_callno)+dBook.getCallno()+"\n"
@@ -58,9 +68,7 @@ public class DetailBookActivity extends BaseActivity implements IBookManagerActi
 				+"ISBN:"+dBook.getIsbn()+"\n"
 				+getString(R.string.item_price)+dBook.getU_price()+"\n"
 				+getString(R.string.item_subject)+dBook.getSubject()+"\n"
-//				+"Â¼Ã²Â½Ã©"+dBook.getU_abstract()+"\n"
-				);
-		textView10.setText(dBook.getU_abstract());
+				+dBook.getU_abstract());
 		
 		//listview.setAdapter(adapter);
 		
