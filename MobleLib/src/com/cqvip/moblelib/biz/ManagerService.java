@@ -151,7 +151,7 @@ public class ManagerService extends Service implements Runnable {
 				IBookManagerActivity binfo = (IBookManagerActivity) ManagerService
 						.getActivityByName("DetailBookActivity");
 				if (msg.arg1 != 0) {
-					doException(2,msg, "DetailTextActivity");
+					doException(2,msg, "DetailBookActivity");
 					break;
 				}
 				binfo.refresh(msg.obj);

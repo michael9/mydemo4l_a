@@ -27,9 +27,10 @@ import com.cqvip.moblelib.biz.ManagerService;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.model.Book;
 import com.cqvip.moblelib.model.EBook;
+import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.utils.Tool;
 
-public class EBookSearchActivity extends Activity implements IBookManagerActivity,OnItemClickListener {
+public class EBookSearchActivity extends BaseActivity implements IBookManagerActivity,OnItemClickListener {
 	
 	public static final int GETFIRSTPAGE = 1;
 	public static final int GETNEXTPAGE = 2;
@@ -51,7 +52,7 @@ public class EBookSearchActivity extends Activity implements IBookManagerActivit
 		listview = (ListView)findViewById(R.id.search_res_lv);
 		listview.setOnItemClickListener((OnItemClickListener)this);
 		ManagerService.allActivity.add(this);
-		
+		customProgressDialog=CustomProgressDialog.createDialog(this);
 		
 		imgsearch.setOnClickListener(new View.OnClickListener() {
 				
@@ -104,6 +105,7 @@ public class EBookSearchActivity extends Activity implements IBookManagerActivit
 	 * @param count
 	 */
 	private void getHomePage(String key,int page ,int count,int type) {
+		customProgressDialog.show();
 		HashMap map=new HashMap();
 		map.put("key", key);
 		map.put("page", page);
@@ -124,6 +126,7 @@ public class EBookSearchActivity extends Activity implements IBookManagerActivit
 	}
 	@Override
 	public void refresh(Object... obj) {
+		customProgressDialog.dismiss();
 		//œ‘ æ
 		int type = (Integer)obj[0];
 		List<EBook> lists = (List<EBook>)obj[1];

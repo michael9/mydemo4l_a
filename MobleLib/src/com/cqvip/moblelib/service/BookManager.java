@@ -61,7 +61,7 @@ public class BookManager {
 	 * @throws BookException
 	 * @throws JSONException 
 	 */
-	public Result login(String name, String pwd) throws BookException, JSONException {
+	public Result login(String name, String pwd) throws BookException {
 		BookParameters params = new BookParameters();
 		params.add("username", name);
 		params.add("password", pwd);

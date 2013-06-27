@@ -167,7 +167,7 @@
           <activity
             android:name="com.cqvip.moblelib.activity.EBookSearchActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan"
+            android:windowSoftInputMode="adjustPan|stateAlwaysVisible"
              android:theme="@android:style/Theme.Translucent.NoTitleBar" />
           <activity
             android:name="com.cqvip.moblelib.activity.EbookDetailActivity"
