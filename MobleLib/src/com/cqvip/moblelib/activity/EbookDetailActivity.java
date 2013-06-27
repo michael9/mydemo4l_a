@@ -17,7 +17,7 @@ import com.cqvip.moblelib.model.BookLoc;
 import com.cqvip.moblelib.model.EBook;
 import com.cqvip.moblelib.model.ShortBook;
 
-public class EbookDetailActivity extends Activity implements IBookManagerActivity {
+public class EbookDetailActivity extends BaseActivity implements IBookManagerActivity {
 
 	private EBook dBook;
 	private TextView author,from,type,page,title,content;

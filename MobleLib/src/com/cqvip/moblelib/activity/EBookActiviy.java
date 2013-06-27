@@ -35,9 +35,12 @@ import com.cqvip.moblelib.scan.CaptureActivity;
  */
 public class EBookActiviy extends BaseActivity {
 
-	 private static final String[] EBOOKTYPE = new String[] {
-	        "馆藏书目", "维普期刊", "万方期刊","超星图书","内置图书"
-	    };
+//	 private static final String[] EBOOKTYPE = new String[] {
+//	        "馆藏书目", "维普期刊", "万方期刊","超星图书","内置图书"
+//	    };
+	private static final String[] EBOOKTYPE = new String[] {
+       "维普期刊"
+    };
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -63,6 +66,7 @@ public class EBookActiviy extends BaseActivity {
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_multiple_choice,EBOOKTYPE);
 		lv.setAdapter(adapter);
 		lv.setItemsCanFocus(false);
+		lv.setItemChecked(0, true);
 		lv.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 		
 		ImageView scan_iv=(ImageView)findViewById(R.id.ebook_seach_img);
