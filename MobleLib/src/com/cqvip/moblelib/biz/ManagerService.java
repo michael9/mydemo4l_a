@@ -253,7 +253,7 @@ public class ManagerService extends Service implements Runnable {
 			switch(task.getTaskID()){
 			//登陆1
 		case Task.TASK_LOGIN:
-			Result result = manager.login((String)task.getTaskParam().get("id"),(String)task.getTaskParam().get("pwd"));
+			Result result = manager.login((String)task.getTaskParam().get("id"),(String)task.getTaskParam().get("pwd"),GlobleData.LIBIRY_ID);
 			msg.obj = result;
 			break;
 			//获取读者信息2
