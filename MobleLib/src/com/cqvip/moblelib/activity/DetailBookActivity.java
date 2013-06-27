@@ -90,6 +90,7 @@ public class DetailBookActivity extends BaseActivity implements IBookManagerActi
 
 	@Override
 	public void refresh(Object... obj) {
+		customProgressDialog.dismiss();
 		List<BookLoc> list = (List<BookLoc>)obj[0];
 		if(list!=null&&!list.isEmpty()){
 //			BookLoc book = list.get(0);
