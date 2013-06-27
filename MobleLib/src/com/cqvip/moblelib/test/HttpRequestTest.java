@@ -289,8 +289,20 @@ BookManager man = new BookManager();
 			Log.i("mobile",res.toString());
 		} catch (BookException e) {
 			e.printStackTrace();
-		}
-		
-		
+		}	
+	}
+	
+	/**
+	 * ≤‚ ‘»Îπ›÷∏ƒœ
+	 */
+	public void testentrancelib(){
+		BookManager man = new BookManager();	
+		try {
+			String res = man.getContent(6);
+			Log.i("mobile",res);
+		} catch (BookException e) {
+			Log.e("mobile", "error");
+			e.printStackTrace();
+		}	
 	}
 }
