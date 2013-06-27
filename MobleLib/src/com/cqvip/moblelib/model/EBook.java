@@ -34,8 +34,8 @@ public class EBook implements Serializable{
 		    private String classtype;
 		    private String writer;
 		    private String organ;
-		    private int beginpage;
-		    private int endpage;
+		    private String beginpage;
+		    private String endpage;
 		    private int pagecount;
 		    private long pdfsize;
 		    
@@ -103,11 +103,11 @@ public class EBook implements Serializable{
 				return organ;
 			}
 
-			public int getBeginpage() {
+			public String getBeginpage() {
 				return beginpage;
 			}
 
-			public int getEndpage() {
+			public String getEndpage() {
 				return endpage;
 			}
 
@@ -124,7 +124,7 @@ public class EBook implements Serializable{
 		    				lngid = json.getString("lngid");
 		    				gch = json.getString("gch");
 		    				years = json.getString("years");
-		    				num = json.getInt("num");
+		    				num = getInt("pagecount", json);
 		    				vol = json.getString("vol");
 		    				title_c = json.getString("title_c");
 		    				title_e = json.getString("title_e");
@@ -137,10 +137,10 @@ public class EBook implements Serializable{
 		    				classtype = json.getString("classtype");
 		    				writer = json.getString("writer");
 		    				organ = json.getString("organ");
-		    				beginpage = json.getInt("beginpage");
-		    				endpage = json.getInt("endpage");
-		    				pagecount = json.getInt("pagecount");
-		    				pdfsize = json.getInt("pdfsize");
+		    				beginpage = json.getString("beginpage");
+		    				endpage = json.getString("endpage");
+		    				pagecount = getInt("pagecount", json);
+		    				pdfsize = getInt("pdfsize",json);
 		    			} catch (JSONException e) {
 		    				throw new BookException(e);
 		    			}
@@ -174,7 +174,14 @@ public class EBook implements Serializable{
 			
 			
 		}
-
+		    protected static int getInt(String key, JSONObject json) throws JSONException {
+		        String str = json.getString(key);
+		        if(null == str || "".equals(str)||"null".equals(str)){
+		            return 0;
+		        }
+		        return Integer.parseInt(str);
+		    }
+		    
 			@Override
 			public String toString() {
 				return "EBook [lngid=" + lngid + ", gch=" + gch + ", years="
