@@ -157,6 +157,7 @@ public class EBook implements Serializable{
 			     if(!json.getBoolean("success")){
 			    	 return null;
 			     }
+			     if(json.getInt("recordcount")>0){
 				JSONArray ary = json.getJSONArray("articlelist");
 				 int count = ary.length();
 				 if(count <=0){
@@ -167,6 +168,9 @@ public class EBook implements Serializable{
 					 books.add(new EBook(ary.getJSONObject(i)));
 				 }
 				 return books;
+			     }else{
+			    	 return null;
+			     }
 			} catch (JSONException e) {
 				throw new BookException(e);
 			}

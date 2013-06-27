@@ -19,6 +19,8 @@ public class GlobleData {
 	public final static String MODEL_PACKAGE = "com.cqvip.moblelib.entity";
 	/**服务器地址*/
 	public final static   String SERVER_URL = "http://mobile.cqvip.com";
+	/**图书馆id,1代表深圳图书馆*/
+	public final static   String LIBIRY_ID = "1";
 	
 	public static Map<String, Object> datas = new HashMap<String, Object>();
 	

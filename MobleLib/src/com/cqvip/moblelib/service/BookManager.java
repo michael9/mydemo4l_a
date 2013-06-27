@@ -57,14 +57,17 @@ public class BookManager {
 	 *            用户名
 	 * @param pwd
 	 *            密码
+	 * @param libid
+	 *            图书馆id,1代表深圳
 	 * @return
 	 * @throws BookException
 	 * @throws JSONException 
 	 */
-	public Result login(String name, String pwd) throws BookException {
+	public Result login(String name, String pwd,String libid) throws BookException {
 		BookParameters params = new BookParameters();
 		params.add("username", name);
 		params.add("password", pwd);
+		params.add("libid", "1");
 		String result = http.requestUrl(getBaseURL()
 				+ "/library/user/login.aspx", getBasepost(), params);
 		
@@ -75,25 +78,7 @@ public class BookManager {
 			return res;
 		}
 	}
-	/**
-	 * 测试登陆
-	 * 
-	 * @param name
-	 *            用户名
-	 * @param pwd
-	 *            密码
-	 * @return
-	 * @throws BookException
-	 */
-	public String login(String name, String pwd, String test)
-			throws BookException {
-		BookParameters params = new BookParameters();
-		params.add("username", name);
-		params.add("password", pwd);
-		return http.requestUrl(getBaseURL() + "/library/user/login.aspx",
-				getBasepost(), params);
-	}
-
+	
 	/**
 	 * 获取读者信息
 	 * 
@@ -108,34 +93,8 @@ public class BookManager {
 		return Reader.formReaderInfo(result);
 	}
 
-	/**
-	 * 测试获取读者信息
-	 * 
-	 * @return
-	 * @throws BookException
-	 */
-	public String getReaderInfo(String id, String test) throws BookException {
-		BookParameters params = new BookParameters();
-		params.add("userid", id);
-		return http.requestUrl(getBaseURL() + "/library/user/readerinfo.aspx",
-				getBaseget(), params);
-	}
 
-	/**
-	 * 查询当前用户借阅图书列表接口
-	 * 
-	 * @param url
-	 * @param method
-	 * @param params
-	 * @return
-	 * @throws BookException
-	 */
-	public String getLoanList(String id,String test) throws BookException {
-		BookParameters params = new BookParameters();
-		params.add("userid", id);
-		return http.requestUrl(getBaseURL() + "/library/user/borrowlist.aspx",
-				getBaseget(), params);
-	}
+
 	/**
 	 * 查询当前用户借阅图书列表接口
 	 * 
@@ -167,20 +126,7 @@ public class BookManager {
 		return http.requestUrl(getBaseURL(), getBaseget(), params);
 	}
 
-	/**
-	 * 馆藏关键字查询接口
-	 * 
-	 * @param url
-	 * @param method
-	 * @param params
-	 * @return
-	 * @throws BookException
-	 */
-	public String getBookSearch(BookParameters params, String test)
-			throws BookException {
-		return http.requestUrl(getBaseURL() + "/library/bookquery/search.aspx",
-				getBasepost(), params);
-	}
+
 
 	/**
 	 * 馆藏关键字查询接口
