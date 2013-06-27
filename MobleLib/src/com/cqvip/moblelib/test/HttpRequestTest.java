@@ -213,10 +213,16 @@ public class HttpRequestTest extends AndroidTestCase {
 	
 	public void testGetBookDetail(){
 		BookManager man = new BookManager();
+		List<BookLoc> result = null;
 		try {
-			BookLoc b = man.getBookDetail("1402882");
+			 result = man.getBookDetail("1402882");
 			
-			Log.i("mobile",b.toString());
+			 if(result!=null){
+				 for(int i = 0;i<result.size();i++){
+					 Log.i("mobile",result.get(i).toString());
+				 }
+			 }
+			//Log.i("mobile",b.toString());
 		} catch (BookException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -56,5 +56,9 @@
     <style name="ShareText">
         <item name="android:textSize">16sp</item>
     </style>
+    <style name="Loction_book_txt">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 
 </resources>

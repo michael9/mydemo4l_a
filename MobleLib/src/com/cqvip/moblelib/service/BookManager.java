@@ -241,12 +241,12 @@ public class BookManager {
 	 * @return
 	 * @throws BookException
 	 */
-	public BookLoc getBookDetail(String recordid) throws BookException{
+	public List<BookLoc> getBookDetail(String recordid) throws BookException{
 		BookParameters params = new BookParameters();
 		params.add("recordid", recordid);
 		params.add("tablename", "bibliosm");// ÈºÆ
 		String result = http.requestUrl(getBaseURL()+"/library/bookquery/detail.aspx", getBasepost(), params);
-		return new BookLoc(result);
+		return BookLoc.formList(result);
 		
 	}
 	

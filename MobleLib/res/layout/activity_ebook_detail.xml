@@ -92,8 +92,7 @@
             android:id="@+id/ebook_content_abst"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:maxLines="3"
-            android:text=" 简介：阿拉山口打发斯蒂芬阿拉卡水电费鹿鼎记开发" />
+            android:text="" />
     </LinearLayout>
 		
          <LinearLayout
@@ -140,7 +139,6 @@
             android:maxLines="3"
 			android:layout_weight="1.0"     
 			android:gravity="center"
-			android:drawableRight="@drawable/guide_safe_icon"
             android:text="下载" />
         
     </LinearLayout>
