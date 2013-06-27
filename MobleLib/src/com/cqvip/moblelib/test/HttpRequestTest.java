@@ -87,7 +87,7 @@ public class HttpRequestTest extends AndroidTestCase {
 		
 		List<Book> result=null;
 		try {
-			result = man.getBookSearch("cad",1,10);
+			result = man.getBookSearch("³É¶¼",1,10);
 		} catch (BookException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

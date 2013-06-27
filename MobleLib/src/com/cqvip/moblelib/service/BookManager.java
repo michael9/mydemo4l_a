@@ -131,9 +131,9 @@ public class BookManager {
 	/**
 	 * 馆藏关键字查询接口
 	 * 
-	 * @param url
-	 * @param method
-	 * @param params
+	 * @param key 查询关键字
+	 * @param page 页数
+	 * @param count 条数
 	 * @return
 	 * @throws BookException
 	 */
