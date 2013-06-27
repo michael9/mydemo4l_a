@@ -13,6 +13,7 @@ import com.cqvip.moblelib.biz.ManagerService;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.model.Book;
 import com.cqvip.moblelib.model.BookLoc;
+import com.cqvip.moblelib.view.CustomProgressDialog;
 
 public class DetailBookActivity extends BaseActivity implements IBookManagerActivity {
 
@@ -28,6 +29,7 @@ public class DetailBookActivity extends BaseActivity implements IBookManagerActi
 		baseinfo = (TextView) findViewById(R.id.bookinfo_txt);
 		loc = (TextView) findViewById(R.id.loc_txt);
 		textView10=(TextView)findViewById(R.id.textView10);
+		customProgressDialog=CustomProgressDialog.createDialog(this);
 		
 		ManagerService.allActivity.add(this);
 		if(dBook.getRecordid()!=null){
@@ -49,7 +51,7 @@ public class DetailBookActivity extends BaseActivity implements IBookManagerActi
 	}
 
 	private void getLocalinfo(String recordid) {
-		
+		customProgressDialog.show();
 		HashMap map=new HashMap();
 		map.put("id", recordid);
 		ManagerService.addNewTask(new Task(Task.TASK_BOOK_INFO,map));
@@ -71,6 +73,7 @@ public class DetailBookActivity extends BaseActivity implements IBookManagerActi
 
 	@Override
 	public void refresh(Object... obj) {
+		customProgressDialog.dismiss();
 		BookLoc book = (BookLoc)obj[0];
 		if(book!=null){
 			loc.setText("ÌõÂëºÅ:"+book.getBarcode()+"\n"

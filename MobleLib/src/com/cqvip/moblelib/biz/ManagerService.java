@@ -151,7 +151,7 @@ public class ManagerService extends Service implements Runnable {
 				IBookManagerActivity binfo = (IBookManagerActivity) ManagerService
 						.getActivityByName("DetailBookActivity");
 				if (msg.arg1 != 0) {
-					doException(2,msg, "DetailTextActivity");
+					doException(2,msg, "DetailBookActivity");
 					break;
 				}
 				binfo.refresh(msg.obj);
@@ -346,10 +346,10 @@ public class ManagerService extends Service implements Runnable {
 		} catch (BookException e) {
 			msg.arg1 = -100;
 			// msg.what = e.getStatusCode();
-			Log.i("getStatusCode()", "==========stack=======" + msg.what);
+			Log.i("BookException", "==========stack=======" + msg.what);
 		} catch (Exception e) {
 			msg.arg1 = -100;
-			Log.i("getStatusCode()", "==========stack=======-100");
+			Log.i("Exception", "==========stack=======-100");
 		}finally{
 			// ·¢ËÍ¸üÐÂUI
 			hander.sendMessage(msg);
