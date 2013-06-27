@@ -87,7 +87,7 @@ public class HttpRequestTest extends AndroidTestCase {
 		
 		List<Book> result=null;
 		try {
-			result = man.getBookSearch("cad",1,10);
+			result = man.getBookSearch("成都",1,10);
 		} catch (BookException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -225,8 +225,20 @@ BookManager man = new BookManager();
 			Log.i("mobile",res.toString());
 		} catch (BookException e) {
 			e.printStackTrace();
-		}
-		
-		
+		}	
+	}
+	
+	/**
+	 * 测试入馆指南
+	 */
+	public void testentrancelib(){
+		BookManager man = new BookManager();	
+		try {
+			String res = man.getContent(6);
+			Log.i("mobile",res);
+		} catch (BookException e) {
+			Log.e("mobile", "error");
+			e.printStackTrace();
+		}	
 	}
 }
