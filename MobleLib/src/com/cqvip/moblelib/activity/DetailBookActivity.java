@@ -101,16 +101,10 @@ public class DetailBookActivity extends BaseActivity implements IBookManagerActi
 		customProgressDialog.dismiss();
 		List<BookLoc> list = (List<BookLoc>)obj[0];
 		if(list!=null&&!list.isEmpty()){
-//			BookLoc book = list.get(0);
-//			loc.setText(getString(R.string.item_barcode)+book.getBarcode()+"\n"
-//					+getString(R.string.item_callno)+book.getCallno()+"\n"
-//					+getString(R.string.item_loc)+book.getLocal()+"\n"
-//					+getString(R.string.item_volume)+book.getVolume()+"\n"
-//					+getString(R.string.item_cirtype)+book.getCirtype()+"\n"
-//					+getString(R.string.item_status)+book.getStatus()
-//					);
 			adapter = new BookLocAdapter(context,list);
 			listview.setAdapter(adapter);
+		}else{
+			listview.setAdapter(null);
 		}
 		
 	}
