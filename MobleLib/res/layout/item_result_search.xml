@@ -111,23 +111,43 @@
         android:layout_marginTop="5dp"
         android:gravity="right"
         android:orientation="horizontal" >
+        
+         <Button
+            android:id="@+id/btn_item_result_search_great"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+             android:layout_marginRight="12dp"
+            android:background="@null"
+            android:focusable="false"
+            android:text="赞" />
+        
+         <Button
+            android:id="@+id/btn_item_result_search_buzz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="12dp"
+            android:background="@null"
+            android:focusable="false"
+            android:text="评" />
+         
+             <Button
+            android:id="@+id/btn_item_result_search_collect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="12dp"
+            android:background="@null"
+            android:focusable="false"
+            android:text="收藏"/>
 
         <Button
             android:id="@+id/btn_item_result_search_share"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="15dp"
+            android:layout_marginRight="8dp"
             android:background="@null"
             android:focusable="false"
             android:text="分享" />
-        <Button
-            android:id="@+id/btn_item_result_search_collect"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="15dp"
-            android:background="@null"
-            android:focusable="false"
-            android:text="收藏" android:visibility="gone"/>
+    
     </LinearLayout>
 
 </RelativeLayout>
