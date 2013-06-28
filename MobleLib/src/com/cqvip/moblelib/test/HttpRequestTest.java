@@ -240,7 +240,18 @@ BookManager man = new BookManager();
 		BookManager man = new BookManager();	
 		try {
 			
-			Result result = man.addFavorite("1","10000", "1402882", "1");
+			Result result = man.addFavorite("1","10000", "1402882", "2");
+			Log.i("mobile",result.toString());
+		} catch (BookException e) {
+			Log.e("mobile", "error");
+			e.printStackTrace();
+		}
+	}
+	public void destoryFavorite(){
+		BookManager man = new BookManager();	
+		try {
+			
+			Result result = man.destroyFavorite("1","10000", "1402882", "2");
 			Log.i("mobile",result.toString());
 		} catch (BookException e) {
 			Log.e("mobile", "error");

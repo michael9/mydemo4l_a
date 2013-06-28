@@ -300,7 +300,7 @@ public class BookManager {
 		params.add("vipuserid", vipuserid);
 		params.add("keyid", keyid);
 		params.add("typeid", typeid);
-		String result = http.requestUrl(getBaseURL()+"/cloud/favorite.aspx", getBasepost(),null);
+		String result = http.requestUrl(getBaseURL()+"/cloud/favorite.aspx", getBasepost(),params);
 		return new Result(result);
 	}
 	
@@ -337,7 +337,7 @@ public class BookManager {
 		params.add("keyid", keyid);
 		params.add("typeid", typeid);
 		
-		String result = http.requestUrl(getBaseURL()+"/cloud/favorite.aspx", getBasepost(),null);
+		String result = http.requestUrl(getBaseURL()+"/cloud/favoritecancel.aspx", getBasepost(),params);
 		return new Result(result);
 	}
 	
