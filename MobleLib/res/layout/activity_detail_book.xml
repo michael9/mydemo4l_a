@@ -1,7 +1,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent" 
+    android:background="@drawable/bg_list">
+    
+     
 
     <ImageView
         android:id="@+id/book_big_img"
@@ -23,25 +26,25 @@
         android:shadowRadius="3"
         android:text="图书简介"
         android:textSize="16dp" />
-    
-     <LinearLayout
-          android:layout_below="@+id/book_big_img"
-        android:layout_marginTop="15dp"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/book_big_img"
+        android:layout_marginTop="15dp"
         android:gravity="right"
         android:orientation="horizontal" >
-        
-         <Button
+
+        <Button
             android:id="@+id/btn_item_result_search_great"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-             android:layout_marginRight="12dp"
+            android:layout_marginRight="12dp"
             android:background="@null"
             android:focusable="false"
             android:text="赞" />
-        
-         <Button
+
+        <Button
             android:id="@+id/btn_item_result_search_buzz"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -49,15 +52,15 @@
             android:background="@null"
             android:focusable="false"
             android:text="评" />
-         
-             <Button
+
+        <Button
             android:id="@+id/btn_item_result_search_collect"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="12dp"
             android:background="@null"
             android:focusable="false"
-            android:text="收藏"/>
+            android:text="收藏" />
 
         <Button
             android:id="@+id/btn_item_result_search_share"
@@ -67,7 +70,6 @@
             android:background="@null"
             android:focusable="false"
             android:text="分享" />
-    
     </LinearLayout>
 
     <TextView
@@ -78,23 +80,20 @@
         android:layout_marginTop="15dp"
         android:text="馆藏信息" />
 
-    <ScrollView
+    <ListView
+        android:id="@+id/loc_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/textView9" >
+        android:layout_below="@id/textView9"
+        android:cacheColorHint="#00000000"
+        android:divider="@null"
+        android:fadingEdge="none"
+        android:fadingEdgeLength="0.0sp"
+        android:headerDividersEnabled="false"
+        android:listSelector="@android:color/transparent"
+        android:scrollingCache="false"
+        android:smoothScrollbar="false" />
 
-        <ListView
-            android:id="@+id/loc_list"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:cacheColorHint="#00000000"
-            android:divider="@null"
-            android:fadingEdge="none"
-            android:fadingEdgeLength="0.0sp"
-            android:headerDividersEnabled="false"
-            android:listSelector="@android:color/transparent"
-            android:scrollingCache="false"
-            android:smoothScrollbar="false" />
-    </ScrollView>
-
+    <!--  -->
+<include android:id="@+id/detail_book_title" layout="@layout/header" />
 </RelativeLayout>
