@@ -10,11 +10,11 @@ import android.os.IBinder;
 import android.os.Message;
 import android.util.Log;
 
-import com.cqvip.moblelib.activity.ActivityDlg;
 import com.cqvip.moblelib.activity.BaseActivity;
 import com.cqvip.moblelib.activity.BorrowAndOrderActivity;
 import com.cqvip.moblelib.activity.DetailTextActivity;
 import com.cqvip.moblelib.activity.EBookSearchActivity;
+import com.cqvip.moblelib.activity.MyFavorActivity;
 import com.cqvip.moblelib.activity.ResultOnSearchActivity;
 import com.cqvip.moblelib.base.IBookManagerActivity;
 import com.cqvip.moblelib.constant.GlobleData;
@@ -223,6 +223,7 @@ public class ManagerService extends Service implements Runnable {
 				}
 				down.refresh(msg.obj);
 				break;	
+				//获取服务器apk版本号
 			case Task.TASK_REFRESH:
 				IBookManagerActivity refresh= (IBookManagerActivity) ManagerService.getActivityByName("MainMenuActivity");
 				if (msg.arg1 != 0) {//不提示失败信息
@@ -231,7 +232,16 @@ public class ManagerService extends Service implements Runnable {
 				}
 				refresh.refresh(msg.obj);
 				break;	
-			
+				//获取收藏列表
+			case Task.TASK_GET_FAVOR:
+				MyFavorActivity favor= (MyFavorActivity) ManagerService.getActivityByName("MyFavorActivity");
+				if (msg.arg1 != 0) {//不提示失败信息
+					favor.onError(2);
+					msg.arg1 = 0;
+					break;
+				}
+				favor.refresh(msg.obj);
+				break;	
 		   }
 	    }
 	};
@@ -340,6 +350,11 @@ public class ManagerService extends Service implements Runnable {
 		case Task.TASK_REFRESH:
 			ShortBook refresh = manager.getVerionCode();
 			msg.obj = refresh;
+			break;	
+			//更新版本号19
+		case Task.TASK_GET_FAVOR:
+			//ShortBook refresh = manager.getVerionCode();
+			//msg.obj = refresh;
 			break;	
 			
 			}
