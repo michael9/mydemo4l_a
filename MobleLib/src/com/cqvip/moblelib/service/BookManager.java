@@ -157,27 +157,29 @@ public class BookManager {
 	 * @throws BookException
 	 */
 	public String getContent(int type) throws BookException{
+		BookParameters params = new BookParameters();
+		params.add("libid", GlobleData.LIBIRY_ID);
 		String result =null;
 		String str = null;
 		switch(type){
 		case Task.TASK_E_NOTICE:
-			result = http.requestUrl(getBaseURL()+"/library/guide/notice.aspx", getBaseget(), null);
+			result = http.requestUrl(getBaseURL()+"/library/guide/notice.aspx", getBaseget(), params);
 			str = formResult(result);
 			break;
 		case Task.TASK_E_CARDGUID:
-			result = http.requestUrl(getBaseURL()+"/library/guide/cardguide.aspx", getBaseget(), null);
+			result = http.requestUrl(getBaseURL()+"/library/guide/cardguide.aspx", getBaseget(), params);
 			str = formResult(result);
 			break;
 		case Task.TASK_E_TIME:
-			result = http.requestUrl(getBaseURL()+"/library/guide/time.aspx", getBaseget(), null);
+			result = http.requestUrl(getBaseURL()+"/library/guide/time.aspx", getBaseget(), params);
 			str = formResult(result);
 			break;
 		case Task.TASK_E_READER:
-			result = http.requestUrl(getBaseURL()+"/library/guide/reader.aspx", getBaseget(), null);
+			result = http.requestUrl(getBaseURL()+"/library/guide/reader.aspx", getBaseget(), params);
 			str = formResult(result);
 			break;
 		case Task.TASK_E_SERVICE:
-			result = http.requestUrl(getBaseURL()+"/library/guide/service.aspx", getBaseget(), null);
+			result = http.requestUrl(getBaseURL()+"/library/guide/service.aspx", getBaseget(), params);
 			str = formResult(result);
 			break;
 		}
@@ -342,7 +344,7 @@ public class BookManager {
 	private String formResult(String result) throws BookException {
 		try {
 			JSONObject json = new JSONObject(result);
-			return json.getString("content");
+			return json.getString("contents");
 		} catch (JSONException e) {
 			throw new BookException(e);
 		}
