@@ -137,12 +137,15 @@ public class BookManager {
 	 * @return
 	 * @throws BookException
 	 */
-	public List<Book> getBookSearch(String key, int page, int count)
+	public List<Book> getBookSearch(String key, int page, int count,String library,String field)
 			throws BookException {
+		//TODO
 		BookParameters params = new BookParameters();
 		params.add("keyword", key);
 		params.add("curpage", page + "");
 		params.add("perpage", count + "");
+		params.add("library", library);
+		params.add("field", field);
 		String result = http.requestUrl(getBaseURL()
 				+ "/library/bookquery/search.aspx", getBasepost(), params);
 		return Book.formList(result);

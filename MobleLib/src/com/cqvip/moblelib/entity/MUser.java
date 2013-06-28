@@ -14,6 +14,8 @@ public class MUser extends Model{
 	private String cardno;//用户id
 	private String pwd;//密码
 	private String readerno;//读者id
+	private String cqvipid;//读者vipid
+
 	private String name;//用户名
 	
 	public MUser() {
@@ -24,6 +26,13 @@ public class MUser extends Model{
 		return id;
 	}
 
+	public String getCqvipid() {
+		return cqvipid;
+	}
+	
+	public void setCqvipid(String cqvipid) {
+		this.cqvipid = cqvipid;
+	}
 	public void setId(Integer id) {
 		this.id = id;
 	}

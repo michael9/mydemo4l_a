@@ -263,12 +263,18 @@ public class ManagerService extends Service implements Runnable {
 			break;	
 			//查询书籍信息3
 		case Task.TASK_QUERY_BOOK:
-			List<Book> books = manager.getBookSearch((String)task.getTaskParam().get("key"),(Integer)task.getTaskParam().get("page"),(Integer)task.getTaskParam().get("count"));
+			List<Book> books = manager.getBookSearch(
+					(String)task.getTaskParam().get("key"),(Integer)task.getTaskParam().get("page"),
+					(Integer)task.getTaskParam().get("count"),(String)task.getTaskParam().get("library"),
+					(String)task.getTaskParam().get("field"));
 			msg.obj = books;
 			break;	
 			//查询更多4
 		case Task.TASK_QUERY_MORE:
-			List<Book> more = manager.getBookSearch((String)task.getTaskParam().get("key"),(Integer)task.getTaskParam().get("page"),(Integer)task.getTaskParam().get("count"));
+			List<Book> more = manager.getBookSearch(
+					(String)task.getTaskParam().get("key"),(Integer)task.getTaskParam().get("page"),
+					(Integer)task.getTaskParam().get("count"),(String)task.getTaskParam().get("library"),
+					(String)task.getTaskParam().get("field"));
 			msg.obj = more;
 			break;	
 			//入馆须知5
