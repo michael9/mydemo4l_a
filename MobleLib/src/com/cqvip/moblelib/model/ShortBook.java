@@ -56,11 +56,41 @@ public class ShortBook {
 				throw new BookException(e);
 			}
 			break;
+		case Task.TASK_GET_FAVOR:
+			try {
+				JSONObject json = new JSONObject(result);
+				id = json.getString("favoritetypeid");
+				date = json.getString("favoritekeyid");
+			} catch (JSONException e) {
+				throw new BookException(e);
+			}
+			break;
 		}
 		
 	}
 	
 	public static List<ShortBook> formList(int type,String result) throws BookException{
+		if(type == Task.TASK_GET_FAVOR){
+			   List<ShortBook> books = null;
+				try {
+					JSONObject json = new JSONObject(result);
+				     if(!json.getBoolean("success")){
+				    	 return null;
+				     }
+					JSONArray ary = json.getJSONArray("favoritelist");
+					 int count = ary.length();
+					 if(count <=0){
+						 return null;
+					 }
+					 books = new ArrayList<ShortBook>(count);
+					 for(int i = 0;i<count;i++){
+						 books.add(new ShortBook(type,ary.getJSONObject(i).toString()));
+					 }
+					 return books;
+				} catch (JSONException e) {
+					throw new BookException(e);
+				}
+		}else{
 		
 	    List<ShortBook> books = null;
 	try {
@@ -82,7 +112,7 @@ public class ShortBook {
 		throw new BookException(e);
 	}
 	
-		
+		}
 	}
 	
 	

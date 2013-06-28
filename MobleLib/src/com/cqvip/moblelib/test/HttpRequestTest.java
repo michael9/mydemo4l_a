@@ -258,4 +258,21 @@ BookManager man = new BookManager();
 			e.printStackTrace();
 		}
 	}
+	public void getFavoritList(){
+BookManager man = new BookManager();
+		
+		List<ShortBook> result=null;
+		try {
+			result = man.getFavoriteList("1","10000", "1", "10");
+		
+		} catch (BookException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		if(result!=null){
+			for(int i = 0;i<result.size();i++){
+				Log.i("mobile",result.get(i).toString());
+			}
+		}
+	}
 }

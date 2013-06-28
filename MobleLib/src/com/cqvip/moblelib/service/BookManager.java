@@ -305,19 +305,21 @@ public class BookManager {
 	}
 	
 	/**
-	 * 
+	 * 获取收藏列表
 	 * @param page 页数
 	 * @param count 数量
 	 * @return
 	 * @throws BookException
 	 */
-	public String getFavoriteList(String page,String count)throws BookException{
+	public List<ShortBook> getFavoriteList(String libid,String vipuserid,String page,String count)throws BookException{
 		//TODO
 		BookParameters params = new BookParameters();
+		params.add("libid", libid);
+		params.add("vipuserid", vipuserid);
 		params.add("curpage", page);
 		params.add("perpage", count);
-		String result = http.requestUrl(getBaseURL()+"/cloud/favorite.aspx", getBasepost(),null);
-		return result;
+		String result = http.requestUrl(getBaseURL()+"/cloud/favoritelist.aspx", getBasepost(),params);
+		return ShortBook.formList(Task.TASK_GET_FAVOR, result);
 	}
 	
 	/**

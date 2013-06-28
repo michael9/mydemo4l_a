@@ -29,6 +29,14 @@ public class GlobleData {
 	 * 龙岗图书馆id 
 	 * */
 	public final static   String SZLG_LIB_ID = "044120";
+	/**
+	 * 书籍类型id, 4代表中刊，5代表深圳馆藏图书
+	 */
+	public final static int BOOK_ZK_TYPE = 4;
+	/**
+	 * 书籍类型id, 4代表中刊，5代表深圳馆藏图书
+	 */	
+	public final static int BOOK_SZ_TYPE = 5;
 	//查询类型,关键字 
 	public final static String QUERY_KEY = "subject";
 	//查询类型,isbn
