@@ -121,7 +121,7 @@ public class Book implements Serializable  {
 		    	 return null;
 		     }
 			dateObj = json.getJSONObject("articlelist");	
-			if(dateObj.getInt("loannum")>0){
+			if(dateObj.getInt("loadnum")>0){
 			JSONArray ary = dateObj.getJSONArray("recordlist");
 			
 			 int count = ary.length();
