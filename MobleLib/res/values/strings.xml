@@ -103,4 +103,5 @@
     <string name="loadfail">加载失败</string>
     <string name="renewfail">续借失败</string>
     <string name="modifyfail">修改失败</string>
+    <string name="favorfail">收藏失败</string>
 </resources>

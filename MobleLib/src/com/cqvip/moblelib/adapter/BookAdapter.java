@@ -83,7 +83,7 @@ public class BookAdapter extends BaseAdapter{
 //			TextView u_abstract;//¼ò½é
 			TextView isbn;
 			
-			Button btn_item_result_search_share;
+			Button btn_item_result_search_share,favorite;
 			
 			}
 	
@@ -108,7 +108,7 @@ public class BookAdapter extends BaseAdapter{
 			holder.img = (ImageView) convertView.findViewById(R.id.re_book_img);
 //			holder.u_abstract = (TextView) convertView.findViewById(R.id.re_hot_txt);
 			holder.isbn=(TextView) convertView.findViewById(R.id.re_hot_txt);
-			
+			holder.btn_item_result_search_share=(Button)convertView.findViewById(R.id.btn_item_result_search_share);
 		
 			convertView.setTag(holder);
 		}else{
@@ -125,7 +125,7 @@ public class BookAdapter extends BaseAdapter{
 	        holder.publishyear.setText(time+book.getPublishyear());
 //	        holder.u_abstract.setText(describe+book.getU_abstract());
 	        holder.isbn.setText("ISBN:"+book.getIsbn());
-	        holder.btn_item_result_search_share=(Button)convertView.findViewById(R.id.btn_item_result_search_share);
+	        
 	        holder.btn_item_result_search_share.setTag(position);
 	        holder.btn_item_result_search_share.setOnClickListener(new OnClickListener() {
 				
