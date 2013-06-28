@@ -2,10 +2,6 @@ package com.cqvip.moblelib.test;
 
 import java.util.List;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.xml.sax.DTDHandler;
-
 import android.test.AndroidTestCase;
 import android.util.Log;
 
@@ -20,7 +16,6 @@ import com.cqvip.moblelib.model.Reader;
 import com.cqvip.moblelib.model.Result;
 import com.cqvip.moblelib.model.ShortBook;
 import com.cqvip.moblelib.net.BookException;
-import com.cqvip.moblelib.net.BookParameters;
 import com.cqvip.moblelib.service.BookManager;
 
 public class HttpRequestTest extends AndroidTestCase {
@@ -87,7 +82,7 @@ public class HttpRequestTest extends AndroidTestCase {
 		
 		List<Book> result=null;
 		try {
-			result = man.getBookSearch("³É¶¼",1,10);
+			result = man.getBookSearch("978-7-208-06771-4",1,10,GlobleData.SZLG_LIB_ID,"isbn");
 		} catch (BookException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -240,5 +235,27 @@ BookManager man = new BookManager();
 			Log.e("mobile", "error");
 			e.printStackTrace();
 		}	
+	}
+	public void addFavorite(){
+		BookManager man = new BookManager();	
+		try {
+			
+			Result result = man.addFavorite("1","10000", "1402882", "2");
+			Log.i("mobile",result.toString());
+		} catch (BookException e) {
+			Log.e("mobile", "error");
+			e.printStackTrace();
+		}
+	}
+	public void destoryFavorite(){
+		BookManager man = new BookManager();	
+		try {
+			
+			Result result = man.destroyFavorite("1","10000", "1402882", "2");
+			Log.i("mobile",result.toString());
+		} catch (BookException e) {
+			Log.e("mobile", "error");
+			e.printStackTrace();
+		}
 	}
 }

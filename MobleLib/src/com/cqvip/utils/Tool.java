@@ -2,6 +2,8 @@ package com.cqvip.utils;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -70,6 +72,17 @@ public class Tool {
   		} 
   		return buf.toString();
   	}
+  	/**
+  	 * isbn正则表达式匹配
+  	 * @param str
+  	 * @return
+  	 */
+  	 public static  boolean isbnMatch(String str)
+     {
+  	   Pattern pattern = Pattern.compile("[0-9]{3}\\-?[0-9]{1}\\-?[0-9]{4}\\-?[0-9]{4}\\-?[0-9]{1}");
+  		Matcher matcher = pattern.matcher(str);
+  		return matcher.find();
+     }
   
 }
 

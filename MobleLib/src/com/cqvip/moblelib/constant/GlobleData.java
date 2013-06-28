@@ -17,10 +17,36 @@ public class GlobleData {
 	 * 实体类所在包
 	 */
 	public final static String MODEL_PACKAGE = "com.cqvip.moblelib.entity";
-	/**服务器地址*/
+	/**
+	 * 服务器地址
+	 * */
 	public final static   String SERVER_URL = "http://mobile.cqvip.com";
-	/**图书馆id,1代表深圳图书馆*/
+	/**
+	 * 图书馆id,1代表深圳图书馆
+	 * */
 	public final static   String LIBIRY_ID = "1";
+	/**
+	 * 龙岗图书馆id 
+	 * */
+	public final static   String SZLG_LIB_ID = "044120";
+	//查询类型,关键字 
+	public final static String QUERY_KEY = "subject";
+	//查询类型,isbn
+	public final static String QUERY_ISBN = "isbn";
+	//查询类型,任意词
+	public final static String QUERY_ALL = "all";
+	//查询类型,标题
+	public final static String QUERY_TITLE = "title";
+	//查询类型,作者 
+	public final static String QUERY_AUTHOR = "author";
+	//查询类型,分类号
+	public final static String QUERY_CALSSNO = "classno";
+	//查询类型,索书号
+	public final static String QUERY_CALLNO = "callno";
+	//查询类型,出版社
+	public final static String QUERY_PUBLISHER = "publisher";
+	
+	
 	
 	public static Map<String, Object> datas = new HashMap<String, Object>();
 	
@@ -28,6 +54,7 @@ public class GlobleData {
 	
 	public static String userid;
 	public static String readerid;
+	public static String cqvipid;
 	
 	
 	

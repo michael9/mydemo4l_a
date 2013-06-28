@@ -301,6 +301,7 @@ public class MainMenuActivity extends BaseActivity implements IBookManagerActivi
 						"数据库获取书籍成功" + user.getCardno() + user.getReaderno());
 				GlobleData.userid = user.getCardno();
 				GlobleData.readerid = user.getReaderno();
+				GlobleData.cqvipid = user.getCqvipid();
 				islogin = true;
 
 			}

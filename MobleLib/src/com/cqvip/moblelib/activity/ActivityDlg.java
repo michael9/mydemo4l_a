@@ -174,11 +174,13 @@ public class ActivityDlg extends BaseActivity implements IBookManagerActivity {
 			User user = (User) obj[0];
 			GlobleData.userid = user.getCardno();
 			GlobleData.readerid = user.getReaderno();
+			GlobleData.cqvipid = user.getVipuserid()+"";
 			MUser muser = new MUser();
 			muser.setCardno(user.getCardno());
 			muser.setReaderno(user.getReaderno());
 			muser.setPwd(pwd);
 			muser.setName(user.getName());
+			muser.setCqvipid(user.getVipuserid()+"");
 			if (dao == null) {
 				dao = new MUserDao(this);
 			}

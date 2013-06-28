@@ -29,6 +29,11 @@ public class Result {
 	public String getMessage() {
 		return message;
 	}
+
+	@Override
+	public String toString() {
+		return "Result [success=" + success + ", message=" + message + "]";
+	}
 	
 	
 }

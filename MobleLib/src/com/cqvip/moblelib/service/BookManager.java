@@ -137,12 +137,15 @@ public class BookManager {
 	 * @return
 	 * @throws BookException
 	 */
-	public List<Book> getBookSearch(String key, int page, int count)
+	public List<Book> getBookSearch(String key, int page, int count,String library,String field)
 			throws BookException {
+		//TODO
 		BookParameters params = new BookParameters();
 		params.add("keyword", key);
 		params.add("curpage", page + "");
 		params.add("perpage", count + "");
+		params.add("library", library);
+		params.add("field", field);
 		String result = http.requestUrl(getBaseURL()
 				+ "/library/bookquery/search.aspx", getBasepost(), params);
 		return Book.formList(result);
@@ -280,6 +283,62 @@ public class BookManager {
 	public ShortBook getVerionCode() throws BookException{
 		String result = http.requestUrl(getBaseURL()+"/library/base/versiontemp.aspx", getBasepost(),null);
 		return new ShortBook(Task.TASK_REFRESH, result);
+	}
+	
+	/**
+	 * 添加收藏
+	 * @param libid //图书馆id
+	 * @param vipuserid //vip 用户id
+	 * @param keyid //图书id
+	 * @param typeid //类别 1,图书，2,期刊 3，多媒体 ，4，文档
+	 * @return
+	 * @throws BookException
+	 */
+	public Result addFavorite(String libid,String vipuserid,String keyid,String typeid) throws BookException{
+		BookParameters params = new BookParameters();
+		params.add("libid", libid);
+		params.add("vipuserid", vipuserid);
+		params.add("keyid", keyid);
+		params.add("typeid", typeid);
+		String result = http.requestUrl(getBaseURL()+"/cloud/favorite.aspx", getBasepost(),params);
+		return new Result(result);
+	}
+	
+	/**
+	 * 
+	 * @param page 页数
+	 * @param count 数量
+	 * @return
+	 * @throws BookException
+	 */
+	public String getFavoriteList(String page,String count)throws BookException{
+		//TODO
+		BookParameters params = new BookParameters();
+		params.add("curpage", page);
+		params.add("perpage", count);
+		String result = http.requestUrl(getBaseURL()+"/cloud/favorite.aspx", getBasepost(),null);
+		return result;
+	}
+	
+	/**
+	 * 删除收藏
+	 * @param libid //图书馆id
+	 * @param vipuserid //vip 用户id
+	 * @param keyid //图书id
+	 * @param typeid //类别 1,图书，2,期刊 3，多媒体 ，4，文档
+	 * @return
+	 * @throws BookException
+	 */
+	public Result destroyFavorite(String libid,String vipuserid,String keyid,String typeid)throws BookException{
+		//TODO
+		BookParameters params = new BookParameters();
+		params.add("libid", libid);
+		params.add("vipuserid", vipuserid);
+		params.add("keyid", keyid);
+		params.add("typeid", typeid);
+		
+		String result = http.requestUrl(getBaseURL()+"/cloud/favoritecancel.aspx", getBasepost(),params);
+		return new Result(result);
 	}
 	
 	private String formResult(String result) throws BookException {

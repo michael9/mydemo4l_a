@@ -24,6 +24,7 @@ import com.cqvip.moblelib.adapter.BookAdapter;
 import com.cqvip.moblelib.base.IBookManagerActivity;
 import com.cqvip.moblelib.biz.ManagerService;
 import com.cqvip.moblelib.biz.Task;
+import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.Book;
 import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.utils.Tool;
@@ -38,7 +39,7 @@ public class ResultOnSearchActivity extends BaseActivity implements IBookManager
 	private Context context;
 	private ListView listview;
 	private String key;
-	private int page=1;
+	private int page = 1;
 	private BookAdapter adapter;
 	
 	@Override
@@ -71,7 +72,14 @@ public class ResultOnSearchActivity extends BaseActivity implements IBookManager
 					if(!Tool.checkNetWork(context)){
 						return ;
 					}
-					getHomePage(edit.getText().toString().trim(),page,DEFAULT_COUNT,0);
+					key = edit.getText().toString().trim();
+					//判断是否是isbn号查询
+					page = 1;
+					if(Tool.isbnMatch(key)){
+					getHomePage(key,GETFIRSTPAGE,DEFAULT_COUNT,GETFIRSTPAGE,GlobleData.QUERY_ISBN);
+					}else{
+					getHomePage(key,GETFIRSTPAGE,DEFAULT_COUNT,GETFIRSTPAGE,GlobleData.QUERY_ALL);
+					}
 //					Tool.ShowMessages(context, "开始搜索");
 //					progressDialog.show();
 				}
@@ -84,7 +92,7 @@ public class ResultOnSearchActivity extends BaseActivity implements IBookManager
 					if(TextUtils.isEmpty(edit.getText().toString())){
 						return true;
 					}
-					key = edit.getText().toString();
+					key = edit.getText().toString().trim();
 					//隐藏键盘
 					InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
 					imm.hideSoftInputFromWindow(edit.getWindowToken(), 0);
@@ -94,9 +102,11 @@ public class ResultOnSearchActivity extends BaseActivity implements IBookManager
 					}
 					//网络访问,获取首页
 					page = 1;
-					getHomePage(edit.getText().toString().trim(),1,DEFAULT_COUNT,0);
-//					Tool.ShowMessages(context, "开始搜索");
-//					progressDialog.show();
+					if(Tool.isbnMatch(key)){
+						getHomePage(key,GETFIRSTPAGE,DEFAULT_COUNT,GETFIRSTPAGE,GlobleData.QUERY_ISBN);
+						}else{
+						getHomePage(key,GETFIRSTPAGE,DEFAULT_COUNT,GETFIRSTPAGE,GlobleData.QUERY_ALL);
+						}
 					return true;
 				}
 
@@ -108,14 +118,16 @@ public class ResultOnSearchActivity extends BaseActivity implements IBookManager
 	 * @param page
 	 * @param count
 	 */
-	private void getHomePage(String key,int page ,int count,int type) {
+	private void getHomePage(String key,int page ,int count,int type,String field) {
 		customProgressDialog.show();
 		HashMap map=new HashMap();
 		map.put("key", key);
 		map.put("page", page);
 		map.put("count", count);
+		map.put("library",GlobleData.SZLG_LIB_ID);
+		map.put("field",field);
 		Task tsHome;
-		if(type == 0){
+		if(type == GETFIRSTPAGE){
 		 tsHome=new Task(Task.TASK_QUERY_BOOK,map);
 		}else{
 		 tsHome=new Task(Task.TASK_QUERY_MORE,map);
@@ -167,7 +179,11 @@ public class ResultOnSearchActivity extends BaseActivity implements IBookManager
 			View moreprocess = arg1.findViewById(R.id.footer_progress);
 			moreprocess.setVisibility(View.VISIBLE);
 			//请求网络更多
-			getHomePage(key,page+1,DEFAULT_COUNT,1);
+			if(Tool.isbnMatch(key)){
+				getHomePage(key,page+1,DEFAULT_COUNT,GETNEXTPAGE,GlobleData.QUERY_ISBN);
+				}else{
+				getHomePage(key,page+1,DEFAULT_COUNT,GETNEXTPAGE,GlobleData.QUERY_ALL);
+				}
 			page = page+1;
 		}else{
 			Book book = adapter.getLists().get(positon);

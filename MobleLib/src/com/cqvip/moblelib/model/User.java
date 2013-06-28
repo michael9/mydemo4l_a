@@ -23,10 +23,15 @@ public class User extends Result{
 	private String phone;//电话
 	private String mobile;//手机
 	private String updatedate;//更新日期
+	private int vipuserid;//更新日期
 	
 	
 	
 	
+	public int getVipuserid() {
+		return vipuserid;
+	}
+
 	public User(String result) throws BookException{
 		super(result);
 		try {
@@ -37,12 +42,20 @@ public class User extends Result{
 			cardtype = json.getString("cardtypeid");
 			userid = json.getString("userid");
 			readerno = json.getString("readerno");
+			vipuserid = getInt("vipuserid",json);
 		} catch (JSONException e) {
 			throw new BookException(e);
 		}
 		
 	}
-	
+	   protected static int getInt(String key, JSONObject json) throws JSONException {
+	        String str = json.getString(key);
+	        if(null == str || "".equals(str)||"null".equals(str)){
+	            return 0;
+	        }
+	        return Integer.parseInt(str);
+	    }
+	    
 	public String getCardno() {
 		return cardno;
 	}
