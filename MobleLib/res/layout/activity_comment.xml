@@ -1,0 +1,54 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_list" >
+
+    <ImageView
+        android:id="@+id/book_big_img"
+        android:layout_width="fill_parent"
+        android:layout_height="220dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/defaut_book" />
+
+    <TextView
+        android:id="@+id/intro_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/book_big_img"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:shadowColor="@android:color/white"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="3"
+        android:text="图书简介"
+        android:textSize="16dp" />
+
+    <EditText
+        android:id="@+id/comment_et" 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/intro_tv"
+        android:layout_centerHorizontal="true"
+        android:hint="请在这里输入评论"
+        android:imeOptions="actionSend"
+        android:minLines="5"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp" />
+
+    <Button android:id="@+id/commit_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/comment_et"
+        android:layout_marginRight="8dp"
+        android:text="提交" />
+
+    <include
+        android:id="@+id/detail_book_title"
+        layout="@layout/header" />
+
+</RelativeLayout>

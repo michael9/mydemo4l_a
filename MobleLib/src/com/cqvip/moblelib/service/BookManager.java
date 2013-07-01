@@ -289,16 +289,16 @@ public class BookManager {
 	 * 添加收藏
 	 * @param libid //图书馆id
 	 * @param vipuserid //vip 用户id
-	 * @param keyid //图书id
+	 * @param keyid //索书号
 	 * @param typeid //类别 1,图书，2,期刊 3，多媒体 ，4，文档
 	 * @return
 	 * @throws BookException
 	 */
-	public Result addFavorite(String libid,String vipuserid,String keyid,String typeid) throws BookException{
+	public Result addFavorite(String libid,String vipuserid,String callno,String typeid) throws BookException{
 		BookParameters params = new BookParameters();
 		params.add("libid", libid);
 		params.add("vipuserid", vipuserid);
-		params.add("keyid", keyid);
+		params.add("keyid", callno);
 		params.add("typeid", typeid);
 		String result = http.requestUrl(getBaseURL()+"/cloud/favorite.aspx", getBasepost(),params);
 		return new Result(result);

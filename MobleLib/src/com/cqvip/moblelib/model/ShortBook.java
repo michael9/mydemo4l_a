@@ -69,6 +69,10 @@ public class ShortBook {
 		
 	}
 	
+//	public static List<List<ShortBook>> formLists(int type,String result) throws BookException{
+//		
+//	}
+	
 	public static List<ShortBook> formList(int type,String result) throws BookException{
 		if(type == Task.TASK_GET_FAVOR){
 			   List<ShortBook> books = null;

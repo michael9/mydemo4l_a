@@ -173,7 +173,11 @@
             android:name="com.cqvip.moblelib.activity.EbookDetailActivity"
             android:screenOrientation="portrait"
             />
-          
+          <activity
+            android:name="com.cqvip.moblelib.activity.CommentActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar"
+            />
           
             
     </application>

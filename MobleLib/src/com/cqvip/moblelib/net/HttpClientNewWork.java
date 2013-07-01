@@ -41,8 +41,8 @@ public class HttpClientNewWork {
 	public static final String HTTPMETHOD_POST = "POST";
 	public static final String HTTPMETHOD_GET = "GET";
 	
-	private static final int CONNECTION_TIMEOUT = 10000;
-	private static final int SOCKET_TIMEOUT = 20 * 1000;
+	private static final int CONNECTION_TIMEOUT = 5000;
+	private static final int SOCKET_TIMEOUT = 8 * 1000;
 	/**
 	 * ÍøÂçÇëÇó
 	 * @param url ·þÎñÆ÷url

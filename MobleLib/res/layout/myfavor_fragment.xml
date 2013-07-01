@@ -1,23 +1,26 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-     >
+    android:layout_height="match_parent" >
 
     <TextView
         android:id="@+id/section_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="aa"  android:visibility="gone"/>
+        android:text="aa"
+        android:visibility="gone" />
 
-    <GridView
-        android:id="@+id/gridView" 
+    <ListView
+        android:id="@+id/favorlist"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="top"
-        android:horizontalSpacing="5dp"
-        android:numColumns="5" 
-        android:verticalSpacing="5dp" android:background="@color/transparent">
-    </GridView>
+        android:layout_height="match_parent"
+        android:layout_below="@+id/searchbar"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/text_bck"
+        android:divider="@color/divider_color"
+        android:dividerHeight="0.5dp" />
 
 </RelativeLayout>
