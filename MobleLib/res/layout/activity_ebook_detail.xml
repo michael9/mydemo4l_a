@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
      >
 
     <!-- 图书 -->
@@ -77,6 +77,7 @@
             android:text="页数："
             android:textSize="14.0sp" />
     </LinearLayout>
+    
        <LinearLayout
         android:id="@+id/ll_abstract"
         android:layout_width="match_parent"
@@ -94,7 +95,62 @@
             android:layout_height="wrap_content"
             android:text="" />
     </LinearLayout>
-		
+    
+       
+           <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_abstract"
+        android:layout_marginTop="15dp"
+        android:gravity="right"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btn_ebook_detail_great"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="12dp"
+            android:background="@null"
+            android:focusable="false"
+            android:text="赞" />
+
+        <Button
+            android:id="@+id/btn_ebook_detail_buzz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="12dp"
+            android:background="@null"
+            android:focusable="false"
+            android:text="评" />
+
+        <Button
+            android:id="@+id/btn_ebook_detail_collect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="12dp"
+            android:background="@null"
+            android:focusable="false"
+            android:text="收藏" />
+
+        <Button
+            android:id="@+id/btn_ebook_detail_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="12dp"
+            android:background="@null"
+            android:focusable="false"
+            android:text="分享" />
+        
+          <Button
+            android:id="@+id/btn_ebook_detail_download"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:background="@null"
+            android:focusable="false"
+            android:text="下载" />
+    </LinearLayout>
+		<!--  
          <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -142,6 +198,6 @@
             android:text="下载" />
         
     </LinearLayout>
-       
+       -->
 
 </RelativeLayout>

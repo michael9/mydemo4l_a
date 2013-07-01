@@ -71,6 +71,9 @@ public class BaseActivity extends Activity {
 		} else if (a == 4) {// –ﬁ∏ƒ ß∞‹
 			Tool.ShowMessages(this, getResources()
 					.getString(R.string.modifyfail));
+		}else if (a == 5) {//  ’≤ÿ ß∞‹
+			Tool.ShowMessages(this, getResources()
+					.getString(R.string.favorfail));
 		}
 	}
 }

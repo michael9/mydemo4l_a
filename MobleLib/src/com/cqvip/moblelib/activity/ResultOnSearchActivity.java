@@ -37,6 +37,7 @@ public class ResultOnSearchActivity extends BaseActivity implements IBookManager
 	
 	public static final int GETFIRSTPAGE = 1;
 	public static final int GETNEXTPAGE = 2;
+	public static final int FAVOR = 3;
 	public static final int DEFAULT_COUNT = 10;
 	private EditText edit;
 	private ImageButton imgsearch;
@@ -187,6 +188,12 @@ public class ResultOnSearchActivity extends BaseActivity implements IBookManager
 				}else{
 					Tool.ShowMessages(context, "没有更多内容可供加载");
 				}
+		}else if(type == FAVOR){
+//			if(lists!=null&&!lists.isEmpty()){
+//				adapter.addMoreData(lists);
+//				}else{
+					Tool.ShowMessages(context, "收藏成功");
+				//}
 		}
 	}
 	private List<? extends Map<String, ?>> getData() {

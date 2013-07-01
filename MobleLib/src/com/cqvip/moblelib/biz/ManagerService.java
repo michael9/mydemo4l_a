@@ -236,12 +236,21 @@ public class ManagerService extends Service implements Runnable {
 				//获取收藏列表
 			case Task.TASK_GET_FAVOR:
 				MyFavorActivity favor= (MyFavorActivity) ManagerService.getActivityByName("MyFavorActivity");
-				if (msg.arg1 != 0) {//不提示失败信息
+				if (msg.arg1 != 0) {
 					favor.onError(2);
 					msg.arg1 = 0;
 					break;
 				}
 				favor.refresh(msg.obj);
+				break;	
+				//馆藏图书收藏
+			case Task.TASK_LIB_FAVOR:
+				IBookManagerActivity favor_lib = (IBookManagerActivity) ManagerService.getActivityByName("ResultOnSearchActivity");
+				if (msg.arg1 != 0) {
+					doException(5,msg, "ResultOnSearchActivity");
+					break;
+				}
+				favor_lib.refresh(msg.obj);
 				break;	
 		   }
 	    }
@@ -358,10 +367,10 @@ public class ManagerService extends Service implements Runnable {
 			ShortBook refresh = manager.getVerionCode();
 			msg.obj = refresh;
 			break;	
-			//更新版本号19
+			//获取收藏列表19
 		case Task.TASK_GET_FAVOR:
-			//ShortBook refresh = manager.getVerionCode();
-			//msg.obj = refresh;
+			List<ShortBook> getFavor = manager.articledown((String)task.getTaskParam().get("lngid"));
+			msg.obj = getFavor;
 			break;	
 			
 			}

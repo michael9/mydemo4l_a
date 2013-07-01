@@ -71,7 +71,7 @@ public class EBookSearchActivity extends BaseActivity implements IBookManagerAct
 						return ;
 					}
 					getHomePage(edit.getText().toString().trim(),page,DEFAULT_COUNT,0);
-					Tool.ShowMessages(context, "开始搜索");
+//					Tool.ShowMessages(context, "开始搜索");
 				}
 			});
 		  edit.setOnEditorActionListener(new TextView.OnEditorActionListener() {

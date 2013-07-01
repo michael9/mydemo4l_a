@@ -128,7 +128,7 @@ public class EbookAdapter extends BaseAdapter{
 	        holder.type.setText(type+"PDF");
 	        holder.l_abst.setVisibility(View.VISIBLE);
 	        holder.u_abstract.setText(describe+book.getRemark_c());
-	        holder.favorite.setVisibility(View.VISIBLE);
+	      //  holder.favorite.setVisibility(View.VISIBLE);
 	      
 	        holder.btn_item_result_search_share.setTag(position);
 	        holder.btn_item_result_search_share.setOnClickListener(new OnClickListener() {
