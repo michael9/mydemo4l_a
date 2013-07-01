@@ -45,7 +45,6 @@ public class EBookActiviy extends BaseActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature( Window.FEATURE_NO_TITLE );
 		setContentView(R.layout.activity_ebook_activiy);
 		View v = findViewById(R.id.ebook_title);
 		TextView title = (TextView)v.findViewById(R.id.txt_header);
@@ -78,6 +77,7 @@ public class EBookActiviy extends BaseActivity {
 			public void onClick(View v) {
 				Intent intent=new Intent(EBookActiviy.this, EBookSearchActivity.class);
 				startActivity(intent);
+				finish();
 			}
 		});
 //		InitImageView();
@@ -93,6 +93,7 @@ public class EBookActiviy extends BaseActivity {
 					imm.hideSoftInputFromWindow(et.getWindowToken(), 0);
 					Intent intent = new Intent(EBookActiviy.this,EBookSearchActivity.class) ;
 					startActivity(intent);
+					finish();
 				}
 			});
 		

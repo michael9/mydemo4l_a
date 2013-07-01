@@ -137,6 +137,7 @@ public class EBookSearchActivity extends BaseActivity implements IBookManagerAct
 	@Override
 	public void refresh(Object... obj) {
 		customProgressDialog.dismiss();
+		hideKeybord();
 		//œ‘ æ
 		int type = (Integer)obj[0];
 		List<EBook> lists = (List<EBook>)obj[1];

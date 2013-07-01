@@ -163,6 +163,7 @@ public class ResultOnSearchActivity extends BaseActivity implements IBookManager
 	public void refresh(Object... obj) {
 		//œ‘ æ
 		customProgressDialog.dismiss();
+		hideKeybord();
 		int type = (Integer)obj[0];
 		List<Book> lists = (List<Book>)obj[1];
 		if(type == GETFIRSTPAGE ){
