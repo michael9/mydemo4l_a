@@ -169,9 +169,11 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateAlwaysVisible"
              android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+          
           <activity
             android:name="com.cqvip.moblelib.activity.EbookDetailActivity"
             android:screenOrientation="portrait"
+             android:theme="@android:style/Theme.Translucent.NoTitleBar" 
             />
           
           
