@@ -96,6 +96,9 @@
     <string name="ebook_orang">来源:</string>
     <string name="ebook_type">格式:</string>
     <string name="ebook_abstrac">简介:</string>
+    
+    <string name="no_result">没有找到相关结果\n试试别的关键字吧!</string>
+    <string name="no_borrow">您没有借阅书籍!</string>
 
     
     <!-- 异常提示 -->

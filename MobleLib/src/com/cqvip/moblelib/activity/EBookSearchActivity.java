@@ -17,6 +17,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.cqvip.moblelib.R;
@@ -42,6 +43,7 @@ public class EBookSearchActivity extends BaseActivity implements IBookManagerAct
 	private String key;
 	private int page=1;
 	private EbookAdapter adapter;
+	private RelativeLayout noResult_rl;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -53,15 +55,13 @@ public class EBookSearchActivity extends BaseActivity implements IBookManagerAct
 		listview.setOnItemClickListener((OnItemClickListener)this);
 		ManagerService.allActivity.add(this);
 		customProgressDialog=CustomProgressDialog.createDialog(this);
+		noResult_rl = (RelativeLayout) findViewById(R.id.noresult_rl);
 		
 		imgsearch.setOnClickListener(new View.OnClickListener() {
 				
 				@Override
 				public void onClick(View v) {
-					InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-					if(imm.isActive()){
-						imm.hideSoftInputFromWindow(edit.getWindowToken(), 0);
-					}
+					hideKeybord();
 					if(TextUtils.isEmpty(edit.getText().toString())){
 						Tool.ShowMessages(context, "ÇëÊäÈë¹Ø¼ü×Ö");
 						return;
@@ -83,8 +83,7 @@ public class EBookSearchActivity extends BaseActivity implements IBookManagerAct
 					}
 					key = edit.getText().toString();
 					//Òþ²Ø¼üÅÌ
-					InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-					imm.hideSoftInputFromWindow(edit.getWindowToken(), 0);
+					hideKeybord();
 					//¼ì²éÍøÂç
 					if(!Tool.checkNetWork(context)){
 						return false;
@@ -98,6 +97,17 @@ public class EBookSearchActivity extends BaseActivity implements IBookManagerAct
 
 			});
 	}
+	
+	/**
+	 * Òþ²Ø¼üÅÌ
+	 */
+	private void hideKeybord() {
+		InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+		if(imm.isActive()){
+			imm.hideSoftInputFromWindow(edit.getWindowToken(), 0);
+		}
+	}
+	
 	/**
 	 * ÇëÇóÍøÂç£¬»ñÈ¡Êý¾Ý
 	 * @param key
@@ -132,9 +142,14 @@ public class EBookSearchActivity extends BaseActivity implements IBookManagerAct
 		List<EBook> lists = (List<EBook>)obj[1];
 		if(type == GETFIRSTPAGE ){
 		if(lists!=null&&!lists.isEmpty()){
+			listview.setVisibility(View.VISIBLE);
+			noResult_rl.setVisibility(View.GONE);
 			adapter = new EbookAdapter(context,lists);
 			listview.setAdapter(adapter);
 			
+		}else{
+			listview.setVisibility(View.GONE);
+			noResult_rl.setVisibility(View.VISIBLE);
 		}
 		}else if(type == GETNEXTPAGE){
 			if(lists!=null&&!lists.isEmpty()){

@@ -1,7 +1,9 @@
 package com.cqvip.moblelib.activity;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,7 +18,9 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.cqvip.moblelib.R;
@@ -41,7 +45,8 @@ public class ResultOnSearchActivity extends BaseActivity implements IBookManager
 	private String key;
 	private int page = 1;
 	private BookAdapter adapter;
-	
+	private View moreprocess;
+	private RelativeLayout noResult_rl;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -53,17 +58,14 @@ public class ResultOnSearchActivity extends BaseActivity implements IBookManager
 		listview.setOnItemClickListener((OnItemClickListener)this);
 		ManagerService.allActivity.add(this);
 		customProgressDialog=CustomProgressDialog.createDialog(this);
-		
+		noResult_rl = (RelativeLayout) findViewById(R.id.noresult_rl);
 		edit.setText(getIntent().getStringExtra("ISBN"));
 		
 		imgsearch.setOnClickListener(new View.OnClickListener() {
 				
 				@Override
 				public void onClick(View v) {
-					InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-					if(imm.isActive()){
-						imm.hideSoftInputFromWindow(edit.getWindowToken(), 0);
-					}
+					hideKeybord();
 					if(TextUtils.isEmpty(edit.getText().toString())){
 						Tool.ShowMessages(context, "请输入关键字");
 						return;
@@ -83,8 +85,10 @@ public class ResultOnSearchActivity extends BaseActivity implements IBookManager
 //					Tool.ShowMessages(context, "开始搜索");
 //					progressDialog.show();
 				}
+
 			});
 		
+          
 		  edit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 				
 			  @Override
@@ -94,9 +98,8 @@ public class ResultOnSearchActivity extends BaseActivity implements IBookManager
 					}
 					key = edit.getText().toString().trim();
 					//隐藏键盘
-					InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-					imm.hideSoftInputFromWindow(edit.getWindowToken(), 0);
-					//检查网络
+					hideKeybord();
+					//检查0网络
 					if(!Tool.checkNetWork(context)){
 						return false;
 					}
@@ -111,6 +114,15 @@ public class ResultOnSearchActivity extends BaseActivity implements IBookManager
 				}
 
 			});
+	}
+	/**
+	 * 隐藏键盘
+	 */
+	private void hideKeybord() {
+		InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+		if(imm.isActive()){
+			imm.hideSoftInputFromWindow(edit.getWindowToken(), 0);
+		}
 	}
 	/**
 	 * 请求网络，获取数据
@@ -154,15 +166,22 @@ public class ResultOnSearchActivity extends BaseActivity implements IBookManager
 		List<Book> lists = (List<Book>)obj[1];
 		if(type == GETFIRSTPAGE ){
 			if(lists!=null&&!lists.isEmpty()){
+				listview.setVisibility(View.VISIBLE);
+				noResult_rl.setVisibility(View.GONE);
 			adapter = new BookAdapter(context,lists);
 			listview.setAdapter(adapter);
 			
 		}
 		else
 		{
-			Tool.ShowMessages(context, "不好意思，没有找到你想找的资源！");
+			//Tool.ShowMessages(context, "不好意思，没有找到你想找的资源！");
+			//listview.setAdapter(new SimpleAdapter(context, getData(), android.R.layout.simple_list_item_1, new String[]{"no"}, new int[] { android.R.id.text1 }));
+			listview.setVisibility(View.GONE);
+			noResult_rl.setVisibility(View.VISIBLE);
+			
 		}
 		}else if(type == GETNEXTPAGE){
+			moreprocess.setVisibility(View.GONE);
 			if(lists!=null&&!lists.isEmpty()){
 				adapter.addMoreData(lists);
 				}else{
@@ -170,13 +189,21 @@ public class ResultOnSearchActivity extends BaseActivity implements IBookManager
 				}
 		}
 	}
+	private List<? extends Map<String, ?>> getData() {
+		List<Map<String,String>> list = new ArrayList<Map<String,String>>();
+		
+			Map<String,String> map = new HashMap<String,String>();
+			map.put("no","查询无记录");
+			list.add(map);
+        return list;
+	}
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int positon, long id) {
 		Log.i("item","===============click=");
 		if (id == -2) //更多
 		{
 			//进度条
-			View moreprocess = arg1.findViewById(R.id.footer_progress);
+			moreprocess = arg1.findViewById(R.id.footer_progress);
 			moreprocess.setVisibility(View.VISIBLE);
 			//请求网络更多
 			if(Tool.isbnMatch(key)){
