@@ -38,6 +38,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -70,6 +71,7 @@ public class BorrowAndOrderActivity extends BaseActivity implements IBookManager
 	private ListView listview;
 	private BorrowBookAdapter adapter;
 	private List<BorrowBook>  lists;
+	private RelativeLayout noborrow_rl;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -80,6 +82,7 @@ public class BorrowAndOrderActivity extends BaseActivity implements IBookManager
 		TextView title = (TextView)v.findViewById(R.id.txt_header);
 		title.setText(R.string.main_borrow);
 		ImageView back = (ImageView)v.findViewById(R.id.img_back_header);
+		noborrow_rl = (RelativeLayout) findViewById(R.id.noborrow_rl);
 		//ImageView history = (ImageView)v.findViewById(R.id.btn_right_header);
 		//history.setVisibility(View.VISIBLE);
 		//history.setImageResource(R.drawable.lscx);
@@ -143,8 +146,12 @@ public class BorrowAndOrderActivity extends BaseActivity implements IBookManager
 		case BORROWLIST:
 			lists = (List<BorrowBook>)obj[1];
 			if(lists==null||lists.isEmpty()){
-			   Tool.ShowMessages(context, "查询无记录");
+				listview.setVisibility(View.GONE);
+				noborrow_rl.setVisibility(View.VISIBLE);
+			   //Tool.ShowMessages(context, "查询无记录");
 			}else {
+				listview.setVisibility(View.VISIBLE);
+				noborrow_rl.setVisibility(View.GONE);
 				adapter = new BorrowBookAdapter(context,lists);
 				listview.setAdapter(adapter);
 			}
