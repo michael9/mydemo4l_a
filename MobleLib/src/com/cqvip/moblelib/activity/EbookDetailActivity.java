@@ -7,6 +7,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cqvip.moblelib.R;
@@ -22,7 +24,12 @@ public class EbookDetailActivity extends BaseActivity implements IBookManagerAct
 	private EBook dBook;
 	private TextView author,from,type,page,title,content;
 	private String download_url = null;
-	private TextView share,favor,comment,download;
+	private Button btn_ebook_detail_great,
+					btn_ebook_detail_buzz,
+					btn_ebook_detail_share,
+					btn_ebook_detail_collect,
+					btn_ebook_detail_download;
+	private View title_bar;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -37,10 +44,16 @@ public class EbookDetailActivity extends BaseActivity implements IBookManagerAct
 		title =(TextView)findViewById(R.id.ebook_title_txt);
 		content =(TextView)findViewById(R.id.ebook_content_abst);
 		
-		share =(TextView)findViewById(R.id.ebook_share_txt);
-		favor =(TextView)findViewById(R.id.ebook_favorite_txt);
-		comment =(TextView)findViewById(R.id.ebook_comment_txt);
-		download =(TextView)findViewById(R.id.ebook_down_txt);
+//		share =(Button)findViewById(R.id.ebook_share_txt);
+//		favor =(Button)findViewById(R.id.ebook_favorite_txt);
+//		comment =(Button)findViewById(R.id.ebook_comment_txt);
+//		download =(Button)findViewById(R.id.ebook_down_txt);
+		
+		btn_ebook_detail_great=(Button)findViewById(R.id.btn_ebook_detail_great);
+		btn_ebook_detail_buzz=(Button)findViewById(R.id.btn_ebook_detail_buzz);
+		btn_ebook_detail_share=(Button)findViewById(R.id.btn_ebook_detail_share);
+		btn_ebook_detail_collect=(Button)findViewById(R.id.btn_ebook_detail_collect);
+		btn_ebook_detail_download=(Button)findViewById(R.id.btn_ebook_detail_download);
 		
 		ManagerService.allActivity.add(this);
 		if(dBook.getLngid()!=null){
@@ -60,7 +73,7 @@ public class EbookDetailActivity extends BaseActivity implements IBookManagerAct
 		page.setText(page1+dBook.getPagecount());
 		content.setText(describe1+dBook.getRemark_c());
 		
-		download.setOnClickListener(new View.OnClickListener() {
+		btn_ebook_detail_download.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
@@ -73,7 +86,17 @@ public class EbookDetailActivity extends BaseActivity implements IBookManagerAct
 			}
 		});
 		
-		
+		title_bar=findViewById(R.id.head_bar);
+		TextView title = (TextView)title_bar.findViewById(R.id.txt_header);
+		title.setText(R.string.book_detail);
+		ImageView back = (ImageView)title_bar.findViewById(R.id.img_back_header);
+		back.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				finish();
+			}
+		});
 	}
 
 	private void getLocalinfo(String recordid) {

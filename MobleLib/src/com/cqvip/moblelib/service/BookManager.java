@@ -244,8 +244,8 @@ public class BookManager {
 	public List<EBook> queryEBook(String key,int page,int count) throws BookException{
 		BookParameters params = new BookParameters();
 		params.add("title", key);
-		params.add("curpage", page+"");//新密码
-		params.add("perpage",count+"" );//旧密码
+		params.add("curpage", page+"");//当前页数
+		params.add("perpage",count+"" );//条数
 		String result = http.requestUrl(getBaseURL()+"/zk/searchtemp.aspx", getBasepost(), params);
 		return EBook.formList(result);
 		

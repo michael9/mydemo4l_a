@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_list"
      >
 
+     <include android:id="@+id/head_bar" layout="@layout/header" />
     <!-- 图书 -->
 
     <ImageView
+        android:layout_below="@id/head_bar"
         android:id="@+id/ebook_icon_img"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/lyRightLayout"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
+
         android:layout_marginLeft="5.0dip"
         android:layout_marginTop="5.0dip"
         android:background="@android:color/white"
@@ -21,6 +24,7 @@
         android:src="@drawable/defaut_book" />
 
     <LinearLayout
+         android:layout_below="@id/head_bar"
         android:id="@+id/lyRightLayout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -39,6 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
+                android:textColor="@color/txt_black"
                 android:text="编程的艺术"
                 android:textSize="18.0sp" />
         </RelativeLayout>
@@ -49,6 +54,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10.0dip"
+             android:textColor="@color/txt_black"
             android:text="作者：托马斯"
             android:textSize="14.0sp" />
         <!-- address -->
@@ -57,6 +63,7 @@
             android:id="@+id/ebook_from_txt"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+             android:textColor="@color/txt_black"
             android:text="来源期刊：电子工业出版社"
             android:textSize="14.0sp" />
         <!-- time -->
@@ -65,6 +72,7 @@
             android:id="@+id/ebook_type_txt"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+             android:textColor="@color/txt_black"
             android:text="格式：2012-06"
             android:textSize="14.0sp" />
         <!-- time -->
@@ -73,10 +81,12 @@
             android:id="@+id/ebook_page_txt"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+             android:textColor="@color/txt_black"
             android:maxLines="2"
             android:text="页数："
             android:textSize="14.0sp" />
     </LinearLayout>
+    
        <LinearLayout
         android:id="@+id/ll_abstract"
         android:layout_width="match_parent"
@@ -92,9 +102,65 @@
             android:id="@+id/ebook_content_abst"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+             android:textColor="@color/txt_black"
             android:text="" />
     </LinearLayout>
-		
+    
+       
+           <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_abstract"
+        android:layout_marginTop="15dp"
+        android:gravity="right"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btn_ebook_detail_great"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="12dp"
+            android:background="@null"
+            android:focusable="false"
+            android:text="赞" />
+
+        <Button
+            android:id="@+id/btn_ebook_detail_buzz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="12dp"
+            android:background="@null"
+            android:focusable="false"
+            android:text="评" />
+
+        <Button
+            android:id="@+id/btn_ebook_detail_collect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="12dp"
+            android:background="@null"
+            android:focusable="false"
+            android:text="收藏" />
+
+        <Button
+            android:id="@+id/btn_ebook_detail_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="12dp"
+            android:background="@null"
+            android:focusable="false"
+            android:text="分享" />
+        
+          <Button
+            android:id="@+id/btn_ebook_detail_download"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:background="@null"
+            android:focusable="false"
+            android:text="下载" />
+    </LinearLayout>
+		<!--  
          <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -142,6 +208,6 @@
             android:text="下载" />
         
     </LinearLayout>
-       
+       -->
 
 </RelativeLayout>

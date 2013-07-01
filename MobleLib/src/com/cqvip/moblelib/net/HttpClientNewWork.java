@@ -13,6 +13,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.conn.ClientConnectionManager;
+import org.apache.http.conn.params.ConnManagerParams;
 import org.apache.http.conn.scheme.PlainSocketFactory;
 import org.apache.http.conn.scheme.Scheme;
 import org.apache.http.conn.scheme.SchemeRegistry;
@@ -40,9 +41,9 @@ public class HttpClientNewWork {
 	
 	public static final String HTTPMETHOD_POST = "POST";
 	public static final String HTTPMETHOD_GET = "GET";
-	
-	private static final int CONNECTION_TIMEOUT = 5000;
-	private static final int SOCKET_TIMEOUT = 8 * 1000;
+
+	private static final int CONNECTION_TIMEOUT = 10000;
+	private static final int SOCKET_TIMEOUT = 10 * 1000;
 	/**
 	 * 网络请求
 	 * @param url 服务器url
@@ -109,10 +110,10 @@ public class HttpClientNewWork {
 	private static synchronized HttpClient getHttpclient() {
 		if(client == null){
 		HttpParams params = new BasicHttpParams();
-
-//		HttpConnectionParams.setConnectionTimeout(params, 10000);
-//		HttpConnectionParams.setSoTimeout(params, 10000);
-
+		//设置连接和响应超时
+		ConnManagerParams.setTimeout(params, CONNECTION_TIMEOUT);
+		HttpConnectionParams.setConnectionTimeout(params, CONNECTION_TIMEOUT);
+		HttpConnectionParams.setSoTimeout(params, SOCKET_TIMEOUT);
 		HttpProtocolParams.setVersion(params, HttpVersion.HTTP_1_1);
 		HttpProtocolParams.setContentCharset(params, HTTP.UTF_8);
 
@@ -121,11 +122,7 @@ public class HttpClientNewWork {
 		registry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
 		//支持https
 //		registry.register(new Scheme("https", sf, 443));
-
 		ClientConnectionManager ccm = new ThreadSafeClientConnManager(params, registry);
-		//设置连接和响应超时
-		HttpConnectionParams.setConnectionTimeout(params, CONNECTION_TIMEOUT);
-		HttpConnectionParams.setSoTimeout(params, SOCKET_TIMEOUT);
 		 client = new DefaultHttpClient(ccm, params);
 		
 		}

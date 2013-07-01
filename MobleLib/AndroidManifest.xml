@@ -137,7 +137,7 @@
             android:name="com.cqvip.moblelib.activity.ResultOnSearchActivity"
             android:label="@string/title_activity_result_on_search" 
              android:screenOrientation="portrait"
-              android:windowSoftInputMode="adjustPan|stateAlwaysVisible"
+              android:windowSoftInputMode="stateVisible|adjustPan"
              android:theme="@android:style/Theme.Light.NoTitleBar"/>
        <activity
             android:name="com.cqvip.moblelib.activity.DetailBookActivity"
@@ -167,17 +167,21 @@
           <activity
             android:name="com.cqvip.moblelib.activity.EBookSearchActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|stateAlwaysVisible"
+            android:windowSoftInputMode="stateVisible|adjustPan"
              android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+          
           <activity
             android:name="com.cqvip.moblelib.activity.EbookDetailActivity"
             android:screenOrientation="portrait"
+             android:theme="@android:style/Theme.Translucent.NoTitleBar" 
             />
-          <activity
+          
+            <activity
             android:name="com.cqvip.moblelib.activity.CommentActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar"
             />
+
           
             
     </application>
