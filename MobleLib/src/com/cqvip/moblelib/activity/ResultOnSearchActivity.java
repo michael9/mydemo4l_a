@@ -48,6 +48,7 @@ public class ResultOnSearchActivity extends BaseActivity implements IBookManager
 	private BookAdapter adapter;
 	private View moreprocess;
 	private RelativeLayout noResult_rl;
+	private View title_bar;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -115,6 +116,19 @@ public class ResultOnSearchActivity extends BaseActivity implements IBookManager
 				}
 
 			});
+	
+		  title_bar=findViewById(R.id.head_bar);
+			TextView title = (TextView)title_bar.findViewById(R.id.txt_header);
+			title.setText(R.string.main_search);
+			ImageView back = (ImageView)title_bar.findViewById(R.id.img_back_header);
+			back.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					finish();
+				}
+			});
+	
 	}
 	/**
 	 * Òþ²Ø¼üÅÌ

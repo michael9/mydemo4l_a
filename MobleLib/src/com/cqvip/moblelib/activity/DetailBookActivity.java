@@ -8,7 +8,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.cqvip.moblelib.R;
@@ -27,6 +30,7 @@ public class DetailBookActivity extends BaseActivity implements IBookManagerActi
 	private ListView listview;
 	private BookLocAdapter adapter;
 	private Context context;
+	private View title_bar;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -71,8 +75,17 @@ public class DetailBookActivity extends BaseActivity implements IBookManagerActi
 				+dBook.getU_abstract());
 		
 		//listview.setAdapter(adapter);
-		
-		
+		title_bar=findViewById(R.id.head_bar);
+		TextView title = (TextView)title_bar.findViewById(R.id.txt_header);
+		title.setText(R.string.book_detail);
+		ImageView back = (ImageView)title_bar.findViewById(R.id.img_back_header);
+		back.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				finish();
+			}
+		});
 	}
 
 	private void getLocalinfo(String recordid) {

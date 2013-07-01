@@ -5,15 +5,17 @@
     android:background="@drawable/bg_list"
      >
 
+     <include android:id="@+id/head_bar" layout="@layout/header" />
     <!-- 图书 -->
 
     <ImageView
+        android:layout_below="@id/head_bar"
         android:id="@+id/ebook_icon_img"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/lyRightLayout"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
+
         android:layout_marginLeft="5.0dip"
         android:layout_marginTop="5.0dip"
         android:background="@android:color/white"
@@ -22,6 +24,7 @@
         android:src="@drawable/defaut_book" />
 
     <LinearLayout
+         android:layout_below="@id/head_bar"
         android:id="@+id/lyRightLayout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
