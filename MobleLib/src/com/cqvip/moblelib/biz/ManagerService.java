@@ -2,6 +2,7 @@ package com.cqvip.moblelib.biz;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import android.app.Service;
 import android.content.Intent;
@@ -10,7 +11,6 @@ import android.os.IBinder;
 import android.os.Message;
 import android.util.Log;
 
-import com.cqvip.moblelib.activity.ActivityDlg;
 import com.cqvip.moblelib.activity.BaseActivity;
 import com.cqvip.moblelib.activity.BorrowAndOrderActivity;
 import com.cqvip.moblelib.activity.DetailTextActivity;
@@ -24,6 +24,7 @@ import com.cqvip.moblelib.model.BookLoc;
 import com.cqvip.moblelib.model.BorrowBook;
 import com.cqvip.moblelib.model.EBook;
 import com.cqvip.moblelib.model.EbookDetail;
+import com.cqvip.moblelib.model.Favorite;
 import com.cqvip.moblelib.model.Reader;
 import com.cqvip.moblelib.model.Result;
 import com.cqvip.moblelib.model.ShortBook;
@@ -369,7 +370,7 @@ public class ManagerService extends Service implements Runnable {
 			break;	
 			//获取收藏列表19
 		case Task.TASK_GET_FAVOR:
-			List<ShortBook> getFavor = manager.getFavoriteList((String)task.getTaskParam().get("libid"), (String)task.getTaskParam().get("vipuserid"), (String)task.getTaskParam().get("curpage"), (String)task.getTaskParam().get("perpage"));
+			Map<Integer,List<Favorite>> getFavor = manager.getFavoriteList((String)task.getTaskParam().get("libid"), (String)task.getTaskParam().get("vipuserid"), (String)task.getTaskParam().get("curpage"), (String)task.getTaskParam().get("perpage"));
 			msg.obj = getFavor;
 			break;	
 			//收藏20
