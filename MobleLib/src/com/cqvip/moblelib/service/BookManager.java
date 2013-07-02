@@ -325,11 +325,11 @@ public class BookManager {
 	}
 	
 	/**
-	 * 删除收藏
+	 * 取消收藏
 	 * @param libid //图书馆id
 	 * @param vipuserid //vip 用户id
-	 * @param keyid //图书id
-	 * @param typeid //类别 1,图书，2,期刊 3，多媒体 ，4，文档
+	 * @param keyid //索书号
+	 * @param typeid //类别 4中刊，5深图
 	 * @return
 	 * @throws BookException
 	 */

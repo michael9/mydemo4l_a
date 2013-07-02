@@ -17,7 +17,7 @@ public class Favorite {
 	private String lngid;
 	private String title;
 	private String writer;
-	private String organ;
+	private String organ;//出版社
 	private String keyword;
 	private String remark;
 	private String years;
@@ -28,10 +28,20 @@ public class Favorite {
 	private int commentcount;
 	private String imgurl;
 	private String weburl;
+	private String favoritekeyid;//索书号
+	private String typeid;//书类型
 	
+	public String getTypeid() {
+		return typeid;
+	}
+	public String getFavoritekeyid() {
+		return favoritekeyid;
+	}
 	public Favorite(JSONObject jsonObject) throws BookException{
 		try {
+			favoritekeyid = jsonObject.getString("favoritekeyid");
 			JSONObject json = jsonObject.getJSONObject("favoriteinfo");
+			typeid=lngid = json.getString("typeid");
 			lngid = json.getString("lngid");
 			title = json.getString("title");
 			writer = json.getString("writer");
