@@ -1,6 +1,7 @@
 package com.cqvip.moblelib.test;
 
 import java.util.List;
+import java.util.Map;
 
 import android.test.AndroidTestCase;
 import android.util.Log;
@@ -12,6 +13,7 @@ import com.cqvip.moblelib.model.BookLoc;
 import com.cqvip.moblelib.model.BorrowBook;
 import com.cqvip.moblelib.model.EBook;
 import com.cqvip.moblelib.model.EbookDetail;
+import com.cqvip.moblelib.model.Favorite;
 import com.cqvip.moblelib.model.Reader;
 import com.cqvip.moblelib.model.Result;
 import com.cqvip.moblelib.model.ShortBook;
@@ -259,19 +261,24 @@ BookManager man = new BookManager();
 		}
 	}
 	public void getFavoritList(){
-BookManager man = new BookManager();
+          BookManager man = new BookManager();
 		
-		List<ShortBook> result=null;
+          Map<Integer,List<Favorite>> result=null;
 		try {
-			result = man.getFavoriteList("1","10000", "1", "10");
+			result = (Map<Integer, List<Favorite>>) man.getFavoriteList("1","10000", "1", "10");
 		
 		} catch (BookException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		if(result!=null){
-			for(int i = 0;i<result.size();i++){
-				Log.i("mobile",result.get(i).toString());
+			List<Favorite> f1 = result.get(GlobleData.BOOK_SZ_TYPE);
+			for(int i = 0;i<f1.size();i++){
+				Log.i("mobile",f1.get(i).toString());
+			}
+			List<Favorite> f2 = result.get(GlobleData.BOOK_ZK_TYPE);
+			for(int i = 0;i<f2.size();i++){
+				Log.i("mobile",f2.get(i).toString());
 			}
 		}
 	}

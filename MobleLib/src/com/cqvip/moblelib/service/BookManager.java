@@ -1,6 +1,7 @@
 package com.cqvip.moblelib.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -12,6 +13,7 @@ import com.cqvip.moblelib.model.BookLoc;
 import com.cqvip.moblelib.model.BorrowBook;
 import com.cqvip.moblelib.model.EBook;
 import com.cqvip.moblelib.model.EbookDetail;
+import com.cqvip.moblelib.model.Favorite;
 import com.cqvip.moblelib.model.Reader;
 import com.cqvip.moblelib.model.Result;
 import com.cqvip.moblelib.model.ShortBook;
@@ -311,7 +313,7 @@ public class BookManager {
 	 * @return
 	 * @throws BookException
 	 */
-	public List<ShortBook> getFavoriteList(String libid,String vipuserid,String page,String count)throws BookException{
+	public Map<Integer,List<Favorite>> getFavoriteList(String libid,String vipuserid,String page,String count)throws BookException{
 		//TODO
 		BookParameters params = new BookParameters();
 		params.add("libid", libid);
@@ -319,7 +321,7 @@ public class BookManager {
 		params.add("curpage", page);
 		params.add("perpage", count);
 		String result = http.requestUrl(getBaseURL()+"/cloud/favoritelist.aspx", getBasepost(),params);
-		return ShortBook.formList(Task.TASK_GET_FAVOR, result);
+		return Favorite.formList(result);
 	}
 	
 	/**
