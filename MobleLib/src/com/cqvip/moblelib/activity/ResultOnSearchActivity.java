@@ -30,6 +30,7 @@ import com.cqvip.moblelib.biz.ManagerService;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.Book;
+import com.cqvip.moblelib.model.Result;
 import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.utils.Tool;
 
@@ -48,6 +49,7 @@ public class ResultOnSearchActivity extends BaseActivity implements IBookManager
 	private BookAdapter adapter;
 	private View moreprocess;
 	private RelativeLayout noResult_rl;
+	private View title_bar;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -115,6 +117,19 @@ public class ResultOnSearchActivity extends BaseActivity implements IBookManager
 				}
 
 			});
+	
+		  title_bar=findViewById(R.id.head_bar);
+			TextView title = (TextView)title_bar.findViewById(R.id.txt_header);
+			title.setText(R.string.main_search);
+			ImageView back = (ImageView)title_bar.findViewById(R.id.img_back_header);
+			back.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					finish();
+				}
+			});
+	
 	}
 	/**
 	 * 隐藏键盘
@@ -163,7 +178,19 @@ public class ResultOnSearchActivity extends BaseActivity implements IBookManager
 	public void refresh(Object... obj) {
 		//显示
 		customProgressDialog.dismiss();
+		hideKeybord();
 		int type = (Integer)obj[0];
+		//判断收藏是否成功
+		 if(type == FAVOR){
+			 Result res = (Result) obj[1];
+			 if (res.getSuccess()) {
+						Tool.ShowMessages(context, "收藏成功");
+			}else{
+						Tool.ShowMessages(context, "收藏失败");
+						}
+						return;
+			}
+		 
 		List<Book> lists = (List<Book>)obj[1];
 		if(type == GETFIRSTPAGE ){
 			if(lists!=null&&!lists.isEmpty()){
@@ -188,12 +215,6 @@ public class ResultOnSearchActivity extends BaseActivity implements IBookManager
 				}else{
 					Tool.ShowMessages(context, "没有更多内容可供加载");
 				}
-		}else if(type == FAVOR){
-//			if(lists!=null&&!lists.isEmpty()){
-//				adapter.addMoreData(lists);
-//				}else{
-					Tool.ShowMessages(context, "收藏成功");
-				//}
 		}
 	}
 	private List<? extends Map<String, ?>> getData() {

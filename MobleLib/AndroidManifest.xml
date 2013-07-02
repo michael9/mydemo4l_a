@@ -176,6 +176,12 @@
              android:theme="@android:style/Theme.Translucent.NoTitleBar" 
             />
           
+            <activity
+            android:name="com.cqvip.moblelib.activity.CommentActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar"
+            />
+
           
             
     </application>

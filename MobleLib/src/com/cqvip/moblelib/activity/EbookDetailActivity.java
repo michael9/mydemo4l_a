@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cqvip.moblelib.R;
@@ -28,6 +29,7 @@ public class EbookDetailActivity extends BaseActivity implements IBookManagerAct
 					btn_ebook_detail_share,
 					btn_ebook_detail_collect,
 					btn_ebook_detail_download;
+	private View title_bar;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -84,7 +86,17 @@ public class EbookDetailActivity extends BaseActivity implements IBookManagerAct
 			}
 		});
 		
-		
+		title_bar=findViewById(R.id.head_bar);
+		TextView title = (TextView)title_bar.findViewById(R.id.txt_header);
+		title.setText(R.string.book_detail);
+		ImageView back = (ImageView)title_bar.findViewById(R.id.img_back_header);
+		back.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				finish();
+			}
+		});
 	}
 
 	private void getLocalinfo(String recordid) {

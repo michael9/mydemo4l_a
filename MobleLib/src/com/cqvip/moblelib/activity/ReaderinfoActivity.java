@@ -29,6 +29,7 @@ import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.Reader;
 import com.cqvip.moblelib.model.Result;
 import com.cqvip.moblelib.utils.Rotate3dAnimation;
+import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.utils.Tool;
 
 public class ReaderinfoActivity extends BaseActivity implements
@@ -38,6 +39,8 @@ public class ReaderinfoActivity extends BaseActivity implements
 	private ListView mList;
 	private ViewGroup mContainer;
 	private RelativeLayout readerinfo_f_lay, readerinfo_b_lay;
+	
+	private  CustomProgressDialog customprogressdlg;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +59,8 @@ public class ReaderinfoActivity extends BaseActivity implements
 			}
 		});
 
+		customprogressdlg=CustomProgressDialog.createDialog(ReaderinfoActivity.this);
 		init();
-
 		mList = (ListView) findViewById(android.R.id.list);
 		mContainer = (ViewGroup) findViewById(R.id.container);
 
@@ -193,6 +196,7 @@ public class ReaderinfoActivity extends BaseActivity implements
 	@Override
 	public void init() {
 		if (GlobleData.userid != null) {
+			customprogressdlg.show();
 			ManagerService.allActivity.add(this);
 			HashMap map = new HashMap();
 			map.put("userid", GlobleData.userid);
@@ -208,6 +212,7 @@ public class ReaderinfoActivity extends BaseActivity implements
 
 	@Override
 	public void refresh(Object... obj) {
+		customprogressdlg.dismiss();
 		Reader reader = (Reader) obj[0];
 		String[] values = { reader.getName(), reader.getRegdate(),
 				reader.getUsername(), reader.getCardbegdate(),

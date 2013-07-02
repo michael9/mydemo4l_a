@@ -1,10 +1,13 @@
 package com.cqvip.moblelib.adapter;
 
+import java.util.HashMap;
 import java.util.List;
 
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -15,6 +18,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cqvip.moblelib.R;
+import com.cqvip.moblelib.activity.CommentActivity;
+import com.cqvip.moblelib.biz.ManagerService;
+import com.cqvip.moblelib.biz.Task;
+import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.Book;
 
 /**
@@ -83,7 +90,7 @@ public class BookAdapter extends BaseAdapter{
 //			TextView u_abstract;//简介
 			TextView isbn;
 			
-			Button btn_item_result_search_share,favorite;
+			Button btn_comment,btn_item_result_search_share,favorite;
 			
 			}
 	
@@ -91,7 +98,6 @@ public class BookAdapter extends BaseAdapter{
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		final ViewHolder holder ;
-		final long id;
 		//更多
 		if (position == this.getCount() - 1) {
 			convertView = LayoutInflater.from(context).inflate(R.layout.moreitemsview, null);
@@ -109,7 +115,8 @@ public class BookAdapter extends BaseAdapter{
 //			holder.u_abstract = (TextView) convertView.findViewById(R.id.re_hot_txt);
 			holder.isbn=(TextView) convertView.findViewById(R.id.re_hot_txt);
 			holder.btn_item_result_search_share=(Button)convertView.findViewById(R.id.btn_item_result_search_share);
-		
+			holder.favorite = (Button)convertView.findViewById(R.id.btn_item_result_search_collect);
+			holder.btn_comment = (Button)convertView.findViewById(R.id.btn_comment);
 			convertView.setTag(holder);
 		}else{
 			holder = (ViewHolder) convertView.getTag();
@@ -125,7 +132,7 @@ public class BookAdapter extends BaseAdapter{
 	        holder.publishyear.setText(time+book.getPublishyear());
 //	        holder.u_abstract.setText(describe+book.getU_abstract());
 	        holder.isbn.setText("ISBN:"+book.getIsbn());
-	        
+	        //分享
 	        holder.btn_item_result_search_share.setTag(position);
 	        holder.btn_item_result_search_share.setOnClickListener(new OnClickListener() {
 				
@@ -146,7 +153,44 @@ public class BookAdapter extends BaseAdapter{
 				
 				}
 			});
-		
+		//评论
+	        holder.btn_comment.setTag(position);
+	        holder.btn_comment.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {		
+					int pos=(Integer)v.getTag();
+					Book book =lists.get(pos);
+					if(book!=null){
+						Intent intent=new Intent(context, CommentActivity.class);						
+						Bundle bundle = new Bundle();
+						bundle.putSerializable("book", book);
+						intent.putExtra("detaiinfo", bundle);
+						context.startActivity(intent);
+					}
+				}
+			});
+	      //收藏
+	        holder.favorite .setTag(position);
+	        holder.favorite .setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {		
+					int pos=(Integer)v.getTag();
+					Book book =lists.get(pos);
+					if(book!=null){
+						HashMap<String, String> map = new HashMap<String, String>();
+						map.put("libid", GlobleData.LIBIRY_ID);
+						map.put("vipuserid", GlobleData.cqvipid);
+						Log.i("收藏",  GlobleData.cqvipid);
+						map.put("keyid", book.getCallno());
+						Log.i("keyid", book.getCallno());
+						map.put("typeid", ""+GlobleData.BOOK_SZ_TYPE);
+						ManagerService.addNewTask(new Task(Task.TASK_LIB_FAVOR, map));
+					}
+				}
+			});
+	        
 		return convertView;
 	}
 

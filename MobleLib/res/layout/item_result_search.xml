@@ -113,7 +113,7 @@
         android:orientation="horizontal" >
         
          <Button
-            android:id="@+id/btn_item_result_search_great"
+            android:id="@+id/btn_great"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
              android:layout_marginRight="12dp"
@@ -122,7 +122,7 @@
             android:text="赞" />
         
          <Button
-            android:id="@+id/btn_item_result_search_buzz"
+            android:id="@+id/btn_comment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="12dp"

@@ -41,7 +41,7 @@ public class HttpClientNewWork {
 	
 	public static final String HTTPMETHOD_POST = "POST";
 	public static final String HTTPMETHOD_GET = "GET";
-	
+
 	private static final int CONNECTION_TIMEOUT = 10000;
 	private static final int SOCKET_TIMEOUT = 10 * 1000;
 	/**
@@ -114,7 +114,6 @@ public class HttpClientNewWork {
 		ConnManagerParams.setTimeout(params, CONNECTION_TIMEOUT);
 		HttpConnectionParams.setConnectionTimeout(params, CONNECTION_TIMEOUT);
 		HttpConnectionParams.setSoTimeout(params, SOCKET_TIMEOUT);
-
 		HttpProtocolParams.setVersion(params, HttpVersion.HTTP_1_1);
 		HttpProtocolParams.setContentCharset(params, HTTP.UTF_8);
 

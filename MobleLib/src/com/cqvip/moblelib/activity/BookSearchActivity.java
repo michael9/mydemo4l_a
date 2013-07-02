@@ -118,6 +118,7 @@ public class BookSearchActivity extends BaseActivity {
 					imm.hideSoftInputFromWindow(et.getWindowToken(), 0);
 					Intent intent = new Intent(context,ResultOnSearchActivity.class) ;
 					startActivity(intent);
+					finish();
 				}
 			});
 		

@@ -44,6 +44,7 @@ public class EBookSearchActivity extends BaseActivity implements IBookManagerAct
 	private int page=1;
 	private EbookAdapter adapter;
 	private RelativeLayout noResult_rl;
+	private View title_bar;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -96,6 +97,18 @@ public class EBookSearchActivity extends BaseActivity implements IBookManagerAct
 				}
 
 			});
+		  
+		  title_bar=findViewById(R.id.head_bar);
+			TextView title = (TextView)title_bar.findViewById(R.id.txt_header);
+			title.setText(R.string.main_ebook);
+			ImageView back = (ImageView)title_bar.findViewById(R.id.img_back_header);
+			back.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					finish();
+				}
+			});
 	}
 	
 	/**
@@ -137,6 +150,7 @@ public class EBookSearchActivity extends BaseActivity implements IBookManagerAct
 	@Override
 	public void refresh(Object... obj) {
 		customProgressDialog.dismiss();
+		hideKeybord();
 		//œ‘ æ
 		int type = (Integer)obj[0];
 		List<EBook> lists = (List<EBook>)obj[1];

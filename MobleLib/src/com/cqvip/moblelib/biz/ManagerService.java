@@ -233,7 +233,7 @@ public class ManagerService extends Service implements Runnable {
 				}
 				refresh.refresh(msg.obj);
 				break;	
-				//获取收藏列表
+				//获取收藏列表19
 			case Task.TASK_GET_FAVOR:
 				MyFavorActivity favor= (MyFavorActivity) ManagerService.getActivityByName("MyFavorActivity");
 				if (msg.arg1 != 0) {
@@ -243,14 +243,14 @@ public class ManagerService extends Service implements Runnable {
 				}
 				favor.refresh(msg.obj);
 				break;	
-				//馆藏图书收藏
+				//馆藏图书收藏20
 			case Task.TASK_LIB_FAVOR:
 				IBookManagerActivity favor_lib = (IBookManagerActivity) ManagerService.getActivityByName("ResultOnSearchActivity");
 				if (msg.arg1 != 0) {
 					doException(5,msg, "ResultOnSearchActivity");
 					break;
 				}
-				favor_lib.refresh(msg.obj);
+				favor_lib.refresh(ResultOnSearchActivity.FAVOR,msg.obj);
 				break;	
 		   }
 	    }
@@ -369,15 +369,21 @@ public class ManagerService extends Service implements Runnable {
 			break;	
 			//获取收藏列表19
 		case Task.TASK_GET_FAVOR:
-			List<ShortBook> getFavor = manager.articledown((String)task.getTaskParam().get("lngid"));
+			List<ShortBook> getFavor = manager.getFavoriteList((String)task.getTaskParam().get("libid"), (String)task.getTaskParam().get("vipuserid"), (String)task.getTaskParam().get("curpage"), (String)task.getTaskParam().get("perpage"));
 			msg.obj = getFavor;
 			break;	
-			
+			//收藏20
+		case Task.TASK_LIB_FAVOR:
+			Result result_addfavor = manager.addFavorite((String)task.getTaskParam().get("libid"), (String)task.getTaskParam().get("vipuserid"), (String)task.getTaskParam().get("keyid"), (String)task.getTaskParam().get("typeid"));
+			msg.obj = result_addfavor;
+			break;				
 			}
 		} catch (BookException e) {
+			System.out.println(e.getMessage());
 			msg.arg1 = -100;
 		} catch (Exception e) {
 			msg.arg1 = -100;
+			System.out.println(e.getMessage());
 		}finally{
 			// 发送更新UI
 			hander.sendMessage(msg);

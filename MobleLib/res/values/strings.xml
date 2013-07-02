@@ -11,7 +11,7 @@
     <string name="main_readingguide">推荐阅读</string>
     <string name="main_bookcomment"></string><!--参考咨询  -->
     <string name="main_ebookstore">个人中心</string>
-    <string name="main_notice">馆内公告</string>
+    <string name="main_notice">馆内公告</string>  
     <string name="main_borrow">借阅管理</string>
     <string name="main_order">书友圈</string>
     <string name="guide_needknow">入馆须知</string>
@@ -83,8 +83,8 @@
     <string name="title_activity_result_on_search">ResultOnSearchActivity</string>
     <string name="title_activity_detail_book">DetailBookActivity</string>
     
-    <string name="title_section1">图书</string>
-    <string name="title_section2">期刊</string>
+    <string name="title_section1">中刊</string>
+    <string name="title_section2">深圳馆藏图书</string>
     <string name="title_section3">文档</string>
     <string name="title_section4">多媒体</string>
     <string name="title_tips">提示</string>
@@ -100,6 +100,7 @@
     <string name="no_result">没有找到相关结果\n试试别的关键字吧!</string>
     <string name="no_borrow">您没有借阅书籍信息!</string>
 
+   <string name="book_detail">详细</string>
     
     <!-- 异常提示 -->
 	<string name="loginfail">登录失败</string>
