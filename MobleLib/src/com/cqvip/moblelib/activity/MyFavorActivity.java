@@ -7,13 +7,12 @@ import java.util.Locale;
 import java.util.Map;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.PagerTitleStrip;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -22,27 +21,22 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.cqvip.moblelib.R;
-import com.cqvip.moblelib.adapter.BookAdapter;
 import com.cqvip.moblelib.base.IBookManagerActivity;
 import com.cqvip.moblelib.biz.ManagerService;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
-import com.cqvip.moblelib.model.Book;
 import com.cqvip.moblelib.model.Favorite;
 import com.cqvip.moblelib.model.Result;
-import com.cqvip.moblelib.model.ShortBook;
 import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.utils.Tool;
 
@@ -84,12 +78,12 @@ public class MyFavorActivity extends FragmentActivity implements
 		context = this;
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the app.
-		// mSectionsPagerAdapter = new SectionsPagerAdapter(
-		// getSupportFragmentManager());
+		mSectionsPagerAdapter = new SectionsPagerAdapter(
+				getSupportFragmentManager());
 
 		// Set up the ViewPager with the sections adapter.
 		mViewPager = (ViewPager) findViewById(R.id.pager);
-		// mViewPager.setAdapter(mSectionsPagerAdapter);
+		mViewPager.setAdapter(mSectionsPagerAdapter);
 		// 获取数据
 		ManagerService.allActivity.add(this);
 		getfavorlist();
@@ -134,6 +128,20 @@ public class MyFavorActivity extends FragmentActivity implements
 			args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, position);
 			fragment.setArguments(args);
 			return fragment;
+		}
+
+		/**
+		 * 重写此方法为了使notifyDataSetChanged有效 Called when the host view is
+		 * attempting to determine if an item's position has changed. Returns
+		 * POSITION_UNCHANGED if the position of the given item has not changed
+		 * or POSITION_NONE if the item is no longer present in the adapter. The
+		 * default implementation assumes that items will never change position
+		 * and always returns POSITION_UNCHANGED.
+		 */
+		@Override
+		public int getItemPosition(Object object) {
+			// TODO Auto-generated method stub
+			return POSITION_NONE;
 		}
 
 		@Override
@@ -252,6 +260,7 @@ public class MyFavorActivity extends FragmentActivity implements
 				map.put("typeid", "" + favorite.getTypeid());
 				ManagerService
 						.addNewTask(new Task(Task.TASK_CANCEL_FAVOR, map));
+				customProgressDialog.show();
 			}
 			return false;
 		}
@@ -469,15 +478,7 @@ public class MyFavorActivity extends FragmentActivity implements
 				arrayList_sz.clear();
 				arrayList_zk = arrayLists.get(GlobleData.BOOK_ZK_TYPE);
 				arrayList_sz = arrayLists.get(GlobleData.BOOK_SZ_TYPE);
-
-				mSectionsPagerAdapter = new SectionsPagerAdapter(
-						getSupportFragmentManager());
-				mViewPager.setAdapter(mSectionsPagerAdapter);
-				// adapter_zk.notifyDataSetChanged();
-				// adapter_sz.notifyDataSetChanged();
-				// adapter_zk.refresh();
-				// adapter_sz.refresh();
-				// getFragmentManager().get
+				mSectionsPagerAdapter.notifyDataSetChanged();
 			}
 		} else if (temp == CANCELFAVOR) {
 			Result res = (Result) obj[1];

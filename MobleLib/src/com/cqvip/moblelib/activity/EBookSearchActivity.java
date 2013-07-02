@@ -28,6 +28,7 @@ import com.cqvip.moblelib.biz.ManagerService;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.model.Book;
 import com.cqvip.moblelib.model.EBook;
+import com.cqvip.moblelib.model.Result;
 import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.utils.Tool;
 
@@ -35,6 +36,7 @@ public class EBookSearchActivity extends BaseActivity implements IBookManagerAct
 	
 	public static final int GETFIRSTPAGE = 1;
 	public static final int GETNEXTPAGE = 2;
+	public static final int FAVOR = 3;
 	public static final int DEFAULT_COUNT = 10;
 	private EditText edit;
 	private ImageView imgsearch;
@@ -153,6 +155,18 @@ public class EBookSearchActivity extends BaseActivity implements IBookManagerAct
 		hideKeybord();
 		//显示
 		int type = (Integer)obj[0];
+		
+		//判断收藏是否成功
+		 if(type == FAVOR){
+			 Result res = (Result) obj[1];
+			 if (res.getSuccess()) {
+						Tool.ShowMessages(context, "收藏成功");
+			}else{
+						Tool.ShowMessages(context, "收藏失败");
+						}
+						return;
+			}
+		
 		List<EBook> lists = (List<EBook>)obj[1];
 		if(type == GETFIRSTPAGE ){
 		if(lists!=null&&!lists.isEmpty()){
