@@ -108,4 +108,10 @@
     <string name="renewfail">续借失败</string>
     <string name="modifyfail">修改失败</string>
     <string name="favorfail">收藏失败</string>
+    
+      <string name="clear_cache_menu">Clear Caches</string>
+    <string name="clear_cache_complete_toast">Caches have been cleared</string>
+    <string name="imageview_description">Image Thumbnail</string>
+    <string name="no_network_connection_toast">No network connection found</string>
+    
 </resources>

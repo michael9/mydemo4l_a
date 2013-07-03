@@ -119,6 +119,7 @@
              android:layout_marginRight="12dp"
             android:background="@null"
             android:focusable="false"
+            android:visibility="gone"
             android:text="赞" />
         
          <Button
