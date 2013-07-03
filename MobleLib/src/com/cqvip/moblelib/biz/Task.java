@@ -24,7 +24,9 @@ public class Task {
 	public static final int TASK_EBOOK_DOWN= 17;//查询下载地址
 	public static final int TASK_REFRESH= 18;//更新
 	public static final int TASK_GET_FAVOR= 19;//获取收藏列表
-	public static final int TASK_LIB_FAVOR= 20;//图书收藏
+	public static final int TASK_LIB_FAVOR= 20;//馆藏图书收藏
+	public static final int TASK_CANCEL_FAVOR= 21;//取消收藏
+	public static final int TASK_EBOOK_FAVOR= 22;//电子图书收藏
 	
 	
 	public Task(int id, Map param) {

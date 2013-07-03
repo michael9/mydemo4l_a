@@ -242,7 +242,7 @@ public class ManagerService extends Service implements Runnable {
 					msg.arg1 = 0;
 					break;
 				}
-				favor.refresh(msg.obj);
+				favor.refresh(MyFavorActivity.FAVOR,msg.obj);
 				break;	
 				//馆藏图书收藏20
 			case Task.TASK_LIB_FAVOR:
@@ -252,6 +252,25 @@ public class ManagerService extends Service implements Runnable {
 					break;
 				}
 				favor_lib.refresh(ResultOnSearchActivity.FAVOR,msg.obj);
+				break;	
+				//取消收藏21
+			case Task.TASK_CANCEL_FAVOR:
+				MyFavorActivity favor_cancel = (MyFavorActivity) ManagerService.getActivityByName("MyFavorActivity");
+				if (msg.arg1 != 0) {
+					favor_cancel.onError(6);
+					msg.arg1 = 0;
+					break;
+				}
+				favor_cancel.refresh(MyFavorActivity.CANCELFAVOR,msg.obj);
+				break;	
+				//电子图书收藏22
+			case Task.TASK_EBOOK_FAVOR:
+				IBookManagerActivity favor_ebook = (IBookManagerActivity) ManagerService.getActivityByName("EBookSearchActivity");
+				if (msg.arg1 != 0) {
+					doException(5,msg, "EBookSearchActivity");
+					break;
+				}
+				favor_ebook.refresh(ResultOnSearchActivity.FAVOR,msg.obj);
 				break;	
 		   }
 	    }
@@ -373,11 +392,21 @@ public class ManagerService extends Service implements Runnable {
 			Map<Integer,List<Favorite>> getFavor = manager.getFavoriteList((String)task.getTaskParam().get("libid"), (String)task.getTaskParam().get("vipuserid"), (String)task.getTaskParam().get("curpage"), (String)task.getTaskParam().get("perpage"));
 			msg.obj = getFavor;
 			break;	
-			//收藏20
+			//馆藏图书收藏20
 		case Task.TASK_LIB_FAVOR:
 			Result result_addfavor = manager.addFavorite((String)task.getTaskParam().get("libid"), (String)task.getTaskParam().get("vipuserid"), (String)task.getTaskParam().get("keyid"), (String)task.getTaskParam().get("typeid"));
 			msg.obj = result_addfavor;
-			break;				
+			break;		
+			//取消收藏21
+		case Task.TASK_CANCEL_FAVOR:
+			Result result_cancelfavor = manager.destroyFavorite((String)task.getTaskParam().get("libid"), (String)task.getTaskParam().get("vipuserid"), (String)task.getTaskParam().get("keyid"), (String)task.getTaskParam().get("typeid"));
+			msg.obj = result_cancelfavor;
+			break;	
+			//电子书收藏22
+		case Task.TASK_EBOOK_FAVOR:
+			Result result_addebookfavor = manager.addFavorite((String)task.getTaskParam().get("libid"), (String)task.getTaskParam().get("vipuserid"), (String)task.getTaskParam().get("keyid"), (String)task.getTaskParam().get("typeid"));
+			msg.obj = result_addebookfavor;
+			break;	
 			}
 		} catch (BookException e) {
 			System.out.println(e.getMessage());

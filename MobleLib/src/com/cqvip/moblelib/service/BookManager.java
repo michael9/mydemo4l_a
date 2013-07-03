@@ -325,7 +325,7 @@ public class BookManager {
 	}
 	
 	/**
-	 * 删除收藏
+	 * 取消收藏
 	 * @param libid //图书馆id
 	 * @param vipuserid //vip 用户id
 	 * @param keyid //索书号

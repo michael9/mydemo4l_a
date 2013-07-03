@@ -2,16 +2,17 @@ package com.cqvip.moblelib.activity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.PagerTitleStrip;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -20,32 +21,34 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.cqvip.moblelib.R;
-import com.cqvip.moblelib.adapter.BookAdapter;
 import com.cqvip.moblelib.base.IBookManagerActivity;
 import com.cqvip.moblelib.biz.ManagerService;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
-import com.cqvip.moblelib.model.Book;
-import com.cqvip.moblelib.model.ShortBook;
+import com.cqvip.moblelib.model.Favorite;
+import com.cqvip.moblelib.model.Result;
 import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.utils.Tool;
 
 public class MyFavorActivity extends FragmentActivity implements
 		IBookManagerActivity {
+	public static final int FAVOR = 1;
+	public static final int CANCELFAVOR = 2;
 
 	private String curpage = "1";// 第几页
-	private String perpage = "20";// 每页显示条数
+	private String perpage = "10";// 每页显示条数
+
+	MyGridViewAdapter adapter_zk, adapter_sz;
 	/**
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide
 	 * fragments for each of the sections. We use a
@@ -63,8 +66,9 @@ public class MyFavorActivity extends FragmentActivity implements
 	PagerTitleStrip mPagerTitleStrip;
 	Context context;
 	protected CustomProgressDialog customProgressDialog;
-	ArrayList<ArrayList<Object>> arrayLists = new ArrayList<ArrayList<Object>>();
-	ArrayList<Book> alArrayList;
+	Map<Integer, List<Favorite>> arrayLists;
+	List<Favorite> arrayList_zk = new ArrayList<Favorite>();
+	List<Favorite> arrayList_sz = new ArrayList<Favorite>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -81,13 +85,18 @@ public class MyFavorActivity extends FragmentActivity implements
 		mViewPager = (ViewPager) findViewById(R.id.pager);
 		mViewPager.setAdapter(mSectionsPagerAdapter);
 		// 获取数据
-//		ManagerService.allActivity.add(this);
-//		HashMap map = new HashMap();
-//		map.put("libid", GlobleData.LIBIRY_ID);
-//		map.put("vipuserid", GlobleData.cqvipid);
-//		map.put("curpage", curpage);
-//		map.put("perpage", perpage);
-//		ManagerService.addNewTask(new Task(Task.TASK_GET_FAVOR, map));
+		ManagerService.allActivity.add(this);
+		getfavorlist();
+	}
+
+	private void getfavorlist() {
+		HashMap map = new HashMap();
+		map.put("libid", GlobleData.LIBIRY_ID);
+		Log.i("MyFavorActivity_cqvipid", "" + GlobleData.cqvipid);
+		map.put("vipuserid", GlobleData.cqvipid);
+		map.put("curpage", curpage);
+		map.put("perpage", perpage);
+		ManagerService.addNewTask(new Task(Task.TASK_GET_FAVOR, map));
 	}
 
 	@Override
@@ -101,6 +110,7 @@ public class MyFavorActivity extends FragmentActivity implements
 	 * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
 	 * one of the sections/tabs/pages.
 	 */
+
 	public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
 		public SectionsPagerAdapter(FragmentManager fm) {
@@ -109,6 +119,7 @@ public class MyFavorActivity extends FragmentActivity implements
 
 		@Override
 		public Fragment getItem(int position) {
+			Log.i("getItem", "getItem");
 			// getItem is called to instantiate the fragment for the given page.
 			// Return a DummySectionFragment (defined as a static inner class
 			// below) with the page number as its lone argument.
@@ -119,6 +130,20 @@ public class MyFavorActivity extends FragmentActivity implements
 			return fragment;
 		}
 
+		/**
+		 * 重写此方法为了使notifyDataSetChanged有效 Called when the host view is
+		 * attempting to determine if an item's position has changed. Returns
+		 * POSITION_UNCHANGED if the position of the given item has not changed
+		 * or POSITION_NONE if the item is no longer present in the adapter. The
+		 * default implementation assumes that items will never change position
+		 * and always returns POSITION_UNCHANGED.
+		 */
+		@Override
+		public int getItemPosition(Object object) {
+			// TODO Auto-generated method stub
+			return POSITION_NONE;
+		}
+
 		@Override
 		public int getCount() {
 			return 2;
@@ -126,7 +151,12 @@ public class MyFavorActivity extends FragmentActivity implements
 
 		@Override
 		public CharSequence getPageTitle(int position) {
+			Log.i("getPageTitle", "getPageTitle");
 			Locale l = Locale.getDefault();
+			if (adapter_zk != null && adapter_sz != null) {
+				adapter_zk.notifyDataSetChanged();
+				adapter_sz.notifyDataSetChanged();
+			}
 			switch (position) {
 			case 0:
 				return getString(R.string.title_section1).toUpperCase(l);
@@ -141,11 +171,9 @@ public class MyFavorActivity extends FragmentActivity implements
 	 * A dummy fragment representing a section of the app, but that simply
 	 * displays dummy text.
 	 */
-	ListView listView;
-	MyGridViewAdapter adapter;
 
 	public class DummySectionFragment extends Fragment implements
-			OnItemClickListener {
+			OnItemClickListener, OnItemLongClickListener {
 		/**
 		 * The fragment argument representing the section number for this
 		 * fragment.
@@ -156,21 +184,29 @@ public class MyFavorActivity extends FragmentActivity implements
 			Log.i("MyFavorActivity", "DummySectionFragment");
 		}
 
+		List<Favorite> arrayList_temp;
+
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
 			Log.i("MyFavorActivity", "onCreateView");
 			View rootView = inflater.inflate(R.layout.myfavor_fragment,
 					container, false);
-			// TextView dummyTextView = (TextView) rootView
-			// .findViewById(R.id.section_label);
-			// dummyTextView.setText(Integer.toString(getArguments().getInt(
-			// ARG_SECTION_NUMBER)));
-			listView = (ListView) rootView.findViewById(R.id.favorlist);
+			ListView listView = (ListView) rootView
+					.findViewById(R.id.favorlist);
+			int i = getArguments().getInt(ARG_SECTION_NUMBER);
+			if (i == 0) {
+				arrayList_temp = arrayList_zk;
+				adapter_zk = new MyGridViewAdapter(getActivity(), arrayList_zk);
+				listView.setAdapter(adapter_zk);
+			} else if (i == 1) {
+				arrayList_temp = arrayList_sz;
+				adapter_sz = new MyGridViewAdapter(getActivity(), arrayList_sz);
+				listView.setAdapter(adapter_sz);
+			}
+
 			listView.setOnItemClickListener((OnItemClickListener) this);
-			adapter = new MyGridViewAdapter(context, getArguments().getInt(
-					ARG_SECTION_NUMBER));
-			// listView.setAdapter(adapter);
+			listView.setOnItemLongClickListener(this);
 			return rootView;
 		}
 
@@ -209,6 +245,25 @@ public class MyFavorActivity extends FragmentActivity implements
 			// // startActivityForResult(_intent, 1);
 			// }
 		}
+
+		@Override
+		public boolean onItemLongClick(AdapterView<?> parent, View view,
+				int position, long id) {
+			Favorite favorite = arrayList_temp.get(position);
+			if (favorite != null) {
+				HashMap<String, String> map = new HashMap<String, String>();
+				map.put("libid", GlobleData.LIBIRY_ID);
+				map.put("vipuserid", GlobleData.cqvipid);
+				Log.i("删除收藏", GlobleData.cqvipid);
+				map.put("keyid", favorite.getFavoritekeyid());
+				Log.i("keyid", favorite.getFavoritekeyid());
+				map.put("typeid", "" + favorite.getTypeid());
+				ManagerService
+						.addNewTask(new Task(Task.TASK_CANCEL_FAVOR, map));
+				customProgressDialog.show();
+			}
+			return false;
+		}
 	}
 
 	static class ViewHolder {
@@ -228,28 +283,40 @@ public class MyFavorActivity extends FragmentActivity implements
 
 	class MyGridViewAdapter extends BaseAdapter {
 		private Context myContext;
+		private List<Favorite> arrayList;
 
-		public MyGridViewAdapter(Context context, int a) {
+		public MyGridViewAdapter(Context context, List<Favorite> list) {
 			this.myContext = context;
+			this.arrayList = list;
 			Log.i("MyFavorActivity", "MyGridViewAdapter");
 		}
 
 		@Override
 		public int getCount() {
-			// TODO Auto-generated method stub
-			return 14;
+			Log.i("getCount", "getCount");
+			if (arrayList != null) {
+				return arrayList.size() + 1;
+			}
+			return 1;
 		}
 
 		@Override
 		public Object getItem(int position) {
 			// TODO Auto-generated method stub
-			return null;
+			return arrayList.get(position);
 		}
 
 		@Override
 		public long getItemId(int position) {
-			// TODO Auto-generated method stub
-			return position;
+			if ((this.getCount() - 1) > 0 && position < (this.getCount() - 1)) {
+				return position;
+			} else {
+				return -2;
+			}
+		}
+
+		public void refresh() {
+			notifyDataSetChanged();
 		}
 
 		// @Override
@@ -268,16 +335,17 @@ public class MyFavorActivity extends FragmentActivity implements
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			final ViewHolder holder;
+
 			// 更多
 			if (position == this.getCount() - 1) {
-				convertView = LayoutInflater.from(context).inflate(
+				convertView = LayoutInflater.from(myContext).inflate(
 						R.layout.moreitemsview, null);
 				return convertView;
 			}
 			if (convertView == null
 					|| convertView.findViewById(R.id.linemore) != null) {
-				convertView = LayoutInflater.from(context).inflate(
-						R.layout.myfavor_fragmen_item, null);
+				convertView = LayoutInflater.from(myContext).inflate(
+						R.layout.item_result_search, null);
 				holder = new ViewHolder();
 
 				holder.title = (TextView) convertView
@@ -311,66 +379,67 @@ public class MyFavorActivity extends FragmentActivity implements
 			String time = context.getResources().getString(R.string.item_time);
 			String describe = context.getResources().getString(
 					R.string.item_describe);
-			Book book = alArrayList.get(position);
-			holder.title.setText(book.getTitle());
-			holder.author.setText(author + book.getAuthor());
-			holder.publisher.setText(publish + book.getPublisher());
-			holder.publishyear.setText(time + book.getPublishyear());
-			holder.isbn.setText("ISBN:" + book.getIsbn());
+			Favorite favorite = arrayList.get(position);
+			holder.title.setText(favorite.getTitle());
+			holder.author.setText(author + favorite.getWriter());
+			holder.publisher.setText(publish + favorite.getOrgan());
+			holder.publishyear.setText(time + favorite.getYears());
+			holder.isbn.setText("ISBN:" + favorite.getLngid());
 
-			// 分享
-			holder.btn_item_result_search_share.setTag(position);
-			holder.btn_item_result_search_share
-					.setOnClickListener(new OnClickListener() {
-
-						@Override
-						public void onClick(View v) {
-
-							int pos = (Integer) v.getTag();
-							Intent intent = new Intent(Intent.ACTION_SEND);
-							intent.setType("image/*");
-							intent.putExtra(Intent.EXTRA_SUBJECT, "图书分享");
-							intent.putExtra(
-									Intent.EXTRA_TEXT,
-									("好书分享:"
-											+ (alArrayList.get(pos)).getTitle()
-											+ "\r\n作者:"
-											+ (alArrayList.get(pos))
-													.getAuthor()
-											+ "\r\n出版社:"
-											+ (alArrayList.get(pos))
-													.getPublisher()
-											+ "\r\n出版日期:"
-											+ (alArrayList.get(pos))
-													.getPublishyear()
-											+ "\r\nISBN:" + (alArrayList
-											.get(pos)).getIsbn()));
-							intent.putExtra(
-									Intent.EXTRA_STREAM,
-									Uri.decode("http://www.szlglib.com.cn/images/logo.jpg")); // 分享图片"http://www.szlglib.com.cn/images/logo.jpg"
-							context.startActivity(Intent.createChooser(intent,
-									"分享到"));
-
-						}
-					});
-			// 评论
-			holder.btn_comment.setTag(position);
-			holder.btn_comment.setOnClickListener(new OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					int pos = (Integer) v.getTag();
-					Book book = alArrayList.get(pos);
-					if (book != null) {
-						Intent intent = new Intent(context,
-								CommentActivity.class);
-						Bundle bundle = new Bundle();
-						bundle.putSerializable("book", book);
-						intent.putExtra("detaiinfo", bundle);
-						context.startActivity(intent);
-					}
-				}
-			});
+			// // 分享
+			// holder.btn_item_result_search_share.setTag(position);
+			// holder.btn_item_result_search_share
+			// .setOnClickListener(new OnClickListener() {
+			//
+			// @Override
+			// public void onClick(View v) {
+			//
+			// int pos = (Integer) v.getTag();
+			// Intent intent = new Intent(Intent.ACTION_SEND);
+			// intent.setType("image/*");
+			// intent.putExtra(Intent.EXTRA_SUBJECT, "图书分享");
+			// intent.putExtra(
+			// Intent.EXTRA_TEXT,
+			// ("好书分享:"
+			// + (alArrayList.get(pos)).getTitle()
+			// + "\r\n作者:"
+			// + (alArrayList.get(pos))
+			// .getAuthor()
+			// + "\r\n出版社:"
+			// + (alArrayList.get(pos))
+			// .getPublisher()
+			// + "\r\n出版日期:"
+			// + (alArrayList.get(pos))
+			// .getPublishyear()
+			// + "\r\nISBN:" + (alArrayList
+			// .get(pos)).getIsbn()));
+			// intent.putExtra(
+			// Intent.EXTRA_STREAM,
+			// Uri.decode("http://www.szlglib.com.cn/images/logo.jpg")); //
+			// 分享图片"http://www.szlglib.com.cn/images/logo.jpg"
+			// context.startActivity(Intent.createChooser(intent,
+			// "分享到"));
+			//
+			// }
+			// });
+			// // 评论
+			// holder.btn_comment.setTag(position);
+			// holder.btn_comment.setOnClickListener(new OnClickListener() {
+			//
+			// @Override
+			// public void onClick(View v) {
+			// int pos = (Integer) v.getTag();
+			// Book book = alArrayList.get(pos);
+			// if (book != null) {
+			// Intent intent = new Intent(context,
+			// CommentActivity.class);
+			// Bundle bundle = new Bundle();
+			// bundle.putSerializable("book", book);
+			// intent.putExtra("detaiinfo", bundle);
+			// context.startActivity(intent);
+			// }
+			// }
+			// });
 
 			return convertView;
 		}
@@ -400,9 +469,25 @@ public class MyFavorActivity extends FragmentActivity implements
 	@Override
 	public void refresh(Object... obj) {
 		customProgressDialog.dismiss();
-		alArrayList = (ArrayList<Book>) obj[0];
-		if (alArrayList != null && !alArrayList.isEmpty()) {
-			listView.setAdapter(adapter);
+		Log.i("MyFavorActivity_refresh", "refresh");
+		int temp = (Integer) obj[0];
+		if (temp == FAVOR) {
+			arrayLists = (Map<Integer, List<Favorite>>) obj[1];
+			if (arrayLists != null && !arrayLists.isEmpty()) {
+				arrayList_zk.clear();
+				arrayList_sz.clear();
+				arrayList_zk = arrayLists.get(GlobleData.BOOK_ZK_TYPE);
+				arrayList_sz = arrayLists.get(GlobleData.BOOK_SZ_TYPE);
+				mSectionsPagerAdapter.notifyDataSetChanged();
+			}
+		} else if (temp == CANCELFAVOR) {
+			Result res = (Result) obj[1];
+			if (res.getSuccess()) {
+				Tool.ShowMessages(context, "取消收藏成功");
+				getfavorlist();
+			} else {
+				Tool.ShowMessages(context, "取消收藏失败");
+			}
 		}
 	}
 
@@ -412,6 +497,9 @@ public class MyFavorActivity extends FragmentActivity implements
 		}
 		if (a == 2) {// 加载失败
 			Tool.ShowMessages(this, getResources().getString(R.string.loadfail));
+		} else if (a == 6) {
+			Tool.ShowMessages(this,
+					getResources().getString(R.string.cancelfavorfail));
 		}
 	}
 }

@@ -1,10 +1,12 @@
 package com.cqvip.moblelib.adapter;
 
+import java.util.HashMap;
 import java.util.List;
 
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -16,6 +18,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.cqvip.moblelib.R;
+import com.cqvip.moblelib.biz.ManagerService;
+import com.cqvip.moblelib.biz.Task;
+import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.Book;
 import com.cqvip.moblelib.model.EBook;
 
@@ -79,9 +84,8 @@ public class EbookAdapter extends BaseAdapter{
 			ImageView img;//时间图片 不用修改
 			TextView u_page;//页数
 			TextView type;//格式
-			Button favorite;//搜藏
 			
-			Button btn_item_result_search_share;
+			Button btn_comment,btn_item_result_search_share,favorite;
 			
 			}
 	
@@ -119,7 +123,7 @@ public class EbookAdapter extends BaseAdapter{
 		   String describe = context.getResources().getString(R.string.ebook_abstrac);
 		   String type = context.getResources().getString(R.string.ebook_type);
 		   
-			EBook book = lists.get(position);
+			final EBook book = lists.get(position);
 	        holder.title.setText(book.getTitle_c());
 	        holder.author.setText(author+book.getWriter());
 	        holder.publisher.setText(from+book.getName_c()+","+book.getYears()+","+"第"+book.getNum()+"期");
@@ -146,6 +150,26 @@ public class EbookAdapter extends BaseAdapter{
 				intent.putExtra(Intent.EXTRA_STREAM, Uri.decode("http://www.szlglib.com.cn/images/logo.jpg")); //分享图片"http://www.szlglib.com.cn/images/logo.jpg"
 				context.startActivity(Intent.createChooser(intent, "分享到"));  
 				
+				}
+			});
+	        //收藏
+	       // holder.favorite .setTag(position);
+	        holder.favorite .setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {		
+					//int pos=(Integer)v.getTag();
+					//Book book =lists.get(pos);
+					if(book!=null){
+						HashMap<String, String> map = new HashMap<String, String>();
+						map.put("libid", GlobleData.LIBIRY_ID);
+						map.put("vipuserid", GlobleData.cqvipid);
+						Log.i("收藏",  GlobleData.cqvipid);
+						map.put("keyid", book.getLngid());
+						Log.i("keyid", book.getLngid());
+						map.put("typeid", ""+GlobleData.BOOK_ZK_TYPE);
+						ManagerService.addNewTask(new Task(Task.TASK_EBOOK_FAVOR, map));
+					}
 				}
 			});
 		
