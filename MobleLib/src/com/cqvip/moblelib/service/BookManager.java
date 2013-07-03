@@ -248,7 +248,7 @@ public class BookManager {
 		params.add("title", key);
 		params.add("curpage", page+"");//当前页数
 		params.add("perpage",count+"" );//条数
-		String result = http.requestUrl(getBaseURL()+"/zk/searchtemp.aspx", getBasepost(), params);
+		String result = http.requestUrl(getBaseURL()+"/zk/search.aspx", getBasepost(), params);
 		return EBook.formList(result);
 		
 	}
@@ -261,7 +261,7 @@ public class BookManager {
 	public EbookDetail queryEBookDetail(String lngid) throws BookException{
 		BookParameters params = new BookParameters();
 		params.add("lngid", lngid);
-		String result = http.requestUrl(getBaseURL()+"/zk/detailtemp.aspx", getBasepost(), params);
+		String result = http.requestUrl(getBaseURL()+"/zk/detail.aspx", getBasepost(), params);
 		return EbookDetail.formObject(result);
 	}
 	/**
@@ -273,7 +273,7 @@ public class BookManager {
 	public List<ShortBook> articledown(String lngid) throws BookException{
 		BookParameters params = new BookParameters();
 		params.add("lngid", lngid);
-		String result = http.requestUrl(getBaseURL()+"/zk/articledowntemp.aspx", getBasepost(), params);
+		String result = http.requestUrl(getBaseURL()+"/zk/articledown.aspx", getBasepost(), params);
 		return ShortBook.formList(Task.TASK_EBOOK_DOWN, result);
 	}
 	
@@ -283,7 +283,7 @@ public class BookManager {
 	 * @throws BookException
 	 */
 	public ShortBook getVerionCode() throws BookException{
-		String result = http.requestUrl(getBaseURL()+"/library/base/versiontemp.aspx", getBasepost(),null);
+		String result = http.requestUrl(getBaseURL()+"/library/base/version.aspx", getBasepost(),null);
 		return new ShortBook(Task.TASK_REFRESH, result);
 	}
 	

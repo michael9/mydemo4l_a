@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.cqvip.mobelib.imgutils.ImageFetcher;
 import com.cqvip.moblelib.R;
 import com.cqvip.moblelib.biz.ManagerService;
 import com.cqvip.moblelib.biz.Task;
@@ -27,12 +28,18 @@ import com.cqvip.moblelib.model.EBook;
 public class EbookAdapter extends BaseAdapter{
 	private Context context;
 	private List<EBook> lists;
+	private ImageFetcher fetch;
 	public EbookAdapter(Context context){
 		this.context = context;
 	}
 	public EbookAdapter(Context context,List<EBook> lists){
 		this.context = context;
 		this.lists = lists;
+	}
+	public EbookAdapter(Context context,List<EBook> lists,ImageFetcher fetch){
+		this.context = context;
+		this.lists = lists;
+		this.fetch = fetch;
 	}
 	public List<EBook> getLists(){
 		return lists;
@@ -133,7 +140,7 @@ public class EbookAdapter extends BaseAdapter{
 	        holder.l_abst.setVisibility(View.VISIBLE);
 	        holder.u_abstract.setText(describe+book.getRemark_c());
 	      //  holder.favorite.setVisibility(View.VISIBLE);
-	      
+	        fetch.loadImage(book.getImgurl(), holder.img);
 	        holder.btn_item_result_search_share.setTag(position);
 	        holder.btn_item_result_search_share.setOnClickListener(new OnClickListener() {
 				

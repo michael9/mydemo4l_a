@@ -38,8 +38,13 @@ public class EBook implements Serializable{
 		    private String endpage;
 		    private int pagecount;
 		    private long pdfsize;
-		    
-		    public String getLngid() {
+		    private String imgurl;
+		    private boolean isfavorite;
+		    public String getImgurl() {
+				return imgurl;
+			}
+
+			public String getLngid() {
 				return lngid;
 			}
 
@@ -141,6 +146,8 @@ public class EBook implements Serializable{
 		    				endpage = json.getString("endpage");
 		    				pagecount = getInt("pagecount", json);
 		    				pdfsize = getInt("pdfsize",json);
+		    				imgurl = json.getString("imgurl");
+		    				isfavorite = json.getBoolean("isfavorite");
 		    			} catch (JSONException e) {
 		    				throw new BookException(e);
 		    			}
@@ -185,7 +192,11 @@ public class EBook implements Serializable{
 		        }
 		        return Integer.parseInt(str);
 		    }
-		    
+
+			public boolean isIsfavorite() {
+				return isfavorite;
+			}
+
 			@Override
 			public String toString() {
 				return "EBook [lngid=" + lngid + ", gch=" + gch + ", years="
@@ -197,8 +208,9 @@ public class EBook implements Serializable{
 						+ remark_e + ", classtype=" + classtype + ", writer="
 						+ writer + ", organ=" + organ + ", beginpage="
 						+ beginpage + ", endpage=" + endpage + ", pagecount="
-						+ pagecount + ", pdfsize=" + pdfsize + "]";
+						+ pagecount + ", pdfsize=" + pdfsize + ", imgurl="
+						+ imgurl + ", isfavorite=" + isfavorite + "]";
 			}
-	
+
 			
 }

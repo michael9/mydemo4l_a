@@ -3,7 +3,7 @@ package com.cqvip.moblelib.activity;
 import java.util.HashMap;
 import java.util.List;
 
-import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,16 +11,19 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.cqvip.mobelib.imgutils.ImageFetcher;
+import com.cqvip.mobelib.imgutils.ImageCache.ImageCacheParams;
 import com.cqvip.moblelib.R;
 import com.cqvip.moblelib.base.IBookManagerActivity;
 import com.cqvip.moblelib.biz.ManagerService;
 import com.cqvip.moblelib.biz.Task;
-import com.cqvip.moblelib.model.BookLoc;
+import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.EBook;
 import com.cqvip.moblelib.model.ShortBook;
 
 public class EbookDetailActivity extends BaseActivity implements IBookManagerActivity {
 
+	private Context context;
 	private EBook dBook;
 	private TextView author,from,type,page,title,content;
 	private String download_url = null;
@@ -30,11 +33,13 @@ public class EbookDetailActivity extends BaseActivity implements IBookManagerAct
 					btn_ebook_detail_collect,
 					btn_ebook_detail_download;
 	private View title_bar;
+	private ImageView img_book;
+	private ImageFetcher mImageFetcher;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_ebook_detail);
-		
+		context = this;
 		Bundle bundle = getIntent().getBundleExtra("detaiinfo");
 		dBook = (EBook)bundle.getSerializable("ebook");
 		author = (TextView) findViewById(R.id.ebook_author_txt);
@@ -43,12 +48,12 @@ public class EbookDetailActivity extends BaseActivity implements IBookManagerAct
 		page =(TextView)findViewById(R.id.ebook_page_txt);
 		title =(TextView)findViewById(R.id.ebook_title_txt);
 		content =(TextView)findViewById(R.id.ebook_content_abst);
-		
+		img_book = (ImageView)findViewById(R.id.ebook_icon_img);
 //		share =(Button)findViewById(R.id.ebook_share_txt);
 //		favor =(Button)findViewById(R.id.ebook_favorite_txt);
 //		comment =(Button)findViewById(R.id.ebook_comment_txt);
 //		download =(Button)findViewById(R.id.ebook_down_txt);
-		
+	
 		btn_ebook_detail_great=(Button)findViewById(R.id.btn_ebook_detail_great);
 		btn_ebook_detail_buzz=(Button)findViewById(R.id.btn_ebook_detail_buzz);
 		btn_ebook_detail_share=(Button)findViewById(R.id.btn_ebook_detail_share);
@@ -64,8 +69,14 @@ public class EbookDetailActivity extends BaseActivity implements IBookManagerAct
 		   String page1 =  getResources().getString(R.string.ebook_page);
 		   String describe1 = getResources().getString(R.string.ebook_abstrac);
 		   String type1 = getResources().getString(R.string.ebook_type);
-		
-		
+	   ImageCacheParams cacheParams = new ImageCacheParams(context, GlobleData.IMAGE_CACHE_DIR);
+       cacheParams.setMemCacheSizePercent(0.125f); // Set memory cache to 25% of app memory
+	   mImageFetcher = new ImageFetcher(context, getResources().getDimensionPixelSize(R.dimen.bookicon_width),
+			   getResources().getDimensionPixelSize(R.dimen.bookicon_height));
+	   mImageFetcher.setLoadingImage(R.drawable.defaut_book);
+	   mImageFetcher.addImageCache(cacheParams);
+	   mImageFetcher.setImageFadeIn(false);
+	   mImageFetcher.loadImage(dBook.getImgurl(), img_book);	
 		title.setText(dBook.getTitle_c());
 		author.setText(author1+dBook.getWriter());
 		from.setText(from1+dBook.getName_c()+","+dBook.getYears()+","+"µÚ"+dBook.getNum()+"ÆÚ");
@@ -112,7 +123,24 @@ public class EbookDetailActivity extends BaseActivity implements IBookManagerAct
 		// TODO Auto-generated method stub
 		
 	}
+    @Override
+    public void onResume() {
+        super.onResume();
+        mImageFetcher.setExitTasksEarly(false);
+    }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mImageFetcher.setExitTasksEarly(true);
+        mImageFetcher.flushCache();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mImageFetcher.closeCache();
+    }
 	@Override
 	public void refresh(Object... obj) {
 		List<ShortBook> book = (List<ShortBook>)obj[0];

@@ -116,6 +116,15 @@ public abstract class ImageWorker {
     public void setLoadingImage(int resId) {
         mLoadingBitmap = BitmapFactory.decodeResource(mResources, resId);
     }
+    /**
+     * imagecaheÊµÀý´¦Àí»º´æ
+     * @param cacheParams
+     */
+    public void addImageCache(ImageCache.ImageCacheParams cacheParams) {
+        mImageCacheParams = cacheParams;
+        mImageCache = ImageCache.getInstance(mImageCacheParams);
+        new CacheAsyncTask().execute(MESSAGE_INIT_DISK_CACHE);
+    }
     
     public void addImageCache(Context context,
             ImageCache.ImageCacheParams cacheParams) {

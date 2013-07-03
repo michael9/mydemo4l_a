@@ -18,7 +18,7 @@
         android:background="@android:color/white"
         android:padding="2dp"
         android:saveEnabled="true"
-        android:src="@drawable/defaut_book" />
+         />
 
     <LinearLayout
         android:id="@+id/lyRightLayout"
