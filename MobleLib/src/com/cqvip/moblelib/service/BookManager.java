@@ -292,7 +292,7 @@ public class BookManager {
 	 * @param libid //图书馆id
 	 * @param vipuserid //vip 用户id
 	 * @param keyid //索书号
-	 * @param typeid //类别 1,图书，2,期刊 3，多媒体 ，4，文档
+	 * @param typeid //类别 //4，中刊，5深圳
 	 * @return
 	 * @throws BookException
 	 */
@@ -328,8 +328,8 @@ public class BookManager {
 	 * 删除收藏
 	 * @param libid //图书馆id
 	 * @param vipuserid //vip 用户id
-	 * @param keyid //图书id
-	 * @param typeid //类别 1,图书，2,期刊 3，多媒体 ，4，文档
+	 * @param keyid //索书号
+	 * @param typeid //类别 4中刊，5深图
 	 * @return
 	 * @throws BookException
 	 */
@@ -344,6 +344,51 @@ public class BookManager {
 		String result = http.requestUrl(getBaseURL()+"/cloud/favoritecancel.aspx", getBasepost(),params);
 		return new Result(result);
 	}
+	
+//	public List<Comment> getCommentList(){
+//		
+//	}
+	
+	/**
+	 * 添加评论
+	 * @param libid //图书馆id
+	 * @param vipuserid //vip 用户id
+	 * @param keyid //评论图书id,中刊为lngid，深圳为callno
+	 * @param typeid //4，中刊，5深圳
+	 * @return
+	 * @throws BookException
+	 */
+	public Result addComment(String libid,String vipuserid,String keyid,String typeid) throws BookException{
+		BookParameters params = new BookParameters();
+		params.add("libid", libid);
+		params.add("vipuserid", vipuserid);
+		params.add("keyid", keyid);
+		params.add("typeid", typeid);
+		String result = http.requestUrl(getBaseURL()+"/cloud/comment.aspx", getBasepost(),params);
+		return new Result(result);
+		
+	}
+	/**
+	 * 删除评论
+	 * @param libid //图书馆id
+	 * @param vipuserid //vip 用户id
+	 * @param keyid //评论图书id,中刊为lngid，深圳为callno
+	 * @param typeid //类别 //4，中刊，5深圳
+	 * @return
+	 * @throws BookException
+	 */
+	public Result destoryComment(String libid,String vipuserid,String keyid,String typeid) throws BookException{
+		BookParameters params = new BookParameters();
+		params.add("libid", libid);
+		params.add("vipuserid", vipuserid);
+		params.add("keyid", keyid);
+		params.add("typeid", typeid);
+		String result = http.requestUrl(getBaseURL()+"/cloud/comment.aspx", getBasepost(),params);
+		return new Result(result);
+	}
+	
+	
+	
 	
 	private String formResult(String result) throws BookException {
 		try {
