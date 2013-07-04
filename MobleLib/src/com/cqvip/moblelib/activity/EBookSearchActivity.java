@@ -101,7 +101,7 @@ public class EBookSearchActivity extends BaseActivity implements IBookManagerAct
 					//网络访问,获取首页
 					page = 1;
 					getHomePage(edit.getText().toString().trim(),1,DEFAULT_COUNT,0);
-					Tool.ShowMessages(context, "开始搜索");
+					//Tool.ShowMessages(context, "开始搜索");
 					return true;
 				}
 

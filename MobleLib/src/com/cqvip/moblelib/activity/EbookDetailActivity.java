@@ -25,7 +25,7 @@ public class EbookDetailActivity extends BaseActivity implements IBookManagerAct
 
 	private Context context;
 	private EBook dBook;
-	private TextView author,from,type,page,title,content;
+	private TextView author,from,type,page,title,content,time;
 	private String download_url = null;
 	private Button btn_ebook_detail_great,
 					btn_ebook_detail_buzz,
@@ -48,6 +48,7 @@ public class EbookDetailActivity extends BaseActivity implements IBookManagerAct
 		page =(TextView)findViewById(R.id.ebook_page_txt);
 		title =(TextView)findViewById(R.id.ebook_title_txt);
 		content =(TextView)findViewById(R.id.ebook_content_abst);
+		time = (TextView) findViewById(R.id.ebook_time_txt);
 		img_book = (ImageView)findViewById(R.id.ebook_icon_img);
 //		share =(Button)findViewById(R.id.ebook_share_txt);
 //		favor =(Button)findViewById(R.id.ebook_favorite_txt);
@@ -66,6 +67,7 @@ public class EbookDetailActivity extends BaseActivity implements IBookManagerAct
 		}
 		   String author1 = getResources().getString(R.string.item_author);
 		   String from1 = getResources().getString(R.string.ebook_orang);
+		   String time1 = getResources().getString(R.string.ebook_time);
 		   String page1 =  getResources().getString(R.string.ebook_page);
 		   String describe1 = getResources().getString(R.string.ebook_abstrac);
 		   String type1 = getResources().getString(R.string.ebook_type);
@@ -79,9 +81,10 @@ public class EbookDetailActivity extends BaseActivity implements IBookManagerAct
 	   mImageFetcher.loadImage(dBook.getImgurl(), img_book);	
 		title.setText(dBook.getTitle_c());
 		author.setText(author1+dBook.getWriter());
-		from.setText(from1+dBook.getName_c()+","+dBook.getYears()+","+"第"+dBook.getNum()+"期");
-		type.setText(type1+"PDF,"+dBook.getPdfsize()/1024+"KB");
+		from.setText(from1+dBook.getName_c());
+		time.setText(time1+dBook.getYears()+"年,"+"第"+dBook.getNum()+"期");
 		page.setText(page1+dBook.getPagecount());
+		type.setText(type1+"PDF,"+dBook.getPdfsize()/1024+"KB");
 		content.setText(describe1+dBook.getRemark_c());
 		
 		btn_ebook_detail_download.setOnClickListener(new View.OnClickListener() {

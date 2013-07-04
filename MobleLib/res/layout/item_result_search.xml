@@ -5,20 +5,21 @@
     android:tag="itemview" >
 
     <!-- 图书 -->
-
+  <RelativeLayout 
+      android:id="@+id/up_rl"
+      android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+      >
     <ImageView
         android:id="@+id/re_book_img"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/lyRightLayout"
+        android:layout_width="72dp"
+        android:layout_height="100dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="5.0dip"
+        android:layout_marginLeft="10.0dip"
         android:layout_marginTop="5.0dip"
-        android:background="@android:color/white"
-        android:padding="2dp"
-        android:saveEnabled="true"
-         />
+        android:background="@android:color/transparent"
+        android:saveEnabled="true" />
 
     <LinearLayout
         android:id="@+id/lyRightLayout"
@@ -49,7 +50,8 @@
             android:id="@+id/re_author_txt"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10.0dip"
+            android:layout_marginTop="5.0dip"
+            android:singleLine="true"
             android:text="作者：托马斯"
             android:textColor="#ff414951"
             android:textSize="14.0sp" />
@@ -59,6 +61,7 @@
             android:id="@+id/re_addr_txt"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:singleLine="true"
             android:text="出版社：电子工业出版社"
             android:textColor="#ff414951"
             android:textSize="14.0sp" />
@@ -82,12 +85,13 @@
             android:textColor="#ff414951"
             android:textSize="14.0sp" />
     </LinearLayout>
+    </RelativeLayout>
        <LinearLayout
         android:id="@+id/ll_abstract"
         android:visibility="gone"   
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/re_book_img"
+        android:layout_below="@+id/up_rl"
         android:layout_marginBottom="5dp"
         android:layout_marginTop="5dp"
         android:paddingLeft="@dimen/activity_horizontal_margin"

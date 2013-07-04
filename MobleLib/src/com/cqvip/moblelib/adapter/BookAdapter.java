@@ -132,6 +132,8 @@ public class BookAdapter extends BaseAdapter{
 	        holder.publishyear.setText(time+book.getPublishyear());
 //	        holder.u_abstract.setText(describe+book.getU_abstract());
 	        holder.isbn.setText("ISBN:"+book.getIsbn());
+	        //Õº∆¨
+	        holder.img.setBackgroundResource(R.drawable.defaut_book);
 	        //∑÷œÌ
 	        holder.btn_item_result_search_share.setTag(position);
 	        holder.btn_item_result_search_share.setOnClickListener(new OnClickListener() {

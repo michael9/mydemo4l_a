@@ -31,7 +31,7 @@ public class DetailBookActivity extends BaseActivity implements IBookManagerActi
 	private BookLocAdapter adapter;
 	private Context context;
 	private View title_bar;
-	
+	private ImageView imgview;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -40,7 +40,9 @@ public class DetailBookActivity extends BaseActivity implements IBookManagerActi
 		listview = (ListView)findViewById(R.id.loc_list);
 //		View v = LayoutInflater.from(this).inflate(R.layout.activity_detail_book, null);
 //		listview.addHeaderView(v);
-		
+		imgview = (ImageView) findViewById(R.id.book_big_img);
+		//…Ë÷√Õº∆¨
+		imgview.setBackgroundResource(R.drawable.defaut_book);
 		Bundle bundle = getIntent().getBundleExtra("detaiinfo");
 		dBook = (Book)bundle.getSerializable("book");
 //		baseinfo = (TextView) findViewById(R.id.bookinfo_txt);

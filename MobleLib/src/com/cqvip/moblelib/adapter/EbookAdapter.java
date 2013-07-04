@@ -126,17 +126,17 @@ public class EbookAdapter extends BaseAdapter{
 		}
 		   String author = context.getResources().getString(R.string.item_author);
 		   String from = context.getResources().getString(R.string.ebook_orang);
-		   String page =  context.getResources().getString(R.string.ebook_page);
+		   String page =  context.getResources().getString(R.string.ebook_time);//刊号
 		   String describe = context.getResources().getString(R.string.ebook_abstrac);
 		   String type = context.getResources().getString(R.string.ebook_type);
 		   
 			final EBook book = lists.get(position);
 	        holder.title.setText(book.getTitle_c());
 	        holder.author.setText(author+book.getWriter());
-	        holder.publisher.setText(from+book.getName_c()+","+book.getYears()+","+"第"+book.getNum()+"期");
-	        holder.u_page.setText(page+book.getPagecount());
+	        holder.publisher.setText(from+book.getName_c());
+	        holder.u_page.setText(page+book.getYears()+"年,"+"第"+book.getNum()+"期");
 //	        holder.u_abstract.setText(describe+book.getU_abstract());
-	        holder.type.setText(type+"PDF");
+	        holder.type.setText(type+book.getPagecount()+"页,"+"PDF");
 	        holder.l_abst.setVisibility(View.VISIBLE);
 	        holder.u_abstract.setText(describe+book.getRemark_c());
 	      //  holder.favorite.setVisibility(View.VISIBLE);
