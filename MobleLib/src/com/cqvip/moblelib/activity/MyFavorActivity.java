@@ -7,6 +7,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -47,6 +48,7 @@ public class MyFavorActivity extends FragmentActivity implements
 
 	private String curpage = "1";// 第几页
 	private String perpage = "10";// 每页显示条数
+	private Favorite del_favorite;
 
 	MyGridViewAdapter adapter_zk, adapter_sz;
 	/**
@@ -249,23 +251,45 @@ public class MyFavorActivity extends FragmentActivity implements
 		@Override
 		public boolean onItemLongClick(AdapterView<?> parent, View view,
 				int position, long id) {
-			Favorite favorite = arrayList_temp.get(position);
-			if (favorite != null) {
-				HashMap<String, String> map = new HashMap<String, String>();
-				map.put("libid", GlobleData.LIBIRY_ID);
-				map.put("vipuserid", GlobleData.cqvipid);
-				Log.i("删除收藏", GlobleData.cqvipid);
-				map.put("keyid", favorite.getFavoritekeyid());
-				Log.i("keyid", favorite.getFavoritekeyid());
-				map.put("typeid", "" + favorite.getTypeid());
-				ManagerService
-						.addNewTask(new Task(Task.TASK_CANCEL_FAVOR, map));
-				customProgressDialog.show();
-			}
+			
+			Intent intent=new Intent();
+			intent.setClass(context, ActivityDlg.class);
+			intent.putExtra("ACTIONID", 0);
+			intent.putExtra("MSGBODY", "确定删除该收藏");
+			intent.putExtra("BTN_CANCEL", 1);
+			startActivityForResult(intent,101);
+			del_favorite=arrayList_temp.get(position);
+			
+			
 			return false;
 		}
 	}
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+			switch (requestCode) {
+			case 101:
+				if(resultCode==0&&del_favorite!=null)
+				{
+					
+					HashMap<String, String> map = new HashMap<String, String>();
+					map.put("libid", GlobleData.LIBIRY_ID);
+					map.put("vipuserid", GlobleData.cqvipid);
+					Log.i("删除收藏", GlobleData.cqvipid);
+					map.put("keyid", del_favorite.getFavoritekeyid());
+//					Log.i("keyid", favorite.getFavoritekeyid());
+					map.put("typeid", "" + del_favorite.getTypeid());
+					ManagerService
+							.addNewTask(new Task(Task.TASK_CANCEL_FAVOR, map));
+				}
+				break;
 
+			default:
+				break;
+			}
+		
+	}
 	static class ViewHolder {
 
 		TextView title;// 书名
