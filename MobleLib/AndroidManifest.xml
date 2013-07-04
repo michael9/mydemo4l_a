@@ -181,6 +181,12 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar"
             />
+            
+             <activity
+            android:name="com.cqvip.moblelib.activity.MyCommentByBooktypeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar"
+            />
 
           
             

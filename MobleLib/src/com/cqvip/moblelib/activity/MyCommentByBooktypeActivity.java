@@ -40,7 +40,7 @@ import com.cqvip.moblelib.model.Result;
 import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.utils.Tool;
 
-public class MyFavorActivity extends FragmentActivity implements
+public class MyCommentByBooktypeActivity extends FragmentActivity implements
 		IBookManagerActivity {
 	public static final int FAVOR = 1;
 	public static final int CANCELFAVOR = 2;
@@ -272,13 +272,8 @@ public class MyFavorActivity extends FragmentActivity implements
 		TextView author;// 作者
 		TextView publisher;// 出版社
 		TextView publishyear;// 出版时间
+		TextView commentcount;//评论数
 		ImageView img;// 时间图片 不用修改
-		// TextView u_page;//页数
-		// TextView u_abstract;//简介
-		TextView isbn;
-
-		Button btn_comment, btn_item_result_search_share, favorite;
-
 	}
 
 	class MyGridViewAdapter extends BaseAdapter {
@@ -294,7 +289,7 @@ public class MyFavorActivity extends FragmentActivity implements
 		@Override
 		public int getCount() {
 			Log.i("getCount", "getCount");
-			if (arrayList!=null&&!arrayList.isEmpty()) {
+			if (arrayList != null) {
 				return arrayList.size() + 1;
 			}
 			return 1;
@@ -358,16 +353,9 @@ public class MyFavorActivity extends FragmentActivity implements
 						.findViewById(R.id.re_time_txt);
 				holder.img = (ImageView) convertView
 						.findViewById(R.id.re_book_img);
-				// holder.u_abstract = (TextView)
-				// convertView.findViewById(R.id.re_hot_txt);
-				holder.isbn = (TextView) convertView
+				holder.commentcount = (TextView) convertView
 						.findViewById(R.id.re_hot_txt);
-				holder.btn_item_result_search_share = (Button) convertView
-						.findViewById(R.id.btn_item_result_search_share);
-				holder.favorite = (Button) convertView
-						.findViewById(R.id.btn_item_result_search_collect);
-				holder.btn_comment = (Button) convertView
-						.findViewById(R.id.btn_comment);
+				holder.commentcount.setTextColor(getResources().getColor(R.color.green_light));
 				convertView.setTag(holder);
 			} else {
 				holder = (ViewHolder) convertView.getTag();
@@ -377,69 +365,14 @@ public class MyFavorActivity extends FragmentActivity implements
 			String publish = context.getResources().getString(
 					R.string.item_publish);
 			String time = context.getResources().getString(R.string.item_time);
-			String describe = context.getResources().getString(
-					R.string.item_describe);
+			String commentcount = context.getResources().getString(
+					R.string.item_comment_count);
 			Favorite favorite = arrayList.get(position);
 			holder.title.setText(favorite.getTitle());
 			holder.author.setText(author + favorite.getWriter());
 			holder.publisher.setText(publish + favorite.getOrgan());
 			holder.publishyear.setText(time + favorite.getYears());
-			holder.isbn.setText("ISBN:" + favorite.getLngid());
-
-			// // 分享
-			// holder.btn_item_result_search_share.setTag(position);
-			// holder.btn_item_result_search_share
-			// .setOnClickListener(new OnClickListener() {
-			//
-			// @Override
-			// public void onClick(View v) {
-			//
-			// int pos = (Integer) v.getTag();
-			// Intent intent = new Intent(Intent.ACTION_SEND);
-			// intent.setType("image/*");
-			// intent.putExtra(Intent.EXTRA_SUBJECT, "图书分享");
-			// intent.putExtra(
-			// Intent.EXTRA_TEXT,
-			// ("好书分享:"
-			// + (alArrayList.get(pos)).getTitle()
-			// + "\r\n作者:"
-			// + (alArrayList.get(pos))
-			// .getAuthor()
-			// + "\r\n出版社:"
-			// + (alArrayList.get(pos))
-			// .getPublisher()
-			// + "\r\n出版日期:"
-			// + (alArrayList.get(pos))
-			// .getPublishyear()
-			// + "\r\nISBN:" + (alArrayList
-			// .get(pos)).getIsbn()));
-			// intent.putExtra(
-			// Intent.EXTRA_STREAM,
-			// Uri.decode("http://www.szlglib.com.cn/images/logo.jpg")); //
-			// 分享图片"http://www.szlglib.com.cn/images/logo.jpg"
-			// context.startActivity(Intent.createChooser(intent,
-			// "分享到"));
-			//
-			// }
-			// });
-			// // 评论
-			// holder.btn_comment.setTag(position);
-			// holder.btn_comment.setOnClickListener(new OnClickListener() {
-			//
-			// @Override
-			// public void onClick(View v) {
-			// int pos = (Integer) v.getTag();
-			// Book book = alArrayList.get(pos);
-			// if (book != null) {
-			// Intent intent = new Intent(context,
-			// CommentActivity.class);
-			// Bundle bundle = new Bundle();
-			// bundle.putSerializable("book", book);
-			// intent.putExtra("detaiinfo", bundle);
-			// context.startActivity(intent);
-			// }
-			// }
-			// });
+			holder.commentcount.setText(commentcount +"(" +favorite.getLngid()+")");
 
 			return convertView;
 		}
@@ -448,10 +381,9 @@ public class MyFavorActivity extends FragmentActivity implements
 	@Override
 	public void init() {
 		mPagerTitleStrip = (PagerTitleStrip) findViewById(R.id.pager_title_strip);
-		mPagerTitleStrip.setTextSpacing(-50);
 		mPagerTitleStrip.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
 		TextView title = (TextView) findViewById(R.id.txt_header);
-		title.setText(R.string.serv_favorite);
+		title.setText(R.string.mycomments);
 		ImageView back = (ImageView) findViewById(R.id.img_back_header);
 		back.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -479,17 +411,14 @@ public class MyFavorActivity extends FragmentActivity implements
 				arrayList_zk = arrayLists.get(GlobleData.BOOK_ZK_TYPE);
 				arrayList_sz = arrayLists.get(GlobleData.BOOK_SZ_TYPE);
 				mSectionsPagerAdapter.notifyDataSetChanged();
-				adapter_zk.notifyDataSetChanged();
-				adapter_sz.notifyDataSetChanged();
-				Log.i("MyFavorAc", "refresh_favor");
 			}
 		} else if (temp == CANCELFAVOR) {
 			Result res = (Result) obj[1];
 			if (res.getSuccess()) {
-				Tool.ShowMessages(context, "取消收藏成功");
+				Tool.ShowMessages(context, getResources().getString(R.string.cancelcommentdone));
 				getfavorlist();
 			} else {
-				Tool.ShowMessages(context, "取消收藏失败");
+				Tool.ShowMessages(context, getResources().getString(R.string.cancelcommentfail));
 			}
 		}
 	}
@@ -502,7 +431,7 @@ public class MyFavorActivity extends FragmentActivity implements
 			Tool.ShowMessages(this, getResources().getString(R.string.loadfail));
 		} else if (a == 6) {
 			Tool.ShowMessages(this,
-					getResources().getString(R.string.cancelfavorfail));
+					getResources().getString(R.string.cancelcommentfail));
 		}
 	}
 }
