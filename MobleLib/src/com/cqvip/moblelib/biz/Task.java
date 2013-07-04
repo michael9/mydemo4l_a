@@ -31,7 +31,6 @@ public class Task {
 	public static final int TASK_COMMENT_LIST= 24;//获取围绕书籍的评论列表
 	public static final int TASK_COMMENT_ADD= 25;//添加收藏
 	public static final int TASK_ADD_COMMENT= 26;//添加评论
-	public static final int TASK_ANNOUNCE_SPEACH= 27;//讲座
 	
 	
 	public Task(int id, Map param) {

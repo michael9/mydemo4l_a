@@ -420,20 +420,6 @@ public class BookManager {
 		String result = http.requestUrl(getBaseURL()+"/cloud/comment.aspx", getBasepost(),params);
 		return new Result(result);
 	}
-	/**
-	 * 获取讲座信息
-	 * @param libid
-	 * @param announcetypeid
-	 * @return
-	 * @throws BookException
-	 */
-	public List<ShortBook> getAnnouce(String libid,String announcetypeid) throws BookException{
-		BookParameters params = new BookParameters();
-		params.add("libid", libid);
-		params.add("announcetypeid",announcetypeid);
-		String result = http.requestUrl(getBaseURL()+"/library/announce/html.aspx", getBaseget(),params);
-		return ShortBook.formList(Task.TASK_ANNOUNCE_SPEACH,result);
-	}
 	
 	
 	
