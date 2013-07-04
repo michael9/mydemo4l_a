@@ -9,6 +9,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.net.BookException;
 
@@ -17,7 +18,7 @@ public class Favorite {
 	private String lngid;
 	private String title;
 	private String writer;
-	private String organ;//出版社
+	private String organ;// 出版社
 	private String keyword;
 	private String remark;
 	private String years;
@@ -28,20 +29,22 @@ public class Favorite {
 	private int commentcount;
 	private String imgurl;
 	private String weburl;
-	private String favoritekeyid;//索书号
-	private String typeid;//书类型
-	
+	private String favoritekeyid;// 索书号
+	private String typeid;// 书类型
+
 	public String getTypeid() {
 		return typeid;
 	}
+
 	public String getFavoritekeyid() {
 		return favoritekeyid;
 	}
-	public Favorite(JSONObject jsonObject) throws BookException{
+
+	public Favorite(JSONObject jsonObject) throws BookException {
 		try {
 			favoritekeyid = jsonObject.getString("favoritekeyid");
 			JSONObject json = jsonObject.getJSONObject("favoriteinfo");
-			typeid=lngid = json.getString("typeid");
+			typeid = lngid = json.getString("typeid");
 			lngid = json.getString("lngid");
 			title = json.getString("title");
 			writer = json.getString("writer");
@@ -60,104 +63,223 @@ public class Favorite {
 			e.printStackTrace();
 			throw new BookException(e);
 		}
-		
+
 	}
-	   protected static int getInt(String key, JSONObject json) throws JSONException {
-	        String str = json.getString(key);
-	        if(null == str || "".equals(str)||"null".equals(str)){
-	            return 0;
-	        }
-	        return Integer.parseInt(str);
-	    }
-	    
-	
-	public static Map<Integer,List<Favorite>> formList(String result) throws BookException{
-		Map<Integer,List<Favorite>>  map = new HashMap<Integer,List<Favorite>>();
-		 List<Favorite> favor_sz = null;
-		 List<Favorite> favor_zk = null;
-	try {
-		JSONObject json = new JSONObject(result);
-	     if(!json.getBoolean("success")){
-	    	 return null;
-	     }
-	     if(json.getInt("recordcount")>0){
-		JSONArray ary = json.getJSONArray("grouplist");
-		 int count = ary.length();
-		 if(count <=0){
-			 return null;
-		 }
-		 favor_sz = new ArrayList<Favorite>();
-		 favor_zk = new ArrayList<Favorite>();
-		 for(int i = 0;i<count;i++){
-			 JSONObject js = ary.getJSONObject(i);
-			 int type = js.getInt("typeid");
-			 JSONArray array = js.getJSONArray("favoritelist");
-			 switch(type){
-			 case GlobleData.BOOK_SZ_TYPE:
-				 for(int j=0;j<array.length();j++){
-				 favor_sz.add(new Favorite(array.getJSONObject(j))); 
-				 }
-				 break;
-			 case GlobleData.BOOK_ZK_TYPE:
-				 for(int j=0;j<array.length();j++){
-					 favor_zk.add(new Favorite(array.getJSONObject(j))); 
-					 }
-				 break;
-			 }
-		 }
-		map.put(GlobleData.BOOK_SZ_TYPE, favor_sz);	 
-		map.put(GlobleData.BOOK_ZK_TYPE, favor_zk);	 
-		 return map;
-	     }else{
-	    	 return null;
-	     }
-	} catch (JSONException e) {
-		e.printStackTrace();
-		throw new BookException(e);
+
+	public Favorite(int type, JSONObject json) throws BookException {
+		if (type == Task.TASK_COMMENT_BOOKLIST) {
+			try {
+				typeid = lngid = json.getString("typeid");
+				lngid = json.getString("lngid");
+				title = json.getString("title");
+				writer = json.getString("writer");
+				organ = json.getString("organ");
+				keyword = json.getString("keyword");
+				remark = json.getString("remark");
+				years = json.getString("years");
+				num = getInt("num", json);
+				pagecount = getInt("pagecount", json);
+				price = json.getString("price");
+				vote = json.getString("vote");
+				commentcount = getInt("commentcount", json);
+				imgurl = json.getString("imgurl");
+				weburl = json.getString("weburl");
+			} catch (JSONException e) {
+				e.printStackTrace();
+				throw new BookException(e);
+			}
+		}
+
 	}
+
+	protected static int getInt(String key, JSONObject json)
+			throws JSONException {
+		String str = json.getString(key);
+		if (null == str || "".equals(str) || "null".equals(str)) {
+			return 0;
+		}
+		return Integer.parseInt(str);
 	}
+
+	public static Map<Integer, List<Favorite>> formList(int task, String result)
+			throws BookException {
+		Map<Integer, List<Favorite>> map = new HashMap<Integer, List<Favorite>>();
+		List<Favorite> favor_sz = null;
+		List<Favorite> favor_zk = null;
+		switch (task) {
+		case Task.TASK_GET_FAVOR:
+			try {
+				JSONObject json = new JSONObject(result);
+				if (!json.getBoolean("success")) {
+					return null;
+				}
+				if (json.getInt("recordcount") > 0) {
+					JSONArray ary = json.getJSONArray("grouplist");
+					int count = ary.length();
+					if (count <= 0) {
+						return null;
+					}
+					favor_sz = new ArrayList<Favorite>();
+					favor_zk = new ArrayList<Favorite>();
+					for (int i = 0; i < count; i++) {
+						JSONObject js = ary.getJSONObject(i);
+						int type = js.getInt("typeid");
+						JSONArray array = js.getJSONArray("favoritelist");
+						switch (type) {
+						case GlobleData.BOOK_SZ_TYPE:
+							for (int j = 0; j < array.length(); j++) {
+								favor_sz.add(new Favorite(array
+										.getJSONObject(j)));
+							}
+							break;
+						case GlobleData.BOOK_ZK_TYPE:
+							for (int j = 0; j < array.length(); j++) {
+								favor_zk.add(new Favorite(array
+										.getJSONObject(j)));
+							}
+							break;
+						}
+					}
+					map.put(GlobleData.BOOK_SZ_TYPE, favor_sz);
+					map.put(GlobleData.BOOK_ZK_TYPE, favor_zk);
+					return map;
+				}
+			} catch (JSONException e) {
+				e.printStackTrace();
+				throw new BookException(e);
+			}
+			break;
+		case Task.TASK_COMMENT_BOOKLIST:
+			try {
+				JSONObject json = new JSONObject(result);
+				if (!json.getBoolean("success")) {
+					return null;
+				}
+				if (json.getInt("recordcount") > 0) {
+					if(hasObject(json,"zkbooks")){
+					JSONArray ary = json.getJSONArray("zkbooks");
+					int count = ary.length();
+					if (count <= 0) {
+						map.put(GlobleData.BOOK_ZK_TYPE, null);
+					} else {
+						favor_zk = new ArrayList<Favorite>(count);
+						for (int i = 0; i < count; i++) {
+							JSONObject js = ary.getJSONObject(i);
+							favor_zk.add(new Favorite(task, js
+									.getJSONObject("resourceinfo")));
+
+						}
+						map.put(GlobleData.BOOK_ZK_TYPE, favor_zk);
+					}
+					}else{
+						map.put(GlobleData.BOOK_ZK_TYPE, null);
+					}
+					if(hasObject(json,"zkbooks")){
+					JSONArray sz = json.getJSONArray("szbooks");
+					int szcount = sz.length();
+					if (szcount <= 0) {
+						map.put(GlobleData.BOOK_SZ_TYPE, null);
+					} else {
+						favor_sz = new ArrayList<Favorite>(szcount);
+						for (int i = 0; i < szcount; i++) {
+							JSONObject js = sz.getJSONObject(i);
+							favor_sz.add(new Favorite(task, js
+									.getJSONObject("resourceinfo")));
+						}
+						map.put(GlobleData.BOOK_SZ_TYPE, favor_sz);
+					}
+					}else{
+						map.put(GlobleData.BOOK_SZ_TYPE, null);
+					}
+					return map;
+				}
+			} catch (JSONException e) {
+				e.printStackTrace();
+				throw new BookException(e);
+			}
+			break;
+		}
+		return null;
+
+	}
+
+	protected static boolean hasObject(JSONObject object, String key) {
+		try {
+			if (object.isNull(key)) {
+				return false;
+			}
+			String strTmp = object.getString(key);
+			if (null == strTmp) {
+				return false;
+			} else if (strTmp.equals("null")) {
+				return false;
+			} else if (strTmp.equals("")) {
+				return false;
+			} else {
+				return true;
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
 	public String getLngid() {
 		return lngid;
 	}
+
 	public String getTitle() {
 		return title;
 	}
+
 	public String getWriter() {
 		return writer;
 	}
+
 	public String getOrgan() {
 		return organ;
 	}
+
 	public String getKeyword() {
 		return keyword;
 	}
+
 	public String getRemark() {
 		return remark;
 	}
+
 	public String getYears() {
 		return years;
 	}
+
 	public int getNum() {
 		return num;
 	}
+
 	public int getPagecount() {
 		return pagecount;
 	}
+
 	public String getPrice() {
 		return price;
 	}
+
 	public String getVote() {
 		return vote;
 	}
+
 	public int getCommentcount() {
 		return commentcount;
 	}
+
 	public String getImgurl() {
 		return imgurl;
 	}
+
 	public String getWeburl() {
 		return weburl;
 	}
+
 	@Override
 	public String toString() {
 		return "Favorite [lngid=" + lngid + ", title=" + title + ", writer="
@@ -167,5 +289,5 @@ public class Favorite {
 				+ vote + ", commentcount=" + commentcount + ", imgurl="
 				+ imgurl + ", weburl=" + weburl + "]";
 	}
-	
+
 }
