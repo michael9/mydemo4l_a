@@ -5,107 +5,98 @@
     android:tag="itemview" >
 
     <!-- 图书 -->
-  <RelativeLayout 
-      android:id="@+id/up_rl"
-      android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-      >
-    <ImageView
-        android:id="@+id/re_book_img"
-        android:layout_width="72dp"
-        android:layout_height="100dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="10.0dip"
-        android:layout_marginTop="5.0dip"
-        android:background="@android:color/transparent"
-        android:saveEnabled="true" />
 
-    <LinearLayout
-        android:id="@+id/lyRightLayout"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5.0dip"
-        android:layout_toRightOf="@+id/re_book_img"
-        android:orientation="vertical" >
+    <RelativeLayout
+        android:id="@+id/up_rl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
 
-        <RelativeLayout
+        <ImageView
+            android:id="@+id/re_book_img"
+            android:layout_width="72dp"
+            android:layout_height="100dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="10.0dip"
+            android:layout_marginTop="5.0dip"
+            android:background="@android:color/transparent"
+            android:saveEnabled="true" />
+
+        <LinearLayout
+            android:id="@+id/lyRightLayout"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:layout_margin="5.0dip"
+            android:layout_toRightOf="@+id/re_book_img"
+            android:orientation="vertical" >
 
-            <!-- title -->
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <!-- title -->
+
+                <TextView
+                    android:id="@+id/re_name_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="编程的艺术"
+                    android:textColor="#ff333333"
+                    android:textSize="18.0sp" />
+            </RelativeLayout>
+            <!-- author -->
 
             <TextView
-                android:id="@+id/re_name_txt"
-                android:layout_width="wrap_content"
+                android:id="@+id/re_author_txt"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5.0dip"
+                android:singleLine="true"
+                android:text="作者：托马斯"
+                android:textColor="@color/txt_black"
+                android:textSize="14.0sp" />
+            <!-- address -->
+
+            <TextView
+                android:id="@+id/re_addr_txt"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
-                android:text="编程的艺术"
-                android:textColor="#ff333333"
-                android:textSize="18.0sp" />
-        </RelativeLayout>
-        <!-- author -->
+                android:text="出版社：电子工业出版社"
+                android:textColor="@color/txt_black"
+                android:textSize="14.0sp" />
+            <!-- time -->
 
-        <TextView
-            android:id="@+id/re_author_txt"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5.0dip"
-            android:singleLine="true"
-            android:text="作者：托马斯"
-            android:textColor="#ff414951"
-            android:textSize="14.0sp" />
-        <!-- address -->
+            <TextView
+                android:id="@+id/re_time_txt"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="年份：2012-06"
+                android:textColor="@color/txt_black"
+                android:textSize="14.0sp" />
+            <!-- time -->
 
-        <TextView
-            android:id="@+id/re_addr_txt"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:singleLine="true"
-            android:text="出版社：电子工业出版社"
-            android:textColor="#ff414951"
-            android:textSize="14.0sp" />
-        <!-- time -->
-
-        <TextView
-            android:id="@+id/re_time_txt"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="年份：2012-06"
-            android:textColor="#ff414951"
-            android:textSize="14.0sp" />
-        <!-- time -->
-
-        <TextView
-            android:id="@+id/re_hot_txt"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:maxLines="2"
-            android:text="页数："
-            android:textColor="#ff414951"
-            android:textSize="14.0sp" />
-    </LinearLayout>
+            <TextView
+                android:id="@+id/re_hot_txt"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="2"
+                android:text="页数："
+                android:textColor="@color/txt_black"
+                android:textSize="14.0sp" />
+        </LinearLayout>
     </RelativeLayout>
-       <LinearLayout
-        android:id="@+id/ll_abstract"
-        android:visibility="gone"   
-        android:layout_width="match_parent"
+
+    <TextView
+        android:id="@+id/txt_abst"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/up_rl"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:id="@+id/txt_abst"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#ff414951"
-            android:maxLines="3"
-            android:text=" " />
-    </LinearLayout>
+        android:layout_margin="5dp"
+        android:maxLines="3"
+        android:text="图书介绍"
+        android:textColor="@color/txt_black" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -114,45 +105,53 @@
         android:layout_marginBottom="5dp"
         android:layout_marginTop="5dp"
         android:gravity="right"
-        android:orientation="horizontal" >
-        
-         <Button
+        android:orientation="horizontal"
+        android:visibility="gone" >
+
+        <Button
             android:id="@+id/btn_great"
-            android:layout_width="wrap_content"
+            android:layout_width="48dp"
             android:layout_height="wrap_content"
-             android:layout_marginRight="12dp"
+            android:layout_marginRight="12dp"
             android:background="@null"
             android:focusable="false"
-            android:visibility="gone"
-            android:text="赞" />
-        
-         <Button
+            android:text="赞"
+            android:textColor="@color/green_light"
+            android:textSize="16dp"
+            android:visibility="gone" />
+
+        <Button
             android:id="@+id/btn_comment"
-            android:layout_width="wrap_content"
+            android:layout_width="48dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="12dp"
             android:background="@null"
             android:focusable="false"
-            android:text="评" />
-         
-             <Button
+            android:text="评"
+            android:textColor="@color/green_light"
+            android:textSize="16dp" />
+
+        <Button
             android:id="@+id/btn_item_result_search_collect"
-            android:layout_width="wrap_content"
+            android:layout_width="48dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="12dp"
             android:background="@null"
             android:focusable="false"
-            android:text="收藏"/>
+            android:text="收藏"
+            android:textColor="@color/green_light"
+            android:textSize="16dp" />
 
         <Button
             android:id="@+id/btn_item_result_search_share"
-            android:layout_width="wrap_content"
+            android:layout_width="48dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="8dp"
             android:background="@null"
             android:focusable="false"
-            android:text="分享" />
-    
+            android:text="分享"
+            android:textColor="@color/green_light"
+            android:textSize="16dp" />
     </LinearLayout>
 
 </RelativeLayout>

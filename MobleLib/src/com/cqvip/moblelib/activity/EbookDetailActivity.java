@@ -4,9 +4,12 @@ import java.util.HashMap;
 import java.util.List;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,6 +23,7 @@ import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.EBook;
 import com.cqvip.moblelib.model.ShortBook;
+import com.cqvip.utils.Tool;
 
 public class EbookDetailActivity extends BaseActivity implements IBookManagerActivity {
 
@@ -87,13 +91,39 @@ public class EbookDetailActivity extends BaseActivity implements IBookManagerAct
 		type.setText(type1+"PDF,"+dBook.getPdfsize()/1024+"KB");
 		content.setText(describe1+dBook.getRemark_c());
 		
-		btn_ebook_detail_download.setOnClickListener(new View.OnClickListener() {
+		btn_ebook_detail_buzz.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Tool.bookEbuzz(EbookDetailActivity.this, dBook);
+			}
+		});
+		btn_ebook_detail_share.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Tool.bookEshare(EbookDetailActivity.this, dBook);
+			}
+		});
+		btn_ebook_detail_collect.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Tool.bookEfavorite(EbookDetailActivity.this, dBook);
+			}
+		});
+		
+		btn_ebook_detail_download.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				if(download_url!=null){
 					//弹出对话框
-					
+					Intent  intent=new Intent(Intent.ACTION_VIEW,Uri.parse(download_url));
+					startActivity(intent);
 					//下载
 				}
 				
