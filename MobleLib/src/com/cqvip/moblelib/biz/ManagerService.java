@@ -13,7 +13,6 @@ import android.util.Log;
 
 import com.cqvip.moblelib.activity.BaseActivity;
 import com.cqvip.moblelib.activity.BorrowAndOrderActivity;
-import com.cqvip.moblelib.activity.CommentActivity;
 import com.cqvip.moblelib.activity.DetailTextActivity;
 import com.cqvip.moblelib.activity.EBookSearchActivity;
 import com.cqvip.moblelib.activity.MyFavorActivity;
@@ -273,15 +272,6 @@ public class ManagerService extends Service implements Runnable {
 				}
 				favor_ebook.refresh(ResultOnSearchActivity.FAVOR,msg.obj);
 				break;	
-				//添加评论23
-			case Task.TASK_ADD_COMMENT:
-				IBookManagerActivity add_comment = (IBookManagerActivity) ManagerService.getActivityByName("CommentActivity");
-				if (msg.arg1 != 0) {
-					doException(6,msg, "CommentActivity");
-					break;
-				}
-				add_comment.refresh(CommentActivity.ADDCOMMENT,msg.obj);
-				break;	
 		   }
 	    }
 	};
@@ -416,11 +406,6 @@ public class ManagerService extends Service implements Runnable {
 		case Task.TASK_EBOOK_FAVOR:
 			Result result_addebookfavor = manager.addFavorite((String)task.getTaskParam().get("libid"), (String)task.getTaskParam().get("vipuserid"), (String)task.getTaskParam().get("keyid"), (String)task.getTaskParam().get("typeid"));
 			msg.obj = result_addebookfavor;
-			break;	
-			//添加评论23
-		case Task.TASK_ADD_COMMENT:
-			Result result_addcomment = manager.addComment((String)task.getTaskParam().get("libid"), (String)task.getTaskParam().get("vipuserid"), (String)task.getTaskParam().get("keyid"), (String)task.getTaskParam().get("typeid"));
-			msg.obj = result_addcomment;
 			break;	
 			}
 		} catch (BookException e) {

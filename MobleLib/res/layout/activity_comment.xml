@@ -12,8 +12,7 @@
         android:layout_alignParentTop="true"
         android:scaleType="fitXY"
         android:src="@drawable/defaut_book" />
-
-    <ScrollView
+ <ScrollView
         android:id="@+id/intro_sl"
         android:layout_width="match_parent"
         android:layout_height="188dp"
@@ -42,7 +41,7 @@
         android:layout_centerHorizontal="true" >
     </ListView>
 
-    <LinearLayout 
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -67,7 +66,6 @@
             android:layout_height="wrap_content"
             android:text="提交" />
     </LinearLayout>
-
     <include
         android:id="@+id/detail_book_title"
         layout="@layout/header" />

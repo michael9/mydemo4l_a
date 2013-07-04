@@ -39,9 +39,7 @@ public class EBookActiviy extends BaseActivity {
 //	 private static final String[] EBOOKTYPE = new String[] {
 //	        "馆藏书目", "维普期刊", "万方期刊","超星图书","内置图书"
 //	    };
-	private static final String[] EBOOKTYPE = new String[] {
-       "维普期刊"
-    };
+	private  String[] EBOOKTYPE;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -60,7 +58,7 @@ public class EBookActiviy extends BaseActivity {
 		});
 		
 //		SearchView sc = (SearchView)findViewById(R.id.search_view);
-	
+		EBOOKTYPE = getResources().getStringArray(R.array.ebooktype);
 		
 		ListView lv = (ListView)findViewById(R.id.ebook_search_list);
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_multiple_choice,EBOOKTYPE);

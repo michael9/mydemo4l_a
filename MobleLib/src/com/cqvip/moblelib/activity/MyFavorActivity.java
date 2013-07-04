@@ -155,6 +155,10 @@ public class MyFavorActivity extends FragmentActivity implements
 		public CharSequence getPageTitle(int position) {
 			Log.i("getPageTitle", "getPageTitle");
 			Locale l = Locale.getDefault();
+			if (adapter_zk != null && adapter_sz != null) {
+				adapter_zk.notifyDataSetChanged();
+				adapter_sz.notifyDataSetChanged();
+			}
 			switch (position) {
 			case 0:
 				return getString(R.string.title_section1).toUpperCase(l);
@@ -498,8 +502,11 @@ public class MyFavorActivity extends FragmentActivity implements
 				arrayList_sz.clear();
 				arrayList_zk = arrayLists.get(GlobleData.BOOK_ZK_TYPE);
 				arrayList_sz = arrayLists.get(GlobleData.BOOK_SZ_TYPE);
+				mSectionsPagerAdapter.notifyDataSetChanged();
+				adapter_zk.notifyDataSetChanged();
+				adapter_sz.notifyDataSetChanged();
+				Log.i("MyFavorAc", "refresh_favor");
 			}
-			mSectionsPagerAdapter.notifyDataSetChanged();
 		} else if (temp == CANCELFAVOR) {
 			Result res = (Result) obj[1];
 			if (res.getSuccess()) {
