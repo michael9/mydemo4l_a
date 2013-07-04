@@ -322,7 +322,7 @@ public class BookManager {
 		params.add("curpage", page);
 		params.add("perpage", count);
 		String result = http.requestUrl(getBaseURL()+"/cloud/favoritelist.aspx", getBasepost(),params);
-		return Favorite.formList(Task.TASK_LIB_FAVOR,result);
+		return Favorite.formList(Task.TASK_GET_FAVOR,result);
 	}
 	
 	/**
