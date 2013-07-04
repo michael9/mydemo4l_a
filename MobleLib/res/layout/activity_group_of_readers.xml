@@ -19,7 +19,8 @@
         android:paddingRight="9.0dip"
         android:paddingTop="9.0dip" >
 
-        <LinearLayout
+        <LinearLayout 
+            android:visibility="gone"
             android:id="@+id/mycomments_ll"
             android:layout_width="fill_parent"
             android:layout_height="45.0dip"
