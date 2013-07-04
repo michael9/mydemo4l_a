@@ -294,7 +294,7 @@ public class MyFavorActivity extends FragmentActivity implements
 		@Override
 		public int getCount() {
 			Log.i("getCount", "getCount");
-			if (arrayList != null) {
+			if (arrayList!=null&&!arrayList.isEmpty()) {
 				return arrayList.size() + 1;
 			}
 			return 1;
@@ -479,6 +479,9 @@ public class MyFavorActivity extends FragmentActivity implements
 				arrayList_zk = arrayLists.get(GlobleData.BOOK_ZK_TYPE);
 				arrayList_sz = arrayLists.get(GlobleData.BOOK_SZ_TYPE);
 				mSectionsPagerAdapter.notifyDataSetChanged();
+				adapter_zk.notifyDataSetChanged();
+				adapter_sz.notifyDataSetChanged();
+				Log.i("MyFavorAc", "refresh_favor");
 			}
 		} else if (temp == CANCELFAVOR) {
 			Result res = (Result) obj[1];
