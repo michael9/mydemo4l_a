@@ -11,6 +11,7 @@ import com.cqvip.moblelib.biz.ManagerService;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.Book;
+import com.cqvip.moblelib.model.EBook;
 
 import android.content.Context;
 import android.content.Intent;
@@ -29,6 +30,46 @@ import android.widget.Toast;
  */
 public class Tool {
 
+	
+	public static void bookEshare(Context mcontext, EBook mbook) {
+		if (mbook != null) {
+			Intent intent = new Intent(Intent.ACTION_SEND);
+			intent.setType("image/*");
+			intent.putExtra(Intent.EXTRA_SUBJECT, "图书分享");
+			intent.putExtra(Intent.EXTRA_TEXT,
+					("好书分享:" + mbook.getTitle_c() + "\r\n作者:" + mbook.getWriter()
+							+ "\r\n出版日期:"
+							+ mbook.getYears() + "\r\nISBN:" ));
+			intent.putExtra(Intent.EXTRA_STREAM,
+					Uri.decode("http://www.szlglib.com.cn/images/logo.jpg")); // 分享图片"http://www.szlglib.com.cn/images/logo.jpg"
+			mcontext.startActivity(Intent.createChooser(intent, "分享到"));
+		}
+	}
+
+	// 评论
+	public static void bookEbuzz(Context mcontext, EBook mbook) {
+		if (mbook != null) {
+//			Intent intent = new Intent(mcontext, CommentActivity.class);
+//			Bundle bundle = new Bundle();
+//			bundle.putSerializable("book", mbook);
+//			intent.putExtra("detaiinfo", bundle);
+//			mcontext.startActivity(intent);
+		}
+	}
+
+	// 收藏
+	public static void bookEfavorite(Context mcontext, EBook mbook) {
+		if (mbook != null) {
+			HashMap<String, String> map = new HashMap<String, String>();
+			map.put("libid", GlobleData.LIBIRY_ID);
+			map.put("vipuserid", GlobleData.cqvipid);
+//			Log.i("收藏",  GlobleData.cqvipid);
+			map.put("keyid", mbook.getLngid());
+//			Log.i("keyid", book.getLngid());
+			map.put("typeid", ""+GlobleData.BOOK_ZK_TYPE);
+			ManagerService.addNewTask(new Task(Task.TASK_EBOOK_FAVOR, map));
+		}
+	}
 	// 分享
 	public static void bookshare(Context mcontext, Book mbook) {
 		if (mbook != null) {
