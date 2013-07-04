@@ -435,6 +435,9 @@ public class BookManager {
 		return ShortBook.formList(Task.TASK_ANNOUNCE_SPEACH,result);
 	}
 	
+	
+	
+	
 	private String formResult(String result) throws BookException {
 		try {
 			JSONObject json = new JSONObject(result);
@@ -443,5 +446,4 @@ public class BookManager {
 			throw new BookException(e);
 		}
 	}
-	
 }

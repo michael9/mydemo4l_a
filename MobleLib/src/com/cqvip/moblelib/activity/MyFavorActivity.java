@@ -90,6 +90,43 @@ public class MyFavorActivity extends FragmentActivity implements
 		ManagerService.allActivity.add(this);
 		getfavorlist();
 	}
+	
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+			switch (requestCode) {
+			case 101:
+				if(resultCode==0&&del_favorite!=null)
+				{
+					
+					HashMap<String, String> map = new HashMap<String, String>();
+					map.put("libid", GlobleData.LIBIRY_ID);
+					map.put("vipuserid", GlobleData.cqvipid);
+					Log.i("删除收藏", GlobleData.cqvipid);
+					map.put("keyid", del_favorite.getFavoritekeyid());
+//					Log.i("keyid", favorite.getFavoritekeyid());
+					map.put("typeid", "" + del_favorite.getTypeid());
+					ManagerService
+							.addNewTask(new Task(Task.TASK_CANCEL_FAVOR, map));
+				}
+				break;
+
+			default:
+				break;
+			}
+		
+	}
+	
+	public void senddel(){
+		Intent intent=new Intent();
+		intent.setClass(MyFavorActivity.this, ActivityDlg.class);
+		intent.putExtra("ACTIONID", 0);
+		intent.putExtra("MSGBODY", "确定删除该收藏");
+		intent.putExtra("BTN_CANCEL", 1);
+		startActivityForResult(intent,101);
+	}
 
 	private void getfavorlist() {
 		HashMap map = new HashMap();
@@ -168,6 +205,8 @@ public class MyFavorActivity extends FragmentActivity implements
 			return null;
 		}
 	}
+	
+	
 
 	/**
 	 * A dummy fragment representing a section of the app, but that simply
@@ -183,7 +222,7 @@ public class MyFavorActivity extends FragmentActivity implements
 		public static final String ARG_SECTION_NUMBER = "section_number";
 
 		public DummySectionFragment() {
-			Log.i("MyFavorActivity", "DummySectionFragment");
+//			Log.i("MyFavorActivity", "DummySectionFragment");
 		}
 
 		List<Favorite> arrayList_temp;
@@ -252,44 +291,14 @@ public class MyFavorActivity extends FragmentActivity implements
 		public boolean onItemLongClick(AdapterView<?> parent, View view,
 				int position, long id) {
 			
-			Intent intent=new Intent();
-			intent.setClass(context, ActivityDlg.class);
-			intent.putExtra("ACTIONID", 0);
-			intent.putExtra("MSGBODY", "确定删除该收藏");
-			intent.putExtra("BTN_CANCEL", 1);
-			startActivityForResult(intent,101);
 			del_favorite=arrayList_temp.get(position);
 			
+			senddel();
 			
 			return false;
 		}
 	}
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		// TODO Auto-generated method stub
-		super.onActivityResult(requestCode, resultCode, data);
-			switch (requestCode) {
-			case 101:
-				if(resultCode==0&&del_favorite!=null)
-				{
-					
-					HashMap<String, String> map = new HashMap<String, String>();
-					map.put("libid", GlobleData.LIBIRY_ID);
-					map.put("vipuserid", GlobleData.cqvipid);
-					Log.i("删除收藏", GlobleData.cqvipid);
-					map.put("keyid", del_favorite.getFavoritekeyid());
-//					Log.i("keyid", favorite.getFavoritekeyid());
-					map.put("typeid", "" + del_favorite.getTypeid());
-					ManagerService
-							.addNewTask(new Task(Task.TASK_CANCEL_FAVOR, map));
-				}
-				break;
-
-			default:
-				break;
-			}
-		
-	}
+	
 	static class ViewHolder {
 
 		TextView title;// 书名
@@ -497,16 +506,14 @@ public class MyFavorActivity extends FragmentActivity implements
 		int temp = (Integer) obj[0];
 		if (temp == FAVOR) {
 			arrayLists = (Map<Integer, List<Favorite>>) obj[1];
+			arrayList_zk.clear();
+			arrayList_sz.clear();
 			if (arrayLists != null && !arrayLists.isEmpty()) {
-				arrayList_zk.clear();
-				arrayList_sz.clear();
 				arrayList_zk = arrayLists.get(GlobleData.BOOK_ZK_TYPE);
 				arrayList_sz = arrayLists.get(GlobleData.BOOK_SZ_TYPE);
-				mSectionsPagerAdapter.notifyDataSetChanged();
-				adapter_zk.notifyDataSetChanged();
-				adapter_sz.notifyDataSetChanged();
-				Log.i("MyFavorAc", "refresh_favor");
 			}
+
+			mSectionsPagerAdapter.notifyDataSetChanged();
 		} else if (temp == CANCELFAVOR) {
 			Result res = (Result) obj[1];
 			if (res.getSuccess()) {
