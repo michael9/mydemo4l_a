@@ -46,6 +46,7 @@ import android.util.Log;
 import com.cqvip.moblelib.BuildConfig;
 
 /**
+ * 处理文件和内存缓存
  * This class handles disk and memory caching of bitmaps in conjunction with the
  * {@link ImageWorker} class and its subclasses. Use
  * {@link ImageCache#getInstance(FragmentManager, ImageCacheParams)} to get an instance of this
@@ -55,27 +56,27 @@ import com.cqvip.moblelib.BuildConfig;
 public class ImageCache {
     private static final String TAG = "ImageCache";
 
-    // Default memory cache size in kilobytes
+    // Default memory cache size in kilobytes 内存缓存 5M
     private static final int DEFAULT_MEM_CACHE_SIZE = 1024 * 5; // 5MB
 
-    // Default disk cache size in bytes
+    // Default disk cache size in bytes 文件缓存10M
     private static final int DEFAULT_DISK_CACHE_SIZE = 1024 * 1024 * 10; // 10MB
 
-    // Compression settings when writing images to disk cache
+    // Compression settings when writing images to disk cache 压缩格式JPEG
     private static final CompressFormat DEFAULT_COMPRESS_FORMAT = CompressFormat.JPEG;
-    private static final int DEFAULT_COMPRESS_QUALITY = 70;
+    private static final int DEFAULT_COMPRESS_QUALITY = 70; //压缩质量 70
     private static final int DISK_CACHE_INDEX = 0;
 
     // Constants to easily toggle various caches
-    private static final boolean DEFAULT_MEM_CACHE_ENABLED = true;
-    private static final boolean DEFAULT_DISK_CACHE_ENABLED = true;
-    private static final boolean DEFAULT_INIT_DISK_CACHE_ON_CREATE = false;
+    private static final boolean DEFAULT_MEM_CACHE_ENABLED = true; //内存
+    private static final boolean DEFAULT_DISK_CACHE_ENABLED = true; //文件存储
+    private static final boolean DEFAULT_INIT_DISK_CACHE_ON_CREATE = false; 
 
-    private DiskLruCache mDiskLruCache;
-    private LruCache<String, BitmapDrawable> mMemoryCache;
-    private ImageCacheParams mCacheParams;
-    private final Object mDiskCacheLock = new Object();
-    private boolean mDiskCacheStarting = true;
+    private DiskLruCache mDiskLruCache;  
+    private LruCache<String, BitmapDrawable> mMemoryCache; //位图缓存，替代softreference
+    private ImageCacheParams mCacheParams;//holer 保存，缓存参数
+    private final Object mDiskCacheLock = new Object(); //锁
+    private boolean mDiskCacheStarting = true;//缓存开始标识
 
     private HashSet<SoftReference<Bitmap>> mReusableBitmaps;
 
@@ -90,7 +91,34 @@ public class ImageCache {
     private ImageCache(ImageCacheParams cacheParams) {
         init(cacheParams);
     }
+    /**
+     * 返回图片缓存实例
+     * @param cacheParams
+     * @return
+     */
+    public static ImageCache getInstance(ImageCacheParams cacheParams) {
+    	ImageCache  imageCache = new ImageCache(cacheParams);
+        return imageCache;
+    }
+    /**
+     * 
+     * @param context
+     * @param cacheParams
+     * @return
+     */
+    public static ImageCache getInstance(
+            Context context, ImageCacheParams cacheParams) {
+    	//TODO
+        // Search for, or create an instance of the non-UI RetainFragment
+      //  final RetainFragment mRetainFragment = findOrCreateRetainFragment(fragmentManager);
 
+        // See if we already have an ImageCache stored in RetainFragment
+        //ImageCache imageCache = (ImageCache) mRetainFragment.getObject();
+
+        // No existing ImageCache, create one and store it in RetainFragment
+    	ImageCache  imageCache = new ImageCache(cacheParams);
+        return imageCache;
+    }
     /**
      * Return an {@link ImageCache} instance. A {@link RetainFragment} is used to retain the
      * ImageCache object across configuration changes such as a change in device orientation.
@@ -117,19 +145,7 @@ public class ImageCache {
         return imageCache;
     }
     
-    public static ImageCache getInstance(
-            Context context, ImageCacheParams cacheParams) {
-
-        // Search for, or create an instance of the non-UI RetainFragment
-      //  final RetainFragment mRetainFragment = findOrCreateRetainFragment(fragmentManager);
-
-        // See if we already have an ImageCache stored in RetainFragment
-        //ImageCache imageCache = (ImageCache) mRetainFragment.getObject();
-
-        // No existing ImageCache, create one and store it in RetainFragment
-    	ImageCache  imageCache = new ImageCache(cacheParams);
-        return imageCache;
-    }
+   
     /**
      * Initialize the cache, providing all parameters.
      *

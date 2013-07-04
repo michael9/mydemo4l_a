@@ -34,8 +34,12 @@ public class Book implements Serializable  {
 	private String u_abstract;//¼ò½é
 	private String u_title;
 	private String u_isbn;
+	private boolean isfavorite;
 
 	
+	public boolean isIsfavorite() {
+		return isfavorite;
+	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
@@ -72,6 +76,7 @@ public class Book implements Serializable  {
 			u_cover = json.getString("u_cover");
 			u_title = json.getString("u_title");
 			u_publish = json.getString("u_publish");
+			isfavorite = json.getBoolean("isfavorite");
 		} catch (JSONException e) {
 			throw new BookException(e);
 		}
@@ -149,9 +154,11 @@ public class Book implements Serializable  {
 				+ publisher + ", publishyear=" + publishyear + ", title="
 				+ title + ", author=" + author + ", callno=" + callno
 				+ ", classno=" + classno + ", subject=" + subject
-				+ ", u_cover=" + u_cover + ", u_page=" + u_page + ", u_price="
-				+ u_price + ", u_abstract=" + u_abstract + ", u_title="
-				+ u_title + ", u_isbn=" + u_isbn + "]";
+				+ ", u_publish=" + u_publish + ", u_cover=" + u_cover
+				+ ", u_page=" + u_page + ", u_price=" + u_price
+				+ ", u_abstract=" + u_abstract + ", u_title=" + u_title
+				+ ", u_isbn=" + u_isbn + ", isfavorite=" + isfavorite + "]";
 	}
+	
 	
 }

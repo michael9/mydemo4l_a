@@ -3,7 +3,6 @@ package com.cqvip.moblelib.activity;
 import java.util.HashMap;
 import java.util.List;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,13 +19,14 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.cqvip.mobelib.imgutils.ImageCache.ImageCacheParams;
+import com.cqvip.mobelib.imgutils.ImageFetcher;
 import com.cqvip.moblelib.R;
-import com.cqvip.moblelib.adapter.BookAdapter;
 import com.cqvip.moblelib.adapter.EbookAdapter;
 import com.cqvip.moblelib.base.IBookManagerActivity;
 import com.cqvip.moblelib.biz.ManagerService;
 import com.cqvip.moblelib.biz.Task;
-import com.cqvip.moblelib.model.Book;
+import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.EBook;
 import com.cqvip.moblelib.model.Result;
 import com.cqvip.moblelib.view.CustomProgressDialog;
@@ -47,6 +47,7 @@ public class EBookSearchActivity extends BaseActivity implements IBookManagerAct
 	private EbookAdapter adapter;
 	private RelativeLayout noResult_rl;
 	private View title_bar;
+	private ImageFetcher mImageFetcher;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -59,7 +60,13 @@ public class EBookSearchActivity extends BaseActivity implements IBookManagerAct
 		ManagerService.allActivity.add(this);
 		customProgressDialog=CustomProgressDialog.createDialog(this);
 		noResult_rl = (RelativeLayout) findViewById(R.id.noresult_rl);
-		
+		//内存占用整个app1/8
+		ImageCacheParams cacheParams = new ImageCacheParams(context, GlobleData.IMAGE_CACHE_DIR);
+        cacheParams.setMemCacheSizePercent(0.125f); // Set memory cache to 25% of app memory
+		 mImageFetcher = new ImageFetcher(context, getResources().getDimensionPixelSize(R.dimen.bookicon_width),
+				   getResources().getDimensionPixelSize(R.dimen.bookicon_height));
+	     mImageFetcher.setLoadingImage(R.drawable.defaut_book);
+	     mImageFetcher.addImageCache(cacheParams);
 		imgsearch.setOnClickListener(new View.OnClickListener() {
 				
 				@Override
@@ -94,7 +101,7 @@ public class EBookSearchActivity extends BaseActivity implements IBookManagerAct
 					//网络访问,获取首页
 					page = 1;
 					getHomePage(edit.getText().toString().trim(),1,DEFAULT_COUNT,0);
-					Tool.ShowMessages(context, "开始搜索");
+					//Tool.ShowMessages(context, "开始搜索");
 					return true;
 				}
 
@@ -149,6 +156,25 @@ public class EBookSearchActivity extends BaseActivity implements IBookManagerAct
 		// TODO Auto-generated method stub
 		
 	}
+	 @Override
+	    public void onResume() {
+	        super.onResume();
+	        mImageFetcher.setExitTasksEarly(false);
+	    }
+
+	    @Override
+	    public void onPause() {
+	        super.onPause();
+	        mImageFetcher.setPauseWork(false);
+	        mImageFetcher.setExitTasksEarly(true);
+	        mImageFetcher.flushCache();
+	    }
+
+	    @Override
+	    public void onDestroy() {
+	        super.onDestroy();
+	        mImageFetcher.closeCache();
+	    }
 	@Override
 	public void refresh(Object... obj) {
 		customProgressDialog.dismiss();
@@ -172,7 +198,7 @@ public class EBookSearchActivity extends BaseActivity implements IBookManagerAct
 		if(lists!=null&&!lists.isEmpty()){
 			listview.setVisibility(View.VISIBLE);
 			noResult_rl.setVisibility(View.GONE);
-			adapter = new EbookAdapter(context,lists);
+			adapter = new EbookAdapter(context,lists,mImageFetcher);
 			listview.setAdapter(adapter);
 			
 		}else{

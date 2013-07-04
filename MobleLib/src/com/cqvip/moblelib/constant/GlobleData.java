@@ -53,6 +53,8 @@ public class GlobleData {
 	public final static String QUERY_CALLNO = "callno";
 	//查询类型,出版社
 	public final static String QUERY_PUBLISHER = "publisher";
+	//
+	public final static String IMAGE_CACHE_DIR = "bookimg";
 	
 	
 	

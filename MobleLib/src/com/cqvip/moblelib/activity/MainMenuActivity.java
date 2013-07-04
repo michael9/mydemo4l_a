@@ -77,15 +77,15 @@ public class MainMenuActivity extends BaseActivity implements IBookManagerActivi
 			switch (msg.what) {
 			
 			case 0:
-				sd.open();
-			
-				break;
-			case 1:
-				sd.close();
-				//检查更新	
+//				sd.open();
 				if (Tool.checkNetWork(context)) {
 		        	startCheckUpdate();
 				}
+				break;
+			case 1:
+//				sd.close();
+				//检查更新	
+				
 			mtimer.cancel();
 				break;
 			default:

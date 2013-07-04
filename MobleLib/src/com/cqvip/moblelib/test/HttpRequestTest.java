@@ -282,4 +282,33 @@ BookManager man = new BookManager();
 			}
 		}
 	}
+	public void getBookCommentList(){
+		  BookManager man = new BookManager();
+			
+          Map<Integer,List<Favorite>> result=null;
+		try {
+			result = (Map<Integer, List<Favorite>>) man.getUserCommentBook("1","10000", 1, 10);
+		
+		} catch (BookException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		if(result!=null){
+			List<Favorite> f1 = result.get(GlobleData.BOOK_SZ_TYPE);
+			if(f1!=null){
+			for(int i = 0;i<f1.size();i++){
+				Log.i("mobile",f1.get(i).toString());
+			}
+			}
+			List<Favorite> f2 = result.get(GlobleData.BOOK_ZK_TYPE);
+			if(f1!=null){
+			for(int i = 0;i<f2.size();i++){
+				Log.i("mobile",f2.get(i).toString());
+			}
+			}
+		}
+		
+		
+		
+	}
 }
