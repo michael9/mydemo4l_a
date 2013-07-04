@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp"
+    android:tag="itemview" >
+
+    <TextView
+        android:id="@+id/discussant_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5.0dip"
+        android:text=""
+        android:textColor="@color/green_light"
+        android:textSize="14.0sp" />
+
+    <!-- 鍐呭 -->
+    <TextView
+        android:id="@+id/content_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/discussant_tv"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:text=""
+        android:textColor="#ff414951"
+        android:textSize="14.0sp" />
+
+    <TextView
+        android:id="@+id/time_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/content_tv"
+        android:text="2013-07-04 13:20"
+        android:textColor="#ff414951"
+        android:textSize="14.0sp" />
+
+</RelativeLayout>
