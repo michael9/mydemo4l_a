@@ -11,6 +11,7 @@ import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.Book;
 import com.cqvip.moblelib.model.BookLoc;
 import com.cqvip.moblelib.model.BorrowBook;
+import com.cqvip.moblelib.model.Comment;
 import com.cqvip.moblelib.model.EBook;
 import com.cqvip.moblelib.model.EbookDetail;
 import com.cqvip.moblelib.model.Favorite;
@@ -321,7 +322,7 @@ public class BookManager {
 		params.add("curpage", page);
 		params.add("perpage", count);
 		String result = http.requestUrl(getBaseURL()+"/cloud/favoritelist.aspx", getBasepost(),params);
-		return Favorite.formList(result);
+		return Favorite.formList(Task.TASK_LIB_FAVOR,result);
 	}
 	
 	/**
@@ -344,10 +345,43 @@ public class BookManager {
 		String result = http.requestUrl(getBaseURL()+"/cloud/favoritecancel.aspx", getBasepost(),params);
 		return new Result(result);
 	}
+	/**
+	 * 获取用户所有评论过得书籍
+	 * @param libid
+	 * @param vipuserid
+	 * @param page
+	 * @param count
+	 * @return
+	 * @throws BookException
+	 */
+	public Map<Integer,List<Favorite>> getUserCommentBook(String libid,String vipuserid,int page,int count) throws BookException{
+		BookParameters params = new BookParameters();
+		params.add("libid", libid);
+		params.add("vipuserid", vipuserid);
+		params.add("curpage", page+"");
+		params.add("perpage", count+"");
+		String result = http.requestUrl(getBaseURL()+"/cloud/commentlistuser.aspx", getBaseget(),params);
+		return Favorite.formList(Task.TASK_COMMENT_BOOKLIST, result);
+	}
 	
-//	public List<Comment> getCommentList(){
-//		
-//	}
+	/**
+	 * 获取某本书籍下面的所有评论
+	 * @param bookid
+	 * @param vipuserid
+	 * @param page
+	 * @param count
+	 * @return
+	 * @throws BookException
+	 */
+	public List<Comment> getCommentList(String bookid,String vipuserid,int page,int count) throws BookException{
+		BookParameters params = new BookParameters();
+		params.add("libid", bookid);
+		params.add("vipuserid", vipuserid);
+		params.add("curpage", page+"");
+		params.add("perpage", count+"");
+		String result = http.requestUrl(getBaseURL()+"/cloud/favoritecancel.aspx", getBasepost(),params);
+		return Comment.formList(result);
+	}
 	
 	/**
 	 * 添加评论
