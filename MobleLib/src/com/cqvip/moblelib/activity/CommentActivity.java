@@ -72,6 +72,7 @@ public class CommentActivity extends BaseActivity implements
 		commit_btn = (Button) findViewById(R.id.commit_btn);
 		comment_et = (EditText) findViewById(R.id.comment_et);
 		ManagerService.allActivity.add(this);
+		customProgressDialog=new CustomProgressDialog(this);
 	}
 
 	@Override
