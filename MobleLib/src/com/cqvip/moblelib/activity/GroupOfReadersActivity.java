@@ -34,6 +34,7 @@ public class GroupOfReadersActivity extends BaseActivity implements OnClickListe
 		setContentView(R.layout.activity_group_of_readers);
 		mycomments_ll=(LinearLayout) findViewById(R.id.mycomments_ll);
 		mycomments_ll.setOnClickListener(this);
+		
 		View v = findViewById(R.id.group_title);
 		TextView title = (TextView) v.findViewById(R.id.txt_header);
 		title.setText(R.string.main_order);
