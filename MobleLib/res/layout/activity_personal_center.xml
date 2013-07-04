@@ -3,10 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_list"
-    tools:context=".GroupOfReadersActivity" android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".PersonalCenterActivity" >
 
     <include
-        android:id="@+id/group_title"
+        android:id="@+id/readerserve_title"
         layout="@layout/header" />
 
     <LinearLayout
@@ -53,6 +54,8 @@
                 android:src="@drawable/eg_arrow" />
         </LinearLayout>
 
+
+        
         <LinearLayout
             android:id="@+id/favorLayout"
             android:layout_width="fill_parent"
@@ -60,8 +63,8 @@
             android:layout_marginTop="-1dp"
             android:background="@drawable/linearlayout_shape2"
             android:gravity="center"
-            android:orientation="horizontal"
-            android:visibility="gone" >
+            android:visibility="gone"
+            android:orientation="horizontal" >
 
             <ImageView
                 android:id="@+id/serv_favor_icon"
@@ -88,7 +91,6 @@
                 android:layout_marginRight="20.0dip"
                 android:src="@drawable/eg_arrow" />
         </LinearLayout>
-
         <LinearLayout
             android:id="@+id/logoutLayout"
             android:layout_width="fill_parent"
@@ -124,8 +126,8 @@
                 android:src="@drawable/eg_arrow" />
         </LinearLayout>
 
-        <!--
-        <LinearLayout android:layout_marginTop="-1dp"
+        
+     <!--    <LinearLayout android:layout_marginTop="-1dp"
             android:background="@drawable/linearlayout_shape2"
             android:id="@+id/attentionLayout"
             android:layout_width="fill_parent"
@@ -157,12 +159,10 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="20.0dip"
                 android:src="@drawable/eg_arrow" />
-        </LinearLayout>
-        -->
-
-
-        <!--
-        <LinearLayout android:layout_marginTop="-1dp"
+        </LinearLayout> -->       
+        
+        
+		<!--  <LinearLayout android:layout_marginTop="-1dp"
             android:background="@drawable/linearlayout_shape2"
             android:id="@+id/attentionLayout"
             android:layout_width="fill_parent"
@@ -194,12 +194,10 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="20.0dip"
                 android:src="@drawable/eg_arrow" />
-        </LinearLayout>
-        -->
-
-
-        <!--
-        <LinearLayout android:layout_marginTop="-1dp"
+        </LinearLayout> -->
+        
+        
+       <!--  <LinearLayout android:layout_marginTop="-1dp"
             android:background="@drawable/linearlayout_shape2"
             android:id="@+id/myreadLayout"
             android:layout_width="fill_parent"
@@ -231,12 +229,10 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="20.0dip"
                 android:src="@drawable/eg_arrow" />
-        </LinearLayout>
-        -->
-
-
-        <!--
-        <LinearLayout android:layout_marginTop="-1dp"
+        </LinearLayout> -->
+       
+        
+      <!--   <LinearLayout android:layout_marginTop="-1dp"
             android:background="@drawable/linearlayout_shape2"
             android:id="@+id/mybyLayout"
             android:layout_width="fill_parent"
@@ -268,10 +264,8 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="20.0dip"
                 android:src="@drawable/eg_arrow" />
-        </LinearLayout>
-        -->
-
-
+        </LinearLayout> -->
+        
         <!--
         <LinearLayout android:layout_marginTop="-1dp"
             android:background="@drawable/linearlayout_shape_down"
@@ -305,8 +299,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="20.0dip"
                 android:src="@drawable/eg_arrow" />
-        </LinearLayout>
-
+        </LinearLayout>
         -->
     </LinearLayout>
 

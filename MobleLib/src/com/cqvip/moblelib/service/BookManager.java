@@ -373,13 +373,13 @@ public class BookManager {
 	 * @return
 	 * @throws BookException
 	 */
-	public List<Comment> getCommentList(String bookid,String vipuserid,int page,int count) throws BookException{
+	public List<Comment> getCommentList(String typeid,String keyid,int page,int count) throws BookException{
 		BookParameters params = new BookParameters();
-		params.add("libid", bookid);
-		params.add("vipuserid", vipuserid);
+		params.add("typeid", typeid);
+		params.add("keyid", keyid);
 		params.add("curpage", page+"");
 		params.add("perpage", count+"");
-		String result = http.requestUrl(getBaseURL()+"/cloud/favoritecancel.aspx", getBasepost(),params);
+		String result = http.requestUrl(getBaseURL()+"/cloud/commentlist.aspx", getBaseget(),params);
 		return Comment.formList(result);
 	}
 	

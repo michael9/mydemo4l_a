@@ -23,7 +23,6 @@ public class BaseActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		mGestureDetector = new GestureDetector(this,
 				new MyGestrueListener(this));
-		customProgressDialog=CustomProgressDialog.createDialog(this);		
 	}
 
 //	@Override
@@ -75,9 +74,6 @@ public class BaseActivity extends Activity {
 		}else if (a == 5) {//  ’≤ÿ ß∞‹
 			Tool.ShowMessages(this, getResources()
 					.getString(R.string.favorfail));
-		}else if (a == 6) {// ÃÌº” ß∞‹
-			Tool.ShowMessages(this, getResources()
-					.getString(R.string.addfail));
 		}
 	}
 }

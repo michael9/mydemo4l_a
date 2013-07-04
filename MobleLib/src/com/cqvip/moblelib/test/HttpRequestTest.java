@@ -11,6 +11,7 @@ import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.Book;
 import com.cqvip.moblelib.model.BookLoc;
 import com.cqvip.moblelib.model.BorrowBook;
+import com.cqvip.moblelib.model.Comment;
 import com.cqvip.moblelib.model.EBook;
 import com.cqvip.moblelib.model.EbookDetail;
 import com.cqvip.moblelib.model.Favorite;
@@ -310,5 +311,21 @@ BookManager man = new BookManager();
 		
 		
 		
+	}
+	public void getComment(){
+        BookManager man = new BookManager();
+		
+		List<Comment> result=null;
+		try {
+			result = man.getCommentList("5","B848/7218",1,10);
+		} catch (BookException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		if(result!=null){
+			for(int i = 0;i<result.size();i++){
+				Log.i("mobile",result.get(i).toString());
+			}
+		}
 	}
 }
