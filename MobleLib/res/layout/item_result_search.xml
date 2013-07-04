@@ -98,7 +98,7 @@
         android:text="图书介绍"
         android:textColor="@color/txt_black" />
 
-    <LinearLayout
+    <LinearLayout android:id="@+id/handle_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/ll_abstract"

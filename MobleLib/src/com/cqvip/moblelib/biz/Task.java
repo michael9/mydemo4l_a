@@ -27,6 +27,10 @@ public class Task {
 	public static final int TASK_LIB_FAVOR= 20;//馆藏图书收藏
 	public static final int TASK_CANCEL_FAVOR= 21;//取消收藏
 	public static final int TASK_EBOOK_FAVOR= 22;//电子图书收藏
+	public static final int TASK_COMMENT_BOOKLIST= 23;//获取用户评论过得书籍列表
+	public static final int TASK_COMMENT_LIST= 24;//获取围绕书籍的评论列表
+public static final int TASK_ADD_COMMENT= 25;//添加评论
+	public static final int TASK_COMMENT_DESTORY= 26;//删除收藏
 	
 	
 	public Task(int id, Map param) {
