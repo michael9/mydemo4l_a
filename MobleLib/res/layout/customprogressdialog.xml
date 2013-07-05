@@ -14,6 +14,6 @@
         android:layout_width="wrap_content"  
         android:layout_height="wrap_content"  
         android:layout_gravity="center_vertical"
-        android:text="正在加载中..."  
+        android:text="请稍等..."  
         android:textSize="20dp"/>  
 </LinearLayout>  

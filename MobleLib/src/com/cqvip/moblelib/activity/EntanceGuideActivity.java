@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.cqvip.moblelib.R;
 import com.cqvip.moblelib.view.mylinearlayout;
+import com.cqvip.utils.Tool;
 
 /**
  * <p>
@@ -147,7 +148,8 @@ public class EntanceGuideActivity extends BaseActivity {
 			public void onClick(View v) {
 				Intent intent = new Intent(context, DetailTextActivity.class);
 				intent.putExtra("enter", 8);
-				startActivity(intent);
+				//startActivity(intent);
+				Tool.ShowMessages(EntanceGuideActivity.this, "‘›ŒﬁŒ Ã‚");
 				// overridePendingTransition(R.anim.slide_right_in,
 				// R.anim.slide_left_out);
 

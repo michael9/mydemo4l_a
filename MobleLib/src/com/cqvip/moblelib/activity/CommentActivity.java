@@ -9,11 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -25,7 +23,6 @@ import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.Book;
 import com.cqvip.moblelib.model.Result;
-import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.utils.Tool;
 
 public class CommentActivity extends BaseActivity implements
@@ -77,11 +74,14 @@ public class CommentActivity extends BaseActivity implements
 		});
 		
 		ManagerService.allActivity.add(this);
-		customProgressDialog=new CustomProgressDialog(this);
 	}
 
 	@Override
 	public void onClick(View v) {
+		if(comment_et.getText().toString().trim().isEmpty()){
+			Tool.ShowMessages(this, "评论内容不能空");
+			return;
+		}
 		if (dBook != null) {
 			HashMap<String, String> map = new HashMap<String, String>();
 			map.put("libid", GlobleData.LIBIRY_ID);
