@@ -16,6 +16,7 @@ import com.cqvip.moblelib.activity.BorrowAndOrderActivity;
 import com.cqvip.moblelib.activity.CommentActivity;
 import com.cqvip.moblelib.activity.DetailTextActivity;
 import com.cqvip.moblelib.activity.EBookSearchActivity;
+import com.cqvip.moblelib.activity.EbookDetailActivity;
 import com.cqvip.moblelib.activity.GroupOfReadersActivity;
 import com.cqvip.moblelib.activity.MyFavorActivity;
 import com.cqvip.moblelib.activity.ResultOnSearchActivity;
@@ -225,7 +226,7 @@ public class ManagerService extends Service implements Runnable {
 					doException(2,msg, "EbookDetailActivity");
 					break;
 				}
-				down.refresh(msg.obj);
+				down.refresh(EbookDetailActivity.GET_DETAIL,msg.obj);
 				break;	
 				//获取服务器apk版本号
 			case Task.TASK_REFRESH:
@@ -267,12 +268,12 @@ public class ManagerService extends Service implements Runnable {
 				break;	
 				//电子图书收藏22
 			case Task.TASK_EBOOK_FAVOR:
-				IBookManagerActivity favor_ebook = (IBookManagerActivity) ManagerService.getActivityByName("EBookSearchActivity");
+				IBookManagerActivity favor_ebook = (IBookManagerActivity) ManagerService.getActivityByName("EbookDetailActivity");
 				if (msg.arg1 != 0) {
-					doException(5,msg, "EBookSearchActivity");
+					doException(5,msg, "EbookDetailActivity");
 					break;
 				}
-				favor_ebook.refresh(ResultOnSearchActivity.FAVOR,msg.obj);
+				favor_ebook.refresh(EbookDetailActivity.ADD_FORVORITE,msg.obj);
 				break;	
 				//添加评论23
 			case Task.TASK_ADD_COMMENT:

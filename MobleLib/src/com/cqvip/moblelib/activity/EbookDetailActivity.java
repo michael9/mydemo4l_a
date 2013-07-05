@@ -14,19 +14,25 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.cqvip.mobelib.imgutils.ImageFetcher;
 import com.cqvip.mobelib.imgutils.ImageCache.ImageCacheParams;
+import com.cqvip.mobelib.imgutils.ImageFetcher;
 import com.cqvip.moblelib.R;
 import com.cqvip.moblelib.base.IBookManagerActivity;
 import com.cqvip.moblelib.biz.ManagerService;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
+import com.cqvip.moblelib.model.Book;
 import com.cqvip.moblelib.model.EBook;
+import com.cqvip.moblelib.model.Result;
 import com.cqvip.moblelib.model.ShortBook;
 import com.cqvip.utils.Tool;
 
 public class EbookDetailActivity extends BaseActivity implements IBookManagerActivity {
 
+	public static final int ADD_COMMENT = 1;
+	public static final int ADD_FORVORITE = 2;
+	public static final int GET_DETAIL = 3;
+	
 	private Context context;
 	private EBook dBook;
 	private TextView author,from,type,page,title,content,time;
@@ -90,13 +96,25 @@ public class EbookDetailActivity extends BaseActivity implements IBookManagerAct
 		page.setText(page1+dBook.getPagecount());
 		type.setText(type1+"PDF,"+dBook.getPdfsize()/1024+"KB");
 		content.setText(describe1+dBook.getRemark_c());
+		//判断是否已经收藏
+		btn_ebook_detail_collect.setText(isFavorite(dBook.isIsfavorite()));
+		
 		
 		btn_ebook_detail_buzz.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Tool.bookEbuzz(EbookDetailActivity.this, dBook);
+				//Tool.bookEbuzz(EbookDetailActivity.this, dBook);
+				Intent _intent = new Intent(context,CommentActivity.class);
+				Book book = new Book(dBook.getLngid(),dBook.getOrgan(),dBook.getTitle_c(),
+						dBook.getWriter(),null,null,null,dBook.getRemark_c());
+				Bundle bundle = new Bundle();
+				bundle.putSerializable("book", book);
+				_intent.putExtra("detaiinfo", bundle);
+				startActivity(_intent);
+				
+				
 			}
 		});
 		btn_ebook_detail_share.setOnClickListener(new OnClickListener() {
@@ -142,6 +160,14 @@ public class EbookDetailActivity extends BaseActivity implements IBookManagerAct
 			}
 		});
 	}
+	//判断是否收藏
+	private String isFavorite(boolean isfavorite) {
+		if(isfavorite&&EBookSearchActivity.favors.containsKey(dBook.getLngid())){
+			return getResources().getString(R.string.already_favoriate);
+		}else{
+			return getResources().getString(R.string.add_favorite);
+		}
+	}
 
 	private void getLocalinfo(String recordid) {
 		
@@ -176,11 +202,31 @@ public class EbookDetailActivity extends BaseActivity implements IBookManagerAct
     }
 	@Override
 	public void refresh(Object... obj) {
-		List<ShortBook> book = (List<ShortBook>)obj[0];
-		if(book!=null){
-			download_url = book.get(0).getDate();
-			Log.i("url","download_url"+download_url);
+		int type = (Integer)obj[0];
+		switch(type){
+		case ADD_FORVORITE:
+			//更新界面
+			Result result = (Result)obj[1];
+			if(result.getSuccess()){
+			//提示
+				Tool.ShowMessages(context,getResources().getString(R.string.favorsucess));
+			//设置已收藏
+			btn_ebook_detail_collect.setText(getResources().getString(R.string.already_favoriate));
+			//加入hashMap
+			EBookSearchActivity.favors.put(dBook.getLngid(), true);
+			}else{
+				Tool.ShowMessages(context, getResources().getString(R.string.favorfail));
+				}
+			break;
+		case GET_DETAIL:
+			List<ShortBook> book = (List<ShortBook>)obj[1];
+			if(book!=null){
+				download_url = book.get(0).getDate();
+				Log.i("url","download_url"+download_url);
+			}
+			break;
 		}
+		
 		
 	}
 
