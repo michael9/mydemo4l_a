@@ -4,50 +4,66 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_list" >
 
-    <ImageView
-        android:id="@+id/book_big_img"
+    <include
+        android:id="@+id/head_bar"
+        layout="@layout/header" />
+
+    <RelativeLayout
+        android:id="@+id/baseinfo_rl"
         android:layout_width="fill_parent"
-        android:layout_height="220dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:scaleType="fitXY"
-        android:src="@drawable/defaut_book" />
- <ScrollView
-        android:id="@+id/intro_sl"
-        android:layout_width="match_parent"
-        android:layout_height="188dp"
-        android:layout_below="@+id/detail_book_title"
-        android:fadeScrollbars="false" >
+        android:layout_height="wrap_content"
+        android:layout_below="@id/head_bar" >
+
+        <ImageView
+            android:id="@+id/book_big_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@android:color/white"
+            android:padding="2dp"
+            android:src="@drawable/defaut_book" />
+
+        <TextView
+            android:id="@+id/baseinfo_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_toRightOf="@id/book_big_img"
+            android:text="基本信息"
+            android:textSize="16dp" />
 
         <TextView
             android:id="@+id/intro_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:shadowColor="@android:color/white"
-            android:shadowDx="2"
-            android:shadowDy="2"
-            android:shadowRadius="3"
+            android:layout_below="@id/baseinfo_tv"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_toRightOf="@id/book_big_img"
+            android:maxLines="3"
             android:text="图书简介"
-            android:textSize="16dp" />
-    </ScrollView>
+            android:textSize="16dp" android:ellipsize="end"/>
+    </RelativeLayout>
 
     <ListView
         android:id="@+id/comment_lv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/intro_sl"
         android:layout_above="@+id/comment_ll"
+        android:layout_below="@id/baseinfo_rl"
         android:layout_centerHorizontal="true" >
     </ListView>
 
-   <LinearLayout android:id="@+id/comment_ll"
+    <LinearLayout
+        android:id="@+id/comment_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
+        android:layout_marginTop="10dp"
         android:gravity="bottom"
         android:orientation="horizontal" >
 
@@ -67,8 +83,5 @@
             android:layout_height="wrap_content"
             android:text="提交" />
     </LinearLayout>
-    <include
-        android:id="@+id/detail_book_title"
-        layout="@layout/header" />
 
 </RelativeLayout>

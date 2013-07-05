@@ -248,7 +248,7 @@ public class GroupOfReadersActivity extends FragmentActivity implements
 				Favorite favorite = arrayList_temp.get(positon);
 				Book book = new Book(favorite.getLngid(), favorite.getOrgan(),
 						favorite.getTitle(), favorite.getWriter(),
-						favorite.getFavoritekeyid(), favorite.getYears(),
+						favorite.getLngid(), favorite.getYears(),
 						favorite.getPrice(), favorite.getRemark());
 				Tool.getCommentList(context, book);
 
