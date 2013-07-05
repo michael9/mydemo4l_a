@@ -179,7 +179,7 @@ public class Tool {
 	 * @param str
 	 * @return
 	 */
-	public static boolean isbnMatchling(String str) {
+	public static boolean isbnMatch(String str) {
 		Pattern pattern = Pattern
 				.compile("[0-9]{3}\\-?[0-9]{1}\\-?[0-9]{4}\\-?[0-9]{4}\\-?[0-9]{1}");
 		Matcher matcher = pattern.matcher(str);
