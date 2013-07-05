@@ -231,9 +231,9 @@ public class GroupOfReadersActivity extends FragmentActivity implements
 		@Override
 		public void onItemClick(AdapterView<?> arg0, View arg1, int positon,
 				long id) {
-			 Log.i("item","===============click=");
-			 if (id == -2) //更多
-			 {
+			Log.i("item", "===============click=");
+			if (id == -2) // 更多
+			{
 				// //进度条
 				// View moreprocess = arg1.findViewById(R.id.footer_progress);
 				// moreprocess.setVisibility(View.VISIBLE);
@@ -244,28 +244,32 @@ public class GroupOfReadersActivity extends FragmentActivity implements
 				// getHomePage(key,page+1,DEFAULT_COUNT,GETNEXTPAGE,GlobleData.QUERY_ALL);
 				// }
 				// page = page+1;
-			 }else{
-				 Favorite favorite=arrayList_temp.get(positon);
-				 Book book=new Book(favorite.getLngid(), favorite.getOrgan(), favorite.getTitle(), favorite.getWriter(), favorite.getFavoritekeyid(), favorite.getYears(), favorite.getPrice(),favorite.getRemark());
-				 Tool.getCommentList(context, book);
-				 
-//			 Book book = adapter.getLists().get(positon);
-//			 if(book!=null){
-//			 Log.i("ResultOnSearchActivity",book.toString());
-//			 Intent _intent = new Intent(context,DetailBookActivity.class);
-//			 Bundle bundle = new Bundle();
-//			 bundle.putSerializable("book", book);
-//			 _intent.putExtra("detaiinfo", bundle);
-//			 startActivity(_intent);
-//			 }
-			
-			 // Book book = lists.get(position-1);
-			 // if(book!=null){
-			 // Bundle bundle = new Bundle();
-			 // bundle.putSerializable("book", book);
-			 // _intent.putExtra("detaiinfo", bundle);
-			 // startActivityForResult(_intent, 1);
-			 }
+			} else {
+				Favorite favorite = arrayList_temp.get(positon);
+				Book book = new Book(favorite.getLngid(), favorite.getOrgan(),
+						favorite.getTitle(), favorite.getWriter(),
+						favorite.getFavoritekeyid(), favorite.getYears(),
+						favorite.getPrice(), favorite.getRemark());
+				Tool.getCommentList(context, book);
+
+				// Book book = adapter.getLists().get(positon);
+				// if(book!=null){
+				// Log.i("ResultOnSearchActivity",book.toString());
+				// Intent _intent = new
+				// Intent(context,DetailBookActivity.class);
+				// Bundle bundle = new Bundle();
+				// bundle.putSerializable("book", book);
+				// _intent.putExtra("detaiinfo", bundle);
+				// startActivity(_intent);
+				// }
+
+				// Book book = lists.get(position-1);
+				// if(book!=null){
+				// Bundle bundle = new Bundle();
+				// bundle.putSerializable("book", book);
+				// _intent.putExtra("detaiinfo", bundle);
+				// startActivityForResult(_intent, 1);
+			}
 		}
 
 		@Override
@@ -295,7 +299,7 @@ public class GroupOfReadersActivity extends FragmentActivity implements
 		TextView publisher;// 出版社
 		TextView publishyear;// 出版时间
 		TextView commentcount;// 评论数
-		//TextView abst_tv;// 简介
+		// TextView abst_tv;// 简介
 		ImageView img;// 时间图片 不用修改
 	}
 
@@ -378,7 +382,8 @@ public class GroupOfReadersActivity extends FragmentActivity implements
 						.findViewById(R.id.re_book_img);
 				holder.commentcount = (TextView) convertView
 						.findViewById(R.id.re_hot_txt);
-			  convertView.findViewById(R.id.txt_abst).setVisibility(View.GONE);
+				convertView.findViewById(R.id.txt_abst)
+						.setVisibility(View.GONE);
 				holder.commentcount.setTextColor(getResources().getColor(
 						R.color.green_light));
 				convertView.setTag(holder);
@@ -392,7 +397,7 @@ public class GroupOfReadersActivity extends FragmentActivity implements
 			String time = context.getResources().getString(R.string.item_time);
 			String commentcount = context.getResources().getString(
 					R.string.item_comment_count);
-			
+
 			Favorite favorite = arrayList.get(position);
 			holder.title.setText(favorite.getTitle());
 			holder.author.setText(author + favorite.getWriter());
