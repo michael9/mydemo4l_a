@@ -27,11 +27,19 @@ public class Task {
 	public static final int TASK_LIB_FAVOR= 20;//馆藏图书收藏
 	public static final int TASK_CANCEL_FAVOR= 21;//取消收藏
 	public static final int TASK_EBOOK_FAVOR= 22;//电子图书收藏
-public static final int TASK_ADD_COMMENT= 23;//添加评论
+    public static final int TASK_ADD_COMMENT= 23;//添加评论
 	public static final int TASK_COMMENT_BOOKLIST= 24;//获取用户评论过得书籍列表
 	public static final int TASK_COMMENT_LIST= 25;//获取围绕书籍的评论列表
-	public static final int TASK_ANNOUNCE_SPEACH= 26;//讲座
-	public static final int TASK_GET_HOTBOOK = 27; //获取热门书籍	
+	public static final int TASK_ANNOUNCE_SPEACH= 26;//讲座安排
+	public static final int TASK_ANNOUNCE_WELFARE= 28;//公益讲座
+	public static final int TASK_ANNOUNCE_NEWS = 29;//新闻动态
+	public static final int TASK_ANNOUNCE_DETAIL = 30;//公告详细
+	public static final int TASK_E_CAUTION = 31;//常见问题
+	public static final int TASK_SUGGEST_HOTBOOK = 32; //获取热门书籍
+	public static final int TASK_SUGGEST_NEWBOOK = 33;//获取新书推荐
+	public static final int TASK_SUGGEST_DETAIL = 34;//推荐书籍详细
+	public static final int TAST_CENTER_QUESTION= 35;//在线问答
+	
 	
 	
 	public Task(int id, Map param) {
