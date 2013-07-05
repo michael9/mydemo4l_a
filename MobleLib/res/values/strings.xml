@@ -85,8 +85,8 @@
     <string name="title_activity_result_on_search">ResultOnSearchActivity</string>
     <string name="title_activity_detail_book">DetailBookActivity</string>
     
-    <string name="title_section1">中刊</string>
-    <string name="title_section2">深圳馆藏图书</string>
+    <string name="title_section1">深圳馆藏图书</string>
+    <string name="title_section2">中刊</string>
     <string name="title_section3">文档</string>
     <string name="title_section4">多媒体</string>
     <string name="title_tips">提示</string>

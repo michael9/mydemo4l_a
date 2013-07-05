@@ -237,13 +237,13 @@ public class MyFavorActivity extends FragmentActivity implements
 					.findViewById(R.id.favorlist);
 			int i = getArguments().getInt(ARG_SECTION_NUMBER);
 			if (i == 0) {
-				arrayList_temp = arrayList_zk;
-				adapter_zk = new MyGridViewAdapter(getActivity(), arrayList_zk);
-				listView.setAdapter(adapter_zk);
-			} else if (i == 1) {
 				arrayList_temp = arrayList_sz;
 				adapter_sz = new MyGridViewAdapter(getActivity(), arrayList_sz);
 				listView.setAdapter(adapter_sz);
+			} else if (i == 1) {
+				arrayList_temp = arrayList_zk;
+				adapter_zk = new MyGridViewAdapter(getActivity(), arrayList_zk);
+				listView.setAdapter(adapter_zk);
 			}
 
 			listView.setOnItemClickListener((OnItemClickListener) this);
