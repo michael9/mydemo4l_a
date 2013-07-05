@@ -184,6 +184,5 @@ public class Tool {
 				.compile("[0-9]{3}\\-?[0-9]{1}\\-?[0-9]{4}\\-?[0-9]{4}\\-?[0-9]{1}");
 		Matcher matcher = pattern.matcher(str);
 		return matcher.find();
-	}
-
+	}	
 }
