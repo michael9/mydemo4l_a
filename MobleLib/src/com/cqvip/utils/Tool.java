@@ -6,21 +6,21 @@ import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.cqvip.moblelib.activity.CommentActivity;
-import com.cqvip.moblelib.biz.ManagerService;
-import com.cqvip.moblelib.biz.Task;
-import com.cqvip.moblelib.constant.GlobleData;
-import com.cqvip.moblelib.model.Book;
-import com.cqvip.moblelib.model.EBook;
-
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
+
+import com.cqvip.moblelib.activity.CommentActivity;
+import com.cqvip.moblelib.biz.ManagerService;
+import com.cqvip.moblelib.biz.Task;
+import com.cqvip.moblelib.constant.GlobleData;
+import com.cqvip.moblelib.model.Book;
+import com.cqvip.moblelib.model.EBook;
+import com.cqvip.moblelib.model.Favorite;
 
 /**
  * 工具内，构造字符串，解析字符串，字符串转换
@@ -89,6 +89,17 @@ public class Tool {
 
 	// 评论
 	public static void bookbuzz(Context mcontext, Book mbook) {
+		if (mbook != null) {
+			Intent intent = new Intent(mcontext, CommentActivity.class);
+			Bundle bundle = new Bundle();
+			bundle.putSerializable("book", mbook);
+			intent.putExtra("detaiinfo", bundle);
+			mcontext.startActivity(intent);
+		}
+	}
+	
+	// 获取某本书籍下面的所有评论
+	public static void getCommentList(Context mcontext, Book mbook) {
 		if (mbook != null) {
 			Intent intent = new Intent(mcontext, CommentActivity.class);
 			Bundle bundle = new Bundle();

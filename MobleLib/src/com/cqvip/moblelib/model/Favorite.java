@@ -1,5 +1,6 @@
 package com.cqvip.moblelib.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,9 +14,9 @@ import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.net.BookException;
 
-public class Favorite {
+public class Favorite implements Serializable{
 
-	private String lngid;
+	private String lngid;//为5时，是isbn号
 	private String title;
 	private String writer;
 	private String organ;// 出版社

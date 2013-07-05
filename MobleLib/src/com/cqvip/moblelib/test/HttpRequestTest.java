@@ -288,7 +288,7 @@ BookManager man = new BookManager();
 			
           Map<Integer,List<Favorite>> result=null;
 		try {
-			result = (Map<Integer, List<Favorite>>) man.getUserCommentBook("1","10000", 1, 10);
+			result = (Map<Integer, List<Favorite>>) man.getUserCommentBook("1","10000", "1", "10");
 		
 		} catch (BookException e1) {
 			// TODO Auto-generated catch block
@@ -296,13 +296,13 @@ BookManager man = new BookManager();
 		}
 		if(result!=null){
 			List<Favorite> f1 = result.get(GlobleData.BOOK_SZ_TYPE);
-			if(f1!=null){
+			if(f1!=null&&!f1.isEmpty()){
 			for(int i = 0;i<f1.size();i++){
 				Log.i("mobile",f1.get(i).toString());
 			}
 			}
 			List<Favorite> f2 = result.get(GlobleData.BOOK_ZK_TYPE);
-			if(f1!=null){
+			if(f2!=null&&!f2.isEmpty()){
 			for(int i = 0;i<f2.size();i++){
 				Log.i("mobile",f2.get(i).toString());
 			}
@@ -317,7 +317,7 @@ BookManager man = new BookManager();
 		
 		List<Comment> result=null;
 		try {
-			result = man.getCommentList("5","B848/7218",1,10);
+			result = man.getCommentList("5","B848/7218","1", "10");
 		} catch (BookException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

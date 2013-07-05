@@ -36,6 +36,19 @@ public class Book implements Serializable  {
 	private String u_isbn;
 	private boolean isfavorite;
 
+	//Favorite×ª»»ÎªBook
+	public Book(String isbn, String publisher, String title, String author,
+			String callno, String subject, String u_price,String u_abstract) {
+		super();
+		this.isbn = isbn;
+		this.publisher = publisher;
+		this.title = title;
+		this.author = author;
+		this.callno = callno;
+		this.subject = subject;
+		this.u_price = u_price;
+		this.u_abstract=u_abstract;
+	}
 	
 	public boolean isIsfavorite() {
 		return isfavorite;

@@ -16,6 +16,7 @@ import com.cqvip.moblelib.activity.BorrowAndOrderActivity;
 import com.cqvip.moblelib.activity.CommentActivity;
 import com.cqvip.moblelib.activity.DetailTextActivity;
 import com.cqvip.moblelib.activity.EBookSearchActivity;
+import com.cqvip.moblelib.activity.GroupOfReadersActivity;
 import com.cqvip.moblelib.activity.MyFavorActivity;
 import com.cqvip.moblelib.activity.ResultOnSearchActivity;
 import com.cqvip.moblelib.base.IBookManagerActivity;
@@ -282,6 +283,16 @@ public class ManagerService extends Service implements Runnable {
 				}
 				add_comment.refresh(CommentActivity.ADDCOMMENT,msg.obj);
 				break;	
+				//获取用户评论过得书籍列表24
+			case Task.TASK_COMMENT_BOOKLIST:
+				GroupOfReadersActivity groupOfReadersActivity= (GroupOfReadersActivity) ManagerService.getActivityByName("GroupOfReadersActivity");
+				if (msg.arg1 != 0) {
+					groupOfReadersActivity.onError(2);
+					msg.arg1 = 0;
+					break;
+				}
+				groupOfReadersActivity.refresh(GroupOfReadersActivity.COMMENTLIST,msg.obj);
+				break;	
 		   }
 	    }
 	};
@@ -421,6 +432,11 @@ public class ManagerService extends Service implements Runnable {
 		case Task.TASK_ADD_COMMENT:
 			Result result_addcomment = manager.addComment((String)task.getTaskParam().get("libid"), (String)task.getTaskParam().get("vipuserid"), (String)task.getTaskParam().get("keyid"), (String)task.getTaskParam().get("typeid"));
 			msg.obj = result_addcomment;
+			break;	
+			//获取用户评论过得书籍列表24
+		case Task.TASK_COMMENT_BOOKLIST:
+			Map<Integer,List<Favorite>> getcommentbooklist = manager.getUserCommentBook((String)task.getTaskParam().get("libid"), (String)task.getTaskParam().get("vipuserid"), (String)task.getTaskParam().get("curpage"), (String)task.getTaskParam().get("perpage"));
+			msg.obj = getcommentbooklist;
 			break;	
 			}
 		} catch (BookException e) {

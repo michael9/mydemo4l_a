@@ -354,12 +354,12 @@ public class BookManager {
 	 * @return
 	 * @throws BookException
 	 */
-	public Map<Integer,List<Favorite>> getUserCommentBook(String libid,String vipuserid,int page,int count) throws BookException{
+	public Map<Integer,List<Favorite>> getUserCommentBook(String libid,String vipuserid,String page,String count) throws BookException{
 		BookParameters params = new BookParameters();
 		params.add("libid", libid);
 		params.add("vipuserid", vipuserid);
-		params.add("curpage", page+"");
-		params.add("perpage", count+"");
+		params.add("curpage", page);
+		params.add("perpage", count);
 		String result = http.requestUrl(getBaseURL()+"/cloud/commentlistuser.aspx", getBaseget(),params);
 		return Favorite.formList(Task.TASK_COMMENT_BOOKLIST, result);
 	}
@@ -373,12 +373,12 @@ public class BookManager {
 	 * @return
 	 * @throws BookException
 	 */
-	public List<Comment> getCommentList(String typeid,String keyid,int page,int count) throws BookException{
+	public List<Comment> getCommentList(String typeid,String keyid,String page,String count) throws BookException{
 		BookParameters params = new BookParameters();
 		params.add("typeid", typeid);
 		params.add("keyid", keyid);
-		params.add("curpage", page+"");
-		params.add("perpage", count+"");
+		params.add("curpage", page);
+		params.add("perpage", count);
 		String result = http.requestUrl(getBaseURL()+"/cloud/commentlist.aspx", getBaseget(),params);
 		return Comment.formList(result);
 	}
