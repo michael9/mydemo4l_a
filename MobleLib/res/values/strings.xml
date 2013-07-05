@@ -112,6 +112,11 @@
     <string name="modifyfail">修改失败</string>
     <string name="favorfail">收藏失败</string>
     <string name="addfail">添加失败</string>
+    <string name="add_favorite">收藏</string>
+    <string name="already_favoriate">已收藏</string>
+    <string name="favorsucess">收藏成功</string>
+    
+    
     
 
     <string name="imageview_description">Image Thumbnail</string>

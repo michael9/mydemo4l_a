@@ -48,6 +48,7 @@ public class EBookSearchActivity extends BaseActivity implements IBookManagerAct
 	private RelativeLayout noResult_rl;
 	private View title_bar;
 	private ImageFetcher mImageFetcher;
+	public static HashMap<String,Boolean> favors = new HashMap<String, Boolean>();//保持收藏状态，更新界面
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
