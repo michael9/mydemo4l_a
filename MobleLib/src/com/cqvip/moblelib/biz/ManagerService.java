@@ -430,7 +430,9 @@ public class ManagerService extends Service implements Runnable {
 			break;	
 			//添加评论23
 		case Task.TASK_ADD_COMMENT:
-			Result result_addcomment = manager.addComment((String)task.getTaskParam().get("libid"), (String)task.getTaskParam().get("vipuserid"), (String)task.getTaskParam().get("keyid"), (String)task.getTaskParam().get("typeid"));
+			Result result_addcomment = manager.addComment((String)task.getTaskParam().get("libid"), 
+					(String)task.getTaskParam().get("vipuserid"), (String)task.getTaskParam().get("keyid"), 
+					(String)task.getTaskParam().get("typeid"), (String)task.getTaskParam().get("content"));
 			msg.obj = result_addcomment;
 			break;	
 			//获取用户评论过得书籍列表24

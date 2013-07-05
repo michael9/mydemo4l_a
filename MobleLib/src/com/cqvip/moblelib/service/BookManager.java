@@ -389,15 +389,17 @@ public class BookManager {
 	 * @param vipuserid //vip 用户id
 	 * @param keyid //评论图书id,中刊为lngid，深圳为callno
 	 * @param typeid //4，中刊，5深圳
+	 * @param content //评论内容
 	 * @return
 	 * @throws BookException
 	 */
-	public Result addComment(String libid,String vipuserid,String keyid,String typeid) throws BookException{
+	public Result addComment(String libid,String vipuserid,String keyid,String typeid,String content) throws BookException{
 		BookParameters params = new BookParameters();
 		params.add("libid", libid);
 		params.add("vipuserid", vipuserid);
 		params.add("keyid", keyid);
 		params.add("typeid", typeid);
+		params.add("info", content);
 		String result = http.requestUrl(getBaseURL()+"/cloud/comment.aspx", getBasepost(),params);
 		return new Result(result);
 		
@@ -419,6 +421,20 @@ public class BookManager {
 		params.add("typeid", typeid);
 		String result = http.requestUrl(getBaseURL()+"/cloud/comment.aspx", getBasepost(),params);
 		return new Result(result);
+	}
+	/**
+	 * 获取讲座信息
+	 * @param libid
+	 * @param announcetypeid
+	 * @return
+	 * @throws BookException
+	 */
+	public List<ShortBook> getAnnouce(String libid,String announcetypeid) throws BookException{
+		BookParameters params = new BookParameters();
+		params.add("libid", libid);
+		params.add("announcetypeid",announcetypeid);
+		String result = http.requestUrl(getBaseURL()+"/library/announce/html.aspx", getBaseget(),params);
+		return ShortBook.formList(Task.TASK_ANNOUNCE_SPEACH,result);
 	}
 	
 	
