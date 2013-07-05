@@ -32,7 +32,7 @@ public class CommentActivity extends BaseActivity implements
 		IBookManagerActivity, OnClickListener {
 	public static final int ADDCOMMENT = 1;
 
-	private TextView intro_tv;
+	private TextView baseinfo_tv,intro_tv;
 	private EditText comment_et;
 	private Button commit_btn;
 	private Book dBook;
@@ -54,17 +54,28 @@ public class CommentActivity extends BaseActivity implements
 		if(describe.trim().isEmpty()){
 			describe="ÎÞ";
 		}
-		intro_tv.setText("¡¶" + dBook.getTitle() + "¡·\n"
-				+ getString(R.string.item_author) + dBook.getAuthor() + "\n"			
-				+ getString(R.string.item_describe)+describe);
+		baseinfo_tv.setText("¡¶" + dBook.getTitle() + "¡·\n"
+				+ getString(R.string.item_author) + dBook.getAuthor());
+		intro_tv.setText(getString(R.string.item_describe)+describe);
 	}
 
 	@Override
 	public void init() {
 		comments_lv = (ListView) findViewById(R.id.comment_lv);
-		intro_tv = (TextView) findViewById(R.id.intro_tv);
+		baseinfo_tv = (TextView) findViewById(R.id.baseinfo_tv);
+		intro_tv= (TextView) findViewById(R.id.intro_tv);
 		commit_btn = (Button) findViewById(R.id.commit_btn);
 		comment_et = (EditText) findViewById(R.id.comment_et);
+		TextView title = (TextView)findViewById(R.id.txt_header);
+		title.setText(R.string.book_comment);
+		ImageView back = (ImageView)findViewById(R.id.img_back_header);
+		back.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				finish();
+			}
+		});
+		
 		ManagerService.allActivity.add(this);
 		customProgressDialog=new CustomProgressDialog(this);
 	}
@@ -77,7 +88,7 @@ public class CommentActivity extends BaseActivity implements
 			map.put("vipuserid", GlobleData.cqvipid);
 			Log.i("Ìí¼ÓÆÀÂÛ", GlobleData.cqvipid);
 			map.put("keyid", dBook.getCallno());
-			Log.i("keyid", dBook.getCallno());
+			Log.i("CommentActivity_keyid", dBook.getCallno());
 			map.put("typeid", "" + GlobleData.BOOK_SZ_TYPE);
 			ManagerService.addNewTask(new Task(Task.TASK_ADD_COMMENT, map));
 			customProgressDialog.show();

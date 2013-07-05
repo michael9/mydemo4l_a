@@ -104,6 +104,7 @@
     <string name="no_borrow">您没有借阅书籍信息!</string>
 
    <string name="book_detail">详细</string>
+   <string name="book_comment">书评</string>
     
     <!-- 异常提示 -->
 	<string name="loginfail">登录失败</string>
