@@ -38,10 +38,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/intro_sl"
+        android:layout_above="@+id/comment_ll"
         android:layout_centerHorizontal="true" >
     </ListView>
 
-   <LinearLayout
+   <LinearLayout android:id="@+id/comment_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

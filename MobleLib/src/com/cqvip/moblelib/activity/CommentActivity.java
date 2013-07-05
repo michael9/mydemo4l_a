@@ -50,19 +50,13 @@ public class CommentActivity extends BaseActivity implements
 
 		Bundle bundle = getIntent().getBundleExtra("detaiinfo");
 		dBook = (Book) bundle.getSerializable("book");
-		intro_tv.setText("¡¶" + dBook.getU_title() + "¡·\n"
-				+ getString(R.string.item_author) + dBook.getAuthor() + "\n"
-				+ getString(R.string.item_publish)
-				+ dBook.getU_publish()
-				+ "\n"
-				+ getString(R.string.item_subject)
-				+ dBook.getSubject()
-				+ "\n"
-				// +getString(R.string.item_callno)+dBook.getCallno()+"\n"
-				// +getString(R.string.item_classno)+dBook.getClassno()+"\n"
-				+ "ISBN:" + dBook.getIsbn() + "\n"
-				+ getString(R.string.item_price) + dBook.getU_price() + "\n"
-				+ dBook.getU_abstract());
+		String describe=dBook.getU_abstract();
+		if(describe.trim().isEmpty()){
+			describe="ÎÞ";
+		}
+		intro_tv.setText("¡¶" + dBook.getTitle() + "¡·\n"
+				+ getString(R.string.item_author) + dBook.getAuthor() + "\n"			
+				+ getString(R.string.item_describe)+describe);
 	}
 
 	@Override
