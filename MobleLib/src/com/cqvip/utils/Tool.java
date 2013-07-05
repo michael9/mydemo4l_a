@@ -179,11 +179,10 @@ public class Tool {
 	 * @param str
 	 * @return
 	 */
-	public static boolean isbnMatch(String str) {
+	public static boolean isbnMatch1(String str) {
 		Pattern pattern = Pattern
 				.compile("[0-9]{3}\\-?[0-9]{1}\\-?[0-9]{4}\\-?[0-9]{4}\\-?[0-9]{1}");
 		Matcher matcher = pattern.matcher(str);
 		return matcher.find();
-	}
-
+	}	
 }
