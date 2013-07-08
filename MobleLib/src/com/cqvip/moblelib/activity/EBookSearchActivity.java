@@ -63,7 +63,7 @@ public class EBookSearchActivity extends BaseActivity implements IBookManagerAct
 		noResult_rl = (RelativeLayout) findViewById(R.id.noresult_rl);
 		//内存占用整个app1/8
 		ImageCacheParams cacheParams = new ImageCacheParams(context, GlobleData.IMAGE_CACHE_DIR);
-        cacheParams.setMemCacheSizePercent(0.125f); // Set memory cache to 25% of app memory
+        cacheParams.setMemCacheSizePercent(0.125f); // Set memory cache to 12.5% of app memory
 		 mImageFetcher = new ImageFetcher(context, getResources().getDimensionPixelSize(R.dimen.bookicon_width),
 				   getResources().getDimensionPixelSize(R.dimen.bookicon_height));
 	     mImageFetcher.setLoadingImage(R.drawable.defaut_book);

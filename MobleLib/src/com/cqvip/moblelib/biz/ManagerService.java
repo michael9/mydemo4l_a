@@ -14,6 +14,7 @@ import android.util.Log;
 import com.cqvip.moblelib.activity.BaseActivity;
 import com.cqvip.moblelib.activity.BorrowAndOrderActivity;
 import com.cqvip.moblelib.activity.CommentActivity;
+import com.cqvip.moblelib.activity.DetailBookActivity;
 import com.cqvip.moblelib.activity.DetailTextActivity;
 import com.cqvip.moblelib.activity.EBookSearchActivity;
 import com.cqvip.moblelib.activity.EbookDetailActivity;
@@ -159,7 +160,7 @@ public class ManagerService extends Service implements Runnable {
 					doException(2,msg, "DetailBookActivity");
 					break;
 				}
-				binfo.refresh(msg.obj);
+				binfo.refresh(DetailBookActivity.GETBOOKINFO, msg.obj);
 				break;
 			// 修改密码
 			case Task.TASK_USER_PWD:
@@ -249,12 +250,12 @@ public class ManagerService extends Service implements Runnable {
 				break;	
 				//馆藏图书收藏20
 			case Task.TASK_LIB_FAVOR:
-				IBookManagerActivity favor_lib = (IBookManagerActivity) ManagerService.getActivityByName("ResultOnSearchActivity");
+				IBookManagerActivity favor_lib = (IBookManagerActivity) ManagerService.getActivityByName("DetailBookActivity");
 				if (msg.arg1 != 0) {
-					doException(5,msg, "ResultOnSearchActivity");
+					doException(5,msg, "DetailBookActivity");
 					break;
 				}
-				favor_lib.refresh(ResultOnSearchActivity.FAVOR,msg.obj);
+				favor_lib.refresh(DetailBookActivity.FAVOR,msg.obj);
 				break;	
 				//取消收藏21
 			case Task.TASK_CANCEL_FAVOR:

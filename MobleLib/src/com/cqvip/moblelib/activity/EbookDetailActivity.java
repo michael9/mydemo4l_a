@@ -96,8 +96,8 @@ public class EbookDetailActivity extends BaseActivity implements IBookManagerAct
 		page.setText(page1+dBook.getPagecount());
 		type.setText(type1+"PDF,"+dBook.getPdfsize()/1024+"KB");
 		content.setText(describe1+dBook.getRemark_c());
-		//判断是否已经收藏
-		btn_ebook_detail_collect.setText(isFavorite(dBook.isIsfavorite()));
+//		//判断是否已经收藏
+//		btn_ebook_detail_collect.setText(isFavorite(dBook.isIsfavorite()));
 		
 		
 		btn_ebook_detail_buzz.setOnClickListener(new OnClickListener() {
@@ -106,6 +106,7 @@ public class EbookDetailActivity extends BaseActivity implements IBookManagerAct
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				//Tool.bookEbuzz(EbookDetailActivity.this, dBook);
+				if (GlobleData.islogin) {
 				Intent _intent = new Intent(context,CommentActivity.class);
 				Book book = new Book(dBook.getLngid(),dBook.getOrgan(),dBook.getTitle_c(),
 						dBook.getWriter(),dBook.getLngid(),null,null,dBook.getRemark_c());
@@ -114,8 +115,10 @@ public class EbookDetailActivity extends BaseActivity implements IBookManagerAct
 				_intent.putExtra("detaiinfo", bundle);
 				_intent.putExtra("type", GlobleData.BOOK_ZK_TYPE);
 				startActivity(_intent);
-				
-				
+				} else {
+					//只是登陆而已
+					showLoginDialog(4);
+				}
 			}
 		});
 		btn_ebook_detail_share.setOnClickListener(new OnClickListener() {
@@ -131,7 +134,13 @@ public class EbookDetailActivity extends BaseActivity implements IBookManagerAct
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				if (GlobleData.islogin) {
 				Tool.bookEfavorite(EbookDetailActivity.this, dBook);
+				customProgressDialog.show();
+				} else {
+					//只是登陆而已
+					showLoginDialog(4);
+				}
 			}
 		});
 		
@@ -161,14 +170,23 @@ public class EbookDetailActivity extends BaseActivity implements IBookManagerAct
 			}
 		});
 	}
-	//判断是否收藏
-	private String isFavorite(boolean isfavorite) {
-		if(isfavorite&&EBookSearchActivity.favors.containsKey(dBook.getLngid())){
-			return getResources().getString(R.string.already_favoriate);
-		}else{
-			return getResources().getString(R.string.add_favorite);
-		}
+	
+	//显示对话框
+	private void showLoginDialog(int id) {
+		MainMenuActivity.cantouch = true;
+		Intent intent = new Intent(context, ActivityDlg.class);
+		intent.putExtra("ACTIONID", id);
+		startActivityForResult(intent, id);
 	}
+	
+//	//判断是否收藏
+//	private String isFavorite(boolean isfavorite) {
+//		if(isfavorite||EBookSearchActivity.favors.containsKey(dBook.getLngid())){
+//			return getResources().getString(R.string.already_favoriate);
+//		}else{
+//			return getResources().getString(R.string.add_favorite);
+//		}
+//	}
 
 	private void getLocalinfo(String recordid) {
 		
@@ -203,6 +221,7 @@ public class EbookDetailActivity extends BaseActivity implements IBookManagerAct
     }
 	@Override
 	public void refresh(Object... obj) {
+		customProgressDialog.dismiss();
 		int type = (Integer)obj[0];
 		switch(type){
 		case ADD_FORVORITE:
@@ -211,12 +230,14 @@ public class EbookDetailActivity extends BaseActivity implements IBookManagerAct
 			if(result.getSuccess()){
 			//提示
 				Tool.ShowMessages(context,getResources().getString(R.string.favorsucess));
-			//设置已收藏
-			btn_ebook_detail_collect.setText(getResources().getString(R.string.already_favoriate));
-			//加入hashMap
-			EBookSearchActivity.favors.put(dBook.getLngid(), true);
+//			//设置已收藏
+//			btn_ebook_detail_collect.setText(getResources().getString(R.string.already_favoriate));
+//			btn_ebook_detail_collect.setClickable(false);
+//			btn_ebook_detail_collect.setTextColor(getResources().getColor(R.drawable.silvergray));
+//			//加入hashMap
+//			EBookSearchActivity.favors.put(dBook.getLngid(), true);
 			}else{
-				Tool.ShowMessages(context, getResources().getString(R.string.favorfail));
+				Tool.ShowMessages(context, getResources().getString(R.string.already_favoriate));
 				}
 			break;
 		case GET_DETAIL:

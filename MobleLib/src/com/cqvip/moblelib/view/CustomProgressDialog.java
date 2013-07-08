@@ -79,6 +79,7 @@ public class CustomProgressDialog extends Dialog {
     public void dismiss() {
     	// TODO Auto-generated method stub
     	super.dismiss();
+    	if(imageView!=null)
     	imageView.clearAnimation();
     }
     /**

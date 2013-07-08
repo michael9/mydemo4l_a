@@ -35,7 +35,7 @@ public class CommentActivity extends BaseActivity implements
 	private Button commit_btn;
 	private Book dBook;
 	private ListView comments_lv;
-	private int type;
+	private int typeid;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -49,7 +49,7 @@ public class CommentActivity extends BaseActivity implements
 		Bundle bundle = getIntent().getBundleExtra("detaiinfo");
 		dBook = (Book) bundle.getSerializable("book");
 		
-		type = getIntent().getIntExtra("type", GlobleData.BOOK_SZ_TYPE);
+		typeid = getIntent().getIntExtra("type", GlobleData.BOOK_SZ_TYPE);
 		
 		String describe=dBook.getU_abstract();
 		if(TextUtils.isEmpty(describe)){
@@ -82,7 +82,8 @@ public class CommentActivity extends BaseActivity implements
 
 	@Override
 	public void onClick(View v) {
-		if(TextUtils.isEmpty(comment_et.getText().toString().trim())){
+		String info=comment_et.getText().toString().trim();
+		if(TextUtils.isEmpty(info)){
 			Tool.ShowMessages(this, "评论内容不能空");
 			return;
 		}
@@ -94,14 +95,15 @@ public class CommentActivity extends BaseActivity implements
 			map.put("keyid", dBook.getCallno());
 			Log.i("CommentActivity_keyid", dBook.getCallno());
 			map.put("typeid", "" + GlobleData.BOOK_SZ_TYPE);
-			map.put("record", getTypeComment(dBook));
+			map.put("recordid", getTypeComment(dBook));
+			map.put("content", info);
 			ManagerService.addNewTask(new Task(Task.TASK_ADD_COMMENT, map));
 			customProgressDialog.show();
 		}
 	}
 
 	private String getTypeComment(Book dBook2) {
-		if(type == GlobleData.BOOK_SZ_TYPE){
+		if(typeid == GlobleData.BOOK_SZ_TYPE){
 			return dBook2.getRecordid();
 		}else {
 			return null;
