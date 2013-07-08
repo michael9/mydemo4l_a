@@ -6,6 +6,8 @@ import java.util.Map;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.text.TextUtils;
+
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.Book;
@@ -22,6 +24,7 @@ import com.cqvip.moblelib.model.User;
 import com.cqvip.moblelib.net.BookException;
 import com.cqvip.moblelib.net.BookParameters;
 import com.cqvip.moblelib.net.HttpClientNewWork;
+import com.cqvip.utils.Tool;
 
 /**
  * 定义接口层
@@ -306,6 +309,28 @@ public class BookManager {
 		String result = http.requestUrl(getBaseURL()+"/cloud/favorite.aspx", getBasepost(),params);
 		return new Result(result);
 	}
+	/**
+	 * 添加收藏
+	 * @param libid //图书馆id
+	 * @param vipuserid //vip 用户id
+	 * @param keyid //索书号
+	 * @param typeid //类别 //4，中刊，5深圳
+	 * @return
+	 * @throws BookException
+	 */
+	public Result addFavorite(String libid,String vipuserid,String callno,String typeid,String recordid) throws BookException{
+		BookParameters params = new BookParameters();
+		params.add("libid", libid);
+		params.add("vipuserid", vipuserid);
+		if(!TextUtils.isEmpty(recordid)){
+		params.add("keyid", Tool.formSZbookID(callno,recordid));
+		}else{
+		params.add("keyid", callno);
+		}
+		params.add("typeid", typeid);
+		String result = http.requestUrl(getBaseURL()+"/cloud/favorite.aspx", getBasepost(),params);
+		return new Result(result);
+	}
 	
 	/**
 	 * 获取收藏列表
@@ -398,6 +423,31 @@ public class BookManager {
 		params.add("libid", libid);
 		params.add("vipuserid", vipuserid);
 		params.add("keyid", keyid);
+		params.add("typeid", typeid);
+		params.add("info", content);
+		String result = http.requestUrl(getBaseURL()+"/cloud/comment.aspx", getBasepost(),params);
+		return new Result(result);
+		
+	}
+	/**
+	 * 添加评论
+	 * @param libid //图书馆id
+	 * @param vipuserid //vip 用户id
+	 * @param keyid //评论图书id,中刊为lngid，深圳为callno
+	 * @param typeid //4，中刊，5深圳
+	 * @param content //评论内容
+	 * @return
+	 * @throws BookException
+	 */
+	public Result addComment(String libid,String vipuserid,String keyid,String typeid,String content,String recordid) throws BookException{
+		BookParameters params = new BookParameters();
+		params.add("libid", libid);
+		params.add("vipuserid", vipuserid);
+		if(!TextUtils.isEmpty(recordid)){
+			params.add("keyid", Tool.formSZbookID(keyid,recordid));
+			}else{
+				params.add("keyid", keyid);
+			}
 		params.add("typeid", typeid);
 		params.add("info", content);
 		String result = http.requestUrl(getBaseURL()+"/cloud/comment.aspx", getBasepost(),params);

@@ -112,6 +112,7 @@ public class EbookDetailActivity extends BaseActivity implements IBookManagerAct
 				Bundle bundle = new Bundle();
 				bundle.putSerializable("book", book);
 				_intent.putExtra("detaiinfo", bundle);
+				_intent.putExtra("type", GlobleData.BOOK_ZK_TYPE);
 				startActivity(_intent);
 				
 				

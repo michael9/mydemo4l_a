@@ -150,7 +150,7 @@ private Context context;
 						e.printStackTrace();
 					}
 					//设置登录标识
-					MainMenuActivity.islogin = false;
+					GlobleData.islogin = false;
 					//返回登录界面
 					finish();
 					//提示注销成功

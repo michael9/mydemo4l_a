@@ -416,7 +416,7 @@ public class ManagerService extends Service implements Runnable {
 			break;	
 			//馆藏图书收藏20
 		case Task.TASK_LIB_FAVOR:
-			Result result_addfavor = manager.addFavorite((String)task.getTaskParam().get("libid"), (String)task.getTaskParam().get("vipuserid"), (String)task.getTaskParam().get("keyid"), (String)task.getTaskParam().get("typeid"));
+			Result result_addfavor = manager.addFavorite((String)task.getTaskParam().get("libid"), (String)task.getTaskParam().get("vipuserid"), (String)task.getTaskParam().get("keyid"), (String)task.getTaskParam().get("typeid"),(String)task.getTaskParam().get("recordid"));
 			msg.obj = result_addfavor;
 			break;		
 			//取消收藏21
@@ -433,7 +433,7 @@ public class ManagerService extends Service implements Runnable {
 		case Task.TASK_ADD_COMMENT:
 			Result result_addcomment = manager.addComment((String)task.getTaskParam().get("libid"), 
 					(String)task.getTaskParam().get("vipuserid"), (String)task.getTaskParam().get("keyid"), 
-					(String)task.getTaskParam().get("typeid"), (String)task.getTaskParam().get("content"));
+					(String)task.getTaskParam().get("typeid"), (String)task.getTaskParam().get("content"),(String)task.getTaskParam().get("recordid"));
 			msg.obj = result_addcomment;
 			break;	
 			//获取用户评论过得书籍列表24
