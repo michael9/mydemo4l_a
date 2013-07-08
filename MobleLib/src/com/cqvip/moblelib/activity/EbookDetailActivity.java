@@ -108,7 +108,7 @@ public class EbookDetailActivity extends BaseActivity implements IBookManagerAct
 				//Tool.bookEbuzz(EbookDetailActivity.this, dBook);
 				Intent _intent = new Intent(context,CommentActivity.class);
 				Book book = new Book(dBook.getLngid(),dBook.getOrgan(),dBook.getTitle_c(),
-						dBook.getWriter(),null,null,null,dBook.getRemark_c());
+						dBook.getWriter(),dBook.getLngid(),null,null,dBook.getRemark_c());
 				Bundle bundle = new Bundle();
 				bundle.putSerializable("book", book);
 				_intent.putExtra("detaiinfo", bundle);

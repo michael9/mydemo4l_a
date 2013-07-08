@@ -69,15 +69,14 @@ public class ResultOnSearchActivity extends BaseActivity implements IBookManager
 				@Override
 				public void onClick(View v) {
 					hideKeybord();
-					if(TextUtils.isEmpty(edit.getText().toString())){
-						Tool.ShowMessages(context, "请输入关键字");
-						return;
-					}
-				  //搜索新鲜事
+					key = edit.getText().toString().trim();
 					if(!Tool.checkNetWork(context)){
 						return ;
 					}
-					key = edit.getText().toString().trim();
+					if(TextUtils.isEmpty(key)){
+						Tool.ShowMessages(context, "请输入关键字");
+						return;
+					}
 					//判断是否是isbn号查询
 					page = 1;
 					if(Tool.isbnMatch(key)){

@@ -73,7 +73,7 @@ public class EBookSearchActivity extends BaseActivity implements IBookManagerAct
 				@Override
 				public void onClick(View v) {
 					hideKeybord();
-					if(TextUtils.isEmpty(edit.getText().toString())){
+					if(TextUtils.isEmpty(edit.getText().toString().trim())){
 						Tool.ShowMessages(context, "«Î ‰»Îπÿº¸◊÷");
 						return;
 					}
