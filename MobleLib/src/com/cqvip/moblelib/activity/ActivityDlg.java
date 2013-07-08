@@ -181,7 +181,7 @@ public class ActivityDlg extends BaseActivity implements IBookManagerActivity {
 		customProgressDialog.dismiss();
 		Result res = (Result) obj[0];
 		if (res.getSuccess()) {
-			MainMenuActivity.islogin = true;
+			GlobleData.islogin = true;
 
 			User user = (User) obj[0];
 			GlobleData.userid = user.getCardno();
@@ -211,7 +211,7 @@ public class ActivityDlg extends BaseActivity implements IBookManagerActivity {
 //			Tool.ShowMessages(this, "登陆成功");
 			winexit(0);
 		} else {
-			MainMenuActivity.islogin = false;
+			GlobleData.islogin = false;
 			// dialog.dismiss();
 			// 提示登陆失败
 			Tool.ShowMessages(this, res.getMessage());

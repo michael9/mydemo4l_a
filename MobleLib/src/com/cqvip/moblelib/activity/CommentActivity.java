@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,7 +35,7 @@ public class CommentActivity extends BaseActivity implements
 	private Button commit_btn;
 	private Book dBook;
 	private ListView comments_lv;
-
+	private int type;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -47,8 +48,11 @@ public class CommentActivity extends BaseActivity implements
 
 		Bundle bundle = getIntent().getBundleExtra("detaiinfo");
 		dBook = (Book) bundle.getSerializable("book");
+		
+		type = getIntent().getIntExtra("type", GlobleData.BOOK_SZ_TYPE);
+		
 		String describe=dBook.getU_abstract();
-		if(describe.trim().isEmpty()){
+		if(TextUtils.isEmpty(describe)){
 			describe="无";
 		}
 		baseinfo_tv.setText("《" + dBook.getTitle() + "》\n"
@@ -78,7 +82,7 @@ public class CommentActivity extends BaseActivity implements
 
 	@Override
 	public void onClick(View v) {
-		if(comment_et.getText().toString().trim().isEmpty()){
+		if(TextUtils.isEmpty(comment_et.getText().toString())){
 			Tool.ShowMessages(this, "评论内容不能空");
 			return;
 		}
@@ -90,8 +94,17 @@ public class CommentActivity extends BaseActivity implements
 			map.put("keyid", dBook.getCallno());
 			Log.i("CommentActivity_keyid", dBook.getCallno());
 			map.put("typeid", "" + GlobleData.BOOK_SZ_TYPE);
+			map.put("record", getTypeComment(dBook));
 			ManagerService.addNewTask(new Task(Task.TASK_ADD_COMMENT, map));
 			customProgressDialog.show();
+		}
+	}
+
+	private String getTypeComment(Book dBook2) {
+		if(type == GlobleData.BOOK_SZ_TYPE){
+			return dBook2.getRecordid();
+		}else {
+			return null;
 		}
 	}
 
