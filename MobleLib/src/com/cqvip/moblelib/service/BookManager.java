@@ -346,7 +346,7 @@ public class BookManager {
 		params.add("vipuserid", vipuserid);
 		params.add("curpage", page);
 		params.add("perpage", count);
-		String result = http.requestUrl(getBaseURL()+"/cloud/favoritelist.aspx", getBasepost(),params);
+		String result = http.requestUrl(getBaseURL()+"/cloud/favoritelistuser.aspx", getBasepost(),params);
 		return Favorite.formList(Task.TASK_GET_FAVOR,result);
 	}
 	
