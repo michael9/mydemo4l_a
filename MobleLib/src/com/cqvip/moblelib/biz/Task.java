@@ -32,13 +32,17 @@ public class Task {
 	public static final int TASK_COMMENT_LIST= 25;//获取围绕书籍的评论列表
 	public static final int TASK_ANNOUNCE_SPEACH= 26;//讲座安排
 	public static final int TASK_ANNOUNCE_WELFARE= 28;//公益讲座
-	public static final int TASK_ANNOUNCE_NEWS = 29;//新闻动态
-	public static final int TASK_ANNOUNCE_DETAIL = 30;//公告详细
-	public static final int TASK_E_CAUTION = 31;//常见问题
-	public static final int TASK_SUGGEST_HOTBOOK = 32; //获取热门书籍
-	public static final int TASK_SUGGEST_NEWBOOK = 33;//获取新书推荐
-	public static final int TASK_SUGGEST_DETAIL = 34;//推荐书籍详细
-	public static final int TAST_CENTER_QUESTION= 35;//在线问答
+	public static final int TASK_ANNOUNCE_WELFARE_MORE= 29;//公益讲座
+	public static final int TASK_ANNOUNCE_NEWS = 30;//新闻动态
+	public static final int TASK_ANNOUNCE_NEWS_MORE = 31;//新闻动态
+	public static final int TASK_ANNOUNCE_DETAIL = 32;//公告详细
+	public static final int TASK_E_CAUTION = 33;//常见问题
+	public static final int TASK_SUGGEST_HOTBOOK = 34; //获取热门书籍
+	public static final int TASK_SUGGEST_NEWBOOK = 35;//获取新书推荐
+	public static final int TASK_SUGGEST_HOTBOOK_MORE = 36; //获取热门书籍
+	public static final int TASK_SUGGEST_NEWBOOK_MORE = 37;//获取新书推荐
+	public static final int TASK_SUGGEST_DETAIL = 38;//推荐书籍详细
+	public static final int TAST_CENTER_QUESTION= 39;//在线问答
 	
 	
 	

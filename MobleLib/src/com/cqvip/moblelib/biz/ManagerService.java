@@ -11,9 +11,12 @@ import android.os.IBinder;
 import android.os.Message;
 import android.util.Log;
 
+import com.cqvip.moblelib.activity.AdvancedBookActivity;
+import com.cqvip.moblelib.activity.AnnouceListActivity;
 import com.cqvip.moblelib.activity.BaseActivity;
 import com.cqvip.moblelib.activity.BorrowAndOrderActivity;
 import com.cqvip.moblelib.activity.CommentActivity;
+import com.cqvip.moblelib.activity.DetailAdvancedBookActivity;
 import com.cqvip.moblelib.activity.DetailTextActivity;
 import com.cqvip.moblelib.activity.EBookSearchActivity;
 import com.cqvip.moblelib.activity.EbookDetailActivity;
@@ -294,6 +297,43 @@ public class ManagerService extends Service implements Runnable {
 				}
 				groupOfReadersActivity.refresh(GroupOfReadersActivity.COMMENTLIST,msg.obj);
 				break;	
+			
+			case Task.TASK_SUGGEST_NEWBOOK:	
+			case Task.TASK_SUGGEST_NEWBOOK_MORE:
+			case Task.TASK_SUGGEST_HOTBOOK:
+			case Task.TASK_SUGGEST_HOTBOOK_MORE:
+				AdvancedBookActivity adbook= (AdvancedBookActivity) ManagerService.getActivityByName("AdvancedBookActivity");
+				if (msg.arg1 != 0) {
+					adbook.onError(2);
+					msg.arg1 = 0;
+					break;
+				}
+				adbook.refresh(msg.what,msg.obj);
+				break;
+			case Task.TASK_SUGGEST_DETAIL:
+				DetailAdvancedBookActivity adbookDetail= (DetailAdvancedBookActivity) ManagerService.getActivityByName("DetailAdvancedBookActivity");
+				if (msg.arg1 != 0) {
+					adbookDetail.onError(2);
+					msg.arg1 = 0;
+					break;
+				}
+				adbookDetail.refresh(msg.obj);
+				break;
+			case Task.TASK_ANNOUNCE_NEWS:	
+			case Task.TASK_ANNOUNCE_NEWS_MORE:
+			case Task.TASK_ANNOUNCE_WELFARE:
+			case Task.TASK_ANNOUNCE_WELFARE_MORE:
+				AnnouceListActivity annouce = (AnnouceListActivity) ManagerService.getActivityByName("AnnouceListActivity");
+				if (msg.arg1 != 0) {
+					annouce.onError(2);
+					msg.arg1 = 0;
+					break;
+				}
+				annouce.refresh(msg.what,msg.obj);
+				break;
+			case Task.TASK_ANNOUNCE_DETAIL:
+				
+				break;	
 		   }
 	    }
 	};
@@ -441,7 +481,37 @@ public class ManagerService extends Service implements Runnable {
 			Map<Integer,List<Favorite>> getcommentbooklist = manager.getUserCommentBook((String)task.getTaskParam().get("libid"), (String)task.getTaskParam().get("vipuserid"), (String)task.getTaskParam().get("curpage"), (String)task.getTaskParam().get("perpage"));
 			msg.obj = getcommentbooklist;
 			break;	
+		case Task.TASK_SUGGEST_HOTBOOK:
+		case Task.TASK_SUGGEST_HOTBOOK_MORE:
+			List<ShortBook> hotbook = manager.getSuggestHotBook(Task.TASK_SUGGEST_HOTBOOK,GlobleData.LIBIRY_ID, GlobleData.ANNAOUCETYPE_HOTBOOK+"",  (String)task.getTaskParam().get("page"),  (String)task.getTaskParam().get("count"));
+			msg.obj = hotbook;
+			break;
+		case Task.TASK_SUGGEST_NEWBOOK:
+		case Task.TASK_SUGGEST_NEWBOOK_MORE:
+			List<ShortBook> newbook = manager.getSuggestHotBook(Task.TASK_SUGGEST_NEWBOOK,GlobleData.LIBIRY_ID, GlobleData.ANNAOUCETYPE_NEWBOOK+"",  (String)task.getTaskParam().get("page"),  (String)task.getTaskParam().get("count"));
+			msg.obj = newbook;
+			break;
+		case Task.TASK_SUGGEST_DETAIL:
+			String scontent = manager.getSuggestDetail(GlobleData.LIBIRY_ID,(String)task.getTaskParam().get("id"));
+			msg.obj = scontent;
+			break;
+		case Task.TASK_ANNOUNCE_WELFARE:
+		case Task.TASK_ANNOUNCE_WELFARE_MORE:
+			List<ShortBook> freespeech = manager.getAnnounceNews(Task.TASK_SUGGEST_HOTBOOK,GlobleData.LIBIRY_ID,GlobleData.ANNAOUCETYPE_FREESPEECH+"",(String)task.getTaskParam().get("page"),  (String)task.getTaskParam().get("count"));
+			msg.obj = freespeech;
+			break;
+		case Task.TASK_ANNOUNCE_NEWS:
+		case Task.TASK_ANNOUNCE_NEWS_MORE:
+			List<ShortBook> news = manager.getSuggestHotBook(Task.TASK_ANNOUNCE_NEWS,GlobleData.LIBIRY_ID,GlobleData.ANNAOUCETYPE_NEWS+"", (String)task.getTaskParam().get("page"),  (String)task.getTaskParam().get("count"));
+			msg.obj = news;
+			break;
+		case Task.TASK_ANNOUNCE_DETAIL:
+			String acontent = manager.getSuggestDetail(GlobleData.LIBIRY_ID,(String)task.getTaskParam().get("id"));
+			msg.obj = acontent;
+			break;	
 			}
+			
+			
 		} catch (BookException e) {
 			System.out.println(e.getMessage());
 			msg.arg1 = -100;

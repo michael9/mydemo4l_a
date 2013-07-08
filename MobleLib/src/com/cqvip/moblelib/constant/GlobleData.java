@@ -56,7 +56,10 @@ public class GlobleData {
 	//
 	public final static String IMAGE_CACHE_DIR = "bookimg";
 	
-	
+	public static final int ANNAOUCETYPE_HOTBOOK = 3;//新书推荐
+	public static final int ANNAOUCETYPE_NEWBOOK = 4;//新书推荐
+	public static final int ANNAOUCETYPE_NEWS = 2 ;//新闻动态
+	public static final int ANNAOUCETYPE_FREESPEECH = 1;//公益讲座
 	
 	public static Map<String, Object> datas = new HashMap<String, Object>();
 	
@@ -68,6 +71,7 @@ public class GlobleData {
 	
 	//登录标识
 	public static boolean islogin = false;
+	
 	
 	
 	
