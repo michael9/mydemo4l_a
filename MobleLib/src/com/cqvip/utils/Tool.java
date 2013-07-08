@@ -119,6 +119,7 @@ public class Tool {
 			map.put("keyid", mbook.getCallno());
 			// Log.i("keyid", book.getCallno());
 			map.put("typeid", "" + GlobleData.BOOK_SZ_TYPE);
+			map.put("recordid", mbook.getRecordid());
 			ManagerService.addNewTask(new Task(Task.TASK_LIB_FAVOR, map));
 		}
 	}
@@ -195,5 +196,15 @@ public class Tool {
 				.compile("[0-9]{3}\\-?[0-9]{1}\\-?[0-9]{4}\\-?[0-9]{4}\\-?[0-9]{1}");
 		Matcher matcher = pattern.matcher(str);
 		return matcher.find();
-	}	
+	}
+	/**
+	 * Æ´½ÓÇëÇó×Ö·û´®
+	 * @param callno
+	 * @param recordid
+	 * @return
+	 */
+	public static String formSZbookID(String callno,String recordid){
+		String result = callno+","+recordid;
+		return result;
+	}
 }

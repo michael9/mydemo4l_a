@@ -66,6 +66,9 @@ public class GlobleData {
 	public static String readerid;
 	public static String cqvipid;
 	
+	//µÇÂ¼±êÊ¶
+	public static boolean islogin = false;
+	
 	
 	
 }
