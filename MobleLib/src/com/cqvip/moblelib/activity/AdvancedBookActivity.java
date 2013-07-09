@@ -3,36 +3,33 @@ package com.cqvip.moblelib.activity;
 import java.util.HashMap;
 import java.util.List;
 
-import org.xml.sax.DTDHandler;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
 
+import com.cqvip.mobelib.imgutils.AsyncTask;
 import com.cqvip.moblelib.R;
 import com.cqvip.moblelib.adapter.AdvancedBookAdapter;
-import com.cqvip.moblelib.adapter.BookAdapter;
 import com.cqvip.moblelib.base.IBookManagerActivity;
 import com.cqvip.moblelib.biz.ManagerService;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.Constant;
-import com.cqvip.moblelib.model.EBook;
 import com.cqvip.moblelib.model.ShortBook;
+import com.cqvip.moblelib.view.DownFreshListView;
 import com.cqvip.utils.Tool;
 
-public class AdvancedBookActivity extends BaseActivity implements IBookManagerActivity,OnItemClickListener {
+public class AdvancedBookActivity extends BaseActivity implements IBookManagerActivity,OnItemClickListener,DownFreshListView.OnRefreshListener {
 
 	private static final int GETMORE = 1;
 	private static final int GETHOMEPAGE = 0;
 	
 	private  AdvancedBookAdapter adapter;
-	private ListView listview;
+	private DownFreshListView listview;
 	private int type;
 	private Context context;
 	private int page=1;
@@ -44,8 +41,9 @@ public class AdvancedBookActivity extends BaseActivity implements IBookManagerAc
 		context = this;
 		type = getIntent().getIntExtra("type", 1);
 		
-		listview = (ListView) findViewById(R.id.listview_abook);
+		listview = (DownFreshListView) findViewById(R.id.listview_abook);
 		listview.setOnItemClickListener(this);
+		listview.setOnRefreshListener(this);
 		adapter = new AdvancedBookAdapter(context,null);
 		
 		//获取列表
@@ -135,6 +133,32 @@ public class AdvancedBookActivity extends BaseActivity implements IBookManagerAc
 			}
 			break;
 		}
+		
+	}
+
+
+	@Override
+	public void onRefresh() {
+		getHomePage(1, Constant.DEFAULT_COUNT,GETHOMEPAGE);
+		new AsyncTask<Void, Void, Void>() {
+			protected Void doInBackground(Void... params) {
+
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				return null;
+			}
+			//刷新完成
+			@Override
+			protected void onPostExecute(Void result) {
+				
+				listview.onRefreshComplete();
+
+			}
+
+		}.execute(null, null);
 		
 	}
 		
