@@ -36,6 +36,7 @@ public class AnnounceActivity extends BaseActivity {
 		
 		requestWindowFeature( Window.FEATURE_NO_TITLE );
 		setContentView(R.layout.activity_announce);
+		context = this;
 		View v = findViewById(R.id.readerserve_title);
 		TextView title = (TextView)v.findViewById(R.id.txt_header);
 		title.setText(R.string.main_notice);
@@ -49,8 +50,8 @@ public class AnnounceActivity extends BaseActivity {
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(context, AdvancedBookActivity.class);
-				intent.putExtra("type",Constant.HOTBOOK);
+				Intent intent = new Intent(context, AnnouceListActivity.class);
+				intent.putExtra("type",Constant.SPEECH_NEWS);
 				startActivity(intent);
 				// overridePendingTransition(R.anim.slide_right_in,
 				// R.anim.slide_left_out);
@@ -60,8 +61,8 @@ public class AnnounceActivity extends BaseActivity {
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(context, AdvancedBookActivity.class);
-				intent.putExtra("type",Constant.NEWBOOK);
+				Intent intent = new Intent(context, AnnouceListActivity.class);
+				intent.putExtra("type",Constant.SPPECH_FREE);
 				startActivity(intent);
 				// overridePendingTransition(R.anim.slide_right_in,
 				// R.anim.slide_left_out);

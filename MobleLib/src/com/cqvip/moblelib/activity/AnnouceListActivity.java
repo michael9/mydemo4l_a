@@ -30,6 +30,8 @@ import com.cqvip.utils.Tool;
 
 public class AnnouceListActivity extends BaseActivity implements IBookManagerActivity,OnItemClickListener{
 
+	private static final int GETMORE = 1;
+	private static final int GETHOMEPAGE = 0;
 	private ListView listview;
 	private int type;
 	private Context context;
@@ -45,22 +47,34 @@ public class AnnouceListActivity extends BaseActivity implements IBookManagerAct
 		type = getIntent().getIntExtra("type", 1);
 		
 		listview = (ListView) findViewById(R.id.listview_new);
+		listview.setOnItemClickListener(this);
 		adapter = new MyNewAdapter(context,null);
-		ManagerService.allActivity.add(this);
-		getHomePage(page, Constant.DEFAULT_COUNT);
+		
+		getHomePage(page, Constant.DEFAULT_COUNT,GETHOMEPAGE);
 		
 	}
 
-	private void getHomePage(int page, int defaultCount) {
+	private void getHomePage(int page, int defaultCount,int mwhat) {
+		if(!ManagerService.allActivity.contains(this)){
+			ManagerService.allActivity.add(this);
+			}
 		HashMap map=new HashMap();
-		map.put("page",page);
-		map.put("count", Constant.DEFAULT_COUNT);
+		map.put("page",page+"");
+		map.put("count", Constant.DEFAULT_COUNT+"");
 		switch(type){
 		case Constant.SPEECH_NEWS://新闻动态
+			if(mwhat == GETHOMEPAGE){
 			ManagerService.addNewTask(new Task(Task.TASK_ANNOUNCE_NEWS,map));
+			}else{
+				ManagerService.addNewTask(new Task(Task.TASK_ANNOUNCE_NEWS_MORE,map));
+			}
 			break;
 		case Constant.SPPECH_FREE://公益讲座
+			if(mwhat == GETHOMEPAGE){
 			ManagerService.addNewTask(new Task(Task.TASK_ANNOUNCE_WELFARE,map));
+			}else{
+			ManagerService.addNewTask(new Task(Task.TASK_ANNOUNCE_WELFARE_MORE,map));
+			}
 			break;
 		}
 		
@@ -74,7 +88,7 @@ public class AnnouceListActivity extends BaseActivity implements IBookManagerAct
 	}
 	class MyNewAdapter extends BaseAdapter{
 		private Context context;
-		private List<ShortBook> lists;
+		private List<ShortBook> mlists;
 		
 		public MyNewAdapter(Context con){
 			context = con;
@@ -82,31 +96,31 @@ public class AnnouceListActivity extends BaseActivity implements IBookManagerAct
 		public MyNewAdapter(Context context,
 				List<ShortBook> lists) {
 			this.context = context;
-			this.lists = lists;
+			this.mlists = lists;
 		}
 	
 		public void addMoreData(List<ShortBook> moreStatus)
 		{
-			this.lists.addAll(moreStatus);//把新数据增加到原有集合
+			this.mlists.addAll(moreStatus);//把新数据增加到原有集合
 			this.notifyDataSetChanged();
 		}
 		@Override
 		public int getCount() {
 
-			 if(lists!=null){
+			 if(mlists!=null){
 					
-					return lists.size()+1;
+					return mlists.size()+1;
 				}
 				return 0;
 			
 		}
 		public List<ShortBook> getList(){
-			return lists;
+			return mlists;
 		}
 		
 		@Override
 		public Object getItem(int position) {
-			return lists.get(position);
+			return mlists.get(position);
 		}
 
 		@Override
@@ -121,7 +135,6 @@ public class AnnouceListActivity extends BaseActivity implements IBookManagerAct
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			//更多
-			TextView tx = null;
 			if (position == this.getCount() - 1) {
 				convertView = LayoutInflater.from(context).inflate(R.layout.moreitemsview, null);
 				return convertView;
@@ -129,10 +142,11 @@ public class AnnouceListActivity extends BaseActivity implements IBookManagerAct
 			
 			if(convertView==null||convertView.findViewById(R.id.linemore) != null){
 				convertView = LayoutInflater.from(context).inflate(R.layout.item_news, null);
-				tx = (TextView)convertView.findViewById(R.id.tv_item_topic);
 				
+				TextView tx = (TextView)convertView.findViewById(R.id.tv_item_topic);
+				
+				tx.setText(mlists.get(position).getMessage());
 			}
-			tx.setText(lists.get(position).getDate());
 			return convertView;
 		}
 		
@@ -142,10 +156,10 @@ public class AnnouceListActivity extends BaseActivity implements IBookManagerAct
 		if (id == -2) //更多
 		{
 			//进度条
-			View moreprocess = arg1.findViewById(R.id.footer_progress);
+		    moreprocess = arg1.findViewById(R.id.footer_progress);
 			moreprocess.setVisibility(View.VISIBLE);
 			//请求网络更多
-			getHomePage(page+1,Constant.DEFAULT_COUNT);
+			getHomePage(page+1,Constant.DEFAULT_COUNT,GETMORE);
 			page = page+1;
 		}else{
 			ShortBook book = adapter.getList().get(position);
@@ -181,8 +195,8 @@ public class AnnouceListActivity extends BaseActivity implements IBookManagerAct
 			}
 			//TODO
 			break;
-		case Task.TASK_SUGGEST_HOTBOOK_MORE:
-		case Task.TASK_SUGGEST_NEWBOOK_MORE:
+		case Task.TASK_ANNOUNCE_NEWS_MORE:
+		case Task.TASK_ANNOUNCE_WELFARE_MORE:
 			moreprocess.setVisibility(View.GONE);
 			if(lists!=null&&!lists.isEmpty()){
 				adapter.addMoreData(lists);

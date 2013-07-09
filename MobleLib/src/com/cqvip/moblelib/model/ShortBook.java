@@ -67,6 +67,8 @@ public class ShortBook {
 			break;
 		case Task.TASK_SUGGEST_HOTBOOK:	
 		case Task.TASK_SUGGEST_NEWBOOK:
+		case Task.TASK_ANNOUNCE_NEWS:	
+		case Task.TASK_ANNOUNCE_WELFARE:
 			try {
 				JSONObject json = new JSONObject(result);
 				id = json.getString("id");
@@ -123,6 +125,8 @@ public class ShortBook {
 			break;
 		case Task.TASK_SUGGEST_HOTBOOK:	
 		case Task.TASK_SUGGEST_NEWBOOK:
+		case Task.TASK_ANNOUNCE_NEWS:	
+		case Task.TASK_ANNOUNCE_WELFARE:
 			try {
 				JSONObject json = new JSONObject(result);
 				if(!json.getBoolean("success")){
@@ -141,7 +145,6 @@ public class ShortBook {
 				throw new BookException(e);
 			}
 			break;
-			
 		}
 		    return books;
 		

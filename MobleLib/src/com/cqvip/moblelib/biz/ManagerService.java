@@ -17,6 +17,7 @@ import com.cqvip.moblelib.activity.BaseActivity;
 import com.cqvip.moblelib.activity.BorrowAndOrderActivity;
 import com.cqvip.moblelib.activity.CommentActivity;
 import com.cqvip.moblelib.activity.DetailAdvancedBookActivity;
+import com.cqvip.moblelib.activity.DetailBookActivity;
 import com.cqvip.moblelib.activity.DetailTextActivity;
 import com.cqvip.moblelib.activity.EBookSearchActivity;
 import com.cqvip.moblelib.activity.EbookDetailActivity;
@@ -162,7 +163,7 @@ public class ManagerService extends Service implements Runnable {
 					doException(2,msg, "DetailBookActivity");
 					break;
 				}
-				binfo.refresh(msg.obj);
+				binfo.refresh(DetailBookActivity.GETBOOKINFO, msg.obj);
 				break;
 			// 修改密码
 			case Task.TASK_USER_PWD:
@@ -254,10 +255,10 @@ public class ManagerService extends Service implements Runnable {
 			case Task.TASK_LIB_FAVOR:
 				IBookManagerActivity favor_lib = (IBookManagerActivity) ManagerService.getActivityByName("ResultOnSearchActivity");
 				if (msg.arg1 != 0) {
-					doException(5,msg, "ResultOnSearchActivity");
+					doException(5,msg, "DetailBookActivity");
 					break;
 				}
-				favor_lib.refresh(ResultOnSearchActivity.FAVOR,msg.obj);
+				favor_lib.refresh(DetailBookActivity.FAVOR,msg.obj);
 				break;	
 				//取消收藏21
 			case Task.TASK_CANCEL_FAVOR:
@@ -497,12 +498,12 @@ public class ManagerService extends Service implements Runnable {
 			break;
 		case Task.TASK_ANNOUNCE_WELFARE:
 		case Task.TASK_ANNOUNCE_WELFARE_MORE:
-			List<ShortBook> freespeech = manager.getAnnounceNews(Task.TASK_SUGGEST_HOTBOOK,GlobleData.LIBIRY_ID,GlobleData.ANNAOUCETYPE_FREESPEECH+"",(String)task.getTaskParam().get("page"),  (String)task.getTaskParam().get("count"));
+			List<ShortBook> freespeech = manager.getAnnounceNews(Task.TASK_ANNOUNCE_WELFARE,GlobleData.LIBIRY_ID,GlobleData.ANNAOUCETYPE_FREESPEECH+"",(String)task.getTaskParam().get("page"),  (String)task.getTaskParam().get("count"));
 			msg.obj = freespeech;
 			break;
 		case Task.TASK_ANNOUNCE_NEWS:
 		case Task.TASK_ANNOUNCE_NEWS_MORE:
-			List<ShortBook> news = manager.getSuggestHotBook(Task.TASK_ANNOUNCE_NEWS,GlobleData.LIBIRY_ID,GlobleData.ANNAOUCETYPE_NEWS+"", (String)task.getTaskParam().get("page"),  (String)task.getTaskParam().get("count"));
+			List<ShortBook> news = manager.getAnnounceNews(Task.TASK_ANNOUNCE_NEWS,GlobleData.LIBIRY_ID,GlobleData.ANNAOUCETYPE_NEWS+"", (String)task.getTaskParam().get("page"),  (String)task.getTaskParam().get("count"));
 			msg.obj = news;
 			break;
 		case Task.TASK_ANNOUNCE_DETAIL:

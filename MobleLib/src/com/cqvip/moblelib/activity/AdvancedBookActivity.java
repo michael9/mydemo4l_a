@@ -28,6 +28,9 @@ import com.cqvip.utils.Tool;
 
 public class AdvancedBookActivity extends BaseActivity implements IBookManagerActivity,OnItemClickListener {
 
+	private static final int GETMORE = 1;
+	private static final int GETHOMEPAGE = 0;
+	
 	private  AdvancedBookAdapter adapter;
 	private ListView listview;
 	private int type;
@@ -42,11 +45,11 @@ public class AdvancedBookActivity extends BaseActivity implements IBookManagerAc
 		type = getIntent().getIntExtra("type", 1);
 		
 		listview = (ListView) findViewById(R.id.listview_abook);
+		listview.setOnItemClickListener(this);
 		adapter = new AdvancedBookAdapter(context,null);
-		ManagerService.allActivity.add(this);
-		//获取列表
-		getHomePage(page, Constant.DEFAULT_COUNT);
 		
+		//获取列表
+		getHomePage(page, Constant.DEFAULT_COUNT,GETHOMEPAGE);
 		
 		
 	}
@@ -86,13 +89,14 @@ public class AdvancedBookActivity extends BaseActivity implements IBookManagerAc
 
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int position, long id) {
+		Log.i("mobile","=================onclick======");
 		if (id == -2) //更多
 		{
 			//进度条
-			View moreprocess = arg1.findViewById(R.id.footer_progress);
+		    moreprocess = arg1.findViewById(R.id.footer_progress);
 			moreprocess.setVisibility(View.VISIBLE);
 			//请求网络更多
-			getHomePage(page+1,Constant.DEFAULT_COUNT);
+			getHomePage(page+1,Constant.DEFAULT_COUNT,GETMORE);
 			page = page+1;
 		}else{
 			ShortBook book = adapter.getLists().get(position);
@@ -108,16 +112,27 @@ public class AdvancedBookActivity extends BaseActivity implements IBookManagerAc
 		}
 
 	
-	private void getHomePage(int page, int defaultCount) {
+	private void getHomePage(int page, int defaultCount,int mwhat) {
+		if(!ManagerService.allActivity.contains(this)){
+		ManagerService.allActivity.add(this);
+		}
 		HashMap map=new HashMap();
-		map.put("page",page);
-		map.put("count", Constant.DEFAULT_COUNT);
+		map.put("page",page+"");
+		map.put("count", Constant.DEFAULT_COUNT+"");
 		switch(type){
 		case Constant.HOTBOOK:
-			ManagerService.addNewTask(new Task(Task.TASK_SUGGEST_HOTBOOK,map));
+			if(mwhat == GETHOMEPAGE){
+				ManagerService.addNewTask(new Task(Task.TASK_SUGGEST_HOTBOOK,map));
+			}else{
+				ManagerService.addNewTask(new Task(Task.TASK_SUGGEST_HOTBOOK_MORE,map));
+			}
 			break;
 		case Constant.NEWBOOK:
+			if(mwhat == GETHOMEPAGE){
 			ManagerService.addNewTask(new Task(Task.TASK_SUGGEST_NEWBOOK,map));
+			}else{
+			ManagerService.addNewTask(new Task(Task.TASK_SUGGEST_NEWBOOK_MORE,map));
+			}
 			break;
 		}
 		

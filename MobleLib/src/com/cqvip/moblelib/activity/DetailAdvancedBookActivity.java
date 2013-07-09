@@ -46,7 +46,7 @@ public class DetailAdvancedBookActivity extends BaseActivity implements IBookMan
 
 	@Override
 	public void refresh(Object... obj) {
-		String res =(String)obj[1];
+		String res =(String)obj[0];
 		content.setText(Html.fromHtml(res));
 		
 	}

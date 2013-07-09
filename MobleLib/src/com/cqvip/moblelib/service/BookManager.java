@@ -536,7 +536,7 @@ public class BookManager {
 		params.add("announcetypeid", announcetypeid);
 		params.add("curpage", curpage);
 		params.add("perpage", perpage);
-		String result = http.requestUrl(getBaseURL()+"/announce/list.aspx", getBaseget(),params);
+		String result = http.requestUrl(getBaseURL()+"/library/announce/list.aspx", getBaseget(),params);
 		return ShortBook.formList(type, result);
 		
 	}

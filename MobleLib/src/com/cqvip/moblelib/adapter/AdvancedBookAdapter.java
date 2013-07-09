@@ -93,7 +93,7 @@ public class AdvancedBookAdapter extends BaseAdapter {
 		}else{
 			holder = (ViewHolder) convertView.getTag();
 		}
-		ShortBook book = lists.get(position);
+		    ShortBook book = lists.get(position);
 	        holder.title.setText(book.getMessage());
 	        holder.img.setBackgroundResource(R.drawable.defaut_book);
 	        //·ÖÏí
