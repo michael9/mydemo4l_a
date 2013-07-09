@@ -36,6 +36,7 @@ import com.cqvip.moblelib.base.IBookManagerActivity;
 import com.cqvip.moblelib.biz.ManagerService;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
+import com.cqvip.moblelib.model.Book;
 import com.cqvip.moblelib.model.Favorite;
 import com.cqvip.moblelib.model.Result;
 import com.cqvip.moblelib.view.CustomProgressDialog;
@@ -46,9 +47,12 @@ public class MyFavorActivity extends FragmentActivity implements
 	public static final int FAVOR = 1;
 	public static final int CANCELFAVOR = 2;
 
-	private String curpage = "1";// 第几页
-	private String perpage = "10";// 每页显示条数
+	private int curpage = 1;// 第几页
+	private int perpage = 10;// 每页显示条数
 	private Favorite del_favorite;
+	private View moreprocess;
+	private int type=GlobleData.BOOK_SZ_TYPE;
+	private int curpage_sz = 1, curpage_zk=1;// 第几页
 
 	MyGridViewAdapter adapter_zk, adapter_sz;
 	/**
@@ -69,8 +73,8 @@ public class MyFavorActivity extends FragmentActivity implements
 	Context context;
 	protected CustomProgressDialog customProgressDialog;
 	Map<Integer, List<Favorite>> arrayLists;
-	List<Favorite> arrayList_zk = new ArrayList<Favorite>();
-	List<Favorite> arrayList_sz = new ArrayList<Favorite>();
+	ArrayList<Favorite> arrayList_zk = new ArrayList<Favorite>();
+	ArrayList<Favorite> arrayList_sz = new ArrayList<Favorite>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +92,8 @@ public class MyFavorActivity extends FragmentActivity implements
 		mViewPager.setAdapter(mSectionsPagerAdapter);
 		// 获取数据
 		ManagerService.allActivity.add(this);
-		getfavorlist();
+		getfavorlist(curpage,perpage,GlobleData.BOOK_SZ_TYPE);
+		getfavorlist(curpage,perpage,GlobleData.BOOK_ZK_TYPE);
 	}
 	
 	
@@ -128,13 +133,14 @@ public class MyFavorActivity extends FragmentActivity implements
 		startActivityForResult(intent,101);
 	}
 
-	private void getfavorlist() {
+	private void getfavorlist(int pagecount,int perpage,int typeid) {
 		HashMap map = new HashMap();
 		map.put("libid", GlobleData.LIBIRY_ID);
 		Log.i("MyFavorActivity_cqvipid", "" + GlobleData.cqvipid);
 		map.put("vipuserid", GlobleData.cqvipid);
-		map.put("curpage", curpage);
-		map.put("perpage", perpage);
+		map.put("curpage", ""+pagecount);
+		map.put("perpage", ""+perpage);
+		map.put("typeid", ""+typeid);
 		ManagerService.addNewTask(new Task(Task.TASK_GET_FAVOR, map));
 	}
 
@@ -180,6 +186,7 @@ public class MyFavorActivity extends FragmentActivity implements
 		@Override
 		public int getItemPosition(Object object) {
 			// TODO Auto-generated method stub
+			Log.i("MyFavorActivity", "SectionsPagerAdapter_getItemPosition:");
 			return POSITION_NONE;
 		}
 
@@ -198,8 +205,10 @@ public class MyFavorActivity extends FragmentActivity implements
 			}
 			switch (position) {
 			case 0:
+				Log.i("MyFavorActivity", "SectionsPagerAdapter_getPageTitle_0");
 				return getString(R.string.title_section1).toUpperCase(l);
 			case 1:
+				Log.i("MyFavorActivity", "SectionsPagerAdapter_getPageTitle_1");
 				return getString(R.string.title_section2).toUpperCase(l);
 			}
 			return null;
@@ -240,65 +249,82 @@ public class MyFavorActivity extends FragmentActivity implements
 				arrayList_temp = arrayList_sz;
 				adapter_sz = new MyGridViewAdapter(getActivity(), arrayList_sz);
 				listView.setAdapter(adapter_sz);
+				listView.setTag(GlobleData.BOOK_SZ_TYPE);
 			} else if (i == 1) {
+				listView.setTag(GlobleData.BOOK_ZK_TYPE);
 				arrayList_temp = arrayList_zk;
 				adapter_zk = new MyGridViewAdapter(getActivity(), arrayList_zk);
 				listView.setAdapter(adapter_zk);
 			}
 
-			listView.setOnItemClickListener((OnItemClickListener) this);
+			listView.setOnItemClickListener(this);
 			listView.setOnItemLongClickListener(this);
 			return rootView;
 		}
 
+
+
 		@Override
-		public void onItemClick(AdapterView<?> arg0, View arg1, int positon,
+		public void onItemClick(AdapterView<?> parent, View view, int positon,
 				long id) {
-			// Log.i("item","===============click=");
-			// if (id == -2) //更多
-			// {
-			// //进度条
-			// View moreprocess = arg1.findViewById(R.id.footer_progress);
-			// moreprocess.setVisibility(View.VISIBLE);
-			// //请求网络更多
-			// if(Tool.isbnMatch(key)){
-			// getHomePage(key,page+1,DEFAULT_COUNT,GETNEXTPAGE,GlobleData.QUERY_ISBN);
-			// }else{
-			// getHomePage(key,page+1,DEFAULT_COUNT,GETNEXTPAGE,GlobleData.QUERY_ALL);
-			// }
-			// page = page+1;
-			// }else{
-			// Book book = adapter.getLists().get(positon);
-			// if(book!=null){
-			// Log.i("ResultOnSearchActivity",book.toString());
-			// Intent _intent = new Intent(context,DetailBookActivity.class);
-			// Bundle bundle = new Bundle();
-			// bundle.putSerializable("book", book);
-			// _intent.putExtra("detaiinfo", bundle);
-			// startActivity(_intent);
-			// }
-			//
-			// // Book book = lists.get(position-1);
-			// // if(book!=null){
-			// // Bundle bundle = new Bundle();
-			// // bundle.putSerializable("book", book);
-			// // _intent.putExtra("detaiinfo", bundle);
-			// // startActivityForResult(_intent, 1);
-			// }
-		}
+			Log.i("item","===============click=");
+			if (id == -2) {
+				if(parent.getAdapter().getCount()==1){
+					return;
+				}
+				//进度条
+				moreprocess = view.findViewById(R.id.footer_progress);
+				moreprocess.setVisibility(View.VISIBLE);
+				Log.i("parent.getTag()",""+parent.getTag());
+				//请求网络更多		
+				if((Integer)parent.getTag()==GlobleData.BOOK_SZ_TYPE){
+				curpage_sz++;
+				getfavorlist(curpage_sz,perpage,GlobleData.BOOK_SZ_TYPE);
+				}else if((Integer)parent.getTag()==GlobleData.BOOK_ZK_TYPE){
+				curpage_zk++;
+				getfavorlist(curpage_zk,perpage,GlobleData.BOOK_ZK_TYPE);
+				}
+			}else{
+//				//Book book = adapter.getLists().get(positon);
+//				if(book!=null){
+//					Log.i("ResultOnSearchActivity",book.toString());
+//					Intent _intent = new Intent(context,DetailBookActivity.class);
+//					Bundle bundle = new Bundle();
+//					bundle.putSerializable("book", book);
+//					_intent.putExtra("detaiinfo", bundle);
+//					startActivity(_intent);
+				//}
+				
+//				Book book =  lists.get(position-1);
+//				if(book!=null){
+//				Bundle bundle = new Bundle();
+//				bundle.putSerializable("book", book);
+//				_intent.putExtra("detaiinfo", bundle);
+//				startActivityForResult(_intent, 1);
+				}
+			}
 
 		@Override
 		public boolean onItemLongClick(AdapterView<?> parent, View view,
 				int position, long id) {
-			
+			if(parent.getAdapter().getItemId(position)!=-2){
+			int listviewid=(Integer)parent.getTag();
+			listview_id=listviewid;
+			listview_item_position=position;
+			if(listviewid==GlobleData.BOOK_SZ_TYPE){
+				type=GlobleData.BOOK_SZ_TYPE;
+			}else if(listviewid==GlobleData.BOOK_ZK_TYPE){
+				type=GlobleData.BOOK_ZK_TYPE;
+			}
 			del_favorite=arrayList_temp.get(position);
 			
 			senddel();
-			
+			}
 			return false;
 		}
 	}
-	
+	private int listview_id=GlobleData.BOOK_SZ_TYPE;
+	private int listview_item_position=0;
 	static class ViewHolder {
 
 		TextView title;// 书名
@@ -324,6 +350,10 @@ public class MyFavorActivity extends FragmentActivity implements
 			Log.i("MyFavorActivity", "MyGridViewAdapter");
 		}
 
+		public List<Favorite> getList(){
+			return this.arrayList;
+		}
+		
 		@Override
 		public int getCount() {
 			Log.i("getCount", "getCount");
@@ -352,35 +382,36 @@ public class MyFavorActivity extends FragmentActivity implements
 			notifyDataSetChanged();
 		}
 
-		// @Override
-		// public View getView(int position, View convertView, ViewGroup parent)
-		// {
-		// if (convertView == null) {
-		// convertView = LayoutInflater.from(myContext).inflate(
-		// R.layout.myfavor_fragmen_item, null);
-		// }
-		// ImageView iv = (ImageView) convertView
-		// .findViewById(R.id.imageView1);
-		// TextView tc = (TextView) convertView.findViewById(R.id.textView1);
-		// return convertView;
-		// }
-
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			final ViewHolder holder;
-
+			if(this.getCount() == 1){
+				convertView = LayoutInflater.from(myContext).inflate(
+						R.layout.moreitemsview, null);
+				convertView.setClickable(false);
+				convertView.setBackground(context.getResources().getDrawable(R.drawable.transparent));
+				TextView tv=(TextView)convertView.findViewById(R.id.footer_txt);
+				tv.setText("亲，您所在分类没有收藏哦");
+				tv.setTextColor(context.getResources().getColor(R.drawable.silvergray));
+				tv.setTextSize(context.getResources().getDimension(R.dimen.search_detail_txtsize_tv));
+				tv.setClickable(false);
+				return convertView;
+			}
 			// 更多
 			if (position == this.getCount() - 1) {
 				convertView = LayoutInflater.from(myContext).inflate(
 						R.layout.moreitemsview, null);
 				return convertView;
 			}
+
 			if (convertView == null
 					|| convertView.findViewById(R.id.linemore) != null) {
 				convertView = LayoutInflater.from(myContext).inflate(
 						R.layout.item_result_search, null);
 				holder = new ViewHolder();
-
+				TextView txt_abst= (TextView) convertView
+						.findViewById(R.id.txt_abst);
+				txt_abst.setVisibility(View.GONE);
 				holder.title = (TextView) convertView
 						.findViewById(R.id.re_name_txt);
 				holder.author = (TextView) convertView
@@ -419,61 +450,6 @@ public class MyFavorActivity extends FragmentActivity implements
 			holder.publishyear.setText(time + favorite.getYears());
 			holder.isbn.setText("ISBN:" + favorite.getLngid());
 
-			// // 分享
-			// holder.btn_item_result_search_share.setTag(position);
-			// holder.btn_item_result_search_share
-			// .setOnClickListener(new OnClickListener() {
-			//
-			// @Override
-			// public void onClick(View v) {
-			//
-			// int pos = (Integer) v.getTag();
-			// Intent intent = new Intent(Intent.ACTION_SEND);
-			// intent.setType("image/*");
-			// intent.putExtra(Intent.EXTRA_SUBJECT, "图书分享");
-			// intent.putExtra(
-			// Intent.EXTRA_TEXT,
-			// ("好书分享:"
-			// + (alArrayList.get(pos)).getTitle()
-			// + "\r\n作者:"
-			// + (alArrayList.get(pos))
-			// .getAuthor()
-			// + "\r\n出版社:"
-			// + (alArrayList.get(pos))
-			// .getPublisher()
-			// + "\r\n出版日期:"
-			// + (alArrayList.get(pos))
-			// .getPublishyear()
-			// + "\r\nISBN:" + (alArrayList
-			// .get(pos)).getIsbn()));
-			// intent.putExtra(
-			// Intent.EXTRA_STREAM,
-			// Uri.decode("http://www.szlglib.com.cn/images/logo.jpg")); //
-			// 分享图片"http://www.szlglib.com.cn/images/logo.jpg"
-			// context.startActivity(Intent.createChooser(intent,
-			// "分享到"));
-			//
-			// }
-			// });
-			// // 评论
-			// holder.btn_comment.setTag(position);
-			// holder.btn_comment.setOnClickListener(new OnClickListener() {
-			//
-			// @Override
-			// public void onClick(View v) {
-			// int pos = (Integer) v.getTag();
-			// Book book = alArrayList.get(pos);
-			// if (book != null) {
-			// Intent intent = new Intent(context,
-			// CommentActivity.class);
-			// Bundle bundle = new Bundle();
-			// bundle.putSerializable("book", book);
-			// intent.putExtra("detaiinfo", bundle);
-			// context.startActivity(intent);
-			// }
-			// }
-			// });
-
 			return convertView;
 		}
 	}
@@ -499,6 +475,8 @@ public class MyFavorActivity extends FragmentActivity implements
 		customProgressDialog.show();
 	}
 
+	private boolean isdeleted_sz=false;
+	private boolean isdeleted_zk=false;
 	@Override
 	public void refresh(Object... obj) {
 		customProgressDialog.dismiss();
@@ -506,23 +484,44 @@ public class MyFavorActivity extends FragmentActivity implements
 		int temp = (Integer) obj[0];
 		if (temp == FAVOR) {
 			arrayLists = (Map<Integer, List<Favorite>>) obj[1];
-			arrayList_zk.clear();
-			arrayList_sz.clear();
-			if (arrayLists != null && !arrayLists.isEmpty()) {
-				arrayList_zk = arrayLists.get(GlobleData.BOOK_ZK_TYPE);
-				arrayList_sz = arrayLists.get(GlobleData.BOOK_SZ_TYPE);
+			if(isdeleted_sz){
+				arrayList_sz.clear();
+				isdeleted_sz=false;
+			}else if(isdeleted_zk){
+				arrayList_zk.clear();
+				isdeleted_zk=false;
+			}else if((curpage_sz>1||curpage_zk>1)&&arrayLists != null && !arrayLists.isEmpty()){
+				if ((arrayLists.get(GlobleData.BOOK_ZK_TYPE)==null||arrayLists.get(GlobleData.BOOK_ZK_TYPE).isEmpty())&&
+						(arrayLists.get(GlobleData.BOOK_SZ_TYPE)==null||arrayLists.get(GlobleData.BOOK_SZ_TYPE).isEmpty())) {
+					Tool.ShowMessages(context, "没有更多内容可供加载");
+					moreprocess.setVisibility(View.GONE);
+					return;
+				}
 			}
-
-			mSectionsPagerAdapter.notifyDataSetChanged();
+			if (arrayLists != null && !arrayLists.isEmpty()) {
+				arrayList_zk.addAll(arrayLists.get(GlobleData.BOOK_ZK_TYPE));
+				arrayList_sz.addAll(arrayLists.get(GlobleData.BOOK_SZ_TYPE));
+			}
 		} else if (temp == CANCELFAVOR) {
 			Result res = (Result) obj[1];
 			if (res.getSuccess()) {
 				Tool.ShowMessages(context, "取消收藏成功");
-				getfavorlist();
+				int temp_pagecount=0;
+				if(listview_id==GlobleData.BOOK_SZ_TYPE){
+					isdeleted_sz=true;
+					arrayList_sz.remove(listview_item_position);
+					temp_pagecount=perpage*curpage_sz;
+				}else if(listview_id==GlobleData.BOOK_ZK_TYPE){
+					isdeleted_zk=true;
+					arrayList_zk.remove(listview_item_position);
+					temp_pagecount=perpage*curpage_zk;
+				}
+				getfavorlist(curpage,temp_pagecount,listview_id);
 			} else {
 				Tool.ShowMessages(context, "取消收藏失败");
 			}
 		}
+		mSectionsPagerAdapter.notifyDataSetChanged();
 	}
 
 	public void onError(int a) {
