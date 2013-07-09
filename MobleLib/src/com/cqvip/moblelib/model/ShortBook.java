@@ -65,58 +65,89 @@ public class ShortBook {
 				throw new BookException(e);
 			}
 			break;
+		case Task.TASK_SUGGEST_HOTBOOK:	
+		case Task.TASK_SUGGEST_NEWBOOK:
+		case Task.TASK_ANNOUNCE_NEWS:	
+		case Task.TASK_ANNOUNCE_WELFARE:
+			try {
+				JSONObject json = new JSONObject(result);
+				id = json.getString("id");
+				message = json.getString("title");
+				date = json.getString("imgurl");
+			} catch (JSONException e) {
+				throw new BookException(e);
+			}
+			break;
 		}
 		
 	}
-	
-//	public static List<List<ShortBook>> formLists(int type,String result) throws BookException{
-//		
-//	}
 	
 	public static List<ShortBook> formList(int type,String result) throws BookException{
-		if(type == Task.TASK_GET_FAVOR){
-			   List<ShortBook> books = null;
-				try {
-					JSONObject json = new JSONObject(result);
-				     if(!json.getBoolean("success")){
-				    	 return null;
-				     }
-					JSONArray ary = json.getJSONArray("favoritelist");
-					 int count = ary.length();
-					 if(count <=0){
-						 return null;
-					 }
-					 books = new ArrayList<ShortBook>(count);
-					 for(int i = 0;i<count;i++){
-						 books.add(new ShortBook(type,ary.getJSONObject(i).toString()));
-					 }
-					 return books;
-				} catch (JSONException e) {
-					throw new BookException(e);
+		List<ShortBook> books = null;
+		switch(type){
+		case Task.TASK_GET_FAVOR:
+			try {
+				JSONObject json = new JSONObject(result);
+				if(!json.getBoolean("success")){
+					return null;
 				}
-		}else{
-		
-	    List<ShortBook> books = null;
-	try {
-		JSONObject json = new JSONObject(result);
-	     if(!json.getBoolean("success")){
-	    	 return null;
-	     }
-		JSONArray ary = json.getJSONArray("serverinfo");
-		 int count = ary.length();
-		 if(count <=0){
-			 return null;
-		 }
-		 books = new ArrayList<ShortBook>(count);
-		 for(int i = 0;i<count;i++){
-			 books.add(new ShortBook(type,ary.getJSONObject(i).toString()));
-		 }
-		 return books;
-	} catch (JSONException e) {
-		throw new BookException(e);
-	}
-	
+				JSONArray ary = json.getJSONArray("favoritelist");
+				int count = ary.length();
+				if(count <=0){
+					return null;
+				}
+				books = new ArrayList<ShortBook>(count);
+				for(int i = 0;i<count;i++){
+					books.add(new ShortBook(type,ary.getJSONObject(i).toString()));
+				}
+			} catch (JSONException e) {
+				throw new BookException(e);
+			}
+			break;
+		case Task.TASK_EBOOK_DOWN:
+			try {
+				JSONObject json = new JSONObject(result);
+				if(!json.getBoolean("success")){
+					return null;
+				}
+				JSONArray ary = json.getJSONArray("serverinfo");
+				int count = ary.length();
+				if(count <=0){
+					return null;
+				}
+				books = new ArrayList<ShortBook>(count);
+				for(int i = 0;i<count;i++){
+					books.add(new ShortBook(type,ary.getJSONObject(i).toString()));
+				}
+			} catch (JSONException e) {
+				throw new BookException(e);
+			}
+			break;
+		case Task.TASK_SUGGEST_HOTBOOK:	
+		case Task.TASK_SUGGEST_NEWBOOK:
+		case Task.TASK_ANNOUNCE_NEWS:	
+		case Task.TASK_ANNOUNCE_WELFARE:
+			try {
+				JSONObject json = new JSONObject(result);
+				if(!json.getBoolean("success")){
+					return null;
+				}
+				JSONArray ary = json.getJSONArray("announcelist");
+				int count = ary.length();
+				if(count <=0){
+					return null;
+				}
+				books = new ArrayList<ShortBook>(count);
+				for(int i = 0;i<count;i++){
+					books.add(new ShortBook(type,ary.getJSONObject(i).toString()));
+				}
+			} catch (JSONException e) {
+				throw new BookException(e);
+			}
+			break;
 		}
+		    return books;
+		
 	}
 	
 	

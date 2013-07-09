@@ -110,18 +110,10 @@ public class GridViewImgAdapter extends BaseAdapter {
 					case 0:
 					case 1:
 					case 2:
+					case 3:
 						intent.setClass(mContext, activities[tag]);
 						mContext.startActivity(intent);
-						break;
-
-					case 3:
-						intent.setClass(mContext, ActivityDlg.class);
-						intent.putExtra("ACTIONID", 0);
-						intent.putExtra("MSGBODY", "该项正在紧张开发中...");
-						intent.putExtra("BTN_CANCEL", 0);
-						mContext.startActivity(intent);
-						break;
-					//个人中心	
+						break;					//个人中心	
 					case 4:
 					//我的收藏	
 					case 5:

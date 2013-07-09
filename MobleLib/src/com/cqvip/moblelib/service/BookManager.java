@@ -145,7 +145,6 @@ public class BookManager {
 	 */
 	public List<Book> getBookSearch(String key, int page, int count,String library,String field)
 			throws BookException {
-		//TODO
 		BookParameters params = new BookParameters();
 		params.add("keyword", key);
 		params.add("curpage", page + "");
@@ -202,6 +201,7 @@ public class BookManager {
 		BookParameters params = new BookParameters();
 		params.add("recordid", recordid);
 		params.add("tablename", "bibliosm");//书籍
+		params.add("library", GlobleData.SZLG_LIB_ID);
 		String result = http.requestUrl(getBaseURL()+"/library/bookquery/detail.aspx", getBasepost(), params);
 		return BookLoc.formList(result);
 		
@@ -340,7 +340,6 @@ public class BookManager {
 	 * @throws BookException
 	 */
 	public Map<Integer,List<Favorite>> getFavoriteList(String libid,String vipuserid,String page,String count,String typeid)throws BookException{
-		//TODO
 		BookParameters params = new BookParameters();
 		params.add("libid", libid);
 		params.add("vipuserid", vipuserid);
@@ -361,7 +360,6 @@ public class BookManager {
 	 * @throws BookException
 	 */
 	public Result destroyFavorite(String libid,String vipuserid,String keyid,String typeid)throws BookException{
-		//TODO
 		BookParameters params = new BookParameters();
 		params.add("libid", libid);
 		params.add("vipuserid", vipuserid);
@@ -437,6 +435,7 @@ public class BookManager {
 	 * @param keyid //评论图书id,中刊为lngid，深圳为callno
 	 * @param typeid //4，中刊，5深圳
 	 * @param content //评论内容
+	 * @param recordid //记录id,book唯一标识
 	 * @return
 	 * @throws BookException
 	 */
@@ -480,6 +479,7 @@ public class BookManager {
 	 * @return
 	 * @throws BookException
 	 */
+	//TODO
 	public List<ShortBook> getAnnouce(String libid,String announcetypeid) throws BookException{
 		BookParameters params = new BookParameters();
 		params.add("libid", libid);
@@ -487,9 +487,74 @@ public class BookManager {
 		String result = http.requestUrl(getBaseURL()+"/library/announce/html.aspx", getBaseget(),params);
 		return ShortBook.formList(Task.TASK_ANNOUNCE_SPEACH,result);
 	}
+	/**
+	 * 热门书籍,新书通报
+	 * @param libid
+	 * @param announcetypeid
+	 * @param curpage
+	 * @param perpage
+	 * @return
+	 * @throws BookException
+	 */
+	public List<ShortBook> getSuggestHotBook(int type,String libid,String announcetypeid,String curpage,String perpage) throws BookException{
+		BookParameters params = new BookParameters();
+		params.add("libid", libid);
+		params.add("announcetypeid", announcetypeid);
+		params.add("curpage", curpage);
+		params.add("perpage", perpage);
+		String result = http.requestUrl(getBaseURL()+"/library/announce/list.aspx", getBaseget(),params);
+		return ShortBook.formList(type, result);
+	}
+	/**
+	 * 推荐模块书籍详细
+	 * @param libid
+	 * @param announceid
+	 * @return
+	 * @throws BookException 
+	 */
+	public String getSuggestDetail(String libid,String announceid) throws BookException{
+		BookParameters params = new BookParameters();
+		params.add("libid", libid);
+		params.add("announceid", announceid);
+		String result = http.requestUrl(getBaseURL()+"/library/announce/detail.aspx", getBaseget(),params);
+		return formResult(result);
+		
+	}
 	
-	
-	
+	/**
+	 * 新闻动态，公益讲座
+	 * @param type
+	 * @param libid
+	 * @param announcetypeid
+	 * @param curpage
+	 * @param perpage
+	 * @return
+	 * @throws BookException
+	 */
+	public List<ShortBook> getAnnounceNews(int type,String libid,String announcetypeid,String curpage,String perpage) throws BookException{
+		BookParameters params = new BookParameters();
+		params.add("libid", libid);
+		params.add("announcetypeid", announcetypeid);
+		params.add("curpage", curpage);
+		params.add("perpage", perpage);
+		String result = http.requestUrl(getBaseURL()+"/library/announce/list.aspx", getBaseget(),params);
+		return ShortBook.formList(type, result);
+		
+	}
+	/**
+	 * 公告内容详细
+	 * @param libid
+	 * @param announceid
+	 * @return
+	 * @throws BookException
+	 */
+	public String getAnnounceDetail(String libid,String announceid) throws BookException{
+		BookParameters params = new BookParameters();
+		params.add("libid", libid);
+		params.add("announceid", announceid);
+		String result = http.requestUrl(getBaseURL()+"/library/announce/detail.aspx", getBaseget(),params);
+		return formResult(result);
+	}
 	
 	private String formResult(String result) throws BookException {
 		try {
