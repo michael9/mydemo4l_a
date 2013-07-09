@@ -9,6 +9,7 @@ import org.json.JSONObject;
 
 import android.util.Log;
 
+import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.net.BookException;
 
 /**
@@ -56,18 +57,26 @@ public class BookLoc {
 		 if(ary.length()<=0){
 			 return null;
 		 }
-		 JSONArray array = ary.getJSONObject(0).getJSONArray("serviceaddrlist");
-		 if(array.length()<=0){
-			 return null;
-		 }
-		 JSONArray json = array.getJSONObject(0).getJSONArray("articlelist");
-		 int count = json.length();
-		 if(count <=0){
-			 return null;
-		 }
-		 books = new ArrayList<BookLoc>(count);
-		 for(int i = 0;i<count;i++){
-			 books.add(new BookLoc(json.getJSONObject(i)));
+		 for(int i = 0;i<ary.length();i++){
+			 JSONArray array = ary.getJSONObject(i).getJSONArray("serviceaddrlist");
+			 if(array.length()<=0){
+				 continue;
+			 }else{
+				 String library = array.getJSONObject(0).getString("library");
+				 if(library.equals(GlobleData.SZLG_LIB_ID)){
+					 
+					 JSONArray json = array.getJSONObject(0).getJSONArray("articlelist");
+					 int count = json.length();
+					 if(count <=0){
+						 return null;
+					 }
+					 
+					 books = new ArrayList<BookLoc>(count);
+					 for(int j= 0;j<count;j++){
+						 books.add(new BookLoc(json.getJSONObject(j)));
+					 }
+				 }
+			 }
 		 }
 		 return books;
 	} catch (JSONException e) {
