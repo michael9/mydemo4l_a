@@ -246,7 +246,7 @@ public class ManagerService extends Service implements Runnable {
 					msg.arg1 = 0;
 					break;
 				}
-				favor.refresh(MyFavorActivity.FAVOR,msg.obj);
+				favor.refresh(MyFavorActivity.FAVOR,msg.obj,msg.arg2);
 				break;	
 				//馆藏图书收藏20
 			case Task.TASK_LIB_FAVOR:
@@ -412,8 +412,9 @@ public class ManagerService extends Service implements Runnable {
 			break;	
 			//获取收藏列表19
 		case Task.TASK_GET_FAVOR:
-			Map<Integer,List<Favorite>> getFavor = manager.getFavoriteList((String)task.getTaskParam().get("libid"), (String)task.getTaskParam().get("vipuserid"), (String)task.getTaskParam().get("curpage"), (String)task.getTaskParam().get("perpage"));
+			Map<Integer,List<Favorite>> getFavor = manager.getFavoriteList((String)task.getTaskParam().get("libid"), (String)task.getTaskParam().get("vipuserid"), (String)task.getTaskParam().get("curpage"), (String)task.getTaskParam().get("perpage"),(String)task.getTaskParam().get("typeid"));
 			msg.obj = getFavor;
+			msg.arg2=Integer.valueOf((String)task.getTaskParam().get("typeid"));
 			break;	
 			//馆藏图书收藏20
 		case Task.TASK_LIB_FAVOR:

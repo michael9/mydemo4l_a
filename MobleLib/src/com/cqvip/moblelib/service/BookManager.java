@@ -339,13 +339,14 @@ public class BookManager {
 	 * @return
 	 * @throws BookException
 	 */
-	public Map<Integer,List<Favorite>> getFavoriteList(String libid,String vipuserid,String page,String count)throws BookException{
+	public Map<Integer,List<Favorite>> getFavoriteList(String libid,String vipuserid,String page,String count,String typeid)throws BookException{
 		//TODO
 		BookParameters params = new BookParameters();
 		params.add("libid", libid);
 		params.add("vipuserid", vipuserid);
 		params.add("curpage", page);
 		params.add("perpage", count);
+		params.add("typeid", typeid);
 		String result = http.requestUrl(getBaseURL()+"/cloud/favoritelistuser.aspx", getBasepost(),params);
 		return Favorite.formList(Task.TASK_GET_FAVOR,result);
 	}
