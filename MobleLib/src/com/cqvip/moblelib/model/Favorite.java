@@ -166,9 +166,7 @@ public class Favorite implements Serializable{
 						favor_zk = new ArrayList<Favorite>(count);
 						for (int i = 0; i < count; i++) {
 							JSONObject js = ary.getJSONObject(i);
-							favor_zk.add(new Favorite(task, js
-									.getJSONObject("resourceinfo")));
-
+							favor_zk.add(new Favorite(task, js));
 						}
 						map.put(GlobleData.BOOK_ZK_TYPE, favor_zk);
 					}
@@ -184,8 +182,7 @@ public class Favorite implements Serializable{
 						favor_sz = new ArrayList<Favorite>(szcount);
 						for (int i = 0; i < szcount; i++) {
 							JSONObject js = sz.getJSONObject(i);
-							favor_sz.add(new Favorite(task, js
-									.getJSONObject("resourceinfo")));
+							favor_sz.add(new Favorite(task, js));
 						}
 						map.put(GlobleData.BOOK_SZ_TYPE, favor_sz);
 					}

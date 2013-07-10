@@ -1,60 +1,78 @@
 package com.cqvip.moblelib.activity;
 
 import java.util.HashMap;
+import java.util.List;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.webkit.DownloadListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.cqvip.mobelib.imgutils.AsyncTask;
 import com.cqvip.moblelib.R;
+import com.cqvip.moblelib.adapter.CommentItemAdapter;
 import com.cqvip.moblelib.base.IBookManagerActivity;
 import com.cqvip.moblelib.biz.ManagerService;
 import com.cqvip.moblelib.biz.Task;
+import com.cqvip.moblelib.constant.Constant;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.Book;
+import com.cqvip.moblelib.model.Comment;
 import com.cqvip.moblelib.model.Result;
+import com.cqvip.moblelib.view.DownFreshListView;
 import com.cqvip.utils.Tool;
 
 public class CommentActivity extends BaseActivity implements
-		IBookManagerActivity, OnClickListener {
+		IBookManagerActivity, OnClickListener,OnItemClickListener,DownFreshListView.OnRefreshListener {
 	public static final int ADDCOMMENT = 1;
-
+	private static final int GETMORE = 1;
+	private static final int GETHOMEPAGE = 0;
+	
 	private TextView baseinfo_tv,intro_tv;
 	private EditText comment_et;
 	private Button commit_btn;
 	private Book dBook;
-	private ListView comments_lv;
+	private DownFreshListView listview;
 	private int typeid;
+	private CommentItemAdapter adapter;
+	private int delFlag;
+	private int page = 1;
+	private Context context;
+	private View moreprocess;
+	private String keyid;//书籍唯一id
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_comment);
+		context = this;
 		init();
 		commit_btn.setOnClickListener(this);
 		
-		BaseAdapter adapter=new CommentAdapter(this);
-		comments_lv.setAdapter(adapter);
-
+		//获取书籍详细对象
 		Bundle bundle = getIntent().getBundleExtra("detaiinfo");
 		dBook = (Book) bundle.getSerializable("book");
-		
+		//获取书籍列席
 		typeid = getIntent().getIntExtra("type", GlobleData.BOOK_SZ_TYPE);
-		
+		//获取是否删除表识
+		delFlag = getIntent().getIntExtra("flag", 0);
+		//书籍id
+	    keyid = getLngId(dBook.getCallno(),dBook.getRecordid());
+		getHomeComment(typeid,keyid,page,Constant.DEFAULT_COUNT,GETHOMEPAGE);
 		String describe=dBook.getU_abstract();
 		if(TextUtils.isEmpty(describe)){
 			describe="无";
 		}
+		
 		baseinfo_tv.setText("《" + dBook.getTitle() + "》\n"
 				+ getString(R.string.item_author) + dBook.getAuthor());
 		intro_tv.setText(getString(R.string.item_describe)+describe);
@@ -62,7 +80,9 @@ public class CommentActivity extends BaseActivity implements
 
 	@Override
 	public void init() {
-		comments_lv = (ListView) findViewById(R.id.comment_lv);
+		listview = (DownFreshListView) findViewById(R.id.comment_lv);
+		listview.setOnItemClickListener(this);
+		listview.setOnRefreshListener(this);
 		baseinfo_tv = (TextView) findViewById(R.id.baseinfo_tv);
 		intro_tv= (TextView) findViewById(R.id.intro_tv);
 		commit_btn = (Button) findViewById(R.id.commit_btn);
@@ -70,6 +90,10 @@ public class CommentActivity extends BaseActivity implements
 		TextView title = (TextView)findViewById(R.id.txt_header);
 		title.setText(R.string.book_comment);
 		ImageView back = (ImageView)findViewById(R.id.img_back_header);
+		adapter = new CommentItemAdapter(context,null);
+		//加载数据
+		//getHomeComment(1,Constant.DEFAULT_COUNT);
+		
 		back.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -77,7 +101,30 @@ public class CommentActivity extends BaseActivity implements
 			}
 		});
 		
-		ManagerService.allActivity.add(this);
+	}
+
+	private void getHomeComment(int typeid,String keyid,int page, int count,int more) {
+		if(!ManagerService.allActivity.contains(this)){
+			ManagerService.allActivity.add(this);
+			}
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("typeid", typeid+"");
+		map.put("keyid",keyid);
+		map.put("page", page+"");
+		map.put("count", count+"");
+		if(more == GETHOMEPAGE){
+		ManagerService.addNewTask(new Task(Task.TASK_COMMENT_LIST, map));
+		}else{
+		ManagerService.addNewTask(new Task(Task.TASK_COMMENT_LIST_MORE, map));
+		}
+	}
+
+	private String getLngId(String callno, String recordid) {
+		if(typeid == GlobleData.BOOK_SZ_TYPE){
+			return callno+","+recordid;
+		}else {//中刊返回lngid
+				return callno;
+		}
 	}
 
 	@Override
@@ -94,7 +141,7 @@ public class CommentActivity extends BaseActivity implements
 			Log.i("添加评论", GlobleData.cqvipid);
 			map.put("keyid", dBook.getCallno());
 			Log.i("CommentActivity_keyid", dBook.getCallno());
-			map.put("typeid", "" + GlobleData.BOOK_SZ_TYPE);
+			map.put("typeid", "" + typeid);
 			map.put("recordid", getTypeComment(dBook));
 			map.put("content", info);
 			ManagerService.addNewTask(new Task(Task.TASK_ADD_COMMENT, map));
@@ -114,73 +161,77 @@ public class CommentActivity extends BaseActivity implements
 	public void refresh(Object... obj) {
 		customProgressDialog.dismiss();
 		int type = (Integer) obj[0];
-		// 判断收藏是否成功
-		if (type == ADDCOMMENT) {
+		switch(type){
+		case Task.TASK_ADD_COMMENT:
 			Result res = (Result) obj[1];
 			if (res.getSuccess()) {
+				//提示
 				Tool.ShowMessages(this, "添加成功");
+				//更新列表
+				getHomeComment(typeid,keyid,1,Constant.DEFAULT_COUNT,GETHOMEPAGE);
 			} else {
 				Tool.ShowMessages(this, "添加失败");
 			}
-			return;
+			break;
+		case Task.TASK_COMMENT_LIST:
+			 List<Comment> lists =(List<Comment>)obj[1];
+			if(lists!=null&&!lists.isEmpty()){
+				adapter = new CommentItemAdapter(context,lists);
+				listview.setAdapter(adapter);
+				}
+				//TODO
+				break;
+		case Task.TASK_COMMENT_LIST_MORE:
+			List<Comment> lists1 =(List<Comment>)obj[1];
+				moreprocess.setVisibility(View.GONE);
+				if(lists1!=null&&!lists1.isEmpty()){
+					adapter.addMoreData(lists1);
+				  }else{
+						Tool.ShowMessages(context, "没有更多内容可供加载");
+					}
+				break;
+			}
+			
+			
 		}
+
+	@Override
+	public void onItemClick(AdapterView<?> arg0, View arg1, int position, long id) {
+		if (id == -2) //更多
+		{
+			//进度条
+		    moreprocess = arg1.findViewById(R.id.footer_progress);
+			moreprocess.setVisibility(View.VISIBLE);
+			//请求网络更多
+			getHomeComment(typeid,keyid,page+1,Constant.DEFAULT_COUNT,GETMORE);
+			page = page+1;
+		
+		}
+		
 	}
 
-	  static class ViewHolder{
-			TextView discussant_tv;
-			TextView content_tv;
-			TextView time_tv;
+	@Override
+	public void onRefresh() {
+		getHomeComment(typeid,keyid,1,Constant.DEFAULT_COUNT,GETHOMEPAGE);
+		new AsyncTask<Void, Void, Void>() {
+			protected Void doInBackground(Void... params) {
+
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				return null;
 			}
-	
-	public class CommentAdapter extends BaseAdapter {
-		private Context context;
-
-		public CommentAdapter(Context context) {
-			this.context = context;
-		}
-
-		@Override
-		public int getCount() {
-			// TODO Auto-generated method stub
-			return 10;
-		}
-
-		@Override
-		public Object getItem(int position) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public long getItemId(int position) {
-			// TODO Auto-generated method stub
-			return position;
-		}
-
-		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-			ViewHolder holder ;
-			//更多
-			if (position == this.getCount() - 1) {
-				convertView = LayoutInflater.from(context).inflate(R.layout.moreitemsview, null);
-				return convertView;
-			}
-			if(convertView==null||convertView.findViewById(R.id.linemore) != null){
-				convertView=LayoutInflater.from(context).inflate(R.layout.item_comment, null);
-				holder = new ViewHolder();
+			//刷新完成
+			@Override
+			protected void onPostExecute(Void result) {
 				
-				holder.discussant_tv = (TextView) convertView.findViewById(R.id.discussant_tv);
-				holder.content_tv = (TextView) convertView.findViewById(R.id.content_tv);
-				holder.time_tv = (TextView) convertView.findViewById(R.id.time_tv);
-				convertView.setTag(holder);
-			}else{
-				holder = (ViewHolder) convertView.getTag();
-			}
-//			holder.discussant_tv.setText(text);
-//			holder.content_tv.setText(text);
-//			holder.time_tv.setText(text);
-			return convertView;
-		}
+				listview.onRefreshComplete();
 
+			}
+
+		}.execute(null, null);
+		
 	}
 }

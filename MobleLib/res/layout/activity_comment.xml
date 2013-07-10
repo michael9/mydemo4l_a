@@ -47,14 +47,13 @@
             android:textSize="16dp" android:ellipsize="end"/>
     </RelativeLayout>
 
-    <ListView
+    <com.cqvip.moblelib.view.DownFreshListView
         android:id="@+id/comment_lv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/comment_ll"
         android:layout_below="@id/baseinfo_rl"
-        android:layout_centerHorizontal="true" >
-    </ListView>
+        android:layout_centerHorizontal="true" />
 
     <LinearLayout
         android:id="@+id/comment_ll"

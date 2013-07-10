@@ -2,6 +2,8 @@ package com.cqvip.utils;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -20,7 +22,6 @@ import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.Book;
 import com.cqvip.moblelib.model.EBook;
-import com.cqvip.moblelib.model.Favorite;
 
 /**
  * 工具内，构造字符串，解析字符串，字符串转换
@@ -206,5 +207,34 @@ public class Tool {
 	public static String formSZbookID(String callno,String recordid){
 		String result = callno+","+recordid;
 		return result;
+	}
+	/**
+	 * 返回 时间样式 ：几小时前
+	 * @param date
+	 * @return
+	 */
+	public static String GetTime(Date date){
+		long   lSubTime = 0;
+		String strTime = "";
+		Date curTime = new Date();
+		lSubTime = curTime.getTime() - date.getTime();
+		lSubTime = lSubTime/(60 * 1000);
+		if(lSubTime < 1){
+			lSubTime = 1;
+		}
+		if(lSubTime < 60){
+			strTime = "" + lSubTime + "分钟前";
+		}else if(lSubTime >= 60 && lSubTime < (24*60)){
+			strTime = "" + lSubTime/60 + "小时前";
+		}else{
+			try {
+				SimpleDateFormat df = (SimpleDateFormat) new SimpleDateFormat(
+						"MM-dd hh:mm");
+				strTime = df.format(date);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return strTime;
 	}
 }
