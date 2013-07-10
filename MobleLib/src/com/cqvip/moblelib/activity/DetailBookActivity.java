@@ -36,7 +36,8 @@ public class DetailBookActivity extends BaseActivity implements IBookManagerActi
 	
 	private Book dBook;
 	private TextView booktitle_tv,textView9,textView10,textView11;
-	private ListView listview;
+//	private ListView listview;
+	private LinearLayout loc_list_ll;
 	private BookLocAdapter adapter;
 	private Context context;
 	private View title_bar,book_action_bar;
@@ -47,7 +48,8 @@ public class DetailBookActivity extends BaseActivity implements IBookManagerActi
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_detail_book);
 		context = this;
-		listview = (ListView)findViewById(R.id.loc_list);
+		loc_list_ll=(LinearLayout)findViewById(R.id.loc_list_ll);
+//		listview = (ListView)findViewById(R.id.loc_list);
 //		View v = LayoutInflater.from(this).inflate(R.layout.activity_detail_book, null);
 //		listview.addHeaderView(v);
 		imgview = (ImageView) findViewById(R.id.book_big_img);
@@ -162,20 +164,44 @@ public class DetailBookActivity extends BaseActivity implements IBookManagerActi
 		// TODO Auto-generated method stub
 		
 	}
+	
+	private void add2gc(List<BookLoc> list){
+		if(list==null||list.isEmpty())
+			return;
+		for(BookLoc bl:list)
+		{
+//		LinearLayout mll=new LinearLayout(this);
+		LinearLayout mll=(LinearLayout)getLayoutInflater().inflate(R.layout.item_location_book, null);
+//		mll.inflate(this, R.layout.item_location_book, null);
+		TextView barcode = (TextView) mll.findViewById(R.id.loc_barcode_txt);
+		TextView callno = (TextView) mll.findViewById(R.id.loc_callno_txt);
+		TextView location = (TextView) mll.findViewById(R.id.loc_location_txt);
+		TextView cirtype = (TextView) mll.findViewById(R.id.loc_cirtype_txt);
+		TextView status = (TextView) mll.findViewById(R.id.loc_status_txt);
+
+			barcode.setText(context.getString(R.string.item_barcode)+bl.getBarcode());
+			callno.setText(context.getString(R.string.item_callno)+bl.getCallno());
+			location.setText(context.getString(R.string.item_loc)+bl.getLocal());
+			cirtype.setText(context.getString(R.string.item_cirtype)+bl.getCirtype());
+			status.setText(context.getString(R.string.item_status)+bl.getStatus());
+			loc_list_ll.addView(mll);
+		}
+	}
 
 	@Override
 	public void refresh(Object... obj) {
 		customProgressDialog.dismiss();
 	    int type = (Integer)obj[0];
 		 if(type==GETBOOKINFO){
-		List<BookLoc> list = (List<BookLoc>)obj[1];
-		if(list!=null&&!list.isEmpty()){
-			textView9.setText("馆藏信息("+list.size()+")");
-			adapter = new BookLocAdapter(context,list);
-			listview.setAdapter(adapter);
-		}else{
-			listview.setAdapter(null);
-		       }
+//		List<BookLoc> list = (List<BookLoc>)obj[1];
+//		if(list!=null&&!list.isEmpty()){
+//			textView9.setText("馆藏信息("+list.size()+")");
+//			adapter = new BookLocAdapter(context,list);
+//			listview.setAdapter(adapter);
+//		}else{
+//			listview.setAdapter(null);
+//		       }
+			 add2gc((List<BookLoc>)obj[1]);
 		}else if(type == FAVOR){//判断收藏是否成功
 			 Result res = (Result) obj[1];
 			 if (res.getSuccess()) {
