@@ -14,7 +14,7 @@
         <ImageView
             android:id="@+id/re_book_img"
             android:layout_width="72dp"
-            android:layout_height="100dp"
+            android:layout_height="96dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_marginLeft="10.0dip"

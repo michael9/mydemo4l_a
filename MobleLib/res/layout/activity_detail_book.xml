@@ -22,15 +22,15 @@
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
-                android:background="@android:color/white"
+                android:background="@android:color/transparent"
                 android:padding="2dp"
-                android:src="@drawable/defaut_book" />
+                 />
 
             <TextView
                 android:id="@+id/booktitle_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/head_bar"
+                android:layout_below="@+id/head_bar"
                 android:layout_margin="5dp"
                 android:layout_toRightOf="@id/book_big_img"
                 android:text="title"

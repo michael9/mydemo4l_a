@@ -250,7 +250,7 @@ public class ManagerService extends Service implements Runnable {
 					msg.arg1 = 0;
 					break;
 				}
-				if(!favor.isDestroyed())
+				if(favor.isFinishing())
 				favor.refresh(MyFavorActivity.FAVOR,msg.obj,msg.arg2);
 				break;	
 				//π›≤ÿÕº È ’≤ÿ20
@@ -298,8 +298,9 @@ public class ManagerService extends Service implements Runnable {
 					msg.arg1 = 0;
 					break;
 				}
-				if(!groupOfReadersActivity.isDestroyed())
+				if(!groupOfReadersActivity.isFinishing()){
 				groupOfReadersActivity.refresh(GroupOfReadersActivity.COMMENTLIST,msg.obj);
+				}
 				break;	
 			case Task.TASK_COMMENT_LIST:
 			case Task.TASK_COMMENT_LIST_MORE:

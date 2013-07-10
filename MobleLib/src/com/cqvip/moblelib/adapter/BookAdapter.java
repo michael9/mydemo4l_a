@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.cqvip.mobelib.imgutils.ImageFetcher;
 import com.cqvip.moblelib.R;
 import com.cqvip.moblelib.activity.CommentActivity;
 import com.cqvip.moblelib.biz.ManagerService;
@@ -33,12 +35,18 @@ import com.cqvip.utils.Tool;
 public class BookAdapter extends BaseAdapter{
 	private Context context;
 	private List<Book> lists;
+	private ImageFetcher fetch;
 	public BookAdapter(Context context){
 		this.context = context;
 	}
 	public BookAdapter(Context context,List<Book> lists){
 		this.context = context;
 		this.lists = lists;
+	}
+	public BookAdapter(Context context,List<Book> lists,ImageFetcher fetch){
+		this.context = context;
+		this.lists = lists;
+		this.fetch = fetch;
 	}
 	public List<Book> getLists(){
 		return lists;
@@ -134,7 +142,11 @@ public class BookAdapter extends BaseAdapter{
 	        holder.u_abstract.setText(describe+book.getU_abstract());
 	        holder.isbn.setText("ISBN:"+book.getIsbn());
 	        //Õº∆¨
-	        holder.img.setBackgroundResource(R.drawable.defaut_book);
+	        if(!TextUtils.isEmpty(book.getCover_path())){
+	        	fetch.loadImage(book.getCover_path(), holder.img);
+	        }else{
+	        	holder.img.setBackgroundResource(R.drawable.defaut_book);
+	        }
 	        //∑÷œÌ
 	        holder.btn_item_result_search_share.setTag(position);
 	        holder.btn_item_result_search_share.setOnClickListener(new OnClickListener() {
