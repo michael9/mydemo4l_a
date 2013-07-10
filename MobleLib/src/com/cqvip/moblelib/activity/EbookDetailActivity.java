@@ -42,7 +42,7 @@ public class EbookDetailActivity extends BaseActivity implements IBookManagerAct
 					btn_ebook_detail_share,
 					btn_ebook_detail_collect,
 					btn_ebook_detail_download;
-	private View title_bar;
+	private View title_bar,book_action_bar;
 	private ImageView img_book;
 	private ImageFetcher mImageFetcher;
 	@Override
@@ -65,11 +65,12 @@ public class EbookDetailActivity extends BaseActivity implements IBookManagerAct
 //		comment =(Button)findViewById(R.id.ebook_comment_txt);
 //		download =(Button)findViewById(R.id.ebook_down_txt);
 	
-		btn_ebook_detail_great=(Button)findViewById(R.id.btn_ebook_detail_great);
-		btn_ebook_detail_buzz=(Button)findViewById(R.id.btn_ebook_detail_buzz);
-		btn_ebook_detail_share=(Button)findViewById(R.id.btn_ebook_detail_share);
-		btn_ebook_detail_collect=(Button)findViewById(R.id.btn_ebook_detail_collect);
-		btn_ebook_detail_download=(Button)findViewById(R.id.btn_ebook_detail_download);
+		book_action_bar=findViewById(R.id.book_action_bar);
+		btn_ebook_detail_great=(Button)book_action_bar.findViewById(R.id.btn_item_great);
+		btn_ebook_detail_buzz=(Button)book_action_bar.findViewById(R.id.btn_item_buzz);
+		btn_ebook_detail_share=(Button)book_action_bar.findViewById(R.id.btn_item_share);
+		btn_ebook_detail_collect=(Button)book_action_bar.findViewById(R.id.btn_item_collect);
+		btn_ebook_detail_download=(Button)book_action_bar.findViewById(R.id.btn_item_download);
 		
 		ManagerService.allActivity.add(this);
 		if(dBook.getLngid()!=null){
