@@ -1,6 +1,9 @@
 package com.cqvip.moblelib.model;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -23,7 +26,7 @@ private String keyid;//书籍id
 private String userid;//用户id
 private String nickname;//名字
 private String contents;//内容
-private String commenttime;//评论时间
+private Date commenttime;//评论时间
 	
 public Comment(JSONObject json) throws BookException{
 	try {
@@ -33,7 +36,7 @@ public Comment(JSONObject json) throws BookException{
 	userid = json.getString("userid");
 	nickname = json.getString("nickname");
 	contents = json.getString("contents");
-	commenttime = json.getString("commenttime");
+	commenttime = parseDate(json.getString("commenttime"), "yyyy-MM-dd HH:mm:ss");
 	} catch (JSONException e) {
 		throw new BookException(e);
 	}
@@ -68,6 +71,21 @@ try {
 	throw new BookException(e);
 }
 
+}
+
+
+private Date parseDate(String str, String format) throws BookException {
+	 if(str==null||"".equals(str)){
+        	return null;
+        }
+    	SimpleDateFormat sdf = new SimpleDateFormat(format);
+	    Date time;
+		try {
+			time = sdf.parse(str);
+			return time;
+		} catch (ParseException e) {
+			throw new BookException("Unexpected format(" + str + ") date Exception");
+		}
 }
 
 	public String getCommentid() {
@@ -106,7 +124,7 @@ public String getContents() {
 
 
 
-public String getCommenttime() {
+public Date getCommenttime() {
 	return commenttime;
 }
 

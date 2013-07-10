@@ -404,7 +404,7 @@ public class BookManager {
 		params.add("keyid", keyid);
 		params.add("curpage", page);
 		params.add("perpage", count);
-		String result = http.requestUrl(getBaseURL()+"/cloud/commentlist.aspx", getBaseget(),params);
+		String result = http.requestUrl(getBaseURL()+"/cloud/commentlist.aspx", getBasepost(),params);
 		return Comment.formList(result);
 	}
 	

@@ -1,40 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:padding="5dp"
-    android:tag="itemview" >
+<LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+  <!--头像-->
+    <ImageView android:id="@+id/commentItemPortrait"  android:saveEnabled="true" android:layout_width="50.0dip" android:layout_height="50.0dip" android:layout_marginLeft="5.0dip" android:layout_marginTop="5.0dip"/>
+    <LinearLayout android:orientation="vertical" android:id="@+id/lyRightLayout" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_margin="5.0dip">
+        <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginRight="3.0dip">
+        	 <!--昵称-->
+            <TextView android:textSize="15.0sp" 
+                android:textColor="#ff333333" 
+                android:id="@+id/tvcommentItemName" 
+                android:layout_width="wrap_content" 
+                android:layout_height="wrap_content" 
+                android:text="哈哈哈" />
+         
+          <RelativeLayout android:gravity="right" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginRight="3.0dip" android:layout_weight="1.0">
+               <!--时间-->
+                <TextView android:textSize="12.0sp" 
+                    android:textColor="#ff666666" 
+                    android:layout_gravity="right" 
+                    android:id="@+id/tvcommentItemDate" 
+                    android:layout_width="wrap_content" 
+                    android:layout_height="wrap_content" 
+                    android:layout_marginLeft="3.0dip" 
+                    android:text="1998.12.15" 
+                    android:layout_alignParentRight="true" />
+               <!--时间图片-->
+            </RelativeLayout>
+        </LinearLayout>
+        <!--内容-->
+         <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginRight="3.0dip">
+         
+		  <RelativeLayout  android:layout_marginTop="10.0dip"  android:layout_width="fill_parent"    android:layout_height="wrap_content" android:layout_marginRight="3.0dip" android:layout_weight="1.0">
+           
+		      <TextView android:textSize="15.0sp" 
+              android:textColor="#ff414951"
+               android:id="@+id/tvcommentItemContent" 
+               android:layout_width="wrap_content"
+                android:layout_height="wrap_content" 
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="3.0dip"
+                android:layout_alignParentLeft="true"
+                android:layout_toLeftOf="@+id/img_item_comment"
+                android:text="" />
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout> 
 
-    <TextView
-        android:id="@+id/discussant_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5.0dip"
-        android:text=""
-        android:textColor="@color/green_light"
-        android:textSize="14.0sp" />
 
-    <!-- 鍐呭 -->
-    <TextView
-        android:id="@+id/content_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/discussant_tv"
-        android:layout_marginLeft="20dp"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp"
-        android:text=""
-        android:textColor="#ff414951"
-        android:textSize="14.0sp" />
 
-    <TextView
-        android:id="@+id/time_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/content_tv"
-        android:text="2013-07-04 13:20"
-        android:textColor="#ff414951"
-        android:textSize="14.0sp" />
-
-</RelativeLayout>
