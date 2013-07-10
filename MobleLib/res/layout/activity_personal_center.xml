@@ -1,18 +1,25 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_list"
-    android:orientation="vertical"
     tools:context=".PersonalCenterActivity" >
 
     <include
         android:id="@+id/readerserve_title"
         layout="@layout/header" />
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="8dp"
+        android:src="@drawable/main_log_img" />
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/readerserve_title"
         android:gravity="center"
         android:orientation="vertical"
         android:paddingBottom="9.0dip"
@@ -54,8 +61,6 @@
                 android:src="@drawable/eg_arrow" />
         </LinearLayout>
 
-
-        
         <LinearLayout
             android:id="@+id/favorLayout"
             android:layout_width="fill_parent"
@@ -63,8 +68,8 @@
             android:layout_marginTop="-1dp"
             android:background="@drawable/linearlayout_shape2"
             android:gravity="center"
-            android:visibility="gone"
-            android:orientation="horizontal" >
+            android:orientation="horizontal"
+            android:visibility="gone" >
 
             <ImageView
                 android:id="@+id/serv_favor_icon"
@@ -91,6 +96,7 @@
                 android:layout_marginRight="20.0dip"
                 android:src="@drawable/eg_arrow" />
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/logoutLayout"
             android:layout_width="fill_parent"
@@ -126,8 +132,8 @@
                 android:src="@drawable/eg_arrow" />
         </LinearLayout>
 
-        
-     <!--    <LinearLayout android:layout_marginTop="-1dp"
+        <!--
+        <LinearLayout android:layout_marginTop="-1dp"
             android:background="@drawable/linearlayout_shape2"
             android:id="@+id/attentionLayout"
             android:layout_width="fill_parent"
@@ -159,10 +165,12 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="20.0dip"
                 android:src="@drawable/eg_arrow" />
-        </LinearLayout> -->       
-        
-        
-		<!--  <LinearLayout android:layout_marginTop="-1dp"
+        </LinearLayout>
+        -->
+
+
+        <!--
+        <LinearLayout android:layout_marginTop="-1dp"
             android:background="@drawable/linearlayout_shape2"
             android:id="@+id/attentionLayout"
             android:layout_width="fill_parent"
@@ -194,10 +202,12 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="20.0dip"
                 android:src="@drawable/eg_arrow" />
-        </LinearLayout> -->
-        
-        
-       <!--  <LinearLayout android:layout_marginTop="-1dp"
+        </LinearLayout>
+        -->
+
+
+        <!--
+        <LinearLayout android:layout_marginTop="-1dp"
             android:background="@drawable/linearlayout_shape2"
             android:id="@+id/myreadLayout"
             android:layout_width="fill_parent"
@@ -229,10 +239,12 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="20.0dip"
                 android:src="@drawable/eg_arrow" />
-        </LinearLayout> -->
-       
-        
-      <!--   <LinearLayout android:layout_marginTop="-1dp"
+        </LinearLayout>
+        -->
+
+
+        <!--
+        <LinearLayout android:layout_marginTop="-1dp"
             android:background="@drawable/linearlayout_shape2"
             android:id="@+id/mybyLayout"
             android:layout_width="fill_parent"
@@ -264,8 +276,10 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="20.0dip"
                 android:src="@drawable/eg_arrow" />
-        </LinearLayout> -->
-        
+        </LinearLayout>
+        -->
+
+
         <!--
         <LinearLayout android:layout_marginTop="-1dp"
             android:background="@drawable/linearlayout_shape_down"
@@ -299,8 +313,8 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="20.0dip"
                 android:src="@drawable/eg_arrow" />
-        </LinearLayout>
+        </LinearLayout>
         -->
     </LinearLayout>
 
-</LinearLayout>
+  </RelativeLayout>
