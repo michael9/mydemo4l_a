@@ -480,7 +480,7 @@ public class ManagerService extends Service implements Runnable {
 			break;	
 			//获取用户评论过得书籍列表24
 		case Task.TASK_COMMENT_BOOKLIST:
-			Map<Integer,List<Favorite>> getcommentbooklist = manager.getUserCommentBook((String)task.getTaskParam().get("libid"), (String)task.getTaskParam().get("vipuserid"), (String)task.getTaskParam().get("curpage"), (String)task.getTaskParam().get("perpage"));
+			Map<Integer,List<Favorite>> getcommentbooklist = manager.getUserCommentBook((String)task.getTaskParam().get("libid"), (String)task.getTaskParam().get("vipuserid"), (String)task.getTaskParam().get("curpage"), (String)task.getTaskParam().get("perpage"),(String)task.getTaskParam().get("typeid"));
 			msg.obj = getcommentbooklist;
 			break;	
 		case Task.TASK_SUGGEST_HOTBOOK:

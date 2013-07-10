@@ -94,7 +94,7 @@ public class CommentActivity extends BaseActivity implements
 			Log.i("Ìí¼ÓÆÀÂÛ", GlobleData.cqvipid);
 			map.put("keyid", dBook.getCallno());
 			Log.i("CommentActivity_keyid", dBook.getCallno());
-			map.put("typeid", "" + GlobleData.BOOK_SZ_TYPE);
+			map.put("typeid", "" + typeid);
 			map.put("recordid", getTypeComment(dBook));
 			map.put("content", info);
 			ManagerService.addNewTask(new Task(Task.TASK_ADD_COMMENT, map));

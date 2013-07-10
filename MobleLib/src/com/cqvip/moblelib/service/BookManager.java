@@ -378,12 +378,13 @@ public class BookManager {
 	 * @return
 	 * @throws BookException
 	 */
-	public Map<Integer,List<Favorite>> getUserCommentBook(String libid,String vipuserid,String page,String count) throws BookException{
+	public Map<Integer,List<Favorite>> getUserCommentBook(String libid,String vipuserid,String page,String count,String typeid) throws BookException{
 		BookParameters params = new BookParameters();
 		params.add("libid", libid);
 		params.add("vipuserid", vipuserid);
 		params.add("curpage", page);
 		params.add("perpage", count);
+		params.add("typeid", typeid);
 		String result = http.requestUrl(getBaseURL()+"/cloud/commentlistuser.aspx", getBaseget(),params);
 		return Favorite.formList(Task.TASK_COMMENT_BOOKLIST, result);
 	}
