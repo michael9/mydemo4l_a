@@ -29,6 +29,7 @@ import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.Book;
 import com.cqvip.moblelib.model.BookLoc;
 import com.cqvip.moblelib.model.BorrowBook;
+import com.cqvip.moblelib.model.Comment;
 import com.cqvip.moblelib.model.EBook;
 import com.cqvip.moblelib.model.EbookDetail;
 import com.cqvip.moblelib.model.Favorite;
@@ -286,7 +287,7 @@ public class ManagerService extends Service implements Runnable {
 					doException(6,msg, "CommentActivity");
 					break;
 				}
-				add_comment.refresh(CommentActivity.ADDCOMMENT,msg.obj);
+				add_comment.refresh(msg.what,msg.obj);
 				break;	
 				//获取用户评论过得书籍列表24
 			case Task.TASK_COMMENT_BOOKLIST:
@@ -297,6 +298,16 @@ public class ManagerService extends Service implements Runnable {
 					break;
 				}
 				groupOfReadersActivity.refresh(GroupOfReadersActivity.COMMENTLIST,msg.obj);
+				break;	
+			case Task.TASK_COMMENT_LIST:
+			case Task.TASK_COMMENT_LIST_MORE:
+				CommentActivity comments= (CommentActivity) ManagerService.getActivityByName("CommentActivity");
+				if (msg.arg1 != 0) {
+					comments.onError(2);
+					msg.arg1 = 0;
+					break;
+				}
+				comments.refresh(msg.what,msg.obj);
 				break;	
 			
 			case Task.TASK_SUGGEST_NEWBOOK:	
@@ -483,16 +494,25 @@ public class ManagerService extends Service implements Runnable {
 			Map<Integer,List<Favorite>> getcommentbooklist = manager.getUserCommentBook((String)task.getTaskParam().get("libid"), (String)task.getTaskParam().get("vipuserid"), (String)task.getTaskParam().get("curpage"), (String)task.getTaskParam().get("perpage"));
 			msg.obj = getcommentbooklist;
 			break;	
+			//获取用户评论列表
+		case Task.TASK_COMMENT_LIST:
+		case Task.TASK_COMMENT_LIST_MORE:
+			List<Comment> comments = manager.getCommentList((String)task.getTaskParam().get("typeid"), (String)task.getTaskParam().get("keyid"), (String)task.getTaskParam().get("page"), (String)task.getTaskParam().get("count"));
+			msg.obj = comments;
+			break;	
+			//推荐书籍和更多
 		case Task.TASK_SUGGEST_HOTBOOK:
 		case Task.TASK_SUGGEST_HOTBOOK_MORE:
 			List<ShortBook> hotbook = manager.getSuggestHotBook(Task.TASK_SUGGEST_HOTBOOK,GlobleData.LIBIRY_ID, GlobleData.ANNAOUCETYPE_HOTBOOK+"",  (String)task.getTaskParam().get("page"),  (String)task.getTaskParam().get("count"));
 			msg.obj = hotbook;
 			break;
+			//新书和更多
 		case Task.TASK_SUGGEST_NEWBOOK:
 		case Task.TASK_SUGGEST_NEWBOOK_MORE:
 			List<ShortBook> newbook = manager.getSuggestHotBook(Task.TASK_SUGGEST_NEWBOOK,GlobleData.LIBIRY_ID, GlobleData.ANNAOUCETYPE_NEWBOOK+"",  (String)task.getTaskParam().get("page"),  (String)task.getTaskParam().get("count"));
 			msg.obj = newbook;
 			break;
+			//详细
 		case Task.TASK_SUGGEST_DETAIL:
 			String scontent = manager.getSuggestDetail(GlobleData.LIBIRY_ID,(String)task.getTaskParam().get("id"));
 			msg.obj = scontent;
