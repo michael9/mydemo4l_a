@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -30,7 +31,7 @@ import com.cqvip.moblelib.model.Result;
 import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.utils.Tool;
 
-public class DetailBookActivity extends BaseActivity implements IBookManagerActivity {
+public class DetailBookActivity extends BaseImageActivity implements IBookManagerActivity {
 	public static final int GETBOOKINFO = 1;
 	public static final int FAVOR = 2;
 	
@@ -52,7 +53,6 @@ public class DetailBookActivity extends BaseActivity implements IBookManagerActi
 //		listview.addHeaderView(v);
 		imgview = (ImageView) findViewById(R.id.book_big_img);
 		//…Ë÷√Õº∆¨
-		imgview.setBackgroundResource(R.drawable.defaut_book);
 		Bundle bundle = getIntent().getBundleExtra("detaiinfo");
 		dBook = (Book)bundle.getSerializable("book");
 		booktitle_tv=(TextView)findViewById(R.id.booktitle_tv);
@@ -63,6 +63,11 @@ public class DetailBookActivity extends BaseActivity implements IBookManagerActi
 		ManagerService.allActivity.add(this);
 		if(dBook.getRecordid()!=null){
 			getLocalinfo(dBook.getRecordid());
+		}
+		if(!TextUtils.isEmpty(dBook.getCover_path())){
+		mImageFetcher.loadImage(dBook.getCover_path(), imgview);
+		}else{
+			imgview.setBackgroundResource(R.drawable.defaut_book);
 		}
 		
 		booktitle_tv.setText(dBook.getU_title());

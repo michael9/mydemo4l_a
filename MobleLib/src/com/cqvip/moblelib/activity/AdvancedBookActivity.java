@@ -128,7 +128,6 @@ public class AdvancedBookActivity extends BaseActivity implements IBookManagerAc
 
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int position, long id) {
-		Log.i("mobile","=================onclick======");
 		if (id == -2) //更多
 		{
 			//进度条
@@ -138,7 +137,8 @@ public class AdvancedBookActivity extends BaseActivity implements IBookManagerAc
 			getHomePage(page+1,Constant.DEFAULT_COUNT,GETMORE);
 			page = page+1;
 		}else{
-			ShortBook book = adapter.getLists().get(position);
+			//可滑动的listview需要 position-1
+			ShortBook book = adapter.getLists().get(position-1);
 			if(book!=null){
 				Log.i("ResultOnSearchActivity",book.toString());
 				Intent _intent = new Intent(context,DetailAdvancedBookActivity.class);

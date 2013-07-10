@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cqvip.mobelib.imgutils.AsyncTask;
 import com.cqvip.moblelib.R;
@@ -138,14 +139,12 @@ public class AnnouceListActivity extends BaseActivity implements IBookManagerAct
 		}
 		@Override
 		public int getCount() {
-
 			 if(mlists!=null){
 					
 					return mlists.size()+1;
 				}
-				return 0;
-			
-		}
+				return 1;
+			}
 		public List<ShortBook> getList(){
 			return mlists;
 		}
@@ -157,7 +156,7 @@ public class AnnouceListActivity extends BaseActivity implements IBookManagerAct
 
 		@Override
 		public long getItemId(int position) {
-			if(position < (this.getCount()-1)){
+			if((this.getCount()-1)>0&&position < (this.getCount()-1)){
 				return position;
 			}else{
 				return -2;
@@ -194,7 +193,8 @@ public class AnnouceListActivity extends BaseActivity implements IBookManagerAct
 			getHomePage(page+1,Constant.DEFAULT_COUNT,GETMORE);
 			page = page+1;
 		}else{
-			ShortBook book = adapter.getList().get(position);
+			//可滑动的listview需要 position-1
+			ShortBook book = adapter.getList().get(position-1);
 			if(book!=null){
 				Log.i("ResultOnSearchActivity",book.toString());
 				Intent _intent = new Intent(context,DetailAdvancedBookActivity.class);

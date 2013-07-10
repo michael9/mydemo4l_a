@@ -254,12 +254,20 @@ public class GroupOfReadersActivity extends FragmentActivity implements
 				getfavorlist(curpage_zk,perpage,GlobleData.BOOK_ZK_TYPE);
 				}
 			} else {
-				Favorite favorite = arrayList_temp.get(positon);
+				Favorite favorite = null;
+				int typeflag = 5;
+				if((Integer)parent.getTag()==GlobleData.BOOK_SZ_TYPE){
+					favorite = adapter_sz.getLists().get(positon);
+					typeflag = 5;
+					}else if((Integer)parent.getTag()==GlobleData.BOOK_ZK_TYPE){
+					favorite = adapter_zk.getLists().get(positon);
+					typeflag = 4;
+					}
 				Book book = new Book(favorite.getLngid(), favorite.getOrgan(),
 						favorite.getTitle(), favorite.getWriter(),
 						favorite.getLngid(), favorite.getYears(),
 						favorite.getPrice(), favorite.getRemark());
-				Tool.getCommentList(context, book);
+				Tool.getCommentList(context, book,typeflag);
 
 				// Book book = adapter.getLists().get(positon);
 				// if(book!=null){
@@ -323,6 +331,10 @@ public class GroupOfReadersActivity extends FragmentActivity implements
 			Log.i("MyFavorActivity", "MyGridViewAdapter");
 		}
 
+		public List<Favorite> getLists(){
+			return this.arrayList;
+		}
+		
 		@Override
 		public int getCount() {
 			Log.i("getCount", "getCount");

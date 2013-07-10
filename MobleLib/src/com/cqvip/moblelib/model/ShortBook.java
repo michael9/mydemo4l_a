@@ -74,6 +74,7 @@ public class ShortBook {
 				id = json.getString("id");
 				message = json.getString("title");
 				date = json.getString("imgurl");
+				
 			} catch (JSONException e) {
 				throw new BookException(e);
 			}
