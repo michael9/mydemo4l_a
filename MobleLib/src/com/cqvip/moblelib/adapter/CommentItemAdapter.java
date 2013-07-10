@@ -11,9 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cqvip.moblelib.R;
-import com.cqvip.moblelib.adapter.AdvancedBookAdapter.ViewHolder;
 import com.cqvip.moblelib.model.Comment;
-import com.cqvip.moblelib.model.ShortBook;
 import com.cqvip.utils.Tool;
 
 public class CommentItemAdapter extends BaseAdapter{
