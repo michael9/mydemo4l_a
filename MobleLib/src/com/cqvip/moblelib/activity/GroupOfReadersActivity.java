@@ -121,13 +121,6 @@ public class GroupOfReadersActivity extends FragmentActivity implements
 		ManagerService.addNewTask(new Task(Task.TASK_COMMENT_BOOKLIST, map));
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
-
 	/**
 	 * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
 	 * one of the sections/tabs/pages.
@@ -452,12 +445,12 @@ public class GroupOfReadersActivity extends FragmentActivity implements
 				ArrayList<Favorite> temp_zk_list=(ArrayList<Favorite>) arrayLists.get(GlobleData.BOOK_ZK_TYPE);
 				if(temp_sz_list!=null){
 					arrayList_sz.addAll(arrayLists.get(GlobleData.BOOK_SZ_TYPE));
-					}
-				if(temp_zk_list!=null){
+					mSectionsPagerAdapter.notifyDataSetChanged();
+					}else if(temp_zk_list!=null){
 				arrayList_zk.addAll(arrayLists.get(GlobleData.BOOK_ZK_TYPE));
+				mSectionsPagerAdapter.notifyDataSetChanged();
 				}
 			}
-			mSectionsPagerAdapter.notifyDataSetChanged();
 		} 
 	}
 
