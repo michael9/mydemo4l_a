@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_list" >
+
+    <include
+        android:id="@+id/head_bar"
+        layout="@layout/header" />
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_list" >
-
-        <include
-            android:id="@+id/head_bar"
-            layout="@layout/header" />
+        android:layout_height="match_parent"
+        android:layout_below="@+id/head_bar"
+        android:layout_marginBottom="40dp" >
 
         <!-- 图书 -->
 
         <RelativeLayout
             android:id="@+id/detail_up_rl"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/head_bar" >
+            android:layout_height="wrap_content" >
 
             <ImageView
                 android:id="@+id/ebook_icon_img"
@@ -37,21 +38,17 @@
                 android:layout_toRightOf="@+id/ebook_icon_img"
                 android:orientation="vertical" >
 
-                <RelativeLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content" >
+                <!-- title -->
 
-                    <!-- title -->
-
-                    <TextView
-                        android:id="@+id/ebook_title_txt"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:singleLine="true"
-                        android:text="编程的艺术"
-                        android:textColor="@color/txt_black"
-                        android:textSize="18.0sp" android:textStyle="bold"/>
-                </RelativeLayout>
+                <TextView
+                    android:id="@+id/ebook_title_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="编程的艺术"
+                    android:textColor="@color/txt_black"
+                    android:textSize="18.0sp"
+                    android:textStyle="bold" />
                 <!-- author -->
 
                 <TextView
@@ -102,16 +99,11 @@
             </LinearLayout>
         </RelativeLayout>
 
-        <LinearLayout
-            android:id="@+id/ll_abstract"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_below="@+id/detail_up_rl"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
-            android:orientation="horizontal"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin" >
+            android:layout_margin="5dp" >
 
             <TextView
                 android:id="@+id/ebook_content_abst"
@@ -120,120 +112,18 @@
                 android:text=""
                 android:textColor="@color/txt_black"
                 android:textSize="@dimen/search_detail_txtsize_btn" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/ll_abstract"
-            android:layout_marginTop="15dp"
-            android:gravity="right"
-            android:orientation="horizontal" >
-
-            <Button
-                android:id="@+id/btn_ebook_detail_great"
-                android:layout_width="48dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="12dp"
-                android:background="@null"
-                android:focusable="false"
-                android:text="赞"
-                android:textColor="@color/green_light"
-                android:textSize="@dimen/search_detail_txtsize_btn"
-                android:visibility="gone" />
-
-            <Button
-                android:id="@+id/btn_ebook_detail_buzz"
-                android:layout_width="48dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="12dp"
-                android:background="@null"
-                android:focusable="false"
-                android:text="评"
-                android:textColor="@color/green_light" />
-
-            <Button
-                android:id="@+id/btn_ebook_detail_collect"
-                android:layout_width="48dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="12dp"
-                android:background="@null"
-                android:focusable="false"
-                android:text="收藏"
-                android:textColor="@color/green_light"
-                android:textSize="@dimen/search_detail_txtsize_btn" />
-
-            <Button
-                android:id="@+id/btn_ebook_detail_share"
-                android:layout_width="48dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="12dp"
-                android:background="@null"
-                android:focusable="false"
-                android:text="分享"
-                android:textColor="@color/green_light"
-                android:textSize="@dimen/search_detail_txtsize_btn" />
-
-            <Button
-                android:id="@+id/btn_ebook_detail_download"
-                android:layout_width="48dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="8dp"
-                android:background="@null"
-                android:focusable="false"
-                android:text="下载"
-                android:textColor="@color/green_light"
-                android:textSize="@dimen/search_detail_txtsize_btn" />
-        </LinearLayout>
-        <!--
-         <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/ll_abstract"
-        android:layout_marginTop="5dp"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:orientation="horizontal" >
-
-        <TextView
-            style="@style/ShareText"
-            android:id="@+id/ebook_comment_txt"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:maxLines="3"
-			android:layout_weight="1.0"  
-			android:gravity="center"          
-            android:text="评论" />
-        <TextView
-			style="@style/ShareText"
-            android:id="@+id/ebook_share_txt"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:maxLines="3"
-			android:gravity="center"
-			android:layout_weight="1.0"
-            android:text="分享" />
-        <TextView
-            style="@style/ShareText"
-            android:id="@+id/ebook_favorite_txt"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:maxLines="3"
-            android:gravity="center"
-            android:layout_weight="1.0"
-            android:text="收藏" />
-        <TextView
-            style="@style/ShareText"
-            android:id="@+id/ebook_down_txt"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:maxLines="3"
-			android:layout_weight="1.0"     
-			android:gravity="center"
-            android:text="下载" />
-        
-    </LinearLayout>
-        -->
+        </ScrollView>
     </RelativeLayout>
 
-</ScrollView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+       >
+
+        <include
+            android:id="@+id/book_action_bar"
+            layout="@layout/book_action_bar" />
+    </LinearLayout>
+
+</RelativeLayout>

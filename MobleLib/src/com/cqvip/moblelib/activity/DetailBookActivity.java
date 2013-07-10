@@ -35,13 +35,13 @@ public class DetailBookActivity extends BaseActivity implements IBookManagerActi
 	public static final int FAVOR = 2;
 	
 	private Book dBook;
-	private TextView booktitle_tv,textView10,textView11;
+	private TextView booktitle_tv,textView9,textView10,textView11;
 	private ListView listview;
 	private BookLocAdapter adapter;
 	private Context context;
-	private View title_bar;
-	private ImageView imgview;
-	private Button btn_item_result_search_collect,btn_item_result_search_share,btn_item_result_search_buzz;
+	private View title_bar,book_action_bar;
+	private ImageView imgview;	
+	private Button btn_item_result_search_collect,btn_item_result_search_share,btn_item_result_search_buzz,btn_item_result_search_download;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -56,6 +56,7 @@ public class DetailBookActivity extends BaseActivity implements IBookManagerActi
 		Bundle bundle = getIntent().getBundleExtra("detaiinfo");
 		dBook = (Book)bundle.getSerializable("book");
 		booktitle_tv=(TextView)findViewById(R.id.booktitle_tv);
+		textView9=(TextView)findViewById(R.id.textView9);
 		textView10=(TextView)findViewById(R.id.textView10);
 		textView11=(TextView)findViewById(R.id.textView11);
 		
@@ -87,8 +88,9 @@ public class DetailBookActivity extends BaseActivity implements IBookManagerActi
 				finish();
 			}
 		});
+		book_action_bar=findViewById(R.id.book_action_bar);
 		//收藏 
-		btn_item_result_search_collect=(Button)findViewById(R.id.btn_item_result_search_collect);
+		btn_item_result_search_collect=(Button)book_action_bar.findViewById(R.id.btn_item_collect);
 		btn_item_result_search_collect.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -103,7 +105,7 @@ public class DetailBookActivity extends BaseActivity implements IBookManagerActi
 			}
 		});
 		//分享
-		btn_item_result_search_share=(Button)findViewById(R.id.btn_item_result_search_share);
+		btn_item_result_search_share=(Button)book_action_bar.findViewById(R.id.btn_item_share);
 		btn_item_result_search_share.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -114,7 +116,7 @@ public class DetailBookActivity extends BaseActivity implements IBookManagerActi
 		});
 		
 		//评论
-		btn_item_result_search_buzz=(Button)findViewById(R.id.btn_item_result_search_buzz);
+		btn_item_result_search_buzz=(Button)book_action_bar.findViewById(R.id.btn_item_buzz);
 		btn_item_result_search_buzz.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -127,7 +129,9 @@ public class DetailBookActivity extends BaseActivity implements IBookManagerActi
 				}
 			}
 		});
-		
+		//
+		btn_item_result_search_download=(Button)book_action_bar.findViewById(R.id.btn_item_download);
+		btn_item_result_search_download.setVisibility(View.GONE);
 	}
 
 	//显示对话框
@@ -166,6 +170,7 @@ public class DetailBookActivity extends BaseActivity implements IBookManagerActi
 		 if(type==GETBOOKINFO){
 		List<BookLoc> list = (List<BookLoc>)obj[1];
 		if(list!=null&&!list.isEmpty()){
+			textView9.setText("馆藏信息("+list.size()+")");
 			adapter = new BookLocAdapter(context,list);
 			listview.setAdapter(adapter);
 		}else{

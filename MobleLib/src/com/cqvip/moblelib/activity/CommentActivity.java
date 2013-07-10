@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.webkit.DownloadListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
@@ -17,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.cqvip.mobelib.imgutils.AsyncTask;
 import com.cqvip.moblelib.R;
 import com.cqvip.moblelib.adapter.CommentItemAdapter;
 import com.cqvip.moblelib.base.IBookManagerActivity;
@@ -27,10 +29,11 @@ import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.Book;
 import com.cqvip.moblelib.model.Comment;
 import com.cqvip.moblelib.model.Result;
+import com.cqvip.moblelib.view.DownFreshListView;
 import com.cqvip.utils.Tool;
 
 public class CommentActivity extends BaseActivity implements
-		IBookManagerActivity, OnClickListener,OnItemClickListener {
+		IBookManagerActivity, OnClickListener,OnItemClickListener,DownFreshListView.OnRefreshListener {
 	public static final int ADDCOMMENT = 1;
 	private static final int GETMORE = 1;
 	private static final int GETHOMEPAGE = 0;
@@ -39,7 +42,7 @@ public class CommentActivity extends BaseActivity implements
 	private EditText comment_et;
 	private Button commit_btn;
 	private Book dBook;
-	private ListView listview;
+	private DownFreshListView listview;
 	private int typeid;
 	private CommentItemAdapter adapter;
 	private int delFlag;
@@ -77,8 +80,9 @@ public class CommentActivity extends BaseActivity implements
 
 	@Override
 	public void init() {
-		listview = (ListView) findViewById(R.id.comment_lv);
+		listview = (DownFreshListView) findViewById(R.id.comment_lv);
 		listview.setOnItemClickListener(this);
+		listview.setOnRefreshListener(this);
 		baseinfo_tv = (TextView) findViewById(R.id.baseinfo_tv);
 		intro_tv= (TextView) findViewById(R.id.intro_tv);
 		commit_btn = (Button) findViewById(R.id.commit_btn);
@@ -161,7 +165,10 @@ public class CommentActivity extends BaseActivity implements
 		case Task.TASK_ADD_COMMENT:
 			Result res = (Result) obj[1];
 			if (res.getSuccess()) {
+				//提示
 				Tool.ShowMessages(this, "添加成功");
+				//更新列表
+				getHomeComment(typeid,keyid,1,Constant.DEFAULT_COUNT,GETHOMEPAGE);
 			} else {
 				Tool.ShowMessages(this, "添加失败");
 			}
@@ -200,6 +207,31 @@ public class CommentActivity extends BaseActivity implements
 			page = page+1;
 		
 		}
+		
+	}
+
+	@Override
+	public void onRefresh() {
+		getHomeComment(typeid,keyid,1,Constant.DEFAULT_COUNT,GETHOMEPAGE);
+		new AsyncTask<Void, Void, Void>() {
+			protected Void doInBackground(Void... params) {
+
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				return null;
+			}
+			//刷新完成
+			@Override
+			protected void onPostExecute(Void result) {
+				
+				listview.onRefreshComplete();
+
+			}
+
+		}.execute(null, null);
 		
 	}
 }
