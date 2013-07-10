@@ -4,17 +4,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-
-
     <TextView
         android:id="@+id/tv_item_topic"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-		android:textColor="@color/black"
-		android:paddingLeft="8.0dip"
-		android:paddingTop="8.0dip"
-		android:paddingBottom="8.0dip"
-        android:textSize="18sp"
-        android:text="789798" />
-		
+        android:paddingBottom="8.0dip"
+        android:paddingLeft="8.0dip"
+        android:paddingTop="8.0dip"
+        android:textColor="@color/txt_black"
+        android:textSize="16sp" />
+
 </LinearLayout>
