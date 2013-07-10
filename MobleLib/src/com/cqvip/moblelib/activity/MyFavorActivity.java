@@ -51,8 +51,8 @@ public class MyFavorActivity extends FragmentActivity implements
 	private int perpage = 10;// 每页显示条数
 	private Favorite del_favorite;
 	private View moreprocess;
-	private int type=GlobleData.BOOK_SZ_TYPE;
-	private int curpage_sz = 1, curpage_zk=1;// 第几页
+	private int type = GlobleData.BOOK_SZ_TYPE;
+	private int curpage_sz = 1, curpage_zk = 1;// 第几页
 
 	MyGridViewAdapter adapter_zk, adapter_sz;
 	/**
@@ -92,63 +92,54 @@ public class MyFavorActivity extends FragmentActivity implements
 		mViewPager.setAdapter(mSectionsPagerAdapter);
 		// 获取数据
 		ManagerService.allActivity.add(this);
-		getfavorlist(curpage,perpage,GlobleData.BOOK_SZ_TYPE);
-		getfavorlist(curpage,perpage,GlobleData.BOOK_ZK_TYPE);
+		getfavorlist(curpage, perpage, GlobleData.BOOK_SZ_TYPE);
+		getfavorlist(curpage, perpage, GlobleData.BOOK_ZK_TYPE);
 	}
-	
-	
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
-			switch (requestCode) {
-			case 101:
-				if(resultCode==0&&del_favorite!=null)
-				{
-					
-					HashMap<String, String> map = new HashMap<String, String>();
-					map.put("libid", GlobleData.LIBIRY_ID);
-					map.put("vipuserid", GlobleData.cqvipid);
-					Log.i("删除收藏", GlobleData.cqvipid);
-					map.put("keyid", del_favorite.getFavoritekeyid());
-//					Log.i("keyid", favorite.getFavoritekeyid());
-					map.put("typeid", "" + del_favorite.getTypeid());
-					ManagerService
-							.addNewTask(new Task(Task.TASK_CANCEL_FAVOR, map));
-				}
-				break;
+		switch (requestCode) {
+		case 101:
+			if (resultCode == 0 && del_favorite != null) {
 
-			default:
-				break;
+				HashMap<String, String> map = new HashMap<String, String>();
+				map.put("libid", GlobleData.LIBIRY_ID);
+				map.put("vipuserid", GlobleData.cqvipid);
+				Log.i("删除收藏", GlobleData.cqvipid);
+				map.put("keyid", del_favorite.getFavoritekeyid());
+				// Log.i("keyid", favorite.getFavoritekeyid());
+				map.put("typeid", "" + del_favorite.getTypeid());
+				ManagerService
+						.addNewTask(new Task(Task.TASK_CANCEL_FAVOR, map));
 			}
-		
+			break;
+
+		default:
+			break;
+		}
+
 	}
-	
-	public void senddel(){
-		Intent intent=new Intent();
+
+	public void senddel() {
+		Intent intent = new Intent();
 		intent.setClass(MyFavorActivity.this, ActivityDlg.class);
 		intent.putExtra("ACTIONID", 0);
 		intent.putExtra("MSGBODY", "确定删除该收藏");
 		intent.putExtra("BTN_CANCEL", 1);
-		startActivityForResult(intent,101);
+		startActivityForResult(intent, 101);
 	}
 
-	private void getfavorlist(int pagecount,int perpage,int typeid) {
+	private void getfavorlist(int pagecount, int perpage, int typeid) {
 		HashMap map = new HashMap();
 		map.put("libid", GlobleData.LIBIRY_ID);
 		Log.i("MyFavorActivity_cqvipid", "" + GlobleData.cqvipid);
 		map.put("vipuserid", GlobleData.cqvipid);
-		map.put("curpage", ""+pagecount);
-		map.put("perpage", ""+perpage);
-		map.put("typeid", ""+typeid);
+		map.put("curpage", "" + pagecount);
+		map.put("perpage", "" + perpage);
+		map.put("typeid", "" + typeid);
 		ManagerService.addNewTask(new Task(Task.TASK_GET_FAVOR, map));
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
 	}
 
 	/**
@@ -214,8 +205,6 @@ public class MyFavorActivity extends FragmentActivity implements
 			return null;
 		}
 	}
-	
-	
 
 	/**
 	 * A dummy fragment representing a section of the app, but that simply
@@ -231,7 +220,7 @@ public class MyFavorActivity extends FragmentActivity implements
 		public static final String ARG_SECTION_NUMBER = "section_number";
 
 		public DummySectionFragment() {
-//			Log.i("MyFavorActivity", "DummySectionFragment");
+			// Log.i("MyFavorActivity", "DummySectionFragment");
 		}
 
 		List<Favorite> arrayList_temp;
@@ -262,69 +251,70 @@ public class MyFavorActivity extends FragmentActivity implements
 			return rootView;
 		}
 
-
-
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int positon,
 				long id) {
-			Log.i("item","===============click=");
+			Log.i("item", "===============click=");
 			if (id == -2) {
-				if(parent.getAdapter().getCount()==1){
+				if (parent.getAdapter().getCount() == 1) {
 					return;
 				}
-				//进度条
+				// 进度条
 				moreprocess = view.findViewById(R.id.footer_progress);
 				moreprocess.setVisibility(View.VISIBLE);
-				Log.i("parent.getTag()",""+parent.getTag());
-				//请求网络更多		
-				if((Integer)parent.getTag()==GlobleData.BOOK_SZ_TYPE){
-				curpage_sz++;
-				getfavorlist(curpage_sz,perpage,GlobleData.BOOK_SZ_TYPE);
-				}else if((Integer)parent.getTag()==GlobleData.BOOK_ZK_TYPE){
-				curpage_zk++;
-				getfavorlist(curpage_zk,perpage,GlobleData.BOOK_ZK_TYPE);
+				Log.i("parent.getTag()", "" + parent.getTag());
+				// 请求网络更多
+				if ((Integer) parent.getTag() == GlobleData.BOOK_SZ_TYPE) {
+					curpage_sz++;
+					getfavorlist(curpage_sz, perpage, GlobleData.BOOK_SZ_TYPE);
+				} else if ((Integer) parent.getTag() == GlobleData.BOOK_ZK_TYPE) {
+					curpage_zk++;
+					getfavorlist(curpage_zk, perpage, GlobleData.BOOK_ZK_TYPE);
 				}
-			}else{
-//				//Book book = adapter.getLists().get(positon);
-//				if(book!=null){
-//					Log.i("ResultOnSearchActivity",book.toString());
-//					Intent _intent = new Intent(context,DetailBookActivity.class);
-//					Bundle bundle = new Bundle();
-//					bundle.putSerializable("book", book);
-//					_intent.putExtra("detaiinfo", bundle);
-//					startActivity(_intent);
-				//}
-				
-//				Book book =  lists.get(position-1);
-//				if(book!=null){
-//				Bundle bundle = new Bundle();
-//				bundle.putSerializable("book", book);
-//				_intent.putExtra("detaiinfo", bundle);
-//				startActivityForResult(_intent, 1);
-				}
+			} else {
+				// //Book book = adapter.getLists().get(positon);
+				// if(book!=null){
+				// Log.i("ResultOnSearchActivity",book.toString());
+				// Intent _intent = new
+				// Intent(context,DetailBookActivity.class);
+				// Bundle bundle = new Bundle();
+				// bundle.putSerializable("book", book);
+				// _intent.putExtra("detaiinfo", bundle);
+				// startActivity(_intent);
+				// }
+
+				// Book book = lists.get(position-1);
+				// if(book!=null){
+				// Bundle bundle = new Bundle();
+				// bundle.putSerializable("book", book);
+				// _intent.putExtra("detaiinfo", bundle);
+				// startActivityForResult(_intent, 1);
 			}
+		}
 
 		@Override
 		public boolean onItemLongClick(AdapterView<?> parent, View view,
 				int position, long id) {
-			if(parent.getAdapter().getItemId(position)!=-2){
-			int listviewid=(Integer)parent.getTag();
-			listview_id=listviewid;
-			listview_item_position=position;
-			if(listviewid==GlobleData.BOOK_SZ_TYPE){
-				type=GlobleData.BOOK_SZ_TYPE;
-			}else if(listviewid==GlobleData.BOOK_ZK_TYPE){
-				type=GlobleData.BOOK_ZK_TYPE;
-			}
-			del_favorite=arrayList_temp.get(position);
-			
-			senddel();
+			if (parent.getAdapter().getItemId(position) != -2) {
+				int listviewid = (Integer) parent.getTag();
+				listview_id = listviewid;
+				listview_item_position = position;
+				if (listviewid == GlobleData.BOOK_SZ_TYPE) {
+					type = GlobleData.BOOK_SZ_TYPE;
+				} else if (listviewid == GlobleData.BOOK_ZK_TYPE) {
+					type = GlobleData.BOOK_ZK_TYPE;
+				}
+				del_favorite = arrayList_temp.get(position);
+
+				senddel();
 			}
 			return false;
 		}
 	}
-	private int listview_id=GlobleData.BOOK_SZ_TYPE;
-	private int listview_item_position=0;
+
+	private int listview_id = GlobleData.BOOK_SZ_TYPE;
+	private int listview_item_position = 0;
+
 	static class ViewHolder {
 
 		TextView title;// 书名
@@ -350,14 +340,14 @@ public class MyFavorActivity extends FragmentActivity implements
 			Log.i("MyFavorActivity", "MyGridViewAdapter");
 		}
 
-		public List<Favorite> getList(){
+		public List<Favorite> getList() {
 			return this.arrayList;
 		}
-		
+
 		@Override
 		public int getCount() {
 			Log.i("getCount", "getCount");
-			if (arrayList!=null&&!arrayList.isEmpty()) {
+			if (arrayList != null && !arrayList.isEmpty()) {
 				return arrayList.size() + 1;
 			}
 			return 1;
@@ -385,15 +375,19 @@ public class MyFavorActivity extends FragmentActivity implements
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			final ViewHolder holder;
-			if(this.getCount() == 1){
+			if (this.getCount() == 1) {
 				convertView = LayoutInflater.from(myContext).inflate(
 						R.layout.moreitemsview, null);
 				convertView.setClickable(false);
-				convertView.setBackground(context.getResources().getDrawable(R.drawable.transparent));
-				TextView tv=(TextView)convertView.findViewById(R.id.footer_txt);
+				convertView.setBackground(context.getResources().getDrawable(
+						R.drawable.transparent));
+				TextView tv = (TextView) convertView
+						.findViewById(R.id.footer_txt);
 				tv.setText("亲，您所在分类没有收藏哦");
-				tv.setTextColor(context.getResources().getColor(R.drawable.silvergray));
-				tv.setTextSize(context.getResources().getDimension(R.dimen.search_detail_txtsize_tv));
+				tv.setTextColor(context.getResources().getColor(
+						R.drawable.silvergray));
+				tv.setTextSize(context.getResources().getDimension(
+						R.dimen.search_detail_txtsize_tv));
 				tv.setClickable(false);
 				return convertView;
 			}
@@ -409,7 +403,7 @@ public class MyFavorActivity extends FragmentActivity implements
 				convertView = LayoutInflater.from(myContext).inflate(
 						R.layout.item_result_search, null);
 				holder = new ViewHolder();
-				TextView txt_abst= (TextView) convertView
+				TextView txt_abst = (TextView) convertView
 						.findViewById(R.id.txt_abst);
 				txt_abst.setVisibility(View.GONE);
 				holder.title = (TextView) convertView
@@ -475,8 +469,9 @@ public class MyFavorActivity extends FragmentActivity implements
 		customProgressDialog.show();
 	}
 
-	private boolean isdeleted_sz=false;
-	private boolean isdeleted_zk=false;
+	private boolean isdeleted_sz = false;
+	private boolean isdeleted_zk = false;
+
 	@Override
 	public void refresh(Object... obj) {
 		customProgressDialog.dismiss();
@@ -484,44 +479,51 @@ public class MyFavorActivity extends FragmentActivity implements
 		int temp = (Integer) obj[0];
 		if (temp == FAVOR) {
 			arrayLists = (Map<Integer, List<Favorite>>) obj[1];
-			if(isdeleted_sz){
+			if (isdeleted_sz) {
 				arrayList_sz.clear();
-				isdeleted_sz=false;
-			}else if(isdeleted_zk){
+				isdeleted_sz = false;
+			} else if (isdeleted_zk) {
 				arrayList_zk.clear();
-				isdeleted_zk=false;
-			}else if((curpage_sz>1||curpage_zk>1)&&arrayLists != null && !arrayLists.isEmpty()){
-				if ((arrayLists.get(GlobleData.BOOK_ZK_TYPE)==null||arrayLists.get(GlobleData.BOOK_ZK_TYPE).isEmpty())&&
-						(arrayLists.get(GlobleData.BOOK_SZ_TYPE)==null||arrayLists.get(GlobleData.BOOK_SZ_TYPE).isEmpty())) {
+				isdeleted_zk = false;
+			} else if ((curpage_sz > 1 || curpage_zk > 1) && arrayLists != null
+					&& !arrayLists.isEmpty()) {
+				if ((arrayLists.get(GlobleData.BOOK_ZK_TYPE) == null || arrayLists
+						.get(GlobleData.BOOK_ZK_TYPE).isEmpty())
+						&& (arrayLists.get(GlobleData.BOOK_SZ_TYPE) == null || arrayLists
+								.get(GlobleData.BOOK_SZ_TYPE).isEmpty())) {
 					Tool.ShowMessages(context, "没有更多内容可供加载");
 					moreprocess.setVisibility(View.GONE);
 					return;
 				}
 			}
 			if (arrayLists != null && !arrayLists.isEmpty()) {
+				if(arrayLists.get(GlobleData.BOOK_ZK_TYPE).isEmpty()&&arrayLists.get(GlobleData.BOOK_SZ_TYPE).isEmpty()){
+					return;
+				}
 				arrayList_zk.addAll(arrayLists.get(GlobleData.BOOK_ZK_TYPE));
 				arrayList_sz.addAll(arrayLists.get(GlobleData.BOOK_SZ_TYPE));
+				mSectionsPagerAdapter.notifyDataSetChanged();
 			}
 		} else if (temp == CANCELFAVOR) {
 			Result res = (Result) obj[1];
 			if (res.getSuccess()) {
 				Tool.ShowMessages(context, "取消收藏成功");
-				int temp_pagecount=0;
-				if(listview_id==GlobleData.BOOK_SZ_TYPE){
-					isdeleted_sz=true;
+				int temp_pagecount = 0;
+				if (listview_id == GlobleData.BOOK_SZ_TYPE) {
+					isdeleted_sz = true;
 					arrayList_sz.remove(listview_item_position);
-					temp_pagecount=perpage*curpage_sz;
-				}else if(listview_id==GlobleData.BOOK_ZK_TYPE){
-					isdeleted_zk=true;
+					temp_pagecount = perpage * curpage_sz;
+				} else if (listview_id == GlobleData.BOOK_ZK_TYPE) {
+					isdeleted_zk = true;
 					arrayList_zk.remove(listview_item_position);
-					temp_pagecount=perpage*curpage_zk;
+					temp_pagecount = perpage * curpage_zk;
 				}
-				getfavorlist(curpage,temp_pagecount,listview_id);
+				getfavorlist(curpage, temp_pagecount, listview_id);
 			} else {
 				Tool.ShowMessages(context, "取消收藏失败");
 			}
 		}
-		mSectionsPagerAdapter.notifyDataSetChanged();
+	
 	}
 
 	public void onError(int a) {
