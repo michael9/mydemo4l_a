@@ -44,10 +44,11 @@
     <string name="title_activity_borrow_and_order">借阅管理</string>
     <string name="title_activity_group_of_readers">书友圈</string>
     <string name="suggestread_proffession">专家推荐</string>
+     <string name="suggestread_hotbook">热门图书</string>
     <string name="suggestread_topcomment">热门评论</string>
     <string name="suggestread_rank">借阅排行</string>
     <string name="suggestread_ebookrand">电子资源下载排行</string>
-    <string name="suggestread_newbook">新书通报</string>
+    <string name="suggestread_newbook">新书推荐</string>
     <string name="announce_innermove">馆内动态</string>
     <string name="announce_out">新闻动态</string>
     <string name="announce_inneractive">馆内活动</string>

@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
@@ -23,6 +24,7 @@ import com.cqvip.moblelib.biz.ManagerService;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.Constant;
 import com.cqvip.moblelib.model.ShortBook;
+import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.moblelib.view.DownFreshListView;
 import com.cqvip.utils.Tool;
 
@@ -43,17 +45,48 @@ public class AnnouceListActivity extends BaseActivity implements IBookManagerAct
 		
 		context = this;
 		type = getIntent().getIntExtra("type", 1);
-		
 		listview = (DownFreshListView) findViewById(R.id.listview_new);
 		listview.setOnItemClickListener(this);
 		listview.setOnRefreshListener(this);
 		adapter = new MyNewAdapter(context,null);
 		
+		switch (type) {
+		case  Constant.SPEECH_NEWS:
+			setheadbar("新闻动态");
+			break;
+			
+		case  Constant.SPPECH_FREE:
+			setheadbar("公益讲座");
+			break;
+
+		default:
+			break;
+		}
 		getHomePage(page, Constant.DEFAULT_COUNT,GETHOMEPAGE);
 		
 	}
+	
+	private void setheadbar(String title)
+	{
+		View headbar,btn_back;
+		TextView bar_title;
+		customProgressDialog=CustomProgressDialog.createDialog(this);
+		headbar=findViewById(R.id.head_bar);
+		bar_title=(TextView)headbar.findViewById(R.id.txt_header);
+		bar_title.setText(title);
+		btn_back=headbar.findViewById(R.id.img_back_header);
+		btn_back.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+			finish();	
+			}
+		});
+	}
 
 	private void getHomePage(int page, int defaultCount,int mwhat) {
+		customProgressDialog.show();
 		if(!ManagerService.allActivity.contains(this)){
 			ManagerService.allActivity.add(this);
 			}
@@ -181,6 +214,7 @@ public class AnnouceListActivity extends BaseActivity implements IBookManagerAct
 
 	@Override
 	public void refresh(Object... obj) {
+		customProgressDialog.dismiss();
 		Integer state = (Integer)obj[0];
 		List<ShortBook> lists=(List<ShortBook>)obj[1];
 		switch(state){
