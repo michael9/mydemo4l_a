@@ -255,7 +255,7 @@ public class ManagerService extends Service implements Runnable {
 				break;	
 				//π›≤ÿÕº È ’≤ÿ20
 			case Task.TASK_LIB_FAVOR:
-				IBookManagerActivity favor_lib = (IBookManagerActivity) ManagerService.getActivityByName("ResultOnSearchActivity");
+				IBookManagerActivity favor_lib = (IBookManagerActivity) ManagerService.getActivityByName("DetailBookActivity");
 				if (msg.arg1 != 0) {
 					doException(5,msg, "DetailBookActivity");
 					break;
