@@ -61,11 +61,13 @@ import com.cqvip.utils.Tool;
 public class GroupOfReadersActivity extends FragmentActivity implements
 		IBookManagerActivity {
 	public static final int COMMENTLIST = 1;
-	public static final int CANCELFAVOR = 2;
 
-	private String curpage = "1";// 第几页
-	private String perpage = "10";// 每页显示条数
-
+	private int curpage = 1;// 第几页
+	private int perpage = 10;// 每页显示条数
+	private View moreprocess;
+	private int type=GlobleData.BOOK_SZ_TYPE;
+	private int curpage_sz = 1, curpage_zk=1;
+	
 	MyGridViewAdapter adapter_zk, adapter_sz;
 	/**
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -85,8 +87,8 @@ public class GroupOfReadersActivity extends FragmentActivity implements
 	Context context;
 	protected CustomProgressDialog customProgressDialog;
 	Map<Integer, List<Favorite>> arrayLists;
-	List<Favorite> arrayList_zk = new ArrayList<Favorite>();
-	List<Favorite> arrayList_sz = new ArrayList<Favorite>();
+	ArrayList<Favorite> arrayList_zk = new ArrayList<Favorite>();
+	ArrayList<Favorite> arrayList_sz = new ArrayList<Favorite>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -104,16 +106,18 @@ public class GroupOfReadersActivity extends FragmentActivity implements
 		mViewPager.setAdapter(mSectionsPagerAdapter);
 		// 获取数据
 		ManagerService.allActivity.add(this);
-		getfavorlist();
+		getfavorlist(curpage,perpage,GlobleData.BOOK_SZ_TYPE);
+		getfavorlist(curpage,perpage,GlobleData.BOOK_ZK_TYPE);
 	}
 
-	private void getfavorlist() {
+	private void getfavorlist(int pagecount,int perpage,int typeid) {
 		HashMap map = new HashMap();
 		map.put("libid", GlobleData.LIBIRY_ID);
 		Log.i("MyFavorActivity_cqvipid", "" + GlobleData.cqvipid);
 		map.put("vipuserid", GlobleData.cqvipid);
-		map.put("curpage", curpage);
-		map.put("perpage", perpage);
+		map.put("curpage", ""+pagecount);
+		map.put("perpage", ""+perpage);
+		map.put("typeid", ""+typeid);
 		ManagerService.addNewTask(new Task(Task.TASK_COMMENT_BOOKLIST, map));
 	}
 
@@ -191,7 +195,7 @@ public class GroupOfReadersActivity extends FragmentActivity implements
 	 */
 
 	public class DummySectionFragment extends Fragment implements
-			OnItemClickListener, OnItemLongClickListener {
+			OnItemClickListener {
 		/**
 		 * The fragment argument representing the section number for this
 		 * fragment.
@@ -217,33 +221,38 @@ public class GroupOfReadersActivity extends FragmentActivity implements
 				arrayList_temp = arrayList_sz;
 				adapter_sz = new MyGridViewAdapter(getActivity(), arrayList_sz);
 				listView.setAdapter(adapter_sz);
+				listView.setTag(GlobleData.BOOK_SZ_TYPE);
 			} else if (i == 1) {
+				listView.setTag(GlobleData.BOOK_ZK_TYPE);
 				arrayList_temp = arrayList_zk;
 				adapter_zk = new MyGridViewAdapter(getActivity(), arrayList_zk);
 				listView.setAdapter(adapter_zk);
 			}
 
-			listView.setOnItemClickListener((OnItemClickListener) this);
-			listView.setOnItemLongClickListener(this);
+			listView.setOnItemClickListener(this);
 			return rootView;
 		}
 
 		@Override
-		public void onItemClick(AdapterView<?> arg0, View arg1, int positon,
+		public void onItemClick(AdapterView<?> parent, View view, int positon,
 				long id) {
 			Log.i("item", "===============click=");
-			if (id == -2) // 更多
-			{
-				// //进度条
-				// View moreprocess = arg1.findViewById(R.id.footer_progress);
-				// moreprocess.setVisibility(View.VISIBLE);
-				// //请求网络更多
-				// if(Tool.isbnMatch(key)){
-				// getHomePage(key,page+1,DEFAULT_COUNT,GETNEXTPAGE,GlobleData.QUERY_ISBN);
-				// }else{
-				// getHomePage(key,page+1,DEFAULT_COUNT,GETNEXTPAGE,GlobleData.QUERY_ALL);
-				// }
-				// page = page+1;
+			if (id == -2){ // 更多
+				if(parent.getAdapter().getCount()==1){
+					return;
+				}
+				//进度条
+				moreprocess = view.findViewById(R.id.footer_progress);
+				moreprocess.setVisibility(View.VISIBLE);
+				Log.i("parent.getTag()",""+parent.getTag());
+				//请求网络更多		
+				if((Integer)parent.getTag()==GlobleData.BOOK_SZ_TYPE){
+				curpage_sz++;
+				getfavorlist(curpage_sz,perpage,GlobleData.BOOK_SZ_TYPE);
+				}else if((Integer)parent.getTag()==GlobleData.BOOK_ZK_TYPE){
+				curpage_zk++;
+				getfavorlist(curpage_zk,perpage,GlobleData.BOOK_ZK_TYPE);
+				}
 			} else {
 				Favorite favorite = arrayList_temp.get(positon);
 				Book book = new Book(favorite.getLngid(), favorite.getOrgan(),
@@ -272,28 +281,29 @@ public class GroupOfReadersActivity extends FragmentActivity implements
 			}
 		}
 
-		@Override
-		public boolean onItemLongClick(AdapterView<?> parent, View view,
-				int position, long id) {
-			Favorite favorite = arrayList_temp.get(position);
-			if (favorite != null) {
-				HashMap<String, String> map = new HashMap<String, String>();
-				map.put("libid", GlobleData.LIBIRY_ID);
-				map.put("vipuserid", GlobleData.cqvipid);
-				Log.i("删除收藏", GlobleData.cqvipid);
-				map.put("keyid", favorite.getFavoritekeyid());
-				Log.i("keyid", favorite.getFavoritekeyid());
-				map.put("typeid", "" + favorite.getTypeid());
-				ManagerService
-						.addNewTask(new Task(Task.TASK_CANCEL_FAVOR, map));
-				customProgressDialog.show();
-			}
-			return false;
-		}
+//		@Override
+//		public boolean onItemLongClick(AdapterView<?> parent, View view,
+//				int position, long id) {
+//			Favorite favorite = arrayList_temp.get(position);
+//			if (favorite != null) {
+//				HashMap<String, String> map = new HashMap<String, String>();
+//				map.put("libid", GlobleData.LIBIRY_ID);
+//				map.put("vipuserid", GlobleData.cqvipid);
+//				Log.i("删除收藏", GlobleData.cqvipid);
+//				map.put("keyid", favorite.getFavoritekeyid());
+//				Log.i("keyid", favorite.getFavoritekeyid());
+//				map.put("typeid", "" + favorite.getTypeid());
+//				ManagerService
+//						.addNewTask(new Task(Task.TASK_CANCEL_FAVOR, map));
+//				customProgressDialog.show();
+//			}
+//			return false;
+//		}
 	}
-
+	
+	private int listview_id=GlobleData.BOOK_SZ_TYPE;
+	private int listview_item_position=0;
 	static class ViewHolder {
-
 		TextView title;// 书名
 		TextView author;// 作者
 		TextView publisher;// 出版社
@@ -316,7 +326,7 @@ public class GroupOfReadersActivity extends FragmentActivity implements
 		@Override
 		public int getCount() {
 			Log.i("getCount", "getCount");
-			if (arrayList != null) {
+			if (arrayList!=null&&!arrayList.isEmpty()) {
 				return arrayList.size() + 1;
 			}
 			return 1;
@@ -337,27 +347,21 @@ public class GroupOfReadersActivity extends FragmentActivity implements
 			}
 		}
 
-		public void refresh() {
-			notifyDataSetChanged();
-		}
-
-		// @Override
-		// public View getView(int position, View convertView, ViewGroup parent)
-		// {
-		// if (convertView == null) {
-		// convertView = LayoutInflater.from(myContext).inflate(
-		// R.layout.myfavor_fragmen_item, null);
-		// }
-		// ImageView iv = (ImageView) convertView
-		// .findViewById(R.id.imageView1);
-		// TextView tc = (TextView) convertView.findViewById(R.id.textView1);
-		// return convertView;
-		// }
-
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			final ViewHolder holder;
-
+			if(this.getCount() == 1){
+				convertView = LayoutInflater.from(myContext).inflate(
+						R.layout.moreitemsview, null);
+				convertView.setClickable(false);
+				convertView.setBackground(context.getResources().getDrawable(R.drawable.transparent));
+				TextView tv=(TextView)convertView.findViewById(R.id.footer_txt);
+				tv.setText("亲，您所在分类没有评论哦");
+				tv.setTextColor(context.getResources().getColor(R.drawable.silvergray));
+				tv.setTextSize(context.getResources().getDimension(R.dimen.search_detail_txtsize_tv));
+				tv.setClickable(false);
+				return convertView;
+			}
 			// 更多
 			if (position == this.getCount() - 1) {
 				convertView = LayoutInflater.from(myContext).inflate(
@@ -429,7 +433,7 @@ public class GroupOfReadersActivity extends FragmentActivity implements
 		customProgressDialog = CustomProgressDialog.createDialog(this);
 		customProgressDialog.show();
 	}
-
+	
 	@Override
 	public void refresh(Object... obj) {
 		customProgressDialog.dismiss();
@@ -437,24 +441,24 @@ public class GroupOfReadersActivity extends FragmentActivity implements
 		int temp = (Integer) obj[0];
 		if (temp == COMMENTLIST) {
 			arrayLists = (Map<Integer, List<Favorite>>) obj[1];
-			arrayList_zk.clear();
-			arrayList_sz.clear();
 			if (arrayLists != null && !arrayLists.isEmpty()) {
-				arrayList_zk = arrayLists.get(GlobleData.BOOK_ZK_TYPE);
-				arrayList_sz = arrayLists.get(GlobleData.BOOK_SZ_TYPE);
+				if ((curpage_sz>1||curpage_zk>1)&&(arrayLists.get(GlobleData.BOOK_ZK_TYPE)==null||arrayLists.get(GlobleData.BOOK_ZK_TYPE).isEmpty())&&
+						(arrayLists.get(GlobleData.BOOK_SZ_TYPE)==null||arrayLists.get(GlobleData.BOOK_SZ_TYPE).isEmpty())) {
+					Tool.ShowMessages(context, "没有更多内容可供加载");
+					moreprocess.setVisibility(View.GONE);
+					return;
+				}
+				ArrayList<Favorite> temp_sz_list=(ArrayList<Favorite>) arrayLists.get(GlobleData.BOOK_SZ_TYPE);
+				ArrayList<Favorite> temp_zk_list=(ArrayList<Favorite>) arrayLists.get(GlobleData.BOOK_ZK_TYPE);
+				if(temp_sz_list!=null){
+					arrayList_sz.addAll(arrayLists.get(GlobleData.BOOK_SZ_TYPE));
+					}
+				if(temp_zk_list!=null){
+				arrayList_zk.addAll(arrayLists.get(GlobleData.BOOK_ZK_TYPE));
+				}
 			}
 			mSectionsPagerAdapter.notifyDataSetChanged();
-		} else if (temp == CANCELFAVOR) {
-			Result res = (Result) obj[1];
-			if (res.getSuccess()) {
-				Tool.ShowMessages(context,
-						getResources().getString(R.string.cancelcommentdone));
-				getfavorlist();
-			} else {
-				Tool.ShowMessages(context,
-						getResources().getString(R.string.cancelcommentfail));
-			}
-		}
+		} 
 	}
 
 	public void onError(int a) {
