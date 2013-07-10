@@ -56,7 +56,7 @@
                 android:layout_weight="1.0"
                 android:duplicateParentState="true"
                 android:gravity="center_vertical"
-                android:text="@string/suggestread_proffession"
+                android:text="@string/suggestread_hotbook"
                 android:textSize="16sp" />
 
             <ImageView
