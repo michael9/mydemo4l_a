@@ -95,7 +95,9 @@ public class EbookDetailActivity extends BaseActivity implements IBookManagerAct
 		from.setText(from1+dBook.getName_c());
 		time.setText(time1+dBook.getYears()+"年,"+"第"+dBook.getNum()+"期");
 		page.setText(page1+dBook.getPagecount());
+		if(dBook.getPdfsize()!=0){
 		type.setText(type1+"PDF,"+dBook.getPdfsize()/1024+"KB");
+		}
 		content.setText(describe1+dBook.getRemark_c());
 //		//判断是否已经收藏
 //		btn_ebook_detail_collect.setText(isFavorite(dBook.isIsfavorite()));
