@@ -71,7 +71,6 @@ public class DetailBookActivity extends BaseImageActivity implements IBookManage
 			imgview.setBackgroundResource(R.drawable.defaut_book);
 		}
 		
-<<<<<<< HEAD
 	  imgview.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -86,12 +85,10 @@ public class DetailBookActivity extends BaseImageActivity implements IBookManage
 				
 			}
 		});
-=======
->>>>>>> branch 'master' of https://github.com/michael9/mydemo4l_a.git
 		booktitle_tv.setText(dBook.getTitle());
 		//从我的收藏传过来的isbn都是空字符串，
 		String isbn="";
-		if(!dBook.getIsbn().isEmpty()){
+		if(!TextUtils.isEmpty(dBook.getIsbn())){
 			isbn="ISBN:"+dBook.getIsbn()+"\n";
 		}
 		//从我的收藏传过来的是出版时间而非主题

@@ -146,22 +146,22 @@ public class BookAdapter extends BaseAdapter{
 	        //ͼƬ
 	        if(!TextUtils.isEmpty(book.getCover_path())){
 	        	fetch.loadImage(book.getCover_path(), holder.img);
+	        	final String bigimg = Tool.getBigImg(book.getCover_path());
+	        	holder.img.setOnClickListener(new View.OnClickListener() {
+	        		
+	        		@Override
+	        		public void onClick(View v) {
+	        			if(TextUtils.isEmpty(bigimg)){
+	        				return;
+	        			}
+	        			Intent  intent = new Intent(context,BigImgActivity.class);
+	        			intent.putExtra("bigurl", bigimg);
+	        			context.startActivity(intent);
+	        		}
+	        	});
 	        }else{
 	        	holder.img.setImageDrawable(context.getResources().getDrawable(R.drawable.defaut_book));
 	        }
-	        final String bigimg = Tool.getBigImg(book.getCover_path());
-	        holder.img.setOnClickListener(new View.OnClickListener() {
-	        	
-	        	@Override
-	        	public void onClick(View v) {
-	        		if(TextUtils.isEmpty(bigimg)){
-	        			return;
-	        		}
-	        		Intent  intent = new Intent(context,BigImgActivity.class);
-	        		intent.putExtra("bigurl", bigimg);
-	        		context.startActivity(intent);
-	        	}
-	        });
 	        
 	        
 	        

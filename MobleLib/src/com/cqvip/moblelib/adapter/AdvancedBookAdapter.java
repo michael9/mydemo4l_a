@@ -103,23 +103,23 @@ public class AdvancedBookAdapter extends BaseAdapter {
 	      //Õº∆¨
 	        if(!TextUtils.isEmpty(book.getDate())){
 	        	fetch.loadImage(book.getDate(), holder.img);
+	        	final String bigimg = book.getSucesss();
+	        	holder.img.setOnClickListener(new View.OnClickListener() {
+	        		
+	        		@Override
+	        		public void onClick(View v) {
+	        			if(TextUtils.isEmpty(bigimg)){
+	        				return;
+	        			}
+	        			Intent  intent = new Intent(context,BigImgActivity.class);
+	        			intent.putExtra("bigurl", bigimg);
+	        			context.startActivity(intent);
+	        			
+	        		}
+	        	});
 	        }else{
 	        	holder.img.setBackgroundResource(R.drawable.defaut_book);
 	        }
-	        final String bigimg = book.getSucesss();
-	        holder.img.setOnClickListener(new View.OnClickListener() {
-	        	
-	        	@Override
-	        	public void onClick(View v) {
-	        		if(TextUtils.isEmpty(bigimg)){
-	        			return;
-	        		}
-	        		Intent  intent = new Intent(context,BigImgActivity.class);
-	        		intent.putExtra("bigurl", bigimg);
-	        		context.startActivity(intent);
-	        		
-	        	}
-	        });
 	        //∑÷œÌ
 		return convertView;
 	}
