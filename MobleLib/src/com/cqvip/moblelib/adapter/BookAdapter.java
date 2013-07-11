@@ -145,7 +145,7 @@ public class BookAdapter extends BaseAdapter{
 	        if(!TextUtils.isEmpty(book.getCover_path())){
 	        	fetch.loadImage(book.getCover_path(), holder.img);
 	        }else{
-	        	holder.img.setBackgroundResource(R.drawable.defaut_book);
+	        	holder.img.setImageDrawable(context.getResources().getDrawable(R.drawable.defaut_book));
 	        }
 	        //·ÖÏí
 	        holder.btn_item_result_search_share.setTag(position);

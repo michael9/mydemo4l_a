@@ -24,7 +24,7 @@ import com.cqvip.moblelib.model.ShortBook;
 import com.cqvip.moblelib.view.DownFreshListView;
 import com.cqvip.utils.Tool;
 
-public class AdvancedBookActivity extends BaseActivity implements IBookManagerActivity,OnItemClickListener,DownFreshListView.OnRefreshListener {
+public class AdvancedBookActivity extends BaseImageActivity implements IBookManagerActivity,OnItemClickListener,DownFreshListView.OnRefreshListener {
 
 	private static final int GETMORE = 1;
 	private static final int GETHOMEPAGE = 0;
@@ -104,7 +104,7 @@ public class AdvancedBookActivity extends BaseActivity implements IBookManagerAc
 		case Task.TASK_SUGGEST_NEWBOOK:
 			
 			if(lists!=null&&!lists.isEmpty()){
-			adapter = new AdvancedBookAdapter(context,lists);
+			adapter = new AdvancedBookAdapter(context,lists,mImageFetcher);
 			listview.setAdapter(adapter);
 			}
 			//TODO
