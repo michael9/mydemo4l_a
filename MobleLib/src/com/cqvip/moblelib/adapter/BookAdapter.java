@@ -143,10 +143,8 @@ public class BookAdapter extends BaseAdapter{
 	        holder.isbn.setText("ISBN:"+book.getIsbn());
 	        //Õº∆¨
 	        if(!TextUtils.isEmpty(book.getCover_path())){
-	        	Log.i("image","book.getCover_path()"+book.getCover_path());
 	        	fetch.loadImage(book.getCover_path(), holder.img);
-	        } else{
-	        	Log.i("image","getCover==0"+book.getCover_path());
+	        }else{
 	        	holder.img.setImageDrawable(context.getResources().getDrawable(R.drawable.defaut_book));
 	        }
 	        //∑÷œÌ
