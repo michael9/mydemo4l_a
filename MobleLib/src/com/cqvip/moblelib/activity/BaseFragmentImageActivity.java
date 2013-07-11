@@ -23,6 +23,7 @@ public class BaseFragmentImageActivity  extends FragmentActivity{
 				   getResources().getDimensionPixelSize(R.dimen.bookicon_height));
 	    mImageFetcher.setLoadingImage(R.drawable.defaut_book);
 	    mImageFetcher.addImageCache(cacheParams);
+	    mImageFetcher.setImageFadeIn(false);
 	}
 	
 	@Override

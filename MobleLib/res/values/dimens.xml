@@ -5,7 +5,7 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="guide_dm">5dp</dimen>
     <dimen name="bookicon_width">96dp</dimen>
-    <dimen name="bookicon_height">144dp</dimen>
+    <dimen name="bookicon_height">96dp</dimen>
     <dimen name="search_detail_txtsize_tv">14sp</dimen>
     <dimen name="search_detail_txtsize_btn">16sp</dimen>
 

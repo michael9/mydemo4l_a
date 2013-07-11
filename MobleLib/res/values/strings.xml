@@ -118,5 +118,8 @@
     <string name="title_activity_advanced_book">AdvancedBookActivity</string>
     <string name="title_activity_detail_advanced_book">DetailAdvancedBookActivity</string>
     <string name="title_activity_annouce_list">AnnouceListActivity</string>
+    
+    <string name="need_pwd">请输入密码</string>
+    <string name="need_username">请输入用户名</string>
 
 </resources>

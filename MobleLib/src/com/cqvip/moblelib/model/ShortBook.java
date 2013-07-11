@@ -73,8 +73,8 @@ public class ShortBook {
 				JSONObject json = new JSONObject(result);
 				id = json.getString("id");
 				message = json.getString("title");
-				date = json.getString("imgurl");
-				
+				date = json.getString("imgurl_s");//СͼƬ
+				sucesss = json.getString("imgurl");//��ͼƬ
 			} catch (JSONException e) {
 				throw new BookException(e);
 			}
