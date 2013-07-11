@@ -273,16 +273,21 @@ public class MyFavorActivity extends FragmentActivity implements
 			} else {
 				if ((Integer) parent.getTag() == GlobleData.BOOK_SZ_TYPE) {
 					favorite = arrayList_sz.get(positon);
-					Book book = new Book(favorite.getLngid(), favorite.getOrgan(),
+					String recordid=favorite.getLngid();
+					if(recordid.contains(",")){
+						recordid=recordid.split(",")[1];
+					}
+					Book book = new Book("", favorite.getOrgan(),
 							favorite.getTitle(), favorite.getWriter(),
-							favorite.getLngid(), favorite.getYears(),
-							favorite.getPrice(), favorite.getRemark());
+							recordid, favorite.getYears(),
+							favorite.getPrice(), favorite.getRemark(),favorite.getImgurl());
 					if(book!=null){
 						Log.i("ResultOnSearchActivity",book.toString());
 						Intent _intent = new Intent(context,DetailBookActivity.class);
 						Bundle bundle = new Bundle();
 						bundle.putSerializable("book", book);
 						_intent.putExtra("detaiinfo", bundle);
+						_intent.putExtra("ismyfavor",true);
 						startActivity(_intent);
 					}
 				}else if((Integer) parent.getTag() == GlobleData.BOOK_ZK_TYPE){

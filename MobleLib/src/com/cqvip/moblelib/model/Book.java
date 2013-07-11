@@ -42,7 +42,7 @@ public class Book implements Serializable  {
 
 	//Favorite×ª»»ÎªBook
 	public Book(String isbn, String publisher, String title, String author,
-			String callno, String subject, String u_price,String u_abstract) {
+			String callno, String subject, String u_price,String u_abstract,String imageurl) {
 		super();
 		this.isbn = isbn;
 		this.publisher = publisher;
@@ -52,6 +52,7 @@ public class Book implements Serializable  {
 		this.subject = subject;
 		this.u_price = u_price;
 		this.u_abstract=u_abstract;
+		this.cover_path=imageurl;
 	}
 	
 	public boolean isIsfavorite() {

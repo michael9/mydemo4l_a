@@ -83,7 +83,7 @@ public class EbookDetailActivity extends BaseActivity implements IBookManagerAct
 		   String describe1 = getResources().getString(R.string.ebook_abstrac);
 		   String type1 = getResources().getString(R.string.ebook_type);
 	   ImageCacheParams cacheParams = new ImageCacheParams(context, GlobleData.IMAGE_CACHE_DIR);
-       cacheParams.setMemCacheSizePercent(0.125f); // Set memory cache to 25% of app memory
+       cacheParams.setMemCacheSizePercent(0.125f); // Set memory cache to 12.5% of app memory
 	   mImageFetcher = new ImageFetcher(context, getResources().getDimensionPixelSize(R.dimen.bookicon_width),
 			   getResources().getDimensionPixelSize(R.dimen.bookicon_height));
 	   mImageFetcher.setLoadingImage(R.drawable.defaut_book);
@@ -95,7 +95,11 @@ public class EbookDetailActivity extends BaseActivity implements IBookManagerAct
 		from.setText(from1+dBook.getName_c());
 		time.setText(time1+dBook.getYears()+"年,"+"第"+dBook.getNum()+"期");
 		page.setText(page1+dBook.getPagecount());
+		if(dBook.getPdfsize()!=0){
 		type.setText(type1+"PDF,"+dBook.getPdfsize()/1024+"KB");
+		}else {
+		type.setVisibility(View.GONE);
+		}
 		content.setText(describe1+dBook.getRemark_c());
 //		//判断是否已经收藏
 //		btn_ebook_detail_collect.setText(isFavorite(dBook.isIsfavorite()));
@@ -110,7 +114,7 @@ public class EbookDetailActivity extends BaseActivity implements IBookManagerAct
 				if (GlobleData.islogin) {
 				Intent _intent = new Intent(context,CommentActivity.class);
 				Book book = new Book(null,dBook.getOrgan(),dBook.getTitle_c(),
-						dBook.getWriter(),dBook.getLngid(),null,null,dBook.getRemark_c());
+						dBook.getWriter(),dBook.getLngid(),null,null,dBook.getRemark_c(),"");
 				Bundle bundle = new Bundle();
 				bundle.putSerializable("book", book);
 				_intent.putExtra("detaiinfo", bundle);
