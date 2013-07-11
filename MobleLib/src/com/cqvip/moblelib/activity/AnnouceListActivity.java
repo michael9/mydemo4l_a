@@ -10,13 +10,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.cqvip.mobelib.imgutils.AsyncTask;
 import com.cqvip.moblelib.R;
@@ -25,7 +24,6 @@ import com.cqvip.moblelib.biz.ManagerService;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.Constant;
 import com.cqvip.moblelib.model.ShortBook;
-import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.moblelib.view.DownFreshListView;
 import com.cqvip.utils.Tool;
 
@@ -50,7 +48,7 @@ public class AnnouceListActivity extends BaseActivity implements IBookManagerAct
 		listview.setOnItemClickListener(this);
 		listview.setOnRefreshListener(this);
 		adapter = new MyNewAdapter(context,null);
-		
+		customProgressDialog.show();
 		switch (type) {
 		case  Constant.SPEECH_NEWS:
 			setheadbar("ÐÂÎÅ¶¯Ì¬");
@@ -71,7 +69,6 @@ public class AnnouceListActivity extends BaseActivity implements IBookManagerAct
 	{
 		View headbar,btn_back;
 		TextView bar_title;
-		customProgressDialog=CustomProgressDialog.createDialog(this);
 		headbar=findViewById(R.id.head_bar);
 		bar_title=(TextView)headbar.findViewById(R.id.txt_header);
 		bar_title.setText(title);
@@ -87,7 +84,6 @@ public class AnnouceListActivity extends BaseActivity implements IBookManagerAct
 	}
 
 	private void getHomePage(int page, int defaultCount,int mwhat) {
-		customProgressDialog.show();
 		if(!ManagerService.allActivity.contains(this)){
 			ManagerService.allActivity.add(this);
 			}

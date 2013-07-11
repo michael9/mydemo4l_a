@@ -11,8 +11,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.cqvip.mobelib.imgutils.AsyncTask;
@@ -23,7 +21,6 @@ import com.cqvip.moblelib.biz.ManagerService;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.Constant;
 import com.cqvip.moblelib.model.ShortBook;
-import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.moblelib.view.DownFreshListView;
 import com.cqvip.utils.Tool;
 
@@ -46,7 +43,7 @@ public class AdvancedBookActivity extends BaseActivity implements IBookManagerAc
 		context = this;
 		type = getIntent().getIntExtra("type", 1);
 
-		customProgressDialog=CustomProgressDialog.createDialog(this);
+		customProgressDialog.show();
 		
 		switch (type) {
 		case Constant.HOTBOOK:
@@ -77,7 +74,6 @@ public class AdvancedBookActivity extends BaseActivity implements IBookManagerAc
 	{
 		View headbar,btn_back;
 		TextView bar_title;
-		customProgressDialog=CustomProgressDialog.createDialog(this);
 		headbar=findViewById(R.id.head_bar);
 		bar_title=(TextView)headbar.findViewById(R.id.txt_header);
 		bar_title.setText(title);
@@ -152,7 +148,7 @@ public class AdvancedBookActivity extends BaseActivity implements IBookManagerAc
 
 	
 	private void getHomePage(int page, int defaultCount,int mwhat) {
-		customProgressDialog.show();
+
 		if(!ManagerService.allActivity.contains(this)){
 		ManagerService.allActivity.add(this);
 		}
