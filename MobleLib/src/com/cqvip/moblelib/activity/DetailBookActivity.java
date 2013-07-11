@@ -57,22 +57,21 @@ public class DetailBookActivity extends BaseImageActivity implements IBookManage
 		//设置图片
 		Bundle bundle = getIntent().getBundleExtra("detaiinfo");
 		dBook = (Book)bundle.getSerializable("book");
+		boolean ismyfavor=getIntent().getBooleanExtra("ismyfavor", false);
 		booktitle_tv=(TextView)findViewById(R.id.booktitle_tv);
 		textView9=(TextView)findViewById(R.id.textView9);
 		textView10=(TextView)findViewById(R.id.textView10);
 		textView11=(TextView)findViewById(R.id.textView11);
 		
 		ManagerService.allActivity.add(this);
-		if(dBook.getRecordid()!=null){
-			getLocalinfo(dBook.getRecordid());
-		}
+		
 		if(!TextUtils.isEmpty(dBook.getCover_path())){
 		mImageFetcher.loadImage(dBook.getCover_path(), imgview);
 		}else{
 			imgview.setBackgroundResource(R.drawable.defaut_book);
 		}
 		
-		imgview.setOnClickListener(new View.OnClickListener() {
+	  imgview.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
@@ -86,15 +85,37 @@ public class DetailBookActivity extends BaseImageActivity implements IBookManage
 				
 			}
 		});
+		booktitle_tv.setText(dBook.getTitle());
+		//从我的收藏传过来的isbn都是空字符串，
+		String isbn="";
+		if(!dBook.getIsbn().isEmpty()){
+			isbn="ISBN:"+dBook.getIsbn()+"\n";
+		}
+		//从我的收藏传过来的是出版时间而非主题
+		String timeortheme="";
+		if(ismyfavor){
+			timeortheme=getString(R.string.item_time)+dBook.getSubject();
+		}else{
+			timeortheme=getString(R.string.item_subject)+dBook.getSubject();
+		}
+		//从我的收藏传过来的recordid存储在Book的callno
+		String recordid="";
+		if(ismyfavor){
+			recordid=dBook.getCallno();
+		}else{
+			recordid=dBook.getRecordid();
+		}
+		if(!TextUtils.isEmpty(recordid)){
+			getLocalinfo(recordid);
+		}
 		
-		booktitle_tv.setText(dBook.getU_title());
 		textView10.setText(
 				getString(R.string.item_author)+dBook.getAuthor()+"\n"
-				+getString(R.string.item_publish)+dBook.getU_publish()+"\n"
-				+getString(R.string.item_subject)+dBook.getSubject()+"\n"
+				+getString(R.string.item_publish)+dBook.getPublisher()+"\n"
+				+timeortheme+"\n"
 //				+getString(R.string.item_callno)+dBook.getCallno()+"\n"
 //				+getString(R.string.item_classno)+dBook.getClassno()+"\n"
-				+"ISBN:"+dBook.getIsbn()+"\n"
+				+isbn
 				+getString(R.string.item_price)+dBook.getU_price()		
 				);
 		textView11.setText(dBook.getU_abstract());
