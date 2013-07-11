@@ -30,6 +30,8 @@ import com.cqvip.moblelib.biz.ManagerService;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.Book;
+import com.cqvip.moblelib.model.Result;
+import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.utils.Tool;
 
 public class ResultOnSearchActivity extends BaseImageActivity implements IBookManagerActivity,OnItemClickListener {
@@ -48,7 +50,6 @@ public class ResultOnSearchActivity extends BaseImageActivity implements IBookMa
 	private View moreprocess;
 	private RelativeLayout noResult_rl;
 	private View title_bar;
-	private boolean isfirstrequest=true;//判断是否是第一次请求，显示大圆圈
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -59,6 +60,7 @@ public class ResultOnSearchActivity extends BaseImageActivity implements IBookMa
 		listview = (ListView)findViewById(R.id.search_res_lv);
 		listview.setOnItemClickListener((OnItemClickListener)this);
 		ManagerService.allActivity.add(this);
+		customProgressDialog=CustomProgressDialog.createDialog(this);
 		noResult_rl = (RelativeLayout) findViewById(R.id.noresult_rl);
 		edit.setText(getIntent().getStringExtra("ISBN"));
 		
@@ -144,9 +146,7 @@ public class ResultOnSearchActivity extends BaseImageActivity implements IBookMa
 	 * @param count
 	 */
 	private void getHomePage(String key,int page ,int count,int type,String field) {
-		if(isfirstrequest){
 		customProgressDialog.show();
-		}
 		HashMap map=new HashMap();
 		map.put("key", key);
 		map.put("page", page);
@@ -187,7 +187,7 @@ public class ResultOnSearchActivity extends BaseImageActivity implements IBookMa
 				noResult_rl.setVisibility(View.GONE);
 			adapter = new BookAdapter(context,lists,mImageFetcher);
 			listview.setAdapter(adapter);
-			isfirstrequest=false;
+			
 		}
 		else
 		{

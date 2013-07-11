@@ -49,6 +49,7 @@
                 android:layout_marginRight="8dp"
                	android:background="@drawable/eg_button_bg"
                 android:text="开始我的图书馆生活"
+                android:alpha="0.618"
                 android:textColor="#FFFFFF"
                 android:textSize="18sp" />
         </RelativeLayout>

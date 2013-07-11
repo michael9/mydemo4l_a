@@ -2,10 +2,10 @@ package com.cqvip.moblelib.activity;
 
 import java.util.HashMap;
 
-import android.app.Activity;
-import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -41,13 +41,14 @@ public class ActivityDlg extends BaseActivity implements IBookManagerActivity {
 //	private LinearLayout login_status_ll;
 	private MUserDao dao;
 	private TextView msg_box_txt;
+	private Context context;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_dlg);
-
+		context = this;
 		msg_box_layout=(LinearLayout)findViewById(R.id.msg_box_layout);
 		login_layout = (RelativeLayout) findViewById(R.id.log_in_layout);
 //		login_status_ll = (LinearLayout) findViewById(R.id.login_status);
@@ -86,6 +87,13 @@ public class ActivityDlg extends BaseActivity implements IBookManagerActivity {
 		login_btn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				if(!validate(log_in_username.getText().toString().trim(),getResources().getString(R.string.need_username))){
+					return;
+				}
+				if(!validate(log_in_passwords.getText().toString().trim(),getResources().getString(R.string.need_pwd))){
+					return;
+				}
+				
 				HashMap map = new HashMap();
 				name = log_in_username.getText().toString().trim();
 				pwd = log_in_passwords.getText().toString();
@@ -98,6 +106,16 @@ public class ActivityDlg extends BaseActivity implements IBookManagerActivity {
 				customProgressDialog.show();
 //				login_layout.setVisibility(View.GONE);
 //				login_status_ll.setVisibility(View.VISIBLE);
+			}
+
+			private boolean validate(String trim,String msg) {
+				if(TextUtils.isEmpty(trim)){
+					Tool.ShowMessages(context, msg);
+					return false;
+				}else{
+					
+					return true;
+				}
 			}
 		});
 		

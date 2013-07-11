@@ -15,6 +15,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerTitleStrip;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -29,6 +30,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.cqvip.mobelib.imgutils.ImageFetcher;
 import com.cqvip.moblelib.R;
 import com.cqvip.moblelib.base.IBookManagerActivity;
 import com.cqvip.moblelib.biz.ManagerService;
@@ -41,7 +43,7 @@ import com.cqvip.moblelib.model.Result;
 import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.utils.Tool;
 
-public class MyFavorActivity extends FragmentActivity implements
+public class MyFavorActivity extends BaseFragmentImageActivity implements
 		IBookManagerActivity {
 	public static final int FAVOR = 1;
 	public static final int CANCELFAVOR = 2;
@@ -235,13 +237,13 @@ public class MyFavorActivity extends FragmentActivity implements
 			int i = getArguments().getInt(ARG_SECTION_NUMBER);
 			if (i == 0) {
 				arrayList_temp = arrayList_sz;
-				adapter_sz = new MyGridViewAdapter(getActivity(), arrayList_sz);
+				adapter_sz = new MyGridViewAdapter(getActivity(), arrayList_sz,mImageFetcher);
 				listView.setAdapter(adapter_sz);
 				listView.setTag(GlobleData.BOOK_SZ_TYPE);
 			} else if (i == 1) {
 				listView.setTag(GlobleData.BOOK_ZK_TYPE);
 				arrayList_temp = arrayList_zk;
-				adapter_zk = new MyGridViewAdapter(getActivity(), arrayList_zk);
+				adapter_zk = new MyGridViewAdapter(getActivity(), arrayList_zk,mImageFetcher);
 				listView.setAdapter(adapter_zk);
 			}
 
@@ -348,10 +350,16 @@ public class MyFavorActivity extends FragmentActivity implements
 	class MyGridViewAdapter extends BaseAdapter {
 		private Context myContext;
 		private List<Favorite> arrayList;
-
+		private ImageFetcher fetch;
 		public MyGridViewAdapter(Context context, List<Favorite> list) {
 			this.myContext = context;
 			this.arrayList = list;
+			Log.i("MyFavorActivity", "MyGridViewAdapter");
+		}
+		public MyGridViewAdapter(Context context, List<Favorite> list,ImageFetcher fetch) {
+			this.myContext = context;
+			this.arrayList = list;
+			this.fetch = fetch;
 			Log.i("MyFavorActivity", "MyGridViewAdapter");
 		}
 
@@ -456,7 +464,13 @@ public class MyFavorActivity extends FragmentActivity implements
 			holder.publisher.setText(publish + favorite.getOrgan());
 			holder.publishyear.setText(time + favorite.getYears());
 			holder.isbn.setText("ISBN:" + favorite.getLngid());
-
+			//ͼƬ
+			if(!TextUtils.isEmpty(favorite.getImgurl())){
+			fetch.loadImage(favorite.getImgurl(),holder.img);
+			}else{
+			holder.img.setBackgroundResource(R.drawable.defaut_book);
+			}
+			
 			return convertView;
 		}
 	}

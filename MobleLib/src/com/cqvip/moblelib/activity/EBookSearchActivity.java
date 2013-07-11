@@ -29,6 +29,7 @@ import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.EBook;
 import com.cqvip.moblelib.model.Result;
+import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.utils.Tool;
 
 public class EBookSearchActivity extends BaseActivity implements IBookManagerActivity,OnItemClickListener {
@@ -47,7 +48,6 @@ public class EBookSearchActivity extends BaseActivity implements IBookManagerAct
 	private RelativeLayout noResult_rl;
 	private View title_bar;
 	private ImageFetcher mImageFetcher;
-	private boolean isfirstrequest=true;//判断是否是第一次请求，显示大圆圈
 	public static HashMap<String,Boolean> favors = new HashMap<String, Boolean>();//保持收藏状态，更新界面
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +59,7 @@ public class EBookSearchActivity extends BaseActivity implements IBookManagerAct
 		listview = (ListView)findViewById(R.id.search_res_lv);
 		listview.setOnItemClickListener((OnItemClickListener)this);
 		ManagerService.allActivity.add(this);
+		customProgressDialog=CustomProgressDialog.createDialog(this);
 		noResult_rl = (RelativeLayout) findViewById(R.id.noresult_rl);
 		//内存占用整个app1/8
 		ImageCacheParams cacheParams = new ImageCacheParams(context, GlobleData.IMAGE_CACHE_DIR);
@@ -137,9 +138,7 @@ public class EBookSearchActivity extends BaseActivity implements IBookManagerAct
 	 * @param count
 	 */
 	private void getHomePage(String key,int page ,int count,int type) {
-		if(isfirstrequest){
 		customProgressDialog.show();
-		}
 		HashMap map=new HashMap();
 		map.put("key", key);
 		map.put("page", page);
@@ -184,16 +183,16 @@ public class EBookSearchActivity extends BaseActivity implements IBookManagerAct
 		//显示
 		int type = (Integer)obj[0];
 		
-//		//判断收藏是否成功
-//		 if(type == FAVOR){
-//			 Result res = (Result) obj[1];
-//			 if (res.getSuccess()) {
-//						Tool.ShowMessages(context, "收藏成功");
-//			}else{
-//						Tool.ShowMessages(context, "收藏失败");
-//						}
-//						return;
-//			}
+		//判断收藏是否成功
+		 if(type == FAVOR){
+			 Result res = (Result) obj[1];
+			 if (res.getSuccess()) {
+						Tool.ShowMessages(context, "收藏成功");
+			}else{
+						Tool.ShowMessages(context, "收藏失败");
+						}
+						return;
+			}
 		
 		List<EBook> lists = (List<EBook>)obj[1];
 		if(type == GETFIRSTPAGE ){
@@ -202,7 +201,7 @@ public class EBookSearchActivity extends BaseActivity implements IBookManagerAct
 			noResult_rl.setVisibility(View.GONE);
 			adapter = new EbookAdapter(context,lists,mImageFetcher);
 			listview.setAdapter(adapter);
-			isfirstrequest=false;
+			
 		}else{
 			listview.setVisibility(View.GONE);
 			noResult_rl.setVisibility(View.VISIBLE);

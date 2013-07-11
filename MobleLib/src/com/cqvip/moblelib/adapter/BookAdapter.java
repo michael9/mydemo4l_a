@@ -1,3 +1,4 @@
+
 package com.cqvip.moblelib.adapter;
 
 import java.util.HashMap;
