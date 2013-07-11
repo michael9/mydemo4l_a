@@ -6,6 +6,7 @@ import java.util.List;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -140,7 +141,11 @@ public class EbookAdapter extends BaseAdapter{
 //	        holder.l_abst.setVisibility(View.VISIBLE);
 	        holder.u_abstract.setText(describe+book.getRemark_c());
 	      //  holder.favorite.setVisibility(View.VISIBLE);
+	        if(!TextUtils.isEmpty(book.getImgurl())){
 	        fetch.loadImage(book.getImgurl(), holder.img);
+	        }else{
+	        	holder.img.setImageDrawable(context.getResources().getDrawable(R.drawable.defaut_book));
+	        }
 //	        holder.btn_item_result_search_share.setTag(position);
 ////	        holder.btn_item_result_search_share.setOnClickListener(new OnClickListener() {
 //				

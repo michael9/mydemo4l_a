@@ -21,6 +21,7 @@ public class BaseImageActivity extends BaseActivity{
 				   getResources().getDimensionPixelSize(R.dimen.bookicon_height));
 	    mImageFetcher.setLoadingImage(R.drawable.defaut_book);
 	    mImageFetcher.addImageCache(cacheParams);
+	    mImageFetcher.setImageFadeIn(false);
 		
 	}
 	 @Override

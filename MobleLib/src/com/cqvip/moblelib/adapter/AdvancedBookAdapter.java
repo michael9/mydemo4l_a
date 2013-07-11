@@ -2,6 +2,7 @@ package com.cqvip.moblelib.adapter;
 
 import java.util.List;
 
+import com.cqvip.mobelib.imgutils.ImageFetcher;
 import com.cqvip.moblelib.R;
 import com.cqvip.moblelib.adapter.BookAdapter.ViewHolder;
 import com.cqvip.moblelib.model.Book;
@@ -9,6 +10,7 @@ import com.cqvip.moblelib.model.ShortBook;
 import com.cqvip.utils.Tool;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,12 +23,18 @@ import android.widget.TextView;
 public class AdvancedBookAdapter extends BaseAdapter {
 	private Context context;
 	private List<ShortBook> lists;
+	private ImageFetcher fetch;
 	public AdvancedBookAdapter(Context context){
 		this.context = context;
 	}
 	public AdvancedBookAdapter(Context context,List<ShortBook> lists){
 		this.context = context;
 		this.lists = lists;
+	}
+	public AdvancedBookAdapter(Context context,List<ShortBook> lists,ImageFetcher fetch){
+		this.context = context;
+		this.lists = lists;
+		this.fetch = fetch;
 	}
 	public List<ShortBook> getLists(){
 		return lists;
@@ -95,7 +103,12 @@ public class AdvancedBookAdapter extends BaseAdapter {
 		}
 		    ShortBook book = lists.get(position);
 	        holder.title.setText(book.getMessage());
-	        holder.img.setBackgroundResource(R.drawable.defaut_book);
+	      //Õº∆¨
+	        if(!TextUtils.isEmpty(book.getDate())){
+	        	fetch.loadImage(book.getDate(), holder.img);
+	        }else{
+	        	holder.img.setBackgroundResource(R.drawable.defaut_book);
+	        }
 	        //∑÷œÌ
 		return convertView;
 	}
