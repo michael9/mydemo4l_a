@@ -72,6 +72,21 @@ public class DetailBookActivity extends BaseImageActivity implements IBookManage
 			imgview.setBackgroundResource(R.drawable.defaut_book);
 		}
 		
+		imgview.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if(TextUtils.isEmpty(dBook.getCover_path())){
+					return;
+				}
+				String bigimg = Tool.getBigImg(dBook.getCover_path());
+				Intent  intent = new Intent(context,BigImgActivity.class);
+    			intent.putExtra("bigurl", bigimg);
+    			startActivity(intent);
+				
+			}
+		});
+		
 		booktitle_tv.setText(dBook.getU_title());
 		textView10.setText(
 				getString(R.string.item_author)+dBook.getAuthor()+"\n"

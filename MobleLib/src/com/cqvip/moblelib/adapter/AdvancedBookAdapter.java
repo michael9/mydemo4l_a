@@ -2,23 +2,20 @@ package com.cqvip.moblelib.adapter;
 
 import java.util.List;
 
-import com.cqvip.mobelib.imgutils.ImageFetcher;
-import com.cqvip.moblelib.R;
-import com.cqvip.moblelib.adapter.BookAdapter.ViewHolder;
-import com.cqvip.moblelib.model.Book;
-import com.cqvip.moblelib.model.ShortBook;
-import com.cqvip.utils.Tool;
-
 import android.content.Context;
+import android.content.Intent;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.View.OnClickListener;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.cqvip.mobelib.imgutils.ImageFetcher;
+import com.cqvip.moblelib.R;
+import com.cqvip.moblelib.activity.BigImgActivity;
+import com.cqvip.moblelib.model.ShortBook;
 
 public class AdvancedBookAdapter extends BaseAdapter {
 	private Context context;
@@ -109,6 +106,20 @@ public class AdvancedBookAdapter extends BaseAdapter {
 	        }else{
 	        	holder.img.setBackgroundResource(R.drawable.defaut_book);
 	        }
+	        final String bigimg = book.getSucesss();
+	        holder.img.setOnClickListener(new View.OnClickListener() {
+	        	
+	        	@Override
+	        	public void onClick(View v) {
+	        		if(TextUtils.isEmpty(bigimg)){
+	        			return;
+	        		}
+	        		Intent  intent = new Intent(context,BigImgActivity.class);
+	        		intent.putExtra("bigurl", bigimg);
+	        		context.startActivity(intent);
+	        		
+	        	}
+	        });
 	        //·ÖÏí
 		return convertView;
 	}
