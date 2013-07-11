@@ -254,7 +254,7 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity implements
 				Book book = new Book(favorite.getLngid(), favorite.getOrgan(),
 						favorite.getTitle(), favorite.getWriter(),
 						favorite.getLngid(), favorite.getYears(),
-						favorite.getPrice(), favorite.getRemark());
+						favorite.getPrice(), favorite.getRemark(),"");
 				Tool.getCommentList(context, book,typeflag);
 
 				// Book book = adapter.getLists().get(positon);
