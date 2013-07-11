@@ -20,12 +20,17 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 
 import com.cqvip.mobelib.imgutils.ImageFetcher;
 import com.cqvip.moblelib.R;
@@ -36,6 +41,7 @@ import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.Book;
 import com.cqvip.moblelib.model.Favorite;
+import com.cqvip.moblelib.model.Result;
 import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.utils.Tool;
 
@@ -52,7 +58,7 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity implements
 	public static final int COMMENTLIST = 1;
 
 	private int curpage = 1;// 第几页
-	private int perpage = 2;// 每页显示条数
+	private int perpage = 10;// 每页显示条数
 	private View moreprocess;
 	private int type=GlobleData.BOOK_SZ_TYPE;
 	private int curpage_sz = 1, curpage_zk=1;
@@ -463,9 +469,6 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity implements
 					}else if(temp_zk_list!=null){
 				arrayList_zk.addAll(arrayLists.get(GlobleData.BOOK_ZK_TYPE));
 				adapter_zk.notifyDataSetChanged();
-//				if(mViewPager!=null&&mSectionsPagerAdapter!=null){
-//				mSectionsPagerAdapter.notifyDataSetChanged();
-//				}
 				}
 			}
 		} 
