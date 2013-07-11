@@ -18,6 +18,9 @@ public class BaseActivity extends Activity {
 	private GestureDetector mGestureDetector;
 	protected CustomProgressDialog customProgressDialog;
 
+	
+	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

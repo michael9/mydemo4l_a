@@ -6,9 +6,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -16,10 +14,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerTitleStrip;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
@@ -34,12 +32,9 @@ import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 
+import com.cqvip.mobelib.imgutils.ImageFetcher;
 import com.cqvip.moblelib.R;
-import com.cqvip.moblelib.activity.MyCommentByBooktypeActivity.DummySectionFragment;
-import com.cqvip.moblelib.activity.MyCommentByBooktypeActivity.MyGridViewAdapter;
-import com.cqvip.moblelib.activity.MyCommentByBooktypeActivity.SectionsPagerAdapter;
-import com.cqvip.moblelib.activity.MyCommentByBooktypeActivity.ViewHolder;
-import com.cqvip.moblelib.adapter.BookAdapter;
+
 import com.cqvip.moblelib.base.IBookManagerActivity;
 import com.cqvip.moblelib.biz.ManagerService;
 import com.cqvip.moblelib.biz.Task;
@@ -58,7 +53,7 @@ import com.cqvip.utils.Tool;
  * 
  * @author LHP,LJ
  */
-public class GroupOfReadersActivity extends FragmentActivity implements
+public class GroupOfReadersActivity extends BaseFragmentImageActivity implements
 		IBookManagerActivity {
 	public static final int COMMENTLIST = 1;
 
@@ -212,13 +207,13 @@ public class GroupOfReadersActivity extends FragmentActivity implements
 			int i = getArguments().getInt(ARG_SECTION_NUMBER);
 			if (i == 0) {
 				arrayList_temp = arrayList_sz;
-				adapter_sz = new MyGridViewAdapter(getActivity(), arrayList_sz);
+				adapter_sz = new MyGridViewAdapter(getActivity(), arrayList_sz,mImageFetcher);
 				listView.setAdapter(adapter_sz);
 				listView.setTag(GlobleData.BOOK_SZ_TYPE);
 			} else if (i == 1) {
 				listView.setTag(GlobleData.BOOK_ZK_TYPE);
 				arrayList_temp = arrayList_zk;
-				adapter_zk = new MyGridViewAdapter(getActivity(), arrayList_zk);
+				adapter_zk = new MyGridViewAdapter(getActivity(), arrayList_zk,mImageFetcher);
 				listView.setAdapter(adapter_zk);
 			}
 
@@ -247,12 +242,20 @@ public class GroupOfReadersActivity extends FragmentActivity implements
 				getfavorlist(curpage_zk,perpage,GlobleData.BOOK_ZK_TYPE);
 				}
 			} else {
-				Favorite favorite = arrayList_temp.get(positon);
+				Favorite favorite = null;
+				int typeflag = 5;
+				if((Integer)parent.getTag()==GlobleData.BOOK_SZ_TYPE){
+					favorite = adapter_sz.getLists().get(positon);
+					typeflag = 5;
+					}else if((Integer)parent.getTag()==GlobleData.BOOK_ZK_TYPE){
+					favorite = adapter_zk.getLists().get(positon);
+					typeflag = 4;
+					}
 				Book book = new Book(favorite.getLngid(), favorite.getOrgan(),
 						favorite.getTitle(), favorite.getWriter(),
 						favorite.getLngid(), favorite.getYears(),
 						favorite.getPrice(), favorite.getRemark());
-				Tool.getCommentList(context, book);
+				Tool.getCommentList(context, book,typeflag);
 
 				// Book book = adapter.getLists().get(positon);
 				// if(book!=null){
@@ -309,13 +312,23 @@ public class GroupOfReadersActivity extends FragmentActivity implements
 	class MyGridViewAdapter extends BaseAdapter {
 		private Context myContext;
 		private List<Favorite> arrayList;
-
+		private ImageFetcher fetch;
 		public MyGridViewAdapter(Context context, List<Favorite> list) {
 			this.myContext = context;
 			this.arrayList = list;
 			Log.i("MyFavorActivity", "MyGridViewAdapter");
 		}
+		public MyGridViewAdapter(Context context, List<Favorite> list,ImageFetcher fetch) {
+			this.myContext = context;
+			this.arrayList = list;
+			this.fetch = fetch;
+			Log.i("MyFavorActivity", "MyGridViewAdapter");
+		}
 
+		public List<Favorite> getLists(){
+			return this.arrayList;
+		}
+		
 		@Override
 		public int getCount() {
 			Log.i("getCount", "getCount");
@@ -402,7 +415,13 @@ public class GroupOfReadersActivity extends FragmentActivity implements
 			holder.publishyear.setText(time + favorite.getYears());
 			holder.commentcount.setText(commentcount + "("
 					+ favorite.getCommentcount() + ")");
-
+			//ͼƬ
+			if(!TextUtils.isEmpty(favorite.getImgurl())){
+			fetch.loadImage(favorite.getImgurl(),holder.img);
+			}else{
+			holder.img.setBackgroundResource(R.drawable.defaut_book);
+			}
+			
 			return convertView;
 		}
 	}
@@ -445,10 +464,11 @@ public class GroupOfReadersActivity extends FragmentActivity implements
 				ArrayList<Favorite> temp_zk_list=(ArrayList<Favorite>) arrayLists.get(GlobleData.BOOK_ZK_TYPE);
 				if(temp_sz_list!=null){
 					arrayList_sz.addAll(arrayLists.get(GlobleData.BOOK_SZ_TYPE));
-					mSectionsPagerAdapter.notifyDataSetChanged();
+					//mSectionsPagerAdapter.notifyDataSetChanged();
+					adapter_sz.notifyDataSetChanged();
 					}else if(temp_zk_list!=null){
 				arrayList_zk.addAll(arrayLists.get(GlobleData.BOOK_ZK_TYPE));
-				mSectionsPagerAdapter.notifyDataSetChanged();
+				adapter_zk.notifyDataSetChanged();
 				}
 			}
 		} 

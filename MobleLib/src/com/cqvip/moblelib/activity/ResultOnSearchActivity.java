@@ -34,7 +34,7 @@ import com.cqvip.moblelib.model.Result;
 import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.utils.Tool;
 
-public class ResultOnSearchActivity extends BaseActivity implements IBookManagerActivity,OnItemClickListener {
+public class ResultOnSearchActivity extends BaseImageActivity implements IBookManagerActivity,OnItemClickListener {
 	
 	public static final int GETFIRSTPAGE = 1;
 	public static final int GETNEXTPAGE = 2;
@@ -185,7 +185,7 @@ public class ResultOnSearchActivity extends BaseActivity implements IBookManager
 			if(lists!=null&&!lists.isEmpty()){
 				listview.setVisibility(View.VISIBLE);
 				noResult_rl.setVisibility(View.GONE);
-			adapter = new BookAdapter(context,lists);
+			adapter = new BookAdapter(context,lists,mImageFetcher);
 			listview.setAdapter(adapter);
 			
 		}

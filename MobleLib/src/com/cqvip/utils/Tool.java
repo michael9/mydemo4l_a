@@ -100,12 +100,13 @@ public class Tool {
 	}
 	
 	// 获取某本书籍下面的所有评论
-	public static void getCommentList(Context mcontext, Book mbook) {
+	public static void getCommentList(Context mcontext, Book mbook,int type) {
 		if (mbook != null) {
 			Intent intent = new Intent(mcontext, CommentActivity.class);
 			Bundle bundle = new Bundle();
 			bundle.putSerializable("book", mbook);
 			intent.putExtra("detaiinfo", bundle);
+			intent.putExtra("type", type);
 			mcontext.startActivity(intent);
 		}
 	}

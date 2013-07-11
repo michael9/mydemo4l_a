@@ -25,7 +25,11 @@ public class Book implements Serializable  {
 	private String author;//书名	
 	private String callno;//分类号
 	private String classno;
+	private String cover_path;//封面图片
 	
+	public String getCover_path() {
+		return cover_path;
+	}
 	private String subject;//关键字
 	private String u_publish;//关键字
 	private String u_cover;//图片
@@ -82,6 +86,7 @@ public class Book implements Serializable  {
 			subject = json.getString("subject");
 			classno = json.getString("classno");
 			callno = json.getString("callno");
+			cover_path = json.getString("cover_path");
 			u_page = json.getString("u_page");
 			u_price = json.getString("u_price");
 			u_abstract = json.getString("u_abstract");
