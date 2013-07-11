@@ -230,7 +230,7 @@ public class EBookSearchActivity extends BaseActivity implements IBookManagerAct
 				Log.i("ResultOnSearchActivity",book.toString());
 				Intent _intent = new Intent(context,EbookDetailActivity.class);
 				Bundle bundle = new Bundle();
-				bundle.putSerializable("ebook", book);
+				bundle.putSerializable("book", book);
 				_intent.putExtra("detaiinfo", bundle);
 				startActivity(_intent);
 			}

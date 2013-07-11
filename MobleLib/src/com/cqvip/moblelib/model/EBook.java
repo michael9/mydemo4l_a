@@ -40,7 +40,24 @@ public class EBook implements Serializable{
 		    private long pdfsize;
 		    private String imgurl;
 		    private boolean isfavorite;
-		    public String getImgurl() {
+		    
+		    public EBook(String lngid, String years, int num, String title_c,
+					String name_c, String remark_c, String writer,
+					int pagecount, long pdfsize, String imgurl) {
+				super();
+				this.lngid = lngid;
+				this.years = years;
+				this.num = num;
+				this.title_c = title_c;
+				this.name_c = name_c;
+				this.remark_c = remark_c;
+				this.writer = writer;
+				this.pagecount = pagecount;
+				this.pdfsize = pdfsize;
+				this.imgurl = imgurl;
+			}
+
+			public String getImgurl() {
 				return imgurl;
 			}
 

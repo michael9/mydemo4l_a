@@ -51,7 +51,7 @@ public class EbookDetailActivity extends BaseActivity implements IBookManagerAct
 		setContentView(R.layout.activity_ebook_detail);
 		context = this;
 		Bundle bundle = getIntent().getBundleExtra("detaiinfo");
-		dBook = (EBook)bundle.getSerializable("ebook");
+		dBook = (EBook)bundle.getSerializable("book");
 		author = (TextView) findViewById(R.id.ebook_author_txt);
 		from = (TextView) findViewById(R.id.ebook_from_txt);
 		type =(TextView)findViewById(R.id.ebook_type_txt);

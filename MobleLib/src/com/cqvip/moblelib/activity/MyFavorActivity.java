@@ -13,13 +13,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.PagerTitleStrip;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -37,6 +35,7 @@ import com.cqvip.moblelib.biz.ManagerService;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.Book;
+import com.cqvip.moblelib.model.EBook;
 import com.cqvip.moblelib.model.Favorite;
 import com.cqvip.moblelib.model.Result;
 import com.cqvip.moblelib.view.CustomProgressDialog;
@@ -250,7 +249,7 @@ public class MyFavorActivity extends FragmentActivity implements
 			listView.setOnItemLongClickListener(this);
 			return rootView;
 		}
-
+		Favorite favorite;
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int positon,
 				long id) {
@@ -272,26 +271,37 @@ public class MyFavorActivity extends FragmentActivity implements
 					getfavorlist(curpage_zk, perpage, GlobleData.BOOK_ZK_TYPE);
 				}
 			} else {
-				// //Book book = adapter.getLists().get(positon);
-				// if(book!=null){
-				// Log.i("ResultOnSearchActivity",book.toString());
-				// Intent _intent = new
-				// Intent(context,DetailBookActivity.class);
-				// Bundle bundle = new Bundle();
-				// bundle.putSerializable("book", book);
-				// _intent.putExtra("detaiinfo", bundle);
-				// startActivity(_intent);
-				// }
+				if ((Integer) parent.getTag() == GlobleData.BOOK_SZ_TYPE) {
+					favorite = arrayList_sz.get(positon);
+					Book book = new Book(favorite.getLngid(), favorite.getOrgan(),
+							favorite.getTitle(), favorite.getWriter(),
+							favorite.getLngid(), favorite.getYears(),
+							favorite.getPrice(), favorite.getRemark());
+					if(book!=null){
+						Log.i("ResultOnSearchActivity",book.toString());
+						Intent _intent = new Intent(context,DetailBookActivity.class);
+						Bundle bundle = new Bundle();
+						bundle.putSerializable("book", book);
+						_intent.putExtra("detaiinfo", bundle);
+						startActivity(_intent);
+					}
+				}else if((Integer) parent.getTag() == GlobleData.BOOK_ZK_TYPE){
+					favorite = arrayList_zk.get(positon);
+					EBook book = new EBook(favorite.getLngid(), favorite.getYears(), favorite.getNum(), favorite.getTitle(),
+							favorite.getOrgan(), favorite.getRemark(), favorite.getWriter(), favorite.getPagecount(), 0, favorite.getImgurl());
+					if(book!=null){
+						Log.i("ResultOnSearchActivity",book.toString());
+						Intent _intent = new Intent(context,EbookDetailActivity.class);
+						Bundle bundle = new Bundle();
+						bundle.putSerializable("book", book);
+						_intent.putExtra("detaiinfo", bundle);
+						startActivity(_intent);
+					}
+				}
 
-				// Book book = lists.get(position-1);
-				// if(book!=null){
-				// Bundle bundle = new Bundle();
-				// bundle.putSerializable("book", book);
-				// _intent.putExtra("detaiinfo", bundle);
-				// startActivityForResult(_intent, 1);
 			}
 		}
-
+		
 		@Override
 		public boolean onItemLongClick(AdapterView<?> parent, View view,
 				int position, long id) {
@@ -379,8 +389,6 @@ public class MyFavorActivity extends FragmentActivity implements
 				convertView = LayoutInflater.from(myContext).inflate(
 						R.layout.moreitemsview, null);
 				convertView.setClickable(false);
-				convertView.setBackground(context.getResources().getDrawable(
-						R.drawable.transparent));
 				TextView tv = (TextView) convertView
 						.findViewById(R.id.footer_txt);
 				tv.setText("亲，您所在分类没有收藏哦");
@@ -502,7 +510,9 @@ public class MyFavorActivity extends FragmentActivity implements
 				}
 				arrayList_zk.addAll(arrayLists.get(GlobleData.BOOK_ZK_TYPE));
 				arrayList_sz.addAll(arrayLists.get(GlobleData.BOOK_SZ_TYPE));
-				mSectionsPagerAdapter.notifyDataSetChanged();
+				//mSectionsPagerAdapter.notifyDataSetChanged();
+				adapter_sz.notifyDataSetChanged();
+				adapter_zk.notifyDataSetChanged();
 			}
 		} else if (temp == CANCELFAVOR) {
 			Result res = (Result) obj[1];
