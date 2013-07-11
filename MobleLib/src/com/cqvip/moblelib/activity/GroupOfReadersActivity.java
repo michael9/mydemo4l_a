@@ -254,7 +254,7 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity implements
 				Book book = new Book(favorite.getLngid(), favorite.getOrgan(),
 						favorite.getTitle(), favorite.getWriter(),
 						favorite.getLngid(), favorite.getYears(),
-						favorite.getPrice(), favorite.getRemark());
+						favorite.getPrice(), favorite.getRemark(),"");
 				Tool.getCommentList(context, book,typeflag);
 
 				// Book book = adapter.getLists().get(positon);
@@ -360,7 +360,6 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity implements
 				convertView = LayoutInflater.from(myContext).inflate(
 						R.layout.moreitemsview, null);
 				convertView.setClickable(false);
-				convertView.setBackground(context.getResources().getDrawable(R.drawable.transparent));
 				TextView tv=(TextView)convertView.findViewById(R.id.footer_txt);
 				tv.setText("亲，您所在分类没有评论哦");
 				tv.setTextColor(context.getResources().getColor(R.drawable.silvergray));

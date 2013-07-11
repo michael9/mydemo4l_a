@@ -25,6 +25,7 @@ import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import org.apache.http.params.HttpProtocolParams;
 import org.apache.http.protocol.HTTP;
+import org.apache.http.util.EntityUtils;
 
 import android.util.Log;
 
@@ -37,13 +38,15 @@ public class HttpClientNewWork {
 
 	
 	private static HttpClient client;
+	private  HttpUriRequest request;
+	private  HttpResponse response;
 	
 	
 	public static final String HTTPMETHOD_POST = "POST";
 	public static final String HTTPMETHOD_GET = "GET";
 
-	private static final int CONNECTION_TIMEOUT = 10000;
-	private static final int SOCKET_TIMEOUT = 10 * 1000;
+	private static final int CONNECTION_TIMEOUT = 2000;
+	private static final int SOCKET_TIMEOUT = 3 * 1000;
 	/**
 	 * 网络请求
 	 * @param url 服务器url
@@ -58,8 +61,10 @@ public class HttpClientNewWork {
 		try {
 			
 			Log.i("mobile","=======method========="+method);
-		HttpClient client = getHttpclient();
-		HttpUriRequest request = null;
+//		HttpClient client = getHttpclient();
+			getHttpclient();
+//		HttpUriRequest request = null;
+			request=null;
 		ByteArrayOutputStream bos = null;
 		if(method.equals(HTTPMETHOD_GET)){
 			Log.i("mobile","=======GET=========");
@@ -88,7 +93,7 @@ public class HttpClientNewWork {
 			post.setEntity(formEntity);
 			request = post;
 		}
-		    HttpResponse response;
+//		    HttpResponse response;
 			response = client.execute(request);
 		    StatusLine status = response.getStatusLine();
 		if(status.getStatusCode()!=200){
@@ -99,7 +104,11 @@ public class HttpClientNewWork {
 		return result;
 		} catch (IOException e) {
 			throw new BookException(e);
-		} 
+		}
+		finally {  
+			request.abort();  
+		}
+		
 	}
 
 
@@ -107,7 +116,7 @@ public class HttpClientNewWork {
 	 * 设置超时
 	 * @return
 	 */
-	private static synchronized HttpClient getHttpclient() {
+	private static synchronized void  getHttpclient() {
 		if(client == null){
 		HttpParams params = new BasicHttpParams();
 		//设置连接和响应超时
@@ -126,7 +135,7 @@ public class HttpClientNewWork {
 		 client = new DefaultHttpClient(ccm, params);
 		
 		}
-		return client;
+//		return client;
 		
 	}
 	
