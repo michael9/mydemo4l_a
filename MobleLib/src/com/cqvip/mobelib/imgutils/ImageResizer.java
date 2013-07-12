@@ -177,6 +177,7 @@ public class ImageResizer extends ImageWorker {
     public static Bitmap decodeSampledBitmapFromDescriptor(
             FileDescriptor fileDescriptor, int reqWidth, int reqHeight, ImageCache cache) {
 
+    	try{
         // First decode with inJustDecodeBounds=true to check dimensions
         final BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
@@ -194,6 +195,10 @@ public class ImageResizer extends ImageWorker {
         }
 
         return BitmapFactory.decodeFileDescriptor(fileDescriptor, null, options);
+    	}catch (Exception e) {
+			// TODO: handle exception
+    		return null;
+		}
     }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)

@@ -16,12 +16,12 @@
 
     <ProgressBar
         android:id="@+id/footer_progress"
-        style="?@android:attr/progressBarStyleSmallInverse"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_marginLeft="5.0dip"
         android:layout_toRightOf="@id/footer_txt"
+        style="@android:style/Widget.ProgressBar.Small.Inverse"
         android:visibility="gone" />
 
 </RelativeLayout>
