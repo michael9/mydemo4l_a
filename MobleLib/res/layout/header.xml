@@ -7,7 +7,7 @@
 
     <ImageView
         android:id="@+id/img_back_header"
-        android:layout_width="wrap_content"
+        android:layout_width="66dp"
         android:layout_height="32dp"
         android:layout_centerVertical="true"
         android:layout_marginLeft="9dip"
