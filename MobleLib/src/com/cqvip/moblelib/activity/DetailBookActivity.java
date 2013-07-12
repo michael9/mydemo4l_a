@@ -105,6 +105,9 @@ public class DetailBookActivity extends BaseImageActivity implements IBookManage
 		}else{
 			recordid=dBook.getRecordid();
 		}
+		if(recordid.contains(",")){
+			recordid=recordid.split(",")[1];
+		}
 		if(!TextUtils.isEmpty(recordid)){
 			getLocalinfo(recordid);
 		}

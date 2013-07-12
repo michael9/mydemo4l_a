@@ -146,7 +146,7 @@ public class EBook implements Serializable{
 		    				lngid = json.getString("lngid");
 		    				gch = json.getString("gch");
 		    				years = json.getString("years");
-		    				num = getInt("pagecount", json);
+		    				num = getInt("num", json);
 		    				vol = json.getString("vol");
 		    				title_c = json.getString("title_c");
 		    				title_e = json.getString("title_e");

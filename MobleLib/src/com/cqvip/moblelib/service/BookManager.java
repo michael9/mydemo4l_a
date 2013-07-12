@@ -431,7 +431,9 @@ public class BookManager {
 		BookParameters params = new BookParameters();
 		params.add("libid", libid);
 		params.add("vipuserid", vipuserid);
-		if(!TextUtils.isEmpty(recordid)){
+		if(keyid.contains(",")){//当从我的收藏点击评论，由于只有这个lngid（J228.5/1:4,863174）可供使用，所以在这判断一下
+			params.add("keyid", keyid);
+		}else if(!TextUtils.isEmpty(recordid)){
 			params.add("keyid", Tool.formSZbookID(keyid,recordid));
 			}else{
 				params.add("keyid", keyid);
