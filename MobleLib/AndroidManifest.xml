@@ -181,6 +181,11 @@
             android:label="@string/title_activity_annouce_list" 
              android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Light.NoTitleBar"/>
+        <activity
+            android:name="com.cqvip.moblelib.activity.HelperActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar"
+           />
     </application>
 
 </manifest>

@@ -3,6 +3,9 @@ package com.cqvip.moblelib.activity;
 import java.util.Timer;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -30,16 +33,39 @@ public class WelcomeActivity extends Activity {
                if(welcomimg.isShown()&&!animator.isRunning())
             	   animator.start();
                
-               if(n>155)
+               if(n==155)
                {
+                   startHelperActivity();
                    finish();
-              
-               }
+                   }
                 break;
             }
        
         }
     };
+    
+   void startHelperActivity(){
+		 //读取SharedPreferences中需要的数据
+
+	   SharedPreferences  preferences = getSharedPreferences("count",MODE_PRIVATE);
+
+       int count = preferences.getInt("count", 0);
+
+       //判断程序与第几次运行，如果是第一次运行则跳转到引导页面
+
+      if (count == 0) {
+       	
+       	 Editor editor = preferences.edit();
+            //存入数据
+            editor.putInt("count", ++count);
+            //提交修改
+            editor.commit();
+            
+       	Intent intent = new Intent();
+           intent.setClass(WelcomeActivity.this,HelperActivity.class);
+           startActivity(intent);
+       }
+    }
     
     class Page_check_task extends java.util.TimerTask {
         @Override
