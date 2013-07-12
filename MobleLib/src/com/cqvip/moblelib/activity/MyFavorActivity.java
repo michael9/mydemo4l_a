@@ -468,7 +468,7 @@ public class MyFavorActivity extends BaseFragmentImageActivity implements
 			if(!TextUtils.isEmpty(favorite.getImgurl())){
 			fetch.loadImage(favorite.getImgurl(),holder.img);
 			}else{
-			holder.img.setBackgroundResource(R.drawable.defaut_book);
+				holder.img.setImageDrawable(getResources().getDrawable(R.drawable.defaut_book));
 			}
 			
 			return convertView;
