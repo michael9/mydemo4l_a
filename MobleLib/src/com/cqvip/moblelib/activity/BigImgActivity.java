@@ -9,6 +9,7 @@ import android.util.FloatMath;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
 import android.view.View.OnTouchListener;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -46,6 +47,7 @@ public class BigImgActivity extends Activity implements OnTouchListener {
 		@Override
 		public void onCreate(Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
+			requestWindowFeature(Window.FEATURE_NO_TITLE);
 			setContentView(R.layout.image_bigview);
 
 			 // activity runs full screen
