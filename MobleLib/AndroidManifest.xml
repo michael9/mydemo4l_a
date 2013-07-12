@@ -193,5 +193,17 @@
             android:theme="@android:style/Theme.Light.NoTitleBar"
            />
     </application>
+    
+   <supports-screens 
+       android:resizeable="true"
+                  android:smallScreens="false"
+                  android:normalScreens="true"
+                  android:largeScreens="true"
+                  android:xlargeScreens="true"
+                  android:anyDensity="true"
+                />
+   
+    
+    
 
 </manifest>

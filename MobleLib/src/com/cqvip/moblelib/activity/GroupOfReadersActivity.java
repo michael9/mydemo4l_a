@@ -254,7 +254,7 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity implements
 				Book book = new Book(favorite.getLngid(), favorite.getOrgan(),
 						favorite.getTitle(), favorite.getWriter(),
 						favorite.getLngid(), favorite.getYears(),
-						favorite.getPrice(), favorite.getRemark(),"");
+						favorite.getPrice(), favorite.getRemark(),favorite.getImgurl());
 				Tool.getCommentList(context, book,typeflag);
 
 				// Book book = adapter.getLists().get(positon);
@@ -418,7 +418,7 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity implements
 			if(!TextUtils.isEmpty(favorite.getImgurl())){
 			fetch.loadImage(favorite.getImgurl(),holder.img);
 			}else{
-			holder.img.setBackgroundResource(R.drawable.defaut_book);
+			holder.img.setImageDrawable(getResources().getDrawable(R.drawable.defaut_book));
 			}
 			
 			return convertView;
@@ -471,9 +471,8 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity implements
 				}
 			}else if(curpage_sz>1||curpage_zk>1){
 				Tool.ShowMessages(context, "没有更多内容可供加载");
-				if(moreprocess!=null){
+				if(moreprocess!=null)
 				moreprocess.setVisibility(View.GONE);
-				}
 			}
 		} 
 	}

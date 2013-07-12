@@ -32,7 +32,7 @@ import com.cqvip.moblelib.model.Result;
 import com.cqvip.moblelib.view.DownFreshListView;
 import com.cqvip.utils.Tool;
 
-public class CommentActivity extends BaseActivity implements
+public class CommentActivity extends BaseImageActivity implements
 		IBookManagerActivity, OnClickListener,OnItemClickListener,DownFreshListView.OnRefreshListener {
 	public static final int ADDCOMMENT = 1;
 	private static final int GETMORE = 1;
@@ -50,6 +50,7 @@ public class CommentActivity extends BaseActivity implements
 	private Context context;
 	private View moreprocess;
 	private String keyid;//书籍唯一id
+	private ImageView img;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -76,6 +77,16 @@ public class CommentActivity extends BaseActivity implements
 		baseinfo_tv.setText("《" + dBook.getTitle() + "》\n"
 				+ getString(R.string.item_author) + dBook.getAuthor());
 		intro_tv.setText(getString(R.string.item_describe)+describe);
+		
+		
+		if(!TextUtils.isEmpty(dBook.getCover_path())){
+			mImageFetcher.loadImage(dBook.getCover_path(), img);
+		}else{
+			img.setImageDrawable(getResources().getDrawable(R.drawable.defaut_book));
+		}
+		
+		
+		
 	}
 
 	@Override
@@ -93,6 +104,9 @@ public class CommentActivity extends BaseActivity implements
 		adapter = new CommentItemAdapter(context,null);
 		//加载数据
 		//getHomeComment(1,Constant.DEFAULT_COUNT);
+		img = (ImageView) findViewById(R.id.book_big_img);
+		
+		
 		
 		back.setOnClickListener(new View.OnClickListener() {
 			@Override
