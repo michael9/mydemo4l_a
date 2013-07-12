@@ -453,12 +453,12 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity implements
 		if (temp == COMMENTLIST) {
 			arrayLists = (Map<Integer, List<Favorite>>) obj[1];
 			if (arrayLists != null && !arrayLists.isEmpty()) {
-				if ((curpage_sz>1||curpage_zk>1)&&(arrayLists.get(GlobleData.BOOK_ZK_TYPE)==null||arrayLists.get(GlobleData.BOOK_ZK_TYPE).isEmpty())&&
-						(arrayLists.get(GlobleData.BOOK_SZ_TYPE)==null||arrayLists.get(GlobleData.BOOK_SZ_TYPE).isEmpty())) {
-					Tool.ShowMessages(context, "没有更多内容可供加载");
-					moreprocess.setVisibility(View.GONE);
-					return;
-				}
+//				if ((curpage_sz>1||curpage_zk>1)&&(arrayLists.get(GlobleData.BOOK_ZK_TYPE)==null||arrayLists.get(GlobleData.BOOK_ZK_TYPE).isEmpty())&&
+//						(arrayLists.get(GlobleData.BOOK_SZ_TYPE)==null||arrayLists.get(GlobleData.BOOK_SZ_TYPE).isEmpty())) {
+//					Tool.ShowMessages(context, "没有更多内容可供加载");
+//					moreprocess.setVisibility(View.GONE);
+//					return;
+//				}
 				ArrayList<Favorite> temp_sz_list=(ArrayList<Favorite>) arrayLists.get(GlobleData.BOOK_SZ_TYPE);
 				ArrayList<Favorite> temp_zk_list=(ArrayList<Favorite>) arrayLists.get(GlobleData.BOOK_ZK_TYPE);
 				if(temp_sz_list!=null){
@@ -469,6 +469,10 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity implements
 				arrayList_zk.addAll(arrayLists.get(GlobleData.BOOK_ZK_TYPE));
 				adapter_zk.notifyDataSetChanged();
 				}
+			}else if(curpage_sz>1||curpage_zk>1){
+				Tool.ShowMessages(context, "没有更多内容可供加载");
+				if(moreprocess!=null)
+				moreprocess.setVisibility(View.GONE);
 			}
 		} 
 	}
