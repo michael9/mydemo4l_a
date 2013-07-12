@@ -160,11 +160,11 @@ public class ActivityDlg extends BaseActivity implements IBookManagerActivity {
 	
 	@Override
 	public void init() {
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-				android.R.layout.simple_dropdown_item_1line, new String[] {
-						"0441200001098", "0440061012345" });
-		log_in_username.setThreshold(0);
-		log_in_username.setAdapter(adapter);
+//		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+//				android.R.layout.simple_dropdown_item_1line, new String[] {
+//						"0441200001098", "0440061012345" });
+//		log_in_username.setThreshold(0);
+//		log_in_username.setAdapter(adapter);
 		// 初始化 service
 		// 检查网络是否可用
 		if (Tool.checkNetWork(this)) {
