@@ -275,13 +275,11 @@ public class MyFavorActivity extends BaseFragmentImageActivity implements
 			} else {
 				if ((Integer) parent.getTag() == GlobleData.BOOK_SZ_TYPE) {
 					favorite = arrayList_sz.get(positon);
-					String recordid=favorite.getLngid();
-					if(recordid.contains(",")){
-						recordid=recordid.split(",")[1];
-					}
+					String lngid=favorite.getLngid();//J228.5/1:4,863174
+
 					Book book = new Book("", favorite.getOrgan(),
 							favorite.getTitle(), favorite.getWriter(),
-							recordid, favorite.getYears(),
+							lngid, favorite.getYears(),
 							favorite.getPrice(), favorite.getRemark(),favorite.getImgurl());
 					if(book!=null){
 						Log.i("ResultOnSearchActivity",book.toString());

@@ -121,6 +121,9 @@ public class CommentActivity extends BaseActivity implements
 
 	private String getLngId(String callno, String recordid) {
 		if(typeid == GlobleData.BOOK_SZ_TYPE){
+			if(callno.contains(",")){
+				return callno;
+			}
 			return callno+","+recordid;
 		}else {//ÖÐ¿¯·µ»Ølngid
 				return callno;
