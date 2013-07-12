@@ -178,9 +178,15 @@
             android:theme="@android:style/Theme.Light.NoTitleBar" />
         <activity
             android:name="com.cqvip.moblelib.activity.AnnouceListActivity"
-            android:label="@string/title_activity_annouce_list" 
-             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar"/>
+            android:label="@string/title_activity_annouce_list"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar" />
+        <activity
+            android:name="com.cqvip.moblelib.activity.BigImgActivity"
+            android:label="@string/title_activity_big_img"
+            android:screenOrientation="portrait"
+             >
+        </activity>
         <activity
             android:name="com.cqvip.moblelib.activity.HelperActivity"
             android:screenOrientation="portrait"

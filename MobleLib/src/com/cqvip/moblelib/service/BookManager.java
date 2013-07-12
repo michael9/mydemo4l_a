@@ -43,19 +43,6 @@ public class BookManager {
 	public BookManager() {
 
 	}
-
-	public String getBaseget() {
-		return baseget;
-	}
-
-	public String getBasepost() {
-		return basepost;
-	}
-
-	public String getBaseURL() {
-		return baseURL;
-	}
-
 	/**
 	 * 登陆
 	 * 
@@ -74,8 +61,8 @@ public class BookManager {
 		params.add("username", name);
 		params.add("password", pwd);
 		params.add("libid", "1");
-		String result = http.requestUrl(getBaseURL()
-				+ "/library/user/login.aspx", getBasepost(), params);
+		String result = http.requestUrl(baseURL
+				+ "/library/user/login.aspx", basepost, params);
 		
 		Result res = new Result(result);
 		if(res.getSuccess()==true){
@@ -94,8 +81,8 @@ public class BookManager {
 	public Reader getReaderInfo(String id) throws BookException {
 		BookParameters params = new BookParameters();
 		params.add("userid", id);
-		String result = http.requestUrl(getBaseURL()
-				+ "/library/user/readerinfo.aspx", getBaseget(), params);
+		String result = http.requestUrl(baseURL
+				+ "/library/user/readerinfo.aspx", baseget, params);
 		return Reader.formReaderInfo(result);
 	}
 
@@ -114,7 +101,7 @@ public class BookManager {
 		BookParameters params = new BookParameters();
 		params.add("userid", id);
 		
-		String result = http.requestUrl(getBaseURL() + "/library/user/borrowlist.aspx",getBaseget(), params);
+		String result = http.requestUrl(baseURL + "/library/user/borrowlist.aspx",baseget, params);
 		return BorrowBook.formList(result);
 	}
 
@@ -129,7 +116,7 @@ public class BookManager {
 	 */
 	public String getreaderByIdx(String url, String method,
 			BookParameters params) throws BookException {
-		return http.requestUrl(getBaseURL(), getBaseget(), params);
+		return http.requestUrl(baseURL, baseget, params);
 	}
 
 
@@ -151,8 +138,8 @@ public class BookManager {
 		params.add("perpage", count + "");
 		params.add("library", library);
 		params.add("field", field);
-		String result = http.requestUrl(getBaseURL()
-				+ "/library/bookquery/search.aspx", getBasepost(), params);
+		String result = http.requestUrl(baseURL
+				+ "/library/bookquery/search.aspx", basepost, params);
 		return Book.formList(result);
 	}
 	/**
@@ -168,23 +155,23 @@ public class BookManager {
 		String str = null;
 		switch(type){
 		case Task.TASK_E_NOTICE:
-			result = http.requestUrl(getBaseURL()+"/library/guide/notice.aspx", getBaseget(), params);
+			result = http.requestUrl(baseURL+"/library/guide/notice.aspx", baseget, params);
 			str = formResult(result);
 			break;
 		case Task.TASK_E_CARDGUID:
-			result = http.requestUrl(getBaseURL()+"/library/guide/cardguide.aspx", getBaseget(), params);
+			result = http.requestUrl(baseURL+"/library/guide/cardguide.aspx", baseget, params);
 			str = formResult(result);
 			break;
 		case Task.TASK_E_TIME:
-			result = http.requestUrl(getBaseURL()+"/library/guide/time.aspx", getBaseget(), params);
+			result = http.requestUrl(baseURL+"/library/guide/time.aspx", baseget, params);
 			str = formResult(result);
 			break;
 		case Task.TASK_E_READER:
-			result = http.requestUrl(getBaseURL()+"/library/guide/reader.aspx", getBaseget(), params);
+			result = http.requestUrl(baseURL+"/library/guide/reader.aspx", baseget, params);
 			str = formResult(result);
 			break;
 		case Task.TASK_E_SERVICE:
-			result = http.requestUrl(getBaseURL()+"/library/guide/service.aspx", getBaseget(), params);
+			result = http.requestUrl(baseURL+"/library/guide/service.aspx", baseget, params);
 			str = formResult(result);
 			break;
 		}
@@ -202,7 +189,7 @@ public class BookManager {
 		params.add("recordid", recordid);
 		params.add("tablename", "bibliosm");//书籍
 		params.add("library", GlobleData.SZLG_LIB_ID);
-		String result = http.requestUrl(getBaseURL()+"/library/bookquery/detail.aspx", getBasepost(), params);
+		String result = http.requestUrl(baseURL+"/library/bookquery/detail.aspx", basepost, params);
 		return BookLoc.formList(result);
 		
 	}
@@ -218,7 +205,7 @@ public class BookManager {
 		BookParameters params = new BookParameters();
 		params.add("userind", userind);
 		params.add("barcode", barcode);//书籍
-		String result = http.requestUrl(getBaseURL()+"/library/user/renew.aspx", getBasepost(), params);
+		String result = http.requestUrl(baseURL+"/library/user/renew.aspx", basepost, params);
 		return new ShortBook(Task.TASK_BOOK_RENEW,result);
 	}
 	
@@ -235,7 +222,7 @@ public class BookManager {
 		params.add("userid", userid);
 		params.add("newcode", newcode);//新密码
 		params.add("oldcode", oldcode);//旧密码
-		String result = http.requestUrl(getBaseURL()+"/library/user/password.aspx", getBasepost(), params);
+		String result = http.requestUrl(baseURL+"/library/user/password.aspx", basepost, params);
 		return result;
 		
 	}
@@ -252,7 +239,7 @@ public class BookManager {
 		params.add("title", key);
 		params.add("curpage", page+"");//当前页数
 		params.add("perpage",count+"" );//条数
-		String result = http.requestUrl(getBaseURL()+"/zk/search.aspx", getBasepost(), params);
+		String result = http.requestUrl(baseURL+"/zk/search.aspx", basepost, params);
 		return EBook.formList(result);
 		
 	}
@@ -265,7 +252,7 @@ public class BookManager {
 	public EbookDetail queryEBookDetail(String lngid) throws BookException{
 		BookParameters params = new BookParameters();
 		params.add("lngid", lngid);
-		String result = http.requestUrl(getBaseURL()+"/zk/detail.aspx", getBasepost(), params);
+		String result = http.requestUrl(baseURL+"/zk/detail.aspx", basepost, params);
 		return EbookDetail.formObject(result);
 	}
 	/**
@@ -277,7 +264,7 @@ public class BookManager {
 	public List<ShortBook> articledown(String lngid) throws BookException{
 		BookParameters params = new BookParameters();
 		params.add("lngid", lngid);
-		String result = http.requestUrl(getBaseURL()+"/zk/articledown.aspx", getBasepost(), params);
+		String result = http.requestUrl(baseURL+"/zk/articledown.aspx", basepost, params);
 		return ShortBook.formList(Task.TASK_EBOOK_DOWN, result);
 	}
 	
@@ -287,7 +274,7 @@ public class BookManager {
 	 * @throws BookException
 	 */
 	public ShortBook getVerionCode() throws BookException{
-		String result = http.requestUrl(getBaseURL()+"/library/base/version.aspx", getBasepost(),null);
+		String result = http.requestUrl(baseURL+"/library/base/version.aspx", basepost,null);
 		return new ShortBook(Task.TASK_REFRESH, result);
 	}
 	
@@ -306,7 +293,7 @@ public class BookManager {
 		params.add("vipuserid", vipuserid);
 		params.add("keyid", callno);
 		params.add("typeid", typeid);
-		String result = http.requestUrl(getBaseURL()+"/cloud/favorite.aspx", getBasepost(),params);
+		String result = http.requestUrl(baseURL+"/cloud/favorite.aspx", basepost,params);
 		return new Result(result);
 	}
 	/**
@@ -328,7 +315,7 @@ public class BookManager {
 		params.add("keyid", callno);
 		}
 		params.add("typeid", typeid);
-		String result = http.requestUrl(getBaseURL()+"/cloud/favorite.aspx", getBasepost(),params);
+		String result = http.requestUrl(baseURL+"/cloud/favorite.aspx", basepost,params);
 		return new Result(result);
 	}
 	
@@ -346,7 +333,7 @@ public class BookManager {
 		params.add("curpage", page);
 		params.add("perpage", count);
 		params.add("typeid", typeid);
-		String result = http.requestUrl(getBaseURL()+"/cloud/favoritelistuser.aspx", getBasepost(),params);
+		String result = http.requestUrl(baseURL+"/cloud/favoritelistuser.aspx", basepost,params);
 		return Favorite.formList(Task.TASK_GET_FAVOR,result);
 	}
 	
@@ -366,7 +353,7 @@ public class BookManager {
 		params.add("keyid", keyid);
 		params.add("typeid", typeid);
 		
-		String result = http.requestUrl(getBaseURL()+"/cloud/favoritecancel.aspx", getBasepost(),params);
+		String result = http.requestUrl(baseURL+"/cloud/favoritecancel.aspx", basepost,params);
 		return new Result(result);
 	}
 	/**
@@ -385,7 +372,7 @@ public class BookManager {
 		params.add("curpage", page);
 		params.add("perpage", count);
 		params.add("typeid", typeid);
-		String result = http.requestUrl(getBaseURL()+"/cloud/commentlistuser.aspx", getBaseget(),params);
+		String result = http.requestUrl(baseURL+"/cloud/commentlistuser.aspx", baseget,params);
 		return Favorite.formList(Task.TASK_COMMENT_BOOKLIST, result);
 	}
 	
@@ -404,7 +391,7 @@ public class BookManager {
 		params.add("keyid", keyid);
 		params.add("curpage", page);
 		params.add("perpage", count);
-		String result = http.requestUrl(getBaseURL()+"/cloud/commentlist.aspx", getBasepost(),params);
+		String result = http.requestUrl(baseURL+"/cloud/commentlist.aspx", basepost,params);
 		return Comment.formList(result);
 	}
 	
@@ -425,7 +412,7 @@ public class BookManager {
 		params.add("keyid", keyid);
 		params.add("typeid", typeid);
 		params.add("info", content);
-		String result = http.requestUrl(getBaseURL()+"/cloud/comment.aspx", getBasepost(),params);
+		String result = http.requestUrl(baseURL+"/cloud/comment.aspx", basepost,params);
 		return new Result(result);
 		
 	}
@@ -451,7 +438,7 @@ public class BookManager {
 			}
 		params.add("typeid", typeid);
 		params.add("info", content);
-		String result = http.requestUrl(getBaseURL()+"/cloud/comment.aspx", getBasepost(),params);
+		String result = http.requestUrl(baseURL+"/cloud/comment.aspx", basepost,params);
 		return new Result(result);
 		
 	}
@@ -470,7 +457,7 @@ public class BookManager {
 		params.add("vipuserid", vipuserid);
 		params.add("keyid", keyid);
 		params.add("typeid", typeid);
-		String result = http.requestUrl(getBaseURL()+"/cloud/comment.aspx", getBasepost(),params);
+		String result = http.requestUrl(baseURL+"/cloud/comment.aspx", basepost,params);
 		return new Result(result);
 	}
 	/**
@@ -485,7 +472,7 @@ public class BookManager {
 		BookParameters params = new BookParameters();
 		params.add("libid", libid);
 		params.add("announcetypeid",announcetypeid);
-		String result = http.requestUrl(getBaseURL()+"/library/announce/html.aspx", getBaseget(),params);
+		String result = http.requestUrl(baseURL+"/library/announce/html.aspx", baseget,params);
 		return ShortBook.formList(Task.TASK_ANNOUNCE_SPEACH,result);
 	}
 	/**
@@ -503,7 +490,7 @@ public class BookManager {
 		params.add("announcetypeid", announcetypeid);
 		params.add("curpage", curpage);
 		params.add("perpage", perpage);
-		String result = http.requestUrl(getBaseURL()+"/library/announce/list.aspx", getBaseget(),params);
+		String result = http.requestUrl(baseURL+"/library/announce/list.aspx", baseget,params);
 		return ShortBook.formList(type, result);
 	}
 	/**
@@ -517,7 +504,7 @@ public class BookManager {
 		BookParameters params = new BookParameters();
 		params.add("libid", libid);
 		params.add("announceid", announceid);
-		String result = http.requestUrl(getBaseURL()+"/library/announce/detail.aspx", getBaseget(),params);
+		String result = http.requestUrl(baseURL+"/library/announce/detail.aspx", baseget,params);
 		return formResult(result);
 		
 	}
@@ -538,7 +525,7 @@ public class BookManager {
 		params.add("announcetypeid", announcetypeid);
 		params.add("curpage", curpage);
 		params.add("perpage", perpage);
-		String result = http.requestUrl(getBaseURL()+"/library/announce/list.aspx", getBaseget(),params);
+		String result = http.requestUrl(baseURL+"/library/announce/list.aspx", baseget,params);
 		return ShortBook.formList(type, result);
 		
 	}
@@ -553,7 +540,7 @@ public class BookManager {
 		BookParameters params = new BookParameters();
 		params.add("libid", libid);
 		params.add("announceid", announceid);
-		String result = http.requestUrl(getBaseURL()+"/library/announce/detail.aspx", getBaseget(),params);
+		String result = http.requestUrl(baseURL+"/library/announce/detail.aspx", baseget,params);
 		return formResult(result);
 	}
 	

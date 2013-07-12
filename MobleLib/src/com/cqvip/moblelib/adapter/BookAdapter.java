@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 import com.cqvip.mobelib.imgutils.ImageFetcher;
 import com.cqvip.moblelib.R;
+import com.cqvip.moblelib.activity.BigImgActivity;
 import com.cqvip.moblelib.activity.CommentActivity;
 import com.cqvip.moblelib.biz.ManagerService;
 import com.cqvip.moblelib.biz.Task;
@@ -145,9 +146,25 @@ public class BookAdapter extends BaseAdapter{
 	        //Õº∆¨
 	        if(!TextUtils.isEmpty(book.getCover_path())){
 	        	fetch.loadImage(book.getCover_path(), holder.img);
+	        	final String bigimg = Tool.getBigImg(book.getCover_path());
+	        	holder.img.setOnClickListener(new View.OnClickListener() {
+	        		
+	        		@Override
+	        		public void onClick(View v) {
+	        			if(TextUtils.isEmpty(bigimg)){
+	        				return;
+	        			}
+	        			Intent  intent = new Intent(context,BigImgActivity.class);
+	        			intent.putExtra("bigurl", bigimg);
+	        			context.startActivity(intent);
+	        		}
+	        	});
 	        }else{
 	        	holder.img.setImageDrawable(context.getResources().getDrawable(R.drawable.defaut_book));
 	        }
+	        
+	        
+	        
 	        //∑÷œÌ
 	        holder.btn_item_result_search_share.setTag(position);
 	        holder.btn_item_result_search_share.setOnClickListener(new OnClickListener() {

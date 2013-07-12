@@ -44,7 +44,7 @@
     <string name="title_activity_borrow_and_order">借阅管理</string>
     <string name="title_activity_group_of_readers">书友圈</string>
     <string name="suggestread_proffession">专家推荐</string>
-     <string name="suggestread_hotbook">热门图书</string>
+    <string name="suggestread_hotbook">热门图书</string>
     <string name="suggestread_topcomment">热门评论</string>
     <string name="suggestread_rank">借阅排行</string>
     <string name="suggestread_ebookrand">电子资源下载排行</string>
@@ -118,8 +118,8 @@
     <string name="title_activity_advanced_book">AdvancedBookActivity</string>
     <string name="title_activity_detail_advanced_book">DetailAdvancedBookActivity</string>
     <string name="title_activity_annouce_list">AnnouceListActivity</string>
-    
     <string name="need_pwd">请输入密码</string>
     <string name="need_username">请输入用户名</string>
+    <string name="title_activity_big_img">BigImgActivity</string>
 
 </resources>

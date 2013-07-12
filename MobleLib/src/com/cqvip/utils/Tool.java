@@ -238,4 +238,14 @@ public class Tool {
 		}
 		return strTime;
 	}
+
+	/**
+	 *  »ñÈ¡´óÍ¼Æ¬url
+	 * @param strr
+	 * @return
+	 */
+	 public static String getBigImg(String strr){
+		   int i = strr.indexOf("spic",0);
+		  return strr.substring(0,i) +"l"+ strr.substring(i+1);
+	   }
 }

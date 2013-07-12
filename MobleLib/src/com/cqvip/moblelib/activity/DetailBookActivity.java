@@ -71,10 +71,24 @@ public class DetailBookActivity extends BaseImageActivity implements IBookManage
 			imgview.setBackgroundResource(R.drawable.defaut_book);
 		}
 		
+	  imgview.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if(TextUtils.isEmpty(dBook.getCover_path())){
+					return;
+				}
+				String bigimg = Tool.getBigImg(dBook.getCover_path());
+				Intent  intent = new Intent(context,BigImgActivity.class);
+    			intent.putExtra("bigurl", bigimg);
+    			startActivity(intent);
+				
+			}
+		});
 		booktitle_tv.setText(dBook.getTitle());
 		//从我的收藏传过来的isbn都是空字符串，
 		String isbn="";
-		if(!dBook.getIsbn().isEmpty()){
+		if(!TextUtils.isEmpty(dBook.getIsbn())){
 			isbn="ISBN:"+dBook.getIsbn()+"\n";
 		}
 		//从我的收藏传过来的是出版时间而非主题
