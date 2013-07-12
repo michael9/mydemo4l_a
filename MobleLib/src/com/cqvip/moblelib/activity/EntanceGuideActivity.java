@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.cqvip.moblelib.R;
+import com.cqvip.moblelib.constant.Constant;
 import com.cqvip.moblelib.view.mylinearlayout;
 import com.cqvip.utils.Tool;
 
@@ -149,9 +150,12 @@ public class EntanceGuideActivity extends BaseActivity {
 				Intent intent = new Intent(context, DetailTextActivity.class);
 				intent.putExtra("enter", 8);
 				//startActivity(intent);
-				Tool.ShowMessages(EntanceGuideActivity.this, "暂无问题");
+				//Tool.ShowMessages(EntanceGuideActivity.this, "暂无问题");
 				// overridePendingTransition(R.anim.slide_right_in,
 				// R.anim.slide_left_out);
+				Intent mintent = new Intent(context, AnnouceListActivity.class);
+				mintent.putExtra("type",Constant.QUESTION);
+				startActivity(mintent);
 
 			}
 		});

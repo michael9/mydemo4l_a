@@ -59,7 +59,10 @@ public class AnnouceListActivity extends BaseActivity implements IBookManagerAct
 		case  Constant.SPPECH_FREE:
 			setheadbar("公益讲座");
 			break;
-
+		case  Constant.QUESTION:
+			setheadbar("常见问题");
+			break;
+			
 		default:
 			break;
 		}
@@ -109,6 +112,13 @@ public class AnnouceListActivity extends BaseActivity implements IBookManagerAct
 			ManagerService.addNewTask(new Task(Task.TASK_ANNOUNCE_WELFARE_MORE,map));
 			}
 			break;
+		case Constant.QUESTION://常见问题
+			if(mwhat == GETHOMEPAGE){
+				ManagerService.addNewTask(new Task(Task.TASK_E_CAUTION,map));
+			}else{
+				ManagerService.addNewTask(new Task(Task.TASK_ANNOUNCE_WELFARE_MORE,map));
+			}
+			break;
 		}
 		
 	}
@@ -122,7 +132,6 @@ public class AnnouceListActivity extends BaseActivity implements IBookManagerAct
 	class MyNewAdapter extends BaseAdapter{
 		private Context context;
 		private List<ShortBook> mlists;
-		
 		public MyNewAdapter(Context con){
 			context = con;
 		}
@@ -175,7 +184,7 @@ public class AnnouceListActivity extends BaseActivity implements IBookManagerAct
 				convertView = LayoutInflater.from(context).inflate(R.layout.item_news, null);
 				
 				TextView tx = (TextView)convertView.findViewById(R.id.tv_item_topic);
-				
+				//判断如果是常见问题
 				tx.setText(mlists.get(position).getMessage());
 			}
 			return convertView;
@@ -220,6 +229,7 @@ public class AnnouceListActivity extends BaseActivity implements IBookManagerAct
 		switch(state){
 		case Task.TASK_ANNOUNCE_NEWS:
 		case Task.TASK_ANNOUNCE_WELFARE:
+		case Task.TASK_E_CAUTION:
 			
 			if(lists!=null&&!lists.isEmpty()){
 			adapter = new MyNewAdapter(context,lists);
@@ -229,6 +239,7 @@ public class AnnouceListActivity extends BaseActivity implements IBookManagerAct
 			break;
 		case Task.TASK_ANNOUNCE_NEWS_MORE:
 		case Task.TASK_ANNOUNCE_WELFARE_MORE:
+		case Task.TASK_E_CAUTION_MORE:
 			moreprocess.setVisibility(View.GONE);
 			if(lists!=null&&!lists.isEmpty()){
 				adapter.addMoreData(lists);
@@ -236,6 +247,7 @@ public class AnnouceListActivity extends BaseActivity implements IBookManagerAct
 					Tool.ShowMessages(context, "没有更多内容可供加载");
 				}
 			break;
+			
 		}
 		
 	}

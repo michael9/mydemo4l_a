@@ -60,6 +60,7 @@ public class GlobleData {
 	public static final int ANNAOUCETYPE_NEWBOOK = 4;//新书推荐
 	public static final int ANNAOUCETYPE_NEWS = 2 ;//新闻动态
 	public static final int ANNAOUCETYPE_FREESPEECH = 1;//公益讲座
+	public static final int FAQ_QUESTION = 5;//公益讲座
 	
 	public static Map<String, Object> datas = new HashMap<String, Object>();
 	

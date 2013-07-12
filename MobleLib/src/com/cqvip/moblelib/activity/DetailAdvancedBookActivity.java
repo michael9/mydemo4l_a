@@ -29,9 +29,13 @@ public class DetailAdvancedBookActivity extends BaseActivity implements IBookMan
 		content = (TextView)findViewById(R.id.ad_book_content);
 		type = getIntent().getIntExtra("type",1);
 		id = getIntent().getStringExtra("id");
+		if(type == Constant.QUESTION){
+			content.setText(id);
+			setheadbar(getResources().getString(R.string.title_FAQ));
+		}else{
 		getContent(id);
-
-		setheadbar("œÍœ∏–≈œ¢");
+		setheadbar(getResources().getString(R.string.title_moredetail));
+		}
 	}
 	
 	private void setheadbar(String title)
