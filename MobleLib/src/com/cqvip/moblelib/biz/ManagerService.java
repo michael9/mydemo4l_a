@@ -113,51 +113,51 @@ public class ManagerService extends Service implements Runnable {
 				}
 				more.refresh(ResultOnSearchActivity.GETNEXTPAGE, msg.obj);
 				break;
-			case Task.TASK_E_NOTICE:
-				IBookManagerActivity notice = (IBookManagerActivity) ManagerService
-						.getActivityByName("DetailTextActivity");
-				if (msg.arg1 != 0) {
-					doException(2,msg, "DetailTextActivity");
-					break;
-				}
-				notice.refresh(DetailTextActivity.E_NOTICE, msg.obj);
-				break;
-			case Task.TASK_E_CARDGUID:
-				IBookManagerActivity card = (IBookManagerActivity) ManagerService
-						.getActivityByName("DetailTextActivity");
-				if (msg.arg1 != 0) {
-					doException(2,msg, "DetailTextActivity");
-					break;
-				}
-				card.refresh(DetailTextActivity.E_CARDGUID, msg.obj);
-				break;
-			case Task.TASK_E_TIME:
-				IBookManagerActivity time = (IBookManagerActivity) ManagerService
-						.getActivityByName("DetailTextActivity");
-				if (msg.arg1 != 0) {
-					doException(2,msg, "DetailTextActivity");
-					break;
-				}
-				time.refresh(DetailTextActivity.E_TIME, msg.obj);
-				break;
-			case Task.TASK_E_READER:
-				IBookManagerActivity reader = (IBookManagerActivity) ManagerService
-						.getActivityByName("DetailTextActivity");
-				if (msg.arg1 != 0) {
-					doException(2,msg, "DetailTextActivity");
-					break;
-				}
-				reader.refresh(DetailTextActivity.E_READER, msg.obj);
-				break;
-			case Task.TASK_E_SERVICE:
-				IBookManagerActivity service = (IBookManagerActivity) ManagerService
-						.getActivityByName("DetailTextActivity");
-				if (msg.arg1 != 0) {
-					doException(2,msg, "DetailTextActivity");
-					break;
-				}
-				service.refresh(DetailTextActivity.E_SERVICE, msg.obj);
-				break;
+//			case Task.TASK_E_NOTICE:
+//				IBookManagerActivity notice = (IBookManagerActivity) ManagerService
+//						.getActivityByName("DetailTextActivity");
+//				if (msg.arg1 != 0) {
+//					doException(2,msg, "DetailTextActivity");
+//					break;
+//				}
+//				notice.refresh(DetailTextActivity.E_NOTICE, msg.obj);
+//				break;
+//			case Task.TASK_E_CARDGUID:
+//				IBookManagerActivity card = (IBookManagerActivity) ManagerService
+//						.getActivityByName("DetailTextActivity");
+//				if (msg.arg1 != 0) {
+//					doException(2,msg, "DetailTextActivity");
+//					break;
+//				}
+//				card.refresh(DetailTextActivity.E_CARDGUID, msg.obj);
+//				break;
+//			case Task.TASK_E_TIME:
+//				IBookManagerActivity time = (IBookManagerActivity) ManagerService
+//						.getActivityByName("DetailTextActivity");
+//				if (msg.arg1 != 0) {
+//					doException(2,msg, "DetailTextActivity");
+//					break;
+//				}
+//				time.refresh(DetailTextActivity.E_TIME, msg.obj);
+//				break;
+//			case Task.TASK_E_READER:
+//				IBookManagerActivity reader = (IBookManagerActivity) ManagerService
+//						.getActivityByName("DetailTextActivity");
+//				if (msg.arg1 != 0) {
+//					doException(2,msg, "DetailTextActivity");
+//					break;
+//				}
+//				reader.refresh(DetailTextActivity.E_READER, msg.obj);
+//				break;
+//			case Task.TASK_E_SERVICE:
+//				IBookManagerActivity service = (IBookManagerActivity) ManagerService
+//						.getActivityByName("DetailTextActivity");
+//				if (msg.arg1 != 0) {
+//					doException(2,msg, "DetailTextActivity");
+//					break;
+//				}
+//				service.refresh(DetailTextActivity.E_SERVICE, msg.obj);
+//				break;
 			case Task.TASK_BOOK_INFO:
 				IBookManagerActivity binfo = (IBookManagerActivity) ManagerService
 						.getActivityByName("DetailBookActivity");

@@ -1,5 +1,7 @@
 package com.cqvip.moblelib.activity;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
 import com.cqvip.moblelib.R;
 import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.moblelib.view.mylinearlayout;
@@ -17,7 +19,7 @@ import android.widget.Toast;
 public class BaseActivity extends Activity {
 	private GestureDetector mGestureDetector;
 	protected CustomProgressDialog customProgressDialog;
-
+	protected RequestQueue mQueue;
 	
 	
 	
@@ -27,6 +29,7 @@ public class BaseActivity extends Activity {
 		mGestureDetector = new GestureDetector(this,
 				new MyGestrueListener(this));
 		customProgressDialog=CustomProgressDialog.createDialog(this);
+		mQueue=Volley.newRequestQueue(this);
 	}
 
 //	@Override
