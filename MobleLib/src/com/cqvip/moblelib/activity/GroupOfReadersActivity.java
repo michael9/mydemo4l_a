@@ -468,12 +468,14 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity implements
 					}else if(temp_zk_list!=null){
 				arrayList_zk.addAll(arrayLists.get(GlobleData.BOOK_ZK_TYPE));
 				adapter_zk.notifyDataSetChanged();
+				}else{
+					Tool.ShowMessages(context, "没有更多内容可供加载");
 				}
 			}else if(curpage_sz>1||curpage_zk>1){
 				Tool.ShowMessages(context, "没有更多内容可供加载");
-				if(moreprocess!=null)
-				moreprocess.setVisibility(View.GONE);
 			}
+			if(moreprocess!=null)
+			moreprocess.setVisibility(View.GONE);
 		} 
 	}
 

@@ -68,7 +68,7 @@ public class DetailBookActivity extends BaseImageActivity implements IBookManage
 		if(!TextUtils.isEmpty(dBook.getCover_path())){
 		mImageFetcher.loadImage(dBook.getCover_path(), imgview);
 		}else{
-			imgview.setBackgroundResource(R.drawable.defaut_book);
+			imgview.setImageDrawable(getResources().getDrawable(R.drawable.defaut_book));
 		}
 		
 	  imgview.setOnClickListener(new View.OnClickListener() {
@@ -78,8 +78,8 @@ public class DetailBookActivity extends BaseImageActivity implements IBookManage
 				if(TextUtils.isEmpty(dBook.getCover_path())){
 					return;
 				}
-				String bigimg = Tool.getBigImg(dBook.getCover_path());
 				Intent  intent = new Intent(context,BigImgActivity.class);
+				String bigimg = Tool.getBigImg(dBook.getCover_path());
     			intent.putExtra("bigurl", bigimg);
     			startActivity(intent);
 				
@@ -245,7 +245,7 @@ public class DetailBookActivity extends BaseImageActivity implements IBookManage
 //		}else{
 //			listview.setAdapter(null);
 //		       }
-			 add2gc((List<BookLoc>)obj[1]);
+			// add2gc((List<BookLoc>)obj[1]);
 		}else if(type == FAVOR){//判断收藏是否成功
 			 Result res = (Result) obj[1];
 			 if (res.getSuccess()) {

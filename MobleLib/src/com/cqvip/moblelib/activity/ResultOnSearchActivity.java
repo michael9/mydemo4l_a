@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -30,7 +31,6 @@ import com.cqvip.moblelib.biz.ManagerService;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.Book;
-import com.cqvip.moblelib.model.Result;
 import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.utils.Tool;
 
@@ -128,7 +128,8 @@ public class ResultOnSearchActivity extends BaseImageActivity implements IBookMa
 					finish();
 				}
 			});
-	
+//			 ActivityManager activityManager = (ActivityManager) this.getSystemService("activity");
+//		        Log.i("MemoryClass","" + activityManager.getMemoryClass());
 	}
 	/**
 	 * Òþ²Ø¼üÅÌ

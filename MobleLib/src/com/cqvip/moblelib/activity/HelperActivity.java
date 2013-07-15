@@ -46,10 +46,10 @@ public class HelperActivity extends Activity implements OnViewChangeListener {
 				switch (v.getId()) {
 				case R.id.startBtn:
 				
-							Intent intent = new Intent(
-									context,
-									MainMenuActivity.class);
-							context.startActivity(intent);
+//							Intent intent = new Intent(
+//									context,
+//									MainMenuActivity.class);
+//							context.startActivity(intent);
 							HelperActivity.this.finish();
 					
 					break;

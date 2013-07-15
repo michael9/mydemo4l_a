@@ -76,21 +76,7 @@
                 android:layout_marginTop="20dp"
                 android:text="馆藏信息"
                 android:textSize="16dp" />
-            <!--
-            <ListView
-                android:id="@+id/loc_list"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@id/textView9"
-                android:cacheColorHint="#00000000"
-                android:divider="@null"
-                android:fadingEdge="none"
-                android:fadingEdgeLength="0.0sp"
-                android:headerDividersEnabled="false"
-                android:listSelector="@android:color/transparent"
-                android:scrollingCache="false"
-                android:smoothScrollbar="false" />
-            -->
+ 
 
             <LinearLayout
                 android:id="@+id/loc_list_ll"

@@ -6,6 +6,7 @@ import java.util.Timer;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
 import android.os.Bundle;
@@ -107,9 +108,9 @@ public class MainMenuActivity extends BaseActivity implements IBookManagerActivi
 		super.onCreate(savedInstanceState);
 		// requestWindowFeature(Window.);
 
-		Intent intent = new Intent(MainMenuActivity.this, WelcomeActivity.class);
-		startActivity(intent);
-
+//		Intent intent = new Intent(MainMenuActivity.this, WelcomeActivity.class);
+//		startActivity(intent);
+		startHelperActivity();
 		Display display = getWindowManager().getDefaultDisplay();
 		width = display.getWidth();
 		height = display.getHeight();
@@ -129,6 +130,28 @@ public class MainMenuActivity extends BaseActivity implements IBookManagerActivi
 		init();
 	}
 	
+	 void startHelperActivity(){
+		 //读取SharedPreferences中需要的数据
+
+	   SharedPreferences  preferences = getSharedPreferences("count",MODE_PRIVATE);
+
+       int count = preferences.getInt("count", 0);
+
+       //判断程序与第几次运行，如果是第一次运行则跳转到引导页面
+
+    //  if (count == 0) {
+       	
+       	 Editor editor = preferences.edit();
+            //存入数据
+            editor.putInt("count", ++count);
+            //提交修改
+            editor.commit();
+            
+       	Intent intent = new Intent();
+           intent.setClass(MainMenuActivity.this,HelperActivity.class);
+           startActivity(intent);
+     //  }
+	 }
 	private void init_login() {
 		if (dao == null) {
 			dao = new MUserDao(context);
