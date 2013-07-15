@@ -111,6 +111,7 @@ public class MainMenuActivity extends BaseActivity implements IBookManagerActivi
 //		Intent intent = new Intent(MainMenuActivity.this, WelcomeActivity.class);
 //		startActivity(intent);
 		startHelperActivity();
+		
 		Display display = getWindowManager().getDefaultDisplay();
 		width = display.getWidth();
 		height = display.getHeight();
@@ -139,7 +140,7 @@ public class MainMenuActivity extends BaseActivity implements IBookManagerActivi
 
        //判断程序与第几次运行，如果是第一次运行则跳转到引导页面
 
-    //  if (count == 0) {
+      if (count == 0) {
        	
        	 Editor editor = preferences.edit();
             //存入数据
@@ -150,7 +151,7 @@ public class MainMenuActivity extends BaseActivity implements IBookManagerActivi
        	Intent intent = new Intent();
            intent.setClass(MainMenuActivity.this,HelperActivity.class);
            startActivity(intent);
-     //  }
+       }
 	 }
 	private void init_login() {
 		if (dao == null) {
