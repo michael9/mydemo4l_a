@@ -336,6 +336,8 @@ public class ManagerService extends Service implements Runnable {
 			case Task.TASK_ANNOUNCE_NEWS_MORE:
 			case Task.TASK_ANNOUNCE_WELFARE:
 			case Task.TASK_ANNOUNCE_WELFARE_MORE:
+			case Task.TASK_E_CAUTION:
+			case Task.TASK_E_CAUTION_MORE:
 				AnnouceListActivity annouce = (AnnouceListActivity) ManagerService.getActivityByName("AnnouceListActivity");
 				if (msg.arg1 != 0) {
 					annouce.onError(2);
@@ -527,6 +529,11 @@ public class ManagerService extends Service implements Runnable {
 		case Task.TASK_ANNOUNCE_NEWS_MORE:
 			List<ShortBook> news = manager.getAnnounceNews(Task.TASK_ANNOUNCE_NEWS,GlobleData.LIBIRY_ID,GlobleData.ANNAOUCETYPE_NEWS+"", (String)task.getTaskParam().get("page"),  (String)task.getTaskParam().get("count"));
 			msg.obj = news;
+			break;
+		case Task.TASK_E_CAUTION:
+		case Task.TASK_E_CAUTION_MORE:
+			List<ShortBook> caution = manager.getAnnouce(Task.TASK_E_CAUTION,GlobleData.LIBIRY_ID,GlobleData.FAQ_QUESTION+"", (String)task.getTaskParam().get("page"),  (String)task.getTaskParam().get("count"));
+			msg.obj = caution;
 			break;
 		case Task.TASK_ANNOUNCE_DETAIL:
 			String acontent = manager.getSuggestDetail(GlobleData.LIBIRY_ID,(String)task.getTaskParam().get("id"));

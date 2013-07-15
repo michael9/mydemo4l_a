@@ -470,12 +470,14 @@ public class BookManager {
 	 * @throws BookException
 	 */
 	//TODO
-	public List<ShortBook> getAnnouce(String libid,String announcetypeid) throws BookException{
+	public List<ShortBook> getAnnouce(int type,String libid,String announcetypeid,String curpage,String perpage) throws BookException{
 		BookParameters params = new BookParameters();
 		params.add("libid", libid);
-		params.add("announcetypeid",announcetypeid);
+		params.add("announcetypeid", announcetypeid);
+		params.add("curpage", curpage);
+		params.add("perpage", perpage);
 		String result = http.requestUrl(baseURL+"/library/announce/html.aspx", baseget,params);
-		return ShortBook.formList(Task.TASK_ANNOUNCE_SPEACH,result);
+		return ShortBook.formList(type,result);
 	}
 	/**
 	 * 热门书籍,新书通报

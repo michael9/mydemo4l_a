@@ -79,6 +79,17 @@ public class ShortBook {
 				throw new BookException(e);
 			}
 			break;
+		case Task.TASK_E_CAUTION:	
+		case Task.TASK_E_CAUTION_MORE:	
+			try {
+				JSONObject json = new JSONObject(result);
+				message = json.getString("title");
+				id = json.getString("contents");//СͼƬ
+				sucesss = json.getString("imgurl");//��ͼƬ
+			} catch (JSONException e) {
+				throw new BookException(e);
+			}
+			break;
 		}
 		
 	}
@@ -128,6 +139,8 @@ public class ShortBook {
 		case Task.TASK_SUGGEST_NEWBOOK:
 		case Task.TASK_ANNOUNCE_NEWS:	
 		case Task.TASK_ANNOUNCE_WELFARE:
+		case Task.TASK_E_CAUTION:	
+		case Task.TASK_E_CAUTION_MORE:	
 			try {
 				JSONObject json = new JSONObject(result);
 				if(!json.getBoolean("success")){

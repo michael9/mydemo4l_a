@@ -23,7 +23,7 @@
             android:layout_margin="10dp"
             android:background="@drawable/silvergray"
             android:padding="2dp"
-            android:text="@string/floor_2"
+            android:text="@string/floor_one"
             android:textSize="16sp" />
 
         <TextView
@@ -33,7 +33,7 @@
             android:layout_margin="10dp"
             android:background="@drawable/silvergray"
             android:padding="2dp"
-            android:text="@string/floor_4"
+            android:text="@string/floor_two"
             android:textSize="16sp" />
 
         <TextView
@@ -43,7 +43,7 @@
             android:layout_margin="10dp"
             android:background="@drawable/silvergray"
             android:padding="2dp"
-            android:text="@string/floor_5"
+            android:text="@string/floor_three"
             android:textSize="16sp" />
     </LinearLayout>
 
