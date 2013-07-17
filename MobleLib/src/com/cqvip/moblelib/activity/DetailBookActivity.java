@@ -7,6 +7,7 @@ import java.util.Map;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Paint.Join;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -148,8 +149,9 @@ public class DetailBookActivity extends BaseActivity {
 					@Override
 					public void onClick(View v) {
 						if (GlobleData.islogin) {
-							Tool.bookfavorite(DetailBookActivity.this, dBook);
+							gparams=Tool.bookfavorite(gparams, dBook);
 							customProgressDialog.show();
+							requestVolley(GlobleData.SERVER_URL+"/cloud/favorite.aspx",bookfavorite_ls,Method.POST);
 						} else {
 							// 只是登陆而已
 							showLoginDialog(4);
@@ -196,7 +198,24 @@ public class DetailBookActivity extends BaseActivity {
 		intent.putExtra("ACTIONID", id);
 		startActivityForResult(intent, id);
 	}
+	
 
+	private Listener<String> bookfavorite_ls = new Listener<String>() {
+
+		@Override
+		public void onResponse(String response) {
+			// TODO Auto-generated method stub
+			customProgressDialog.dismiss();
+			try {
+				Result r=new Result(response);
+				Tool.ShowMessagel(DetailBookActivity.this, r.getMessage());
+			} catch (Exception e) {
+				// TODO: handle exception
+				return;
+			}
+		}
+	};
+	
 	private Listener<String> back_ls = new Listener<String>() {
 
 		@Override
