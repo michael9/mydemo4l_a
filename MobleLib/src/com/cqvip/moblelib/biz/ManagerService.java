@@ -251,7 +251,7 @@ public class ManagerService extends Service implements Runnable {
 					msg.arg1 = 0;
 					break;
 				}
-				favor.refresh(MyFavorActivity.FAVOR,msg.obj,msg.arg2);
+				//favor.refresh(MyFavorActivity.FAVOR,msg.obj,msg.arg2);
 				break;	
 				//馆藏图书收藏20
 			case Task.TASK_LIB_FAVOR:
@@ -270,7 +270,7 @@ public class ManagerService extends Service implements Runnable {
 					msg.arg1 = 0;
 					break;
 				}
-				favor_cancel.refresh(MyFavorActivity.CANCELFAVOR,msg.obj);
+				//favor_cancel.refresh(MyFavorActivity.CANCELFAVOR,msg.obj);
 				break;	
 				//电子图书收藏22
 			case Task.TASK_EBOOK_FAVOR:
