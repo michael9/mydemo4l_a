@@ -46,7 +46,7 @@ public class EbookDetailActivity extends BaseActivity {
 			btn_ebook_detail_download;
 	private View title_bar, book_action_bar;
 	private ImageView img_book;
-//	private ImageFetcher mImageFetcher;
+	// private ImageFetcher mImageFetcher;
 	private Map<String, String> gparams;
 
 	@Override
@@ -85,12 +85,12 @@ public class EbookDetailActivity extends BaseActivity {
 		String page1 = getResources().getString(R.string.ebook_page);
 		String describe1 = getResources().getString(R.string.ebook_abstrac);
 		String type1 = getResources().getString(R.string.ebook_type);
-		
+
 		ImageLoader mImageLoader = new ImageLoader(mQueue, new BitmapCache());
-		ImageListener listener = ImageLoader.getImageListener(img_book, R.drawable.defaut_book, R.drawable.defaut_book);
+		ImageListener listener = ImageLoader.getImageListener(img_book,
+				R.drawable.defaut_book, R.drawable.defaut_book);
 		mImageLoader.get(dBook.getImgurl(), listener);
 
-		
 		title.setText(dBook.getTitle_c());
 		author.setText(author1 + dBook.getWriter());
 		from.setText(from1 + dBook.getName_c());
@@ -242,21 +242,7 @@ public class EbookDetailActivity extends BaseActivity {
 			customProgressDialog.dismiss();
 			try {
 				Result result = new Result(response);
-				if (result.getSuccess()) {
-					// 提示
-					Tool.ShowMessages(EbookDetailActivity.this, getResources()
-							.getString(R.string.favorsucess));
-					// //设置已收藏
-					// btn_ebook_detail_collect.setText(getResources().getString(R.string.already_favoriate));
-					// btn_ebook_detail_collect.setClickable(false);
-					// btn_ebook_detail_collect.setTextColor(getResources().getColor(R.drawable.silvergray));
-					// //加入hashMap
-					// EBookSearchActivity.favors.put(dBook.getLngid(), true);
-				} else {
-					Tool.ShowMessages(EbookDetailActivity.this, getResources()
-							.getString(R.string.already_favoriate));
-				}
-
+				Tool.ShowMessages(EbookDetailActivity.this, result.getMessage());
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
