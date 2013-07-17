@@ -171,7 +171,7 @@ public class ResultOnSearchActivity extends BaseImageActivity implements
 					noResult_rl.setVisibility(View.VISIBLE);
 				}
 			} catch (Exception e) {
-				// TODO: handle exception
+				e.printStackTrace();
 			}
 
 		}
@@ -219,7 +219,7 @@ public class ResultOnSearchActivity extends BaseImageActivity implements
 			mQueue.add(mys);
 			mQueue.start();
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 	}
 

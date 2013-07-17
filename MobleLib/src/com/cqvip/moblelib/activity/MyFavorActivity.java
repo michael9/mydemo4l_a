@@ -10,7 +10,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerTitleStrip;
@@ -30,29 +29,34 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.android.volley.Request.Method;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response.ErrorListener;
+import com.android.volley.Response.Listener;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.cqvip.mobelib.imgutils.ImageFetcher;
 import com.cqvip.moblelib.R;
-import com.cqvip.moblelib.base.IBookManagerActivity;
-import com.cqvip.moblelib.biz.ManagerService;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.Book;
 import com.cqvip.moblelib.model.EBook;
 import com.cqvip.moblelib.model.Favorite;
 import com.cqvip.moblelib.model.Result;
+import com.cqvip.moblelib.net.BookException;
 import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.utils.Tool;
 
-public class MyFavorActivity extends BaseFragmentImageActivity implements
-		IBookManagerActivity {
-	public static final int FAVOR = 1;
-	public static final int CANCELFAVOR = 2;
+public class MyFavorActivity extends BaseFragmentImageActivity {
+	public static final int GETFIRSTPAGE_SZ = 1;
+	public static final int GETFIRSTPAGE_ZK = 2;
+	public static final int GETNEXT = 3;
 
 	private int curpage = 1;// 第几页
 	private int perpage = 10;// 每页显示条数
 	private Favorite del_favorite;
 	private View moreprocess;
-	private int type = GlobleData.BOOK_SZ_TYPE;
 	private int curpage_sz = 1, curpage_zk = 1;// 第几页
 
 	MyGridViewAdapter adapter_zk, adapter_sz;
@@ -73,7 +77,8 @@ public class MyFavorActivity extends BaseFragmentImageActivity implements
 	PagerTitleStrip mPagerTitleStrip;
 	Context context;
 	protected CustomProgressDialog customProgressDialog;
-	Map<Integer, List<Favorite>> arrayLists;
+	protected RequestQueue mQueue;
+	Map<Integer, List<Favorite>> arrayLists_sz, arrayLists_zk;
 	ArrayList<Favorite> arrayList_zk = new ArrayList<Favorite>();
 	ArrayList<Favorite> arrayList_sz = new ArrayList<Favorite>();
 
@@ -92,9 +97,8 @@ public class MyFavorActivity extends BaseFragmentImageActivity implements
 		mViewPager = (ViewPager) findViewById(R.id.pager);
 		mViewPager.setAdapter(mSectionsPagerAdapter);
 		// 获取数据
-		ManagerService.allActivity.add(this);
-		getfavorlist(curpage, perpage, GlobleData.BOOK_SZ_TYPE);
-		getfavorlist(curpage, perpage, GlobleData.BOOK_ZK_TYPE);
+		getfavorlist(curpage, perpage, GlobleData.BOOK_SZ_TYPE, GETFIRSTPAGE_SZ);
+		getfavorlist(curpage, perpage, GlobleData.BOOK_ZK_TYPE, GETFIRSTPAGE_ZK);
 	}
 
 	@Override
@@ -112,8 +116,9 @@ public class MyFavorActivity extends BaseFragmentImageActivity implements
 				map.put("keyid", del_favorite.getFavoritekeyid());
 				// Log.i("keyid", favorite.getFavoritekeyid());
 				map.put("typeid", "" + del_favorite.getTypeid());
-				ManagerService
-						.addNewTask(new Task(Task.TASK_CANCEL_FAVOR, map));
+				requestVolley(map, GlobleData.SERVER_URL
+						+ "/cloud/favoritecancel.aspx", backlistenercancel,
+						Method.POST);
 			}
 			break;
 
@@ -132,16 +137,186 @@ public class MyFavorActivity extends BaseFragmentImageActivity implements
 		startActivityForResult(intent, 101);
 	}
 
-	private void getfavorlist(int pagecount, int perpage, int typeid) {
-		HashMap map = new HashMap();
-		map.put("libid", GlobleData.LIBIRY_ID);
+	private void getfavorlist(int pagecount, int perpage, int typeid, int type) {
+		HashMap<String, String> gparams = new HashMap<String, String>();
+		gparams.put("libid", GlobleData.LIBIRY_ID);
 		Log.i("MyFavorActivity_cqvipid", "" + GlobleData.cqvipid);
-		map.put("vipuserid", GlobleData.cqvipid);
-		map.put("curpage", "" + pagecount);
-		map.put("perpage", "" + perpage);
-		map.put("typeid", "" + typeid);
-		ManagerService.addNewTask(new Task(Task.TASK_GET_FAVOR, map));
+		gparams.put("vipuserid", GlobleData.cqvipid);
+		gparams.put("curpage", "" + pagecount);
+		gparams.put("perpage", "" + perpage);
+		gparams.put("typeid", "" + typeid);
+		// ManagerService.addNewTask(new Task(Task.TASK_GET_FAVOR, map));
+		switch (type) {
+		case GETFIRSTPAGE_SZ:
+			requestVolley(gparams, GlobleData.SERVER_URL
+					+ "/cloud/favoritelistuser.aspx", backlistener_sz,
+					Method.POST);
+			break;
+		case GETFIRSTPAGE_ZK:
+			requestVolley(gparams, GlobleData.SERVER_URL
+					+ "/cloud/favoritelistuser.aspx", backlistener_zk,
+					Method.POST);
+			break;
+		case GETNEXT:
+			requestVolley(gparams, GlobleData.SERVER_URL
+					+ "/cloud/favoritelistuser.aspx", backlistenermore,
+					Method.POST);
+			break;
+		default:
+			break;
+		}
 	}
+
+	private void requestVolley(HashMap<String, String> gparams, String url,
+			Listener<String> listener, int post) {
+		final HashMap<String, String> gparams_t = gparams;
+		StringRequest mys = new StringRequest(post, url, listener, el) {
+			protected Map<String, String> getParams()
+					throws com.android.volley.AuthFailureError {
+				return gparams_t;
+			};
+		};
+		mQueue.add(mys);
+		mQueue.start();
+
+	}
+
+	Listener<String> backlistener_sz = new Listener<String>() {
+		@Override
+		public void onResponse(String response) {
+			// TODO Auto-generated method stub
+			customProgressDialog.dismiss();
+			try {
+				arrayLists_sz = Favorite
+						.formList(Task.TASK_GET_FAVOR, response);
+			} catch (BookException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				onError(2);
+			}
+			if (isdeleted_sz) {
+				arrayList_sz.clear();
+				isdeleted_sz = false;
+			}
+			if (arrayLists_sz != null && !arrayLists_sz.isEmpty()) {
+				if (arrayLists_sz.get(GlobleData.BOOK_SZ_TYPE).isEmpty()) {
+					return;
+				}
+				arrayList_sz.addAll(arrayLists_sz.get(GlobleData.BOOK_SZ_TYPE));
+				adapter_sz.notifyDataSetChanged();
+			}
+		}
+	};
+
+	Listener<String> backlistener_zk = new Listener<String>() {
+		@Override
+		public void onResponse(String response) {
+			// TODO Auto-generated method stub
+			customProgressDialog.dismiss();
+			try {
+				arrayLists_zk = Favorite
+						.formList(Task.TASK_GET_FAVOR, response);
+			} catch (BookException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				onError(2);
+			}
+			if (isdeleted_zk) {
+				arrayList_zk.clear();
+				isdeleted_zk = false;
+			}
+			if (arrayLists_zk != null && !arrayLists_zk.isEmpty()) {
+				if (arrayLists_zk.get(GlobleData.BOOK_ZK_TYPE).isEmpty()) {
+					return;
+				}
+				arrayList_zk.addAll(arrayLists_zk.get(GlobleData.BOOK_ZK_TYPE));
+				adapter_zk.notifyDataSetChanged();
+			}
+		}
+	};
+
+	Listener<String> backlistenermore = new Listener<String>() {
+		@Override
+		public void onResponse(String response) {
+			try {
+				arrayLists_sz = Favorite
+						.formList(Task.TASK_GET_FAVOR, response);
+			} catch (BookException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				onError(2);
+			}
+			if (arrayLists_sz != null && !arrayLists_sz.isEmpty()) {
+				if ((arrayLists_sz.get(GlobleData.BOOK_ZK_TYPE) == null || arrayLists_sz
+						.get(GlobleData.BOOK_ZK_TYPE).isEmpty())
+						&& (arrayLists_sz.get(GlobleData.BOOK_SZ_TYPE) == null || arrayLists_sz
+								.get(GlobleData.BOOK_SZ_TYPE).isEmpty())) {
+					Tool.ShowMessages(context, "没有更多内容可供加载");
+					moreprocess.setVisibility(View.GONE);
+					return;
+				}
+			}
+			if (arrayLists_sz != null && !arrayLists_sz.isEmpty()) {
+				if (arrayLists_sz.get(GlobleData.BOOK_ZK_TYPE).isEmpty()
+						&& arrayLists_sz.get(GlobleData.BOOK_SZ_TYPE).isEmpty()) {
+					return;
+				}
+				arrayList_zk.addAll(arrayLists_sz.get(GlobleData.BOOK_ZK_TYPE));
+				arrayList_sz.addAll(arrayLists_sz.get(GlobleData.BOOK_SZ_TYPE));
+				// mSectionsPagerAdapter.notifyDataSetChanged();
+				adapter_sz.notifyDataSetChanged();
+				adapter_zk.notifyDataSetChanged();
+
+			}
+		}
+	};
+
+	Listener<String> backlistenercancel = new Listener<String>() {
+		@Override
+		public void onResponse(String response) {
+			Result res = null;
+			try {
+				res = new Result(response);
+			} catch (BookException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				onError(6);
+			}
+			if (res != null) {
+				if (res.getSuccess()) {
+					Tool.ShowMessages(context, "取消收藏成功");
+					int temp_pagecount = 0;
+					if (listview_id == GlobleData.BOOK_SZ_TYPE) {
+						isdeleted_sz = true;
+						arrayList_sz.remove(listview_item_position);
+						adapter_sz.notifyDataSetChanged();
+						temp_pagecount = perpage * curpage_sz;
+						getfavorlist(curpage, temp_pagecount, listview_id,
+								GETFIRSTPAGE_SZ);
+					} else if (listview_id == GlobleData.BOOK_ZK_TYPE) {
+						isdeleted_zk = true;
+						arrayList_zk.remove(listview_item_position);
+						adapter_zk.notifyDataSetChanged();
+						temp_pagecount = perpage * curpage_zk;
+						getfavorlist(curpage, temp_pagecount, listview_id,
+								GETFIRSTPAGE_ZK);
+					}
+
+				} else {
+					Tool.ShowMessages(context, "取消收藏失败");
+				}
+			}
+		}
+	};
+
+	ErrorListener el = new ErrorListener() {
+		@Override
+		public void onErrorResponse(VolleyError arg0) {
+			// TODO Auto-generated method stub
+			customProgressDialog.dismiss();
+
+		}
+	};
 
 	/**
 	 * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
@@ -237,13 +412,15 @@ public class MyFavorActivity extends BaseFragmentImageActivity implements
 			int i = getArguments().getInt(ARG_SECTION_NUMBER);
 			if (i == 0) {
 				arrayList_temp = arrayList_sz;
-				adapter_sz = new MyGridViewAdapter(getActivity(), arrayList_sz,mImageFetcher);
+				adapter_sz = new MyGridViewAdapter(getActivity(), arrayList_sz,
+						mImageFetcher);
 				listView.setAdapter(adapter_sz);
 				listView.setTag(GlobleData.BOOK_SZ_TYPE);
 			} else if (i == 1) {
 				listView.setTag(GlobleData.BOOK_ZK_TYPE);
 				arrayList_temp = arrayList_zk;
-				adapter_zk = new MyGridViewAdapter(getActivity(), arrayList_zk,mImageFetcher);
+				adapter_zk = new MyGridViewAdapter(getActivity(), arrayList_zk,
+						mImageFetcher);
 				listView.setAdapter(adapter_zk);
 			}
 
@@ -251,7 +428,9 @@ public class MyFavorActivity extends BaseFragmentImageActivity implements
 			listView.setOnItemLongClickListener(this);
 			return rootView;
 		}
+
 		Favorite favorite;
+
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int positon,
 				long id) {
@@ -267,36 +446,43 @@ public class MyFavorActivity extends BaseFragmentImageActivity implements
 				// 请求网络更多
 				if ((Integer) parent.getTag() == GlobleData.BOOK_SZ_TYPE) {
 					curpage_sz++;
-					getfavorlist(curpage_sz, perpage, GlobleData.BOOK_SZ_TYPE);
+					getfavorlist(curpage_sz, perpage, GlobleData.BOOK_SZ_TYPE,
+							GETNEXT);
 				} else if ((Integer) parent.getTag() == GlobleData.BOOK_ZK_TYPE) {
 					curpage_zk++;
-					getfavorlist(curpage_zk, perpage, GlobleData.BOOK_ZK_TYPE);
+					getfavorlist(curpage_zk, perpage, GlobleData.BOOK_ZK_TYPE,
+							GETNEXT);
 				}
 			} else {
 				if ((Integer) parent.getTag() == GlobleData.BOOK_SZ_TYPE) {
 					favorite = arrayList_sz.get(positon);
-					String lngid=favorite.getLngid();//J228.5/1:4,863174
+					String lngid = favorite.getLngid();// J228.5/1:4,863174
 
 					Book book = new Book("", favorite.getOrgan(),
-							favorite.getTitle(), favorite.getWriter(),
-							lngid, favorite.getYears(),
-							favorite.getPrice(), favorite.getRemark(),favorite.getImgurl());
-					if(book!=null){
-						Log.i("ResultOnSearchActivity",book.toString());
-						Intent _intent = new Intent(context,DetailBookActivity.class);
+							favorite.getTitle(), favorite.getWriter(), lngid,
+							favorite.getYears(), favorite.getPrice(),
+							favorite.getRemark(), favorite.getImgurl());
+					if (book != null) {
+						Log.i("ResultOnSearchActivity", book.toString());
+						Intent _intent = new Intent(context,
+								DetailBookActivity.class);
 						Bundle bundle = new Bundle();
 						bundle.putSerializable("book", book);
 						_intent.putExtra("detaiinfo", bundle);
-						_intent.putExtra("ismyfavor",true);
+						_intent.putExtra("ismyfavor", true);
 						startActivity(_intent);
 					}
-				}else if((Integer) parent.getTag() == GlobleData.BOOK_ZK_TYPE){
+				} else if ((Integer) parent.getTag() == GlobleData.BOOK_ZK_TYPE) {
 					favorite = arrayList_zk.get(positon);
-					EBook book = new EBook(favorite.getLngid(), favorite.getYears(), favorite.getNum(), favorite.getTitle(),
-							favorite.getOrgan(), favorite.getRemark(), favorite.getWriter(), favorite.getPagecount(), 0, favorite.getImgurl());
-					if(book!=null){
-						Log.i("ResultOnSearchActivity",book.toString());
-						Intent _intent = new Intent(context,EbookDetailActivity.class);
+					EBook book = new EBook(favorite.getLngid(),
+							favorite.getYears(), favorite.getNum(),
+							favorite.getTitle(), favorite.getOrgan(),
+							favorite.getRemark(), favorite.getWriter(),
+							favorite.getPagecount(), 0, favorite.getImgurl());
+					if (book != null) {
+						Log.i("ResultOnSearchActivity", book.toString());
+						Intent _intent = new Intent(context,
+								EbookDetailActivity.class);
 						Bundle bundle = new Bundle();
 						bundle.putSerializable("book", book);
 						_intent.putExtra("detaiinfo", bundle);
@@ -306,7 +492,7 @@ public class MyFavorActivity extends BaseFragmentImageActivity implements
 
 			}
 		}
-		
+
 		@Override
 		public boolean onItemLongClick(AdapterView<?> parent, View view,
 				int position, long id) {
@@ -314,11 +500,6 @@ public class MyFavorActivity extends BaseFragmentImageActivity implements
 				int listviewid = (Integer) parent.getTag();
 				listview_id = listviewid;
 				listview_item_position = position;
-				if (listviewid == GlobleData.BOOK_SZ_TYPE) {
-					type = GlobleData.BOOK_SZ_TYPE;
-				} else if (listviewid == GlobleData.BOOK_ZK_TYPE) {
-					type = GlobleData.BOOK_ZK_TYPE;
-				}
 				del_favorite = arrayList_temp.get(position);
 
 				senddel();
@@ -349,12 +530,15 @@ public class MyFavorActivity extends BaseFragmentImageActivity implements
 		private Context myContext;
 		private List<Favorite> arrayList;
 		private ImageFetcher fetch;
+
 		public MyGridViewAdapter(Context context, List<Favorite> list) {
 			this.myContext = context;
 			this.arrayList = list;
 			Log.i("MyFavorActivity", "MyGridViewAdapter");
 		}
-		public MyGridViewAdapter(Context context, List<Favorite> list,ImageFetcher fetch) {
+
+		public MyGridViewAdapter(Context context, List<Favorite> list,
+				ImageFetcher fetch) {
 			this.myContext = context;
 			this.arrayList = list;
 			this.fetch = fetch;
@@ -462,18 +646,18 @@ public class MyFavorActivity extends BaseFragmentImageActivity implements
 			holder.publisher.setText(publish + favorite.getOrgan());
 			holder.publishyear.setText(time + favorite.getYears());
 			holder.isbn.setText("ISBN:" + favorite.getLngid());
-			//图片
-			if(!TextUtils.isEmpty(favorite.getImgurl())){
-			fetch.loadImage(favorite.getImgurl(),holder.img);
-			}else{
-				holder.img.setImageDrawable(getResources().getDrawable(R.drawable.defaut_book));
+			// 图片
+			if (!TextUtils.isEmpty(favorite.getImgurl())) {
+				fetch.loadImage(favorite.getImgurl(), holder.img);
+			} else {
+				holder.img.setImageDrawable(getResources().getDrawable(
+						R.drawable.defaut_book));
 			}
-			
+
 			return convertView;
 		}
 	}
 
-	@Override
 	public void init() {
 		mPagerTitleStrip = (PagerTitleStrip) findViewById(R.id.pager_title_strip);
 		mPagerTitleStrip.setTextSpacing(-50);
@@ -491,67 +675,12 @@ public class MyFavorActivity extends BaseFragmentImageActivity implements
 		});
 
 		customProgressDialog = CustomProgressDialog.createDialog(this);
+		mQueue = Volley.newRequestQueue(this);
 		customProgressDialog.show();
 	}
 
 	private boolean isdeleted_sz = false;
 	private boolean isdeleted_zk = false;
-
-	@Override
-	public void refresh(Object... obj) {
-		customProgressDialog.dismiss();
-		Log.i("MyFavorActivity_refresh", "refresh");
-		int temp = (Integer) obj[0];
-		if (temp == FAVOR) {
-			arrayLists = (Map<Integer, List<Favorite>>) obj[1];
-			if (isdeleted_sz) {
-				arrayList_sz.clear();
-				isdeleted_sz = false;
-			} else if (isdeleted_zk) {
-				arrayList_zk.clear();
-				isdeleted_zk = false;
-			} else if ((curpage_sz > 1 || curpage_zk > 1) && arrayLists != null
-					&& !arrayLists.isEmpty()) {
-				if ((arrayLists.get(GlobleData.BOOK_ZK_TYPE) == null || arrayLists
-						.get(GlobleData.BOOK_ZK_TYPE).isEmpty())
-						&& (arrayLists.get(GlobleData.BOOK_SZ_TYPE) == null || arrayLists
-								.get(GlobleData.BOOK_SZ_TYPE).isEmpty())) {
-					Tool.ShowMessages(context, "没有更多内容可供加载");
-					moreprocess.setVisibility(View.GONE);
-					return;
-				}
-			}
-			if (arrayLists != null && !arrayLists.isEmpty()) {
-				if(arrayLists.get(GlobleData.BOOK_ZK_TYPE).isEmpty()&&arrayLists.get(GlobleData.BOOK_SZ_TYPE).isEmpty()){
-					return;
-				}
-				arrayList_zk.addAll(arrayLists.get(GlobleData.BOOK_ZK_TYPE));
-				arrayList_sz.addAll(arrayLists.get(GlobleData.BOOK_SZ_TYPE));
-				//mSectionsPagerAdapter.notifyDataSetChanged();
-				adapter_sz.notifyDataSetChanged();
-				adapter_zk.notifyDataSetChanged();
-			}
-		} else if (temp == CANCELFAVOR) {
-			Result res = (Result) obj[1];
-			if (res.getSuccess()) {
-				Tool.ShowMessages(context, "取消收藏成功");
-				int temp_pagecount = 0;
-				if (listview_id == GlobleData.BOOK_SZ_TYPE) {
-					isdeleted_sz = true;
-					arrayList_sz.remove(listview_item_position);
-					temp_pagecount = perpage * curpage_sz;
-				} else if (listview_id == GlobleData.BOOK_ZK_TYPE) {
-					isdeleted_zk = true;
-					arrayList_zk.remove(listview_item_position);
-					temp_pagecount = perpage * curpage_zk;
-				}
-				getfavorlist(curpage, temp_pagecount, listview_id);
-			} else {
-				Tool.ShowMessages(context, "取消收藏失败");
-			}
-		}
-	
-	}
 
 	public void onError(int a) {
 		if (customProgressDialog != null && customProgressDialog.isShowing()) {
