@@ -1,6 +1,8 @@
 package com.cqvip.moblelib.activity;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,6 +20,11 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.android.volley.VolleyError;
+import com.android.volley.Request.Method;
+import com.android.volley.Response.ErrorListener;
+import com.android.volley.Response.Listener;
+import com.android.volley.toolbox.StringRequest;
 import com.cqvip.dao.DaoException;
 import com.cqvip.moblelib.R;
 import com.cqvip.moblelib.base.IBookManagerActivity;
@@ -26,12 +33,13 @@ import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.db.MUserDao;
 import com.cqvip.moblelib.entity.MUser;
+import com.cqvip.moblelib.model.BookLoc;
 import com.cqvip.moblelib.model.Result;
 import com.cqvip.moblelib.model.User;
 import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.utils.Tool;
 
-public class ActivityDlg extends BaseActivity implements IBookManagerActivity {
+public class ActivityDlg extends BaseActivity  {
 
 	private RelativeLayout login_layout;
 	private LinearLayout msg_box_layout;
@@ -42,6 +50,7 @@ public class ActivityDlg extends BaseActivity implements IBookManagerActivity {
 	private MUserDao dao;
 	private TextView msg_box_txt;
 	private Context context;
+	private Map<String, String> gparams;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -93,17 +102,17 @@ public class ActivityDlg extends BaseActivity implements IBookManagerActivity {
 				if(!validate(log_in_passwords.getText().toString().trim(),getResources().getString(R.string.need_pwd))){
 					return;
 				}
-				
-				HashMap map = new HashMap();
 				name = log_in_username.getText().toString().trim();
 				pwd = log_in_passwords.getText().toString();
-				map.put("id", name);
-				map.put("pwd", pwd);
-				Task tsHome = new Task(Task.TASK_LOGIN, map);
-				ManagerService.allActivity.add(ActivityDlg.this);
-				ManagerService.addNewTask(tsHome);
-
+				
 				customProgressDialog.show();
+				gparams=new HashMap<String, String>();			
+				gparams.put("username", name);
+				gparams.put("password", pwd);
+				gparams.put("libid", "1");
+				requestVolley(GlobleData.SERVER_URL + "/library/user/login.aspx",
+						back_ls, Method.POST);
+			
 //				login_layout.setVisibility(View.GONE);
 //				login_status_ll.setVisibility(View.VISIBLE);
 			}
@@ -125,7 +134,6 @@ public class ActivityDlg extends BaseActivity implements IBookManagerActivity {
 				winexit(1);
 			}
 		});
-		init();
 	}
 
 	private void showmsg(){
@@ -158,23 +166,23 @@ public class ActivityDlg extends BaseActivity implements IBookManagerActivity {
 				 
 	}
 	
-	@Override
-	public void init() {
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-				android.R.layout.simple_dropdown_item_1line, new String[] {
-						"0441200001098", "0440061012345" });
-		log_in_username.setThreshold(0);
-		log_in_username.setAdapter(adapter);
-		// 初始化 service
-		// 检查网络是否可用
-		if (Tool.checkNetWork(this)) {
-			if (!ManagerService.isrun) {
-				ManagerService.isrun = true;
-				Intent it = new Intent(this, ManagerService.class);
-				this.startService(it);
-			}
-		}
-	}
+//	@Override
+//	public void init() {
+//		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+//				android.R.layout.simple_dropdown_item_1line, new String[] {
+//						"0441200001098", "0440061012345" });
+//		log_in_username.setThreshold(0);
+//		log_in_username.setAdapter(adapter);
+//		// 初始化 service
+//		// 检查网络是否可用
+//		if (Tool.checkNetWork(this)) {
+//			if (!ManagerService.isrun) {
+//				ManagerService.isrun = true;
+//				Intent it = new Intent(this, ManagerService.class);
+//				this.startService(it);
+//			}
+//		}
+//	}
 	
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -193,46 +201,78 @@ public class ActivityDlg extends BaseActivity implements IBookManagerActivity {
 		finish();
 	}
 	
-	@Override
-	public void refresh(Object... obj) {
-		// 取消进度条
-		customProgressDialog.dismiss();
-		Result res = (Result) obj[0];
-		if (res.getSuccess()) {
-			GlobleData.islogin = true;
+	private Listener<String> back_ls = new Listener<String>() {
 
-			User user = (User) obj[0];
-			GlobleData.userid = user.getCardno();
-			GlobleData.readerid = user.getReaderno();
-			GlobleData.cqvipid = user.getVipuserid()+"";
-			MUser muser = new MUser();
-			muser.setCardno(user.getCardno());
-			muser.setReaderno(user.getReaderno());
-			muser.setPwd(pwd);
-			muser.setName(user.getName());
-			muser.setCqvipid(user.getVipuserid()+"");
-			if (dao == null) {
-				dao = new MUserDao(this);
-			}
+		@Override
+		public void onResponse(String response) {
+			// TODO Auto-generated method stub
+			customProgressDialog.dismiss();
 			try {
-				// dao.delInfo(muser.getCardno());
-				dao.saveInfo(muser);
-				Log.i("database", "存储成功");
-			} catch (DaoException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				Result res = new Result(response);
+				if (res.getSuccess()) {
+					GlobleData.islogin = true;
+
+					User user = new User(response);
+					GlobleData.userid = user.getCardno();
+					GlobleData.readerid = user.getReaderno();
+					GlobleData.cqvipid = user.getVipuserid()+"";
+					MUser muser = new MUser();
+					muser.setCardno(user.getCardno());
+					muser.setReaderno(user.getReaderno());
+					muser.setPwd(pwd);
+					muser.setName(user.getName());
+					muser.setCqvipid(user.getVipuserid()+"");
+					if (dao == null) {
+						dao = new MUserDao(ActivityDlg.this);
+					}
+					try {
+						// dao.delInfo(muser.getCardno());
+						dao.saveInfo(muser);
+						Log.i("database", "存储成功");
+					} catch (DaoException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					// if (dialog.isShowing()) {
+					// dialog.dismiss();
+					// }
+					// 提示登陆成功
+//					Tool.ShowMessages(this, "登陆成功");
+					winexit(0);
+				} else {
+					GlobleData.islogin = false;
+					// dialog.dismiss();
+					// 提示登陆失败
+					Tool.ShowMessages(ActivityDlg.this, res.getMessage());
+				}
+			} catch (Exception e) {
+				// TODO: handle exception
+				return;
 			}
-			// if (dialog.isShowing()) {
-			// dialog.dismiss();
-			// }
-			// 提示登陆成功
-//			Tool.ShowMessages(this, "登陆成功");
-			winexit(0);
-		} else {
-			GlobleData.islogin = false;
-			// dialog.dismiss();
-			// 提示登陆失败
-			Tool.ShowMessages(this, res.getMessage());
+		}
+	};
+
+	ErrorListener el = new ErrorListener() {
+		@Override
+		public void onErrorResponse(VolleyError arg0) {
+			// TODO Auto-generated method stub
+			customProgressDialog.dismiss();
+		}
+	};
+
+	private void requestVolley(String addr, Listener<String> bl, int method) {
+		try {
+			StringRequest mys = new StringRequest(method, addr, bl, el) {
+
+				protected Map<String, String> getParams()
+						throws com.android.volley.AuthFailureError {
+					return gparams;
+				};
+			};
+			mQueue.add(mys);
+			mQueue.start();
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
 	}
 	

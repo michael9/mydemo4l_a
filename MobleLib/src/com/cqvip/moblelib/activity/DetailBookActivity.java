@@ -7,6 +7,7 @@ import java.util.Map;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Paint.Join;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -34,13 +35,11 @@ import com.cqvip.moblelib.adapter.BorrowBookAdapter;
 import com.cqvip.moblelib.base.IBookManagerActivity;
 import com.cqvip.moblelib.biz.ManagerService;
 import com.cqvip.moblelib.biz.Task;
-import com.cqvip.moblelib.constant.Constant;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.Book;
 import com.cqvip.moblelib.model.BookLoc;
 import com.cqvip.moblelib.model.BorrowBook;
 import com.cqvip.moblelib.model.Result;
-import com.cqvip.moblelib.net.BookException;
 import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.utils.BitmapCache;
 import com.cqvip.utils.Tool;
@@ -75,10 +74,9 @@ public class DetailBookActivity extends BaseActivity {
 		textView9 = (TextView) findViewById(R.id.textView9);
 		textView10 = (TextView) findViewById(R.id.textView10);
 		textView11 = (TextView) findViewById(R.id.textView11);
-
+		
 		ImageLoader mImageLoader = new ImageLoader(mQueue, new BitmapCache());
-		ImageListener listener = ImageLoader.getImageListener(imgview,
-				R.drawable.defaut_book, R.drawable.defaut_book);
+		ImageListener listener = ImageLoader.getImageListener(imgview, R.drawable.defaut_book, R.drawable.defaut_book);
 		mImageLoader.get(dBook.getCover_path(), listener);
 
 		imgview.setOnClickListener(new View.OnClickListener() {
@@ -151,9 +149,9 @@ public class DetailBookActivity extends BaseActivity {
 					@Override
 					public void onClick(View v) {
 						if (GlobleData.islogin) {
-							Tool.bookfavorite(DetailBookActivity.this, dBook,
-									back_collect);
+							gparams=Tool.bookfavorite(gparams, dBook);
 							customProgressDialog.show();
+							requestVolley(GlobleData.SERVER_URL+"/cloud/favorite.aspx",bookfavorite_ls,Method.POST);
 						} else {
 							// 只是登陆而已
 							showLoginDialog(4);
@@ -200,7 +198,24 @@ public class DetailBookActivity extends BaseActivity {
 		intent.putExtra("ACTIONID", id);
 		startActivityForResult(intent, id);
 	}
+	
 
+	private Listener<String> bookfavorite_ls = new Listener<String>() {
+
+		@Override
+		public void onResponse(String response) {
+			// TODO Auto-generated method stub
+			customProgressDialog.dismiss();
+			try {
+				Result r=new Result(response);
+				Tool.ShowMessagel(DetailBookActivity.this, r.getMessage());
+			} catch (Exception e) {
+				// TODO: handle exception
+				return;
+			}
+		}
+	};
+	
 	private Listener<String> back_ls = new Listener<String>() {
 
 		@Override
@@ -217,30 +232,6 @@ public class DetailBookActivity extends BaseActivity {
 		}
 	};
 
-	private Listener<String> back_collect = new Listener<String>() {
-
-		@Override
-		public void onResponse(String response) {
-			// TODO Auto-generated method stub
-			customProgressDialog.dismiss();
-			Result res = null;
-			try {
-				res = new Result(response);
-			} catch (BookException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				onError(2);
-			}
-			if (res.getSuccess()) {
-				Tool.ShowMessages(context,
-						getResources().getString(R.string.favorsucess));
-			} else {
-				Tool.ShowMessages(context,
-						getResources().getString(R.string.already_favoriate));
-			}
-		}
-	};
-
 	ErrorListener el = new ErrorListener() {
 		@Override
 		public void onErrorResponse(VolleyError arg0) {
@@ -249,7 +240,7 @@ public class DetailBookActivity extends BaseActivity {
 		}
 	};
 
-	public void requestVolley(String addr, Listener<String> bl, int method) {
+	private void requestVolley(String addr, Listener<String> bl, int method) {
 		try {
 			StringRequest mys = new StringRequest(method, addr, bl, el) {
 
