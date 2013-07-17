@@ -40,7 +40,6 @@ public class SuggestedReadingActivity extends BaseActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature( Window.FEATURE_NO_TITLE );
 		setContentView(R.layout.activity_suggested_reading);
 		context = this;
 		View v = findViewById(R.id.suggest_title);

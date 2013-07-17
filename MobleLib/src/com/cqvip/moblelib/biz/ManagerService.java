@@ -311,18 +311,18 @@ public class ManagerService extends Service implements Runnable {
 				comments.refresh(msg.what,msg.obj);
 				break;	
 			
-			case Task.TASK_SUGGEST_NEWBOOK:	
-			case Task.TASK_SUGGEST_NEWBOOK_MORE:
-			case Task.TASK_SUGGEST_HOTBOOK:
-			case Task.TASK_SUGGEST_HOTBOOK_MORE:
-				AdvancedBookActivity adbook= (AdvancedBookActivity) ManagerService.getActivityByName("AdvancedBookActivity");
-				if (msg.arg1 != 0) {
-					adbook.onError(2);
-					msg.arg1 = 0;
-					break;
-				}
-				adbook.refresh(msg.what,msg.obj);
-				break;
+//			case Task.TASK_SUGGEST_NEWBOOK:	
+//			case Task.TASK_SUGGEST_NEWBOOK_MORE:
+//			case Task.TASK_SUGGEST_HOTBOOK:
+//			case Task.TASK_SUGGEST_HOTBOOK_MORE:
+//				AdvancedBookActivity adbook= (AdvancedBookActivity) ManagerService.getActivityByName("AdvancedBookActivity");
+//				if (msg.arg1 != 0) {
+//					adbook.onError(2);
+//					msg.arg1 = 0;
+//					break;
+//				}
+//				adbook.refresh(msg.what,msg.obj);
+//				break;
 			case Task.TASK_SUGGEST_DETAIL:
 				DetailAdvancedBookActivity adbookDetail= (DetailAdvancedBookActivity) ManagerService.getActivityByName("DetailAdvancedBookActivity");
 				if (msg.arg1 != 0) {
@@ -332,20 +332,20 @@ public class ManagerService extends Service implements Runnable {
 				}
 				adbookDetail.refresh(msg.obj);
 				break;
-			case Task.TASK_ANNOUNCE_NEWS:	
-			case Task.TASK_ANNOUNCE_NEWS_MORE:
-			case Task.TASK_ANNOUNCE_WELFARE:
-			case Task.TASK_ANNOUNCE_WELFARE_MORE:
-			case Task.TASK_E_CAUTION:
-			case Task.TASK_E_CAUTION_MORE:
-				AnnouceListActivity annouce = (AnnouceListActivity) ManagerService.getActivityByName("AnnouceListActivity");
-				if (msg.arg1 != 0) {
-					annouce.onError(2);
-					msg.arg1 = 0;
-					break;
-				}
-				annouce.refresh(msg.what,msg.obj);
-				break;
+//			case Task.TASK_ANNOUNCE_NEWS:	
+//			case Task.TASK_ANNOUNCE_NEWS_MORE:
+//			case Task.TASK_ANNOUNCE_WELFARE:
+//			case Task.TASK_ANNOUNCE_WELFARE_MORE:
+//			case Task.TASK_E_CAUTION:
+//			case Task.TASK_E_CAUTION_MORE:
+//				AnnouceListActivity annouce = (AnnouceListActivity) ManagerService.getActivityByName("AnnouceListActivity");
+//				if (msg.arg1 != 0) {
+//					annouce.onError(2);
+//					msg.arg1 = 0;
+//					break;
+//				}
+//				annouce.refresh(msg.what,msg.obj);
+//				break;
 			case Task.TASK_ANNOUNCE_DETAIL:
 				
 				break;	
