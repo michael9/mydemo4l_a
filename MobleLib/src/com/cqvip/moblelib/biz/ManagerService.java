@@ -298,7 +298,7 @@ public class ManagerService extends Service implements Runnable {
 					msg.arg1 = 0;
 					break;
 				}
-				groupOfReadersActivity.refresh(GroupOfReadersActivity.COMMENTLIST,msg.obj);
+			//	groupOfReadersActivity.refresh(GroupOfReadersActivity.COMMENTLIST,msg.obj);
 				break;	
 			case Task.TASK_COMMENT_LIST:
 			case Task.TASK_COMMENT_LIST_MORE:
@@ -308,7 +308,7 @@ public class ManagerService extends Service implements Runnable {
 					msg.arg1 = 0;
 					break;
 				}
-				comments.refresh(msg.what,msg.obj);
+				//comments.refresh(msg.what,msg.obj);
 				break;	
 			
 //			case Task.TASK_SUGGEST_NEWBOOK:	

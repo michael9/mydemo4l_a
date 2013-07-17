@@ -77,10 +77,10 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 	PagerTitleStrip mPagerTitleStrip;
 	Context context;
 	protected CustomProgressDialog customProgressDialog;
-	protected RequestQueue mQueue;
 	Map<Integer, List<Favorite>> arrayLists_sz, arrayLists_zk;
 	ArrayList<Favorite> arrayList_zk = new ArrayList<Favorite>();
 	ArrayList<Favorite> arrayList_sz = new ArrayList<Favorite>();
+	private int listviewpagetag=GlobleData.BOOK_SZ_TYPE;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -261,11 +261,16 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 						&& arrayLists_sz.get(GlobleData.BOOK_SZ_TYPE).isEmpty()) {
 					return;
 				}
-				arrayList_zk.addAll(arrayLists_sz.get(GlobleData.BOOK_ZK_TYPE));
+				if(listviewpagetag==GlobleData.BOOK_SZ_TYPE){
+					curpage_sz++;
 				arrayList_sz.addAll(arrayLists_sz.get(GlobleData.BOOK_SZ_TYPE));
 				// mSectionsPagerAdapter.notifyDataSetChanged();
 				adapter_sz.notifyDataSetChanged();
-				adapter_zk.notifyDataSetChanged();
+				}else{
+					curpage_zk++;
+					arrayList_zk.addAll(arrayLists_sz.get(GlobleData.BOOK_ZK_TYPE));
+					adapter_zk.notifyDataSetChanged();
+				}
 
 			}
 		}
@@ -314,7 +319,8 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 		public void onErrorResponse(VolleyError arg0) {
 			// TODO Auto-generated method stub
 			customProgressDialog.dismiss();
-
+			arg0.printStackTrace();
+			onError(2);
 		}
 	};
 
@@ -442,15 +448,14 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 				// 进度条
 				moreprocess = view.findViewById(R.id.footer_progress);
 				moreprocess.setVisibility(View.VISIBLE);
-				Log.i("parent.getTag()", "" + parent.getTag());
+				//Log.i("parent.getTag()", "" + parent.getTag());
+				listviewpagetag=(Integer) parent.getTag();
 				// 请求网络更多
-				if ((Integer) parent.getTag() == GlobleData.BOOK_SZ_TYPE) {
-					curpage_sz++;
-					getfavorlist(curpage_sz, perpage, GlobleData.BOOK_SZ_TYPE,
+				if (listviewpagetag == GlobleData.BOOK_SZ_TYPE) {
+					getfavorlist(curpage_sz+1, perpage, GlobleData.BOOK_SZ_TYPE,
 							GETNEXT);
-				} else if ((Integer) parent.getTag() == GlobleData.BOOK_ZK_TYPE) {
-					curpage_zk++;
-					getfavorlist(curpage_zk, perpage, GlobleData.BOOK_ZK_TYPE,
+				} else if (listviewpagetag == GlobleData.BOOK_ZK_TYPE) {
+					getfavorlist(curpage_zk+1, perpage, GlobleData.BOOK_ZK_TYPE,
 							GETNEXT);
 				}
 			} else {
@@ -675,7 +680,6 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 		});
 
 		customProgressDialog = CustomProgressDialog.createDialog(this);
-		mQueue = Volley.newRequestQueue(this);
 		customProgressDialog.show();
 	}
 
