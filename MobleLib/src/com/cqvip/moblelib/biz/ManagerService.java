@@ -226,14 +226,14 @@ public class ManagerService extends Service implements Runnable {
 				ebooksDtail.refresh(msg.obj);
 				break;	
 				//下载电子书
-			case Task.TASK_EBOOK_DOWN:
-				IBookManagerActivity down = (IBookManagerActivity) ManagerService.getActivityByName("EbookDetailActivity");
-				if (msg.arg1 != 0) {
-					doException(2,msg, "EbookDetailActivity");
-					break;
-				}
-				down.refresh(EbookDetailActivity.GET_DETAIL,msg.obj);
-				break;	
+//			case Task.TASK_EBOOK_DOWN:
+//				IBookManagerActivity down = (IBookManagerActivity) ManagerService.getActivityByName("EbookDetailActivity");
+//				if (msg.arg1 != 0) {
+//					doException(2,msg, "EbookDetailActivity");
+//					break;
+//				}
+//				down.refresh(EbookDetailActivity.GET_DETAIL,msg.obj);
+//				break;	
 				//获取服务器apk版本号
 			case Task.TASK_REFRESH:
 				IBookManagerActivity refresh= (IBookManagerActivity) ManagerService.getActivityByName("MainMenuActivity");
@@ -273,14 +273,14 @@ public class ManagerService extends Service implements Runnable {
 				//favor_cancel.refresh(MyFavorActivity.CANCELFAVOR,msg.obj);
 				break;	
 				//电子图书收藏22
-			case Task.TASK_EBOOK_FAVOR:
-				IBookManagerActivity favor_ebook = (IBookManagerActivity) ManagerService.getActivityByName("EbookDetailActivity");
-				if (msg.arg1 != 0) {
-					doException(5,msg, "EbookDetailActivity");
-					break;
-				}
-				favor_ebook.refresh(EbookDetailActivity.ADD_FORVORITE,msg.obj);
-				break;	
+//			case Task.TASK_EBOOK_FAVOR:
+//				IBookManagerActivity favor_ebook = (IBookManagerActivity) ManagerService.getActivityByName("EbookDetailActivity");
+//				if (msg.arg1 != 0) {
+//					doException(5,msg, "EbookDetailActivity");
+//					break;
+//				}
+//				favor_ebook.refresh(EbookDetailActivity.ADD_FORVORITE,msg.obj);
+//				break;	
 				//添加评论23
 			case Task.TASK_ADD_COMMENT:
 				IBookManagerActivity add_comment = (IBookManagerActivity) ManagerService.getActivityByName("CommentActivity");

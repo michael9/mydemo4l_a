@@ -1,6 +1,8 @@
 package com.cqvip.moblelib.activity;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import android.app.Activity;
 import android.content.Context;
@@ -20,27 +22,33 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.android.volley.RetryPolicy;
+import com.android.volley.VolleyError;
+import com.android.volley.Request.Method;
+import com.android.volley.Response.ErrorListener;
+import com.android.volley.Response.Listener;
+import com.android.volley.toolbox.StringRequest;
 import com.cqvip.moblelib.R;
+import com.cqvip.moblelib.adapter.EbookAdapter;
 import com.cqvip.moblelib.adapter.ReaderInfoAdapter;
 import com.cqvip.moblelib.base.IBookManagerActivity;
 import com.cqvip.moblelib.biz.ManagerService;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
+import com.cqvip.moblelib.model.EBook;
 import com.cqvip.moblelib.model.Reader;
 import com.cqvip.moblelib.model.Result;
 import com.cqvip.moblelib.utils.Rotate3dAnimation;
 import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.utils.Tool;
 
-public class ReaderinfoActivity extends BaseActivity implements
-		IBookManagerActivity {
+public class ReaderinfoActivity extends BaseActivity {
 
 	private Context context;
 	private ListView mList;
 	private ViewGroup mContainer;
 	private RelativeLayout readerinfo_f_lay, readerinfo_b_lay;
-	
-	private  CustomProgressDialog customprogressdlg;
+	private Map<String, String> gparams;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -58,9 +66,7 @@ public class ReaderinfoActivity extends BaseActivity implements
 				// R.anim.slide_right_out);
 			}
 		});
-
-		customprogressdlg=CustomProgressDialog.createDialog(ReaderinfoActivity.this);
-		init();
+		getuser();
 		mList = (ListView) findViewById(android.R.id.list);
 		mContainer = (ViewGroup) findViewById(R.id.container);
 
@@ -193,33 +199,63 @@ public class ReaderinfoActivity extends BaseActivity implements
 	}
 
 	// 获取读者信息
-	@Override
-	public void init() {
+	private void getuser() {
 		if (GlobleData.userid != null) {
-			customprogressdlg.show();
-			ManagerService.allActivity.add(this);
-			HashMap map = new HashMap();
-			map.put("userid", GlobleData.userid);
-			Task tsHome;
-			tsHome = new Task(Task.TASK_GET_READERINFO, map);
-			ManagerService.addNewTask(tsHome);
+			customProgressDialog.show();
+			gparams = new HashMap<String, String>();
+			gparams.put("userid", GlobleData.userid);
+			requestVolley(GlobleData.SERVER_URL
+					+ "/library/user/readerinfo.aspx", backlistener,
+					Method.POST);
 		}
 	}
 
-	private String[] values;
-	private final String[] attrs = { "姓名：", "注册日期：", "证号：", "启用日期：", "终止日期：",
-			"证状态：", "电话：", "地址：" };
+	Listener<String> backlistener = new Listener<String>() {
+		@Override
+		public void onResponse(String response) {
+			// TODO Auto-generated method stub
+			customProgressDialog.dismiss();
+			try {
+				Reader reader = Reader.formReaderInfo(response);
+				String[] values = { reader.getName(), reader.getRegdate(),
+						reader.getUsername(), reader.getCardbegdate(),
+						reader.getCardenddate(), reader.getStatus(),
+						reader.getPhone(), reader.getAddress() };
+				String[] attrs = { "姓名：", "注册日期：", "证号：", "启用日期：", "终止日期：",
+						"证状态：", "电话：", "地址：" };
+				mList.setAdapter(new ReaderInfoAdapter(ReaderinfoActivity.this,
+						attrs, values));
 
-	@Override
-	public void refresh(Object... obj) {
-		customprogressdlg.dismiss();
-		Reader reader = (Reader) obj[0];
-		String[] values = { reader.getName(), reader.getRegdate(),
-				reader.getUsername(), reader.getCardbegdate(),
-				reader.getCardenddate(), reader.getStatus(), reader.getPhone(),
-				reader.getAddress() };
-		this.values = values;
-		mList.setAdapter(new ReaderInfoAdapter(this, attrs, values));
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+
+		}
+	};
+
+	ErrorListener el = new ErrorListener() {
+		@Override
+		public void onErrorResponse(VolleyError arg0) {
+			// TODO Auto-generated method stub
+			customProgressDialog.dismiss();
+
+		}
+	};
+
+	private void requestVolley(String addr, Listener<String> bl, int method) {
+		try {
+			StringRequest mys = new StringRequest(method, addr, bl, el) {
+
+				protected Map<String, String> getParams()
+						throws com.android.volley.AuthFailureError {
+					return gparams;
+				};
+			};
+			mQueue.add(mys);
+			mQueue.start();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 
 }

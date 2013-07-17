@@ -2,6 +2,7 @@ package com.cqvip.moblelib.activity;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import android.content.Context;
 import android.content.Intent;
@@ -19,20 +20,27 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.android.volley.VolleyError;
+import com.android.volley.Request.Method;
+import com.android.volley.Response.ErrorListener;
+import com.android.volley.Response.Listener;
+import com.android.volley.toolbox.StringRequest;
 import com.cqvip.mobelib.imgutils.ImageCache.ImageCacheParams;
 import com.cqvip.mobelib.imgutils.ImageFetcher;
 import com.cqvip.moblelib.R;
+import com.cqvip.moblelib.adapter.BookAdapter;
 import com.cqvip.moblelib.adapter.EbookAdapter;
 import com.cqvip.moblelib.base.IBookManagerActivity;
 import com.cqvip.moblelib.biz.ManagerService;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
+import com.cqvip.moblelib.model.Book;
 import com.cqvip.moblelib.model.EBook;
 import com.cqvip.moblelib.model.Result;
 import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.utils.Tool;
 
-public class EBookSearchActivity extends BaseActivity implements IBookManagerActivity,OnItemClickListener {
+public class EBookSearchActivity extends BaseActivity implements OnItemClickListener {
 	
 	public static final int GETFIRSTPAGE = 1;
 	public static final int GETNEXTPAGE = 2;
@@ -48,6 +56,7 @@ public class EBookSearchActivity extends BaseActivity implements IBookManagerAct
 	private RelativeLayout noResult_rl;
 	private View title_bar;
 	private ImageFetcher mImageFetcher;
+	private Map<String, String> gparams;
 	public static HashMap<String,Boolean> favors = new HashMap<String, Boolean>();//保持收藏状态，更新界面
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +67,6 @@ public class EBookSearchActivity extends BaseActivity implements IBookManagerAct
 		edit = (EditText)findViewById(R.id.search_et);
 		listview = (ListView)findViewById(R.id.search_res_lv);
 		listview.setOnItemClickListener((OnItemClickListener)this);
-		ManagerService.allActivity.add(this);
 		customProgressDialog=CustomProgressDialog.createDialog(this);
 		noResult_rl = (RelativeLayout) findViewById(R.id.noresult_rl);
 		//内存占用整个app1/8
@@ -131,6 +139,74 @@ public class EBookSearchActivity extends BaseActivity implements IBookManagerAct
 		}
 	}
 	
+	Listener<String> backlistener = new Listener<String>() {
+		@Override
+		public void onResponse(String response) {
+			// TODO Auto-generated method stub
+			customProgressDialog.dismiss();
+			try {
+				// JSONObject mj=new JSONObject(response);
+				List<EBook> lists = EBook.formList(response);
+				if (lists != null && !lists.isEmpty()) {
+					listview.setVisibility(View.VISIBLE);
+					noResult_rl.setVisibility(View.GONE);
+					adapter = new EbookAdapter(context, lists, mImageFetcher);
+					listview.setAdapter(adapter);
+				} else {
+					listview.setVisibility(View.GONE);
+					noResult_rl.setVisibility(View.VISIBLE);
+				}
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+
+		}
+	};
+
+	Listener<String> backlistenermore = new Listener<String>() {
+		@Override
+		public void onResponse(String response) {
+			// TODO Auto-generated method stub
+			customProgressDialog.dismiss();
+//			moreprocess.setVisibility(View.GONE);
+			try {
+				// JSONObject mj=new JSONObject(response);
+				List<EBook> lists = EBook.formList(response);
+				if (lists != null && !lists.isEmpty()) {
+					adapter.addMoreData(lists);
+				} else {
+					Tool.ShowMessages(context, "没有更多内容可供加载");
+				}
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+
+		}
+	};
+	
+	ErrorListener el = new ErrorListener() {
+		@Override
+		public void onErrorResponse(VolleyError arg0) {
+			// TODO Auto-generated method stub
+			customProgressDialog.dismiss();
+
+		}
+	};
+	
+	private void requestVolley(String addr, Listener<String> bl, int method) {
+		try {
+			StringRequest mys = new StringRequest(method, addr, bl, el) {
+				protected Map<String, String> getParams()
+						throws com.android.volley.AuthFailureError {
+					return gparams;
+				};
+			};
+			mQueue.add(mys);
+			mQueue.start();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
 	/**
 	 * 请求网络，获取数据
 	 * @param key
@@ -139,24 +215,27 @@ public class EBookSearchActivity extends BaseActivity implements IBookManagerAct
 	 */
 	private void getHomePage(String key,int page ,int count,int type) {
 		customProgressDialog.show();
-		HashMap map=new HashMap();
-		map.put("key", key);
-		map.put("page", page);
-		map.put("count", count);
-		Task tsHome;
+//		HashMap map=new HashMap();
+//		map.put("key", key);
+//		map.put("page", page);
+//		map.put("count", count);
+//		Task tsHome;
+		gparams = new HashMap<String, String>();
+		gparams.put("title", key);
+		gparams.put("curpage", ""+page);//当前页数
+		gparams.put("perpage",""+count );//条数
+		
 		if(type == 0){
-		 tsHome=new Task(Task.TASK_QUERY_EBOOK,map);
+			requestVolley(GlobleData.SERVER_URL
+					+ "/zk/search.aspx", backlistener,
+					Method.POST);
 		}else{
-		 tsHome=new Task(Task.TASK_QUERY_EBOOK_MORE,map);
+			requestVolley(GlobleData.SERVER_URL
+					+ "/zk/search.aspx", backlistenermore,
+					Method.POST);
 		}
-		ManagerService.addNewTask(tsHome);
 	}
 
-	@Override
-	public void init() {
-		// TODO Auto-generated method stub
-		
-	}
 	 @Override
 	    public void onResume() {
 	        super.onResume();
@@ -176,44 +255,44 @@ public class EBookSearchActivity extends BaseActivity implements IBookManagerAct
 	        super.onDestroy();
 	        mImageFetcher.closeCache();
 	    }
-	@Override
-	public void refresh(Object... obj) {
-		customProgressDialog.dismiss();
-		hideKeybord();
-		//显示
-		int type = (Integer)obj[0];
-		
-		//判断收藏是否成功
-		 if(type == FAVOR){
-			 Result res = (Result) obj[1];
-			 if (res.getSuccess()) {
-						Tool.ShowMessages(context, "收藏成功");
-			}else{
-						Tool.ShowMessages(context, "收藏失败");
-						}
-						return;
-			}
-		
-		List<EBook> lists = (List<EBook>)obj[1];
-		if(type == GETFIRSTPAGE ){
-		if(lists!=null&&!lists.isEmpty()){
-			listview.setVisibility(View.VISIBLE);
-			noResult_rl.setVisibility(View.GONE);
-			adapter = new EbookAdapter(context,lists,mImageFetcher);
-			listview.setAdapter(adapter);
-			
-		}else{
-			listview.setVisibility(View.GONE);
-			noResult_rl.setVisibility(View.VISIBLE);
-		}
-		}else if(type == GETNEXTPAGE){
-			if(lists!=null&&!lists.isEmpty()){
-			adapter.addMoreData(lists);
-			}else{
-				Tool.ShowMessages(context, "没有更多内容可供加载");
-			}
-		}
-	}
+//	@Override
+//	public void refresh(Object... obj) {
+//		customProgressDialog.dismiss();
+//		hideKeybord();
+//		//显示
+//		int type = (Integer)obj[0];
+//		
+//		//判断收藏是否成功
+//		 if(type == FAVOR){
+//			 Result res = (Result) obj[1];
+//			 if (res.getSuccess()) {
+//						Tool.ShowMessages(context, "收藏成功");
+//			}else{
+//						Tool.ShowMessages(context, "收藏失败");
+//						}
+//						return;
+//			}
+//		
+//		List<EBook> lists = (List<EBook>)obj[1];
+//		if(type == GETFIRSTPAGE ){
+//		if(lists!=null&&!lists.isEmpty()){
+//			listview.setVisibility(View.VISIBLE);
+//			noResult_rl.setVisibility(View.GONE);
+//			adapter = new EbookAdapter(context,lists,mImageFetcher);
+//			listview.setAdapter(adapter);
+//			
+//		}else{
+//			listview.setVisibility(View.GONE);
+//			noResult_rl.setVisibility(View.VISIBLE);
+//		}
+//		}else if(type == GETNEXTPAGE){
+//			if(lists!=null&&!lists.isEmpty()){
+//			adapter.addMoreData(lists);
+//			}else{
+//				Tool.ShowMessages(context, "没有更多内容可供加载");
+//			}
+//		}
+//	}
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int positon, long id) {
 		if (id == -2) //更多
