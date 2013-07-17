@@ -205,7 +205,11 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 				e.printStackTrace();
 				onError(2);
 			}
-
+            if(arrayLists_sz==null||arrayLists_sz.isEmpty()){
+				Tool.ShowMessages(context, "没有更多内容可供加载");
+				moreprocess.setVisibility(View.GONE);
+				return;
+            }
 			if (listviewpagetag == GlobleData.BOOK_SZ_TYPE) {
 				if (arrayLists_sz.get(GlobleData.BOOK_SZ_TYPE) != null
 						&& !arrayLists_sz.get(GlobleData.BOOK_SZ_TYPE)

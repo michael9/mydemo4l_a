@@ -14,9 +14,13 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.Toast;
 
+import com.android.volley.Request.Method;
+import com.android.volley.Response.Listener;
 import com.cqvip.moblelib.activity.CommentActivity;
+import com.cqvip.moblelib.activity.DetailBookActivity;
 import com.cqvip.moblelib.biz.ManagerService;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
@@ -112,17 +116,24 @@ public class Tool {
 	}
 
 	//  ’≤ÿ
-	public static void bookfavorite(Context mcontext, Book mbook) {
+	public static void bookfavorite(DetailBookActivity dbactivity, Book mbook,Listener<String> bl) {
 		if (mbook != null) {
 			HashMap<String, String> map = new HashMap<String, String>();
 			map.put("libid", GlobleData.LIBIRY_ID);
 			map.put("vipuserid", GlobleData.cqvipid);
 			// Log.i(" ’≤ÿ", GlobleData.cqvipid);
-			map.put("keyid", mbook.getCallno());
+			String callno=mbook.getCallno();
+			String recordid=mbook.getRecordid();
+			if(!TextUtils.isEmpty(recordid)){
+				map.put("keyid", Tool.formSZbookID(callno,recordid));
+				}else{
+					map.put("keyid", callno);
+				}
 			// Log.i("keyid", book.getCallno());
 			map.put("typeid", "" + GlobleData.BOOK_SZ_TYPE);
-			map.put("recordid", mbook.getRecordid());
-			ManagerService.addNewTask(new Task(Task.TASK_LIB_FAVOR, map));
+		//	ManagerService.addNewTask(new Task(Task.TASK_LIB_FAVOR, map));
+			dbactivity.requestVolley(GlobleData.SERVER_URL + "/cloud/favorite.aspx",
+					bl, Method.POST);
 		}
 	}
 
