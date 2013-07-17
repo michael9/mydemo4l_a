@@ -5,6 +5,7 @@ import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -112,18 +113,26 @@ public class Tool {
 	}
 
 	//  ’≤ÿ
-	public static void bookfavorite(Context mcontext, Book mbook) {
-		if (mbook != null) {
-			HashMap<String, String> map = new HashMap<String, String>();
-			map.put("libid", GlobleData.LIBIRY_ID);
-			map.put("vipuserid", GlobleData.cqvipid);
-			// Log.i(" ’≤ÿ", GlobleData.cqvipid);
-			map.put("keyid", mbook.getCallno());
-			// Log.i("keyid", book.getCallno());
-			map.put("typeid", "" + GlobleData.BOOK_SZ_TYPE);
-			map.put("recordid", mbook.getRecordid());
-			ManagerService.addNewTask(new Task(Task.TASK_LIB_FAVOR, map));
-		}
+//	public static void bookfavorite(Context mcontext, Book mbook) {
+//		if (mbook != null) {
+//			HashMap<String, String> map = new HashMap<String, String>();
+//			map.put("libid", GlobleData.LIBIRY_ID);
+//			map.put("vipuserid", GlobleData.cqvipid);
+//			// Log.i(" ’≤ÿ", GlobleData.cqvipid);
+//			map.put("keyid", mbook.getCallno());
+//			// Log.i("keyid", book.getCallno());
+//			map.put("typeid", "" + GlobleData.BOOK_SZ_TYPE);
+//			map.put("recordid", mbook.getRecordid());
+//			ManagerService.addNewTask(new Task(Task.TASK_LIB_FAVOR, map));
+//		}
+//	}
+	public static Map<String, String> bookfavorite(Map<String, String> params,Book mbook) {
+			params=new HashMap<String, String>();
+			params.put("libid",  GlobleData.LIBIRY_ID);
+			params.put("vipuserid", GlobleData.cqvipid);
+			params.put("typeid", ""+GlobleData.BOOK_SZ_TYPE);
+			params.put("keyid", Tool.formSZbookID(mbook.getCallno(),mbook.getRecordid()));
+		return params;
 	}
 
 	/**
