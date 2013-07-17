@@ -3,8 +3,15 @@ package com.cqvip.moblelib.activity;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import com.android.volley.VolleyError;
+import com.android.volley.Request.Method;
+import com.android.volley.Response.ErrorListener;
+import com.android.volley.Response.Listener;
+import com.android.volley.toolbox.StringRequest;
 import com.cqvip.moblelib.R;
+import com.cqvip.moblelib.adapter.AdvancedBookAdapter;
 import com.cqvip.moblelib.adapter.BookAdapter;
 import com.cqvip.moblelib.adapter.BorrowBookAdapter;
 import com.cqvip.moblelib.base.IBookManagerActivity;
@@ -56,11 +63,10 @@ import android.widget.Toast;
  * 
  * @author LHP,LJ
  */
-public class BorrowAndOrderActivity extends BaseActivity implements IBookManagerActivity{
+public class BorrowAndOrderActivity extends BaseActivity {
 
 	public static final int BORROWLIST = 1;
 	public static final int RENEW = 2;
-	private Context context;
 	private ViewPager mPager;//页卡内容
 	private List<View> listViews; // Tab页面列表
 	private ImageView cursor;// 动画图片
@@ -72,27 +78,23 @@ public class BorrowAndOrderActivity extends BaseActivity implements IBookManager
 	private BorrowBookAdapter adapter;
 	private List<BorrowBook>  lists;
 	private RelativeLayout noborrow_rl;
+	private Map<String, String> gparams;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature( Window.FEATURE_NO_TITLE );
 		setContentView(R.layout.activity_borrow_and_order2);
-		context = this;
 		View v = findViewById(R.id.borrow_title);
 		TextView title = (TextView)v.findViewById(R.id.txt_header);
 		title.setText(R.string.main_borrow);
 		ImageView back = (ImageView)v.findViewById(R.id.img_back_header);
 		noborrow_rl = (RelativeLayout) findViewById(R.id.noborrow_rl);
-		//ImageView history = (ImageView)v.findViewById(R.id.btn_right_header);
-		//history.setVisibility(View.VISIBLE);
-		//history.setImageResource(R.drawable.lscx);
-		customProgressDialog=CustomProgressDialog.createDialog(this);
-		if(adapter!=null){
-			
-			
-		}
+//		if(adapter!=null){
+//			
+//			
+//		}
 		listview = (ListView)findViewById(R.id.borrow_list);
-		init();
+		getlist();
 		back.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -116,66 +118,103 @@ public class BorrowAndOrderActivity extends BaseActivity implements IBookManager
 				
 			}
 		}) ;
+	}
+
+	private Listener<String> borrowlist_ls = new Listener<String>() {
+		@Override
+		public void onResponse(String response) {
+			// TODO Auto-generated method stub
+			customProgressDialog.dismiss();
+			try {
+				List<BorrowBook>lists = BorrowBook.formList(response);
+				if(lists==null||lists.isEmpty()){
+					listview.setVisibility(View.GONE);
+					noborrow_rl.setVisibility(View.VISIBLE);
+				}else {
+					listview.setVisibility(View.VISIBLE);
+					noborrow_rl.setVisibility(View.GONE);
+					adapter = new BorrowBookAdapter(BorrowAndOrderActivity.this,lists);
+					listview.setAdapter(adapter);
+				}			
+			} catch (Exception e) {
+				// TODO: handle exception
+				return;
+			}
+		}
+	};
 	
-		
-		
-		
-	}
+	ErrorListener el = new ErrorListener() {
+		@Override
+		public void onErrorResponse(VolleyError arg0) {
+			// TODO Auto-generated method stub
+			customProgressDialog.dismiss();
+		}
+	};
 
+	private void requestVolley(String addr, Listener<String> bl, int method) {
+		try {
+			StringRequest mys = new StringRequest(method, addr, bl, el) {
 
-
-	@Override
-	public void init() {
-		customProgressDialog.show();
-		ManagerService.allActivity.add(this);
-		if(GlobleData.userid==null){
-			Tool.ShowMessages(context, "用户没有登陆");
-		}else{
-		HashMap map = new HashMap();
-		map.put("id", GlobleData.readerid);
-		Task tsHome = new Task(Task.TASK_BORROW_LIST, map);
-		ManagerService.addNewTask(tsHome);
+				protected Map<String, String> getParams()
+						throws com.android.volley.AuthFailureError {
+					return gparams;
+				};
+			};
+			mQueue.add(mys);
+			mQueue.start();
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
 	}
 
-	@Override
-	public void refresh(Object... obj) {
-		customProgressDialog.dismiss();
-		Integer type = (Integer)obj[0];
-		switch(type){
-		case BORROWLIST:
-			lists = (List<BorrowBook>)obj[1];
-			if(lists==null||lists.isEmpty()){
-				listview.setVisibility(View.GONE);
-				noborrow_rl.setVisibility(View.VISIBLE);
-			   //Tool.ShowMessages(context, "查询无记录");
-			}else {
-				listview.setVisibility(View.VISIBLE);
-				noborrow_rl.setVisibility(View.GONE);
-				adapter = new BorrowBookAdapter(context,lists);
-				listview.setAdapter(adapter);
-			}
-			break;
-			
-		case RENEW:
-			//成功
-			ShortBook result = (ShortBook)obj[1];
-			if(result!=null){
-//				if(result.getSucesss().equals("true")){
-				for(int i=0;i<lists.size();i++){
-					if(result.getId().equals(lists.get(i).getBarcode())){
-						lists.get(i).setRenew(1);
-						lists.get(i).setReturndate(result.getDate()+getResources().getString(R.string.alreadyrenew));
-						adapter.notifyDataSetChanged();
-						break;
-					}
-				  }
-//				}
-				Tool.ShowMessages(context, result.getMessage());
-			}
-			break;
-			
-		}
-	}
+  private void getlist() {
+	  customProgressDialog.show();
+	  gparams=new HashMap<String, String>();
+	  gparams.put("userid", GlobleData.userid);	  
+		requestVolley(GlobleData.SERVER_URL
+				+ "/library/user/borrowlist.aspx", borrowlist_ls,
+				Method.POST);
+}
+
+
+//	@Override
+//	public void refresh(Object... obj) {
+//		customProgressDialog.dismiss();
+//		Integer type = (Integer)obj[0];
+//		switch(type){
+//		case BORROWLIST:
+//			lists = (List<BorrowBook>)obj[1];
+//			if(lists==null||lists.isEmpty()){
+//				listview.setVisibility(View.GONE);
+//				noborrow_rl.setVisibility(View.VISIBLE);
+//			   //Tool.ShowMessages(context, "查询无记录");
+//			}else {
+//				listview.setVisibility(View.VISIBLE);
+//				noborrow_rl.setVisibility(View.GONE);
+//				adapter = new BorrowBookAdapter(BorrowAndOrderActivity.this,lists);
+//				listview.setAdapter(adapter);
+//			}
+//			break;
+//			
+//		case RENEW:
+//			//成功
+//			ShortBook result = (ShortBook)obj[1];
+//			if(result!=null){
+////				if(result.getSucesss().equals("true")){
+//				for(int i=0;i<lists.size();i++){
+//					if(result.getId().equals(lists.get(i).getBarcode())){
+//						lists.get(i).setRenew(1);
+//						lists.get(i).setReturndate(result.getDate()+getResources().getString(R.string.alreadyrenew));
+//						adapter.notifyDataSetChanged();
+//						break;
+//					}
+//				  }
+////				}
+//				Tool.ShowMessages(BorrowAndOrderActivity.this, result.getMessage());
+//			}
+//			break;
+//			
+//		}
+//	}
 	
 }

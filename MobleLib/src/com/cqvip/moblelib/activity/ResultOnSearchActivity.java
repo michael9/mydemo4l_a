@@ -41,7 +41,7 @@ import com.cqvip.moblelib.model.Result;
 import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.utils.Tool;
 
-public class ResultOnSearchActivity extends BaseImageActivity implements
+public class ResultOnSearchActivity extends BaseActivity implements
 		 OnItemClickListener {
 
 	public static final int GETFIRSTPAGE = 1;
@@ -164,7 +164,7 @@ public class ResultOnSearchActivity extends BaseImageActivity implements
 				if (lists != null && !lists.isEmpty()) {
 					listview.setVisibility(View.VISIBLE);
 					noResult_rl.setVisibility(View.GONE);
-					adapter = new BookAdapter(context, lists, mImageFetcher);
+					adapter = new BookAdapter(context, lists, mQueue);
 					listview.setAdapter(adapter);
 				} else {
 					listview.setVisibility(View.GONE);

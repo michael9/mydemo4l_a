@@ -19,6 +19,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.ImageLoader.ImageListener;
 import com.cqvip.mobelib.imgutils.ImageFetcher;
 import com.cqvip.moblelib.R;
 import com.cqvip.moblelib.activity.BigImgActivity;
@@ -27,6 +30,7 @@ import com.cqvip.moblelib.biz.ManagerService;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.Book;
+import com.cqvip.utils.BitmapCache;
 import com.cqvip.utils.Tool;
 
 /**
@@ -37,7 +41,7 @@ import com.cqvip.utils.Tool;
 public class BookAdapter extends BaseAdapter{
 	private Context context;
 	private List<Book> lists;
-	private ImageFetcher fetch;
+	private  RequestQueue mQueue;
 	public BookAdapter(Context context){
 		this.context = context;
 	}
@@ -45,10 +49,10 @@ public class BookAdapter extends BaseAdapter{
 		this.context = context;
 		this.lists = lists;
 	}
-	public BookAdapter(Context context,List<Book> lists,ImageFetcher fetch){
+	public BookAdapter(Context context,List<Book> lists,RequestQueue mQueue){
 		this.context = context;
 		this.lists = lists;
-		this.fetch = fetch;
+		this.mQueue = mQueue;
 	}
 	public List<Book> getLists(){
 		return lists;
@@ -101,7 +105,7 @@ public class BookAdapter extends BaseAdapter{
 			TextView u_abstract;//ºÚΩÈ
 			TextView isbn;
 			
-			Button btn_comment,btn_item_result_search_share,favorite;
+//			Button btn_comment,btn_item_result_search_share,favorite;
 			
 			}
 	
@@ -125,9 +129,9 @@ public class BookAdapter extends BaseAdapter{
 			holder.img = (ImageView) convertView.findViewById(R.id.re_book_img);
 			holder.u_abstract = (TextView) convertView.findViewById(R.id.txt_abst);
 			holder.isbn=(TextView) convertView.findViewById(R.id.re_hot_txt);
-			holder.btn_item_result_search_share=(Button)convertView.findViewById(R.id.btn_item_result_search_share);
-			holder.favorite = (Button)convertView.findViewById(R.id.btn_item_result_search_collect);
-			holder.btn_comment = (Button)convertView.findViewById(R.id.btn_comment);
+//			holder.btn_item_result_search_share=(Button)convertView.findViewById(R.id.btn_item_result_search_share);
+//			holder.favorite = (Button)convertView.findViewById(R.id.btn_item_result_search_collect);
+//			holder.btn_comment = (Button)convertView.findViewById(R.id.btn_comment);
 			convertView.setTag(holder);
 		}else{
 			holder = (ViewHolder) convertView.getTag();
@@ -143,58 +147,64 @@ public class BookAdapter extends BaseAdapter{
 	        holder.publishyear.setText(time+book.getPublishyear());
 	        holder.u_abstract.setText(describe+book.getU_abstract());
 	        holder.isbn.setText("ISBN:"+book.getIsbn());
-	        //Õº∆¨
-	        if(!TextUtils.isEmpty(book.getCover_path())){
-	        	fetch.loadImage(book.getCover_path(), holder.img);
-	        	final String bigimg = Tool.getBigImg(book.getCover_path());
-	        	holder.img.setOnClickListener(new View.OnClickListener() {
-	        		
-	        		@Override
-	        		public void onClick(View v) {
-	        			if(TextUtils.isEmpty(bigimg)){
-	        				return;
-	        			}
-	        			Intent  intent = new Intent(context,BigImgActivity.class);
-	        			intent.putExtra("bigurl", bigimg);
-	        			context.startActivity(intent);
-	        		}
-	        	});
-	        }else{
-	        	holder.img.setImageDrawable(context.getResources().getDrawable(R.drawable.defaut_book));
-	        }
+	        
+	        ImageLoader mImageLoader = new ImageLoader(mQueue, new BitmapCache());
+			ImageListener listener = ImageLoader.getImageListener(holder.img, R.drawable.defaut_book, R.drawable.defaut_book);
+			mImageLoader.get(book.getCover_path(), listener);
+			
+//	        //Õº∆¨
+//	        if(!TextUtils.isEmpty(book.getCover_path())){
+//	        	fetch.loadImage(book.getCover_path(), holder.img);
+//	        	final String bigimg = Tool.getBigImg(book.getCover_path());
+//	        	holder.img.setOnClickListener(new View.OnClickListener() {
+//	        		
+//	        		@Override
+//	        		public void onClick(View v) {
+//	        			if(TextUtils.isEmpty(bigimg)){
+//	        				return;
+//	        			}
+//	        			Intent  intent = new Intent(context,BigImgActivity.class);
+//	        			intent.putExtra("bigurl", bigimg);
+//	        			context.startActivity(intent);
+//	        		}
+//	        	});
+//	        }else{
+//	        	holder.img.setImageDrawable(context.getResources().getDrawable(R.drawable.defaut_book));
+//	        }
 	        
 	        
 	        
-	        //∑÷œÌ
-	        holder.btn_item_result_search_share.setTag(position);
-	        holder.btn_item_result_search_share.setOnClickListener(new OnClickListener() {
-				
-				@Override
-				public void onClick(View v) {
-				int pos=(Integer)v.getTag();
-				Tool.bookshare(context, lists.get(pos));
-				}
-			});
-		//∆¿¬€
-	        holder.btn_comment.setTag(position);
-	        holder.btn_comment.setOnClickListener(new OnClickListener() {
-				
-				@Override
-				public void onClick(View v) {		
-					int pos=(Integer)v.getTag();
-					Tool.bookbuzz(context, lists.get(pos));
-				}
-			});
-	      // ’≤ÿ
-	        holder.favorite .setTag(position);
-	        holder.favorite .setOnClickListener(new OnClickListener() {
-				
-				@Override
-				public void onClick(View v) {		
-					int pos=(Integer)v.getTag();
-					Tool.bookfavorite(context, lists.get(pos));
-				}
-			});
+		// //∑÷œÌ
+		// holder.btn_item_result_search_share.setTag(position);
+		// holder.btn_item_result_search_share.setOnClickListener(new
+		// OnClickListener() {
+		//
+		// @Override
+		// public void onClick(View v) {
+		// int pos=(Integer)v.getTag();
+		// Tool.bookshare(context, lists.get(pos));
+		// }
+		// });
+		// //∆¿¬€
+		// holder.btn_comment.setTag(position);
+		// holder.btn_comment.setOnClickListener(new OnClickListener() {
+		//
+		// @Override
+		// public void onClick(View v) {
+		// int pos=(Integer)v.getTag();
+		// Tool.bookbuzz(context, lists.get(pos));
+		// }
+		// });
+		// // ’≤ÿ
+		// holder.favorite .setTag(position);
+		// holder.favorite .setOnClickListener(new OnClickListener() {
+		//
+		// @Override
+		// public void onClick(View v) {
+		// int pos=(Integer)v.getTag();
+		// Tool.bookfavorite(context, lists.get(pos));
+		// }
+		// });
 	        
 		return convertView;
 	}

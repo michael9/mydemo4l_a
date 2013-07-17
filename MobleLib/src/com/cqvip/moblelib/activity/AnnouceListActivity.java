@@ -2,6 +2,7 @@ package com.cqvip.moblelib.activity;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,27 +19,37 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.VolleyError;
+import com.android.volley.Request.Method;
+import com.android.volley.Response.ErrorListener;
+import com.android.volley.Response.Listener;
+import com.android.volley.toolbox.StringRequest;
 import com.cqvip.mobelib.imgutils.AsyncTask;
 import com.cqvip.moblelib.R;
+import com.cqvip.moblelib.adapter.BookAdapter;
 import com.cqvip.moblelib.base.IBookManagerActivity;
 import com.cqvip.moblelib.biz.ManagerService;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.Constant;
+import com.cqvip.moblelib.constant.GlobleData;
+import com.cqvip.moblelib.model.Book;
 import com.cqvip.moblelib.model.ShortBook;
 import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.moblelib.view.DownFreshListView;
 import com.cqvip.utils.Tool;
 
-public class AnnouceListActivity extends BaseActivity implements IBookManagerActivity,OnItemClickListener,DownFreshListView.OnRefreshListener{
+public class AnnouceListActivity extends BaseActivity implements OnItemClickListener,DownFreshListView.OnRefreshListener{
 
-	private static final int GETMORE = 1;
-	private static final int GETHOMEPAGE = 0;
+	private  final int GETMORE = 1;
+	private  final int GETHOMEPAGE = 0;
 	private DownFreshListView listview;
 	private int type;
 	private Context context;
 	private int page=1;
 	private View moreprocess;
 	private MyNewAdapter adapter;
+	private Map<String, String> gparams;
+	private int sendtype;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -53,13 +64,16 @@ public class AnnouceListActivity extends BaseActivity implements IBookManagerAct
 		
 		switch (type) {
 		case  Constant.SPEECH_NEWS:
+			sendtype=Task.TASK_ANNOUNCE_NEWS;
 			setheadbar("新闻动态");
 			break;
 			
 		case  Constant.SPPECH_FREE:
+			sendtype=Task.TASK_ANNOUNCE_WELFARE;
 			setheadbar("公益讲座");
 			break;
 		case  Constant.QUESTION:
+			sendtype=Task.TASK_E_CAUTION;
 			setheadbar("常见问题");
 			break;
 			
@@ -74,7 +88,6 @@ public class AnnouceListActivity extends BaseActivity implements IBookManagerAct
 	{
 		View headbar,btn_back;
 		TextView bar_title;
-		customProgressDialog=CustomProgressDialog.createDialog(this);
 		headbar=findViewById(R.id.head_bar);
 		bar_title=(TextView)headbar.findViewById(R.id.txt_header);
 		bar_title.setText(title);
@@ -88,39 +101,97 @@ public class AnnouceListActivity extends BaseActivity implements IBookManagerAct
 			}
 		});
 	}
+	
+	
+	private Listener<String> backlistener = new Listener<String>() {
+		@Override
+		public void onResponse(String response) {
+			// TODO Auto-generated method stub
+			customProgressDialog.dismiss();
+			try {
+				List<ShortBook> lists= ShortBook.formList(sendtype, response);
+				if(lists!=null&&!lists.isEmpty()){
+					adapter = new MyNewAdapter(context,lists);
+					listview.setAdapter(adapter);
+					}				
+			} catch (Exception e) {
+				// TODO: handle exception
+				return;
+			}
+		}
+	};
+	
+	private Listener<String> backlistenermore = new Listener<String>() {
+		@Override
+		public void onResponse(String response) {
+			// TODO Auto-generated method stub
+			customProgressDialog.dismiss();
+			try {
+				moreprocess.setVisibility(View.GONE);
+				List<ShortBook> lists= ShortBook.formList(sendtype, response);
+				if(lists!=null&&!lists.isEmpty()){
+					adapter.addMoreData(lists);
+				  }else{
+						Tool.ShowMessages(context, "没有更多内容可供加载");
+					}
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
+	};
+	
+	ErrorListener el = new ErrorListener() {
+		@Override
+		public void onErrorResponse(VolleyError arg0) {
+			// TODO Auto-generated method stub
+			customProgressDialog.dismiss();
+		}
+	};
 
+	private void requestVolley(String addr, Listener<String> bl, int method) {
+		try {
+			StringRequest mys = new StringRequest(method, addr, bl, el) {
+
+				protected Map<String, String> getParams()
+						throws com.android.volley.AuthFailureError {
+					return gparams;
+				};
+			};
+			mQueue.add(mys);
+			mQueue.start();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+	
 	private void getHomePage(int page, int defaultCount,int mwhat) {
 		customProgressDialog.show();
-		if(!ManagerService.allActivity.contains(this)){
-			ManagerService.allActivity.add(this);
-			}
-		HashMap map=new HashMap();
-		map.put("page",page+"");
-		map.put("count", Constant.DEFAULT_COUNT+"");
+		gparams=new HashMap<String, String>();
+		gparams.put("libid", GlobleData.LIBIRY_ID);
+		gparams.put("curpage", ""+page);
+		gparams.put("perpage",""+ Constant.DEFAULT_COUNT);
+		
 		switch(type){
 		case Constant.SPEECH_NEWS://新闻动态
-			if(mwhat == GETHOMEPAGE){
-			ManagerService.addNewTask(new Task(Task.TASK_ANNOUNCE_NEWS,map));
-			}else{
-				ManagerService.addNewTask(new Task(Task.TASK_ANNOUNCE_NEWS_MORE,map));
-			}
+			gparams.put("announcetypeid", ""+2);		
 			break;
 		case Constant.SPPECH_FREE://公益讲座
-			if(mwhat == GETHOMEPAGE){
-			ManagerService.addNewTask(new Task(Task.TASK_ANNOUNCE_WELFARE,map));
-			}else{
-			ManagerService.addNewTask(new Task(Task.TASK_ANNOUNCE_WELFARE_MORE,map));
-			}
+			gparams.put("announcetypeid", ""+1);		
 			break;
 		case Constant.QUESTION://常见问题
-			if(mwhat == GETHOMEPAGE){
-				ManagerService.addNewTask(new Task(Task.TASK_E_CAUTION,map));
-			}else{
-				ManagerService.addNewTask(new Task(Task.TASK_ANNOUNCE_WELFARE_MORE,map));
-			}
+			gparams.put("announcetypeid", ""+5);			
 			break;
 		}
 		
+		if(mwhat == GETHOMEPAGE){
+			requestVolley(GlobleData.SERVER_URL
+					+ "/library/announce/list.aspx", backlistener,
+					Method.POST);
+		}else{
+			requestVolley(GlobleData.SERVER_URL
+					+ "/library/announce/list.aspx", backlistenermore,
+					Method.POST);
+		}
 	}
 
 	@Override
@@ -216,41 +287,6 @@ public class AnnouceListActivity extends BaseActivity implements IBookManagerAct
 		
 	}
 
-	@Override
-	public void init() {
-		
-	}
-
-	@Override
-	public void refresh(Object... obj) {
-		customProgressDialog.dismiss();
-		Integer state = (Integer)obj[0];
-		List<ShortBook> lists=(List<ShortBook>)obj[1];
-		switch(state){
-		case Task.TASK_ANNOUNCE_NEWS:
-		case Task.TASK_ANNOUNCE_WELFARE:
-		case Task.TASK_E_CAUTION:
-			
-			if(lists!=null&&!lists.isEmpty()){
-			adapter = new MyNewAdapter(context,lists);
-			listview.setAdapter(adapter);
-			}
-			//TODO
-			break;
-		case Task.TASK_ANNOUNCE_NEWS_MORE:
-		case Task.TASK_ANNOUNCE_WELFARE_MORE:
-		case Task.TASK_E_CAUTION_MORE:
-			moreprocess.setVisibility(View.GONE);
-			if(lists!=null&&!lists.isEmpty()){
-				adapter.addMoreData(lists);
-			  }else{
-					Tool.ShowMessages(context, "没有更多内容可供加载");
-				}
-			break;
-			
-		}
-		
-	}
 
 	@Override
 	public void onRefresh() {

@@ -2,6 +2,7 @@ package com.cqvip.moblelib.activity;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,22 +16,29 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.android.volley.VolleyError;
+import com.android.volley.Request.Method;
+import com.android.volley.Response.ErrorListener;
+import com.android.volley.Response.Listener;
+import com.android.volley.toolbox.StringRequest;
 import com.cqvip.mobelib.imgutils.AsyncTask;
 import com.cqvip.moblelib.R;
+import com.cqvip.moblelib.activity.AnnouceListActivity.MyNewAdapter;
 import com.cqvip.moblelib.adapter.AdvancedBookAdapter;
 import com.cqvip.moblelib.base.IBookManagerActivity;
 import com.cqvip.moblelib.biz.ManagerService;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.Constant;
+import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.ShortBook;
 import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.moblelib.view.DownFreshListView;
 import com.cqvip.utils.Tool;
 
-public class AdvancedBookActivity extends BaseImageActivity implements IBookManagerActivity,OnItemClickListener,DownFreshListView.OnRefreshListener {
+public class AdvancedBookActivity extends BaseActivity implements OnItemClickListener,DownFreshListView.OnRefreshListener {
 
-	private static final int GETMORE = 1;
-	private static final int GETHOMEPAGE = 0;
+	private  final int GETMORE = 1;
+	private  final int GETHOMEPAGE = 0;
 	
 	private  AdvancedBookAdapter adapter;
 	private DownFreshListView listview;
@@ -38,6 +46,8 @@ public class AdvancedBookActivity extends BaseImageActivity implements IBookMana
 	private Context context;
 	private int page=1;
 	private View moreprocess;
+	private int sendtype;
+	private Map<String, String> gparams;
 	 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -45,15 +55,15 @@ public class AdvancedBookActivity extends BaseImageActivity implements IBookMana
 		setContentView(R.layout.activity_advanced_book);
 		context = this;
 		type = getIntent().getIntExtra("type", 1);
-
-		customProgressDialog=CustomProgressDialog.createDialog(this);
 		
 		switch (type) {
 		case Constant.HOTBOOK:
+			sendtype=Task.TASK_SUGGEST_HOTBOOK;
 			setheadbar("热门图书");
 			break;
 			
 		case Constant.NEWBOOK:
+			sendtype= Task.TASK_SUGGEST_NEWBOOK;
 			setheadbar("新书推荐");
 			break;
 
@@ -91,40 +101,67 @@ public class AdvancedBookActivity extends BaseImageActivity implements IBookMana
 			}
 		});
 	}
-
-
-	@Override
-	public void init() {
-		
-	}
-
-	@Override
-	public void refresh(Object... obj) {
-		customProgressDialog.dismiss();
-		Integer state = (Integer)obj[0];
-		List<ShortBook> lists=(List<ShortBook>)obj[1];
-		switch(state){
-		case Task.TASK_SUGGEST_HOTBOOK:
-		case Task.TASK_SUGGEST_NEWBOOK:
-			
-			if(lists!=null&&!lists.isEmpty()){
-			adapter = new AdvancedBookAdapter(context,lists,mImageFetcher);
-			listview.setAdapter(adapter);
+	private Listener<String> backlistener = new Listener<String>() {
+		@Override
+		public void onResponse(String response) {
+			// TODO Auto-generated method stub
+			customProgressDialog.dismiss();
+			try {
+				List<ShortBook> lists= ShortBook.formList(sendtype, response);
+				if(lists!=null&&!lists.isEmpty()){
+					adapter = new  AdvancedBookAdapter(context,lists,mQueue);
+					listview.setAdapter(adapter);
+					}				
+			} catch (Exception e) {
+				// TODO: handle exception
+				return;
 			}
-			//TODO
-			break;
-		case Task.TASK_SUGGEST_HOTBOOK_MORE:
-		case Task.TASK_SUGGEST_NEWBOOK_MORE:
-			moreprocess.setVisibility(View.GONE);
-			if(lists!=null&&!lists.isEmpty()){
-				adapter.addMoreData(lists);
-			  }else{
-					Tool.ShowMessages(context, "没有更多内容可供加载");
-				}
-			break;
 		}
-		
+	};
+	
+	private Listener<String> backlistenermore = new Listener<String>() {
+		@Override
+		public void onResponse(String response) {
+			// TODO Auto-generated method stub
+			customProgressDialog.dismiss();
+			try {
+				moreprocess.setVisibility(View.GONE);
+				List<ShortBook> lists= ShortBook.formList(sendtype, response);
+				if(lists!=null&&!lists.isEmpty()){
+					adapter.addMoreData(lists);
+				  }else{
+						Tool.ShowMessages(context, "没有更多内容可供加载");
+					}
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
+	};
+	
+	ErrorListener el = new ErrorListener() {
+		@Override
+		public void onErrorResponse(VolleyError arg0) {
+			// TODO Auto-generated method stub
+			customProgressDialog.dismiss();
+		}
+	};
+
+	private void requestVolley(String addr, Listener<String> bl, int method) {
+		try {
+			StringRequest mys = new StringRequest(method, addr, bl, el) {
+
+				protected Map<String, String> getParams()
+						throws com.android.volley.AuthFailureError {
+					return gparams;
+				};
+			};
+			mQueue.add(mys);
+			mQueue.start();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
+
 
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int position, long id) {
@@ -153,27 +190,28 @@ public class AdvancedBookActivity extends BaseImageActivity implements IBookMana
 	
 	private void getHomePage(int page, int defaultCount,int mwhat) {
 		customProgressDialog.show();
-		if(!ManagerService.allActivity.contains(this)){
-		ManagerService.allActivity.add(this);
-		}
-		HashMap map=new HashMap();
-		map.put("page",page+"");
-		map.put("count", Constant.DEFAULT_COUNT+"");
+		gparams=new HashMap<String, String>();
+		gparams.put("libid", GlobleData.LIBIRY_ID);
+		gparams.put("curpage", ""+page);
+		gparams.put("perpage",""+ Constant.DEFAULT_COUNT);
+
+		
 		switch(type){
 		case Constant.HOTBOOK:
-			if(mwhat == GETHOMEPAGE){
-				ManagerService.addNewTask(new Task(Task.TASK_SUGGEST_HOTBOOK,map));
-			}else{
-				ManagerService.addNewTask(new Task(Task.TASK_SUGGEST_HOTBOOK_MORE,map));
-			}
+			gparams.put("announcetypeid", ""+3);		
 			break;
 		case Constant.NEWBOOK:
-			if(mwhat == GETHOMEPAGE){
-			ManagerService.addNewTask(new Task(Task.TASK_SUGGEST_NEWBOOK,map));
-			}else{
-			ManagerService.addNewTask(new Task(Task.TASK_SUGGEST_NEWBOOK_MORE,map));
-			}
+			gparams.put("announcetypeid", ""+4);		
 			break;
+		}
+		if(mwhat == GETHOMEPAGE){
+			requestVolley(GlobleData.SERVER_URL
+					+ "/library/announce/list.aspx", backlistener,
+					Method.POST);
+		}else{
+			requestVolley(GlobleData.SERVER_URL
+					+ "/library/announce/list.aspx", backlistenermore,
+					Method.POST);
 		}
 		
 	}
