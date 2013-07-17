@@ -42,9 +42,10 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_toRightOf="@id/book_big_img"
+            android:ellipsize="end"
             android:maxLines="3"
             android:text="图书简介"
-            android:textSize="16dp" android:ellipsize="end"/>
+            android:textSize="16dp" />
     </RelativeLayout>
 
     <com.cqvip.moblelib.view.DownFreshListView
@@ -78,9 +79,11 @@
 
         <Button
             android:id="@+id/commit_btn"
+            style="@style/ButtonAppTheme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="提交" />
+            android:text="提交" 
+            android:textStyle="bold"/>
     </LinearLayout>
 
 </RelativeLayout>
