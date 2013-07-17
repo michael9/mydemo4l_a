@@ -43,7 +43,7 @@ import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.utils.BitmapCache;
 import com.cqvip.utils.Tool;
 
-public class DetailBookActivity extends BaseImageActivity {
+public class DetailBookActivity extends BaseActivity {
 	public final int GETBOOKINFO = 1;
 	public final int FAVOR = 2;
 	private Book dBook;
