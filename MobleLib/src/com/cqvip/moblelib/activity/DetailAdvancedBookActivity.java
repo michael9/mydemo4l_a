@@ -1,31 +1,40 @@
 package com.cqvip.moblelib.activity;
 
-import java.util.HashMap;
+import java.util.Map;
 
+import org.json.JSONObject;
+
+import android.content.Context;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
-import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 
+import com.android.volley.Request.Method;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.cqvip.moblelib.R;
 import com.cqvip.moblelib.base.IBookManagerActivity;
-import com.cqvip.moblelib.biz.ManagerService;
-import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.Constant;
+import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.view.CustomProgressDialog;
 
-public class DetailAdvancedBookActivity extends BaseActivity implements IBookManagerActivity {
+public class DetailAdvancedBookActivity extends BaseActivity{
 
 	private TextView content;
 	private int type;
 	private String id;
+	private Map<String, String> gparams;
+	private Context context;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_detail_advanced_book);
-		
+		context = this;
 		content = (TextView)findViewById(R.id.ad_book_content);
 		type = getIntent().getIntExtra("type",1);
 		id = getIntent().getStringExtra("id");
@@ -33,6 +42,7 @@ public class DetailAdvancedBookActivity extends BaseActivity implements IBookMan
 			content.setText(id);
 			setheadbar(getResources().getString(R.string.title_FAQ));
 		}else{
+		customProgressDialog.show();
 		getContent(id);
 		setheadbar(getResources().getString(R.string.title_moredetail));
 		}
@@ -42,7 +52,7 @@ public class DetailAdvancedBookActivity extends BaseActivity implements IBookMan
 	{
 		View headbar,btn_back;
 		TextView bar_title;
-		customProgressDialog=CustomProgressDialog.createDialog(this);
+		//customProgressDialog=CustomProgressDialog.createDialog(context);
 		headbar=findViewById(R.id.head_bar);
 		bar_title=(TextView)headbar.findViewById(R.id.txt_header);
 		bar_title.setText(title);
@@ -58,26 +68,38 @@ public class DetailAdvancedBookActivity extends BaseActivity implements IBookMan
 	}
 
 	private void getContent(String id2) {
-//		customProgressDialog.show();
-		ManagerService.allActivity.add(this);
-		HashMap map=new HashMap();
-		map.put("id", id2);
-		ManagerService.addNewTask(new Task(Task.TASK_SUGGEST_DETAIL,map));
-			
-	}
-
-
-	@Override
-	public void init() {
 	
-		
+		String serverurl = GlobleData.SERVER_URL + "/library/announce/detail.aspx?libid=1&announceid="+id2;
+		JsonObjectRequest myReq = new JsonObjectRequest(Method.GET,serverurl,null,createDetailListener(),createMyReqErrorListener());
+		mQueue.add(myReq);
 	}
+	private Response.Listener<JSONObject> createDetailListener() {
+        return new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject json) {
+            	customProgressDialog.dismiss();
+            	try {
+    				if (json.getString("success").equalsIgnoreCase("true")) {
+    					content.setText(Html.fromHtml(json.getString("contents")));
+    				}
+    			} catch (Exception e) {
+    				content.setText(getResources()
+    						.getString(R.string.loadfail));
+    			}
 
-	@Override
-	public void refresh(Object... obj) {		
-		String res =(String)obj[0];
-		content.setText(Html.fromHtml(res));
-//		customProgressDialog.dismiss();
-	}
-
+            	
+            	
+            }
+        };
+    }
+    private Response.ErrorListener createMyReqErrorListener() {
+        return new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+        		customProgressDialog.dismiss();
+        		content.setText(getResources()
+						.getString(R.string.loadfail));
+            }
+        };
+    }
 }

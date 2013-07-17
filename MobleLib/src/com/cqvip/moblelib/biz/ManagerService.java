@@ -323,15 +323,15 @@ public class ManagerService extends Service implements Runnable {
 //				}
 //				adbook.refresh(msg.what,msg.obj);
 //				break;
-			case Task.TASK_SUGGEST_DETAIL:
-				DetailAdvancedBookActivity adbookDetail= (DetailAdvancedBookActivity) ManagerService.getActivityByName("DetailAdvancedBookActivity");
-				if (msg.arg1 != 0) {
-					adbookDetail.onError(2);
-					msg.arg1 = 0;
-					break;
-				}
-				adbookDetail.refresh(msg.obj);
-				break;
+//			case Task.TASK_SUGGEST_DETAIL:
+//				DetailAdvancedBookActivity adbookDetail= (DetailAdvancedBookActivity) ManagerService.getActivityByName("DetailAdvancedBookActivity");
+//				if (msg.arg1 != 0) {
+//					adbookDetail.onError(2);
+//					msg.arg1 = 0;
+//					break;
+//				}
+//				adbookDetail.refresh(msg.obj);
+//				break;
 //			case Task.TASK_ANNOUNCE_NEWS:	
 //			case Task.TASK_ANNOUNCE_NEWS_MORE:
 //			case Task.TASK_ANNOUNCE_WELFARE:
