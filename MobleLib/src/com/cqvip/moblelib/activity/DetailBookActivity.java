@@ -149,7 +149,11 @@ public class DetailBookActivity extends BaseActivity {
 					@Override
 					public void onClick(View v) {
 						if (GlobleData.islogin) {
-							gparams=Tool.bookfavorite(gparams, dBook);
+							gparams=new HashMap<String, String>();
+							gparams.put("libid",  GlobleData.LIBIRY_ID);
+							gparams.put("vipuserid", GlobleData.cqvipid);
+							gparams.put("typeid", ""+GlobleData.BOOK_SZ_TYPE);
+							gparams.put("keyid", Tool.formSZbookID(dBook.getCallno(),dBook.getRecordid()));
 							customProgressDialog.show();
 							requestVolley(GlobleData.SERVER_URL+"/cloud/favorite.aspx",bookfavorite_ls,Method.POST);
 						} else {

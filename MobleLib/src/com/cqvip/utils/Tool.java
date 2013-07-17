@@ -59,19 +59,7 @@ public class Tool {
 		}
 	}
 
-	// 收藏
-	public static void bookEfavorite(Context mcontext, EBook mbook) {
-		if (mbook != null) {
-			HashMap<String, String> map = new HashMap<String, String>();
-			map.put("libid", GlobleData.LIBIRY_ID);
-			map.put("vipuserid", GlobleData.cqvipid);
-//			Log.i("收藏",  GlobleData.cqvipid);
-			map.put("keyid", mbook.getLngid());
-//			Log.i("keyid", book.getLngid());
-			map.put("typeid", ""+GlobleData.BOOK_ZK_TYPE);
-			ManagerService.addNewTask(new Task(Task.TASK_EBOOK_FAVOR, map));
-		}
-	}
+
 	// 分享
 	public static void bookshare(Context mcontext, Book mbook) {
 		if (mbook != null) {
@@ -111,30 +99,24 @@ public class Tool {
 			mcontext.startActivity(intent);
 		}
 	}
-
-	// 收藏
-//	public static void bookfavorite(Context mcontext, Book mbook) {
-//		if (mbook != null) {
-//			HashMap<String, String> map = new HashMap<String, String>();
-//			map.put("libid", GlobleData.LIBIRY_ID);
-//			map.put("vipuserid", GlobleData.cqvipid);
-//			// Log.i("收藏", GlobleData.cqvipid);
-//			map.put("keyid", mbook.getCallno());
-//			// Log.i("keyid", book.getCallno());
-//			map.put("typeid", "" + GlobleData.BOOK_SZ_TYPE);
-//			map.put("recordid", mbook.getRecordid());
-//			ManagerService.addNewTask(new Task(Task.TASK_LIB_FAVOR, map));
-//		}
+//	// 收藏
+//	public static Map<String, String> bookfavorite(Map<String, String> params,Book mbook) {
+//			params=new HashMap<String, String>();
+//			params.put("libid",  GlobleData.LIBIRY_ID);
+//			params.put("vipuserid", GlobleData.cqvipid);
+//			params.put("typeid", ""+GlobleData.BOOK_SZ_TYPE);
+//			params.put("keyid", Tool.formSZbookID(mbook.getCallno(),mbook.getRecordid()));
+//		return params;
 //	}
-	public static Map<String, String> bookfavorite(Map<String, String> params,Book mbook) {
-			params=new HashMap<String, String>();
-			params.put("libid",  GlobleData.LIBIRY_ID);
-			params.put("vipuserid", GlobleData.cqvipid);
-			params.put("typeid", ""+GlobleData.BOOK_SZ_TYPE);
-			params.put("keyid", Tool.formSZbookID(mbook.getCallno(),mbook.getRecordid()));
-		return params;
-	}
-
+//	// 收藏
+//	public static  Map<String, String> bookEfavorite(Map<String, String> params, EBook mbook) {
+//		params=new HashMap<String, String>();
+//		params.put("libid",  GlobleData.LIBIRY_ID);
+//		params.put("vipuserid", GlobleData.cqvipid);
+//		params.put("typeid", ""+GlobleData.BOOK_ZK_TYPE);
+//		params.put("keyid", mbook.getLngid());
+//		return params;
+//	}
 	/**
 	 * Toast提示
 	 * 

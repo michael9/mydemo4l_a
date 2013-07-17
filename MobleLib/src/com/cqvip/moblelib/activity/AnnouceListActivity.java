@@ -174,23 +174,40 @@ public class AnnouceListActivity extends BaseActivity implements OnItemClickList
 		switch(type){
 		case Constant.SPEECH_NEWS://新闻动态
 			gparams.put("announcetypeid", ""+2);		
+			if(mwhat == GETHOMEPAGE){
+				requestVolley(GlobleData.SERVER_URL
+						+ "/library/announce/list.aspx", backlistener,
+						Method.POST);
+			}else{
+				requestVolley(GlobleData.SERVER_URL
+						+ "/library/announce/list.aspx", backlistenermore,
+						Method.POST);
+			}
 			break;
 		case Constant.SPPECH_FREE://公益讲座
 			gparams.put("announcetypeid", ""+1);		
+			if(mwhat == GETHOMEPAGE){
+				requestVolley(GlobleData.SERVER_URL
+						+ "/library/announce/list.aspx", backlistener,
+						Method.POST);
+			}else{
+				requestVolley(GlobleData.SERVER_URL
+						+ "/library/announce/list.aspx", backlistenermore,
+						Method.POST);
+			}
 			break;
 		case Constant.QUESTION://常见问题
 			gparams.put("announcetypeid", ""+5);			
+			if(mwhat == GETHOMEPAGE){
+				requestVolley(GlobleData.SERVER_URL
+						+ "/library/announce/html.aspx", backlistener,
+						Method.POST);
+			}else{
+				requestVolley(GlobleData.SERVER_URL
+						+ "/library/announce/html.aspx", backlistenermore,
+						Method.POST);
+			}
 			break;
-		}
-		
-		if(mwhat == GETHOMEPAGE){
-			requestVolley(GlobleData.SERVER_URL
-					+ "/library/announce/list.aspx", backlistener,
-					Method.POST);
-		}else{
-			requestVolley(GlobleData.SERVER_URL
-					+ "/library/announce/list.aspx", backlistenermore,
-					Method.POST);
 		}
 	}
 
