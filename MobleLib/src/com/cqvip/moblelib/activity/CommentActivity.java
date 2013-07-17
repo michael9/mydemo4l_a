@@ -20,7 +20,9 @@ import com.android.volley.Request.Method;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.ImageLoader.ImageListener;
 import com.cqvip.mobelib.imgutils.AsyncTask;
 import com.cqvip.moblelib.R;
 import com.cqvip.moblelib.adapter.CommentItemAdapter;
@@ -31,6 +33,7 @@ import com.cqvip.moblelib.model.Comment;
 import com.cqvip.moblelib.model.Result;
 import com.cqvip.moblelib.net.BookException;
 import com.cqvip.moblelib.view.DownFreshListView;
+import com.cqvip.utils.BitmapCache;
 import com.cqvip.utils.Tool;
 
 public class CommentActivity extends BaseActivity implements
@@ -82,7 +85,10 @@ public class CommentActivity extends BaseActivity implements
 		intro_tv.setText(getString(R.string.item_describe) + describe);
 
 		if (!TextUtils.isEmpty(dBook.getCover_path())) {
-			mImageFetcher.loadImage(dBook.getCover_path(), img);
+			//mImageFetcher.loadImage(dBook.getCover_path(), img);
+	        ImageLoader mImageLoader = new ImageLoader(mQueue, new BitmapCache());
+			ImageListener listener = ImageLoader.getImageListener(img, R.drawable.defaut_book, R.drawable.defaut_book);
+			mImageLoader.get(dBook.getCover_path(), listener);
 		} else {
 			img.setImageDrawable(getResources().getDrawable(
 					R.drawable.defaut_book));

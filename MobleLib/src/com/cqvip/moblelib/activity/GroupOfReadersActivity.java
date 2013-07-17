@@ -81,7 +81,7 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 	Map<Integer, List<Favorite>> arrayLists_sz, arrayLists_zk;
 	ArrayList<Favorite> arrayList_zk = new ArrayList<Favorite>();
 	ArrayList<Favorite> arrayList_sz = new ArrayList<Favorite>();
-	private int listviewpagetag=GlobleData.BOOK_SZ_TYPE;
+	private int listviewpagetag = GlobleData.BOOK_SZ_TYPE;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -110,7 +110,7 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 		map.put("curpage", "" + pagecount);
 		map.put("perpage", "" + perpage);
 		map.put("typeid", "" + typeid);
-		//ManagerService.addNewTask(new Task(Task.TASK_COMMENT_BOOKLIST, map));
+		// ManagerService.addNewTask(new Task(Task.TASK_COMMENT_BOOKLIST, map));
 		switch (type) {
 		case GETFIRSTPAGE_SZ:
 			requestVolley(map, GlobleData.SERVER_URL
@@ -124,7 +124,7 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 			break;
 		case GETNEXT:
 			requestVolley(map, GlobleData.SERVER_URL
-					+ "/cloud/favoritelistuser.aspx", backlistenermore,
+					+ "/cloud/commentlistuser.aspx", backlistenermore,
 					Method.POST);
 			break;
 		default:
@@ -152,8 +152,8 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 			// TODO Auto-generated method stub
 			customProgressDialog.dismiss();
 			try {
-				arrayLists_sz = Favorite
-						.formList(Task.TASK_COMMENT_BOOKLIST, response);
+				arrayLists_sz = Favorite.formList(Task.TASK_COMMENT_BOOKLIST,
+						response);
 			} catch (BookException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -176,8 +176,8 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 			// TODO Auto-generated method stub
 			customProgressDialog.dismiss();
 			try {
-				arrayLists_zk = Favorite
-						.formList(Task.TASK_COMMENT_BOOKLIST, response);
+				arrayLists_zk = Favorite.formList(Task.TASK_COMMENT_BOOKLIST,
+						response);
 			} catch (BookException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -198,32 +198,39 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 		@Override
 		public void onResponse(String response) {
 			try {
-				arrayLists_sz = Favorite
-						.formList(Task.TASK_COMMENT_BOOKLIST, response);
+				arrayLists_sz = Favorite.formList(Task.TASK_COMMENT_BOOKLIST,
+						response);
 			} catch (BookException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				onError(2);
 			}
-			if (arrayLists_sz != null && !arrayLists_sz.isEmpty()) {
-				if ((arrayLists_sz.get(GlobleData.BOOK_ZK_TYPE) == null || arrayLists_sz
-						.get(GlobleData.BOOK_ZK_TYPE).isEmpty())
-						&& (arrayLists_sz.get(GlobleData.BOOK_SZ_TYPE) == null || arrayLists_sz
-								.get(GlobleData.BOOK_SZ_TYPE).isEmpty())) {
+
+			if (listviewpagetag == GlobleData.BOOK_SZ_TYPE) {
+				if (arrayLists_sz.get(GlobleData.BOOK_SZ_TYPE) != null
+						&& !arrayLists_sz.get(GlobleData.BOOK_SZ_TYPE)
+								.isEmpty()) {
+					curpage_sz++;
+					arrayList_sz.addAll(arrayLists_sz
+							.get(GlobleData.BOOK_SZ_TYPE));
+					// mSectionsPagerAdapter.notifyDataSetChanged();
+					adapter_sz.notifyDataSetChanged();
+				} else {
 					Tool.ShowMessages(context, "没有更多内容可供加载");
 					moreprocess.setVisibility(View.GONE);
-					return;
 				}
-			}
-			if(listviewpagetag==GlobleData.BOOK_SZ_TYPE){
-				curpage_sz++;
-			arrayList_sz.addAll(arrayLists_sz.get(GlobleData.BOOK_SZ_TYPE));
-			// mSectionsPagerAdapter.notifyDataSetChanged();
-			adapter_sz.notifyDataSetChanged();
-			}else{
-				curpage_zk++;
-				arrayList_zk.addAll(arrayLists_sz.get(GlobleData.BOOK_ZK_TYPE));
-				adapter_zk.notifyDataSetChanged();
+			} else {
+				if (arrayLists_sz.get(GlobleData.BOOK_ZK_TYPE) != null
+						&& !arrayLists_sz.get(GlobleData.BOOK_ZK_TYPE)
+								.isEmpty()) {
+					curpage_zk++;
+					arrayList_zk.addAll(arrayLists_sz
+							.get(GlobleData.BOOK_ZK_TYPE));
+					adapter_zk.notifyDataSetChanged();
+				} else {
+					Tool.ShowMessages(context, "没有更多内容可供加载");
+					moreprocess.setVisibility(View.GONE);
+				}
 			}
 		}
 	};
@@ -356,13 +363,15 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 				// 进度条
 				moreprocess = view.findViewById(R.id.footer_progress);
 				moreprocess.setVisibility(View.VISIBLE);
-				//Log.i("parent.getTag()", "" + parent.getTag());
+				// Log.i("parent.getTag()", "" + parent.getTag());
 				// 请求网络更多
-				listviewpagetag=(Integer) parent.getTag();
+				listviewpagetag = (Integer) parent.getTag();
 				if (listviewpagetag == GlobleData.BOOK_SZ_TYPE) {
-					getfavorlist(curpage_sz+1, perpage, GlobleData.BOOK_SZ_TYPE,GETNEXT);
+					getfavorlist(curpage_sz + 1, perpage,
+							GlobleData.BOOK_SZ_TYPE, GETNEXT);
 				} else if (listviewpagetag == GlobleData.BOOK_ZK_TYPE) {
-					getfavorlist(curpage_zk+1, perpage, GlobleData.BOOK_ZK_TYPE,GETNEXT);
+					getfavorlist(curpage_zk + 1, perpage,
+							GlobleData.BOOK_ZK_TYPE, GETNEXT);
 				}
 			} else {
 				Favorite favorite = null;
@@ -573,43 +582,45 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 		customProgressDialog.show();
 	}
 
-//	@Override
-//	public void refresh(Object... obj) {
-//		customProgressDialog.dismiss();
-//		Log.i("MyFavorActivity_refresh", "refresh");
-//		int temp = (Integer) obj[0];
-//		if (temp == COMMENTLIST) {
-//			arrayLists = (Map<Integer, List<Favorite>>) obj[1];
-//			if (arrayLists != null && !arrayLists.isEmpty()) {
-//				// if
-//				// ((curpage_sz>1||curpage_zk>1)&&(arrayLists.get(GlobleData.BOOK_ZK_TYPE)==null||arrayLists.get(GlobleData.BOOK_ZK_TYPE).isEmpty())&&
-//				// (arrayLists.get(GlobleData.BOOK_SZ_TYPE)==null||arrayLists.get(GlobleData.BOOK_SZ_TYPE).isEmpty()))
-//				// {
-//				// Tool.ShowMessages(context, "没有更多内容可供加载");
-//				// moreprocess.setVisibility(View.GONE);
-//				// return;
-//				// }
-//				ArrayList<Favorite> temp_sz_list = (ArrayList<Favorite>) arrayLists
-//						.get(GlobleData.BOOK_SZ_TYPE);
-//				ArrayList<Favorite> temp_zk_list = (ArrayList<Favorite>) arrayLists
-//						.get(GlobleData.BOOK_ZK_TYPE);
-//				if (temp_sz_list != null) {
-//					arrayList_sz
-//							.addAll(arrayLists.get(GlobleData.BOOK_SZ_TYPE));
-//					// mSectionsPagerAdapter.notifyDataSetChanged();
-//					adapter_sz.notifyDataSetChanged();
-//				} else if (temp_zk_list != null) {
-//					arrayList_zk
-//							.addAll(arrayLists.get(GlobleData.BOOK_ZK_TYPE));
-//					adapter_zk.notifyDataSetChanged();
-//				}
-//			} else if (curpage_sz > 1 || curpage_zk > 1) {
-//				Tool.ShowMessages(context, "没有更多内容可供加载");
-//				if (moreprocess != null)
-//					moreprocess.setVisibility(View.GONE);
-//			}
-//		}
-//	}
+	// @Override
+	// public void refresh(Object... obj) {
+	// customProgressDialog.dismiss();
+	// Log.i("MyFavorActivity_refresh", "refresh");
+	// int temp = (Integer) obj[0];
+	// if (temp == COMMENTLIST) {
+	// arrayLists = (Map<Integer, List<Favorite>>) obj[1];
+	// if (arrayLists != null && !arrayLists.isEmpty()) {
+	// // if
+	// //
+	// ((curpage_sz>1||curpage_zk>1)&&(arrayLists.get(GlobleData.BOOK_ZK_TYPE)==null||arrayLists.get(GlobleData.BOOK_ZK_TYPE).isEmpty())&&
+	// //
+	// (arrayLists.get(GlobleData.BOOK_SZ_TYPE)==null||arrayLists.get(GlobleData.BOOK_SZ_TYPE).isEmpty()))
+	// // {
+	// // Tool.ShowMessages(context, "没有更多内容可供加载");
+	// // moreprocess.setVisibility(View.GONE);
+	// // return;
+	// // }
+	// ArrayList<Favorite> temp_sz_list = (ArrayList<Favorite>) arrayLists
+	// .get(GlobleData.BOOK_SZ_TYPE);
+	// ArrayList<Favorite> temp_zk_list = (ArrayList<Favorite>) arrayLists
+	// .get(GlobleData.BOOK_ZK_TYPE);
+	// if (temp_sz_list != null) {
+	// arrayList_sz
+	// .addAll(arrayLists.get(GlobleData.BOOK_SZ_TYPE));
+	// // mSectionsPagerAdapter.notifyDataSetChanged();
+	// adapter_sz.notifyDataSetChanged();
+	// } else if (temp_zk_list != null) {
+	// arrayList_zk
+	// .addAll(arrayLists.get(GlobleData.BOOK_ZK_TYPE));
+	// adapter_zk.notifyDataSetChanged();
+	// }
+	// } else if (curpage_sz > 1 || curpage_zk > 1) {
+	// Tool.ShowMessages(context, "没有更多内容可供加载");
+	// if (moreprocess != null)
+	// moreprocess.setVisibility(View.GONE);
+	// }
+	// }
+	// }
 
 	public void onError(int a) {
 		if (customProgressDialog != null && customProgressDialog.isShowing()) {
