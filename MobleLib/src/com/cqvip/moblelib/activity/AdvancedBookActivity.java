@@ -35,7 +35,7 @@ import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.moblelib.view.DownFreshListView;
 import com.cqvip.utils.Tool;
 
-public class AdvancedBookActivity extends BaseImageActivity implements OnItemClickListener,DownFreshListView.OnRefreshListener {
+public class AdvancedBookActivity extends BaseActivity implements OnItemClickListener,DownFreshListView.OnRefreshListener {
 
 	private  final int GETMORE = 1;
 	private  final int GETHOMEPAGE = 0;
@@ -109,7 +109,7 @@ public class AdvancedBookActivity extends BaseImageActivity implements OnItemCli
 			try {
 				List<ShortBook> lists= ShortBook.formList(sendtype, response);
 				if(lists!=null&&!lists.isEmpty()){
-					adapter = new  AdvancedBookAdapter(context,lists,mImageFetcher);
+					adapter = new  AdvancedBookAdapter(context,lists,mQueue);
 					listview.setAdapter(adapter);
 					}				
 			} catch (Exception e) {

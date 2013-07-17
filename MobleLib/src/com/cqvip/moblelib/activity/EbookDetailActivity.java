@@ -19,7 +19,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.Request.Method;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
+import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.ImageLoader.ImageListener;
 import com.cqvip.mobelib.imgutils.ImageCache.ImageCacheParams;
 import com.cqvip.mobelib.imgutils.ImageFetcher;
 import com.cqvip.moblelib.R;
@@ -31,6 +33,7 @@ import com.cqvip.moblelib.model.Book;
 import com.cqvip.moblelib.model.EBook;
 import com.cqvip.moblelib.model.Result;
 import com.cqvip.moblelib.model.ShortBook;
+import com.cqvip.utils.BitmapCache;
 import com.cqvip.utils.Tool;
 
 public class EbookDetailActivity extends BaseActivity {
@@ -43,7 +46,7 @@ public class EbookDetailActivity extends BaseActivity {
 			btn_ebook_detail_download;
 	private View title_bar, book_action_bar;
 	private ImageView img_book;
-	private ImageFetcher mImageFetcher;
+//	private ImageFetcher mImageFetcher;
 	private Map<String, String> gparams;
 
 	@Override
@@ -82,17 +85,12 @@ public class EbookDetailActivity extends BaseActivity {
 		String page1 = getResources().getString(R.string.ebook_page);
 		String describe1 = getResources().getString(R.string.ebook_abstrac);
 		String type1 = getResources().getString(R.string.ebook_type);
-		ImageCacheParams cacheParams = new ImageCacheParams(
-				EbookDetailActivity.this, GlobleData.IMAGE_CACHE_DIR);
-		cacheParams.setMemCacheSizePercent(0.125f); // Set memory cache to 12.5%
-													// of app memory
-		mImageFetcher = new ImageFetcher(EbookDetailActivity.this,
-				getResources().getDimensionPixelSize(R.dimen.bookicon_width),
-				getResources().getDimensionPixelSize(R.dimen.bookicon_height));
-		mImageFetcher.setLoadingImage(R.drawable.defaut_book);
-		mImageFetcher.addImageCache(cacheParams);
-		mImageFetcher.setImageFadeIn(false);
-		mImageFetcher.loadImage(dBook.getImgurl(), img_book);
+		
+		ImageLoader mImageLoader = new ImageLoader(mQueue, new BitmapCache());
+		ImageListener listener = ImageLoader.getImageListener(img_book, R.drawable.defaut_book, R.drawable.defaut_book);
+		mImageLoader.get(dBook.getImgurl(), listener);
+
+		
 		title.setText(dBook.getTitle_c());
 		author.setText(author1 + dBook.getWriter());
 		from.setText(from1 + dBook.getName_c());
@@ -217,25 +215,6 @@ public class EbookDetailActivity extends BaseActivity {
 		gparams.put("lngid", recordid);
 		requestVolley(GlobleData.SERVER_URL + "/zk/articledown.aspx",
 				detail_ls, Method.POST);
-	}
-
-	@Override
-	public void onResume() {
-		super.onResume();
-		mImageFetcher.setExitTasksEarly(false);
-	}
-
-	@Override
-	protected void onPause() {
-		super.onPause();
-		mImageFetcher.setExitTasksEarly(true);
-		mImageFetcher.flushCache();
-	}
-
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-		mImageFetcher.closeCache();
 	}
 
 	Listener<String> detail_ls = new Listener<String>() {

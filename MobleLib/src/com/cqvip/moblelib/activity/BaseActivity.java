@@ -1,5 +1,7 @@
 package com.cqvip.moblelib.activity;
 
+import java.util.Map;
+
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.cqvip.moblelib.R;
@@ -20,7 +22,7 @@ public class BaseActivity extends Activity {
 	private GestureDetector mGestureDetector;
 	protected CustomProgressDialog customProgressDialog;
 	protected RequestQueue mQueue;
-	
+
 	
 	
 	@Override

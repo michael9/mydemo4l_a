@@ -12,15 +12,20 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.ImageLoader.ImageListener;
 import com.cqvip.mobelib.imgutils.ImageFetcher;
 import com.cqvip.moblelib.R;
 import com.cqvip.moblelib.activity.BigImgActivity;
 import com.cqvip.moblelib.model.ShortBook;
+import com.cqvip.utils.BitmapCache;
 
 public class AdvancedBookAdapter extends BaseAdapter {
 	private Context context;
 	private List<ShortBook> lists;
-	private ImageFetcher fetch;
+	private RequestQueue mQueue;
+	
 	public AdvancedBookAdapter(Context context){
 		this.context = context;
 	}
@@ -28,10 +33,10 @@ public class AdvancedBookAdapter extends BaseAdapter {
 		this.context = context;
 		this.lists = lists;
 	}
-	public AdvancedBookAdapter(Context context,List<ShortBook> lists,ImageFetcher fetch){
+	public AdvancedBookAdapter(Context context,List<ShortBook> lists,RequestQueue mQueue){
 		this.context = context;
 		this.lists = lists;
-		this.fetch = fetch;
+		this.mQueue = mQueue;
 	}
 	public List<ShortBook> getLists(){
 		return lists;
@@ -100,26 +105,31 @@ public class AdvancedBookAdapter extends BaseAdapter {
 		}
 		    ShortBook book = lists.get(position);
 	        holder.title.setText(book.getMessage());
-	      //Õº∆¨
-	        if(!TextUtils.isEmpty(book.getDate())){
-	        	fetch.loadImage(book.getDate(), holder.img);
-	        	final String bigimg = book.getSucesss();
-	        	holder.img.setOnClickListener(new View.OnClickListener() {
-	        		
-	        		@Override
-	        		public void onClick(View v) {
-	        			if(TextUtils.isEmpty(bigimg)){
-	        				return;
-	        			}
-	        			Intent  intent = new Intent(context,BigImgActivity.class);
-	        			intent.putExtra("bigurl", bigimg);
-	        			context.startActivity(intent);
-	        			
-	        		}
-	        	});
-	        }else{
-	        	holder.img.setBackgroundResource(R.drawable.defaut_book);
-	        }
+	        
+	        ImageLoader mImageLoader = new ImageLoader(mQueue, new BitmapCache());
+			ImageListener listener = ImageLoader.getImageListener(holder.img,
+					R.drawable.defaut_book, R.drawable.defaut_book);
+			mImageLoader.get(book.getDate(), listener);
+//	      //Õº∆¨
+//	        if(!TextUtils.isEmpty(book.getDate())){
+//	        	fetch.loadImage(book.getDate(), holder.img);
+//	        	final String bigimg = book.getSucesss();
+//	        	holder.img.setOnClickListener(new View.OnClickListener() {
+//	        		
+//	        		@Override
+//	        		public void onClick(View v) {
+//	        			if(TextUtils.isEmpty(bigimg)){
+//	        				return;
+//	        			}
+//	        			Intent  intent = new Intent(context,BigImgActivity.class);
+//	        			intent.putExtra("bigurl", bigimg);
+//	        			context.startActivity(intent);
+//	        			
+//	        		}
+//	        	});
+//	        }else{
+//	        	holder.img.setBackgroundResource(R.drawable.defaut_book);
+//	        }
 	        //∑÷œÌ
 		return convertView;
 	}
