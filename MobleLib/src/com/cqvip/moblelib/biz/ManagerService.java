@@ -158,15 +158,15 @@ public class ManagerService extends Service implements Runnable {
 //				}
 //				service.refresh(DetailTextActivity.E_SERVICE, msg.obj);
 //				break;
-			case Task.TASK_BOOK_INFO:
-				IBookManagerActivity binfo = (IBookManagerActivity) ManagerService
-						.getActivityByName("DetailBookActivity");
-				if (msg.arg1 != 0) {
-					doException(2,msg, "DetailBookActivity");
-					break;
-				}
-				binfo.refresh(DetailBookActivity.GETBOOKINFO, msg.obj);
-				break;
+//			case Task.TASK_BOOK_INFO:
+//				IBookManagerActivity binfo = (IBookManagerActivity) ManagerService
+//						.getActivityByName("DetailBookActivity");
+//				if (msg.arg1 != 0) {
+//					doException(2,msg, "DetailBookActivity");
+//					break;
+//				}
+//				binfo.refresh(DetailBookActivity.GETBOOKINFO, msg.obj);
+//				break;
 			// 修改密码
 			case Task.TASK_USER_PWD:
 				IBookManagerActivity pwd = (IBookManagerActivity) ManagerService
@@ -254,14 +254,14 @@ public class ManagerService extends Service implements Runnable {
 				//favor.refresh(MyFavorActivity.FAVOR,msg.obj,msg.arg2);
 				break;	
 				//馆藏图书收藏20
-			case Task.TASK_LIB_FAVOR:
-				IBookManagerActivity favor_lib = (IBookManagerActivity) ManagerService.getActivityByName("DetailBookActivity");
-				if (msg.arg1 != 0) {
-					doException(5,msg, "DetailBookActivity");
-					break;
-				}
-				favor_lib.refresh(DetailBookActivity.FAVOR,msg.obj);
-				break;	
+//			case Task.TASK_LIB_FAVOR:
+//				IBookManagerActivity favor_lib = (IBookManagerActivity) ManagerService.getActivityByName("DetailBookActivity");
+//				if (msg.arg1 != 0) {
+//					doException(5,msg, "DetailBookActivity");
+//					break;
+//				}
+//				favor_lib.refresh(DetailBookActivity.FAVOR,msg.obj);
+//				break;	
 				//取消收藏21
 			case Task.TASK_CANCEL_FAVOR:
 				MyFavorActivity favor_cancel = (MyFavorActivity) ManagerService.getActivityByName("MyFavorActivity");
@@ -311,18 +311,18 @@ public class ManagerService extends Service implements Runnable {
 				comments.refresh(msg.what,msg.obj);
 				break;	
 			
-			case Task.TASK_SUGGEST_NEWBOOK:	
-			case Task.TASK_SUGGEST_NEWBOOK_MORE:
-			case Task.TASK_SUGGEST_HOTBOOK:
-			case Task.TASK_SUGGEST_HOTBOOK_MORE:
-				AdvancedBookActivity adbook= (AdvancedBookActivity) ManagerService.getActivityByName("AdvancedBookActivity");
-				if (msg.arg1 != 0) {
-					adbook.onError(2);
-					msg.arg1 = 0;
-					break;
-				}
-				adbook.refresh(msg.what,msg.obj);
-				break;
+//			case Task.TASK_SUGGEST_NEWBOOK:	
+//			case Task.TASK_SUGGEST_NEWBOOK_MORE:
+//			case Task.TASK_SUGGEST_HOTBOOK:
+//			case Task.TASK_SUGGEST_HOTBOOK_MORE:
+//				AdvancedBookActivity adbook= (AdvancedBookActivity) ManagerService.getActivityByName("AdvancedBookActivity");
+//				if (msg.arg1 != 0) {
+//					adbook.onError(2);
+//					msg.arg1 = 0;
+//					break;
+//				}
+//				adbook.refresh(msg.what,msg.obj);
+//				break;
 			case Task.TASK_SUGGEST_DETAIL:
 				DetailAdvancedBookActivity adbookDetail= (DetailAdvancedBookActivity) ManagerService.getActivityByName("DetailAdvancedBookActivity");
 				if (msg.arg1 != 0) {
@@ -332,20 +332,20 @@ public class ManagerService extends Service implements Runnable {
 				}
 				adbookDetail.refresh(msg.obj);
 				break;
-			case Task.TASK_ANNOUNCE_NEWS:	
-			case Task.TASK_ANNOUNCE_NEWS_MORE:
-			case Task.TASK_ANNOUNCE_WELFARE:
-			case Task.TASK_ANNOUNCE_WELFARE_MORE:
-			case Task.TASK_E_CAUTION:
-			case Task.TASK_E_CAUTION_MORE:
-				AnnouceListActivity annouce = (AnnouceListActivity) ManagerService.getActivityByName("AnnouceListActivity");
-				if (msg.arg1 != 0) {
-					annouce.onError(2);
-					msg.arg1 = 0;
-					break;
-				}
-				annouce.refresh(msg.what,msg.obj);
-				break;
+//			case Task.TASK_ANNOUNCE_NEWS:	
+//			case Task.TASK_ANNOUNCE_NEWS_MORE:
+//			case Task.TASK_ANNOUNCE_WELFARE:
+//			case Task.TASK_ANNOUNCE_WELFARE_MORE:
+//			case Task.TASK_E_CAUTION:
+//			case Task.TASK_E_CAUTION_MORE:
+//				AnnouceListActivity annouce = (AnnouceListActivity) ManagerService.getActivityByName("AnnouceListActivity");
+//				if (msg.arg1 != 0) {
+//					annouce.onError(2);
+//					msg.arg1 = 0;
+//					break;
+//				}
+//				annouce.refresh(msg.what,msg.obj);
+//				break;
 			case Task.TASK_ANNOUNCE_DETAIL:
 				
 				break;	

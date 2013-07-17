@@ -1,5 +1,7 @@
 package com.cqvip.moblelib.activity;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
 import com.cqvip.mobelib.imgutils.ImageFetcher;
 import com.cqvip.mobelib.imgutils.ImageCache.ImageCacheParams;
 import com.cqvip.moblelib.R;
@@ -13,6 +15,7 @@ public class BaseFragmentImageActivity  extends FragmentActivity{
 	
 	
 	protected ImageFetcher mImageFetcher;
+	protected RequestQueue mQueue;
 	@Override
 	protected void onCreate(Bundle arg0) {
 		// TODO Auto-generated method stub
@@ -24,6 +27,7 @@ public class BaseFragmentImageActivity  extends FragmentActivity{
 	    mImageFetcher.setLoadingImage(R.drawable.defaut_book);
 	    mImageFetcher.addImageCache(cacheParams);
 	    mImageFetcher.setImageFadeIn(false);
+	    mQueue = Volley.newRequestQueue(this);
 	}
 	
 	@Override
