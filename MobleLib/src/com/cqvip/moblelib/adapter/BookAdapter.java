@@ -133,9 +133,12 @@ public class BookAdapter extends BaseAdapter{
 //			holder.favorite = (Button)convertView.findViewById(R.id.btn_item_result_search_collect);
 //			holder.btn_comment = (Button)convertView.findViewById(R.id.btn_comment);
 			convertView.setTag(holder);
+			//Log.i("BookAdapter", "convertView==null");
 		}else{
 			holder = (ViewHolder) convertView.getTag();
+			//Log.i("BookAdapter", "convertView==null_else");
 		}
+		//Log.i("BookAdapter", "getview");
 		   String author = context.getResources().getString(R.string.item_author);
 		   String publish = context.getResources().getString(R.string.item_publish);
 		   String time =  context.getResources().getString(R.string.item_time);
