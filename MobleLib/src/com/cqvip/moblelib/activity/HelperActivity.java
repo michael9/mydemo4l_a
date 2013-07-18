@@ -16,7 +16,7 @@ import com.cqvip.moblelib.view.ScrollLayout;
 import com.cqvip.moblelib.view.listener.OnViewChangeListener;
 
 public class HelperActivity extends Activity implements OnViewChangeListener {
-	
+
 	private ScrollLayout mScrollLayout;
 	private ImageView[] imgs;
 	private int count;
@@ -24,15 +24,13 @@ public class HelperActivity extends Activity implements OnViewChangeListener {
 	private Button startBtn;
 	private RelativeLayout mainRLayout;
 	private LinearLayout pointLayout;
-	private Context context;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.helper);
-		context = this;
 		initView();
 	}
-	
 
 	private void initView() {
 		mScrollLayout = (ScrollLayout) findViewById(R.id.ScrollLayout);
@@ -40,21 +38,17 @@ public class HelperActivity extends Activity implements OnViewChangeListener {
 		mainRLayout = (RelativeLayout) findViewById(R.id.main_rl);
 		startBtn = (Button) findViewById(R.id.startBtn);
 		startBtn.setOnClickListener(new View.OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				switch (v.getId()) {
 				case R.id.startBtn:
-				
-							Intent intent = new Intent(
-									context,
-									MainMenuActivity.class);
-							context.startActivity(intent);
-							HelperActivity.this.finish();
-					
+					Intent intent = new Intent(HelperActivity.this, MainMenuActivity.class);
+					HelperActivity.this.startActivity(intent);
+					HelperActivity.this.finish();
 					break;
 				}
-				
+
 			}
 		});
 		count = mScrollLayout.getChildCount();
@@ -67,11 +61,8 @@ public class HelperActivity extends Activity implements OnViewChangeListener {
 		currentItem = 0;
 		imgs[currentItem].setEnabled(false);
 		mScrollLayout.SetOnViewChangeListener(this);
-		
-		
-		
-	}
 
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
