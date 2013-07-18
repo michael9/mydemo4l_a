@@ -2,31 +2,20 @@ package com.cqvip.moblelib.activity;
 
 import org.json.JSONObject;
 
-import com.android.volley.VolleyError;
-import com.android.volley.Request.Method;
-import com.android.volley.Response.ErrorListener;
-import com.android.volley.Response.Listener;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.cqvip.moblelib.R;
-import com.cqvip.moblelib.R.layout;
-import com.cqvip.moblelib.R.menu;
-import com.cqvip.moblelib.base.IBookManagerActivity;
-import com.cqvip.moblelib.biz.ManagerService;
-import com.cqvip.moblelib.biz.Task;
-import com.cqvip.moblelib.constant.GlobleData;
-import com.cqvip.moblelib.view.CustomProgressDialog;
-
-import android.net.Uri;
 import android.os.Bundle;
-import android.app.Activity;
-import android.app.ProgressDialog;
-import android.content.Intent;
 import android.text.Html;
 import android.view.Menu;
 import android.view.View;
-import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.android.volley.Request.Method;
+import com.android.volley.Response.ErrorListener;
+import com.android.volley.Response.Listener;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.cqvip.moblelib.R;
+import com.cqvip.moblelib.constant.GlobleData;
 
 public class DetailTextActivity extends BaseActivity {
 	private int type;

@@ -20,23 +20,15 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.android.volley.VolleyError;
 import com.android.volley.Request.Method;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.cqvip.mobelib.imgutils.ImageCache.ImageCacheParams;
-import com.cqvip.mobelib.imgutils.ImageFetcher;
 import com.cqvip.moblelib.R;
-import com.cqvip.moblelib.adapter.BookAdapter;
 import com.cqvip.moblelib.adapter.EbookAdapter;
-import com.cqvip.moblelib.base.IBookManagerActivity;
-import com.cqvip.moblelib.biz.ManagerService;
-import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
-import com.cqvip.moblelib.model.Book;
 import com.cqvip.moblelib.model.EBook;
-import com.cqvip.moblelib.model.Result;
 import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.utils.Tool;
 
@@ -166,8 +158,7 @@ public class EBookSearchActivity extends BaseActivity implements
 		@Override
 		public void onResponse(String response) {
 			// TODO Auto-generated method stub
-			customProgressDialog.dismiss();
-			// moreprocess.setVisibility(View.GONE);
+			 moreprocess.setVisibility(View.GONE);
 			try {
 				// JSONObject mj=new JSONObject(response);
 				List<EBook> lists = EBook.formList(response);
@@ -203,7 +194,7 @@ public class EBookSearchActivity extends BaseActivity implements
 			mQueue.add(mys);
 			mQueue.start();
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 	}
 
@@ -273,12 +264,13 @@ public class EBookSearchActivity extends BaseActivity implements
 	// }
 	// }
 	// }
+	View moreprocess;
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int positon, long id) {
 		if (id == -2) // 更多
 		{
 			// 进度条
-			View moreprocess = arg1.findViewById(R.id.footer_progress);
+		    moreprocess = arg1.findViewById(R.id.footer_progress);
 			moreprocess.setVisibility(View.VISIBLE);
 			// 请求网络更多
 			getHomePage(key, page + 1, DEFAULT_COUNT, 1);

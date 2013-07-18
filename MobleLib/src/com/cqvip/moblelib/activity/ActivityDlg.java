@@ -28,7 +28,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.cqvip.dao.DaoException;
 import com.cqvip.moblelib.R;
 import com.cqvip.moblelib.base.IBookManagerActivity;
-import com.cqvip.moblelib.biz.ManagerService;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.db.MUserDao;

@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import com.cqvip.moblelib.R;
 import com.cqvip.moblelib.activity.ActivityDlg;
-import com.cqvip.moblelib.biz.ManagerService;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.BorrowBook;
@@ -132,7 +131,7 @@ public class BorrowBookAdapter extends BaseAdapter{
 							map.put("userid", GlobleData.readerid);
 							map.put("barcode", book.getBarcode());
 							Task task = new Task(Task.TASK_BOOK_RENEW, map);
-							ManagerService.addNewTask(task);
+							//ManagerService.addNewTask(task);
 							Tool.ShowMessages(context,context.getString(R.string.beginrenew));
 							}
 							else

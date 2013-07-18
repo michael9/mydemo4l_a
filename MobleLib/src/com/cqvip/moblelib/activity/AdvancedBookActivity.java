@@ -26,7 +26,6 @@ import com.cqvip.moblelib.R;
 import com.cqvip.moblelib.activity.AnnouceListActivity.MyNewAdapter;
 import com.cqvip.moblelib.adapter.AdvancedBookAdapter;
 import com.cqvip.moblelib.base.IBookManagerActivity;
-import com.cqvip.moblelib.biz.ManagerService;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.Constant;
 import com.cqvip.moblelib.constant.GlobleData;

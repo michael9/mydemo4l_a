@@ -1,7 +1,6 @@
 package com.cqvip.moblelib.activity;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import android.content.Context;
@@ -13,14 +12,11 @@ import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.view.inputmethod.InputMethodManager;
@@ -36,13 +32,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cqvip.moblelib.R;
-import com.cqvip.moblelib.base.IBookManagerActivity;
-import com.cqvip.moblelib.biz.ManagerService;
-import com.cqvip.moblelib.biz.Task;
-import com.cqvip.moblelib.model.Book;
 import com.cqvip.moblelib.scan.CaptureActivity;
 import com.cqvip.moblelib.view.StableGridView;
-import com.cqvip.utils.Tool;
 
 /**
  * <p>

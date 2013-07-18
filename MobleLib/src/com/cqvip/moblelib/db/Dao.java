@@ -9,7 +9,6 @@ import android.util.Log;
 import com.cqvip.dao.DaoException;
 import com.cqvip.dao.MDAO;
 import com.cqvip.dao.Model;
-import com.cqvip.moblelib.biz.ManagerService;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.utils.PackageUtils;
 

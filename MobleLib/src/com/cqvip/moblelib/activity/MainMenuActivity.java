@@ -22,21 +22,18 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.SlidingDrawer;
 
-import com.android.volley.VolleyError;
 import com.android.volley.Request.Method;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.cqvip.dao.DaoException;
 import com.cqvip.moblelib.R;
 import com.cqvip.moblelib.adapter.GridViewImgAdapter;
-import com.cqvip.moblelib.base.IBookManagerActivity;
-import com.cqvip.moblelib.biz.ManagerService;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.db.MUserDao;
 import com.cqvip.moblelib.entity.MUser;
-import com.cqvip.moblelib.model.Favorite;
 import com.cqvip.moblelib.model.ShortBook;
 import com.cqvip.moblelib.net.BookException;
 import com.cqvip.moblelib.view.StableGridView;
@@ -221,11 +218,11 @@ public class MainMenuActivity extends BaseActivity {
 
 	public void init() {
 		// 初始化 service
-		if (!ManagerService.isrun) {
-			ManagerService.isrun = true;
-			Intent it = new Intent(this, ManagerService.class);
-			this.startService(it);
-		}
+		// if (!ManagerService.isrun) {
+		// ManagerService.isrun = true;
+		// Intent it = new Intent(this, ManagerService.class);
+		// this.startService(it);
+		// }
 		// 检查网络是否可用
 		if (Tool.checkNetWork(context)) {
 
@@ -313,41 +310,41 @@ public class MainMenuActivity extends BaseActivity {
 		// Log.i("MainMenuActivity", "onStop");
 	}
 
-//	@Override
-//	public void refresh(Object... obj) {
-//		ShortBook shortBook = (ShortBook) obj[0];
-//		if (shortBook.getSucesss().equals("true")) {
-//			int remoteversion = Integer.parseInt(shortBook.getId());
-//			updata_url = shortBook.getDate();
-//			// 比较版本号下载更新
-//			int versioncode = 0;
-//			try {
-//				versioncode = this.getPackageManager().getPackageInfo(
-//						"com.cqvip.moblelib", 0).versionCode;
-//				Log.i("mainmenu", "versioncode=" + versioncode);
-//			} catch (NameNotFoundException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//			if (remoteversion > versioncode) {
-//				Intent intent = new Intent(MainMenuActivity.this,
-//						ActivityDlg.class);
-//				intent.putExtra("ACTIONID", 0);
-//				intent.putExtra("MSGBODY", "有更新版本，确定是否更新？");
-//				intent.putExtra("BTN_CANCEL", 1);
-//				startActivityForResult(intent, 105);
-//			}
-//		}
-//	}
+	// @Override
+	// public void refresh(Object... obj) {
+	// ShortBook shortBook = (ShortBook) obj[0];
+	// if (shortBook.getSucesss().equals("true")) {
+	// int remoteversion = Integer.parseInt(shortBook.getId());
+	// updata_url = shortBook.getDate();
+	// // 比较版本号下载更新
+	// int versioncode = 0;
+	// try {
+	// versioncode = this.getPackageManager().getPackageInfo(
+	// "com.cqvip.moblelib", 0).versionCode;
+	// Log.i("mainmenu", "versioncode=" + versioncode);
+	// } catch (NameNotFoundException e) {
+	// // TODO Auto-generated catch block
+	// e.printStackTrace();
+	// }
+	// if (remoteversion > versioncode) {
+	// Intent intent = new Intent(MainMenuActivity.this,
+	// ActivityDlg.class);
+	// intent.putExtra("ACTIONID", 0);
+	// intent.putExtra("MSGBODY", "有更新版本，确定是否更新？");
+	// intent.putExtra("BTN_CANCEL", 1);
+	// startActivityForResult(intent, 105);
+	// }
+	// }
+	// }
 
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
 		// 停止服务
 		// 退出Service
-		context.stopService(new Intent("com.cqvip.moblelib.mainbiz"));
+		// context.stopService(new Intent("com.cqvip.moblelib.mainbiz"));
 		// 关闭子线程
-		ManagerService.isrun = false;
+		// ManagerService.isrun = false;
 
 	}
 

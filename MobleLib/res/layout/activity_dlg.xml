@@ -39,7 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="33dp"
                 android:background="@drawable/btn_dlg"
-                android:text="取消" />
+                android:text="取消" android:layout_weight="1"/>
 
             <Button
                 android:id="@+id/dlg_ok_btn"
@@ -47,7 +47,7 @@
                 android:layout_height="33dp"
                 android:layout_marginLeft="10dp"
                 android:background="@drawable/btn_dlg"
-                android:text="确定" />
+                android:text="确定" android:layout_weight="1"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -131,7 +131,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="33dp"
                     android:background="@drawable/btn_dlg"
-                    android:text="取消" />
+                    android:text="取消" android:layout_weight="1"/>
 
                 <Button
                     android:id="@+id/login_ok_btn"
@@ -139,7 +139,7 @@
                     android:layout_height="33dp"
                     android:layout_marginLeft="10dp"
                     android:background="@drawable/btn_dlg"
-                    android:text="登陆" />
+                    android:text="登陆" android:layout_weight="1"/>
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>

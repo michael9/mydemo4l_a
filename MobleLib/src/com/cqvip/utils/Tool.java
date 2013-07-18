@@ -4,8 +4,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -18,9 +16,6 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.cqvip.moblelib.activity.CommentActivity;
-import com.cqvip.moblelib.biz.ManagerService;
-import com.cqvip.moblelib.biz.Task;
-import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.Book;
 import com.cqvip.moblelib.model.EBook;
 

@@ -28,7 +28,6 @@ import com.cqvip.mobelib.imgutils.AsyncTask;
 import com.cqvip.moblelib.R;
 import com.cqvip.moblelib.adapter.BookAdapter;
 import com.cqvip.moblelib.base.IBookManagerActivity;
-import com.cqvip.moblelib.biz.ManagerService;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.Constant;
 import com.cqvip.moblelib.constant.GlobleData;

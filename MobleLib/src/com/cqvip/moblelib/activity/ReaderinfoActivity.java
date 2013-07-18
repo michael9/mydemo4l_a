@@ -1,10 +1,8 @@
 package com.cqvip.moblelib.activity;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -12,35 +10,24 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.android.volley.RetryPolicy;
-import com.android.volley.VolleyError;
 import com.android.volley.Request.Method;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.cqvip.moblelib.R;
-import com.cqvip.moblelib.adapter.EbookAdapter;
 import com.cqvip.moblelib.adapter.ReaderInfoAdapter;
-import com.cqvip.moblelib.base.IBookManagerActivity;
-import com.cqvip.moblelib.biz.ManagerService;
-import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
-import com.cqvip.moblelib.model.EBook;
 import com.cqvip.moblelib.model.Reader;
-import com.cqvip.moblelib.model.Result;
 import com.cqvip.moblelib.utils.Rotate3dAnimation;
-import com.cqvip.moblelib.view.CustomProgressDialog;
-import com.cqvip.utils.Tool;
 
 public class ReaderinfoActivity extends BaseActivity {
 
