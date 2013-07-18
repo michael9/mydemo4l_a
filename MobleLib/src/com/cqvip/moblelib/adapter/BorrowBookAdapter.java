@@ -2,18 +2,23 @@ package com.cqvip.moblelib.adapter;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.android.volley.Request.Method;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.StringRequest;
 import com.cqvip.moblelib.R;
 import com.cqvip.moblelib.activity.ActivityDlg;
-import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.BorrowBook;
 import com.cqvip.utils.Tool;
@@ -22,12 +27,23 @@ public class BorrowBookAdapter extends BaseAdapter{
 
 	private Context context;
 	private List<BorrowBook> lists;
+	private RequestQueue mQueue;
+	private Response.Listener<String> createRenewSuccessListener;
+	private Response.ErrorListener createMyReqErrorListener;
 	public BorrowBookAdapter(Context context){
 		this.context = context;
 	}
 	public BorrowBookAdapter(Context context,List<BorrowBook> lists){
 		this.context = context;
 		this.lists = lists;
+	}
+	public BorrowBookAdapter(Context context,List<BorrowBook> lists,RequestQueue mQueue,
+			Response.Listener<String> createRenewSuccessListener,Response.ErrorListener createMyReqErrorListener){
+		this.context = context;
+		this.lists = lists;
+		this.mQueue = mQueue;
+		this.createRenewSuccessListener = createRenewSuccessListener;
+		this.createMyReqErrorListener = createMyReqErrorListener;
 	}
 	/**
 	 * 底部更多按钮，返回+1
@@ -127,11 +143,20 @@ public class BorrowBookAdapter extends BaseAdapter{
 							//发送续借请求
 							int p=(Integer)v.getTag();
 							if(lists.get(p).getRenew()==0){								
-							HashMap map = new HashMap();
-							map.put("userid", GlobleData.readerid);
-							map.put("barcode", book.getBarcode());
-							Task task = new Task(Task.TASK_BOOK_RENEW, map);
-							//ManagerService.addNewTask(task);
+						   //续借
+						    StringRequest myReq = new StringRequest(Method.POST,GlobleData.SERVER_URL+"/library/user/renew.aspx",
+                                         createRenewSuccessListener,
+                                         createMyReqErrorListener) {
+							     protected Map<String, String> getParams() throws com.android.volley.AuthFailureError {
+							         Map<String, String> params = new HashMap<String, String>();
+							         params.put("userind", GlobleData.readerid);
+							         params.put("barcode", book.getBarcode());
+							         Log.i("mobile",GlobleData.readerid+","+book.getBarcode());
+							         return params;
+							     }; 
+							 };
+ 							mQueue.add(myReq);
+ 							mQueue.start();
 							Tool.ShowMessages(context,context.getString(R.string.beginrenew));
 							}
 							else
@@ -144,10 +169,6 @@ public class BorrowBookAdapter extends BaseAdapter{
 							}
 						}
 					});
-	        	
-	    //   }
-	        
-		
 		return convertView;
 	}
 

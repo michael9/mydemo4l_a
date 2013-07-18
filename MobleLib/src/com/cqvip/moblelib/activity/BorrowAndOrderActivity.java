@@ -1,27 +1,54 @@
 package com.cqvip.moblelib.activity;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.Request.Method;
+import com.android.volley.Response.ErrorListener;
+import com.android.volley.Response.Listener;
+import com.android.volley.toolbox.StringRequest;
+import com.cqvip.moblelib.R;
+import com.cqvip.moblelib.adapter.AdvancedBookAdapter;
+import com.cqvip.moblelib.adapter.BookAdapter;
+import com.cqvip.moblelib.adapter.BorrowBookAdapter;
+import com.cqvip.moblelib.base.IBookManagerActivity;
+import com.cqvip.moblelib.biz.ManagerService;
+import com.cqvip.moblelib.biz.Task;
+import com.cqvip.moblelib.constant.GlobleData;
+import com.cqvip.moblelib.model.BorrowBook;
+import com.cqvip.moblelib.model.ShortBook;
+import com.cqvip.moblelib.view.CustomProgressDialog;
+import com.cqvip.utils.Tool;
+
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.app.Activity;
+import android.content.Context;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.util.DisplayMetrics;
+import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import com.android.volley.Request.Method;
-import com.android.volley.Response.ErrorListener;
-import com.android.volley.Response.Listener;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.cqvip.moblelib.R;
-import com.cqvip.moblelib.adapter.BorrowBookAdapter;
-import com.cqvip.moblelib.constant.GlobleData;
-import com.cqvip.moblelib.model.BorrowBook;
+import android.widget.Toast;
 
 /**
  * <p>
@@ -107,7 +134,7 @@ public class BorrowAndOrderActivity extends BaseActivity {
 				}else {
 					listview.setVisibility(View.VISIBLE);
 					noborrow_rl.setVisibility(View.GONE);
-					adapter = new BorrowBookAdapter(BorrowAndOrderActivity.this,lists);
+					adapter = new BorrowBookAdapter(BorrowAndOrderActivity.this,lists,mQueue,cl_renew,el_new);
 					listview.setAdapter(adapter);
 				}			
 			} catch (Exception e) {
@@ -144,11 +171,51 @@ public class BorrowAndOrderActivity extends BaseActivity {
   private void getlist() {
 	  customProgressDialog.show();
 	  gparams=new HashMap<String, String>();
-	  gparams.put("userid", GlobleData.userid);	  
+	  gparams.put("userid", GlobleData.readerid);	  
 		requestVolley(GlobleData.SERVER_URL
 				+ "/library/user/borrowlist.aspx", borrowlist_ls,
 				Method.POST);
 }
+	  /**
+	   * 续借成功回调
+	   * @return
+	   */
+  	  private Response.Listener<String> cl_renew = new Response.Listener<String>() {
+	          @Override
+	          public void onResponse(String response) {
+	        		customProgressDialog.dismiss();
+	    			try {
+	    				ShortBook result = new ShortBook(Task.TASK_BOOK_RENEW,response);
+	    				if(result!=null){
+	    				if(result.getSucesss().equals("true")){
+	    				for(int i=0;i<lists.size();i++){
+	    					if(result.getId().equals(lists.get(i).getBarcode())){
+	    						lists.get(i).setRenew(1);
+	    						lists.get(i).setReturndate(result.getDate()+getResources().getString(R.string.alreadyrenew));
+	    						adapter.notifyDataSetChanged();
+	    						break;
+	    					}
+	    				  }
+	    				}
+	    				Tool.ShowMessages(BorrowAndOrderActivity.this, result.getMessage());
+	    			}
+	    			} catch (Exception e) {
+	    				return;
+	    			}
+
+	          }
+	      };
+  	  /**
+  	   * 续借异常
+  	   * @return
+  	   */
+	  private Response.ErrorListener el_new = new Response.ErrorListener() {
+	          @Override
+	          public void onErrorResponse(VolleyError error) {
+	        	  customProgressDialog.dismiss();
+	        	  //提示用户异常
+	          }
+	      };
 
 
 //	@Override

@@ -7,6 +7,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.util.Log;
+
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.net.BookException;
 
@@ -27,11 +29,15 @@ public class ShortBook {
 		case Task.TASK_BOOK_RENEW:
 			try {
 				JSONObject js = new JSONObject(result);
-				JSONObject json = js.getJSONObject("renewinfo");
 				sucesss = js.getString("success");
+				if(sucesss.equalsIgnoreCase("true")){
+				JSONObject json = js.getJSONObject("renewinfo");
 				id = json.getString("barcode");
 				date = json.getString("returndate");
 				message = json.getString("returnmessage");
+				}else{
+				  message = js.getString("message");
+				}
 			} catch (JSONException e) {
 				throw new BookException(e);
 			}
