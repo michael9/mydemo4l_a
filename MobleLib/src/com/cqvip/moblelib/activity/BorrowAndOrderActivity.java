@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.Request.Method;
 import com.android.volley.Response.ErrorListener;
@@ -133,7 +134,7 @@ public class BorrowAndOrderActivity extends BaseActivity {
 				}else {
 					listview.setVisibility(View.VISIBLE);
 					noborrow_rl.setVisibility(View.GONE);
-					adapter = new BorrowBookAdapter(BorrowAndOrderActivity.this,lists);
+					adapter = new BorrowBookAdapter(BorrowAndOrderActivity.this,lists,mQueue,cl_renew,el_new);
 					listview.setAdapter(adapter);
 				}			
 			} catch (Exception e) {
@@ -170,11 +171,51 @@ public class BorrowAndOrderActivity extends BaseActivity {
   private void getlist() {
 	  customProgressDialog.show();
 	  gparams=new HashMap<String, String>();
-	  gparams.put("userid", GlobleData.userid);	  
+	  gparams.put("userid", GlobleData.readerid);	  
 		requestVolley(GlobleData.SERVER_URL
 				+ "/library/user/borrowlist.aspx", borrowlist_ls,
 				Method.POST);
 }
+	  /**
+	   * 续借成功回调
+	   * @return
+	   */
+  	  private Response.Listener<String> cl_renew = new Response.Listener<String>() {
+	          @Override
+	          public void onResponse(String response) {
+	        		customProgressDialog.dismiss();
+	    			try {
+	    				ShortBook result = new ShortBook(Task.TASK_BOOK_RENEW,response);
+	    				if(result!=null){
+	    				if(result.getSucesss().equals("true")){
+	    				for(int i=0;i<lists.size();i++){
+	    					if(result.getId().equals(lists.get(i).getBarcode())){
+	    						lists.get(i).setRenew(1);
+	    						lists.get(i).setReturndate(result.getDate()+getResources().getString(R.string.alreadyrenew));
+	    						adapter.notifyDataSetChanged();
+	    						break;
+	    					}
+	    				  }
+	    				}
+	    				Tool.ShowMessages(BorrowAndOrderActivity.this, result.getMessage());
+	    			}
+	    			} catch (Exception e) {
+	    				return;
+	    			}
+
+	          }
+	      };
+  	  /**
+  	   * 续借异常
+  	   * @return
+  	   */
+	  private Response.ErrorListener el_new = new Response.ErrorListener() {
+	          @Override
+	          public void onErrorResponse(VolleyError error) {
+	        	  customProgressDialog.dismiss();
+	        	  //提示用户异常
+	          }
+	      };
 
 
 //	@Override
