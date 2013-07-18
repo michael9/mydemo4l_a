@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -132,6 +133,8 @@ public class MainMenuActivity extends BaseActivity {
 		mtimer = new Timer();
 		mtimer.schedule(new time_check_task(), 8 * 1000, 6 * 1000);
 		init();
+		ActivityManager activityManager = (ActivityManager) this.getSystemService("activity");
+        Log.i("MemoryClass","" + activityManager.getMemoryClass());
 	}
 
 	private void init_login() {
