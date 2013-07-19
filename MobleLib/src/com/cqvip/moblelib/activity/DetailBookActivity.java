@@ -7,6 +7,7 @@ import java.util.Map;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.View;
@@ -215,8 +216,15 @@ public class DetailBookActivity extends BaseActivity {
 			// TODO Auto-generated method stub
 			customProgressDialog.dismiss();
 			try {
-				List<BookLoc> list = BookLoc.formList(response);
-				add2gc(list);
+				final List<BookLoc> list = BookLoc.formList(response);
+				new Thread(new Runnable() {
+					
+					@Override
+					public void run() {
+						add2gc(list);
+					}
+				}).start();
+				
 			} catch (Exception e) {
 				// TODO: handle exception
 				return;
@@ -264,14 +272,15 @@ public class DetailBookActivity extends BaseActivity {
 		getMenuInflater().inflate(R.menu.detail_book, menu);
 		return true;
 	}
-
+	
+	LinearLayout mll;
 	private void add2gc(List<BookLoc> list) {
 		if (list == null || list.isEmpty())
 			return;
 		for (BookLoc bl : list) {
 			// LinearLayout mll=new LinearLayout(this);
-			LinearLayout mll = (LinearLayout) getLayoutInflater().inflate(
-					R.layout.item_location_book, null);
+			 mll = (LinearLayout) getLayoutInflater().inflate(
+					R.layout.item_location_book, loc_list_ll,false);
 			// mll.inflate(this, R.layout.item_location_book, null);
 			TextView barcode = (TextView) mll
 					.findViewById(R.id.loc_barcode_txt);
@@ -292,8 +301,20 @@ public class DetailBookActivity extends BaseActivity {
 					+ bl.getCirtype());
 			status.setText(context.getString(R.string.item_status)
 					+ bl.getStatus());
-			loc_list_ll.addView(mll);
+			handler.sendEmptyMessage(0);
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
+	
+	Handler handler=new Handler(){
+		public void handleMessage(android.os.Message msg) {
+			loc_list_ll.addView(mll,0);
+		};
+	};
 
 }
