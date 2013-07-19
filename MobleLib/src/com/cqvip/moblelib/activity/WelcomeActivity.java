@@ -27,16 +27,17 @@ public class WelcomeActivity extends Activity {
             switch (msg.what) {
             case 1:
                n++;
-//               if(n==2)
-//                   animator.start();     
+               if(n==2)
+                   animator.start();     
                
-               if(welcomimg.isShown()&&!animator.isRunning())
-            	   animator.start();
+//               if(welcomimg.isShown()&&!animator.isRunning())
+//            	   animator.start();
                
-               if(n==155)
-               {
+               if(n==140){  
+                   animator.stop();
+            	   timer_sys_check.cancel();
+            	   finish();
                    startHelperActivity();
-                   finish();
                    }
                 break;
             }
@@ -85,7 +86,6 @@ public class WelcomeActivity extends Activity {
 		welcomimg=(ImageView)findViewById(R.id.welcome_img);
 		welcomimg.setBackgroundResource(R.anim.welcome_anim);
 		animator = (AnimationDrawable) welcomimg.getBackground();
-		
 	}
 	
 	@Override

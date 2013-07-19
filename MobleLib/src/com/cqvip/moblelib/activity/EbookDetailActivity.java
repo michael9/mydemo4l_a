@@ -147,7 +147,7 @@ public class EbookDetailActivity extends BaseActivity {
 						gparams.put("keyid", dBook.getLngid());
 						gparams.put("typeid", "" + GlobleData.BOOK_ZK_TYPE);
 						requestVolley(GlobleData.SERVER_URL
-								+ "/library/bookquery/search.aspx",
+								+ "/cloud/favorite.aspx",
 								add_forvorite_ls, Method.POST);
 					}
 				} else {
@@ -238,9 +238,8 @@ public class EbookDetailActivity extends BaseActivity {
 				Result result = new Result(response);
 				Tool.ShowMessages(EbookDetailActivity.this, result.getMessage());
 			} catch (Exception e) {
-				// TODO: handle exception
+				e.printStackTrace();
 			}
-
 		}
 	};
 
@@ -265,7 +264,8 @@ public class EbookDetailActivity extends BaseActivity {
 			mQueue.add(mys);
 			mQueue.start();
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
+			onError(2);
 		}
 	}
 
