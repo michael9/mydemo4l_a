@@ -62,7 +62,6 @@ public class ResultOnSearchActivity extends BaseActivity implements
 		edit = (EditText) findViewById(R.id.search_et);
 		listview = (ListView) findViewById(R.id.search_res_lv);
 		listview.setOnItemClickListener((OnItemClickListener) this);
-		customProgressDialog = CustomProgressDialog.createDialog(this);
 		noResult_rl = (RelativeLayout) findViewById(R.id.noresult_rl);
 		edit.setText(getIntent().getStringExtra("ISBN"));
 
@@ -80,6 +79,7 @@ public class ResultOnSearchActivity extends BaseActivity implements
 					return;
 				}
 				// 判断是否是isbn号查询
+				customProgressDialog.show();
 				page = 1;
 				if (Tool.isbnMatch(key)) {
 					getHomePage(key, GETFIRSTPAGE, DEFAULT_COUNT, GETFIRSTPAGE,
@@ -108,6 +108,7 @@ public class ResultOnSearchActivity extends BaseActivity implements
 					return false;
 				}
 				// 网络访问,获取首页
+				customProgressDialog.show();
 				page = 1;
 				if (Tool.isbnMatch(key)) {
 					getHomePage(key, GETFIRSTPAGE, DEFAULT_COUNT, GETFIRSTPAGE,
@@ -225,7 +226,6 @@ public class ResultOnSearchActivity extends BaseActivity implements
 	 */
 	private void getHomePage(String key, int page, int count, int type,
 			String field) {
-		customProgressDialog.show();
 		gparams = new HashMap<String, String>();
 		gparams.put("keyword", key);
 		gparams.put("curpage", "" + page);
