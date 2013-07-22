@@ -35,6 +35,7 @@
     <string name="serv_myintroduceread">我的荐读</string>
     <string name="serv_myintroducebuy">我的荐购</string>
     <string name="serv_myquestion">我的提问</string>
+    <string name="serv_download">下载管理</string>
     <string name="title_activity_ebook_activiy">电子资料</string>
     <string name="title_activity_result_for_search">查询结果</string>
     <string name="title_activity_suggested_reading">推荐阅读</string>
@@ -129,5 +130,6 @@
     <string name="need_pwd">请输入密码</string>
     <string name="need_username">请输入用户名</string>
     <string name="title_activity_big_img">BigImgActivity</string>
+    <string name="title_activity_down_load_manager">下载管理</string>
 
 </resources>
