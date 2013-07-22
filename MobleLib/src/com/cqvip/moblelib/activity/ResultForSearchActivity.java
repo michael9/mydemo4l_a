@@ -46,19 +46,19 @@ public class ResultForSearchActivity extends BaseActivity {
 			}
 		});
 		
-		listview = (ListView)findViewById(R.id.re_list);
-		listview.setAdapter(new BookAdapter(this));
-		listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int postion,
-					long id) {
-				
-				
-				
-				
-			}
-		});
+//		listview = (ListView)findViewById(R.id.re_list);
+//		listview.setAdapter(new BookAdapter(this));
+//		listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//
+//			@Override
+//			public void onItemClick(AdapterView<?> parent, View view, int postion,
+//					long id) {
+//				
+//				
+//				
+//				
+//			}
+//		});
 	}
 
 

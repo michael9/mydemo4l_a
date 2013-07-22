@@ -27,8 +27,7 @@ public class Book implements Serializable  {
 	private String callno;//∑÷¿‡∫≈
 	private String classno;
 	private String cover_path;//∑‚√ÊÕº∆¨
-    public  ImageLoader mImageLoader ;
-    public  ImageListener listener;
+
 	
 	public String getCover_path() {
 		return cover_path;
