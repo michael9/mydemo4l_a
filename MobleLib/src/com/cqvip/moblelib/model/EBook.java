@@ -10,6 +10,8 @@ import org.json.JSONObject;
 
 import android.util.Log;
 
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.ImageLoader.ImageListener;
 import com.cqvip.moblelib.net.BookException;
 
 public class EBook implements Serializable{
@@ -40,6 +42,8 @@ public class EBook implements Serializable{
 		    private long pdfsize;
 		    private String imgurl;
 		    private boolean isfavorite;
+		    public  ImageLoader mImageLoader ;
+		    public  ImageListener listener;
 		    
 		    public EBook(String lngid, String years, int num, String title_c,
 					String name_c, String remark_c, String writer,

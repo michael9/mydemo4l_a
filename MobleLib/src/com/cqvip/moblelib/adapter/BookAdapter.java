@@ -136,9 +136,17 @@ public class BookAdapter extends BaseAdapter{
 	        holder.u_abstract.setText(describe+book.getU_abstract());
 	        holder.isbn.setText("ISBN:"+book.getIsbn());
 	        
-	        ImageLoader mImageLoader = new ImageLoader(mQueue, new BitmapCache());
-			ImageListener listener = ImageLoader.getImageListener(holder.img, R.drawable.defaut_book, R.drawable.defaut_book);
-			mImageLoader.get(book.getCover_path(), listener);
+	        if(book.mImageLoader==null)
+	        {
+	        	book. mImageLoader = new ImageLoader(mQueue, new BitmapCache());
+	        }
+	        if(book.listener==null)
+	        {
+	        	book.listener=book. mImageLoader .getImageListener(holder.img, R.drawable.defaut_book, R.drawable.defaut_book);
+	        }
+//	        ImageLoader mImageLoader = new ImageLoader(mQueue, new BitmapCache());
+//			ImageListener listener = ImageLoader.getImageListener(holder.img, R.drawable.defaut_book, R.drawable.defaut_book);
+			book.mImageLoader.get(book.getCover_path(), book.listener);
 			
 //	        //ͼƬ
 //	        if(!TextUtils.isEmpty(book.getCover_path())){

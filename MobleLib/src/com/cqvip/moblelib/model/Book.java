@@ -8,6 +8,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.ImageLoader.ImageListener;
 import com.cqvip.moblelib.net.BookException;
 
 public class Book implements Serializable  {
@@ -18,7 +20,6 @@ public class Book implements Serializable  {
 	private static final long serialVersionUID = 6159142206069737907L;
 	private String recordid;//图书id
 	private String isbn;//isbn号
-//	private String isbn;
 	private String publisher;//出版社
 	private String publishyear;//出版时间
 	private String title;//书名
@@ -26,6 +27,8 @@ public class Book implements Serializable  {
 	private String callno;//分类号
 	private String classno;
 	private String cover_path;//封面图片
+    public  ImageLoader mImageLoader ;
+    public  ImageListener listener;
 	
 	public String getCover_path() {
 		return cover_path;
