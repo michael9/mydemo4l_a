@@ -151,11 +151,15 @@ public class EbookAdapter extends BaseAdapter {
 		// holder.l_abst.setVisibility(View.VISIBLE);
 		holder.u_abstract.setText(describe + book.getRemark_c());
 		// holder.favorite.setVisibility(View.VISIBLE);
-
-		ImageLoader mImageLoader = new ImageLoader(mQueue, new BitmapCache());
-		ImageListener listener = ImageLoader.getImageListener(holder.img,
-				R.drawable.defaut_book, R.drawable.defaut_book);
-		mImageLoader.get(book.getImgurl(), listener);
+	    if(book.mImageLoader==null)
+        {
+        	book. mImageLoader = new ImageLoader(mQueue, new BitmapCache());
+        }
+        if(book.listener==null)
+        {
+        	book.listener=book. mImageLoader .getImageListener(holder.img, R.drawable.defaut_book, R.drawable.defaut_book);
+        }
+		book.mImageLoader.get(book.getImgurl(), book.listener);
 
 		// holder.btn_item_result_search_share.setTag(position);
 		// // holder.btn_item_result_search_share.setOnClickListener(new
