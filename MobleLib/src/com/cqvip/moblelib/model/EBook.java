@@ -20,28 +20,28 @@ public class EBook implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -7393037851968299461L;
-			private String lngid;
-		    private String gch;
-		    private String years;
-		    private int num;
-		    private String vol;
-		    private String title_c;
-		    private String title_e;
-		    private String keyword_c;
+			private String lngid;//id
+		    private String gch;//
+		    private String years;//年
+		    private int num;//期数 第几期
+		    private String vol;//
+		    private String title_c;//标题（中文）
+		    private String title_e;//标题（英文）
+		    private String keyword_c;//
 		    private String keyword_e;
-		    private String name_c;
+		    private String name_c;//来源杂志
 		    private String name_e;
-		    private String remark_c;
+		    private String remark_c;//简介
 		    private String remark_e;
 		    private String classtype;
-		    private String writer;
-		    private String organ;
-		    private String beginpage;
-		    private String endpage;
-		    private int pagecount;
-		    private long pdfsize;
-		    private String imgurl;
-		    private boolean isfavorite;
+		    private String writer;//作者
+		    private String organ;//来源
+		    private String beginpage;//开始页
+		    private String endpage;//结束页
+		    private int pagecount;//页数
+		    private long pdfsize;//大小
+		    private String imgurl;//图片
+		    private boolean isfavorite;//是否收藏
 	
 		    
 		    public EBook(String lngid, String years, int num, String title_c,

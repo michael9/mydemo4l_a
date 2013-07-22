@@ -60,7 +60,6 @@ public class BookAdapter extends BaseAdapter {
 	@Override
 	public int getCount() {
 		if (lists != null) {
-
 			return lists.size() + 1;
 		}
 		return 1;

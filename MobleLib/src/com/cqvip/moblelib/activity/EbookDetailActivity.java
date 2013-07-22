@@ -1,9 +1,13 @@
 package com.cqvip.moblelib.activity;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import android.annotation.SuppressLint;
+import android.app.DownloadManager;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -20,9 +24,12 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.ImageLoader.ImageListener;
 import com.android.volley.toolbox.StringRequest;
+import com.cqvip.dao.DaoException;
 import com.cqvip.moblelib.R;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
+import com.cqvip.moblelib.db.MEBookDao;
+import com.cqvip.moblelib.entity.MEbook;
 import com.cqvip.moblelib.model.Book;
 import com.cqvip.moblelib.model.EBook;
 import com.cqvip.moblelib.model.Result;
@@ -42,11 +49,18 @@ public class EbookDetailActivity extends BaseActivity {
 	private ImageView img_book;
 	// private ImageFetcher mImageFetcher;
 	private Map<String, String> gparams;
-
+	//下载
+	private Context context;
+	 public static final String     DOWNLOAD_FOLDER_NAME = "downloadmoblib";
+	 public static final String     DOWNLOAD_FILE_NAME   = "test0001.pdf";
+	 private long                   downloadId           = 0;
+	 private DownloadManager        downloadManager;
+	 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_ebook_detail);
+		context = this;
 		Bundle bundle = getIntent().getBundleExtra("detaiinfo");
 		dBook = (EBook) bundle.getSerializable("book");
 		author = (TextView) findViewById(R.id.ebook_author_txt);
@@ -70,6 +84,9 @@ public class EbookDetailActivity extends BaseActivity {
 		btn_ebook_detail_download = (Button) book_action_bar
 				.findViewById(R.id.btn_item_download);
 
+		
+		 downloadManager = (DownloadManager)getSystemService(DOWNLOAD_SERVICE);
+		
 		if (dBook.getLngid() != null) {
 			getLocalinfo(dBook.getLngid());
 		}
@@ -156,17 +173,45 @@ public class EbookDetailActivity extends BaseActivity {
 				}
 			}
 		});
-
+		// 下载
 		btn_ebook_detail_download.setOnClickListener(new OnClickListener() {
 
+			@SuppressLint("NewApi")
 			@Override
 			public void onClick(View v) {
 				if (download_url != null) {
 					// 弹出对话框
-					Intent intent = new Intent(Intent.ACTION_VIEW, Uri
-							.parse(download_url));
-					startActivity(intent);
-					// 下载
+//					Intent intent = new Intent(Intent.ACTION_VIEW, Uri
+//							.parse(download_url));
+//					startActivity(intent);
+					//1、判断是否有sd卡
+					 if(!Tool.hasSDcard(context)){
+							return;
+						}
+					//创建下载路径，下载名称
+					 File folder = new File(DOWNLOAD_FOLDER_NAME);
+					   if (!folder.exists() || !folder.isDirectory()) {
+						   folder.mkdirs();
+					   }
+					   MEBookDao dao = new MEBookDao(context);
+					  //1查看是否下载过
+					   if(isAlreadyDownload(dao,dBook.getLngid())){
+						   Intent _intent = new Intent(context,ActivityDlg.class);
+						   _intent.putExtra("MSGBODY", "您已经下载该文件，是否重新下载?");
+						   _intent.putExtra("BTN_CANCEL", 1);
+						   startActivityForResult(_intent,0);
+					   }else{
+						   //加入下载列队
+						   andToqueue();
+						   //插入数据库保存,正在下载
+						   try {
+							dao.saveInfo(dBook, downloadId, MEbook.TYPE_ON_DOWNLOADING);
+							Tool.ShowMessages(context, "插入数据库成功");
+						} catch (DaoException e) {
+							e.printStackTrace();
+							Tool.ShowMessages(context, "插入数据库失败");
+						}
+					   }
 				}
 
 			}
@@ -185,7 +230,57 @@ public class EbookDetailActivity extends BaseActivity {
 			}
 		});
 	}
-
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		//从新下载
+		if(requestCode ==0&&resultCode == 1){
+			
+			
+		}
+	}
+	/**
+	 * 判断是否下载过该文件
+	 * @param id 电子书唯一id
+	 * @return
+	 */
+	private boolean isAlreadyDownload(MEBookDao dao,String id) {
+		try {
+		MEbook m = dao.queryInfo(id);
+		if(m ==null)
+		return false;
+		} catch (DaoException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	/**
+	 * 加入下载列队，下载
+	 * 
+	 */
+	@SuppressLint("NewApi")
+	private void andToqueue() {
+		DownloadManager.Request request = new DownloadManager.Request(Uri.parse(download_url));
+		request.setDestinationInExternalPublicDir(DOWNLOAD_FOLDER_NAME, getFullname(dBook.getTitle_c()));
+		request.setTitle("哈哈哈哈");
+		request.setDescription("meilishuo desc");
+		
+		request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+		request.setVisibleInDownloadsUi(false);
+		request.setMimeType("application/com.cqvip.download.file");
+		downloadId = downloadManager.enqueue(request);
+		
+	}
+	/**
+	 * 下载文件名称
+	 * @param title_c
+	 * @return
+	 */
+	private String getFullname(String title_c) {
+		return title_c+".pdf";
+	}
 	// 显示对话框
 	private void showLoginDialog(int id) {
 		MainMenuActivity.cantouch = true;

@@ -13,6 +13,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.widget.Toast;
 
 import com.cqvip.moblelib.activity.CommentActivity;
@@ -234,4 +235,18 @@ public class Tool {
 		   int i = strr.indexOf("spic",0);
 		  return strr.substring(0,i) +"l"+ strr.substring(i+1);
 	   }
+	 /**
+	  * ºÏ≤‚ «∑Ò”–sdcard
+	  * @param context
+	  * @return
+	  */
+	 public static boolean hasSDcard(Context context){
+		//ºÏ≤‚sdø®
+			String sdStatus = Environment.getExternalStorageState();
+			 if(!sdStatus.equals(Environment.MEDIA_MOUNTED)){
+				Tool.ShowMessages(context, "√ª”–’“µΩSDø®");
+				 return false;
+			 }
+			 return true;
+	 }
 }
