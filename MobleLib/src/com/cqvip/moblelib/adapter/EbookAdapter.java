@@ -1,5 +1,6 @@
 package com.cqvip.moblelib.adapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
@@ -14,6 +15,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.ImageLoader.ImageListener;
 import com.cqvip.moblelib.R;
+import com.cqvip.moblelib.model.Book;
 import com.cqvip.moblelib.model.EBook;
 import com.cqvip.utils.BitmapCache;
 
@@ -21,6 +23,7 @@ public class EbookAdapter extends BaseAdapter {
 	private Context context;
 	private List<EBook> lists;
 	private RequestQueue mQueue;
+	private List<ImageLoader>illist;
 
 	public EbookAdapter(Context context) {
 		this.context = context;
@@ -34,6 +37,11 @@ public class EbookAdapter extends BaseAdapter {
 	public EbookAdapter(Context context, List<EBook> lists, RequestQueue mQueue) {
 		this.context = context;
 		this.lists = lists;
+		illist=new ArrayList<ImageLoader>();
+		for(EBook mb:lists)
+		{
+			illist.add(new ImageLoader(mQueue, new BitmapCache()));
+		}
 		this.mQueue = mQueue;
 	}
 
@@ -151,11 +159,13 @@ public class EbookAdapter extends BaseAdapter {
 		// holder.l_abst.setVisibility(View.VISIBLE);
 		holder.u_abstract.setText(describe + book.getRemark_c());
 		// holder.favorite.setVisibility(View.VISIBLE);
-
-		ImageLoader mImageLoader = new ImageLoader(mQueue, new BitmapCache());
+		
+		if (lists.size()>illist.size()) {
+			illist.add( new ImageLoader(mQueue, new BitmapCache()));
+		}
 		ImageListener listener = ImageLoader.getImageListener(holder.img,
 				R.drawable.defaut_book, R.drawable.defaut_book);
-		mImageLoader.get(book.getImgurl(), listener);
+		(illist.get(position)).get(book.getImgurl(), listener);
 
 		// holder.btn_item_result_search_share.setTag(position);
 		// // holder.btn_item_result_search_share.setOnClickListener(new

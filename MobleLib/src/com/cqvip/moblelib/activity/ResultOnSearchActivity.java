@@ -37,8 +37,8 @@ import com.cqvip.utils.Tool;
 public class ResultOnSearchActivity extends BaseActivity implements
 		 OnItemClickListener {
 
-	public static final int GETFIRSTPAGE = 1;
-	public static final int GETNEXTPAGE = 2;
+	public  final int GETFIRSTPAGE = 1;
+	public  final int GETNEXTPAGE = 2;
 
 	public static final int DEFAULT_COUNT = 10;
 	private EditText edit;

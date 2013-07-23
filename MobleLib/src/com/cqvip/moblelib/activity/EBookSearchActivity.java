@@ -43,7 +43,7 @@ public class EBookSearchActivity extends BaseActivity implements
 	private ImageView imgsearch;
 	private Context context;
 	private ListView listview;
-	private String key;
+//	private String editekey;
 	private int page = 1;
 	private EbookAdapter adapter;
 	private RelativeLayout noResult_rl;
@@ -89,7 +89,7 @@ public class EBookSearchActivity extends BaseActivity implements
 				if (TextUtils.isEmpty(edit.getText().toString())) {
 					return true;
 				}
-				key = edit.getText().toString();
+//				editekey = edit.getText().toString();
 				// 隐藏键盘
 				hideKeybord();
 				// 检查网络
@@ -159,6 +159,7 @@ public class EBookSearchActivity extends BaseActivity implements
 		@Override
 		public void onResponse(String response) {
 			// TODO Auto-generated method stub
+			customProgressDialog.dismiss();
 			 moreprocess.setVisibility(View.GONE);
 			try {
 				// JSONObject mj=new JSONObject(response);
@@ -207,11 +208,6 @@ public class EBookSearchActivity extends BaseActivity implements
 	 * @param count
 	 */
 	private void getHomePage(String key, int page, int count, int type) {
-		// HashMap map=new HashMap();
-		// map.put("key", key);
-		// map.put("page", page);
-		// map.put("count", count);
-		// Task tsHome;
 		gparams = new HashMap<String, String>();
 		gparams.put("title", key);
 		gparams.put("curpage", "" + page);// 当前页数
@@ -273,7 +269,7 @@ public class EBookSearchActivity extends BaseActivity implements
 		    moreprocess = arg1.findViewById(R.id.footer_progress);
 			moreprocess.setVisibility(View.VISIBLE);
 			// 请求网络更多
-			getHomePage(key, page + 1, DEFAULT_COUNT, 1);
+			getHomePage(edit.getText().toString().trim(), page + 1, DEFAULT_COUNT, 1);
 			page = page + 1;
 		} else {
 			EBook book = adapter.getLists().get(positon);

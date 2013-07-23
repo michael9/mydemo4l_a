@@ -36,6 +36,7 @@ public class PersonalCenterActivity extends BaseActivity {
 private LinearLayout readerinfoLayout;
 private LinearLayout favorLayout;
 private LinearLayout logoutLayout;
+private LinearLayout downloadLayout;
 private Context context;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +48,8 @@ private Context context;
 		readerinfoLayout=(LinearLayout) findViewById(R.id.readerinfoLayout);
 		favorLayout=(LinearLayout) findViewById(R.id.favorLayout);
 		logoutLayout=(LinearLayout) findViewById(R.id.logoutLayout);
-		
+		downloadLayout=(LinearLayout) findViewById(R.id.downloadLayout);
+	
 		TextView title = (TextView)findViewById(R.id.txt_header);
 		title.setText(R.string.main_ebookstore);
 		ImageView back = (ImageView) findViewById(R.id.img_back_header);
@@ -77,6 +79,15 @@ private Context context;
 				Intent intent=new Intent(PersonalCenterActivity.this, MyFavorActivity.class);
 				startActivity(intent);
 				//overridePendingTransition(R.anim.slide_left_in, R.anim.slide_right_out);	
+			}
+		});
+		//œ¬›dπ‹¿Ì
+		downloadLayout.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent=new Intent(PersonalCenterActivity.this, DownLoadManagerActivity.class);
+				startActivity(intent);
 			}
 		});
 		
