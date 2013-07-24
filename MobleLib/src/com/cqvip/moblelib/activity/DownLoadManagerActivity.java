@@ -1,6 +1,5 @@
 package com.cqvip.moblelib.activity;
 
-import java.io.File;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,8 +11,9 @@ import android.app.DownloadManager;
 import android.content.Context;
 import android.database.ContentObserver;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -24,7 +24,6 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -41,16 +40,19 @@ import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.cqvip.dao.DaoException;
 import com.cqvip.mobelib.imgutils.ImageFetcher;
 import com.cqvip.moblelib.R;
 import com.cqvip.moblelib.activity.GroupOfReadersActivity.ViewHolder;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
+import com.cqvip.moblelib.db.MEBookDao;
+import com.cqvip.moblelib.entity.MEbook;
 import com.cqvip.moblelib.model.Book;
 import com.cqvip.moblelib.model.Favorite;
 import com.cqvip.moblelib.net.BookException;
-import com.cqvip.moblelib.utils.DownloadManagerPro;
 import com.cqvip.moblelib.view.CustomProgressDialog;
+import com.cqvip.utils.DownloadManagerPro;
 import com.cqvip.utils.Tool;
 
 //public class DownLoadManagerActivity extends Activity {
@@ -98,6 +100,13 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 	private int listviewpagetag = GlobleData.BOOK_SZ_TYPE;
 	
     private DownloadChangeObserver downloadObserver;
+    private MyHandler              handler;
+    private DownloadManagerPro     downloadManagerPro;
+    private DownloadManager        downloadManager;
+    
+    private ArrayList<Long> downloadids_list=new  ArrayList<Long>();
+    private List<MEbook> mebooks_list;//获取downloadid
+    private ArrayList<int[]> _lists= new ArrayList<int[]>();//获取下载状态
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -115,8 +124,8 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 		mViewPager = (ViewPager) findViewById(R.id.pager);
 		mViewPager.setAdapter(mSectionsPagerAdapter);
 		// 获取数据
-		getfavorlist(curpage, perpage, GlobleData.BOOK_SZ_TYPE, GETFIRSTPAGE_SZ);
-		getfavorlist(curpage, perpage, GlobleData.BOOK_ZK_TYPE, GETFIRSTPAGE_ZK);
+		//getfavorlist(curpage, perpage, GlobleData.BOOK_SZ_TYPE, GETFIRSTPAGE_SZ);
+		//getfavorlist(curpage, perpage, GlobleData.BOOK_ZK_TYPE, GETFIRSTPAGE_ZK);
 	}
 
     @Override
@@ -124,7 +133,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
         super.onResume();
         /** observer download change **/
         getContentResolver().registerContentObserver(DownloadManagerPro.CONTENT_URI, true, downloadObserver);
-        updateView();
+       // updateView();
     }
 
     @Override
@@ -132,47 +141,119 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
         super.onPause();
         getContentResolver().unregisterContentObserver(downloadObserver);
     }
-	
+    
+    MEBookDao meBookDao;
     private void initData() {
-    	downloadObserver = new DownloadChangeObserver();
+    	 downloadManager = (DownloadManager)getSystemService(DOWNLOAD_SERVICE);
+    	 downloadObserver = new DownloadChangeObserver();
+    	 handler = new MyHandler();
+    	 downloadManagerPro = new DownloadManagerPro(downloadManager);
+    	 
+    	meBookDao=new MEBookDao(this);
+    	try {
+			mebooks_list=meBookDao.queryall(0);
+		} catch (DaoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}//下载中
         /**
          * get download id from preferences.<br/>
          * if download id bigger than 0, means it has been downloaded, then query status and show right text;
          */
-        downloadId = PreferencesUtils.getLongPreferences(context, PreferencesUtils.KEY_NAME_DOWNLOAD_ID);
-        updateView();
-        downloadButton.setOnClickListener(new OnClickListener() {
+        getDownloadStatus();
+       
+    }
+    
+    public void getDownloadStatus() {
+    	 _lists.clear();
+    	for (MEbook mEbook : mebooks_list) {
+    		int[] bytesAndStatus = downloadManagerPro.getBytesAndStatus(mEbook.getDownloadid());
+    		_lists.add(bytesAndStatus);
+		}
+    	if(adapter_sz!=null)
+    		 handler.sendMessage(handler.obtainMessage(0));
+    }
+    
+//    public void getdownloadids(){
+//    	downloadids_list.clear();
+//    	for (MEbook mEbook : mebooks_list) {
+//    		downloadids_list.add(mEbook.getDownloadid());
+//		}
+//    }
 
-            @Override
-            public void onClick(View v) {
-                File folder = new File(DOWNLOAD_FOLDER_NAME);
-                if (!folder.exists() || !folder.isDirectory()) {
-                    folder.mkdirs();
-                }
+//	public void updateView() {
+//	    int[] bytesAndStatus = downloadManagerPro.getBytesAndStatus(downloadId);
+//	    int[] bytesAndStatus1 = downloadManagerPro.getBytesAndStatus(downloadId1);
+//	    Log.i("updateView_bytesAndStatus", ""+bytesAndStatus[0]);
+//	    Log.i("updateView_bytesAndStatus1", ""+bytesAndStatus1[0]);
+//	    int[] temp = _lists.get(0);
+//	    temp[0] = bytesAndStatus[0];
+//	    temp[1] = bytesAndStatus[1];
+//	    temp[2] = bytesAndStatus[2];
+//	    int[] temp1 = _lists.get(1);
+//	    temp1[0] = bytesAndStatus1[0];
+//	    temp1[1] = bytesAndStatus1[1];
+//	    temp1[2] = bytesAndStatus1[2];
+//	    
+//	    adapter_sz.notifyDataSetChanged();
+//	    Log.i("hand", "hand");
+// //       handler.sendMessage(handler.obtainMessage(0, mlists[0], mlists[1], mlists[2]));
+//}
+    /**
+     * MyHandler
+     * 
+     * @author Trinea 2012-12-18
+     */
+    private class MyHandler extends Handler {
 
-                DownloadManager.Request request = new DownloadManager.Request(Uri.parse(APK_URL));
-                request.setDestinationInExternalPublicDir(DOWNLOAD_FOLDER_NAME, DOWNLOAD_FILE_NAME);
-                request.setTitle(getString(R.string.download_notification_title));
-                request.setDescription("meilishuo desc");
-                request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-                request.setVisibleInDownloadsUi(false);
-                // request.allowScanningByMediaScanner();
-                // request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI);
-                // request.setShowRunningNotification(false);
-                // request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_HIDDEN);
-                request.setMimeType("application/cn.trinea.download.file");
-             
-                updateView();
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+
+            switch (msg.what) {
+                case 0:
+                	adapter_sz.notifyDataSetChanged();
+//                    int status = (Integer)msg.obj;
+//                    if (isDownloading(status)) {
+//                        downloadProgress.setVisibility(View.VISIBLE);
+//                        downloadProgress.setMax(0);
+//                        downloadProgress.setProgress(0);
+//                        downloadButton.setVisibility(View.GONE);
+//                        downloadSize.setVisibility(View.VISIBLE);
+//                        downloadPrecent.setVisibility(View.VISIBLE);
+//                        downloadCancel.setVisibility(View.VISIBLE);
+//
+//                        if (msg.arg2 < 0) {
+//                            downloadProgress.setIndeterminate(true);
+//                            downloadPrecent.setText("0%");
+//                            downloadSize.setText("0M/0M");
+//                        } else {
+//                            downloadProgress.setIndeterminate(false);
+//                            downloadProgress.setMax(msg.arg2);
+//                            downloadProgress.setProgress(msg.arg1);
+//                            downloadPrecent.setText(getNotiPercent(msg.arg1, msg.arg2));
+//                            downloadSize.setText(getAppSize(msg.arg1) + "/" + getAppSize(msg.arg2));
+//                        }
+//                    } else {
+//                        downloadProgress.setVisibility(View.GONE);
+//                        downloadProgress.setMax(0);
+//                        downloadProgress.setProgress(0);
+//                        downloadButton.setVisibility(View.VISIBLE);
+//                        downloadSize.setVisibility(View.GONE);
+//                        downloadPrecent.setVisibility(View.GONE);
+//                        downloadCancel.setVisibility(View.GONE);
+//
+//                        if (status == DownloadManager.STATUS_FAILED) {
+//                            downloadButton.setText(getString(R.string.app_status_download_fail));
+//                        } else if (status == DownloadManager.STATUS_SUCCESSFUL) {
+//                            downloadButton.setText(getString(R.string.app_status_downloaded));
+//                        } else {
+//                            downloadButton.setText(getString(R.string.app_status_download));
+//                        }
+//                    }
+                    break;
             }
-        });
-        downloadCancel.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                downloadManager.remove(downloadId);
-                updateView();
-            }
-        });
+        }
     }
 	
 	private void getfavorlist(int pagecount, int perpage, int typeid, int type) {
@@ -330,7 +411,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 
         @Override
         public void onChange(boolean selfChange) {
-            updateView();
+            getDownloadStatus();
         }
 
     }
@@ -410,7 +491,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 			Log.i("MyFavorActivity", "DummySectionFragment");
 		}
 
-		List<Favorite> arrayList_temp;
+		ArrayList<int[]> temp_aArrayList;
 
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -422,17 +503,17 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 					.findViewById(R.id.favorlist);
 			int i = getArguments().getInt(ARG_SECTION_NUMBER);
 			if (i == 0) {
-				arrayList_temp = arrayList_sz;
-				adapter_sz = new MyGridViewAdapter(getActivity(), arrayList_sz,
+				temp_aArrayList = _lists;
+				adapter_sz = new MyGridViewAdapter(getActivity(), temp_aArrayList,
 						mImageFetcher);
 				listView.setAdapter(adapter_sz);
 				listView.setTag(GlobleData.BOOK_SZ_TYPE);
 			} else if (i == 1) {
-				listView.setTag(GlobleData.BOOK_ZK_TYPE);
-				arrayList_temp = arrayList_zk;
-				adapter_zk = new MyGridViewAdapter(getActivity(), arrayList_zk,
-						mImageFetcher);
-				listView.setAdapter(adapter_zk);
+//				listView.setTag(GlobleData.BOOK_ZK_TYPE);
+//				arrayList_temp = arrayList_zk;
+//				adapter_zk = new MyGridViewAdapter(getActivity(), arrayList_zk,
+//						mImageFetcher);
+//				listView.setAdapter(adapter_zk);
 			}
 
 			listView.setOnItemClickListener(this);
@@ -464,10 +545,10 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 				Favorite favorite = null;
 				int typeflag = 5;
 				if ((Integer) parent.getTag() == GlobleData.BOOK_SZ_TYPE) {
-					favorite = adapter_sz.getLists().get(positon);
+					//favorite = adapter_sz.getLists().get(positon);
 					typeflag = 5;
 				} else if ((Integer) parent.getTag() == GlobleData.BOOK_ZK_TYPE) {
-					favorite = adapter_zk.getLists().get(positon);
+					//favorite = adapter_zk.getLists().get(positon);
 					typeflag = 4;
 				}
 				Book book = new Book(favorite.getLngid(), favorite.getOrgan(),
@@ -524,48 +605,48 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 		Button download_cancel;//
 	}
 
-	class MyGridViewAdapter extends CursorAdapter {
-		private Context myContext;
-		private LayoutInflater mInflater;
-
-		public MyGridViewAdapter(Context context, List<Favorite> list,
-				Cursor cursor) {
-			super(context, cursor);
-			this.myContext = context;
-			mInflater = LayoutInflater.from(context);
-		}
-
-		@Override
-		public View newView(Context context, Cursor cursor, ViewGroup parent) {
-	        final View view =  mInflater.inflate(R.layout.item_downloadmanager, parent, false);  
-	        ViewHolder holder = new ViewHolder();  
-	        holder.download_size = (TextView) view.findViewById(R.id.download_size);  
-	        holder.download_precent = (TextView) view.findViewById(R.id.download_precent);  
-	        holder.download_progress =(ProgressBar) view.findViewById(R.id.download_progress);  
-	        holder.download_cancel =  (Button) view.findViewById(R.id.download_cancel);  
-	        view.setTag(holder);  
-	        return view;  
-		}
-
-		@Override
-		public void bindView(View view, Context context, Cursor cursor) {
-	        ViewHolder holder = (ViewHolder) view.getTag();  
-	        holder.download_size.setText("");
-		}
-	}
+//	class MyGridViewAdapter extends CursorAdapter {
+//		private Context myContext;
+//		private LayoutInflater mInflater;
+//
+//		public MyGridViewAdapter(Context context, List<Favorite> list,
+//				Cursor cursor) {
+//			super(context, cursor);
+//			this.myContext = context;
+//			mInflater = LayoutInflater.from(context);
+//		}
+//
+//		@Override
+//		public View newView(Context context, Cursor cursor, ViewGroup parent) {
+//	        final View view =  mInflater.inflate(R.layout.item_downloadmanager, parent, false);  
+//	        ViewHolder holder = new ViewHolder();  
+//	        holder.download_size = (TextView) view.findViewById(R.id.download_size);  
+//	        holder.download_precent = (TextView) view.findViewById(R.id.download_precent);  
+//	        holder.download_progress =(ProgressBar) view.findViewById(R.id.download_progress);  
+//	        holder.download_cancel =  (Button) view.findViewById(R.id.download_cancel);  
+//	        view.setTag(holder);  
+//	        return view;  
+//		}
+//
+//		@Override
+//		public void bindView(View view, Context context, Cursor cursor) {
+//	        ViewHolder holder = (ViewHolder) view.getTag();  
+//	        holder.download_size.setText("");
+//		}
+//	}
 
 	class MyGridViewAdapter extends BaseAdapter {
 		private Context myContext;
-		private List<Favorite> arrayList;
+		private ArrayList<int[]> arrayList;
 		private ImageFetcher fetch;
 
-		public MyGridViewAdapter(Context context, List<Favorite> list) {
+		public MyGridViewAdapter(Context context, ArrayList<int[]> list) {
 			this.myContext = context;
 			this.arrayList = list;
 			Log.i("MyFavorActivity", "MyGridViewAdapter");
 		}
 
-		public MyGridViewAdapter(Context context, List<Favorite> list,
+		public MyGridViewAdapter(Context context, ArrayList<int[]> list,
 				ImageFetcher fetch) {
 			this.myContext = context;
 			this.arrayList = list;
@@ -573,9 +654,6 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 			Log.i("MyFavorActivity", "MyGridViewAdapter");
 		}
 
-		public List<Favorite> getLists() {
-			return this.arrayList;
-		}
 
 		@Override
 		public int getCount() {
@@ -627,39 +705,42 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 			if (convertView == null
 					|| convertView.findViewById(R.id.linemore) != null) {
 				convertView = LayoutInflater.from(myContext).inflate(
-						R.layout.item_result_search, null);
+						R.layout.item_downloadmanager, null);
 				holder = new ViewHolder();
-
-		        ViewHolder holder = new ViewHolder();  
-		        holder.download_size = (TextView) view.findViewById(R.id.download_size);  
-		        holder.download_precent = (TextView) view.findViewById(R.id.download_precent);  
-		        holder.download_progress =(ProgressBar) view.findViewById(R.id.download_progress);  
-		        holder.download_cancel =  (Button) view.findViewById(R.id.download_cancel);  
+		        holder.download_size = (TextView) convertView.findViewById(R.id.download_size);  
+		        holder.download_precent = (TextView) convertView.findViewById(R.id.download_precent);  
+		        holder.download_progress =(ProgressBar) convertView.findViewById(R.id.download_progress);  
+		        holder.download_cancel =  (Button) convertView.findViewById(R.id.download_cancel);  
+		        convertView.setTag(holder);  
 			} else {
 				holder = (ViewHolder) convertView.getTag();
 			}
-			String author = context.getResources().getString(
-					R.string.item_author);
-			String publish = context.getResources().getString(
-					R.string.item_publish);
-			String time = context.getResources().getString(R.string.item_time);
-			String commentcount = context.getResources().getString(
-					R.string.item_comment_count);
 
-			Favorite favorite = arrayList.get(position);
-			holder.title.setText(favorite.getTitle());
-			holder.author.setText(author + favorite.getWriter());
-			holder.publisher.setText(publish + favorite.getOrgan());
-			holder.publishyear.setText(time + favorite.getYears());
-			holder.commentcount.setText(commentcount + "("
-					+ favorite.getCommentcount() + ")");
+			int[] int_array= arrayList.get(position);
+			  holder.download_progress.setMax(int_array[1]);
+			  holder.download_progress.setProgress(int_array[0]);
+			  holder.download_size.setText(getAppSize(int_array[0]) + "/" + getAppSize(int_array[1]));
+			  final int temp_position=position;
+			  holder.download_cancel.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					downloadManager.remove(mebooks_list.get(temp_position).getDownloadid());
+					try {
+						meBookDao.delInfo(mebooks_list.get(temp_position).getLngid());
+						mebooks_list=meBookDao.queryall(0);
+					} catch (DaoException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			});
 			// 图片
-			if (!TextUtils.isEmpty(favorite.getImgurl())) {
-				fetch.loadImage(favorite.getImgurl(), holder.img);
-			} else {
-				holder.img.setImageDrawable(getResources().getDrawable(
-						R.drawable.defaut_book));
-			}
+//			if (!TextUtils.isEmpty(favorite.getImgurl())) {
+//				fetch.loadImage(favorite.getImgurl(), holder.img);
+//			} else {
+//				holder.img.setImageDrawable(getResources().getDrawable(
+//						R.drawable.defaut_book));
+//			}
 
 			return convertView;
 		}
@@ -725,8 +806,8 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 			}
 		});
 
-		customProgressDialog = CustomProgressDialog.createDialog(this);
-		customProgressDialog.show();
+//		customProgressDialog = CustomProgressDialog.createDialog(this);
+//		customProgressDialog.show();
 	}
 
 	// @Override

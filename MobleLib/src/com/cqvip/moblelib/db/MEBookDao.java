@@ -117,7 +117,7 @@ public class MEBookDao extends Dao{
 	 */
 	public List<MEbook> queryall(int isdownloade) throws DaoException{
 		 StringBuilder where = new StringBuilder();
-		   where.append("iddownload=");
+		   where.append("isdownload=");
 		   where.append(isdownloade);
 		   List<MEbook> result = null;
 		try {
