@@ -105,7 +105,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
     private DownloadManager        downloadManager;
     
     private ArrayList<Long> downloadids_list=new  ArrayList<Long>();
-    private List<MEbook> mebooks_list;//获取downloadid
+    private List<MEbook> mebooks_list=new ArrayList<MEbook>();//获取downloadid
     private ArrayList<int[]> _lists= new ArrayList<int[]>();//获取下载状态
 
 	@Override
@@ -523,60 +523,60 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int positon,
-				long id) {
-			Log.i("item", "===============click=");
-			if (id == -2) { // 更多
-				if (parent.getAdapter().getCount() == 1) {
-					return;
-				}
-				// 进度条
-				moreprocess = view.findViewById(R.id.footer_progress);
-				moreprocess.setVisibility(View.VISIBLE);
-				// Log.i("parent.getTag()", "" + parent.getTag());
-				// 请求网络更多
-				listviewpagetag = (Integer) parent.getTag();
-				if (listviewpagetag == GlobleData.BOOK_SZ_TYPE) {
-					getfavorlist(curpage_sz + 1, perpage,
-							GlobleData.BOOK_SZ_TYPE, GETNEXT);
-				} else if (listviewpagetag == GlobleData.BOOK_ZK_TYPE) {
-					getfavorlist(curpage_zk + 1, perpage,
-							GlobleData.BOOK_ZK_TYPE, GETNEXT);
-				}
-			} else {
-				Favorite favorite = null;
-				int typeflag = 5;
-				if ((Integer) parent.getTag() == GlobleData.BOOK_SZ_TYPE) {
-					//favorite = adapter_sz.getLists().get(positon);
-					typeflag = 5;
-				} else if ((Integer) parent.getTag() == GlobleData.BOOK_ZK_TYPE) {
-					//favorite = adapter_zk.getLists().get(positon);
-					typeflag = 4;
-				}
-				Book book = new Book(favorite.getLngid(), favorite.getOrgan(),
-						favorite.getTitle(), favorite.getWriter(),
-						favorite.getLngid(), favorite.getYears(),
-						favorite.getPrice(), favorite.getRemark(),
-						favorite.getImgurl());
-				Tool.getCommentList(context, book, typeflag);
-
-				// Book book = adapter.getLists().get(positon);
-				// if(book!=null){
-				// Log.i("ResultOnSearchActivity",book.toString());
-				// Intent _intent = new
-				// Intent(context,DetailBookActivity.class);
-				// Bundle bundle = new Bundle();
-				// bundle.putSerializable("book", book);
-				// _intent.putExtra("detaiinfo", bundle);
-				// startActivity(_intent);
-				// }
-
-				// Book book = lists.get(position-1);
-				// if(book!=null){
-				// Bundle bundle = new Bundle();
-				// bundle.putSerializable("book", book);
-				// _intent.putExtra("detaiinfo", bundle);
-				// startActivityForResult(_intent, 1);
-			}
+			long id) {
+//			Log.i("item", "===============click=");
+//			if (id == -2) { // 更多
+//				if (parent.getAdapter().getCount() == 1) {
+//					return;
+//				}
+//				// 进度条
+//				moreprocess = view.findViewById(R.id.footer_progress);
+//				moreprocess.setVisibility(View.VISIBLE);
+//				// Log.i("parent.getTag()", "" + parent.getTag());
+//				// 请求网络更多
+//				listviewpagetag = (Integer) parent.getTag();
+//				if (listviewpagetag == GlobleData.BOOK_SZ_TYPE) {
+//					getfavorlist(curpage_sz + 1, perpage,
+//							GlobleData.BOOK_SZ_TYPE, GETNEXT);
+//				} else if (listviewpagetag == GlobleData.BOOK_ZK_TYPE) {
+//					getfavorlist(curpage_zk + 1, perpage,
+//							GlobleData.BOOK_ZK_TYPE, GETNEXT);
+//				}
+//			} else {
+//				Favorite favorite = null;
+//				int typeflag = 5;
+//				if ((Integer) parent.getTag() == GlobleData.BOOK_SZ_TYPE) {
+//					//favorite = adapter_sz.getLists().get(positon);
+//					typeflag = 5;
+//				} else if ((Integer) parent.getTag() == GlobleData.BOOK_ZK_TYPE) {
+//					//favorite = adapter_zk.getLists().get(positon);
+//					typeflag = 4;
+//				}
+//				Book book = new Book(favorite.getLngid(), favorite.getOrgan(),
+//						favorite.getTitle(), favorite.getWriter(),
+//						favorite.getLngid(), favorite.getYears(),
+//						favorite.getPrice(), favorite.getRemark(),
+//						favorite.getImgurl());
+//				Tool.getCommentList(context, book, typeflag);
+//
+//				// Book book = adapter.getLists().get(positon);
+//				// if(book!=null){
+//				// Log.i("ResultOnSearchActivity",book.toString());
+//				// Intent _intent = new
+//				// Intent(context,DetailBookActivity.class);
+//				// Bundle bundle = new Bundle();
+//				// bundle.putSerializable("book", book);
+//				// _intent.putExtra("detaiinfo", bundle);
+//				// startActivity(_intent);
+//				// }
+//
+//				// Book book = lists.get(position-1);
+//				// if(book!=null){
+//				// Bundle bundle = new Bundle();
+//				// bundle.putSerializable("book", book);
+//				// _intent.putExtra("detaiinfo", bundle);
+//				// startActivityForResult(_intent, 1);
+//			}
 		}
 
 		// @Override
@@ -725,6 +725,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 			  holder.download_cancel.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
+					if(mebooks_list!=null&&!mebooks_list.isEmpty()){
 					downloadManager.remove(mebooks_list.get(temp_position).getDownloadid());
 					try {
 						meBookDao.delInfo(mebooks_list.get(temp_position).getLngid());
@@ -733,8 +734,8 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-			    	if(adapter_sz!=null)
-			    		 handler.sendMessage(handler.obtainMessage(0));
+					getDownloadStatus();
+				}
 				}
 			});
 			// 图片
