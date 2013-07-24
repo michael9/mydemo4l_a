@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -40,6 +41,7 @@ public class EBookActiviy extends BaseActivity {
 //	        "馆藏书目", "维普期刊", "万方期刊","超星图书","内置图书"
 //	    };
 	private  String[] EBOOKTYPE;
+	private ViewGroup searchbar;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -69,8 +71,8 @@ public class EBookActiviy extends BaseActivity {
 		lv.setEnabled(false);
 		lv.setFocusable(false);
 		
-		ImageView scan_iv=(ImageView)findViewById(R.id.ebook_seach_img);
-		scan_iv.setOnClickListener(new View.OnClickListener() {
+		searchbar=(ViewGroup)findViewById(R.id.searchbar);
+		searchbar.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				Intent intent=new Intent(EBookActiviy.this, EBookSearchActivity.class);
@@ -78,10 +80,7 @@ public class EBookActiviy extends BaseActivity {
 				finish();
 			}
 		});
-//		InitImageView();
-//		InitTextView();
-//		InitViewPager();
-//		
+		
 		 final EditText et = (EditText)findViewById(R.id.ebook_edit);
 		    et.setOnClickListener(new View.OnClickListener() {
 				
@@ -94,9 +93,5 @@ public class EBookActiviy extends BaseActivity {
 					finish();
 				}
 			});
-		
-		
 	}
-
-
 }

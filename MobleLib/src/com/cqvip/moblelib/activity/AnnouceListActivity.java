@@ -11,29 +11,24 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.VolleyError;
 import com.android.volley.Request.Method;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.cqvip.mobelib.imgutils.AsyncTask;
 import com.cqvip.moblelib.R;
-import com.cqvip.moblelib.adapter.BookAdapter;
-import com.cqvip.moblelib.base.IBookManagerActivity;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.Constant;
 import com.cqvip.moblelib.constant.GlobleData;
-import com.cqvip.moblelib.model.Book;
 import com.cqvip.moblelib.model.ShortBook;
-import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.moblelib.view.DownFreshListView;
 import com.cqvip.utils.Tool;
 
@@ -79,6 +74,7 @@ public class AnnouceListActivity extends BaseActivity implements OnItemClickList
 		default:
 			break;
 		}
+		customProgressDialog.show();
 		getHomePage(page, Constant.DEFAULT_COUNT,GETHOMEPAGE);
 		
 	}
@@ -123,10 +119,8 @@ public class AnnouceListActivity extends BaseActivity implements OnItemClickList
 	private Listener<String> backlistenermore = new Listener<String>() {
 		@Override
 		public void onResponse(String response) {
-			// TODO Auto-generated method stub
-			customProgressDialog.dismiss();
+			moreprocess.setVisibility(View.GONE);
 			try {
-				moreprocess.setVisibility(View.GONE);
 				List<ShortBook> lists= ShortBook.formList(sendtype, response);
 				if(lists!=null&&!lists.isEmpty()){
 					adapter.addMoreData(lists);
@@ -164,7 +158,6 @@ public class AnnouceListActivity extends BaseActivity implements OnItemClickList
 	}
 	
 	private void getHomePage(int page, int defaultCount,int mwhat) {
-		customProgressDialog.show();
 		gparams=new HashMap<String, String>();
 		gparams.put("libid", GlobleData.LIBIRY_ID);
 		gparams.put("curpage", ""+page);
