@@ -160,19 +160,24 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
          * get download id from preferences.<br/>
          * if download id bigger than 0, means it has been downloaded, then query status and show right text;
          */
-    	if(mebooks_list!=null&&!mebooks_list.isEmpty())
         getDownloadStatus();
        
     }
     
     public void getDownloadStatus() {
     	 _lists.clear();
-    	for (MEbook mEbook : mebooks_list) {
-    		int[] bytesAndStatus = downloadManagerPro.getBytesAndStatus(mEbook.getDownloadid());
+    	if(mebooks_list!=null&&!mebooks_list.isEmpty()){
+    	 int a=mebooks_list.size();
+    	for (int i = 0; i < a; i++) {			
+    		int[] bytesAndStatus = downloadManagerPro.getBytesAndStatus(mebooks_list.get(i).getDownloadid());
     		_lists.add(bytesAndStatus);
 		}
-    	if(adapter_sz!=null)
+    	if(adapter_sz!=null){
+    		//adapter_sz.notifyDataSetChanged();
     		 handler.sendMessage(handler.obtainMessage(0));
+    	}
+    		
+    	}
     }
     
 //    public void getdownloadids(){
@@ -726,10 +731,11 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 				@Override
 				public void onClick(View v) {
 					if(mebooks_list!=null&&!mebooks_list.isEmpty()){
-					downloadManager.remove(mebooks_list.get(temp_position).getDownloadid());
 					try {
-						meBookDao.delInfo(mebooks_list.get(temp_position).getLngid());
-						mebooks_list=meBookDao.queryall(0);
+						MEbook book = mebooks_list.get(temp_position);
+						downloadManager.remove(book.getDownloadid());
+						meBookDao.delInfo(book.getLngid());
+						mebooks_list.remove(book);
 					} catch (DaoException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
