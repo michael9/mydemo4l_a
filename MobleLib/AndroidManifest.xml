@@ -192,7 +192,8 @@
             android:theme="@android:style/Theme.Light.NoTitleBar" />
         <activity
             android:name="com.cqvip.moblelib.activity.DownLoadManagerActivity"
-            android:label="@string/title_activity_down_load_manager" >
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Light.NoTitleBar"  >
         </activity>
     </application>
 
