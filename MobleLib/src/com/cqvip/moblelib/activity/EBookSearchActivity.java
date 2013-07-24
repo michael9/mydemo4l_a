@@ -61,7 +61,6 @@ public class EBookSearchActivity extends BaseActivity implements
 		edit = (EditText) findViewById(R.id.search_et);
 		listview = (ListView) findViewById(R.id.search_res_lv);
 		listview.setOnItemClickListener((OnItemClickListener) this);
-		customProgressDialog = CustomProgressDialog.createDialog(this);
 		noResult_rl = (RelativeLayout) findViewById(R.id.noresult_rl);
 		imgsearch.setOnClickListener(new View.OnClickListener() {
 
@@ -76,6 +75,7 @@ public class EBookSearchActivity extends BaseActivity implements
 				if (!Tool.checkNetWork(context)) {
 					return;
 				}
+				customProgressDialog.show();
 				getHomePage(edit.getText().toString().trim(), page,
 						DEFAULT_COUNT, 0);
 				// Tool.ShowMessages(context, "开始搜索");
@@ -97,6 +97,7 @@ public class EBookSearchActivity extends BaseActivity implements
 					return false;
 				}
 				// 网络访问,获取首页
+				customProgressDialog.show();
 				page = 1;
 				getHomePage(edit.getText().toString().trim(), 1, DEFAULT_COUNT,
 						0);
@@ -207,7 +208,6 @@ public class EBookSearchActivity extends BaseActivity implements
 	 * @param count
 	 */
 	private void getHomePage(String key, int page, int count, int type) {
-		customProgressDialog.show();
 		gparams = new HashMap<String, String>();
 		gparams.put("title", key);
 		gparams.put("curpage", "" + page);// 当前页数

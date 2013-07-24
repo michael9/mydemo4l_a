@@ -54,7 +54,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/comment_ll"
         android:layout_below="@id/baseinfo_rl"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"/>
 
     <LinearLayout
         android:id="@+id/comment_ll"

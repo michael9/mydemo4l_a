@@ -15,6 +15,7 @@
             android:id="@+id/re_book_img"
             android:layout_width="72dp"
             android:layout_height="96dp"
+            android:scaleType="centerCrop"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_marginLeft="5.0dip"

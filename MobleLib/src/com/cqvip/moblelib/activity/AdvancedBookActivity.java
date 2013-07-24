@@ -12,25 +12,20 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import com.android.volley.VolleyError;
 import com.android.volley.Request.Method;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.cqvip.mobelib.imgutils.AsyncTask;
 import com.cqvip.moblelib.R;
-import com.cqvip.moblelib.activity.AnnouceListActivity.MyNewAdapter;
 import com.cqvip.moblelib.adapter.AdvancedBookAdapter;
-import com.cqvip.moblelib.base.IBookManagerActivity;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.Constant;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.ShortBook;
-import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.moblelib.view.DownFreshListView;
 import com.cqvip.utils.Tool;
 
@@ -77,6 +72,7 @@ public class AdvancedBookActivity extends BaseActivity implements OnItemClickLis
 		adapter = new AdvancedBookAdapter(context,null);
 		
 		//获取列表
+		customProgressDialog.show();
 		getHomePage(page, Constant.DEFAULT_COUNT,GETHOMEPAGE);
 		
 		
@@ -86,7 +82,6 @@ public class AdvancedBookActivity extends BaseActivity implements OnItemClickLis
 	{
 		View headbar,btn_back;
 		TextView bar_title;
-		customProgressDialog=CustomProgressDialog.createDialog(this);
 		headbar=findViewById(R.id.head_bar);
 		bar_title=(TextView)headbar.findViewById(R.id.txt_header);
 		bar_title.setText(title);
@@ -122,7 +117,6 @@ public class AdvancedBookActivity extends BaseActivity implements OnItemClickLis
 		@Override
 		public void onResponse(String response) {
 			// TODO Auto-generated method stub
-			customProgressDialog.dismiss();
 			try {
 				moreprocess.setVisibility(View.GONE);
 				List<ShortBook> lists= ShortBook.formList(sendtype, response);
@@ -188,7 +182,6 @@ public class AdvancedBookActivity extends BaseActivity implements OnItemClickLis
 
 	
 	private void getHomePage(int page, int defaultCount,int mwhat) {
-		customProgressDialog.show();
 		gparams=new HashMap<String, String>();
 		gparams.put("libid", GlobleData.LIBIRY_ID);
 		gparams.put("curpage", ""+page);
