@@ -160,6 +160,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
          * get download id from preferences.<br/>
          * if download id bigger than 0, means it has been downloaded, then query status and show right text;
          */
+    	if(mebooks_list!=null&&!mebooks_list.isEmpty())
         getDownloadStatus();
        
     }
@@ -732,6 +733,8 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
+			    	if(adapter_sz!=null)
+			    		 handler.sendMessage(handler.obtainMessage(0));
 				}
 			});
 			// ͼƬ
