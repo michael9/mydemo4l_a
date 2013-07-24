@@ -52,7 +52,6 @@ public class EbookDetailActivity extends BaseActivity {
 	//下载
 	private Context context;
 	 public static final String     DOWNLOAD_FOLDER_NAME = "downloadmoblib";
-	 public static final String     DOWNLOAD_FILE_NAME   = "test0001.pdf";
 	 private long                   downloadId           = 0;
 	 private DownloadManager        downloadManager;
 	 
@@ -61,6 +60,11 @@ public class EbookDetailActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_ebook_detail);
 		context = this;
+		//设置标题，显示下载按钮
+		View v = findViewById(R.id.head_bar);
+		ImageView download = (ImageView)v.findViewById(R.id.btn_right_header);
+		download.setVisibility(View.VISIBLE);
+		
 		Bundle bundle = getIntent().getBundleExtra("detaiinfo");
 		dBook = (EBook) bundle.getSerializable("book");
 		author = (TextView) findViewById(R.id.ebook_author_txt);
@@ -222,6 +226,13 @@ public class EbookDetailActivity extends BaseActivity {
 		title.setText(R.string.book_detail);
 		ImageView back = (ImageView) title_bar
 				.findViewById(R.id.img_back_header);
+        download.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(context,DownLoadManagerActivity.class));
+			}
+		});
 		back.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -264,9 +275,8 @@ public class EbookDetailActivity extends BaseActivity {
 	private void andToqueue() {
 		DownloadManager.Request request = new DownloadManager.Request(Uri.parse(download_url));
 		request.setDestinationInExternalPublicDir(DOWNLOAD_FOLDER_NAME, getFullname(dBook.getTitle_c()));
-		request.setTitle("哈哈哈哈");
-		request.setDescription("meilishuo desc");
-		
+		request.setTitle(dBook.getTitle_c());
+		request.setDescription("格式：pdf,"+dBook.getPdfsize());
 		request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
 		request.setVisibleInDownloadsUi(false);
 		request.setMimeType("application/com.cqvip.download.file");
