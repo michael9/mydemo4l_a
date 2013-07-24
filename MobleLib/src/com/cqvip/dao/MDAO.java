@@ -101,7 +101,7 @@ public abstract  class MDAO extends SQLiteOpenHelper{
 		SQLiteDatabase db = getReadableDatabase();
 		String tableName = modelClass.getSimpleName();
 		
-		Cursor cur = db.query(tableName, null, where, null, null, null, null);
+		Cursor cur = db.query(tableName, null, where, null, null, null, "id "+" desc",null);
 		
 		for(cur.moveToFirst(); !cur.isAfterLast(); cur.moveToNext()) {
 
@@ -148,6 +148,75 @@ public abstract  class MDAO extends SQLiteOpenHelper{
 			list.add(newObj);
 		}
 				
+		cur.close();
+		db.close();
+		
+		return (List<T>) list;
+	}
+	
+	/**
+	 * 分页查询
+	 * @param where
+	 * 		SQL查询条件
+	 * @param modelClass
+	 * 		实体类
+	 * @return	实体列表
+	 */
+	@SuppressWarnings("unchecked")
+	public <T extends Model> List<T> query(String where,String limit, 
+			Class<? extends Model> modelClass) throws DaoException{
+		List<Model> list = new ArrayList<Model>();
+		
+		SQLiteDatabase db = getReadableDatabase();
+		String tableName = modelClass.getSimpleName();
+		
+		Cursor cur = db.query(tableName, null, where, null, null, null, "id "+" desc",limit);
+		
+		for(cur.moveToFirst(); !cur.isAfterLast(); cur.moveToNext()) {
+			
+			// 创建实体类
+			Model newObj;
+			try {
+				newObj = (Model) modelClass.getConstructor(new Class[] {}) // 构造函数中的参数值
+						.newInstance(new Object[] {});// 创建出实例，内含参数
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new DaoException(ErrorType.CANNOT_INSTANCE_MODEL);
+			} 
+			
+			// 初始化实例函数
+			if(Model.Operator.METHOD_INIT_FAILED == modelOperator.initMethods(newObj)) {
+				throw new DaoException(ErrorType.INVALID_MODEL_METHOD);
+			}
+			
+			for(int i = 0; i < cur.getColumnCount(); i++){
+				Class<?> type = modelOperator.getFieldType(newObj, cur.getColumnName(i));
+				
+				if(Integer.class == type){
+					modelOperator.setFieldValue(newObj, cur.getColumnName(i), cur.getInt(i));
+				} else if(Long.class == type) {
+					modelOperator.setFieldValue(newObj, cur.getColumnName(i), cur.getLong(i));
+				} else if(String.class == type) {
+					modelOperator.setFieldValue(newObj, cur.getColumnName(i), cur.getString(i));
+				} else if(Double.class == type) {
+					modelOperator.setFieldValue(newObj, cur.getColumnName(i), cur.getDouble(i));
+				} else if(Float.class == type){
+					modelOperator.setFieldValue(newObj, cur.getColumnName(i), cur.getFloat(i));
+				} else if(Date.class == type) {
+					try {
+						modelOperator.setFieldValue(newObj, cur.getColumnName(i), 
+								dateFormat.parse(cur.getString(i)));
+					} catch (ParseException e) {
+						e.printStackTrace();
+					}
+				} else if(byte[].class == type) {
+					modelOperator.setFieldValue(newObj, cur.getColumnName(i), cur.getBlob(i));
+				}
+			}
+			
+			list.add(newObj);
+		}
+		
 		cur.close();
 		db.close();
 		

@@ -36,12 +36,28 @@ public class MEBookDao extends Dao{
 		
 	}
 	/**
-	 * 删除用户信息
+	 * 删除下载书籍
 	 * @param id
 	 * @throws DaoException 
 	 */
 	public void delInfo(String lngid) throws DaoException{
 		MEbook book = queryInfo(lngid);
+		if(book==null){
+			return; 
+		}
+		try {
+			this.delete(book);
+		} catch (DaoException e) {
+			throw new DaoException(e.getType());
+		}
+	}
+	/**
+	 * 删除，取消下载
+	 * @param id
+	 * @throws DaoException 
+	 */
+	public void deldownload(String downloadid) throws DaoException{
+		MEbook book = queryInfobydownid(downloadid);
 		if(book==null){
 			return; 
 		}
@@ -129,6 +145,31 @@ public class MEBookDao extends Dao{
 			return null;
 		}
 		return result;
+	}
+	/**
+	 * 分页查询所有记录
+	 * @param id
+	 * @return
+	 * @throws DaoException
+	 */
+	public List<MEbook> queryall(int isdownloade,int page,int count) throws DaoException{
+		String limit = formLimit(page,count);
+		StringBuilder where = new StringBuilder();
+		where.append("iddownload=");
+		where.append(isdownloade);
+		List<MEbook> result = null;
+		try {
+			result =  this.query(where.toString(),limit,MEbook.class);
+		} catch (DaoException e) {
+			throw new DaoException(e.getType());
+		}
+		if(result==null||result.size()<=0){
+			return null;
+		}
+		return result;
+	}
+	private String formLimit(int page, int count) {
+		return count*(page-1)+","+count;
 	}
 	private MEbook changeToMEbook(EBook book,long downloadid,int isdownload) {
 		MEbook mbook = new MEbook();
