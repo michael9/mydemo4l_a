@@ -31,13 +31,13 @@ public class BaseFragmentImageActivity  extends FragmentActivity{
 	}
 	
 	@Override
-    public void onResume() {
+	protected void onResume() {
         super.onResume();
         mImageFetcher.setExitTasksEarly(false);
     }
 
     @Override
-    public void onPause() {
+    protected void onPause() {
         super.onPause();
         mImageFetcher.setPauseWork(false);
         mImageFetcher.setExitTasksEarly(true);
@@ -45,7 +45,7 @@ public class BaseFragmentImageActivity  extends FragmentActivity{
     }
 
     @Override
-    public void onDestroy() {
+    protected void onDestroy() {
         super.onDestroy();
         mImageFetcher.closeCache();
     }
