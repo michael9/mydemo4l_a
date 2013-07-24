@@ -131,5 +131,7 @@
     <string name="need_username">请输入用户名</string>
     <string name="title_activity_big_img">BigImgActivity</string>
     <string name="title_activity_down_load_manager">下载管理</string>
+    
+    <string name="download_notification_title">下载</string>
 
 </resources>
