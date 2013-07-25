@@ -210,14 +210,11 @@ public class EbookDetailActivity extends BaseActivity {
 						   //插入数据库保存,正在下载
 						   try {
 							dao.saveInfo(dBook, downloadId, MEbook.TYPE_ON_DOWNLOADING);
-							Tool.ShowMessages(context, "插入数据库成功");
 						} catch (DaoException e) {
 							e.printStackTrace();
-							Tool.ShowMessages(context, "插入数据库失败");
 						}
-					   }
+					 }
 				}
-
 			}
 		});
 
@@ -246,9 +243,15 @@ public class EbookDetailActivity extends BaseActivity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		//从新下载
-		if(requestCode ==0&&resultCode == 1){
-			
-			
+		if(requestCode ==0&&resultCode == 0){
+			 MEBookDao dao = new MEBookDao(context);
+			 andToqueue();
+			   //插入数据库保存,正在下载
+			   try {
+				dao.saveInfo(dBook, downloadId, MEbook.TYPE_ON_DOWNLOADING);
+			} catch (DaoException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	/**

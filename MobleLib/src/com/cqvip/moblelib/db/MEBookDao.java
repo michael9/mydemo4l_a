@@ -56,7 +56,7 @@ public class MEBookDao extends Dao{
 	 * @param id
 	 * @throws DaoException 
 	 */
-	public void deldownload(String downloadid) throws DaoException{
+	public void deldownload(long downloadid) throws DaoException{
 		MEbook book = queryInfobydownid(downloadid);
 		if(book==null){
 			return; 
@@ -74,6 +74,18 @@ public class MEBookDao extends Dao{
 	 */
 	public void saveInfo(EBook book,long downloadid,int isdownload) throws DaoException{
 		MEbook mbook = changeToMEbook(book,downloadid,isdownload);
+		try {
+			this.add(mbook);
+		} catch (DaoException e) {
+			throw new DaoException(e.getType());
+		}
+	}
+	/**
+	 * 保存用户信息
+	 * @param user
+	 * @throws DaoException
+	 */
+	public void saveInfo(MEbook mbook) throws DaoException{
 		try {
 			this.add(mbook);
 		} catch (DaoException e) {
@@ -110,7 +122,7 @@ public class MEBookDao extends Dao{
 	 * @return
 	 * @throws DaoException
 	 */
-	public MEbook queryInfobydownid(String downloadid) throws DaoException{
+	public MEbook queryInfobydownid(long downloadid) throws DaoException{
 		 StringBuilder where = new StringBuilder();
 		   where.append("downloadid=");
 		   where.append(downloadid);
@@ -145,6 +157,18 @@ public class MEBookDao extends Dao{
 			return null;
 		}
 		return result;
+	}
+	/**
+	 * 更新
+	 * @param book
+	 * @throws DaoException
+	 */
+	public void updateState(MEbook mbook) throws DaoException{
+		try {
+			this.update(mbook);
+		} catch (DaoException e) {
+			throw new DaoException(e.getType());
+		}
 	}
 	/**
 	 * 分页查询所有记录
