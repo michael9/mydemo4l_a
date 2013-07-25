@@ -710,7 +710,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 						R.layout.moreitemsview, null);
 				return convertView;
 			}
-			if (convertView == null) {
+			if (convertView == null|| convertView.findViewById(R.id.linemore) != null) {
 				convertView = LayoutInflater.from(myContext).inflate(
 						R.layout.item_downloadmanager, null);
 				holder = new ViewHolder();
@@ -725,8 +725,12 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 			}
             if(!arrayList.isEmpty()){
 			int[] int_array= arrayList.get(position);
+			if(int_array!=null){
+				Log.i("int_array", ""+int_array[1]);
+				Log.i("download_progress", holder.download_progress.toString());
 			  holder.download_progress.setMax(int_array[1]);
 			  holder.download_progress.setProgress(int_array[0]);
+			  }
 			  holder.download_size.setText(getAppSize(int_array[0]) + "/" + getAppSize(int_array[1]));
 			  if(int_array[2]==DownloadManager.STATUS_SUCCESSFUL){
 				  holder.downloadtip.setText("下载完成，请点击打开");
