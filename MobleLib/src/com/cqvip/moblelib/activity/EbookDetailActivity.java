@@ -210,10 +210,8 @@ public class EbookDetailActivity extends BaseActivity {
 						   //插入数据库保存,正在下载
 						   try {
 							dao.saveInfo(dBook, downloadId, MEbook.TYPE_ON_DOWNLOADING);
-							Tool.ShowMessages(context, "插入数据库成功");
 						} catch (DaoException e) {
 							e.printStackTrace();
-							Tool.ShowMessages(context, "插入数据库失败");
 						}
 					   }
 				}

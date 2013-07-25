@@ -75,7 +75,8 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 	private int perpage = 10;// 每页显示条数
 	private View moreprocess;
 	private int curpage_sz = 1, curpage_zk = 1;
-
+    //缓存
+	private  HashMap<Long,Boolean> loded;
 	MyGridViewAdapter adapter_zk, adapter_sz;
 	/**
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -119,7 +120,6 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 		// primary sections of the app.
 		mSectionsPagerAdapter = new SectionsPagerAdapter(
 				getSupportFragmentManager());
-
 		// Set up the ViewPager with the sections adapter.
 		mViewPager = (ViewPager) findViewById(R.id.pager);
 		mViewPager.setAdapter(mSectionsPagerAdapter);
@@ -148,7 +148,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
     	 downloadObserver = new DownloadChangeObserver();
     	 handler = new MyHandler();
     	 downloadManagerPro = new DownloadManagerPro(downloadManager);
-    	 
+    	 loded = new HashMap<Long, Boolean>();
     	meBookDao=new MEBookDao(this);
     	try {
 			mebooks_list=meBookDao.queryall(0);
@@ -665,7 +665,6 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 
 		@Override
 		public int getCount() {
-			Log.i("getCount", "getCount");
 			if (arrayList != null && !arrayList.isEmpty()) {
 				return arrayList.size() + 1;
 			}
@@ -723,28 +722,29 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 			} else {
 				holder = (ViewHolder) convertView.getTag();
 			}
+			final MEbook book = mebooks_list.get(position);
             if(!arrayList.isEmpty()){
 			int[] int_array= arrayList.get(position);
-			if(int_array!=null){
-				Log.i("int_array", ""+int_array[1]);
-				Log.i("download_progress", holder.download_progress.toString());
+				//Log.i("int_array", ""+int_array[1]);
 			  holder.download_progress.setMax(int_array[1]);
 			  holder.download_progress.setProgress(int_array[0]);
-			  }
 			  holder.download_size.setText(getAppSize(int_array[0]) + "/" + getAppSize(int_array[1]));
-			  if(int_array[2]==DownloadManager.STATUS_SUCCESSFUL){
+			  holder.download_precent.setText(getNotiPercent(int_array[0], int_array[1]));
+			  if(int_array[2]==DownloadManager.STATUS_SUCCESSFUL&&!loded.containsKey(book.getDownloadid())){
 				  holder.downloadtip.setText("下载完成，请点击打开");
+				  //放入缓存
+				  loded.put(book.getDownloadid(),true);
+				  //更新数据库
+				  updateDateBase(book);
 			  }
 			  
-			  final int temp_position=position;
 			  holder.download_cancel.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					if(mebooks_list!=null&&!mebooks_list.isEmpty()){
 					try {
-						MEbook book = mebooks_list.get(temp_position);
 						downloadManager.remove(book.getDownloadid());
-						meBookDao.delInfo(book.getLngid());
+						meBookDao.deldownload(book.getDownloadid());
 						mebooks_list.remove(book);
 					} catch (DaoException e) {
 						// TODO Auto-generated catch block
@@ -764,6 +764,15 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 //			}
 
 			return convertView;
+		}
+
+		private void updateDateBase(final MEbook book) {
+			try {
+				book.setIsdownload(MEbook.TYPE_DOWNLOADED);
+				meBookDao.updateState(book);
+			} catch (DaoException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	
