@@ -165,19 +165,20 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
     }
     
     public void getDownloadStatus() {
-    	 _lists.clear();
+    	ArrayList<int[]> temp_lists= new ArrayList<int[]>();
     	if(mebooks_list!=null&&!mebooks_list.isEmpty()){
     	 int a=mebooks_list.size();
     	for (int i = 0; i < a; i++) {			
     		int[] bytesAndStatus = downloadManagerPro.getBytesAndStatus(mebooks_list.get(i).getDownloadid());
-    		_lists.add(bytesAndStatus);
+    		temp_lists.add(bytesAndStatus);
 		}
-    	if(adapter_sz!=null){
-    		//adapter_sz.notifyDataSetChanged();
-    		 handler.sendMessage(handler.obtainMessage(0));
     	}
-    		
-    	}
+   	 _lists.clear();
+   	_lists.addAll(temp_lists);
+	if(adapter_sz!=null){
+		//adapter_sz.notifyDataSetChanged();
+		 handler.sendMessage(handler.obtainMessage(0));
+	}
     }
     
 //    public void getdownloadids(){
@@ -609,6 +610,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 		TextView download_precent;// 
 		ProgressBar download_progress;// 
 		Button download_cancel;//
+		TextView downloadtip;
 	}
 
 //	class MyGridViewAdapter extends CursorAdapter {
@@ -708,8 +710,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 						R.layout.moreitemsview, null);
 				return convertView;
 			}
-			if (convertView == null
-					|| convertView.findViewById(R.id.linemore) != null) {
+			if (convertView == null) {
 				convertView = LayoutInflater.from(myContext).inflate(
 						R.layout.item_downloadmanager, null);
 				holder = new ViewHolder();
@@ -717,15 +718,20 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 		        holder.download_precent = (TextView) convertView.findViewById(R.id.download_precent);  
 		        holder.download_progress =(ProgressBar) convertView.findViewById(R.id.download_progress);  
 		        holder.download_cancel =  (Button) convertView.findViewById(R.id.download_cancel);  
+		        holder.downloadtip = (TextView) convertView.findViewById(R.id.download_tip);
 		        convertView.setTag(holder);  
 			} else {
 				holder = (ViewHolder) convertView.getTag();
 			}
-
+            if(!arrayList.isEmpty()){
 			int[] int_array= arrayList.get(position);
 			  holder.download_progress.setMax(int_array[1]);
 			  holder.download_progress.setProgress(int_array[0]);
 			  holder.download_size.setText(getAppSize(int_array[0]) + "/" + getAppSize(int_array[1]));
+			  if(int_array[2]==DownloadManager.STATUS_SUCCESSFUL){
+				  holder.downloadtip.setText("下载完成，请点击打开");
+			  }
+			  
 			  final int temp_position=position;
 			  holder.download_cancel.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -744,6 +750,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 				}
 				}
 			});
+            }
 			// 图片
 //			if (!TextUtils.isEmpty(favorite.getImgurl())) {
 //				fetch.loadImage(favorite.getImgurl(), holder.img);
