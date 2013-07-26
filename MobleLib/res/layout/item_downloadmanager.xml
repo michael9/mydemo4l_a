@@ -47,6 +47,7 @@
         android:layout_alignRight="@+id/download_progress"
         android:drawableBottom="@drawable/icon_stop"
         android:gravity="bottom"
+        android:focusable="false"
         />
 
     <TextView
