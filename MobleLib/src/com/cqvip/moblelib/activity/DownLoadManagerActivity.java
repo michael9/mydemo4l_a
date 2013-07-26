@@ -22,6 +22,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerTitleStrip;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -52,6 +53,7 @@ import com.cqvip.moblelib.model.Favorite;
 import com.cqvip.moblelib.net.BookException;
 import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.utils.DownloadManagerPro;
+import com.cqvip.utils.FileUtils;
 import com.cqvip.utils.Tool;
 
 import cx.hell.android.pdfview.OpenFileActivity;
@@ -620,6 +622,8 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 	}
 
 	static class ViewHolder {
+		ImageView download_image;
+		TextView download_title;
 		TextView download_size;//
 		TextView download_precent;//
 		ProgressBar download_progress;//
@@ -731,24 +735,34 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 				convertView = LayoutInflater.from(myContext).inflate(
 						R.layout.item_downloadmanager, null);
 				holder = new ViewHolder();
-				convertView.findViewById(R.id.download_size).setVisibility(
-						View.GONE);
+				holder.download_title=(TextView) convertView.findViewById(R.id.download_title);
+				holder.download_size=(TextView) convertView.findViewById(R.id.download_size);
+				holder.download_image=(ImageView) convertView.findViewById(R.id.book_img);
 				convertView.findViewById(R.id.download_precent).setVisibility(
 						View.GONE);
 				convertView.findViewById(R.id.download_progress).setVisibility(
 						View.GONE);
 				holder.download_cancel = (Button) convertView
 						.findViewById(R.id.download_cancel);
-				holder.downloadtip = (TextView) convertView
-						.findViewById(R.id.download_tip);
+				convertView.findViewById(R.id.download_tip).setVisibility(
+						View.GONE);;
 				convertView.setTag(holder);
 			} else {
 				holder = (ViewHolder) convertView.getTag();
 			}
 
 			final MEbook book = arrayList.get(position);
+			final String bookname=book.getTitle_c();
 			if (book != null) {
-				holder.downloadtip.setText("下载完成，请点击打开");
+				holder.download_title.setText(bookname);
+				holder.download_size.setText(getAppSize(book.getPdfsize()));
+				// 图片
+				if (!TextUtils.isEmpty(book.getImgurl())) {
+					fetch.loadImage(book.getImgurl(), holder.download_image);
+				} else {
+					holder.download_image.setImageDrawable(getResources().getDrawable(
+							R.drawable.defaut_book));
+				}
 				holder.download_cancel
 						.setOnClickListener(new View.OnClickListener() {
 							@Override
@@ -759,6 +773,8 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 												.getDownloadid());
 										mebooks_listloaded.remove(book);
 										adapter_zk.notifyDataSetChanged();
+										FileUtils.DeleteFolder(Environment.getExternalStorageDirectory()+File.separator+
+							EbookDetailActivity.DOWNLOAD_FOLDER_NAME + File.separator+bookname+".pdf");
 									} catch (DaoException e) {
 										// TODO Auto-generated catch block
 										e.printStackTrace();
@@ -858,6 +874,10 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 				convertView = LayoutInflater.from(myContext).inflate(
 						R.layout.item_downloadmanager, null);
 				holder = new ViewHolder();
+				holder.download_image = (ImageView) convertView
+						.findViewById(R.id.book_img);
+				holder.download_title = (TextView) convertView
+						.findViewById(R.id.download_title);
 				holder.download_size = (TextView) convertView
 						.findViewById(R.id.download_size);
 				holder.download_precent = (TextView) convertView
@@ -873,16 +893,26 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 				holder = (ViewHolder) convertView.getTag();
 			}
 			final MEbook book = mebooks_list.get(position);
+			final int downloadstatus;
 			if (!arrayList.isEmpty()) {
 				int[] int_array = arrayList.get(position);
+				// 图片
+				if (!TextUtils.isEmpty(book.getImgurl())) {
+					fetch.loadImage(book.getImgurl(), holder.download_image);
+				} else {
+					holder.download_image.setImageDrawable(getResources().getDrawable(
+							R.drawable.defaut_book));
+				}
 				// Log.i("int_array", ""+int_array[1]);
+				holder.download_title.setText(book.getTitle_c());
 				holder.download_progress.setMax(int_array[1]);
 				holder.download_progress.setProgress(int_array[0]);
 				holder.download_size.setText(getAppSize(int_array[0]) + "/"
 						+ getAppSize(int_array[1]));
 				holder.download_precent.setText(getNotiPercent(int_array[0],
 						int_array[1]));
-				if (int_array[2] == DownloadManager.STATUS_SUCCESSFUL
+				downloadstatus=int_array[2];
+				if (downloadstatus== DownloadManager.STATUS_SUCCESSFUL
 						&& !loded.containsKey(book.getDownloadid())) {
 					holder.downloadtip.setText("下载完成，请点击打开");
 					// 放入缓存
@@ -903,6 +933,10 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 										meBookDao.deldownload(book
 												.getDownloadid());
 										mebooks_list.remove(book);
+										if(downloadstatus == DownloadManager.STATUS_SUCCESSFUL){
+										FileUtils.DeleteFolder(Environment.getExternalStorageDirectory()+File.separator+
+							EbookDetailActivity.DOWNLOAD_FOLDER_NAME + File.separator+book.getTitle_c()+".pdf");
+										}
 									} catch (DaoException e) {
 										// TODO Auto-generated catch block
 										e.printStackTrace();
