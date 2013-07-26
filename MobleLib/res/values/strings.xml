@@ -133,5 +133,8 @@
     <string name="title_activity_down_load_manager">下载管理</string>
     
     <string name="download_notification_title">下载</string>
+   
+    <string name="tips_begin_download">文件已加入下载列队，开始下载</string>
+    <string name="tips_unable_download">该文件暂时不能下载</string>
 
 </resources>

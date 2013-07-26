@@ -88,7 +88,7 @@ public class EbookDetailActivity extends BaseActivity {
 		btn_ebook_detail_download = (Button) book_action_bar
 				.findViewById(R.id.btn_item_download);
 
-		
+		btn_ebook_detail_download.setVisibility(View.INVISIBLE);
 		 downloadManager = (DownloadManager)getSystemService(DOWNLOAD_SERVICE);
 		
 		if (dBook.getLngid() != null) {
@@ -214,6 +214,8 @@ public class EbookDetailActivity extends BaseActivity {
 							e.printStackTrace();
 						}
 					 }
+				}else{
+					Tool.ShowMessages(context,getString(R.string.tips_unable_download));
 				}
 			}
 		});
@@ -284,6 +286,7 @@ public class EbookDetailActivity extends BaseActivity {
 		request.setVisibleInDownloadsUi(false);
 		request.setMimeType("application/com.cqvip.download.file");
 		downloadId = downloadManager.enqueue(request);
+		Tool.ShowMessages(context, getString(R.string.tips_begin_download));
 		
 	}
 	/**
@@ -324,12 +327,16 @@ public class EbookDetailActivity extends BaseActivity {
 		public void onResponse(String response) {
 			// TODO Auto-generated method stub
 			customProgressDialog.dismiss();
+			btn_ebook_detail_download.setVisibility(View.VISIBLE);
 			try {
 				List<ShortBook> book = ShortBook.formList(Task.TASK_EBOOK_DOWN,
 						response);
 				if (book != null) {
 					download_url = book.get(0).getDate();
+				}else{
+					Tool.ShowMessages(context,getString(R.string.tips_unable_download));
 				}
+				
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
