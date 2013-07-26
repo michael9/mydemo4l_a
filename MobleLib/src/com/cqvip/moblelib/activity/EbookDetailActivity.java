@@ -183,6 +183,7 @@ public class EbookDetailActivity extends BaseActivity {
 			@SuppressLint("NewApi")
 			@Override
 			public void onClick(View v) {
+				if (GlobleData.islogin) {
 				if (download_url != null) {
 					// 弹出对话框
 //					Intent intent = new Intent(Intent.ACTION_VIEW, Uri
@@ -217,7 +218,12 @@ public class EbookDetailActivity extends BaseActivity {
 				}else{
 					Tool.ShowMessages(context,getString(R.string.tips_unable_download));
 				}
+			}else{
+				// 进入下载界面
+				showLoginDialog(4);
+				}
 			}
+				
 		});
 
 		title_bar = findViewById(R.id.head_bar);
@@ -229,7 +235,12 @@ public class EbookDetailActivity extends BaseActivity {
 			
 			@Override
 			public void onClick(View v) {
+				if (GlobleData.islogin) {
 				startActivity(new Intent(context,DownLoadManagerActivity.class));
+				}else {
+					// 只是登陆而已
+					showLoginDialog(4);
+				}
 			}
 		});
 		back.setOnClickListener(new View.OnClickListener() {
