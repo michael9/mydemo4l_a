@@ -23,7 +23,7 @@ public class EBook implements Serializable{
 			private String lngid;//id
 		    private String gch;//
 		    private String years;//年
-		    private int num;//期数 第几期
+		    private String num;//期数 第几期
 		    private String vol;//
 		    private String title_c;//标题（中文）
 		    private String title_e;//标题（英文）
@@ -44,7 +44,7 @@ public class EBook implements Serializable{
 		    private boolean isfavorite;//是否收藏
 	
 		    
-		    public EBook(String lngid, String years, int num, String title_c,
+		    public EBook(String lngid, String years, String num, String title_c,
 					String name_c, String remark_c, String writer,
 					int pagecount, long pdfsize, String imgurl) {
 				super();
@@ -76,7 +76,7 @@ public class EBook implements Serializable{
 				return years;
 			}
 
-			public int getNum() {
+			public String getNum() {
 				return num;
 			}
 
@@ -149,7 +149,7 @@ public class EBook implements Serializable{
 		    				lngid = json.getString("lngid");
 		    				gch = json.getString("gch");
 		    				years = json.getString("years");
-		    				num = getInt("num", json);
+		    				num = json.getString("num");
 		    				vol = json.getString("vol");
 		    				title_c = json.getString("title_c");
 		    				title_e = json.getString("title_e");

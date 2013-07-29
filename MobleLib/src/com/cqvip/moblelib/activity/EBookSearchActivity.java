@@ -149,7 +149,8 @@ public class EBookSearchActivity extends BaseActivity implements
 					noResult_rl.setVisibility(View.VISIBLE);
 				}
 			} catch (Exception e) {
-				// TODO: handle exception
+				
+				e.printStackTrace();
 			}
 
 		}

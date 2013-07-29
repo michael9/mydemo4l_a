@@ -23,7 +23,7 @@ public class Favorite implements Serializable{
 	private String keyword;
 	private String remark;
 	private String years;
-	private int num;
+	private String num;
 	private int pagecount;
 	private String price;
 	private String vote;
@@ -53,7 +53,7 @@ public class Favorite implements Serializable{
 			keyword = json.getString("keyword");
 			remark = json.getString("remark");
 			years = json.getString("years");
-			num = getInt("num", json);
+			num =json.getString("num");
 			pagecount = getInt("pagecount", json);
 			price = json.getString("price");
 			vote = json.getString("vote");
@@ -78,7 +78,7 @@ public class Favorite implements Serializable{
 				keyword = json.getString("keyword");
 				remark = json.getString("remark");
 				years = json.getString("years");
-				num = getInt("num", json);
+				num = json.getString("num");
 				pagecount = getInt("pagecount", json);
 				price = json.getString("price");
 				vote = json.getString("vote");
@@ -250,7 +250,7 @@ public class Favorite implements Serializable{
 		return years;
 	}
 
-	public int getNum() {
+	public String getNum() {
 		return num;
 	}
 

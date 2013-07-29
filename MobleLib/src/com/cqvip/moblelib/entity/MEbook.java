@@ -11,7 +11,7 @@ public class MEbook extends Model{
 	private Integer id;//自增id
 	private String lngid;//电子书id
 	private String years;//年
-	private Integer num;//第几期
+	private String num;//第几期
 	private String title_c;//标题
 	private String name_c;//来源书籍
 	private String remark_c;//简述
@@ -40,7 +40,7 @@ public class MEbook extends Model{
 		this.years = years;
 	}
 
-	public void setNum(Integer num) {
+	public void setNum(String num) {
 		this.num = num;
 	}
 
@@ -111,7 +111,7 @@ public class MEbook extends Model{
 
 
 
-	public Integer getNum() {
+	public String getNum() {
 		return num;
 	}
 
