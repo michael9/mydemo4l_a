@@ -42,6 +42,7 @@ import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.artifex.mupdfdemo.MuPDFActivity;
 import com.cqvip.dao.DaoException;
 import com.cqvip.mobelib.imgutils.ImageFetcher;
 import com.cqvip.moblelib.R;
@@ -55,8 +56,6 @@ import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.utils.DownloadManagerPro;
 import com.cqvip.utils.FileUtils;
 import com.cqvip.utils.Tool;
-
-import cx.hell.android.pdfview.OpenFileActivity;
 
 public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 	public static final int GETFIRSTPAGE_SZ = 1;
@@ -571,11 +570,19 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 					Log.i("filepath", filepath);
 					File file = new File(filepath);
 					if (file.exists()) {
-						Intent intent = new Intent(DownLoadManagerActivity.this,OpenFileActivity.class);
-						intent.setDataAndType(Uri.fromFile(file),
-								"application/pdf");
-						intent.setAction("android.intent.action.VIEW");
+//						Intent intent = new Intent(DownLoadManagerActivity.this,OpenFileActivity.class);
+//						intent.setDataAndType(Uri.fromFile(file),
+//								"application/pdf");
+//						intent.setAction("android.intent.action.VIEW");
+//						startActivity(intent);
+						Uri uri = Uri.parse(filepath);
+						Intent intent = new Intent(context,MuPDFActivity.class);
+						intent.setAction(Intent.ACTION_VIEW);
+						intent.setData(uri);
 						startActivity(intent);
+						
+						
+						
 					} else {
 						Tool.ShowMessagel(context, "文件" + filename + "不存在");
 					}
