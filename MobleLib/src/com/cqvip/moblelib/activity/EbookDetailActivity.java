@@ -293,7 +293,7 @@ public class EbookDetailActivity extends BaseActivity {
 		request.setDestinationInExternalPublicDir(DOWNLOAD_FOLDER_NAME, getFullname(dBook.getTitle_c()));
 		request.setTitle(dBook.getTitle_c());
 		request.setDescription("∏Ò Ω£∫pdf,"+dBook.getPdfsize());
-		request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+		//request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
 		request.setVisibleInDownloadsUi(false);
 		request.setMimeType("application/com.cqvip.download.file");
 		downloadId = downloadManager.enqueue(request);

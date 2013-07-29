@@ -1016,7 +1016,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 		mPagerTitleStrip = (PagerTitleStrip) findViewById(R.id.pager_title_strip);
 		mPagerTitleStrip.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
 		TextView title = (TextView) findViewById(R.id.txt_header);
-		title.setText(R.string.mycomments);
+		title.setText(R.string.serv_download);
 		ImageView back = (ImageView) findViewById(R.id.img_back_header);
 		back.setOnClickListener(new View.OnClickListener() {
 			@Override
