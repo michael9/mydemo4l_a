@@ -6,10 +6,12 @@ import java.util.List;
 import java.util.Map;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -293,12 +295,12 @@ public class EbookDetailActivity extends BaseActivity {
 		request.setDestinationInExternalPublicDir(DOWNLOAD_FOLDER_NAME, getFullname(dBook.getTitle_c()));
 		request.setTitle(dBook.getTitle_c());
 		request.setDescription("格式：pdf,"+dBook.getPdfsize());
-		//request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+		if(Build.VERSION.SDK_INT>=11)
+		request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
 		request.setVisibleInDownloadsUi(false);
 		request.setMimeType("application/com.cqvip.download.file");
 		downloadId = downloadManager.enqueue(request);
 		Tool.ShowMessages(context, getString(R.string.tips_begin_download));
-		
 	}
 	/**
 	 * 下载文件名称

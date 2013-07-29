@@ -14,12 +14,6 @@
         android:id="@+id/favorlist"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/searchbar"
-        android:layout_marginBottom="15dp"
-        android:layout_marginLeft="2dp"
-        android:layout_marginRight="2dp"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/text_bck"
         android:divider="@color/divider_color"
         android:dividerHeight="0.5dp" />
 

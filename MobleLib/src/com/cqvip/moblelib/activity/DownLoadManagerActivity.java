@@ -716,7 +716,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 				convertView.setClickable(false);
 				TextView tv = (TextView) convertView
 						.findViewById(R.id.footer_txt);
-				tv.setText("亲，您所在分类没有评论哦");
+				tv.setText("亲，没有已下载的电子书");
 				tv.setTextColor(context.getResources().getColor(
 						R.drawable.silvergray));
 				tv.setTextSize(context.getResources().getDimension(
@@ -855,7 +855,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 				convertView.setClickable(false);
 				TextView tv = (TextView) convertView
 						.findViewById(R.id.footer_txt);
-				tv.setText("亲，您所在分类没有评论哦");
+				tv.setText("亲，没有下载中的电子书");
 				tv.setTextColor(context.getResources().getColor(
 						R.drawable.silvergray));
 				tv.setTextSize(context.getResources().getDimension(
