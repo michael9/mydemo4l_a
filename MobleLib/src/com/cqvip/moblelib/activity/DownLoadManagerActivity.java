@@ -679,7 +679,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 		public MyGridViewAdapter_Loaded(Context context, ArrayList<MEbook> list) {
 			this.myContext = context;
 			this.arrayList = list;
-			Log.i("MyFavorActivity", "MyGridViewAdapter");
+			Log.i("MyFavorActivity", "MyGridViewAdapter");	
 		}
 
 		public MyGridViewAdapter_Loaded(Context context,
@@ -759,7 +759,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 			}
 
 			final MEbook book = arrayList.get(position);
-			final String bookname=book.getTitle_c();
+			final String bookname= getfillName(book.getDownloadid());
 			if (book != null) {
 				holder.download_title.setText(bookname);
 				holder.download_size.setText(getAppSize(book.getPdfsize()));
@@ -799,6 +799,11 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 			// }
 
 			return convertView;
+		}
+
+		private String getfillName(Long downloadid) {
+			String title = downloadManagerPro.getFileName(downloadid);
+			return title.substring(title.lastIndexOf("/")+1,title.length());
 		}
 
 		private void updateDateBase(final MEbook book) {

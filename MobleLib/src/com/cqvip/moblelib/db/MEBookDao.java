@@ -85,6 +85,20 @@ public class MEBookDao extends Dao{
 	 * @param user
 	 * @throws DaoException
 	 */
+	public void saveInfo(EBook book,long downloadid,int isdownload,String title) throws DaoException{
+		
+		MEbook mbook = changeToMEbook(book,downloadid,isdownload,title);
+		try {
+			this.add(mbook);
+		} catch (DaoException e) {
+			throw new DaoException(e.getType());
+		}
+	}
+	/**
+	 * 保存用户信息
+	 * @param user
+	 * @throws DaoException
+	 */
 	public void saveInfo(MEbook mbook) throws DaoException{
 		try {
 			this.add(mbook);
@@ -210,6 +224,24 @@ public class MEBookDao extends Dao{
 		mbook.setBeginpage(book.getBeginpage());
 		mbook.setEndpage(book.getEndpage());
 		
+		mbook.setDownloadid(downloadid);
+		mbook.setIsdownload(isdownload);
+		return mbook;
+	}
+	private MEbook changeToMEbook(EBook book,long downloadid,int isdownload,String title) {
+		MEbook mbook = new MEbook();
+		mbook.setLngid(book.getLngid());
+		mbook.setName_c(book.getName_c());
+		mbook.setNum(book.getNum());
+		mbook.setImgurl(book.getImgurl());
+		mbook.setWriter(book.getWriter());
+		mbook.setRemark_c(book.getRemark_c());
+		mbook.setPagecount(book.getPagecount());
+		mbook.setPdfsize(book.getPdfsize());
+		mbook.setTitle_c(title);
+		mbook.setPdfsize(book.getPdfsize());
+		mbook.setBeginpage(book.getBeginpage());
+		mbook.setEndpage(book.getEndpage());
 		mbook.setDownloadid(downloadid);
 		mbook.setIsdownload(isdownload);
 		return mbook;
