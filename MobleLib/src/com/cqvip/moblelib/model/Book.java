@@ -135,6 +135,30 @@ public class Book implements Serializable  {
 	public String getU_abstract() {
 		return u_abstract;
 	}
+	/**
+	 * ËÑË÷·µ»Ø¼ÇÂ¼Êý
+	 * @param result
+	 * @return
+	 * @throws BookException
+	 */
+	public static int bookCount(String result) throws BookException{
+		JSONObject json;
+		try {
+			json = new JSONObject(result);
+			if(!json.getBoolean("success")){
+				return 0;
+			}
+			JSONObject dateObj = json.getJSONObject("articlelist");
+			int resultCount = dateObj.getInt("loadnum");
+			if(resultCount>0){
+				return resultCount;
+			}
+			return 0;
+		} catch (JSONException e) {
+			e.printStackTrace();
+			throw new BookException(e);
+		}
+	}
 	
 	public static List<Book> formList(String result) throws BookException{
 		

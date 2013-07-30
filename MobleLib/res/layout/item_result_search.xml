@@ -17,8 +17,8 @@
             android:layout_height="96dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="5.0dip"
-            android:layout_marginTop="5.0dip"
+            android:layout_marginLeft="2.0dip"
+            android:layout_marginTop="2.0dip"
             android:background="@android:color/transparent"
             android:saveEnabled="true"
             android:scaleType="centerCrop" />
@@ -27,7 +27,8 @@
             android:id="@+id/lyRightLayout"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5.0dip"
+            android:layout_marginTop="1.0dip"
+            android:layout_marginLeft="2.0dip"
             android:layout_toRightOf="@+id/re_book_img"
             android:orientation="horizontal" >
 
@@ -109,7 +110,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/up_rl"
-        android:layout_margin="5dp"
+        android:layout_margin="1dp"
         android:maxLines="3"
         android:text="图书介绍"
         android:textColor="@color/txt_black" />
