@@ -174,6 +174,23 @@ public class EBook implements Serializable{
 		    
 		    	
 		    }
+			public static int ebookCount(String result) throws BookException{
+				JSONObject json;
+				try {
+					json = new JSONObject(result);
+					if(!json.getBoolean("success")){
+						return 0;
+					}
+					int resultCount = json.getInt("recordcount");
+					if(resultCount>0){
+						return resultCount;
+					}
+					return 0;
+				} catch (JSONException e) {
+					e.printStackTrace();
+					throw new BookException(e);
+				}
+			}
 	    
 		    public static List<EBook> formList(String result) throws BookException{
 				

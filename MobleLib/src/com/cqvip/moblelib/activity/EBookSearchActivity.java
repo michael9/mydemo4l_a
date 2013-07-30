@@ -40,6 +40,7 @@ public class EBookSearchActivity extends BaseActivity implements
 	public static final int FAVOR = 3;
 	public static final int DEFAULT_COUNT = 10;
 	private EditText edit;
+	private TextView searchCount;
 	private ImageView imgsearch;
 	private Context context;
 	private ListView listview;
@@ -59,6 +60,7 @@ public class EBookSearchActivity extends BaseActivity implements
 		context = this;
 		imgsearch = (ImageView) findViewById(R.id.search_seach_btn);
 		edit = (EditText) findViewById(R.id.search_et);
+		searchCount = (TextView) findViewById(R.id.txt_total_esearch);
 		listview = (ListView) findViewById(R.id.search_res_lv);
 		listview.setOnItemClickListener((OnItemClickListener) this);
 		noResult_rl = (RelativeLayout) findViewById(R.id.noresult_rl);
@@ -137,6 +139,14 @@ public class EBookSearchActivity extends BaseActivity implements
 			// TODO Auto-generated method stub
 			customProgressDialog.dismiss();
 			try {
+				//获取返回记录数
+				int count = EBook.ebookCount(response);
+				if(count>0){
+					searchCount.setVisibility(View.VISIBLE);
+					searchCount.setText("共计搜索到"+count+"条记录");
+				}else{
+					searchCount.setVisibility(View.GONE);
+				}
 				// JSONObject mj=new JSONObject(response);
 				List<EBook> lists = EBook.formList(response);
 				if (lists != null && !lists.isEmpty()) {
