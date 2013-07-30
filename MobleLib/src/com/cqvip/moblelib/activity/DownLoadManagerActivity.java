@@ -693,7 +693,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 		@Override
 		public int getCount() {
 			if (arrayList != null && !arrayList.isEmpty()) {
-				return arrayList.size() + 1;
+				return arrayList.size();
 			}
 			return 1;
 		}
@@ -706,7 +706,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 
 		@Override
 		public long getItemId(int position) {
-			if ((this.getCount() - 1) > 0 && position < (this.getCount() - 1)) {
+			if (arrayList != null && !arrayList.isEmpty()){
 				return position;
 			} else {
 				return -2;
@@ -716,7 +716,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			final ViewHolder holder;
-			if (this.getCount() == 1) {
+			if (arrayList== null||arrayList.isEmpty()) {
 				convertView = LayoutInflater.from(myContext).inflate(
 						R.layout.moreitemsview, null);
 				convertView.setClickable(false);
@@ -731,11 +731,11 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 				return convertView;
 			}
 			// 更多
-			if (position == this.getCount() - 1) {
-				convertView = LayoutInflater.from(myContext).inflate(
-						R.layout.moreitemsview, null);
-				return convertView;
-			}
+//			if (position == this.getCount() - 1) {
+//				convertView = LayoutInflater.from(myContext).inflate(
+//						R.layout.moreitemsview, null);
+//				return convertView;
+//			}
 			if (convertView == null
 					|| convertView.findViewById(R.id.linemore) != null) {
 				convertView = LayoutInflater.from(myContext).inflate(
@@ -832,7 +832,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 		@Override
 		public int getCount() {
 			if (arrayList != null && !arrayList.isEmpty()) {
-				return arrayList.size() + 1;
+				return arrayList.size();
 			}
 			return 1;
 		}
@@ -845,7 +845,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 
 		@Override
 		public long getItemId(int position) {
-			if ((this.getCount() - 1) > 0 && position < (this.getCount() - 1)) {
+			if (arrayList != null && !arrayList.isEmpty()){
 				return position;
 			} else {
 				return -2;
@@ -855,7 +855,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			final ViewHolder holder;
-			if (this.getCount() == 1) {
+			if (arrayList== null||arrayList.isEmpty()) {
 				convertView = LayoutInflater.from(myContext).inflate(
 						R.layout.moreitemsview, null);
 				convertView.setClickable(false);
@@ -870,11 +870,11 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 				return convertView;
 			}
 			// 更多
-			if (position == this.getCount() - 1) {
-				convertView = LayoutInflater.from(myContext).inflate(
-						R.layout.moreitemsview, null);
-				return convertView;
-			}
+//			if (position == this.getCount() - 1) {
+//				convertView = LayoutInflater.from(myContext).inflate(
+//						R.layout.moreitemsview, null);
+//				return convertView;
+//			}
 			if (convertView == null
 					|| convertView.findViewById(R.id.linemore) != null) {
 				convertView = LayoutInflater.from(myContext).inflate(
