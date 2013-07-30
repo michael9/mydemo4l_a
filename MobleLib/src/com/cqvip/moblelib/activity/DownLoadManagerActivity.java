@@ -131,7 +131,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 		/** observer download change **/
 		getContentResolver().registerContentObserver(
 				DownloadManagerPro.CONTENT_URI, true, downloadObserver);
-		// updateView();
+		getDownloadStatus();
 	}
 
 	@Override
@@ -563,9 +563,9 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 					typeflag = 4;
 				}
 				if (mEbook != null&&mEbook.getIsdownload()==1) {
-					String filename = mEbook.getTitle_c();
+					String filename = getfillName(mEbook.getDownloadid());
 					String filepath=Environment.getExternalStorageDirectory()+File.separator+
-							EbookDetailActivity.DOWNLOAD_FOLDER_NAME + File.separator+filename+".pdf";
+							EbookDetailActivity.DOWNLOAD_FOLDER_NAME + File.separator+filename;
 					Log.i("filepath", filepath);
 					File file = new File(filepath);
 					if (file.exists()) {
@@ -781,7 +781,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 										mebooks_listloaded.remove(book);
 										adapter_zk.notifyDataSetChanged();
 										FileUtils.DeleteFolder(Environment.getExternalStorageDirectory()+File.separator+
-							EbookDetailActivity.DOWNLOAD_FOLDER_NAME + File.separator+bookname+".pdf");
+							EbookDetailActivity.DOWNLOAD_FOLDER_NAME + File.separator+bookname);
 									} catch (DaoException e) {
 										// TODO Auto-generated catch block
 										e.printStackTrace();
@@ -801,10 +801,6 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 			return convertView;
 		}
 
-		private String getfillName(Long downloadid) {
-			String title = downloadManagerPro.getFileName(downloadid);
-			return title.substring(title.lastIndexOf("/")+1,title.length());
-		}
 
 		private void updateDateBase(final MEbook book) {
 			try {
@@ -814,6 +810,10 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 				e.printStackTrace();
 			}
 		}
+	}
+	private String getfillName(Long downloadid) {
+		String title = downloadManagerPro.getFileName(downloadid);
+		return title.substring(title.lastIndexOf("/")+1,title.length());
 	}
 
 	class MyGridViewAdapter extends BaseAdapter {
@@ -932,7 +932,8 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 					// 更新数据库
 					updateDateBase(book);
 				}
-
+				
+				final String bookname= getfillName(book.getDownloadid());
 				holder.download_cancel
 						.setOnClickListener(new View.OnClickListener() {
 							@Override
@@ -947,7 +948,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 										mebooks_list.remove(book);
 										if(downloadstatus == DownloadManager.STATUS_SUCCESSFUL){
 										FileUtils.DeleteFolder(Environment.getExternalStorageDirectory()+File.separator+
-							EbookDetailActivity.DOWNLOAD_FOLDER_NAME + File.separator+book.getTitle_c()+".pdf");
+							EbookDetailActivity.DOWNLOAD_FOLDER_NAME + File.separator+bookname);
 										}
 									} catch (DaoException e) {
 										// TODO Auto-generated catch block
