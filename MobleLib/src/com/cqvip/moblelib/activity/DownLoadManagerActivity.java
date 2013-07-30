@@ -479,9 +479,9 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 
 			switch (position) {
 			case 0:
-				return "下载中".toUpperCase(l);
-			case 1:
 				return "已下载".toUpperCase(l);
+			case 1:
+				return "下载中".toUpperCase(l);
 			}
 			return null;
 		}
@@ -504,7 +504,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 			Log.i("MyFavorActivity", "DummySectionFragment");
 		}
 
-		ArrayList<int[]> temp_aArrayList;
+		//ArrayList<int[]> temp_aArrayList;
 
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -516,16 +516,15 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 					.findViewById(R.id.favorlist);
 			int i = getArguments().getInt(ARG_SECTION_NUMBER);
 			if (i == 0) {
-				temp_aArrayList = _lists;
-				adapter_sz = new MyGridViewAdapter(getActivity(),
-						temp_aArrayList, mImageFetcher);
-				listView.setAdapter(adapter_sz);
-				listView.setTag(GlobleData.BOOK_SZ_TYPE);
-			} else if (i == 1) {
 				listView.setTag(GlobleData.BOOK_ZK_TYPE);
 				adapter_zk = new MyGridViewAdapter_Loaded(getActivity(),
 						mebooks_listloaded, mImageFetcher);
 				listView.setAdapter(adapter_zk);
+			} else if (i == 1) {
+				adapter_sz = new MyGridViewAdapter(getActivity(),
+						_lists, mImageFetcher);
+				listView.setAdapter(adapter_sz);
+				listView.setTag(GlobleData.BOOK_SZ_TYPE);
 			}
 
 			listView.setOnItemClickListener(this);

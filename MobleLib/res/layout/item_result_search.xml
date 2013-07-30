@@ -15,13 +15,13 @@
             android:id="@+id/re_book_img"
             android:layout_width="72dp"
             android:layout_height="96dp"
-            android:scaleType="centerCrop"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_marginLeft="2.0dip"
             android:layout_marginTop="2.0dip"
             android:background="@android:color/transparent"
-            android:saveEnabled="true" />
+            android:saveEnabled="true"
+            android:scaleType="centerCrop" />
 
         <LinearLayout
             android:id="@+id/lyRightLayout"
@@ -30,11 +30,14 @@
             android:layout_marginTop="1.0dip"
             android:layout_marginLeft="2.0dip"
             android:layout_toRightOf="@+id/re_book_img"
-            android:orientation="vertical" >
+            android:orientation="horizontal" >
 
-            <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content" >
+            <LinearLayout
+                android:id="@+id/childLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical" >
 
                 <!-- title -->
 
@@ -43,50 +46,62 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:singleLine="true"
-                    android:text=""
+                    android:text="编程的艺术"
                     android:textColor="#ff333333"
                     android:textSize="18.0sp" />
-            </RelativeLayout>
-            <!-- author -->
 
-            <TextView
-                android:id="@+id/re_author_txt"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5.0dip"
-                android:singleLine="true"
-                android:text=""
-                android:textColor="@color/txt_black"
-                android:textSize="14.0sp" />
-            <!-- address -->
+                <!-- author -->
 
-            <TextView
-                android:id="@+id/re_addr_txt"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:singleLine="true"
-                android:text=""
-                android:textColor="@color/txt_black"
-                android:textSize="14.0sp" />
-            <!-- time -->
+                <TextView
+                    android:id="@+id/re_author_txt"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5.0dip"
+                    android:singleLine="true"
+                    android:text="作者：托马斯"
+                    android:textColor="@color/txt_black"
+                    android:textSize="14.0sp" />
 
-            <TextView
-                android:id="@+id/re_time_txt"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:textColor="@color/txt_black"
-                android:textSize="14.0sp" />
-            <!-- time -->
+                <!-- address -->
 
-            <TextView
-                android:id="@+id/re_hot_txt"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:maxLines="2"
-                android:text=""
-                android:textColor="@color/txt_black"
-                android:textSize="14.0sp" />
+                <TextView
+                    android:id="@+id/re_addr_txt"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="出版社：电子工业出版社"
+                    android:textColor="@color/txt_black"
+                    android:textSize="14.0sp" />
+
+                <!-- time -->
+
+                <TextView
+                    android:id="@+id/re_time_txt"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="年份：2012-06"
+                    android:textColor="@color/txt_black"
+                    android:textSize="14.0sp" />
+
+                <!-- page -->
+
+                <TextView
+                    android:id="@+id/re_hot_txt"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="2"
+                    android:text="页数："
+                    android:textColor="@color/txt_black"
+                    android:textSize="14.0sp" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/favor_cancel"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_gravity="bottom"
+                android:background="@drawable/icon_stop"
+                android:focusable="false" android:visibility="gone"/>
         </LinearLayout>
     </RelativeLayout>
 
@@ -97,10 +112,11 @@
         android:layout_below="@+id/up_rl"
         android:layout_margin="1dp"
         android:maxLines="3"
-        android:text=""
+        android:text="图书介绍"
         android:textColor="@color/txt_black" />
-
-    <LinearLayout android:id="@+id/handle_ll"
+<!--  
+    <LinearLayout
+        android:id="@+id/handle_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/txt_abst"
@@ -155,4 +171,5 @@
             android:textColor="@color/green_light"
             android:textSize="16dp" />
     </LinearLayout>
+-->
 </RelativeLayout>
