@@ -742,6 +742,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 						R.layout.item_downloadmanager, null);
 				holder = new ViewHolder();
 				holder.download_title=(TextView) convertView.findViewById(R.id.download_title);
+				holder.download_title.setMaxLines(2);
 				holder.download_size=(TextView) convertView.findViewById(R.id.download_size);
 				holder.download_image=(ImageView) convertView.findViewById(R.id.book_img);
 				convertView.findViewById(R.id.download_precent).setVisibility(

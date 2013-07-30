@@ -19,23 +19,22 @@
             android:id="@+id/readerinfo_f_lay"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/reader_card1"
-             >
+            android:background="@drawable/reader_card1" >
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/readerinfo_b_lay"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/reader_card2"
-            >
+            android:background="@drawable/reader_card2" >
 
             <ListView
                 android:id="@android:id/list"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:divider="@color/divider_color"
+                android:dividerHeight="0.5dp"
                 android:listSelector="@drawable/transparent"
-                android:padding="12dp"
                 android:persistentDrawingCache="animation|scrolling" />
         </RelativeLayout>
     </FrameLayout>
