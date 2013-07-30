@@ -394,7 +394,7 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 	 */
 
 	public class DummySectionFragment extends Fragment implements
-			OnItemClickListener, OnItemLongClickListener {
+			OnItemClickListener {
 		/**
 		 * The fragment argument representing the section number for this
 		 * fragment.
@@ -431,7 +431,7 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 			}
 
 			listView.setOnItemClickListener(this);
-			listView.setOnItemLongClickListener(this);
+			//listView.setOnItemLongClickListener(this);
 			return rootView;
 		}
 
@@ -498,19 +498,19 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 			}
 		}
 
-		@Override
-		public boolean onItemLongClick(AdapterView<?> parent, View view,
-				int position, long id) {
-			if (parent.getAdapter().getItemId(position) != -2) {
-				int listviewid = (Integer) parent.getTag();
-				listview_id = listviewid;
-				listview_item_position = position;
-				del_favorite = arrayList_temp.get(position);
-
-				senddel();
-			}
-			return false;
-		}
+//		@Override
+//		public boolean onItemLongClick(AdapterView<?> parent, View view,
+//				int position, long id) {
+//			if (parent.getAdapter().getItemId(position) != -2) {
+//				int listviewid = (Integer) parent.getTag();
+//				listview_id = listviewid;
+//				listview_item_position = position;
+//				del_favorite = arrayList_temp.get(position);
+//
+//				senddel();
+//			}
+//			return false;
+//		}
 	}
 
 	private int listview_id = GlobleData.BOOK_SZ_TYPE;
@@ -526,8 +526,8 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 		// TextView u_page;//Ò³Êý
 		// TextView u_abstract;//¼ò½é
 		TextView isbn;
-
-		Button btn_comment, btn_item_result_search_share, favorite;
+		Button favor_cancel;
+		//Button btn_comment, btn_item_result_search_share, favorite;
 
 	}
 
@@ -628,12 +628,14 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 				// convertView.findViewById(R.id.re_hot_txt);
 				holder.isbn = (TextView) convertView
 						.findViewById(R.id.re_hot_txt);
-				holder.btn_item_result_search_share = (Button) convertView
-						.findViewById(R.id.btn_item_result_search_share);
-				holder.favorite = (Button) convertView
-						.findViewById(R.id.btn_item_result_search_collect);
-				holder.btn_comment = (Button) convertView
-						.findViewById(R.id.btn_comment);
+				holder.favor_cancel=(Button) convertView.findViewById(R.id.favor_cancel);
+				holder.favor_cancel.setVisibility(View.VISIBLE);
+//				holder.btn_item_result_search_share = (Button) convertView
+//						.findViewById(R.id.btn_item_result_search_share);
+//				holder.favorite = (Button) convertView
+//						.findViewById(R.id.btn_item_result_search_collect);
+//				holder.btn_comment = (Button) convertView
+//						.findViewById(R.id.btn_comment);
 				convertView.setTag(holder);
 			} else {
 				holder = (ViewHolder) convertView.getTag();
@@ -643,14 +645,26 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 			String publish = context.getResources().getString(
 					R.string.item_publish);
 			String time = context.getResources().getString(R.string.item_time);
-			String describe = context.getResources().getString(
-					R.string.item_describe);
+//			String describe = context.getResources().getString(
+//					R.string.item_describe);
 			Favorite favorite = arrayList.get(position);
 			holder.title.setText(favorite.getTitle());
 			holder.author.setText(author + favorite.getWriter());
 			holder.publisher.setText(publish + favorite.getOrgan());
 			holder.publishyear.setText(time + favorite.getYears());
 			holder.isbn.setText("ISBN:" + favorite.getLngid());
+			final ViewGroup temp_parent=parent;
+			final int temp_position=position;
+			holder.favor_cancel.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+						int listviewid = (Integer) temp_parent.getTag();
+						listview_id = listviewid;
+						listview_item_position = temp_position;
+						del_favorite = arrayList.get(temp_position);
+						senddel();
+				}
+			});
 			// Í¼Æ¬
 			if (!TextUtils.isEmpty(favorite.getImgurl())) {
 				fetch.loadImage(favorite.getImgurl(), holder.img);
