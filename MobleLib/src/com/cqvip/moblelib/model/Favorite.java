@@ -32,6 +32,7 @@ public class Favorite implements Serializable{
 	private String weburl;
 	private String favoritekeyid;// 索书号
 	private String typeid;// 书类型
+	private String favoritetime;// 收藏时间
 
 	public String getTypeid() {
 		return typeid;
@@ -44,6 +45,7 @@ public class Favorite implements Serializable{
 	public Favorite(JSONObject jsonObject) throws BookException {
 		try {
 			favoritekeyid = jsonObject.getString("favoritekeyid");
+			favoritetime=jsonObject.getString("favoritetime");
 			JSONObject json = jsonObject.getJSONObject("favoriteinfo");
 			typeid = lngid = json.getString("typeid");
 			lngid = json.getString("lngid");
@@ -276,6 +278,10 @@ public class Favorite implements Serializable{
 
 	public String getWeburl() {
 		return weburl;
+	}
+	
+	public String getFavoritetime() {
+		return favoritetime;
 	}
 
 	@Override

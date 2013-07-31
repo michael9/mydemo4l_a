@@ -652,7 +652,7 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 			holder.author.setText(author + favorite.getWriter());
 			holder.publisher.setText(publish + favorite.getOrgan());
 			holder.publishyear.setText(time + favorite.getYears());
-			holder.isbn.setText("ISBN:" + favorite.getLngid());
+			holder.isbn.setText(" ’≤ÿ ±º‰:" + favorite.getFavoritetime());
 			final ViewGroup temp_parent=parent;
 			final int temp_position=position;
 			holder.favor_cancel.setOnClickListener(new View.OnClickListener() {
