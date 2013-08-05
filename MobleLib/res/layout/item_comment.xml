@@ -40,7 +40,6 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="3.0dip"
                 android:layout_alignParentLeft="true"
-                android:layout_toLeftOf="@+id/img_item_comment"
                 android:text="" />
             </RelativeLayout>
         </LinearLayout>

@@ -392,7 +392,7 @@ implements OnScrollListener,android.widget.AdapterView.OnItemLongClickListener{
             }  
             child.measure(childWidthSpec, childHeightSpec);  
     }  
-  
+
     public void setAdapter(BaseAdapter adapter) {  
         SimpleDateFormat format=new SimpleDateFormat("yyyyÄêMMÔÂddÈÕ  HH:mm");  
         String date=format.format(new Date());  

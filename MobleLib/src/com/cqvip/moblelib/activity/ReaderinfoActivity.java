@@ -212,7 +212,6 @@ public class ReaderinfoActivity extends BaseActivity {
 						"证状态：", "电话：", "地址：" };
 				mList.setAdapter(new ReaderInfoAdapter(ReaderinfoActivity.this,
 						attrs, values));
-
 			} catch (Exception e) {
 				// TODO: handle exception
 			}

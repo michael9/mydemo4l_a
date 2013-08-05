@@ -293,12 +293,9 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 
 		@Override
 		public CharSequence getPageTitle(int position) {
-			Log.i("getPageTitle", "getPageTitle");
+			Log.i("getPageTitle", "getPageTitle_"+position);
 			Locale l = Locale.getDefault();
-			if (adapter_zk != null && adapter_sz != null) {
-				adapter_zk.notifyDataSetChanged();
-				adapter_sz.notifyDataSetChanged();
-			}
+
 			switch (position) {
 			case 0:
 				return getString(R.string.title_section1).toUpperCase(l);

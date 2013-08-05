@@ -4,9 +4,7 @@ import java.io.File;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 import android.app.DownloadManager;
 import android.content.Context;
@@ -37,35 +35,26 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.android.volley.Request.Method;
-import com.android.volley.Response.ErrorListener;
-import com.android.volley.Response.Listener;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
 import com.artifex.mupdfdemo.MuPDFActivity;
 import com.cqvip.dao.DaoException;
 import com.cqvip.mobelib.imgutils.ImageFetcher;
 import com.cqvip.moblelib.R;
-import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.db.MEBookDao;
 import com.cqvip.moblelib.entity.MEbook;
-import com.cqvip.moblelib.model.Favorite;
-import com.cqvip.moblelib.net.BookException;
-import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.utils.DownloadManagerPro;
 import com.cqvip.utils.FileUtils;
 import com.cqvip.utils.Tool;
 
 public class DownLoadManagerActivity extends BaseFragmentImageActivity {
-	public static final int GETFIRSTPAGE_SZ = 1;
-	public static final int GETFIRSTPAGE_ZK = 2;
-	public static final int GETNEXT = 3;
+//	public static final int GETFIRSTPAGE_SZ = 1;
+//	public static final int GETFIRSTPAGE_ZK = 2;
+	//public static final int GETNEXT = 3;
 
-	private int curpage = 1;// 第几页
-	private int perpage = 10;// 每页显示条数
-	private View moreprocess;
-	private int curpage_sz = 1, curpage_zk = 1;
+	// private int curpage = 1;// 第几页
+	// private int perpage = 10;// 每页显示条数
+	// private View moreprocess;
+	// private int curpage_sz = 1, curpage_zk = 1;
 	// 缓存
 	private HashMap<Long, Boolean> loded;
 	MyGridViewAdapter adapter_sz;
@@ -86,18 +75,16 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 	ViewPager mViewPager;
 	PagerTitleStrip mPagerTitleStrip;
 	Context context;
-	protected CustomProgressDialog customProgressDialog;
-	Map<Integer, List<Favorite>> arrayLists_sz, arrayLists_zk;
-	ArrayList<Favorite> arrayList_zk = new ArrayList<Favorite>();
-	ArrayList<Favorite> arrayList_sz = new ArrayList<Favorite>();
-	private int listviewpagetag = GlobleData.BOOK_SZ_TYPE;
+	// protected CustomProgressDialog customProgressDialog;
+	// Map<Integer, List<Favorite>> arrayLists_sz, arrayLists_zk;
+	// ArrayList<Favorite> arrayList_zk = new ArrayList<Favorite>();
+	// ArrayList<Favorite> arrayList_sz = new ArrayList<Favorite>();
 
 	private DownloadChangeObserver downloadObserver;
 	private MyHandler handler;
 	private DownloadManagerPro downloadManagerPro;
 	private DownloadManager downloadManager;
 
-	private ArrayList<Long> downloadids_list = new ArrayList<Long>();
 	private ArrayList<MEbook> mebooks_list = new ArrayList<MEbook>();// 获取downloadid,下载中
 	private ArrayList<MEbook> mebooks_listloaded = new ArrayList<MEbook>();// 已下载
 	private ArrayList<int[]> _lists = new ArrayList<int[]>();// 获取下载状态
@@ -157,13 +144,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 			e.printStackTrace();
 		}// 下载中
 
-		/**
-		 * get download id from preferences.<br/>
-		 * if download id bigger than 0, means it has been downloaded, then
-		 * query status and show right text;
-		 */
 		getDownloadStatus();
-
 	}
 
 	public void getDownloadStatus() {
@@ -184,240 +165,19 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 		}
 	}
 
-	// public void getdownloadids(){
-	// downloadids_list.clear();
-	// for (MEbook mEbook : mebooks_list) {
-	// downloadids_list.add(mEbook.getDownloadid());
-	// }
-	// }
-
-	// public void updateView() {
-	// int[] bytesAndStatus = downloadManagerPro.getBytesAndStatus(downloadId);
-	// int[] bytesAndStatus1 =
-	// downloadManagerPro.getBytesAndStatus(downloadId1);
-	// Log.i("updateView_bytesAndStatus", ""+bytesAndStatus[0]);
-	// Log.i("updateView_bytesAndStatus1", ""+bytesAndStatus1[0]);
-	// int[] temp = _lists.get(0);
-	// temp[0] = bytesAndStatus[0];
-	// temp[1] = bytesAndStatus[1];
-	// temp[2] = bytesAndStatus[2];
-	// int[] temp1 = _lists.get(1);
-	// temp1[0] = bytesAndStatus1[0];
-	// temp1[1] = bytesAndStatus1[1];
-	// temp1[2] = bytesAndStatus1[2];
-	//
-	// adapter_sz.notifyDataSetChanged();
-	// Log.i("hand", "hand");
-	// // handler.sendMessage(handler.obtainMessage(0, mlists[0], mlists[1],
-	// mlists[2]));
-	// }
-	/**
-	 * MyHandler
-	 * 
-	 * @author Trinea 2012-12-18
-	 */
 	private class MyHandler extends Handler {
-
 		@Override
 		public void handleMessage(Message msg) {
 			super.handleMessage(msg);
-
 			switch (msg.what) {
 			case 0:
 				adapter_sz.notifyDataSetChanged();
-				// int status = (Integer)msg.obj;
-				// if (isDownloading(status)) {
-				// downloadProgress.setVisibility(View.VISIBLE);
-				// downloadProgress.setMax(0);
-				// downloadProgress.setProgress(0);
-				// downloadButton.setVisibility(View.GONE);
-				// downloadSize.setVisibility(View.VISIBLE);
-				// downloadPrecent.setVisibility(View.VISIBLE);
-				// downloadCancel.setVisibility(View.VISIBLE);
-				//
-				// if (msg.arg2 < 0) {
-				// downloadProgress.setIndeterminate(true);
-				// downloadPrecent.setText("0%");
-				// downloadSize.setText("0M/0M");
-				// } else {
-				// downloadProgress.setIndeterminate(false);
-				// downloadProgress.setMax(msg.arg2);
-				// downloadProgress.setProgress(msg.arg1);
-				// downloadPrecent.setText(getNotiPercent(msg.arg1, msg.arg2));
-				// downloadSize.setText(getAppSize(msg.arg1) + "/" +
-				// getAppSize(msg.arg2));
-				// }
-				// } else {
-				// downloadProgress.setVisibility(View.GONE);
-				// downloadProgress.setMax(0);
-				// downloadProgress.setProgress(0);
-				// downloadButton.setVisibility(View.VISIBLE);
-				// downloadSize.setVisibility(View.GONE);
-				// downloadPrecent.setVisibility(View.GONE);
-				// downloadCancel.setVisibility(View.GONE);
-				//
-				// if (status == DownloadManager.STATUS_FAILED) {
-				// downloadButton.setText(getString(R.string.app_status_download_fail));
-				// } else if (status == DownloadManager.STATUS_SUCCESSFUL) {
-				// downloadButton.setText(getString(R.string.app_status_downloaded));
-				// } else {
-				// downloadButton.setText(getString(R.string.app_status_download));
-				// }
-				// }
 				break;
 			}
 		}
 	}
 
-	private void getfavorlist(int pagecount, int perpage, int typeid, int type) {
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("libid", GlobleData.LIBIRY_ID);
-		Log.i("MyFavorActivity_cqvipid", "" + GlobleData.cqvipid);
-		map.put("vipuserid", GlobleData.cqvipid);
-		map.put("curpage", "" + pagecount);
-		map.put("perpage", "" + perpage);
-		map.put("typeid", "" + typeid);
-		// ManagerService.addNewTask(new Task(Task.TASK_COMMENT_BOOKLIST, map));
-		switch (type) {
-		case GETFIRSTPAGE_SZ:
-			requestVolley(map, GlobleData.SERVER_URL
-					+ "/cloud/commentlistuser.aspx", backlistener_sz,
-					Method.POST);
-			break;
-		case GETFIRSTPAGE_ZK:
-			requestVolley(map, GlobleData.SERVER_URL
-					+ "/cloud/commentlistuser.aspx", backlistener_zk,
-					Method.POST);
-			break;
-		case GETNEXT:
-			requestVolley(map, GlobleData.SERVER_URL
-					+ "/cloud/commentlistuser.aspx", backlistenermore,
-					Method.POST);
-			break;
-		default:
-			break;
-		}
-	}
-
-	private void requestVolley(HashMap<String, String> gparams, String url,
-			Listener<String> listener, int post) {
-		final HashMap<String, String> gparams_t = gparams;
-		StringRequest mys = new StringRequest(post, url, listener, el) {
-			protected Map<String, String> getParams()
-					throws com.android.volley.AuthFailureError {
-				return gparams_t;
-			};
-		};
-		mQueue.add(mys);
-		mQueue.start();
-
-	}
-
-	Listener<String> backlistener_sz = new Listener<String>() {
-		@Override
-		public void onResponse(String response) {
-			// TODO Auto-generated method stub
-			customProgressDialog.dismiss();
-			try {
-				arrayLists_sz = Favorite.formList(Task.TASK_COMMENT_BOOKLIST,
-						response);
-			} catch (BookException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				onError(2);
-			}
-
-			if (arrayLists_sz != null && !arrayLists_sz.isEmpty()) {
-				if (arrayLists_sz.get(GlobleData.BOOK_SZ_TYPE).isEmpty()) {
-					return;
-				}
-				arrayList_sz.addAll(arrayLists_sz.get(GlobleData.BOOK_SZ_TYPE));
-				adapter_sz.notifyDataSetChanged();
-			}
-		}
-	};
-
-	Listener<String> backlistener_zk = new Listener<String>() {
-		@Override
-		public void onResponse(String response) {
-			// TODO Auto-generated method stub
-			customProgressDialog.dismiss();
-			try {
-				arrayLists_zk = Favorite.formList(Task.TASK_COMMENT_BOOKLIST,
-						response);
-			} catch (BookException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				onError(2);
-			}
-
-			if (arrayLists_zk != null && !arrayLists_zk.isEmpty()) {
-				if (arrayLists_zk.get(GlobleData.BOOK_ZK_TYPE).isEmpty()) {
-					return;
-				}
-				arrayList_zk.addAll(arrayLists_zk.get(GlobleData.BOOK_ZK_TYPE));
-				adapter_zk.notifyDataSetChanged();
-			}
-		}
-	};
-
-	Listener<String> backlistenermore = new Listener<String>() {
-		@Override
-		public void onResponse(String response) {
-			try {
-				arrayLists_sz = Favorite.formList(Task.TASK_COMMENT_BOOKLIST,
-						response);
-			} catch (BookException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				onError(2);
-			}
-			if (arrayLists_sz == null || arrayLists_sz.isEmpty()) {
-				Tool.ShowMessages(context, "没有更多内容可供加载");
-				moreprocess.setVisibility(View.GONE);
-				return;
-			}
-			if (listviewpagetag == GlobleData.BOOK_SZ_TYPE) {
-				if (arrayLists_sz.get(GlobleData.BOOK_SZ_TYPE) != null
-						&& !arrayLists_sz.get(GlobleData.BOOK_SZ_TYPE)
-								.isEmpty()) {
-					curpage_sz++;
-					arrayList_sz.addAll(arrayLists_sz
-							.get(GlobleData.BOOK_SZ_TYPE));
-					// mSectionsPagerAdapter.notifyDataSetChanged();
-					adapter_sz.notifyDataSetChanged();
-				} else {
-					Tool.ShowMessages(context, "没有更多内容可供加载");
-					moreprocess.setVisibility(View.GONE);
-				}
-			} else {
-				if (arrayLists_sz.get(GlobleData.BOOK_ZK_TYPE) != null
-						&& !arrayLists_sz.get(GlobleData.BOOK_ZK_TYPE)
-								.isEmpty()) {
-					curpage_zk++;
-					arrayList_zk.addAll(arrayLists_sz
-							.get(GlobleData.BOOK_ZK_TYPE));
-					adapter_zk.notifyDataSetChanged();
-				} else {
-					Tool.ShowMessages(context, "没有更多内容可供加载");
-					moreprocess.setVisibility(View.GONE);
-				}
-			}
-		}
-	};
-
-	ErrorListener el = new ErrorListener() {
-		@Override
-		public void onErrorResponse(VolleyError arg0) {
-			// TODO Auto-generated method stub
-			customProgressDialog.dismiss();
-			arg0.printStackTrace();
-			onError(2);
-		}
-	};
-
 	class DownloadChangeObserver extends ContentObserver {
-
 		public DownloadChangeObserver() {
 			super(handler);
 		}
@@ -426,7 +186,6 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 		public void onChange(boolean selfChange) {
 			getDownloadStatus();
 		}
-
 	}
 
 	/**
@@ -435,7 +194,6 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 	 */
 
 	public class SectionsPagerAdapter extends FragmentPagerAdapter {
-
 		public SectionsPagerAdapter(FragmentManager fm) {
 			super(fm);
 		}
@@ -504,7 +262,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 			Log.i("MyFavorActivity", "DummySectionFragment");
 		}
 
-		//ArrayList<int[]> temp_aArrayList;
+		// ArrayList<int[]> temp_aArrayList;
 
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -521,8 +279,8 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 						mebooks_listloaded, mImageFetcher);
 				listView.setAdapter(adapter_zk);
 			} else if (i == 1) {
-				adapter_sz = new MyGridViewAdapter(getActivity(),
-						_lists, mImageFetcher);
+				adapter_sz = new MyGridViewAdapter(getActivity(), _lists,
+						mImageFetcher);
 				listView.setAdapter(adapter_sz);
 				listView.setTag(GlobleData.BOOK_SZ_TYPE);
 			}
@@ -536,74 +294,53 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 				long id) {
 			Log.i("item", "===============click=");
 			if (id == -2) { // 更多
-			// if (parent.getAdapter().getCount() == 1) {
-			// return;
-			// }
-			// // 进度条
-			// moreprocess = view.findViewById(R.id.footer_progress);
-			// moreprocess.setVisibility(View.VISIBLE);
-			// // Log.i("parent.getTag()", "" + parent.getTag());
-			// // 请求网络更多
-			// listviewpagetag = (Integer) parent.getTag();
-			// if (listviewpagetag == GlobleData.BOOK_SZ_TYPE) {
-			// getfavorlist(curpage_sz + 1, perpage,
-			// GlobleData.BOOK_SZ_TYPE, GETNEXT);
-			// } else if (listviewpagetag == GlobleData.BOOK_ZK_TYPE) {
-			// getfavorlist(curpage_zk + 1, perpage,
-			// GlobleData.BOOK_ZK_TYPE, GETNEXT);
-			// }
+				// if (parent.getAdapter().getCount() == 1) {
+				// return;
+				// }
+				// // 进度条
+				// moreprocess = view.findViewById(R.id.footer_progress);
+				// moreprocess.setVisibility(View.VISIBLE);
+				// // Log.i("parent.getTag()", "" + parent.getTag());
+				// // 请求网络更多
+				// listviewpagetag = (Integer) parent.getTag();
+				// if (listviewpagetag == GlobleData.BOOK_SZ_TYPE) {
+				// getfavorlist(curpage_sz + 1, perpage,
+				// GlobleData.BOOK_SZ_TYPE, GETNEXT);
+				// } else if (listviewpagetag == GlobleData.BOOK_ZK_TYPE) {
+				// getfavorlist(curpage_zk + 1, perpage,
+				// GlobleData.BOOK_ZK_TYPE, GETNEXT);
+				// }
 			} else {
 				MEbook mEbook = null;
-				int typeflag = 5;
 				if ((Integer) parent.getTag() == GlobleData.BOOK_SZ_TYPE) {
 					mEbook = mebooks_list.get(positon);
-					typeflag = 5;
 				} else if ((Integer) parent.getTag() == GlobleData.BOOK_ZK_TYPE) {
 					mEbook = mebooks_listloaded.get(positon);
-					typeflag = 4;
 				}
-				if (mEbook != null&&mEbook.getIsdownload()==1) {
-					String filename = getfillName(mEbook.getDownloadid());
-					String filepath=Environment.getExternalStorageDirectory()+File.separator+
-							EbookDetailActivity.DOWNLOAD_FOLDER_NAME + File.separator+filename;
+				String filename = getfillName(mEbook.getDownloadid());
+				if (mEbook != null && mEbook.getIsdownload() == 1&&!filename.equals("")) {
+					String filepath = Environment.getExternalStorageDirectory()
+							+ File.separator
+							+ EbookDetailActivity.DOWNLOAD_FOLDER_NAME
+							+ File.separator + filename;
 					Log.i("filepath", filepath);
 					File file = new File(filepath);
 					if (file.exists()) {
-//						Intent intent = new Intent(DownLoadManagerActivity.this,OpenFileActivity.class);
-//						intent.setDataAndType(Uri.fromFile(file),
-//								"application/pdf");
-//						intent.setAction("android.intent.action.VIEW");
-//						startActivity(intent);
+						// Intent intent = new
+						// Intent(DownLoadManagerActivity.this,OpenFileActivity.class);
+						// intent.setDataAndType(Uri.fromFile(file),
+						// "application/pdf");
+						// intent.setAction("android.intent.action.VIEW");
+						// startActivity(intent);
 						Uri uri = Uri.parse(filepath);
-						Intent intent = new Intent(context,MuPDFActivity.class);
+						Intent intent = new Intent(context, MuPDFActivity.class);
 						intent.setAction(Intent.ACTION_VIEW);
 						intent.setData(uri);
 						startActivity(intent);
-						
-						
-						
 					} else {
 						Tool.ShowMessagel(context, "文件" + filename + "不存在");
 					}
 				}
-
-				// Book book = adapter.getLists().get(positon);
-				// if(book!=null){
-				// Log.i("ResultOnSearchActivity",book.toString());
-				// Intent _intent = new
-				// Intent(context,DetailBookActivity.class);
-				// Bundle bundle = new Bundle();
-				// bundle.putSerializable("book", book);
-				// _intent.putExtra("detaiinfo", bundle);
-				// startActivity(_intent);
-				// }
-
-				// Book book = lists.get(position-1);
-				// if(book!=null){
-				// Bundle bundle = new Bundle();
-				// bundle.putSerializable("book", book);
-				// _intent.putExtra("detaiinfo", bundle);
-				// startActivityForResult(_intent, 1);
 			}
 		}
 
@@ -637,40 +374,6 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 		TextView downloadtip;
 	}
 
-	// class MyGridViewAdapter extends CursorAdapter {
-	// private Context myContext;
-	// private LayoutInflater mInflater;
-	//
-	// public MyGridViewAdapter(Context context, List<Favorite> list,
-	// Cursor cursor) {
-	// super(context, cursor);
-	// this.myContext = context;
-	// mInflater = LayoutInflater.from(context);
-	// }
-	//
-	// @Override
-	// public View newView(Context context, Cursor cursor, ViewGroup parent) {
-	// final View view = mInflater.inflate(R.layout.item_downloadmanager,
-	// parent, false);
-	// ViewHolder holder = new ViewHolder();
-	// holder.download_size = (TextView) view.findViewById(R.id.download_size);
-	// holder.download_precent = (TextView)
-	// view.findViewById(R.id.download_precent);
-	// holder.download_progress =(ProgressBar)
-	// view.findViewById(R.id.download_progress);
-	// holder.download_cancel = (Button)
-	// view.findViewById(R.id.download_cancel);
-	// view.setTag(holder);
-	// return view;
-	// }
-	//
-	// @Override
-	// public void bindView(View view, Context context, Cursor cursor) {
-	// ViewHolder holder = (ViewHolder) view.getTag();
-	// holder.download_size.setText("");
-	// }
-	// }
-
 	class MyGridViewAdapter_Loaded extends BaseAdapter {
 		private Context myContext;
 		private ArrayList<MEbook> arrayList;
@@ -679,7 +382,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 		public MyGridViewAdapter_Loaded(Context context, ArrayList<MEbook> list) {
 			this.myContext = context;
 			this.arrayList = list;
-			Log.i("MyFavorActivity", "MyGridViewAdapter");	
+			Log.i("MyFavorActivity", "MyGridViewAdapter");
 		}
 
 		public MyGridViewAdapter_Loaded(Context context,
@@ -706,7 +409,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 
 		@Override
 		public long getItemId(int position) {
-			if (arrayList != null && !arrayList.isEmpty()){
+			if (arrayList != null && !arrayList.isEmpty()) {
 				return position;
 			} else {
 				return -2;
@@ -716,7 +419,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			final ViewHolder holder;
-			if (arrayList== null||arrayList.isEmpty()) {
+			if (arrayList == null || arrayList.isEmpty()) {
 				convertView = LayoutInflater.from(myContext).inflate(
 						R.layout.moreitemsview, null);
 				convertView.setClickable(false);
@@ -731,20 +434,23 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 				return convertView;
 			}
 			// 更多
-//			if (position == this.getCount() - 1) {
-//				convertView = LayoutInflater.from(myContext).inflate(
-//						R.layout.moreitemsview, null);
-//				return convertView;
-//			}
+			// if (position == this.getCount() - 1) {
+			// convertView = LayoutInflater.from(myContext).inflate(
+			// R.layout.moreitemsview, null);
+			// return convertView;
+			// }
 			if (convertView == null
 					|| convertView.findViewById(R.id.linemore) != null) {
 				convertView = LayoutInflater.from(myContext).inflate(
 						R.layout.item_downloadmanager, null);
 				holder = new ViewHolder();
-				holder.download_title=(TextView) convertView.findViewById(R.id.download_title);
+				holder.download_title = (TextView) convertView
+						.findViewById(R.id.download_title);
 				holder.download_title.setMaxLines(2);
-				holder.download_size=(TextView) convertView.findViewById(R.id.download_size);
-				holder.download_image=(ImageView) convertView.findViewById(R.id.book_img);
+				holder.download_size = (TextView) convertView
+						.findViewById(R.id.download_size);
+				holder.download_image = (ImageView) convertView
+						.findViewById(R.id.book_img);
 				convertView.findViewById(R.id.download_precent).setVisibility(
 						View.GONE);
 				convertView.findViewById(R.id.download_progress).setVisibility(
@@ -752,23 +458,24 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 				holder.download_cancel = (Button) convertView
 						.findViewById(R.id.download_cancel);
 				convertView.findViewById(R.id.download_tip).setVisibility(
-						View.GONE);;
+						View.GONE);
+				;
 				convertView.setTag(holder);
 			} else {
 				holder = (ViewHolder) convertView.getTag();
 			}
 
 			final MEbook book = arrayList.get(position);
-			final String bookname= getfillName(book.getDownloadid());
-			if (book != null) {
+			final String bookname = getfillName(book.getDownloadid());
+			if (book != null&&!bookname.equals("")) {
 				holder.download_title.setText(bookname);
 				holder.download_size.setText(getAppSize(book.getPdfsize()));
 				// 图片
 				if (!TextUtils.isEmpty(book.getImgurl())) {
 					fetch.loadImage(book.getImgurl(), holder.download_image);
 				} else {
-					holder.download_image.setImageDrawable(getResources().getDrawable(
-							R.drawable.defaut_book));
+					holder.download_image.setImageDrawable(getResources()
+							.getDrawable(R.drawable.defaut_book));
 				}
 				holder.download_cancel
 						.setOnClickListener(new View.OnClickListener() {
@@ -780,8 +487,11 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 												.getDownloadid());
 										mebooks_listloaded.remove(book);
 										adapter_zk.notifyDataSetChanged();
-										FileUtils.DeleteFolder(Environment.getExternalStorageDirectory()+File.separator+
-							EbookDetailActivity.DOWNLOAD_FOLDER_NAME + File.separator+bookname);
+										FileUtils.DeleteFolder(Environment
+												.getExternalStorageDirectory()
+												+ File.separator
+												+ EbookDetailActivity.DOWNLOAD_FOLDER_NAME
+												+ File.separator + bookname);
 									} catch (DaoException e) {
 										// TODO Auto-generated catch block
 										e.printStackTrace();
@@ -800,20 +510,15 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 
 			return convertView;
 		}
-
-
-		private void updateDateBase(final MEbook book) {
-			try {
-				book.setIsdownload(MEbook.TYPE_DOWNLOADED);
-				meBookDao.updateState(book);
-			} catch (DaoException e) {
-				e.printStackTrace();
-			}
-		}
 	}
+
 	private String getfillName(Long downloadid) {
 		String title = downloadManagerPro.getFileName(downloadid);
-		return title.substring(title.lastIndexOf("/")+1,title.length());
+		if(title!=null){
+		return title.substring(title.lastIndexOf("/") + 1, title.length());
+		}else{
+			return "";
+		}
 	}
 
 	class MyGridViewAdapter extends BaseAdapter {
@@ -851,7 +556,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 
 		@Override
 		public long getItemId(int position) {
-			if (arrayList != null && !arrayList.isEmpty()){
+			if (arrayList != null && !arrayList.isEmpty()) {
 				return position;
 			} else {
 				return -2;
@@ -861,7 +566,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			final ViewHolder holder;
-			if (arrayList== null||arrayList.isEmpty()) {
+			if (arrayList == null || arrayList.isEmpty()) {
 				convertView = LayoutInflater.from(myContext).inflate(
 						R.layout.moreitemsview, null);
 				convertView.setClickable(false);
@@ -876,11 +581,11 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 				return convertView;
 			}
 			// 更多
-//			if (position == this.getCount() - 1) {
-//				convertView = LayoutInflater.from(myContext).inflate(
-//						R.layout.moreitemsview, null);
-//				return convertView;
-//			}
+			// if (position == this.getCount() - 1) {
+			// convertView = LayoutInflater.from(myContext).inflate(
+			// R.layout.moreitemsview, null);
+			// return convertView;
+			// }
 			if (convertView == null
 					|| convertView.findViewById(R.id.linemore) != null) {
 				convertView = LayoutInflater.from(myContext).inflate(
@@ -912,8 +617,8 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 				if (!TextUtils.isEmpty(book.getImgurl())) {
 					fetch.loadImage(book.getImgurl(), holder.download_image);
 				} else {
-					holder.download_image.setImageDrawable(getResources().getDrawable(
-							R.drawable.defaut_book));
+					holder.download_image.setImageDrawable(getResources()
+							.getDrawable(R.drawable.defaut_book));
 				}
 				// Log.i("int_array", ""+int_array[1]);
 				holder.download_title.setText(book.getTitle_c());
@@ -923,8 +628,8 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 						+ getAppSize(int_array[1]));
 				holder.download_precent.setText(getNotiPercent(int_array[0],
 						int_array[1]));
-				downloadstatus=int_array[2];
-				if (downloadstatus== DownloadManager.STATUS_SUCCESSFUL
+				downloadstatus = int_array[2];
+				if (downloadstatus == DownloadManager.STATUS_SUCCESSFUL
 						&& !loded.containsKey(book.getDownloadid())) {
 					holder.downloadtip.setText("下载完成，请点击打开");
 					// 放入缓存
@@ -932,8 +637,9 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 					// 更新数据库
 					updateDateBase(book);
 				}
-				
-				final String bookname= getfillName(book.getDownloadid());
+
+				final String bookname = getfillName(book.getDownloadid());
+				if(!bookname.equals("")){
 				holder.download_cancel
 						.setOnClickListener(new View.OnClickListener() {
 							@Override
@@ -946,9 +652,12 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 										meBookDao.deldownload(book
 												.getDownloadid());
 										mebooks_list.remove(book);
-										if(downloadstatus == DownloadManager.STATUS_SUCCESSFUL){
-										FileUtils.DeleteFolder(Environment.getExternalStorageDirectory()+File.separator+
-							EbookDetailActivity.DOWNLOAD_FOLDER_NAME + File.separator+bookname);
+										if (downloadstatus == DownloadManager.STATUS_SUCCESSFUL) {
+											FileUtils.DeleteFolder(Environment
+													.getExternalStorageDirectory()
+													+ File.separator
+													+ EbookDetailActivity.DOWNLOAD_FOLDER_NAME
+													+ File.separator + bookname);
 										}
 									} catch (DaoException e) {
 										// TODO Auto-generated catch block
@@ -958,6 +667,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 								}
 							}
 						});
+				}
 			}
 			// 图片
 			// if (!TextUtils.isEmpty(favorite.getImgurl())) {
@@ -981,7 +691,6 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 	}
 
 	static final DecimalFormat DOUBLE_DECIMAL_FORMAT = new DecimalFormat("0.##");
-
 	public static final int MB_2_BYTE = 1024 * 1024;
 	public static final int KB_2_BYTE = 1024;
 
@@ -1017,12 +726,6 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 			rate = (int) ((double) progress / max * 100);
 		}
 		return new StringBuilder(16).append(rate).append("%").toString();
-	}
-
-	public static boolean isDownloading(int downloadManagerStatus) {
-		return downloadManagerStatus == DownloadManager.STATUS_RUNNING
-				|| downloadManagerStatus == DownloadManager.STATUS_PAUSED
-				|| downloadManagerStatus == DownloadManager.STATUS_PENDING;
 	}
 
 	public void init() {
@@ -1084,15 +787,15 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 	// }
 	// }
 
-	public void onError(int a) {
-		if (customProgressDialog != null && customProgressDialog.isShowing()) {
-			customProgressDialog.dismiss();
-		}
-		if (a == 2) {// 加载失败
-			Tool.ShowMessages(this, getResources().getString(R.string.loadfail));
-		} else if (a == 6) {
-			Tool.ShowMessages(this,
-					getResources().getString(R.string.cancelcommentfail));
-		}
-	}
+	// public void onError(int a) {
+	// if (customProgressDialog != null && customProgressDialog.isShowing()) {
+	// customProgressDialog.dismiss();
+	// }
+	// if (a == 2) {// 加载失败
+	// Tool.ShowMessages(this, getResources().getString(R.string.loadfail));
+	// } else if (a == 6) {
+	// Tool.ShowMessages(this,
+	// getResources().getString(R.string.cancelcommentfail));
+	// }
+	// }
 }

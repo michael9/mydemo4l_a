@@ -372,10 +372,6 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 		public CharSequence getPageTitle(int position) {
 			Log.i("getPageTitle", "getPageTitle");
 			Locale l = Locale.getDefault();
-			if (adapter_zk != null && adapter_sz != null) {
-				adapter_zk.notifyDataSetChanged();
-				adapter_sz.notifyDataSetChanged();
-			}
 			switch (position) {
 			case 0:
 				Log.i("MyFavorActivity", "SectionsPagerAdapter_getPageTitle_0");
