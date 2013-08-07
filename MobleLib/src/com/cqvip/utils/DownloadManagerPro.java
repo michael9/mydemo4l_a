@@ -154,7 +154,9 @@ public class DownloadManagerPro {
             if (c != null && c.moveToFirst()) {
                 result = c.getString(c.getColumnIndex(columnName));
             }
-        } finally {
+        }catch(Exception e){
+        	e.printStackTrace();
+        }finally {
             if (c != null) {
                 c.close();
             }

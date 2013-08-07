@@ -38,6 +38,7 @@ import com.cqvip.moblelib.entity.MUser;
 import com.cqvip.moblelib.model.ShortBook;
 import com.cqvip.moblelib.net.BookException;
 import com.cqvip.moblelib.view.StableGridView;
+import com.cqvip.utils.Phinfo;
 import com.cqvip.utils.Tool;
 
 /**
@@ -135,6 +136,12 @@ public class MainMenuActivity extends BaseActivity {
 		init();
 		ActivityManager activityManager = (ActivityManager) this.getSystemService("activity");
         Log.i("MemoryClass","" + activityManager.getMemoryClass());
+        
+        //获取手机信息
+        Phinfo phinfo= new Phinfo();
+        phinfo.fullbaseinfo(this);
+        String info=phinfo.tojson(phinfo);
+        Log.i("phinfo", info);
 	}
 
 	private void init_login() {
