@@ -12,12 +12,8 @@
         -->
     </style>
 
-    <!-- Application theme. -->
-    <style name="AppTheme" parent="AppBaseTheme">
-        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
-    </style>
 
-    <style name="NoTtitleAndAnimation" parent="@style/AppTheme">
+    <style name="NoTtitleAndAnimation" parent="@style/AppBaseTheme">
         <item name="android:windowAnimationStyle">@style/AnimationActivity</item>
     </style>
 
@@ -75,10 +71,10 @@
     <style name="ImageButtonAppTheme" parent="android:Widget.ImageButton">
         <item name="android:background">@drawable/btn_default_holo_light</item>
     </style>
-
-    <style name="AppTheme" parent="android:Theme.Light">
-        <item name="android:buttonStyle">@style/ButtonAppTheme</item>
-        <item name="android:imageButtonStyle">@style/ImageButtonAppTheme</item>
+	 <style name="dialog_fullscreen">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
     </style>
+
 
 </resources>

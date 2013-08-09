@@ -32,5 +32,16 @@
         android:layout_marginRight="9dip" android:src="@drawable/icon_download"
         android:visibility="gone"
         />
-
+	<TextView 
+	    android:id="@+id/txt_concern_title"
+	      android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="9dip"
+        android:text="关注"
+        android:textSize="24dp"
+	    android:drawableLeft="@drawable/icon_add"
+	    android:visibility="gone"
+	    />
 </RelativeLayout>

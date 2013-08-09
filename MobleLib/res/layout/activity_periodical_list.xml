@@ -1,0 +1,53 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_list"
+    tools:context=".ResultOnSearchActivity" >
+    <include
+        android:id="@+id/head_bar"
+        layout="@layout/header" />
+  
+    <TextView
+        android:id="@+id/txt_total_esearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/head_bar"
+        android:layout_marginLeft="8dp"
+        android:padding="1dp"
+        android:text=""
+        android:textSize="12sp"
+        android:visibility="gone" />
+    
+    <ListView
+        android:id="@+id/search_res_lv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/txt_total_esearch"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/text_bck"
+        android:divider="@color/divider_color"
+        android:dividerHeight="0.5dp" />
+
+    <RelativeLayout
+        android:id="@+id/noresult_rl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone" >
+
+        <ImageView
+            android:id="@+id/noresult_img"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/defaut_book" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/noresult_img"
+            android:gravity="center"
+            android:text="没有找到相关结果\n试试别的关键字吧!"
+            android:textColor="@android:color/darker_gray" />
+    </RelativeLayout>
+</RelativeLayout>
