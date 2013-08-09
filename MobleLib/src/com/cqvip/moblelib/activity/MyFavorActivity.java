@@ -580,6 +580,7 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
+			//Log.i("getView20130808", "getView");
 			final ViewHolder holder;
 			if (this.getCount() == 1) {
 				convertView = LayoutInflater.from(myContext).inflate(
@@ -604,6 +605,7 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 
 			if (convertView == null
 					|| convertView.findViewById(R.id.linemore) != null) {
+				//Log.i("convertView20130808", "convertView");
 				convertView = LayoutInflater.from(myContext).inflate(
 						R.layout.item_result_search, null);
 				holder = new ViewHolder();
