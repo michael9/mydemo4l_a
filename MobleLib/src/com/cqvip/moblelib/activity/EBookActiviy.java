@@ -1,25 +1,19 @@
 package com.cqvip.moblelib.activity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.cqvip.moblelib.R;
-import com.cqvip.moblelib.scan.CaptureActivity;
 
 /**
  * <p>
@@ -68,8 +62,20 @@ public class EBookActiviy extends BaseActivity {
 		lv.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 		lv.setItemsCanFocus(false);
 		lv.setItemChecked(0, true);	
-		lv.setEnabled(false);
+		//lv.setEnabled(false);
 		lv.setFocusable(false);
+		
+		lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				
+				startActivity(new Intent(EBookActiviy.this,PeriodicalCenterActivity.class));
+				
+			}
+		
+		});
 		
 		searchbar=(ViewGroup)findViewById(R.id.searchbar);
 		searchbar.setOnClickListener(new View.OnClickListener() {

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <include
+        android:id="@+id/head_bar"
+        layout="@layout/header" />
+
+    <RelativeLayout
+        android:id="@+id/rl_img_and_txt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/head_bar"
+        >
+
+        <!-- 图书 -->
+
+        <RelativeLayout
+            android:id="@+id/detail_up_rl"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:id="@+id/periodical_icon_img"
+                android:layout_width="82dp"
+                android:layout_height="118dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="10.0dip"
+                android:layout_marginTop="5.0dip"
+                android:src="@drawable/eg_bibliosm_958641"
+                android:background="@android:color/transparent" />
+
+            <LinearLayout
+                android:id="@+id/lyRightLayout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5.0dip"
+                android:layout_toRightOf="@+id/periodical_icon_img"
+                android:orientation="vertical" >
+
+                <!-- title -->
+
+                <TextView
+                    android:id="@+id/periodical_title_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="编程的艺术"
+                    android:textColor="@color/txt_black"
+                    android:textSize="18.0sp"
+                    android:textStyle="bold" />
+                <!-- author -->
+
+                <TextView
+                    android:id="@+id/periodical_host1_txt"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="主管单位：中国船舶重工集团公司"
+                    android:textColor="@color/txt_black"
+                    android:textSize="@dimen/search_detail_txtsize_tv" />
+                <!-- address -->
+
+                <TextView
+                    android:id="@+id/periodical_host2_txt"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="主办单位：洛阳船舶材料研究所"
+                    android:textColor="@color/txt_black"
+                    android:textSize="@dimen/search_detail_txtsize_tv" />
+                <!-- time -->
+
+                <TextView
+                    android:id="@+id/periodical_author_txt"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="主　　编：王其红"
+                    android:textColor="@color/txt_black"
+                    android:textSize="@dimen/search_detail_txtsize_tv" />
+                <!-- page -->
+
+                <TextView
+                    android:id="@+id/periodical_time_txt"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="2"
+                    android:text="刊期/开本/创刊时间：双月刊，16开，1979-01-01 "
+                    android:textColor="@color/txt_black"
+                    android:textSize="@dimen/search_detail_txtsize_tv" />
+                <!-- size -->
+
+                <TextView
+                    android:id="@+id/periodical_price_txt"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="单价/定价：20.00，120.00"
+                    android:textColor="@color/txt_black"
+                    android:textSize="@dimen/search_detail_txtsize_tv" />
+                 <TextView
+                    android:id="@+id/periodical_num_txt"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="国内/国际刊号：41-1149/TB,1003-1545"
+                    android:textColor="@color/txt_black"
+                    android:textSize="@dimen/search_detail_txtsize_tv" />
+            </LinearLayout>
+        </RelativeLayout>
+            <TextView
+                android:id="@+id/periodical_content_abst"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/detail_up_rl"
+                android:text="本刊创刊于1979年，曾用刊名是《国外舰船技术：材料类》（月刊），1986年更名为《材料开发与应用》（双月刊）。是由中国船舶重工集团公司主管、中国造船工程学会船舶材料学术委员会和洛阳船舶材料研究所共同主办的材料学科技术性刊物。"
+                android:textColor="@color/txt_black"
+                android:textSize="@dimen/search_detail_txtsize_btn" />
+    </RelativeLayout>
+  <RelativeLayout android:id="@+id/rlFromAndDate" 
+      android:layout_width="fill_parent" 
+      android:layout_height="44.0dip" 
+      android:layout_below="@+id/rl_img_and_txt">
+<!--               底部横分割线 -->
+           <ImageView android:id="@+id/detail_middletab_divider" 
+               android:layout_width="fill_parent" 
+               android:layout_height="wrap_content" 
+               android:layout_marginLeft="5.0dip" 
+               android:layout_marginRight="5.0dip" 
+               android:src="@drawable/statusdetail_cell_sepatator" 
+               android:scaleType="fitXY" 
+               android:layout_alignParentBottom="true" />
+           
+            <RelativeLayout android:orientation="vertical" 
+                android:id="@+id/detail_comment_ly" 
+                android:layout_width="wrap_content" 
+                android:layout_height="fill_parent" 
+                android:layout_centerInParent="true"
+                >
+           <TextView 
+               android:id="@+id/txt_year_month"
+               android:layout_width="wrap_content" 
+			   android:layout_height="wrap_content"  
+               android:textSize="16sp"
+               android:layout_centerVertical="true"
+               android:text="2013年12期：目录"
+               android:drawableRight="@drawable/icon_navigation_expand"
+               />
+           <!--                指示箭头 -->
+
+                <ImageView
+                    android:id="@+id/retweet_bottom_arrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:scaleType="fitXY"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/statusdetail_segmented_bottom_arrow" 
+                    />
+
+           </RelativeLayout>
+       </RelativeLayout>
+
+</RelativeLayout>
