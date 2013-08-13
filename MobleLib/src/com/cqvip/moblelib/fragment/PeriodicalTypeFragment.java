@@ -3,11 +3,13 @@ package com.cqvip.moblelib.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ListView;
 
 import com.cqvip.moblelib.R;
@@ -35,8 +37,7 @@ public class PeriodicalTypeFragment extends Fragment{
 //		TextView tv = (TextView) rootView.findViewById(R.id.txt_periodical);
 //		tv.setText(title);
 		ListView listview = (ListView) rootView.findViewById(R.id.lv_periodical_type);
-		listview.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1,
-				MEDICAL));
+		listview.setAdapter(new MyAdapter(this));
 		
 		listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -48,6 +49,41 @@ public class PeriodicalTypeFragment extends Fragment{
 		});
 		return rootView;
 	}
+	class MyAdapter extends BaseAdapter{
+		private Fragment fragment;
 
+		public MyAdapter(PeriodicalTypeFragment periodicalTypeFragment) {
+			fragment = periodicalTypeFragment;
+		}
+
+		@Override
+		public int getCount() {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
+		@Override
+		public Object getItem(int position) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public long getItemId(int position) {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			if(convertView ==null){
+				convertView = fragment.getActivity().getLayoutInflater().inflate(R.layout.item_periodical_type, null);
+			}
+			
+			// TODO Auto-generated method stub
+			return convertView;
+		}
+		
+	}
 
 }
