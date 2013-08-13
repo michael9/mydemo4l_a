@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.cqvip.moblelib.R;
+import com.cqvip.moblelib.activity.EbookDetailActivity;
 import com.cqvip.moblelib.activity.PeriodicalListActivity;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.Constant;
@@ -63,8 +65,13 @@ public class PeriodicalTypeFragment extends BaseAbstractFragment {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				startActivity(new Intent(getActivity(),
-						PeriodicalListActivity.class));
+				ShortBook mtype = adapter.getList().get(position);
+				if (mtype != null) {
+					Intent _intent = new Intent(getActivity(), PeriodicalListActivity.class);
+					_intent.putExtra("classid", mtype.getId());
+					startActivity(_intent);
+				}
+				
 			}
 		});
 		return rootView;
@@ -157,6 +164,9 @@ public class PeriodicalTypeFragment extends BaseAbstractFragment {
 			return mList.get(position);
 		}
 
+		public List<ShortBook> getList(){
+			return mList;
+		}
 		@Override
 		public long getItemId(int position) {
 			return position;

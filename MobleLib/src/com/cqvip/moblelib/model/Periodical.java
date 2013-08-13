@@ -10,6 +10,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.net.BookException;
 
 /**
@@ -39,7 +40,7 @@ public class Periodical implements Serializable {
 	private String chiefeditor;// 主编
 	private String pubcycle;// 月刊
 	private String size;// 多少开
-	private LinkedHashMap<String, String[]> yearsnumlist;
+	private ArrayList<PeriodicalYear> yearsnumlist;
 
 	// 获取期刊分类列表
 	public LinkedHashMap<String, String> classfylist;
@@ -53,7 +54,7 @@ public class Periodical implements Serializable {
 	}
 
 	public Periodical(JSONObject json, int sort) throws BookException {
-		if (sort == 1) {
+		if (sort == Task.TASK_PERIODICAL_TYPE) {
 			classfylist = new LinkedHashMap<String, String>();
 			try {
 				JSONArray array = json.getJSONArray("classlist");
@@ -69,7 +70,7 @@ public class Periodical implements Serializable {
 				e.printStackTrace();
 				throw new BookException(e);
 			}
-		} else if (sort == 2) {
+		} else if (sort == Task.TASK_PERIODICAL_SUBTYPE) {
 			try {
 				gch = json.getString("gch");
 				name = json.getString("name");
@@ -83,7 +84,7 @@ public class Periodical implements Serializable {
 				e.printStackTrace();
 				throw new BookException(e);
 			}
-		} else if (sort == 3) {
+		} else if (sort == Task.TASK_PERIODICAL_DETAIL) {
 			try {
 				gch = json.getString("gch");
 				name = json.getString("name");
@@ -112,7 +113,7 @@ public class Periodical implements Serializable {
 	// sort --1: 获取期刊分类列表 2: 获取期刊分类下的期刊列表 3:获取期期刊详细
 	public static Periodical formObject(String str, int sort)
 			throws BookException {
-		if (sort == 1) {
+		if (sort == Task.TASK_PERIODICAL_TYPE) {
 			try {
 				JSONObject json = new JSONObject(str);
 				if (!json.getBoolean("success")) {
@@ -123,7 +124,7 @@ public class Periodical implements Serializable {
 			} catch (JSONException e) {
 				throw new BookException(e);
 			}
-		} else if (sort == 2) {
+		} else if (sort == Task.TASK_PERIODICAL_SUBTYPE) {
 			try {
 				JSONObject json = new JSONObject(str);
 				if (!json.getBoolean("success")) {
@@ -143,7 +144,7 @@ public class Periodical implements Serializable {
 			} catch (JSONException e) {
 				throw new BookException(e);
 			}
-		} else if (sort == 3) {
+		} else if (sort == Task.TASK_PERIODICAL_DETAIL) {
 			try {
 				JSONObject json = new JSONObject(str);
 				if (!json.getBoolean("success")) {
@@ -159,21 +160,24 @@ public class Periodical implements Serializable {
 		return null;
 	}
 
-	private LinkedHashMap<String, String[]> formList(JSONArray array)
+	private ArrayList<PeriodicalYear> formList(JSONArray array)
 			throws BookException {
+		ArrayList<PeriodicalYear> mlists = new ArrayList<PeriodicalYear>();
 		int count = array.length();
 		if (count <= 0) {
 			return null;
 		}
-		LinkedHashMap<String, String[]> map = new LinkedHashMap<String, String[]>(count);
 		for (int i = 0; i < count; i++) {
-			JSONObject js;
+			
+			PeriodicalYear map = new PeriodicalYear();
 			try {
-				js = (JSONObject) array.get(i);
+				JSONObject js = (JSONObject) array.get(i);
 				String year = js.getString("year");
 				String tempnum = js.getString("num");
 				String[] num = tempnum.split(",");
-				map.put(year, num);
+				map.setYear(year);
+				map.setNum(num);
+				mlists.add(map);
 			} catch (JSONException e) {
 				e.printStackTrace();
 				throw new BookException(e);
@@ -181,7 +185,7 @@ public class Periodical implements Serializable {
 
 		}
 
-		return map;
+		return mlists;
 	}
 
 	public String getGch() {
@@ -240,7 +244,7 @@ public class Periodical implements Serializable {
 		return size;
 	}
 
-	public HashMap<String, String[]> getYearsnumlist() {
+	public ArrayList<PeriodicalYear> getYearsnumlist() {
 		return yearsnumlist;
 	}
 
@@ -260,5 +264,4 @@ public class Periodical implements Serializable {
 				+ classfylist + ", recordcount=" + recordcount + ", qklist="
 				+ qklist + "]";
 	}
-
 }

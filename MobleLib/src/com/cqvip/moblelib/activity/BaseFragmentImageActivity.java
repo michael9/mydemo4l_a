@@ -10,8 +10,8 @@ import com.cqvip.moblelib.constant.GlobleData;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
-public class BaseFragmentImageActivity  extends FragmentActivity{
 
+public class BaseFragmentImageActivity  extends FragmentActivity{
 	
 	
 	protected ImageFetcher mImageFetcher;
