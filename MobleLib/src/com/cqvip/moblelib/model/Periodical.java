@@ -10,6 +10,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.net.BookException;
 
 /**
@@ -53,7 +54,7 @@ public class Periodical implements Serializable {
 	}
 
 	public Periodical(JSONObject json, int sort) throws BookException {
-		if (sort == 1) {
+		if (sort == Task.TASK_PERIODICAL_TYPE) {
 			classfylist = new LinkedHashMap<String, String>();
 			try {
 				JSONArray array = json.getJSONArray("classlist");
@@ -69,7 +70,7 @@ public class Periodical implements Serializable {
 				e.printStackTrace();
 				throw new BookException(e);
 			}
-		} else if (sort == 2) {
+		} else if (sort == Task.TASK_PERIODICAL_SUBTYPE) {
 			try {
 				gch = json.getString("gch");
 				name = json.getString("name");
@@ -83,7 +84,7 @@ public class Periodical implements Serializable {
 				e.printStackTrace();
 				throw new BookException(e);
 			}
-		} else if (sort == 3) {
+		} else if (sort == Task.TASK_PERIODICAL_DETAIL) {
 			try {
 				gch = json.getString("gch");
 				name = json.getString("name");
@@ -112,7 +113,7 @@ public class Periodical implements Serializable {
 	// sort --1: 获取期刊分类列表 2: 获取期刊分类下的期刊列表 3:获取期期刊详细
 	public static Periodical formObject(String str, int sort)
 			throws BookException {
-		if (sort == 1) {
+		if (sort == Task.TASK_PERIODICAL_TYPE) {
 			try {
 				JSONObject json = new JSONObject(str);
 				if (!json.getBoolean("success")) {
@@ -123,7 +124,7 @@ public class Periodical implements Serializable {
 			} catch (JSONException e) {
 				throw new BookException(e);
 			}
-		} else if (sort == 2) {
+		} else if (sort == Task.TASK_PERIODICAL_SUBTYPE) {
 			try {
 				JSONObject json = new JSONObject(str);
 				if (!json.getBoolean("success")) {
@@ -143,7 +144,7 @@ public class Periodical implements Serializable {
 			} catch (JSONException e) {
 				throw new BookException(e);
 			}
-		} else if (sort == 3) {
+		} else if (sort == Task.TASK_PERIODICAL_DETAIL) {
 			try {
 				JSONObject json = new JSONObject(str);
 				if (!json.getBoolean("success")) {
