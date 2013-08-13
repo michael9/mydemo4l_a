@@ -244,6 +244,10 @@ public class Periodical implements Serializable {
 		return yearsnumlist;
 	}
 
+	public String getRecordcount() {
+		return recordcount;
+	}
+	
 	@Override
 	public String toString() {
 		return "Periodical [gch=" + gch + ", name=" + name + ", ename=" + ename
