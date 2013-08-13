@@ -96,6 +96,15 @@ public class ShortBook {
 				throw new BookException(e);
 			}
 			break;
+		case Task.TASK_PERIODICAL_TYPE:
+			try {
+				JSONObject json = new JSONObject(result);
+				id = json.getString("classid");//СͼƬ
+				date = json.getString("classname");//СͼƬ
+			} catch (JSONException e) {
+				throw new BookException(e);
+			}
+			break;
 		}
 		
 	}
@@ -165,6 +174,29 @@ public class ShortBook {
 				throw new BookException(e);
 			}
 			break;
+		case Task.TASK_PERIODICAL_TYPE:
+			try {
+				JSONObject json = new JSONObject(result);
+				if(!json.getBoolean("success")){
+					return null;
+				}
+				JSONArray ary=json.getJSONArray("classlist");
+				int count = ary.length();
+				if(count <=0){
+					return null;
+				}
+				books = new ArrayList<ShortBook>(count);
+				for(int i = 0;i<count;i++){
+					books.add(new ShortBook(type,ary.getJSONObject(i).toString()));
+				}
+			} catch (JSONException e) {
+				e.printStackTrace();
+				throw new BookException(e);
+			}
+			break;
+			
+			
+			
 		}
 		    return books;
 		

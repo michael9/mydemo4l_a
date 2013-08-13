@@ -28,6 +28,7 @@
           android:layout_centerVertical="true"
           android:layout_toRightOf="@+id/txt_type_peridical"
           android:text="(256)"
+          android:visibility="gone"
           android:textSize="12sp" />
 
 </RelativeLayout>

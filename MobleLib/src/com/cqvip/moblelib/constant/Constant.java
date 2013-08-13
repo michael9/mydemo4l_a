@@ -14,4 +14,11 @@ public class Constant {
 	public static final int SPPECH_FREE = 6;//公益讲座
 	public static final int QUESTION = 7;//常见问题
 	
+	public static final int MEDIAL = 1;//医药卫生
+	public static final int ENGINE = 2;//工程科学
+	public static final int SOCIAL = 3;//人文社会
+	public static final int NATURE = 4;//自然科学
+	public static final int FORESTS = 5;//农林牧鱼
+	
+	
 }

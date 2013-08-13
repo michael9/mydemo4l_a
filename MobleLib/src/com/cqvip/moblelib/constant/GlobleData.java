@@ -72,6 +72,12 @@ public class GlobleData {
 	
 	//登录标识
 	public static boolean islogin = false;
+	//根据http://mobile.cqvip.com/qk/classlist.aspx?classid=0获取
+	public static final int MEDIAL_TYPEID = 1;//医药卫生
+	public static final int ENGINE_TYPEID = 63;//工程科学
+	public static final int SOCIAL_TYPEID = 67;//人文社会
+	public static final int NATURE_TYPEID = 64;//自然科学
+	public static final int FORESTS_TYPEID = 66;//农林牧鱼
 	
 	
 	
