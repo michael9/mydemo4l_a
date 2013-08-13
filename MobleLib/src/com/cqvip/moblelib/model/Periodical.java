@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,38 +39,50 @@ public class Periodical implements Serializable {
 	private String chiefeditor;// 主编
 	private String pubcycle;// 月刊
 	private String size;// 多少开
-	private HashMap<String, String[]> yearsnumlist;
+	private LinkedHashMap<String, String[]> yearsnumlist;
 
 	// 获取期刊分类列表
 	public LinkedHashMap<String, String> classfylist;
-	
-	//获取期刊分类下的期刊列表
+
+	// 获取期刊分类下的期刊列表
 	private String recordcount;
+	public  List<Periodical> qklist;
+	
+	public Periodical() {
+		
+	}
 
 	public Periodical(JSONObject json, int sort) throws BookException {
 		if (sort == 1) {
-			classfylist=new LinkedHashMap<String, String>();
+			classfylist = new LinkedHashMap<String, String>();
 			try {
-				JSONArray array=json.getJSONArray("classlist");
-				for (int i = 0; i < 5; i++) {
+				JSONArray array = json.getJSONArray("classlist");
+				int size=array.length();
+				for (int i = 0; i < size; i++) {
 					JSONObject js;
-					try {
-						js = (JSONObject) array.get(i);
-						String classid = js.getString("classid");
-						String classname = js.getString("classname");
-						classfylist.put(classid, classname);
-					} catch (JSONException e) {
-						e.printStackTrace();
-						throw new BookException(e);
-					}
-
+					js = (JSONObject) array.get(i);
+					String classid = js.getString("classid");
+					String classname = js.getString("classname");
+					classfylist.put(classid, classname);
 				}
 			} catch (JSONException e) {
 				e.printStackTrace();
 				throw new BookException(e);
 			}
 		} else if (sort == 2) {
-
+			try {
+				gch = json.getString("gch");
+				name = json.getString("name");
+				ename = json.getString("ename");
+				imgurl = json.getString("imgurl");
+				isrange = json.getString("isrange");
+				cnno = json.getString("cnno");
+				issn = json.getString("issn");
+				changestate = json.getString("changestate");
+			} catch (JSONException e) {
+				e.printStackTrace();
+				throw new BookException(e);
+			}
 		} else if (sort == 3) {
 			try {
 				gch = json.getString("gch");
@@ -96,28 +109,48 @@ public class Periodical implements Serializable {
 		}
 	}
 
-	// sort --1: 获取期刊分类列表    2:	获取期刊分类下的期刊列表   3:获取期期刊详细
-	public static Periodical formObject(String str, int sort) throws BookException {
+	// sort --1: 获取期刊分类列表 2: 获取期刊分类下的期刊列表 3:获取期期刊详细
+	public static Periodical formObject(String str, int sort)
+			throws BookException {
 		if (sort == 1) {
 			try {
 				JSONObject json = new JSONObject(str);
 				if (!json.getBoolean("success")) {
 					return null;
 				}
-				return new Periodical(json,sort);
+				return new Periodical(json, sort);
 
 			} catch (JSONException e) {
 				throw new BookException(e);
 			}
 		} else if (sort == 2) {
+			try {
+				JSONObject json = new JSONObject(str);
+				if (!json.getBoolean("success")) {
+					return null;
+				}
+				Periodical periodical=new Periodical();
+				periodical.recordcount=json.getString("recordcount");
+				JSONArray array=json.getJSONArray("qklist");
+				
+				int size=array.length();
+				periodical.qklist=new ArrayList<Periodical>();
+				for (int i = 0; i < size; i++) {
+					periodical.qklist.add(new Periodical(array.getJSONObject(i), sort));
+				}
+				return periodical;
 
+			} catch (JSONException e) {
+				throw new BookException(e);
+			}
 		} else if (sort == 3) {
 			try {
 				JSONObject json = new JSONObject(str);
 				if (!json.getBoolean("success")) {
 					return null;
 				}
-				return new Periodical(json,sort);
+				JSONObject json_qkinfo = json.getJSONObject("qkinfo");
+				return new Periodical(json_qkinfo, sort);
 
 			} catch (JSONException e) {
 				throw new BookException(e);
@@ -126,13 +159,13 @@ public class Periodical implements Serializable {
 		return null;
 	}
 
-	private HashMap<String, String[]> formList(JSONArray array)
+	private LinkedHashMap<String, String[]> formList(JSONArray array)
 			throws BookException {
 		int count = array.length();
 		if (count <= 0) {
 			return null;
 		}
-		HashMap<String, String[]> map = new HashMap<String, String[]>(count);
+		LinkedHashMap<String, String[]> map = new LinkedHashMap<String, String[]>(count);
 		for (int i = 0; i < count; i++) {
 			JSONObject js;
 			try {
@@ -209,6 +242,19 @@ public class Periodical implements Serializable {
 
 	public HashMap<String, String[]> getYearsnumlist() {
 		return yearsnumlist;
+	}
+
+	@Override
+	public String toString() {
+		return "Periodical [gch=" + gch + ", name=" + name + ", ename=" + ename
+				+ ", imgurl=" + imgurl + ", isrange=" + isrange + ", cnno="
+				+ cnno + ", issn=" + issn + ", changestate=" + changestate
+				+ ", remark=" + remark + ", directordept=" + directordept
+				+ ", publisher=" + publisher + ", chiefeditor=" + chiefeditor
+				+ ", pubcycle=" + pubcycle + ", size=" + size
+				+ ", yearsnumlist=" + yearsnumlist + ", classfylist="
+				+ classfylist + ", recordcount=" + recordcount + ", qklist="
+				+ qklist + "]";
 	}
 
 }

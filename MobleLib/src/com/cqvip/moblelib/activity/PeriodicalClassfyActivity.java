@@ -190,7 +190,7 @@ public class PeriodicalClassfyActivity extends FragmentActivity {
 				ft = new PeriodicalTypeFragment();
 				
 				Bundle args = new Bundle();
-				args.putString("arg", tabTitle[arg0]);
+				args.putInt("type", arg0);
 				ft.setArguments(args);
 				
 		//		break;
