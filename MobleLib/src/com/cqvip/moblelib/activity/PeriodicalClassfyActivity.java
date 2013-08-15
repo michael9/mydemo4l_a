@@ -1,13 +1,6 @@
 package com.cqvip.moblelib.activity;
 
-import com.cqvip.moblelib.R;
-import com.cqvip.moblelib.R.layout;
-import com.cqvip.moblelib.R.menu;
-import com.cqvip.moblelib.fragment.PeriodicalTypeFragment;
-import com.cqvip.moblelib.view.SwipHorizontalScrollView;
-
 import android.os.Bundle;
-import android.app.Activity;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -24,6 +17,11 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
+
+import com.cqvip.moblelib.R;
+import com.cqvip.moblelib.fragment.PeriodicalTypeFragment;
+import com.cqvip.moblelib.fragment.SpecialPeriodicalFragment;
+import com.cqvip.moblelib.view.SwipHorizontalScrollView;
 
 /**
  * 期刊大全分类界面，可滑动listview,提供分类添加功能
@@ -181,20 +179,19 @@ public class PeriodicalClassfyActivity extends FragmentActivity {
 		@Override
 		public Fragment getItem(int arg0) {
 			Fragment ft = null;
-//			switch (arg0) {
-//			case 0:
-//				ft = new SpecialRecommend();
-//				break;
-//
-//			default:
+			switch (arg0) {
+			case 0:
+				ft = new SpecialPeriodicalFragment();
+				break;
+			default:
 				ft = new PeriodicalTypeFragment();
 				
 				Bundle args = new Bundle();
 				args.putInt("type", arg0);
 				ft.setArguments(args);
 				
-		//		break;
-		//	}
+				break;
+			}
 			return ft;
 		}
 

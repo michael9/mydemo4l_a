@@ -209,7 +209,7 @@ implements OnScrollListener,android.widget.AdapterView.OnItemLongClickListener{
                     // 可以松手去刷新了  
                     if (state == RELEASE_To_REFRESH) {  
   
-                        //setSelection(0);  
+                        setSelection(0);  
   
                         // 往上推了，推到了屏幕足够掩盖head的程度，但是还没有推到全部掩盖的地步  
                         if (((tempY - startY) / RATIO < headContentHeight)  
@@ -234,7 +234,7 @@ implements OnScrollListener,android.widget.AdapterView.OnItemLongClickListener{
                     // 还没有到达显示松开刷新的时候,DONE或者是PULL_To_REFRESH状态  
                     if (state == PULL_To_REFRESH) {  
   
-                        //setSelection(0);  
+                        setSelection(0);  
   
                         // 下拉到可以进入RELEASE_TO_REFRESH的状态  
                         if ((tempY - startY) / RATIO >= headContentHeight) {  

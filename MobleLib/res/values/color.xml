@@ -28,5 +28,6 @@
     <drawable name="transparent">#00000000</drawable>
     <drawable name="a30" >#30ffffff</drawable>
     
+    <color name="textcolor_hint">#80616161</color>
     
 </resources>
