@@ -8,6 +8,11 @@ import android.view.ViewGroup;
 import com.cqvip.moblelib.R;
 import com.cqvip.moblelib.fragment.basefragment.BaseAbstractFragment;
 
+/**
+ * ÌØ±ðÍÆ¼ö
+ * @author luojiang
+ *
+ */
 public class SpecialPeriodicalFragment extends BaseAbstractFragment {
 
 	@Override
