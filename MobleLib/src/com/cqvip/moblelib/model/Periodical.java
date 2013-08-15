@@ -40,7 +40,7 @@ public class Periodical implements Serializable {
 	private String chiefeditor;// 主编
 	private String pubcycle;// 月刊
 	private String size;// 多少开
-	private LinkedHashMap<String, String[]> yearsnumlist;
+	private ArrayList<PeriodicalYear> yearsnumlist;
 
 	// 获取期刊分类列表
 	public LinkedHashMap<String, String> classfylist;
@@ -159,21 +159,24 @@ public class Periodical implements Serializable {
 		return null;
 	}
 
-	private LinkedHashMap<String, String[]> formList(JSONArray array)
+	private ArrayList<PeriodicalYear> formList(JSONArray array)
 			throws BookException {
+		ArrayList<PeriodicalYear> mlists = new ArrayList<PeriodicalYear>();
 		int count = array.length();
 		if (count <= 0) {
 			return null;
 		}
-		LinkedHashMap<String, String[]> map = new LinkedHashMap<String, String[]>(count);
 		for (int i = 0; i < count; i++) {
-			JSONObject js;
+			
+			PeriodicalYear map = new PeriodicalYear();
 			try {
-				js = (JSONObject) array.get(i);
+				JSONObject js = (JSONObject) array.get(i);
 				String year = js.getString("year");
 				String tempnum = js.getString("num");
 				String[] num = tempnum.split(",");
-				map.put(year, num);
+				map.setYear(year);
+				map.setNum(num);
+				mlists.add(map);
 			} catch (JSONException e) {
 				e.printStackTrace();
 				throw new BookException(e);
@@ -181,7 +184,7 @@ public class Periodical implements Serializable {
 
 		}
 
-		return map;
+		return mlists;
 	}
 
 	public String getGch() {
@@ -240,7 +243,7 @@ public class Periodical implements Serializable {
 		return size;
 	}
 
-	public HashMap<String, String[]> getYearsnumlist() {
+	public ArrayList<PeriodicalYear> getYearsnumlist() {
 		return yearsnumlist;
 	}
 
@@ -260,5 +263,4 @@ public class Periodical implements Serializable {
 				+ classfylist + ", recordcount=" + recordcount + ", qklist="
 				+ qklist + "]";
 	}
-
 }

@@ -1,12 +1,15 @@
 package com.cqvip.moblelib.fragment.basefragment;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.Volley;
-import com.cqvip.moblelib.view.CustomProgressDialog;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.View;
+
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
+import com.cqvip.mobelib.imgutils.ImageCache.ImageCacheParams;
+import com.cqvip.mobelib.imgutils.ImageFetcher;
+import com.cqvip.moblelib.R;
+import com.cqvip.moblelib.constant.GlobleData;
+import com.cqvip.moblelib.view.CustomProgressDialog;
 
 public class BaseAbstractFragment extends Fragment{
 

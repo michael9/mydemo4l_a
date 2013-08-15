@@ -10,6 +10,7 @@
     <string name="main_ebook">电子资源</string>
     <string name="main_readingguide">推荐阅读</string>
     <string name="main_bookcomment"></string>
+    <string name="main_periodical">期刊大全</string>
     <!-- 参考咨询 -->
     <string name="main_ebookstore">个人中心</string>
     <string name="main_notice">馆内公告</string>
@@ -108,6 +109,14 @@
     <string name="book_comment">书评</string>
     <string name="title_moredetail">详细信息</string>
     <string name="title_FAQ">问题解答</string>
+    
+    <string name="title_cnno">国内统一刊号：</string>
+    <string name="title_issn">国际标准刊号：</string>
+    <string name="title_perio_chiefdept">主管单位：</string>
+    <string name="title_perio_publisher">主办单位：</string>
+    <string name="title_perio_chiefeditor">主　　编：</string>
+    <string name="title_perio_type">期刊/开本：</string>
+    <string name="title_perio_type">期刊/开本：</string>
 
     <!-- 异常提示 -->
     <string name="loginfail">登录失败</string>

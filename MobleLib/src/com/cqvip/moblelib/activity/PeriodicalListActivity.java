@@ -4,43 +4,39 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.android.volley.VolleyError;
-import com.android.volley.Request.Method;
-import com.android.volley.Response.ErrorListener;
-import com.android.volley.Response.Listener;
-import com.android.volley.toolbox.StringRequest;
-import com.cqvip.moblelib.R;
-import com.cqvip.moblelib.R.layout;
-import com.cqvip.moblelib.R.menu;
-import com.cqvip.moblelib.adapter.EbookAdapter;
-import com.cqvip.moblelib.constant.GlobleData;
-import com.cqvip.moblelib.model.EBook;
-import com.cqvip.utils.Tool;
-
-import android.os.Bundle;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.text.TextUtils;
-import android.util.Log;
-import android.view.KeyEvent;
-import android.view.Menu;
+import android.content.pm.FeatureInfo;
+import android.os.Bundle;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
+import android.view.Window;
 import android.widget.AdapterView;
-import android.widget.EditText;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
+
+import com.android.volley.Request.Method;
+import com.android.volley.Response.ErrorListener;
+import com.android.volley.Response.Listener;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.cqvip.moblelib.R;
+import com.cqvip.moblelib.adapter.EbookAdapter;
+import com.cqvip.moblelib.adapter.PeriodicalAdapter;
+import com.cqvip.moblelib.biz.Task;
+import com.cqvip.moblelib.constant.GlobleData;
+import com.cqvip.moblelib.model.EBook;
+import com.cqvip.moblelib.model.Periodical;
+import com.cqvip.utils.Tool;
 
 /**
  * 模拟期刊列表显示
  * @author luojiang
  *
  */
-public class PeriodicalListActivity extends BaseActivity implements
+public class PeriodicalListActivity extends BaseImageActivity implements
 		OnItemClickListener {
 
 	public static final int GETFIRSTPAGE = 1;
@@ -52,16 +48,19 @@ public class PeriodicalListActivity extends BaseActivity implements
 	private ListView listview;
 	// private String editekey;
 	private int page = 1;
-	private EbookAdapter adapter;
+	private PeriodicalAdapter adapter;
 	private RelativeLayout noResult_rl;
 	private View title_bar;
 	// private ImageFetcher mImageFetcher;
 	private Map<String, String> gparams;
+	private String classid;
+	
 	public static HashMap<String, Boolean> favors = new HashMap<String, Boolean>();// 保持收藏状态，更新界面
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_periodical_list);
 		context = this;
 		searchCount = (TextView) findViewById(R.id.txt_total_esearch);
@@ -71,9 +70,12 @@ public class PeriodicalListActivity extends BaseActivity implements
 
 		title_bar = findViewById(R.id.head_bar);
 		TextView title = (TextView) title_bar.findViewById(R.id.txt_header);
-		title.setText(R.string.main_ebook);
+		title.setText(R.string.main_periodical);
 		ImageView back = (ImageView) title_bar
 				.findViewById(R.id.img_back_header);
+		
+		classid = getIntent().getStringExtra("classid");
+		
 		back.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -82,7 +84,7 @@ public class PeriodicalListActivity extends BaseActivity implements
 			}
 		});
 
-		getHomePage("明朝那些事", page, DEFAULT_COUNT, 0);
+		getHomePage(classid, page, DEFAULT_COUNT, 0);
 	}
 
 
@@ -93,19 +95,20 @@ public class PeriodicalListActivity extends BaseActivity implements
 			customProgressDialog.dismiss();
 			try {
 				// 获取返回记录数
-				int count = EBook.ebookCount(response);
-				if (count > 0) {
-					searchCount.setVisibility(View.VISIBLE);
-					searchCount.setText("共计搜索到" + count + "条记录");
-				} else {
-					searchCount.setVisibility(View.GONE);
-				}
+//				int count = EBook.ebookCount(response);
+//				if (count > 0) {
+//					searchCount.setVisibility(View.VISIBLE);
+//					searchCount.setText("共计搜索到" + count + "条记录");
+//				} else {
+//					searchCount.setVisibility(View.GONE);
+//				}
 				// JSONObject mj=new JSONObject(response);
-				List<EBook> lists = EBook.formList(response);
+				Periodical temp =Periodical.formObject(response,Task.TASK_PERIODICAL_SUBTYPE);
+				List<Periodical> lists = temp.qklist;
 				if (lists != null && !lists.isEmpty()) {
 					listview.setVisibility(View.VISIBLE);
 					noResult_rl.setVisibility(View.GONE);
-					adapter = new EbookAdapter(context, lists, mQueue);
+					adapter = new PeriodicalAdapter(context, lists,mImageFetcher);
 					listview.setAdapter(adapter);
 				} else {
 					listview.setVisibility(View.GONE);
@@ -127,7 +130,8 @@ public class PeriodicalListActivity extends BaseActivity implements
 			moreprocess.setVisibility(View.GONE);
 			try {
 				// JSONObject mj=new JSONObject(response);
-				List<EBook> lists = EBook.formList(response);
+				Periodical temp =Periodical.formObject(response,Task.TASK_PERIODICAL_SUBTYPE);
+				List<Periodical> lists = temp.qklist;
 				if (lists != null && !lists.isEmpty()) {
 					adapter.addMoreData(lists);
 				} else {
@@ -173,57 +177,15 @@ public class PeriodicalListActivity extends BaseActivity implements
 	 */
 	private void getHomePage(String key, int page, int count, int type) {
 		gparams = new HashMap<String, String>();
-		gparams.put("title", key);
-		gparams.put("curpage", "" + page);// 当前页数
-		gparams.put("perpage", "" + count);// 条数
-
+		gparams.put("classid", key);
 		if (type == 0) {
-			requestVolley(GlobleData.SERVER_URL + "/zk/search.aspx",
+			requestVolley(GlobleData.SERVER_URL + "/qk/search.aspx",
 					backlistener, Method.POST);
 		} else {
-			requestVolley(GlobleData.SERVER_URL + "/zk/search.aspx",
-					backlistenermore, Method.POST);
+			requestVolley(GlobleData.SERVER_URL + "/qk/search.aspx",
+					backlistenermore, Method.POST); 
 		}
 	}
-
-	// @Override
-	// public void refresh(Object... obj) {
-	// customProgressDialog.dismiss();
-	// hideKeybord();
-	// //显示
-	// int type = (Integer)obj[0];
-	//
-	// //判断收藏是否成功
-	// if(type == FAVOR){
-	// Result res = (Result) obj[1];
-	// if (res.getSuccess()) {
-	// Tool.ShowMessages(context, "收藏成功");
-	// }else{
-	// Tool.ShowMessages(context, "收藏失败");
-	// }
-	// return;
-	// }
-	//
-	// List<EBook> lists = (List<EBook>)obj[1];
-	// if(type == GETFIRSTPAGE ){
-	// if(lists!=null&&!lists.isEmpty()){
-	// listview.setVisibility(View.VISIBLE);
-	// noResult_rl.setVisibility(View.GONE);
-	// adapter = new EbookAdapter(context,lists,mImageFetcher);
-	// listview.setAdapter(adapter);
-	//
-	// }else{
-	// listview.setVisibility(View.GONE);
-	// noResult_rl.setVisibility(View.VISIBLE);
-	// }
-	// }else if(type == GETNEXTPAGE){
-	// if(lists!=null&&!lists.isEmpty()){
-	// adapter.addMoreData(lists);
-	// }else{
-	// Tool.ShowMessages(context, "没有更多内容可供加载");
-	// }
-	// }
-	// }
 	View moreprocess;
 
 	@Override
@@ -234,18 +196,19 @@ public class PeriodicalListActivity extends BaseActivity implements
 			moreprocess = arg1.findViewById(R.id.footer_progress);
 			moreprocess.setVisibility(View.VISIBLE);
 			// 请求网络更多
-			getHomePage("明朝那些事", page + 1,
+			getHomePage(classid, page + 1,
 					DEFAULT_COUNT, 1);
 			page = page + 1;
 		} else {
-			EBook book = adapter.getLists().get(positon);
-			context.startActivity(new Intent(context,PeriodicalContentActivity.class));
+			Periodical periodical = adapter.getLists().get(positon);
 			// Book book = lists.get(position-1);
-			// if(book!=null){
-			// Bundle bundle = new Bundle();
-			// bundle.putSerializable("book", book);
-			// _intent.putExtra("detaiinfo", bundle);
-			// startActivityForResult(_intent, 1);
+			 if(periodical!=null){
+			Intent _intent = new Intent(context,PeriodicalContentActivity.class);
+			Bundle bundle = new Bundle();
+			bundle.putSerializable("periodical", periodical);
+			_intent.putExtra("detaiinfo", bundle);
+		    context.startActivity(_intent);
+			 }
 		}
 	}
 

@@ -144,6 +144,15 @@
                android:text="2013年12期：目录"
                android:drawableRight="@drawable/icon_navigation_expand"
                />
+           <ProgressBar
+        android:id="@+id/footer_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+         android:layout_centerVertical="true"
+        android:layout_marginLeft="5.0dip"
+        android:layout_toRightOf="@+id/txt_year_month"
+        style="@android:style/Widget.ProgressBar.Small.Inverse"
+        android:visibility="gone" />
            <!--                指示箭头 -->
 
                 <ImageView
