@@ -7,6 +7,7 @@ import java.util.Map;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -56,6 +57,7 @@ public class CommentActivity extends BaseActivity implements
 	private View moreprocess;
 	private String keyid;// 书籍唯一id
 	private ImageView img;
+	public final static String TAG="CommentActivity";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -80,9 +82,8 @@ public class CommentActivity extends BaseActivity implements
 			describe = "无";
 		}
 
-		baseinfo_tv.setText("《" + dBook.getTitle() + "》\n"
-				+ getString(R.string.item_author) + dBook.getAuthor());
-		intro_tv.setText(getString(R.string.item_describe) + describe);
+		baseinfo_tv.setText(dBook.getTitle());
+		intro_tv.setText(getString(R.string.item_author) + dBook.getAuthor()+ "\n"+getString(R.string.item_describe) + describe);
 
 		if (!TextUtils.isEmpty(dBook.getCover_path())) {
 			//mImageFetcher.loadImage(dBook.getCover_path(), img);
@@ -317,6 +318,7 @@ public class CommentActivity extends BaseActivity implements
 			moreprocess = arg1.findViewById(R.id.footer_progress);
 			moreprocess.setVisibility(View.VISIBLE);
 			// 请求网络更多
+			Log.i(TAG, typeid+"--"+keyid);
 			getHomeComment(typeid, keyid, page + 1, Constant.DEFAULT_COUNT,
 					GETMORE);
 		}

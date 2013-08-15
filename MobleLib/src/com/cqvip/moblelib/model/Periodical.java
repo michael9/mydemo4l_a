@@ -102,7 +102,6 @@ public class Periodical implements Serializable {
 				pubcycle = json.getString("pubcycle");
 				size = json.getString("size");
 				yearsnumlist = formList(json.getJSONArray("yearsnumlist"));
-
 			} catch (JSONException e) {
 				e.printStackTrace();
 				throw new BookException(e);

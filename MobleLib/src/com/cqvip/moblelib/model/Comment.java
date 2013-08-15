@@ -20,7 +20,7 @@ import com.cqvip.moblelib.net.BookException;
 public class Comment {
 
 
-private String commentid;//id
+private String recordid;//id
 private String typeid;//类型
 private String keyid;//书籍id
 private String userid;//用户id
@@ -30,7 +30,7 @@ private Date commenttime;//评论时间
 	
 public Comment(JSONObject json) throws BookException{
 	try {
-	commentid = json.getString("commentid");
+		recordid = json.getString("recordid");
 	typeid = json.getString("typeid");
 	keyid = json.getString("keyid");
 	userid = json.getString("userid");
@@ -89,7 +89,7 @@ private Date parseDate(String str, String format) throws BookException {
 }
 
 	public String getCommentid() {
-	return commentid;
+	return recordid;
 }
 
 
@@ -132,7 +132,7 @@ public Date getCommenttime() {
 
 @Override
 public String toString() {
-	return "Comment [commentid=" + commentid + ", typeid=" + typeid
+	return "Comment [commentid=" + recordid + ", typeid=" + typeid
 			+ ", keyid=" + keyid + ", userid=" + userid + ", nickname="
 			+ nickname + ", contents=" + contents + ", commenttime="
 			+ commenttime + "]";

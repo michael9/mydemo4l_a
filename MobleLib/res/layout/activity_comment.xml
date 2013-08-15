@@ -11,41 +11,47 @@
     <RelativeLayout
         android:id="@+id/baseinfo_rl"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/head_bar" >
+        android:layout_height="118dp"
+        android:layout_below="@id/head_bar"
+        android:background="@drawable/linearlayout_shape2"
+        android:padding="1dp" >
 
         <ImageView
             android:id="@+id/book_big_img"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="82dp"
+            android:layout_height="118dp"
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="5dp"
-            android:layout_marginTop="5dp"
-            android:background="@android:color/white"
-            android:padding="2dp"
+            android:background="@android:color/transparent"
+            android:scaleType="centerCrop"
             android:src="@drawable/defaut_book" />
 
-        <TextView
-            android:id="@+id/baseinfo_tv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:layout_toRightOf="@id/book_big_img"
-            android:text="基本信息"
-            android:textSize="16dp" />
-
-        <TextView
-            android:id="@+id/intro_tv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/baseinfo_tv"
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
             android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
+            android:layout_marginRight="1dp"
             android:layout_toRightOf="@id/book_big_img"
-            android:ellipsize="end"
-            android:maxLines="3"
-            android:text="图书简介"
-            android:textSize="16dp" />
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/baseinfo_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:maxLines="2"
+                android:text="基本信息"
+                android:textSize="18.0sp" />
+
+            <TextView
+                android:id="@+id/intro_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="5"
+                android:text="图书简介"
+                android:textSize="14sp" />
+        </LinearLayout>
     </RelativeLayout>
 
     <com.cqvip.moblelib.view.DownFreshListView
@@ -54,8 +60,8 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/comment_ll"
         android:layout_below="@id/baseinfo_rl"
-        android:layout_centerHorizontal="true"/>
-
+        android:layout_centerHorizontal="true" />
+    <!--
     <LinearLayout
         android:id="@+id/comment_ll"
         android:layout_width="match_parent"
@@ -71,8 +77,7 @@
             android:id="@+id/comment_et"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="请在这里输入评论"
+            android:hint="您也来说两句吧"
             android:imeOptions="actionSend"
             android:maxLines="5"
             android:scrollbars="vertical" />
@@ -82,8 +87,66 @@
             style="@style/ButtonAppTheme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="提交" 
-            android:textStyle="bold"/>
+            android:text="提交"
+            android:textStyle="bold" />
+    </LinearLayout>
+    -->
+
+    <LinearLayout
+        android:id="@+id/comment_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="5dp"
+        android:background="@color/textcolor_hint"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10.0dip"
+            android:layout_marginLeft="10.0dip"
+            android:layout_marginTop="10.0dip"
+            android:layout_weight="1.0"
+            android:background="@drawable/input_box"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <EditText
+                android:id="@+id/comment_et"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dip"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="你也来说两句吧"
+                android:maxLines="3"
+                android:imeOptions="actionSend"
+                android:scrollbars="vertical"
+                android:paddingBottom="6.0dip"
+                android:paddingTop="6.0dip"
+                android:textColorHint="@color/textcolor_hint" />
+
+            <Button
+                android:id="@+id/delete_com"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8.0dip"
+                android:background="@drawable/delete_comments"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/commit_btn"
+            style="@style/ButtonAppTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5.0dip"
+            android:layout_marginRight="5.0dip"
+            android:text="提交"
+            android:textColor="#ffffffff" />
     </LinearLayout>
 
 </RelativeLayout>
