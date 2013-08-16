@@ -33,7 +33,9 @@ public class Favorite implements Serializable{
 	private String favoritekeyid;// 索书号
 	private String typeid;// 书类型
 	private String favoritetime;// 收藏时间
-
+	
+	public int recordcount;//条数
+	public Map<Integer, List<Favorite>> map;
 	public String getTypeid() {
 		return typeid;
 	}
@@ -42,6 +44,10 @@ public class Favorite implements Serializable{
 		return favoritekeyid;
 	}
 
+	public Favorite() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	public Favorite(JSONObject jsonObject) throws BookException {
 		try {
 			favoritekeyid = jsonObject.getString("favoritekeyid");
@@ -104,9 +110,11 @@ public class Favorite implements Serializable{
 		return Integer.parseInt(str);
 	}
 
-	public static Map<Integer, List<Favorite>> formList(int task, String result)
+	public static Favorite formList(int task, String result)
 			throws BookException {
+		Favorite favorite=new Favorite();
 		Map<Integer, List<Favorite>> map = new HashMap<Integer, List<Favorite>>();
+		favorite.map=map;
 		List<Favorite> favor_sz = null;
 		List<Favorite> favor_zk = null;
 		switch (task) {
@@ -116,7 +124,7 @@ public class Favorite implements Serializable{
 				if (!json.getBoolean("success")) {
 					return null;
 				}
-				if (json.getInt("recordcount") > 0) {
+				if ((favorite.recordcount=json.getInt("recordcount")) > 0) {
 					JSONArray ary = json.getJSONArray("grouplist");
 					int count = ary.length();
 					if (count <= 0) {
@@ -145,7 +153,7 @@ public class Favorite implements Serializable{
 					}
 					map.put(GlobleData.BOOK_SZ_TYPE, favor_sz);
 					map.put(GlobleData.BOOK_ZK_TYPE, favor_zk);
-					return map;
+					return favorite;
 				}
 			} catch (JSONException e) {
 				e.printStackTrace();
@@ -158,7 +166,7 @@ public class Favorite implements Serializable{
 				if (!json.getBoolean("success")) {
 					return null;
 				}
-				if (json.getInt("recordcount") > 0) {
+				if ((favorite.recordcount=json.getInt("recordcount")) > 0) {
 					if(hasObject(json,"zkbooks")){
 					JSONArray ary = json.getJSONArray("zkbooks");
 					int count = ary.length();
@@ -191,7 +199,7 @@ public class Favorite implements Serializable{
 					}else{
 						map.put(GlobleData.BOOK_SZ_TYPE, null);
 					}
-					return map;
+					return favorite;
 				}
 			} catch (JSONException e) {
 				e.printStackTrace();

@@ -81,6 +81,8 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 	ArrayList<Favorite> arrayList_zk = new ArrayList<Favorite>();
 	ArrayList<Favorite> arrayList_sz = new ArrayList<Favorite>();
 	private int listviewpagetag=GlobleData.BOOK_SZ_TYPE;
+	
+	private int sz_count,zk_count; //ÌõÊý
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -187,8 +189,10 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 			// TODO Auto-generated method stub
 			customProgressDialog.dismiss();
 			try {
-				arrayLists_sz = Favorite
-						.formList(Task.TASK_GET_FAVOR, response);
+				Favorite favorite=Favorite.formList(Task.TASK_GET_FAVOR, response);
+				arrayLists_sz = favorite.map;
+				sz_count=favorite.recordcount;
+				mSectionsPagerAdapter.notifyDataSetChanged();
 			} catch (BookException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -214,8 +218,10 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 			// TODO Auto-generated method stub
 			customProgressDialog.dismiss();
 			try {
-				arrayLists_zk = Favorite
-						.formList(Task.TASK_GET_FAVOR, response);
+				Favorite favorite=Favorite.formList(Task.TASK_GET_FAVOR, response);
+				arrayLists_zk = favorite.map;
+				zk_count=favorite.recordcount;
+				mSectionsPagerAdapter.notifyDataSetChanged();
 			} catch (BookException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -239,8 +245,8 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 		@Override
 		public void onResponse(String response) {
 			try {
-				arrayLists_sz = Favorite
-						.formList(Task.TASK_GET_FAVOR, response);
+				Favorite favorite=Favorite.formList(Task.TASK_GET_FAVOR, response);
+				arrayLists_sz = favorite.map;
 			} catch (BookException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -370,15 +376,13 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 
 		@Override
 		public CharSequence getPageTitle(int position) {
-			Log.i("getPageTitle", "getPageTitle");
+			//Log.i("getPageTitle", "getPageTitle");
 			Locale l = Locale.getDefault();
 			switch (position) {
 			case 0:
-				Log.i("MyFavorActivity", "SectionsPagerAdapter_getPageTitle_0");
-				return getString(R.string.title_section1).toUpperCase(l);
+				return (getString(R.string.title_section1)+"("+sz_count+")").toUpperCase(l);
 			case 1:
-				Log.i("MyFavorActivity", "SectionsPagerAdapter_getPageTitle_1");
-				return getString(R.string.title_section2).toUpperCase(l);
+				return (getString(R.string.title_section2)+"("+zk_count+")").toUpperCase(l);
 			}
 			return null;
 		}
