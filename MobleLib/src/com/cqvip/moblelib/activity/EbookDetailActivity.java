@@ -92,7 +92,6 @@ public class EbookDetailActivity extends BaseActivity {
 
 		btn_ebook_detail_download.setVisibility(View.INVISIBLE);
 		 downloadManager = (DownloadManager)getSystemService(DOWNLOAD_SERVICE);
-		
 		if (dBook.getLngid() != null) {
 			getLocalinfo(dBook.getLngid());
 		}
@@ -298,8 +297,15 @@ public class EbookDetailActivity extends BaseActivity {
 		if(Build.VERSION.SDK_INT>=11)
 		request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
 		request.setVisibleInDownloadsUi(false);
-		request.setMimeType("application/com.cqvip.download.file");
-		downloadId = downloadManager.enqueue(request);
+		request.setMimeType("application/pdf");
+		try {
+			downloadId = downloadManager.enqueue(request);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Tool.ShowMessages(context, getString(R.string.tips_fail_download));
+			return;
+		}
 		Tool.ShowMessages(context, getString(R.string.tips_begin_download));
 	}
 	/**
