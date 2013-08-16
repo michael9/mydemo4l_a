@@ -29,5 +29,7 @@
     <drawable name="a30" >#30ffffff</drawable>
     
     <color name="textcolor_hint">#80616161</color>
+     <color name="grid_state_pressed">#BB7dbcd3</color>
+    <color name="grid_state_focused">#777dbcd3</color>
     
 </resources>

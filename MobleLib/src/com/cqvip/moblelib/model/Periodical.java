@@ -155,7 +155,33 @@ public class Periodical implements Serializable {
 			} catch (JSONException e) {
 				throw new BookException(e);
 			}
-		}
+		}else if (sort == Task.TASK_PERIODICAL_SPECIAL) {
+			try {
+				JSONObject json = new JSONObject(str);
+				if (!json.getBoolean("success")) {
+					return null;
+				}
+				
+				JSONArray ary = json.getJSONArray("classlist");
+				 int count = ary.length();
+				 if(count <=0){
+					 return null;
+				 }
+				 Periodical periodical=new Periodical();
+				 periodical.qklist=new ArrayList<Periodical>();
+				 for(int i = 0;i<count;i++){
+					 
+					 JSONArray array = ary.getJSONObject(i).getJSONArray("qklist");
+					 int tcount = array.length();
+					 for(int j = 0;j<tcount;j++){
+					 periodical.qklist.add(new Periodical(array.getJSONObject(j), Task.TASK_PERIODICAL_SUBTYPE));
+					 }
+				 }
+				 return periodical;
+			} catch (JSONException e) {
+				throw new BookException(e);
+			}
+		}  
 		return null;
 	}
 

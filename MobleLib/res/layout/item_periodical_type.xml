@@ -11,6 +11,7 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="27dp"
+        android:visibility="gone"
         android:src="@drawable/icon_add" />
 
       <TextView
@@ -19,6 +20,10 @@
           android:layout_height="wrap_content"
           android:layout_alignParentLeft="true"
           android:layout_centerVertical="true"
+          android:paddingLeft="5.0dip"
+		android:paddingTop="5.0dip"
+		android:paddingBottom="5.0dip"
+        android:textSize="18sp"
           android:text="预防医学、卫生学" />
 
       <TextView

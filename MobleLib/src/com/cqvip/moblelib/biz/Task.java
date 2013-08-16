@@ -48,6 +48,7 @@ public class Task {
 	public static final int TASK_PERIODICAL_TYPE= 42;//获取期刊分类列表
 	public static final int TASK_PERIODICAL_SUBTYPE= 43;//获取期刊分类下的期刊列表
 	public static final int TASK_PERIODICAL_DETAIL= 44;//获取期期刊详细
+	public static final int TASK_PERIODICAL_SPECIAL= 45;//获取特别推荐
 	
 	
 	

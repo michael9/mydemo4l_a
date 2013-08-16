@@ -33,6 +33,11 @@ import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.fragment.basefragment.BaseAbstractFragment;
 import com.cqvip.moblelib.model.ShortBook;
 
+/**
+ * 分类列表 ，医药，工程，社会...
+ * @author luojiang
+ *
+ */
 public class PeriodicalTypeFragment extends BaseAbstractFragment {
 
 	private ListView listview;

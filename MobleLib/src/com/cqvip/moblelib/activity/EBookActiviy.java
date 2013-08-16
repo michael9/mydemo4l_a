@@ -71,7 +71,7 @@ public class EBookActiviy extends BaseActivity {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				
-				startActivity(new Intent(EBookActiviy.this,PeriodicalCenterActivity.class));
+				startActivity(new Intent(EBookActiviy.this,PeriodicalClassfyActivity.class));
 				
 			}
 		
