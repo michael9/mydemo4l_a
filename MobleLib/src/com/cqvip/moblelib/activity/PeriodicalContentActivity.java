@@ -179,6 +179,7 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 		gch = perio.getGch();
 		gparams = new HashMap<String, String>();
 		gparams.put("gch", gch);
+		customProgressDialog.show();
 		requestVolley(GlobleData.SERVER_URL + "/qk/detail.aspx",
 				backlistener, Method.POST);
 	}
