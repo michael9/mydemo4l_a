@@ -26,32 +26,33 @@
             android:scaleType="centerCrop"
             android:src="@drawable/defaut_book" />
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="1dp"
-            android:layout_toRightOf="@id/book_big_img"
-            android:orientation="vertical" >
+            android:layout_toRightOf="@id/book_big_img" >
 
-            <TextView
-                android:id="@+id/baseinfo_tv"
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:maxLines="2"
-                android:text="基本信息"
-                android:textSize="18.0sp" />
+                android:orientation="vertical" >
 
-            <TextView
-                android:id="@+id/intro_tv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:maxLines="5"
-                android:text="图书简介"
-                android:textSize="14sp" />
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/baseinfo_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="基本信息"
+                    android:textSize="18.0sp" />
+
+                <TextView
+                    android:id="@+id/intro_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="图书简介"
+                    android:textSize="14sp" />
+            </LinearLayout>
+        </ScrollView>
     </RelativeLayout>
 
     <com.cqvip.moblelib.view.DownFreshListView
@@ -61,43 +62,12 @@
         android:layout_above="@+id/comment_ll"
         android:layout_below="@id/baseinfo_rl"
         android:layout_centerHorizontal="true" />
-    <!--
-    <LinearLayout
-        android:id="@+id/comment_ll"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="10dp"
-        android:gravity="bottom"
-        android:orientation="horizontal" >
-
-        <EditText
-            android:id="@+id/comment_et"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="您也来说两句吧"
-            android:imeOptions="actionSend"
-            android:maxLines="5"
-            android:scrollbars="vertical" />
-
-        <Button
-            android:id="@+id/commit_btn"
-            style="@style/ButtonAppTheme"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="提交"
-            android:textStyle="bold" />
-    </LinearLayout>
-    -->
 
     <LinearLayout
         android:id="@+id/comment_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="5dp"
         android:background="@color/textcolor_hint"
         android:gravity="center"
         android:orientation="horizontal" >
@@ -117,16 +87,16 @@
                 android:id="@+id/comment_et"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="2dip"
                 android:layout_marginRight="5dip"
                 android:layout_weight="1"
                 android:background="@null"
                 android:gravity="center_vertical"
                 android:hint="你也来说两句吧"
                 android:maxLines="3"
-                android:imeOptions="actionSend"
-                android:scrollbars="vertical"
                 android:paddingBottom="6.0dip"
                 android:paddingTop="6.0dip"
+                android:scrollbars="vertical"
                 android:textColorHint="@color/textcolor_hint" />
 
             <Button
@@ -143,10 +113,8 @@
             style="@style/ButtonAppTheme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5.0dip"
-            android:layout_marginRight="5.0dip"
             android:text="提交"
-            android:textColor="#ffffffff" />
+            android:textColor="@color/white" />
     </LinearLayout>
 
 </RelativeLayout>

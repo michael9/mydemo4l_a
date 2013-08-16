@@ -46,7 +46,7 @@ public class CommentActivity extends BaseActivity implements
 
 	private TextView baseinfo_tv, intro_tv;
 	private EditText comment_et;
-	private Button commit_btn;
+	private Button commit_btn,delete_com;
 	private Book dBook;
 	private DownFreshListView listview;
 	private int typeid;
@@ -65,7 +65,6 @@ public class CommentActivity extends BaseActivity implements
 		setContentView(R.layout.activity_comment);
 		context = this;
 		init();
-		commit_btn.setOnClickListener(this);
 
 		// 获取书籍详细对象
 		Bundle bundle = getIntent().getBundleExtra("detaiinfo");
@@ -104,6 +103,7 @@ public class CommentActivity extends BaseActivity implements
 		baseinfo_tv = (TextView) findViewById(R.id.baseinfo_tv);
 		intro_tv = (TextView) findViewById(R.id.intro_tv);
 		commit_btn = (Button) findViewById(R.id.commit_btn);
+		delete_com= (Button) findViewById(R.id.delete_com);
 		comment_et = (EditText) findViewById(R.id.comment_et);
 		TextView title = (TextView) findViewById(R.id.txt_header);
 		title.setText(R.string.book_comment);
@@ -111,6 +111,10 @@ public class CommentActivity extends BaseActivity implements
 		adapter = new CommentItemAdapter(context, null);
 		// 加载数据
 		// getHomeComment(1,Constant.DEFAULT_COUNT);
+		
+		commit_btn.setOnClickListener(this);
+		delete_com.setOnClickListener(this);
+		
 		img = (ImageView) findViewById(R.id.book_big_img);
 
 		back.setOnClickListener(new View.OnClickListener() {
@@ -153,11 +157,17 @@ public class CommentActivity extends BaseActivity implements
 
 	@Override
 	public void onClick(View v) {
-		String info = comment_et.getText().toString().trim();
-		if (TextUtils.isEmpty(info)) {
+		if(v.getId()==R.id.delete_com){
+			comment_et.setText("");
+			return;
+		}
+		
+		String info = comment_et.getText().toString();
+		if (TextUtils.isEmpty(info)||info.trim().isEmpty()) {
 			Tool.ShowMessages(this, "评论内容不能空");
 			return;
 		}
+
 		if (dBook != null) {
 			HashMap<String, String> map = new HashMap<String, String>();
 			map.put("libid", GlobleData.LIBIRY_ID);

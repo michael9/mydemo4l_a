@@ -81,6 +81,8 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 	ArrayList<Favorite> arrayList_zk = new ArrayList<Favorite>();
 	ArrayList<Favorite> arrayList_sz = new ArrayList<Favorite>();
 	private int listviewpagetag = GlobleData.BOOK_SZ_TYPE;
+	
+	private int sz_count,zk_count; //ÌõÊý
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -151,8 +153,10 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 			// TODO Auto-generated method stub
 			customProgressDialog.dismiss();
 			try {
-				arrayLists_sz = Favorite.formList(Task.TASK_COMMENT_BOOKLIST,
-						response);
+				Favorite favorite=Favorite.formList(Task.TASK_COMMENT_BOOKLIST, response);
+				arrayLists_sz = favorite.map;
+				sz_count=favorite.recordcount;
+				mSectionsPagerAdapter.notifyDataSetChanged();
 			} catch (BookException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -175,8 +179,10 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 			// TODO Auto-generated method stub
 			customProgressDialog.dismiss();
 			try {
-				arrayLists_zk = Favorite.formList(Task.TASK_COMMENT_BOOKLIST,
-						response);
+				Favorite favorite=Favorite.formList(Task.TASK_COMMENT_BOOKLIST, response);
+				arrayLists_zk = favorite.map;
+				zk_count=favorite.recordcount;
+				mSectionsPagerAdapter.notifyDataSetChanged();
 			} catch (BookException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -197,8 +203,9 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 		@Override
 		public void onResponse(String response) {
 			try {
-				arrayLists_sz = Favorite.formList(Task.TASK_COMMENT_BOOKLIST,
-						response);
+				Favorite favorite=Favorite.formList(Task.TASK_COMMENT_BOOKLIST, response);
+				arrayLists_sz = favorite.map;
+				sz_count=favorite.recordcount;
 			} catch (BookException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -293,14 +300,13 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 
 		@Override
 		public CharSequence getPageTitle(int position) {
-			Log.i("getPageTitle", "getPageTitle_"+position);
+			//Log.i("getPageTitle", "getPageTitle_"+position);
 			Locale l = Locale.getDefault();
-
 			switch (position) {
 			case 0:
-				return getString(R.string.title_section1).toUpperCase(l);
+				return (getString(R.string.title_section1)+"("+sz_count+")").toUpperCase(l);
 			case 1:
-				return getString(R.string.title_section2).toUpperCase(l);
+				return (getString(R.string.title_section2)+"("+zk_count+")").toUpperCase(l);
 			}
 			return null;
 		}

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="white">#00000000</color>
-    <color name="black">#FFFFFFFF</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="black">#FF000000</color>
     <color name="divider_color">#a9a9a9</color>
     <color name="green_light">#FF7C953C</color>
     <!-- scan -->
