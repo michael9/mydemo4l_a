@@ -10,5 +10,6 @@
     <dimen name="search_detail_txtsize_btn">16sp</dimen>
     <dimen name="image_thumbnail_size">100dp</dimen>
     <dimen name="image_thumbnail_spacing">1dp</dimen>
+    <dimen name="gridview_vertical_spacing">5dp</dimen>
 
 </resources>

@@ -47,10 +47,9 @@ public class AdvancedBookAdapter extends BaseAdapter {
 	@Override
 	public int getCount() {
       if(lists!=null){
-				
-				return lists.size()+1;
+				return lists.size();
 			}
-			return 1;
+      return 0;
 		}
 
 	@Override
@@ -62,11 +61,7 @@ public class AdvancedBookAdapter extends BaseAdapter {
 	 */
 	@Override
 	public long getItemId(int position) {
-		if((this.getCount()-1)>0&&position < (this.getCount()-1)){
-			return position;
-		}else{
-			return -2;
-		}
+      return position;
 	}
 	/**
 	 * 增加更多数据
@@ -89,11 +84,6 @@ public class AdvancedBookAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		final ViewHolder holder ;
-		//更多
-		if (position == this.getCount() - 1) {
-			convertView = LayoutInflater.from(context).inflate(R.layout.moreitemsview, null);
-			return convertView;
-		}
 		if(convertView==null||convertView.findViewById(R.id.linemore) != null){
 			convertView=LayoutInflater.from(context).inflate(R.layout.item_advanced_book, null);
 			holder = new ViewHolder();
@@ -110,27 +100,6 @@ public class AdvancedBookAdapter extends BaseAdapter {
 			ImageListener listener = ImageLoader.getImageListener(holder.img,
 					R.drawable.defaut_book, R.drawable.defaut_book);
 			mImageLoader.get(book.getDate(), listener);
-//	      //图片
-//	        if(!TextUtils.isEmpty(book.getDate())){
-//	        	fetch.loadImage(book.getDate(), holder.img);
-//	        	final String bigimg = book.getSucesss();
-//	        	holder.img.setOnClickListener(new View.OnClickListener() {
-//	        		
-//	        		@Override
-//	        		public void onClick(View v) {
-//	        			if(TextUtils.isEmpty(bigimg)){
-//	        				return;
-//	        			}
-//	        			Intent  intent = new Intent(context,BigImgActivity.class);
-//	        			intent.putExtra("bigurl", bigimg);
-//	        			context.startActivity(intent);
-//	        			
-//	        		}
-//	        	});
-//	        }else{
-//	        	holder.img.setBackgroundResource(R.drawable.defaut_book);
-//	        }
-	        //分享
 		return convertView;
 	}
 

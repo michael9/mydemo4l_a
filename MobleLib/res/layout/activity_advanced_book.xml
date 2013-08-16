@@ -4,20 +4,21 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_list"
     tools:context=".AdvancedBookActivity" >
-    
-     <include
+
+    <include
         android:id="@+id/head_bar"
         layout="@layout/header" />
 
-    <com.cqvip.moblelib.view.DownFreshListView
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginBottom="20dp"
+    <GridView
+        android:id="@+id/gridview_abook"
+        style="@style/PhotoGridLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:layout_below="@id/head_bar"
-        android:id="@+id/listview_abook"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="" />
+        android:horizontalSpacing="@dimen/image_thumbnail_spacing"
+        android:numColumns="3"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="@dimen/gridview_vertical_spacing">
+    </GridView>
 
 </RelativeLayout>
