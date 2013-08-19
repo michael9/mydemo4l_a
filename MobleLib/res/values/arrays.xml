@@ -9,5 +9,7 @@
     </string-array>
     <string-array name="ebooktype">
         <item>维普中刊</item>
+        <item>超星图书</item>
+        <item>方正图书</item>
     </string-array>
 </resources>

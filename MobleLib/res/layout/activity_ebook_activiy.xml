@@ -59,6 +59,8 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8.0dip"
+            android:divider="@color/divider_color"
+            android:dividerHeight="1dp"
             android:background="@drawable/linearlayout_shape1" >
         </ListView>
     </LinearLayout>
