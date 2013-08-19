@@ -51,6 +51,7 @@ public class SpecialPeriodicalFragment extends BaseAbstractFragment implements A
 		gridView = (GridView) rootView.findViewById(R.id.gridView);
 		gridView.setOnItemClickListener(this);
 		//发送请求获取图片机url
+		customProgressDialog.show();
 		requestVolley(GlobleData.SERVER_URL
 				+ "/qk/newlist.aspx", backlistener, null,
 				Method.GET);

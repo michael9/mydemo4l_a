@@ -11,8 +11,8 @@ import com.cqvip.moblelib.R;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.view.CustomProgressDialog;
 
-public class BaseAbstractFragment extends Fragment{
 
+public class BaseAbstractFragment extends Fragment{
 	protected RequestQueue mQueue;
 	protected ImageFetcher mImageFetcher;
 	protected CustomProgressDialog customProgressDialog;

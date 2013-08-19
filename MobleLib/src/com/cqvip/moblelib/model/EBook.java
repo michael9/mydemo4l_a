@@ -169,6 +169,7 @@ public class EBook implements Serializable{
 		    				imgurl = json.getString("imgurl");
 		    				isfavorite = json.getBoolean("isfavorite");
 		    			} catch (JSONException e) {
+		    				e.printStackTrace();
 		    				throw new BookException(e);
 		    			}
 		    
@@ -216,6 +217,7 @@ public class EBook implements Serializable{
 			    	 return null;
 			     }
 			} catch (JSONException e) {
+				e.printStackTrace();
 				throw new BookException(e);
 			}
 			

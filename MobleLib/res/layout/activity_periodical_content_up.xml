@@ -47,7 +47,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:singleLine="true"
-                    android:text="编程的艺术"
+                    android:text=""
                     android:textColor="@color/txt_black"
                     android:textSize="18.0sp"
                     android:textStyle="bold" />
@@ -57,7 +57,7 @@
                     android:id="@+id/periodical_host1_txt"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="主管单位：中国船舶重工集团公司"
+                    android:text="主管单位："
                     android:textColor="@color/txt_black"
                     android:textSize="@dimen/search_detail_txtsize_tv" />
                 <!-- address -->
@@ -66,7 +66,7 @@
                     android:id="@+id/periodical_host2_txt"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="主办单位：洛阳船舶材料研究所"
+                    android:text=""
                     android:textColor="@color/txt_black"
                     android:textSize="@dimen/search_detail_txtsize_tv" />
                 <!-- time -->
@@ -75,7 +75,7 @@
                     android:id="@+id/periodical_author_txt"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="主　　编：王其红"
+                    android:text="主　　编："
                     android:textColor="@color/txt_black"
                     android:textSize="@dimen/search_detail_txtsize_tv" />
                 <!-- page -->
@@ -85,7 +85,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:maxLines="2"
-                    android:text="刊期/开本/创刊时间：双月刊，16开，1979-01-01 "
+                    android:text="刊期/开本："
                     android:textColor="@color/txt_black"
                     android:textSize="@dimen/search_detail_txtsize_tv" />
                 <!-- size -->
@@ -94,14 +94,14 @@
                     android:id="@+id/periodical_price_txt"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="单价/定价：20.00，120.00"
+                    android:text=""
                     android:textColor="@color/txt_black"
                     android:textSize="@dimen/search_detail_txtsize_tv" />
                  <TextView
                     android:id="@+id/periodical_num_txt"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="国内/国际刊号：41-1149/TB,1003-1545"
+                    android:text=""
                     android:textColor="@color/txt_black"
                     android:textSize="@dimen/search_detail_txtsize_tv" />
             </LinearLayout>
@@ -111,8 +111,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/detail_up_rl"
-                android:text="本刊创刊于1979年，曾用刊名是《国外舰船技术：材料类》（月刊），1986年更名为《材料开发与应用》（双月刊）。是由中国船舶重工集团公司主管、中国造船工程学会船舶材料学术委员会和洛阳船舶材料研究所共同主办的材料学科技术性刊物。"
+                android:text="简介："
                 android:textColor="@color/txt_black"
+                android:padding="2.0dip"
                 android:textSize="@dimen/search_detail_txtsize_btn" />
     </RelativeLayout>
   <RelativeLayout android:id="@+id/rlFromAndDate" 

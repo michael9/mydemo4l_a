@@ -79,6 +79,8 @@ public class GlobleData {
 	public static final int NATURE_TYPEID = 64;//自然科学
 	public static final int FORESTS_TYPEID = 66;//农林牧鱼
 	
+	public static final int BIG_PERPAGE = 500;//一次性获取500条记录
+	
 	
 	
 	
