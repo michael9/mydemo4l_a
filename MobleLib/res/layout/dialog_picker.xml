@@ -9,8 +9,9 @@
 	<TextView
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_marginTop="24dp"
-		android:layout_gravity="center_horizontal"
+		android:layout_gravity="center_horizontal|top"
+		android:layout_marginTop="10.0dip"
+		android:gravity="top"
 		android:textSize="20sp"
 		android:text="请选择期刊期数"/>
 	
@@ -27,7 +28,7 @@
    <com.cqvip.moblelib.view.picker.WheelView android:id="@+id/country"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:layout_gravity="center_vertical"
+        android:layout_gravity="top"
         android:layout_weight="1"/>
 	
 	<com.cqvip.moblelib.view.picker.WheelView android:id="@+id/city"
@@ -45,6 +46,9 @@
 		android:layout_gravity="center_horizontal"
 		android:layout_marginTop="18dp"
 		android:textSize="18sp"
-		android:text="2012年第6期" />  
+		android:text="2012年第6期" 
+		android:padding="5.0dip"
+		android:layout_marginBottom="5.0dip"
+		/>  
 
 </LinearLayout>

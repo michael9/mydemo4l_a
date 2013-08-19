@@ -116,7 +116,7 @@
     <string name="title_perio_publisher">主办单位：</string>
     <string name="title_perio_chiefeditor">主　　编：</string>
     <string name="title_perio_type">期刊/开本：</string>
-    <string name="title_perio_type">期刊/开本：</string>
+    <string name="title_perio_remark">简介：</string>
 
     <!-- 异常提示 -->
     <string name="loginfail">登录失败</string>

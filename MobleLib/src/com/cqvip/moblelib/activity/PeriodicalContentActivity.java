@@ -48,7 +48,7 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 	private ListView listview;
 	private Context context;
 	private TextView txt_date;
-	private TextView title,directordept,publisher,chiefedit,pubcycle,price,num;
+	private TextView title,directordept,publisher,chiefedit,pubcycle,price,num,remark;
 	private View upView;
 	private ImageView img,img_back;
 	private String gch;
@@ -76,7 +76,7 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 		initdate();
 	
 		setListener();
-		
+		listview.setAdapter(null);
 		txt_date.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -119,7 +119,8 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 					});
 			        city.addChangingListener(new OnWheelChangedListener() {
 						public void onChanged(WheelView wheel, int oldValue, int newValue) {
-							mMonth =  newValue+1+"";
+							//mMonth =  newValue+1+"";
+							mMonth =  yearlist.get(yaer_record).getNum()[newValue];
 							confirm.setText(mYear+"年第"+mMonth+"期");
 							//记录下位置
 							month_record = newValue;
@@ -145,6 +146,7 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 							gparams.put("gch", gch);
 							gparams.put("years",mYear);
 							gparams.put("num", mMonth);
+							gparams.put("perpage",GlobleData.BIG_PERPAGE+"");
 							requestVolley(GlobleData.SERVER_URL + "/zk/search.aspx",
 									backlistener_content, Method.POST);
 							progress.setVisibility(View.VISIBLE);
@@ -201,6 +203,7 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 		pubcycle = (TextView)findViewById(R.id.periodical_time_txt);
 		price = (TextView)findViewById(R.id.periodical_price_txt);
 		num = (TextView)findViewById(R.id.periodical_num_txt);
+		remark = (TextView)findViewById(R.id.periodical_content_abst);
 		//期刊日期
 		txt_date = (TextView) findViewById(R.id.txt_year_month);
 		//图片
@@ -221,6 +224,7 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
+				if(adapter!=null&&adapter.getLists()!=null){
 				EBook book = adapter.getLists().get(position);
 				if (book != null) {
 					Intent _intent = new Intent(context, EbookDetailActivity.class);
@@ -229,6 +233,7 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 					_intent.putExtra("detaiinfo", bundle);
 					startActivity(_intent);
 				}
+			  }
 			}
 		});
 		
@@ -237,9 +242,9 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 		
 		directordept.setText(getResources().getString(R.string.title_perio_chiefdept)+periodical.getDirectordept());
 		publisher.setText(getResources().getString(R.string.title_perio_publisher)+periodical.getPublisher());
-		chiefedit.setText(getResources().getString(R.string.title_perio_chiefeditor)+periodical.getChiefeditor()==null?"":periodical.getChiefeditor());
+		chiefedit.setText(getResources().getString(R.string.title_perio_chiefeditor)+(periodical.getChiefeditor()==null?"":periodical.getChiefeditor()));
 		pubcycle.setText(getResources().getString(R.string.title_perio_type)+periodical.getPubcycle()+","+periodical.getSize());
-		
+		remark.setText(getResources().getString(R.string.title_perio_remark)+periodical.getRemark());
 		
 		//初始化期刊日期
 		year = yearlist.get(0).getYear();
@@ -281,6 +286,7 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 				gparams.put("gch", periodical.getGch());
 				gparams.put("years", yearlist.get(0).getYear());
 				gparams.put("num",  tmpary[tmpary.length-1]);
+				gparams.put("perpage",GlobleData.BIG_PERPAGE+"");
 				requestVolley(GlobleData.SERVER_URL + "/zk/search.aspx",
 						backlistener_content, Method.POST);
 				progress.setVisibility(View.VISIBLE);
