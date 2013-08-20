@@ -90,7 +90,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 	private ArrayList<int[]> _lists = new ArrayList<int[]>();// 获取下载状态
 
 	// private ArrayList<int[]> _listsloaded= new ArrayList<int[]>();//已下载id
-
+    final static String TAG="DownLoadManagerActivity";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -644,6 +644,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 						.setOnClickListener(new View.OnClickListener() {
 							@Override
 							public void onClick(View v) {
+								Log.i(TAG, "onClick");
 								if (mebooks_list != null
 										&& !mebooks_list.isEmpty()) {
 									try {

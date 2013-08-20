@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.ImageLoader.ImageListener;
+import com.android.volley.toolbox.NetworkImageView;
 import com.cqvip.moblelib.R;
 import com.cqvip.moblelib.model.Book;
 import com.cqvip.moblelib.model.EBook;
@@ -22,8 +24,9 @@ import com.cqvip.utils.BitmapCache;
 public class EbookAdapter extends BaseAdapter {
 	private Context context;
 	private List<EBook> lists;
-	private RequestQueue mQueue;
-	private List<ImageLoader>illist;
+//	private RequestQueue mQueue;
+//	private List<ImageLoader>illist;
+	 private ImageLoader mImageLoader;
 
 	public EbookAdapter(Context context) {
 		this.context = context;
@@ -34,15 +37,10 @@ public class EbookAdapter extends BaseAdapter {
 		this.lists = lists;
 	}
 
-	public EbookAdapter(Context context, List<EBook> lists, RequestQueue mQueue) {
+	public EbookAdapter(Context context, List<EBook> lists, ImageLoader imageLoader) {
 		this.context = context;
 		this.lists = lists;
-		illist=new ArrayList<ImageLoader>();
-		for(EBook mb:lists)
-		{
-			illist.add(new ImageLoader(mQueue, new BitmapCache()));
-		}
-		this.mQueue = mQueue;
+        this.mImageLoader=imageLoader;
 	}
 
 	public List<EBook> getLists() {
@@ -95,7 +93,7 @@ public class EbookAdapter extends BaseAdapter {
 		TextView publisher;// 来源,时间和期数
 		// LinearLayout l_abst;//时间和期数
 		TextView u_abstract;// 简介
-		ImageView img;// 时间图片 不用修改
+		NetworkImageView  img;// 时间图片 不用修改
 		TextView u_page;// 页数
 		TextView type;// 格式
 
@@ -127,7 +125,9 @@ public class EbookAdapter extends BaseAdapter {
 					.findViewById(R.id.re_addr_txt);
 			holder.u_page = (TextView) convertView
 					.findViewById(R.id.re_time_txt);
-			holder.img = (ImageView) convertView.findViewById(R.id.re_book_img);
+			holder.img = (NetworkImageView) convertView.findViewById(R.id.re_book_img);
+			holder.img.setDefaultImageResId(R.drawable.defaut_book);
+			holder.img.setErrorImageResId(R.drawable.defaut_book);
 			holder.u_abstract = (TextView) convertView
 					.findViewById(R.id.txt_abst);
 			holder.type = (TextView) convertView.findViewById(R.id.re_hot_txt);
@@ -160,12 +160,12 @@ public class EbookAdapter extends BaseAdapter {
 		holder.u_abstract.setText(describe + book.getRemark_c());
 		// holder.favorite.setVisibility(View.VISIBLE);
 		
-		if (lists.size()>illist.size()) {
-			illist.add( new ImageLoader(mQueue, new BitmapCache()));
-		}
-		ImageListener listener = ImageLoader.getImageListener(holder.img,
-				R.drawable.defaut_book, R.drawable.defaut_book);
-		(illist.get(position)).get(book.getImgurl(), listener);
+		String url=book.getImgurl();
+        if(!TextUtils.isEmpty(url)){
+        	holder.img.setImageUrl(url, mImageLoader);
+        } else {
+            holder.img.setImageResource(R.drawable.defaut_book);
+        }
 
 		// holder.btn_item_result_search_share.setTag(position);
 		// // holder.btn_item_result_search_share.setOnClickListener(new

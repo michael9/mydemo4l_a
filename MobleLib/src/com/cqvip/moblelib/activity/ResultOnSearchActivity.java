@@ -26,6 +26,7 @@ import com.android.volley.Request.Method;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.StringRequest;
 import com.cqvip.moblelib.R;
 import com.cqvip.moblelib.adapter.BookAdapter;
@@ -33,6 +34,7 @@ import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.Book;
 import com.cqvip.moblelib.model.EBook;
 import com.cqvip.moblelib.view.CustomProgressDialog;
+import com.cqvip.utils.BitmapCache;
 import com.cqvip.utils.Tool;
 
 public class ResultOnSearchActivity extends BaseActivity implements
@@ -169,7 +171,7 @@ public class ResultOnSearchActivity extends BaseActivity implements
 				if (lists != null && !lists.isEmpty()) {
 					listview.setVisibility(View.VISIBLE);
 					noResult_rl.setVisibility(View.GONE);
-					adapter = new BookAdapter(context, lists, mQueue);
+					adapter = new BookAdapter(context, lists,  new ImageLoader(mQueue, new BitmapCache()));
 					listview.setAdapter(adapter);
 				} else {
 					listview.setVisibility(View.GONE);

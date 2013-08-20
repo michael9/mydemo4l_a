@@ -1,20 +1,19 @@
 package com.cqvip.moblelib.adapter;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import android.content.Context;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.ImageLoader.ImageListener;
+import com.android.volley.toolbox.NetworkImageView;
 import com.cqvip.moblelib.R;
 import com.cqvip.moblelib.model.Book;
 import com.cqvip.utils.BitmapCache;
@@ -27,8 +26,9 @@ import com.cqvip.utils.BitmapCache;
 public class BookAdapter extends BaseAdapter {
 	private Context context;
 	private List<Book> lists;
-	private List<ImageLoader>illist;
-	private RequestQueue mQueue;
+//	private List<ImageLoader>illist;
+//	private RequestQueue mQueue;
+	private ImageLoader mImageLoader;
 
 	public BookAdapter(Context context) {
 		this.context = context;
@@ -39,15 +39,10 @@ public class BookAdapter extends BaseAdapter {
 		this.lists = lists;
 	}
 
-	public BookAdapter(Context context, List<Book> lists, RequestQueue mQueue) {
+	public BookAdapter(Context context, List<Book> lists, ImageLoader imageLoader) {
 		this.context = context;
 		this.lists = lists;
-		illist=new ArrayList<ImageLoader>();
-		for(Book mb:lists)
-		{
-			illist.add(new ImageLoader(mQueue, new BitmapCache()));
-		}
-		this.mQueue = mQueue;
+		this.mImageLoader=imageLoader;
 	}
 
 	public List<Book> getLists() {
@@ -97,7 +92,7 @@ public class BookAdapter extends BaseAdapter {
 		TextView author;// 作者
 		TextView publisher;// 出版社
 		TextView publishyear;// 出版时间
-		ImageView img;// 时间图片 不用修改
+		NetworkImageView img;// 时间图片 不用修改
 		// TextView u_page;//页数
 		TextView u_abstract;// 简介
 		TextView isbn;
@@ -127,7 +122,9 @@ public class BookAdapter extends BaseAdapter {
 					.findViewById(R.id.re_addr_txt);
 			holder.publishyear = (TextView) convertView
 					.findViewById(R.id.re_time_txt);
-			holder.img = (ImageView) convertView.findViewById(R.id.re_book_img);
+			holder.img = (NetworkImageView) convertView.findViewById(R.id.re_book_img);
+			holder.img.setDefaultImageResId(R.drawable.defaut_book);
+			holder.img.setErrorImageResId(R.drawable.defaut_book);
 			holder.u_abstract = (TextView) convertView
 					.findViewById(R.id.txt_abst);
 			holder.isbn = (TextView) convertView.findViewById(R.id.re_hot_txt);
@@ -157,19 +154,27 @@ public class BookAdapter extends BaseAdapter {
 		holder.u_abstract.setText(describe + book.getU_abstract());
 		holder.isbn.setText("ISBN:" + book.getIsbn());
 
-		if (lists.size()>illist.size()) {
-			illist.add( new ImageLoader(mQueue, new BitmapCache()));
-		}
-		// if(book.listener==null)
-		// {
-		// book.listener=book. mImageLoader .getImageListener(holder.img,
-		// R.drawable.defaut_book, R.drawable.defaut_book);
-		// }
-		// ImageLoader mImageLoader = new ImageLoader(mQueue, new
-		// BitmapCache());
-		ImageListener listener = ImageLoader.getImageListener(holder.img,
-				R.drawable.defaut_book, R.drawable.defaut_book);
-		(illist.get(position)).get(book.getCover_path(), listener);
+		String url=book.getCover_path();
+		Log.i("BookAdapter", url+position);
+        if(!TextUtils.isEmpty(url)){
+        	holder.img.setImageUrl(url, mImageLoader);
+        } else {
+            holder.img.setImageResource(R.drawable.defaut_book);
+        }
+		
+//		if (lists.size()>illist.size()) {
+//			illist.add( new ImageLoader(mQueue, new BitmapCache()));
+//		}
+//		// if(book.listener==null)
+//		// {
+//		// book.listener=book. mImageLoader .getImageListener(holder.img,
+//		// R.drawable.defaut_book, R.drawable.defaut_book);
+//		// }
+//		// ImageLoader mImageLoader = new ImageLoader(mQueue, new
+//		// BitmapCache());
+//		ImageListener listener = ImageLoader.getImageListener(holder.img,
+//				R.drawable.defaut_book, R.drawable.defaut_book);
+//		(illist.get(position)).get(book.getCover_path(), listener);
 
 		// //图片
 		// if(!TextUtils.isEmpty(book.getCover_path())){
