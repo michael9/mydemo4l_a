@@ -3,6 +3,7 @@ package com.cqvip.moblelib.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,8 +69,8 @@ public class EBookActiviy extends BaseActivity {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				if(position==0){
-					adapter.setCurrentID(position);
-					adapter.notifyDataSetChanged();
+//					adapter.setCurrentID(position);
+//					adapter.notifyDataSetChanged();
 					startActivity(new Intent(EBookActiviy.this,
 					PeriodicalClassfyActivity.class));
 				}
@@ -143,17 +144,26 @@ public class EBookActiviy extends BaseActivity {
 			if (convertView == null) {
 				inflater = LayoutInflater.from(context);
 				convertView = inflater.inflate(R.layout.item_ebooktype, null);
+				CheckBox checkBox=(CheckBox) convertView.findViewById(R.id.checkbox);
+				if(position!=0){
+					checkBox.setEnabled(false);
+					Log.i("EBookActiviy_if", ""+position);
+				}
 			}
 			ImageView iv = (ImageView) convertView
 					.findViewById(R.id.booktype_img);
-			CheckedTextView checkedTextView = (CheckedTextView) convertView
+			TextView tv=(TextView) convertView
 					.findViewById(android.R.id.text1);
+//			CheckedTextView checkedTextView = (CheckedTextView) convertView
+//					.findViewById(android.R.id.text1);
+			CheckBox checkBox=(CheckBox) convertView.findViewById(R.id.checkbox);
 			iv.setImageResource(drawableids[position]);
-			checkedTextView.setText(eBookTypes[position]);
-			  if(position==this.currentID)
-				  checkedTextView.setChecked(true);
-			  else
-				  checkedTextView.setChecked(false);
+			tv.setText(eBookTypes[position]);
+			Log.i("EBookActiviy", ""+position);
+//			  if(position==this.currentID)
+//				  checkBox.setChecked(true);
+//			  else
+//				  checkBox.setChecked(false);
 			return convertView;
 		}
 
