@@ -3,24 +3,29 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
-    android:orientation="horizontal" android:padding="2dp"
- >
+    android:orientation="horizontal"
+    android:padding="2dp" >
 
     <ImageView
         android:id="@+id/booktype_img"
         android:layout_width="36dp"
         android:layout_height="36dp"
-        android:layout_marginRight="10dp"
         android:layout_marginLeft="5dp"
+        android:layout_marginRight="10dp"
         android:src="@drawable/sign_vip" />
 
-    <CheckedTextView
-        android:id="@android:id/text1"
-        android:layout_width="match_parent"
+    <TextView android:id="@android:id/text1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textAppearance="?android:attr/textAppearanceListItemSmall" android:text="112233"/>
+
+    <CheckBox
+        android:id="@+id/checkbox"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:checkMark="?android:attr/listChoiceIndicatorMultiple"
-        android:gravity="center_vertical"
-        android:text="112233"
-        android:textAppearance="?android:attr/textAppearanceListItemSmall" />
+        android:focusable="false"
+        />
 
 </LinearLayout>

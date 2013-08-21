@@ -169,7 +169,8 @@ public class Periodical implements Serializable {
 				 }
 				 Periodical periodical=new Periodical();
 				 periodical.qklist=new ArrayList<Periodical>();
-				 for(int i = 0;i<count;i++){
+				 //不显示最新期刊 modified by lj 20130821
+				 for(int i = 1;i<count;i++){
 					 
 					 JSONArray array = ary.getJSONObject(i).getJSONArray("qklist");
 					 int tcount = array.length();
@@ -183,6 +184,29 @@ public class Periodical implements Serializable {
 			}
 		}  
 		return null;
+	}
+	/**
+	 * 期刊数量
+	 * @param result
+	 * @return
+	 * @throws BookException
+	 */
+	public static int getCount(String result) throws BookException{
+		JSONObject json;
+		try {
+			json = new JSONObject(result);
+			if(!json.getBoolean("success")){
+				return 0;
+			}
+			int resultCount = json.getInt("recordcount");
+			if(resultCount>0){
+				return resultCount;
+			}
+			return 0;
+		} catch (JSONException e) {
+			e.printStackTrace();
+			throw new BookException(e);
+		}
 	}
 
 	private ArrayList<PeriodicalYear> formList(JSONArray array)

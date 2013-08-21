@@ -16,6 +16,8 @@
 
 package com.cqvip.mobelib.imgutils;
 
+import com.cqvip.moblelib.activity.PeriodicalClassfyActivity;
+
 import android.annotation.TargetApi;
 import android.os.Build;
 import android.os.StrictMode;
@@ -40,9 +42,8 @@ public class Utils {
 
             if (Utils.hasHoneycomb()) {
                 threadPolicyBuilder.penaltyFlashScreen();
-//                vmPolicyBuilder
-//                        .setClassInstanceLimit(ImageGridActivity.class, 1)
-//                        .setClassInstanceLimit(ImageDetailActivity.class, 1);
+                vmPolicyBuilder
+                        .setClassInstanceLimit(PeriodicalClassfyActivity.class, 1);
             }
             StrictMode.setThreadPolicy(threadPolicyBuilder.build());
             StrictMode.setVmPolicy(vmPolicyBuilder.build());

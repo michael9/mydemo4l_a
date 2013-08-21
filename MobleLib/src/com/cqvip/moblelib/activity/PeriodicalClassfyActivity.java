@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.ViewGroup.LayoutParams;
@@ -181,6 +182,7 @@ public class PeriodicalClassfyActivity extends FragmentActivity {
 			Fragment ft = null;
 			switch (arg0) {
 			case 0:
+				Log.i("TabFragmentPagerAdapter","==============SpecialPeriodicalFragment=============");
 				ft = new SpecialPeriodicalFragment();
 				break;
 			default:

@@ -1,10 +1,12 @@
 package com.cqvip.moblelib.fragment;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 
 import org.json.JSONObject;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +15,7 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
@@ -40,21 +43,107 @@ import com.cqvip.moblelib.model.Periodical;
  */
 public class SpecialPeriodicalFragment extends BaseAbstractFragment implements AdapterView.OnItemClickListener{
 
+private int mImageThumbSize;
+	private int mImageThumbSpacing;
 	private ImageAdapter mAdapter;
 	private GridView gridView;
 	private HashMap<String, String> gparams; // 参数
+	private List<Periodical> lists = null;
+	
+	
+	
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		// TODO Auto-generated method stub
+		super.onSaveInstanceState(outState);
+		if(lists!=null){
+			Log.i("SpecialPeriodicalFragment","===========onSaveInstanceState=========");
+		outState.putSerializable("imgs", (Serializable) lists);
+		}
+	}
+	@Override
+		public void onAttach(Activity activity) {
+			// TODO Auto-generated method stub
+			super.onAttach(activity);
+			Log.i("SpecialPeriodicalFragment","===========onAttach=========");
+		}
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		
+		 mImageThumbSize = getResources().getDimensionPixelSize(R.dimen.image_thumbnail_size);
+	     mImageThumbSpacing = getResources().getDimensionPixelSize(R.dimen.image_thumbnail_spacing);
+	    
+         
+	}
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.fragment_special_periodic,
+		Log.i("SpecialPeriodicalFragment","===========onCreateView=========");
+		
+		final View rootView = inflater.inflate(R.layout.fragment_special_periodic,
 				container, false);
 		gridView = (GridView) rootView.findViewById(R.id.gridView);
 		gridView.setOnItemClickListener(this);
-		//发送请求获取图片机url
-		customProgressDialog.show();
-		requestVolley(GlobleData.SERVER_URL
-				+ "/qk/newlist.aspx", backlistener, null,
-				Method.GET);
+	     if(savedInstanceState!=null){
+	    	 lists = (List<Periodical>) savedInstanceState.getSerializable("imgs");
+	    	 if(lists!=null){
+	    	 mAdapter = new ImageAdapter(getActivity(),lists);
+	    	 gridView.setAdapter(mAdapter);
+	    	 }else{
+	    		 mAdapter = new ImageAdapter(getActivity(),null);
+		    	 customProgressDialog.show();
+		    	 requestVolley(GlobleData.SERVER_URL
+		    			 + "/qk/newlist.aspx", backlistener, null,
+		    			 Method.GET);
+	    	 }
+	     }else{
+	    	 //发送请求获取图片机url
+	    	 mAdapter = new ImageAdapter(getActivity(),null);
+	    	 customProgressDialog.show();
+	    	 requestVolley(GlobleData.SERVER_URL
+	    			 + "/qk/newlist.aspx", backlistener, null,
+	    			 Method.GET);
+	     }
+	     
+	     gridView.setOnScrollListener(new AbsListView.OnScrollListener() {
+	            @Override
+	            public void onScrollStateChanged(AbsListView absListView, int scrollState) {
+	                // Pause fetcher to ensure smoother scrolling when flinging
+	                if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_FLING) {
+	                    mImageFetcher.setPauseWork(true);
+	                } else {
+	                    mImageFetcher.setPauseWork(false);
+	                }
+	            }
+
+	            @Override
+	            public void onScroll(AbsListView absListView, int firstVisibleItem,
+	                    int visibleItemCount, int totalItemCount) {
+	            }
+	        });
+ 
+	     
+		gridView.getViewTreeObserver().addOnGlobalLayoutListener(
+	                new ViewTreeObserver.OnGlobalLayoutListener() {
+	                    @Override
+	                    public void onGlobalLayout() {
+	                        if (mAdapter.getNumColumns() == 0) {
+	                            final int numColumns = (int) Math.floor(
+	                            		gridView.getWidth() / (mImageThumbSize + mImageThumbSpacing));
+	                            if (numColumns > 0) {
+	                                final int columnWidth =
+	                                        (gridView.getWidth() / numColumns) - mImageThumbSpacing;
+	                                mAdapter.setNumColumns(numColumns);
+	                                mAdapter.setItemHeight((int)(columnWidth*1.5));
+	                            }
+	                        }
+	                    }
+	                });
+		
+		
+		
 		
 		return rootView;
 	}
@@ -86,7 +175,8 @@ public class SpecialPeriodicalFragment extends BaseAbstractFragment implements A
 			customProgressDialog.dismiss();
 			try {
 				Periodical temp =Periodical.formObject(response,Task.TASK_PERIODICAL_SPECIAL);
-				List<Periodical> lists = temp.qklist;
+				lists = temp.qklist;
+				
 				if (lists != null && !lists.isEmpty()) {
 //					String[] imgs = new String[lists.size()];
 //					for(int i = 0;i<lists.size();i++){
@@ -101,7 +191,10 @@ public class SpecialPeriodicalFragment extends BaseAbstractFragment implements A
 		}
 	};
 	
-	
+	public void onResume() {
+		 super.onResume();
+	        mAdapter.notifyDataSetChanged();
+	};
 	private class ImageAdapter extends BaseAdapter {
 
         private final Context mContext;
@@ -171,8 +264,8 @@ public class SpecialPeriodicalFragment extends BaseAbstractFragment implements A
                     convertView = new View(mContext);
                 }
                 // Set empty view with height of ActionBar
-                convertView.setLayoutParams(new AbsListView.LayoutParams(
-                        ViewGroup.LayoutParams.MATCH_PARENT, mActionBarHeight));
+//                convertView.setLayoutParams(new AbsListView.LayoutParams(
+//                        ViewGroup.LayoutParams.MATCH_PARENT, mActionBarHeight));
                 return convertView;
             }
 

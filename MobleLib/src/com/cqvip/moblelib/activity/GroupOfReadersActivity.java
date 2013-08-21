@@ -177,7 +177,7 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 		@Override
 		public void onResponse(String response) {
 			// TODO Auto-generated method stub
-			customProgressDialog.dismiss();
+			//customProgressDialog.dismiss();
 			try {
 				Favorite favorite=Favorite.formList(Task.TASK_COMMENT_BOOKLIST, response);
 				arrayLists_zk = favorite.map;

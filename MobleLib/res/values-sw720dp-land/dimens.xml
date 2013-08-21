@@ -7,4 +7,6 @@
     <dimen name="activity_horizontal_margin">128dp</dimen>
 	<dimen name="image_thumbnail_size">198dp</dimen>
     <dimen name="image_thumbnail_spacing">2dp</dimen>
+      <dimen name="bookicon_width">198dp</dimen>
+    <dimen name="bookicon_height">198dp</dimen>
 </resources>
