@@ -21,12 +21,13 @@ public class BaseAbstractFragment extends Fragment{
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		ImageCacheParams cacheParams = new ImageCacheParams(getActivity(), GlobleData.IMAGE_CACHE_DIR);
-        cacheParams.setMemCacheSizePercent(0.125f); // Set memory cache to 12.5% of app memory
+        cacheParams.setMemCacheSizePercent(0.25f); // Set memory cache to 25% of app memory
 		mImageFetcher = new ImageFetcher(getActivity(), getResources().getDimensionPixelSize(R.dimen.bookicon_width),
 				   getResources().getDimensionPixelSize(R.dimen.bookicon_height));
 	    mImageFetcher.setLoadingImage(R.drawable.defaut_book);
-	    mImageFetcher.addImageCache(cacheParams);
-	    mImageFetcher.setImageFadeIn(false);
+	    mImageFetcher.addImageCache(getActivity().getSupportFragmentManager(), cacheParams);
+	   // mImageFetcher.addImageCache(cacheParams);
+	    //mImageFetcher.setImageFadeIn(false);
 		 mQueue = Volley.newRequestQueue(getActivity());
 		 customProgressDialog = CustomProgressDialog.createDialog(getActivity());
 		 

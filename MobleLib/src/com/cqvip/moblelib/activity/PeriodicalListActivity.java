@@ -95,13 +95,13 @@ public class PeriodicalListActivity extends BaseImageActivity implements
 			customProgressDialog.dismiss();
 			try {
 				// 获取返回记录数
-//				int count = EBook.ebookCount(response);
-//				if (count > 0) {
-//					searchCount.setVisibility(View.VISIBLE);
-//					searchCount.setText("共计搜索到" + count + "条记录");
-//				} else {
-//					searchCount.setVisibility(View.GONE);
-//				}
+				int count = Periodical.getCount(response);
+				if (count > 0) {
+					searchCount.setVisibility(View.VISIBLE);
+					searchCount.setText("共计搜索到" + count + "条记录");
+				} else {
+					searchCount.setVisibility(View.GONE);
+				}
 				// JSONObject mj=new JSONObject(response);
 				Periodical temp =Periodical.formObject(response,Task.TASK_PERIODICAL_SUBTYPE);
 				List<Periodical> lists = temp.qklist;
@@ -178,6 +178,9 @@ public class PeriodicalListActivity extends BaseImageActivity implements
 	private void getHomePage(String key, int page, int count, int type) {
 		gparams = new HashMap<String, String>();
 		gparams.put("classid", key);
+		gparams.put("perpage", count+"");
+		gparams.put("curpage", page+"");
+		
 		if (type == 0) {
 			requestVolley(GlobleData.SERVER_URL + "/qk/search.aspx",
 					backlistener, Method.POST);
