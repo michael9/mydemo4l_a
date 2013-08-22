@@ -133,7 +133,7 @@ public class PeriodicalClassfyActivity extends FragmentActivity {
 		
 		mAdapter = new TabFragmentPagerAdapter(getSupportFragmentManager());
 		mViewPager.setAdapter(mAdapter);
-		
+		mViewPager.setOffscreenPageLimit(5);
 	}
 
 	private void initNavigationHSV() {

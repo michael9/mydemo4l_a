@@ -215,7 +215,7 @@ public class ReaderinfoActivity extends BaseActivity {
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
-
+			applyRotation(0, 0, 90);
 		}
 	};
 

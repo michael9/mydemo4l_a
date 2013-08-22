@@ -5,6 +5,7 @@ import java.util.List;
 import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,12 +20,13 @@ import com.cqvip.mobelib.imgutils.ImageFetcher;
 import com.cqvip.moblelib.R;
 import com.cqvip.moblelib.activity.BigImgActivity;
 import com.cqvip.moblelib.model.ShortBook;
+import com.cqvip.moblelib.view.NetworkImageView_rotate;
 import com.cqvip.utils.BitmapCache;
 
 public class AdvancedBookAdapter extends BaseAdapter {
 	private Context context;
 	private List<ShortBook> lists;
-	private RequestQueue mQueue;
+	private ImageLoader mImageLoader;
 	
 	public AdvancedBookAdapter(Context context){
 		this.context = context;
@@ -33,10 +35,10 @@ public class AdvancedBookAdapter extends BaseAdapter {
 		this.context = context;
 		this.lists = lists;
 	}
-	public AdvancedBookAdapter(Context context,List<ShortBook> lists,RequestQueue mQueue){
+	public AdvancedBookAdapter(Context context,List<ShortBook> lists,ImageLoader imageLoader){
 		this.context = context;
 		this.lists = lists;
-		this.mQueue = mQueue;
+		this.mImageLoader=imageLoader;
 	}
 	public List<ShortBook> getLists(){
 		return lists;
@@ -76,7 +78,7 @@ public class AdvancedBookAdapter extends BaseAdapter {
 			
 		
 			TextView title;//书名
-			ImageView img;//时间图片 不用修改
+			NetworkImageView_rotate img;//时间图片 不用修改
 			
 			}
 	
@@ -88,7 +90,7 @@ public class AdvancedBookAdapter extends BaseAdapter {
 			convertView=LayoutInflater.from(context).inflate(R.layout.item_advanced_book, null);
 			holder = new ViewHolder();
 			holder.title = (TextView) convertView.findViewById(R.id.ad_booktitle_txt);
-			holder.img = (ImageView) convertView.findViewById(R.id.ad_book_img);
+			holder.img = (NetworkImageView_rotate) convertView.findViewById(R.id.loaded_book_img);
 			convertView.setTag(holder);
 		}else{
 			holder = (ViewHolder) convertView.getTag();
@@ -96,10 +98,18 @@ public class AdvancedBookAdapter extends BaseAdapter {
 		    ShortBook book = lists.get(position);
 	        holder.title.setText(book.getMessage());
 	        
-	        ImageLoader mImageLoader = new ImageLoader(mQueue, new BitmapCache());
-			ImageListener listener = ImageLoader.getImageListener(holder.img,
-					R.drawable.defaut_book, R.drawable.defaut_book);
-			mImageLoader.get(book.getDate(), listener);
+//	        ImageLoader mImageLoader = new ImageLoader(mQueue, new BitmapCache());
+//			ImageListener listener = ImageLoader.getImageListener(holder.img,
+//					R.drawable.defaut_book, R.drawable.defaut_book);
+//			mImageLoader.get(book.getDate(), listener);
+			
+			String url=book.getDate();
+			Log.i("BookAdapter", url+position);
+	        if(!TextUtils.isEmpty(url)){
+	        	holder.img.setImageUrl(url, mImageLoader);
+	        } else {
+	            holder.img.setImageResource(R.drawable.defaut_book);
+	        }
 		return convertView;
 	}
 
