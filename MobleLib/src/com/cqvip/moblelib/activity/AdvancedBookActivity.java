@@ -19,6 +19,7 @@ import com.android.volley.Request.Method;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.StringRequest;
 import com.cqvip.mobelib.imgutils.AsyncTask;
 import com.cqvip.moblelib.R;
@@ -28,6 +29,7 @@ import com.cqvip.moblelib.constant.Constant;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.ShortBook;
 import com.cqvip.moblelib.view.DownFreshListView;
+import com.cqvip.utils.BitmapCache;
 import com.cqvip.utils.Tool;
 
 public class AdvancedBookActivity extends BaseActivity implements
@@ -103,7 +105,7 @@ public class AdvancedBookActivity extends BaseActivity implements
 			try {
 				List<ShortBook> lists = ShortBook.formList(sendtype, response);
 				if (lists != null && !lists.isEmpty()) {
-					adapter = new AdvancedBookAdapter(context, lists, mQueue);
+					adapter = new AdvancedBookAdapter(context, lists, new ImageLoader(mQueue, new BitmapCache()));
 					gridview_abook.setAdapter(adapter);
 				}
 			} catch (Exception e) {

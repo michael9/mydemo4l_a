@@ -4,20 +4,33 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal|top" >
 
-    <ImageView
-        android:id="@+id/ad_book_img"
-        android:layout_width="110dp"
-        android:layout_height="160dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/defaut_book" />
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/defaut_book_img"
+            android:layout_width="80dp"
+            android:layout_height="110dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/defaut_book" />
+
+        <com.cqvip.moblelib.view.NetworkImageView_rotate
+            android:id="@+id/loaded_book_img"
+            android:layout_width="80dp"
+            android:layout_height="110dp"
+            android:scaleType="centerCrop"
+             />
+    </FrameLayout>
 
     <TextView
         android:id="@+id/ad_booktitle_txt"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@id/ad_book_img"
-        android:layout_alignStart="@id/ad_book_img"
-        android:layout_below="@id/ad_book_img"
+        android:layout_alignEnd="@id/container"
+        android:layout_alignStart="@id/container"
+        android:layout_below="@id/container"
         android:background="@drawable/LightSkyBlue"
         android:ellipsize="end"
         android:gravity="center"
