@@ -45,7 +45,7 @@ public class DetailBookActivity extends BaseActivity {
 	private ImageView imgview;
 	boolean ismyfavor;
 	private Map<String, String> gparams;
-	private Button btn_item_result_search_collect,
+	private TextView btn_item_result_search_collect,
 			btn_item_result_search_share, btn_item_result_search_buzz,
 			btn_item_result_search_download;
 
@@ -130,7 +130,7 @@ public class DetailBookActivity extends BaseActivity {
 		});
 		book_action_bar = findViewById(R.id.book_action_bar);
 		//  ’≤ÿ
-		btn_item_result_search_collect = (Button) book_action_bar
+		btn_item_result_search_collect = (TextView) book_action_bar
 				.findViewById(R.id.btn_item_collect);
 		btn_item_result_search_collect
 				.setOnClickListener(new OnClickListener() {
@@ -152,7 +152,7 @@ public class DetailBookActivity extends BaseActivity {
 					}
 				});
 		// ∑÷œÌ
-		btn_item_result_search_share = (Button) book_action_bar
+		btn_item_result_search_share = (TextView) book_action_bar
 				.findViewById(R.id.btn_item_share);
 		btn_item_result_search_share.setOnClickListener(new OnClickListener() {
 
@@ -164,7 +164,7 @@ public class DetailBookActivity extends BaseActivity {
 		});
 
 		// ∆¿¬€
-		btn_item_result_search_buzz = (Button) book_action_bar
+		btn_item_result_search_buzz = (TextView) book_action_bar
 				.findViewById(R.id.btn_item_buzz);
 		btn_item_result_search_buzz.setOnClickListener(new OnClickListener() {
 
@@ -179,7 +179,7 @@ public class DetailBookActivity extends BaseActivity {
 			}
 		});
 		//
-		btn_item_result_search_download = (Button) book_action_bar
+		btn_item_result_search_download = (TextView) book_action_bar
 				.findViewById(R.id.btn_item_download);
 		btn_item_result_search_download.setVisibility(View.GONE);
 	}

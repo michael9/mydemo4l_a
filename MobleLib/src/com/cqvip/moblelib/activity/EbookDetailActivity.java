@@ -44,7 +44,7 @@ public class EbookDetailActivity extends BaseActivity {
 	private EBook dBook;
 	private TextView author, from, type, page, title, content, time;
 	private String download_url = null;
-	private Button btn_ebook_detail_great, btn_ebook_detail_buzz,
+	private TextView btn_ebook_detail_great, btn_ebook_detail_buzz,
 			btn_ebook_detail_share, btn_ebook_detail_collect,
 			btn_ebook_detail_download;
 	private View title_bar, book_action_bar;
@@ -79,15 +79,15 @@ public class EbookDetailActivity extends BaseActivity {
 		img_book = (ImageView) findViewById(R.id.ebook_icon_img);
 
 		book_action_bar = findViewById(R.id.book_action_bar);
-		btn_ebook_detail_great = (Button) book_action_bar
+		btn_ebook_detail_great = (TextView) book_action_bar
 				.findViewById(R.id.btn_item_great);
-		btn_ebook_detail_buzz = (Button) book_action_bar
+		btn_ebook_detail_buzz = (TextView) book_action_bar
 				.findViewById(R.id.btn_item_buzz);
-		btn_ebook_detail_share = (Button) book_action_bar
+		btn_ebook_detail_share = (TextView) book_action_bar
 				.findViewById(R.id.btn_item_share);
-		btn_ebook_detail_collect = (Button) book_action_bar
+		btn_ebook_detail_collect = (TextView) book_action_bar
 				.findViewById(R.id.btn_item_collect);
-		btn_ebook_detail_download = (Button) book_action_bar
+		btn_ebook_detail_download = (TextView) book_action_bar
 				.findViewById(R.id.btn_item_download);
 
 		btn_ebook_detail_download.setVisibility(View.INVISIBLE);
