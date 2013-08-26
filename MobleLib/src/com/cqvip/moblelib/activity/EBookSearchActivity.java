@@ -154,7 +154,7 @@ public class EBookSearchActivity extends BaseActivity implements
 				if (lists != null && !lists.isEmpty()) {
 					listview.setVisibility(View.VISIBLE);
 					noResult_rl.setVisibility(View.GONE);
-					adapter = new EbookAdapter(context, lists,  new ImageLoader(mQueue, new BitmapCache()));
+					adapter = new EbookAdapter(context, lists,  new ImageLoader(mQueue, new BitmapCache(Tool.getCachSize())));
 					listview.setAdapter(adapter);
 				} else {
 					listview.setVisibility(View.GONE);

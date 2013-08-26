@@ -10,13 +10,14 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.view.ViewGroup.LayoutParams;
+import android.view.ViewTreeObserver;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
@@ -26,22 +27,26 @@ import android.widget.ImageView;
 import com.android.volley.Request.Method;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
+import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.cqvip.mobelib.imgutils.ImageFetcher;
 import com.cqvip.mobelib.imgutils.RecyclingImageView;
 import com.cqvip.moblelib.R;
+import com.cqvip.moblelib.activity.PeriodicalClassfyActivity;
 import com.cqvip.moblelib.activity.PeriodicalContentActivity;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.fragment.basefragment.BaseAbstractFragment;
 import com.cqvip.moblelib.model.Periodical;
+import com.cqvip.moblelib.view.CustomProgressDialog;
 
 /**
  * 特别推荐
  * @author luojiang
  *
  */
-public class SpecialPeriodicalFragment extends BaseAbstractFragment implements AdapterView.OnItemClickListener{
+public class SpecialPeriodicalFragment extends Fragment implements AdapterView.OnItemClickListener{
 
 private int mImageThumbSize;
 	private int mImageThumbSpacing;
@@ -49,15 +54,26 @@ private int mImageThumbSize;
 	private GridView gridView;
 	private HashMap<String, String> gparams; // 参数
 	private List<Periodical> lists = null;
+    private ImageFetcher mImageFetcher;
+	private RequestQueue mQueue;
+	private CustomProgressDialog customProgressDialog;
+	public SpecialPeriodicalFragment(){
+		
+	}
 	
-	
+	public static SpecialPeriodicalFragment instance(int position){
+		SpecialPeriodicalFragment ft = new SpecialPeriodicalFragment();
+		Bundle args = new Bundle();
+		args.putInt("type", position);
+		ft.setArguments(args);
+		return ft;
+	}
 	
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		// TODO Auto-generated method stub
 		super.onSaveInstanceState(outState);
 		if(lists!=null){
-			Log.i("SpecialPeriodicalFragment","===========onSaveInstanceState=========");
 		outState.putSerializable("imgs", (Serializable) lists);
 		}
 	}
@@ -65,7 +81,6 @@ private int mImageThumbSize;
 		public void onAttach(Activity activity) {
 			// TODO Auto-generated method stub
 			super.onAttach(activity);
-			Log.i("SpecialPeriodicalFragment","===========onAttach=========");
 		}
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -74,9 +89,21 @@ private int mImageThumbSize;
 		
 		 mImageThumbSize = getResources().getDimensionPixelSize(R.dimen.image_thumbnail_size);
 	     mImageThumbSpacing = getResources().getDimensionPixelSize(R.dimen.image_thumbnail_spacing);
-	    
+	     mQueue = ((PeriodicalClassfyActivity) getActivity()).getRequestQueue();
+         customProgressDialog = ((PeriodicalClassfyActivity) getActivity()).getCustomDialog();
          
 	}
+	 @Override
+	    public void onActivityCreated(Bundle savedInstanceState) {
+	        super.onActivityCreated(savedInstanceState);
+
+	        // Use the parent activity to load the image asynchronously into the ImageView (so a single
+	        // cache can be used over all pages in the ViewPager
+	        if (PeriodicalClassfyActivity.class.isInstance(getActivity())) {
+	            mImageFetcher = ((PeriodicalClassfyActivity) getActivity()).getImageFetcher();
+	        }
+
+	    }
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -190,11 +217,26 @@ private int mImageThumbSize;
 			}
 		}
 	};
-	
-	public void onResume() {
-		 super.onResume();
+	  @Override
+	    public void onResume() {
+	        super.onResume();
+	        mImageFetcher.setExitTasksEarly(false);
 	        mAdapter.notifyDataSetChanged();
-	};
+	    }
+
+	    @Override
+	    public void onPause() {
+	        super.onPause();
+	        mImageFetcher.setPauseWork(false);
+	        mImageFetcher.setExitTasksEarly(true);
+	        mImageFetcher.flushCache();
+	    }
+
+	    @Override
+	    public void onDestroy() {
+	        super.onDestroy();
+	        mImageFetcher.closeCache();
+	    }
 	private class ImageAdapter extends BaseAdapter {
 
         private final Context mContext;

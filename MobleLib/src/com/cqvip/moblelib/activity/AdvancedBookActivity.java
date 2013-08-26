@@ -105,7 +105,7 @@ public class AdvancedBookActivity extends BaseActivity implements
 			try {
 				List<ShortBook> lists = ShortBook.formList(sendtype, response);
 				if (lists != null && !lists.isEmpty()) {
-					adapter = new AdvancedBookAdapter(context, lists, new ImageLoader(mQueue, new BitmapCache()));
+					adapter = new AdvancedBookAdapter(context, lists, new ImageLoader(mQueue, new BitmapCache(Tool.getCachSize())));
 					gridview_abook.setAdapter(adapter);
 				}
 			} catch (Exception e) {

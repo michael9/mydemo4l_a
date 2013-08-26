@@ -171,7 +171,7 @@ public class ResultOnSearchActivity extends BaseActivity implements
 				if (lists != null && !lists.isEmpty()) {
 					listview.setVisibility(View.VISIBLE);
 					noResult_rl.setVisibility(View.GONE);
-					adapter = new BookAdapter(context, lists,  new ImageLoader(mQueue, new BitmapCache()));
+					adapter = new BookAdapter(context, lists,  new ImageLoader(mQueue, new BitmapCache(Tool.getCachSize())));
 					listview.setAdapter(adapter);
 				} else {
 					listview.setVisibility(View.GONE);

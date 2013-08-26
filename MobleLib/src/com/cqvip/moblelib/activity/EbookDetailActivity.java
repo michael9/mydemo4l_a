@@ -102,7 +102,7 @@ public class EbookDetailActivity extends BaseActivity {
 		String describe1 = getResources().getString(R.string.ebook_abstrac);
 		String type1 = getResources().getString(R.string.ebook_type);
 
-		ImageLoader mImageLoader = new ImageLoader(mQueue, new BitmapCache());
+		ImageLoader mImageLoader = new ImageLoader(mQueue, new BitmapCache(Tool.getCachSize()));
 		ImageListener listener = ImageLoader.getImageListener(img_book,
 				R.drawable.defaut_book, R.drawable.defaut_book);
 		mImageLoader.get(dBook.getImgurl(), listener);

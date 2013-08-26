@@ -26,31 +26,55 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.cqvip.moblelib.R;
 import com.cqvip.moblelib.activity.EbookDetailActivity;
+import com.cqvip.moblelib.activity.PeriodicalClassfyActivity;
 import com.cqvip.moblelib.activity.PeriodicalListActivity;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.Constant;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.fragment.basefragment.BaseAbstractFragment;
 import com.cqvip.moblelib.model.ShortBook;
+import com.cqvip.moblelib.view.CustomProgressDialog;
 
 /**
  * 分类列表 ，医药，工程，社会...
  * @author luojiang
  *
  */
-public class PeriodicalTypeFragment extends BaseAbstractFragment {
+public class PeriodicalTypeFragment extends Fragment {
 
 	private ListView listview;
 	private int sendtype;// 类型
 	private HashMap<String, String> gparams; // 参数
 	private MyAdapter adapter;
-
-	@Override
-	public void onActivityCreated(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
-		super.onActivityCreated(savedInstanceState);
-		// 获取数据 get
+	private RequestQueue mQueue;
+	private CustomProgressDialog customProgressDialog;
+	
+	
+	public PeriodicalTypeFragment(){
+		
 	}
+	
+	public static PeriodicalTypeFragment instance(int position){
+		PeriodicalTypeFragment ft = new PeriodicalTypeFragment();
+		Bundle args = new Bundle();
+		args.putInt("type", position);
+		ft.setArguments(args);
+		return ft;
+	}
+	
+	
+	
+	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		 if (PeriodicalClassfyActivity.class.isInstance(getActivity())) {
+	            mQueue = ((PeriodicalClassfyActivity) getActivity()).getRequestQueue();
+	            customProgressDialog = ((PeriodicalClassfyActivity) getActivity()).getCustomDialog();
+	        }
+	}
+
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
