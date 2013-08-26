@@ -5,6 +5,7 @@ public class Constant {
 	public static final int GETFIRSTPAGE = 1;//获取首页
 	public static final int GETNEXTPAGE = 2; //获取下一页
 	public static final int DEFAULT_COUNT = 10;//默认10条
+	public static final int DEFAULT_TEXT_COUNT = 20;//默认20条
 	
 	public static final int HOTBOOK = 1;//热门图书
 	public static final int NEWBOOK = 2;//新书推荐

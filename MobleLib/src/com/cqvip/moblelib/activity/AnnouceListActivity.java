@@ -161,7 +161,7 @@ public class AnnouceListActivity extends BaseActivity implements OnItemClickList
 		gparams=new HashMap<String, String>();
 		gparams.put("libid", GlobleData.LIBIRY_ID);
 		gparams.put("curpage", ""+page);
-		gparams.put("perpage",""+ Constant.DEFAULT_COUNT);
+		gparams.put("perpage",""+ Constant.DEFAULT_TEXT_COUNT);
 		
 		switch(type){
 		case Constant.SPEECH_NEWS://新闻动态
@@ -255,17 +255,21 @@ public class AnnouceListActivity extends BaseActivity implements OnItemClickList
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			//更多
+			View v;
 			if (position == this.getCount() - 1) {
-				convertView = LayoutInflater.from(context).inflate(R.layout.moreitemsview, null);
-				return convertView;
+				v = LayoutInflater.from(context).inflate(R.layout.moreitemsview, null);
+				return v;
 			}
 			
 			if(convertView==null||convertView.findViewById(R.id.linemore) != null){
-				convertView = LayoutInflater.from(context).inflate(R.layout.item_news, null);
+				v = LayoutInflater.from(context).inflate(R.layout.item_news, null);
 			}
 			TextView tx = (TextView)convertView.findViewById(R.id.tv_item_topic);
 			tx.setText(mlists.get(position).getMessage());
-			return convertView;
+			TextView tx = (TextView)v.findViewById(R.id.tv_item_topic);
+			//判断如果是常见问题
+			tx.setText(mlists.get(position).getMessage());
+			return v;
 		}
 		
 	}
@@ -297,7 +301,8 @@ public class AnnouceListActivity extends BaseActivity implements OnItemClickList
 	@Override
 	public void onRefresh() {
 		page=1;
-		getHomePage(1, Constant.DEFAULT_COUNT,GETHOMEPAGE);
+		page = 1;//重置page
+		getHomePage(page, Constant.DEFAULT_COUNT,GETHOMEPAGE);
 		new AsyncTask<Void, Void, Void>() {
 			protected Void doInBackground(Void... params) {
 
