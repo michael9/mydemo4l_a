@@ -290,7 +290,6 @@ public class EBookSearchActivity extends BaseActivity implements
 		} else {
 			EBook book = adapter.getLists().get(positon);
 			if (book != null) {
-				Log.i("ResultOnSearchActivity", book.toString());
 				Intent _intent = new Intent(context, EbookDetailActivity.class);
 				Bundle bundle = new Bundle();
 				bundle.putSerializable("book", book);

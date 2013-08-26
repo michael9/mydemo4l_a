@@ -28,7 +28,6 @@ public class StableGridView extends GridView{
     public boolean dispatchTouchEvent(MotionEvent ev) {
         // TODO Auto-generated method stub
         if(ev.getAction() == MotionEvent.ACTION_MOVE){
-        	Log.i("Onitemclic", "´¥Ãþ");
             return true;//forbid its child(gridview) to scroll
         }
         return super.dispatchTouchEvent(ev);

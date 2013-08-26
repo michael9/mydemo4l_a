@@ -269,7 +269,6 @@ public class ResultOnSearchActivity extends BaseActivity implements
 
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int positon, long id) {
-		Log.i("item", "===============click=");
 		if (id == -2) // 更多
 		{
 			// 进度条
@@ -287,7 +286,6 @@ public class ResultOnSearchActivity extends BaseActivity implements
 		} else {
 			Book book = adapter.getLists().get(positon);
 			if (book != null) {
-				Log.i("ResultOnSearchActivity", book.toString());
 				Intent _intent = new Intent(context, DetailBookActivity.class);
 				Bundle bundle = new Bundle();
 				bundle.putSerializable("book", book);

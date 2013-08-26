@@ -142,7 +142,6 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 	private void getfavorlist(int pagecount, int perpage, int typeid, int type) {
 		HashMap<String, String> gparams = new HashMap<String, String>();
 		gparams.put("libid", GlobleData.LIBIRY_ID);
-		Log.i("MyFavorActivity_cqvipid", "" + GlobleData.cqvipid);
 		gparams.put("vipuserid", GlobleData.cqvipid);
 		gparams.put("curpage", "" + pagecount);
 		gparams.put("perpage", "" + perpage);
@@ -343,7 +342,6 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 
 		@Override
 		public Fragment getItem(int position) {
-			Log.i("getItem", "getItem");
 			// getItem is called to instantiate the fragment for the given page.
 			// Return a DummySectionFragment (defined as a static inner class
 			// below) with the page number as its lone argument.
@@ -410,7 +408,6 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
-			Log.i("MyFavorActivity", "onCreateView");
 			View rootView = inflater.inflate(R.layout.myfavor_fragment,
 					container, false);
 			ListView listView = (ListView) rootView
@@ -440,7 +437,6 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int positon,
 				long id) {
-			Log.i("item", "===============click=");
 			if (id == -2) {
 				if (parent.getAdapter().getCount() == 1) {
 					return;
@@ -468,7 +464,6 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 							favorite.getYears(), favorite.getPrice(),
 							favorite.getRemark(), favorite.getImgurl());
 					if (book != null) {
-						Log.i("ResultOnSearchActivity", book.toString());
 						Intent _intent = new Intent(context,
 								DetailBookActivity.class);
 						Bundle bundle = new Bundle();
@@ -485,7 +480,6 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 							favorite.getRemark(), favorite.getWriter(),
 							favorite.getPagecount(), 0, favorite.getImgurl());
 					if (book != null) {
-						Log.i("ResultOnSearchActivity", book.toString());
 						Intent _intent = new Intent(context,
 								EbookDetailActivity.class);
 						Bundle bundle = new Bundle();
@@ -539,7 +533,6 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 		public MyGridViewAdapter(Context context, List<Favorite> list) {
 			this.myContext = context;
 			this.arrayList = list;
-			Log.i("MyFavorActivity", "MyGridViewAdapter");
 		}
 
 		public MyGridViewAdapter(Context context, List<Favorite> list,
@@ -547,7 +540,6 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 			this.myContext = context;
 			this.arrayList = list;
 			this.fetch = fetch;
-			Log.i("MyFavorActivity", "MyGridViewAdapter");
 		}
 
 		public List<Favorite> getList() {
@@ -556,7 +548,6 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 
 		@Override
 		public int getCount() {
-			Log.i("getCount", "getCount");
 			if (arrayList != null && !arrayList.isEmpty()) {
 				return arrayList.size() + 1;
 			}

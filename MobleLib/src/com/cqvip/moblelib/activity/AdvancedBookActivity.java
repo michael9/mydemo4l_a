@@ -164,7 +164,6 @@ public class AdvancedBookActivity extends BaseActivity implements
 		// 可滑动的listview需要 position-1
 		ShortBook book = adapter.getLists().get(position);
 		if (book != null) {
-			Log.i("ResultOnSearchActivity", book.toString());
 			Intent _intent = new Intent(context,
 					DetailAdvancedBookActivity.class);
 			_intent.putExtra("id", book.getId());

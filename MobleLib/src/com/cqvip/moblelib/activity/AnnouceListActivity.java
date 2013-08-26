@@ -59,16 +59,16 @@ public class AnnouceListActivity extends BaseActivity implements OnItemClickList
 		switch (type) {
 		case  Constant.SPEECH_NEWS:
 			sendtype=Task.TASK_ANNOUNCE_NEWS;
-			setheadbar("新闻动态");
+			setheadbar(getResources().getString(R.string.announce_out));
 			break;
 			
 		case  Constant.SPPECH_FREE:
 			sendtype=Task.TASK_ANNOUNCE_WELFARE;
-			setheadbar("公益讲座");
+			setheadbar(getResources().getString(R.string.free_speech));
 			break;
 		case  Constant.QUESTION:
 			sendtype=Task.TASK_E_CAUTION;
-			setheadbar("常见问题");
+			setheadbar(getResources().getString(R.string.guide_problem));
 			break;
 			
 		default:
@@ -125,7 +125,7 @@ public class AnnouceListActivity extends BaseActivity implements OnItemClickList
 				if(lists!=null&&!lists.isEmpty()){
 					adapter.addMoreData(lists);
 				  }else{
-						Tool.ShowMessages(context, "没有更多内容可供加载");
+						Tool.ShowMessages(context, getResources().getString(R.string.tips_nomore_data));
 					}
 			} catch (Exception e) {
 				// TODO: handle exception
@@ -285,7 +285,6 @@ public class AnnouceListActivity extends BaseActivity implements OnItemClickList
 			//可滑动的listview需要 position-1
 			ShortBook book = adapter.getList().get(position-1);
 			if(book!=null){
-				Log.i("ResultOnSearchActivity",book.toString());
 				Intent _intent = new Intent(context,DetailAdvancedBookActivity.class);
 				_intent.putExtra("id", book.getId());
 				_intent.putExtra("type", type);

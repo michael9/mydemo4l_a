@@ -123,7 +123,7 @@ public class BorrowBookAdapter extends BaseAdapter{
 	        holder.borrowtime.setText(borrowtime+book.getLoandate());
 	        holder.renew.setTag(position);
 	        if(book.getRenew()!=0){
-	        holder.returntime.setText(returntime+book.getReturndate()+context.getString(R.string.alreadyrenew));
+	        holder.returntime.setText(returntime+book.getReturndate()+context.getResources().getString(R.string.alreadyrenew));
 	        holder.renew.setTextColor(context.getResources().getColor(R.color.txt_red));
 	        }else{
 	        	holder.returntime.setText(returntime+book.getReturndate());

@@ -104,7 +104,6 @@ public class AdvancedBookAdapter extends BaseAdapter {
 //			mImageLoader.get(book.getDate(), listener);
 			
 			String url=book.getDate();
-			Log.i("BookAdapter", url+position);
 	        if(!TextUtils.isEmpty(url)){
 	        	holder.img.setImageUrl(url, mImageLoader);
 	        } else {

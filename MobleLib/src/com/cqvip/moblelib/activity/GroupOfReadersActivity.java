@@ -106,7 +106,6 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 	private void getfavorlist(int pagecount, int perpage, int typeid, int type) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("libid", GlobleData.LIBIRY_ID);
-		Log.i("MyFavorActivity_cqvipid", "" + GlobleData.cqvipid);
 		map.put("vipuserid", GlobleData.cqvipid);
 		map.put("curpage", "" + pagecount);
 		map.put("perpage", "" + perpage);
@@ -268,7 +267,6 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 
 		@Override
 		public Fragment getItem(int position) {
-			Log.i("getItem", "getItem");
 			// getItem is called to instantiate the fragment for the given page.
 			// Return a DummySectionFragment (defined as a static inner class
 			// below) with the page number as its lone argument.
@@ -326,7 +324,6 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 		public static final String ARG_SECTION_NUMBER = "section_number";
 
 		public DummySectionFragment() {
-			Log.i("MyFavorActivity", "DummySectionFragment");
 		}
 
 		List<Favorite> arrayList_temp;
@@ -334,7 +331,6 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
-			Log.i("MyFavorActivity", "onCreateView");
 			View rootView = inflater.inflate(R.layout.myfavor_fragment,
 					container, false);
 			ListView listView = (ListView) rootView
@@ -361,7 +357,6 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int positon,
 				long id) {
-			Log.i("item", "===============click=");
 			if (id == -2) { // ¸ü¶à
 				if (parent.getAdapter().getCount() == 1) {
 					return;
@@ -454,7 +449,6 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 		public MyGridViewAdapter(Context context, List<Favorite> list) {
 			this.myContext = context;
 			this.arrayList = list;
-			Log.i("MyFavorActivity", "MyGridViewAdapter");
 		}
 
 		public MyGridViewAdapter(Context context, List<Favorite> list,
@@ -462,7 +456,6 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 			this.myContext = context;
 			this.arrayList = list;
 			this.fetch = fetch;
-			Log.i("MyFavorActivity", "MyGridViewAdapter");
 		}
 
 		public List<Favorite> getLists() {
@@ -471,7 +464,6 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 
 		@Override
 		public int getCount() {
-			Log.i("getCount", "getCount");
 			if (arrayList != null && !arrayList.isEmpty()) {
 				return arrayList.size() + 1;
 			}

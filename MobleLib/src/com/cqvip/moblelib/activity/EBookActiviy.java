@@ -147,7 +147,6 @@ public class EBookActiviy extends BaseActivity {
 				CheckBox checkBox=(CheckBox) convertView.findViewById(R.id.checkbox);
 				if(position!=0){
 					checkBox.setEnabled(false);
-					Log.i("EBookActiviy_if", ""+position);
 				}
 			}
 			ImageView iv = (ImageView) convertView
@@ -159,7 +158,6 @@ public class EBookActiviy extends BaseActivity {
 			CheckBox checkBox=(CheckBox) convertView.findViewById(R.id.checkbox);
 			iv.setImageResource(drawableids[position]);
 			tv.setText(eBookTypes[position]);
-			Log.i("EBookActiviy", ""+position);
 //			  if(position==this.currentID)
 //				  checkBox.setChecked(true);
 //			  else

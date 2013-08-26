@@ -200,7 +200,6 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 
 		@Override
 		public Fragment getItem(int position) {
-			Log.i("getItem", "getItem");
 			// getItem is called to instantiate the fragment for the given page.
 			// Return a DummySectionFragment (defined as a static inner class
 			// below) with the page number as its lone argument.
@@ -232,7 +231,6 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 
 		@Override
 		public CharSequence getPageTitle(int position) {
-			Log.i("getPageTitle", "getPageTitle");
 			Locale l = Locale.getDefault();
 
 			switch (position) {
@@ -259,7 +257,6 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 		public static final String ARG_SECTION_NUMBER = "section_number";
 
 		public DummySectionFragment() {
-			Log.i("MyFavorActivity", "DummySectionFragment");
 		}
 
 		// ArrayList<int[]> temp_aArrayList;
@@ -267,7 +264,6 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
-			Log.i("MyFavorActivity", "onCreateView");
 			View rootView = inflater.inflate(R.layout.myfavor_fragment,
 					container, false);
 			ListView listView = (ListView) rootView
@@ -292,7 +288,6 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int positon,
 				long id) {
-			Log.i("item", "===============click=");
 			if (id == -2) { // ¸ü¶à
 				// if (parent.getAdapter().getCount() == 1) {
 				// return;
@@ -382,7 +377,6 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 		public MyGridViewAdapter_Loaded(Context context, ArrayList<MEbook> list) {
 			this.myContext = context;
 			this.arrayList = list;
-			Log.i("MyFavorActivity", "MyGridViewAdapter");
 		}
 
 		public MyGridViewAdapter_Loaded(Context context,
@@ -390,7 +384,6 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 			this.myContext = context;
 			this.arrayList = list;
 			this.fetch = fetch;
-			Log.i("MyFavorActivity", "MyGridViewAdapter");
 		}
 
 		@Override
@@ -529,7 +522,6 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 		public MyGridViewAdapter(Context context, ArrayList<int[]> list) {
 			this.myContext = context;
 			this.arrayList = list;
-			Log.i("MyFavorActivity", "MyGridViewAdapter");
 		}
 
 		public MyGridViewAdapter(Context context, ArrayList<int[]> list,
@@ -537,7 +529,6 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 			this.myContext = context;
 			this.arrayList = list;
 			this.fetch = fetch;
-			Log.i("MyFavorActivity", "MyGridViewAdapter");
 		}
 
 		@Override

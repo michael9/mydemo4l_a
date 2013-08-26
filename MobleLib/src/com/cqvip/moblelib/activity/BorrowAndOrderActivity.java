@@ -45,13 +45,6 @@ public class BorrowAndOrderActivity extends BaseActivity {
 
 	public static final int BORROWLIST = 1;
 	public static final int RENEW = 2;
-	private ViewPager mPager;//页卡内容
-	private List<View> listViews; // Tab页面列表
-	private ImageView cursor;// 动画图片
-	private TextView t1, t2;// 页卡头标
-	private int currIndex = 0;// 当前页卡编号
-	private int offset = 0;// 动画图片偏移量
-	private int bmpW;// 动画图片宽度
 	private ListView listview;
 	private BorrowBookAdapter adapter;
 	private List<BorrowBook>  lists;
@@ -64,13 +57,9 @@ public class BorrowAndOrderActivity extends BaseActivity {
 		setContentView(R.layout.activity_borrow_and_order2);
 		View v = findViewById(R.id.borrow_title);
 		TextView title = (TextView)v.findViewById(R.id.txt_header);
-		title.setText(R.string.main_borrow);
+		title.setText(getResources().getString(R.string.main_borrow));
 		ImageView back = (ImageView)v.findViewById(R.id.img_back_header);
 		noborrow_rl = (RelativeLayout) findViewById(R.id.noborrow_rl);
-//		if(adapter!=null){
-//			
-//			
-//		}
 		listview = (ListView)findViewById(R.id.borrow_list);
 		getlist();
 		back.setOnClickListener(new View.OnClickListener() {
@@ -80,13 +69,6 @@ public class BorrowAndOrderActivity extends BaseActivity {
 				finish();
 			}
 		});
-//		history.setOnClickListener(new View.OnClickListener() {
-//			
-//			@Override
-//			public void onClick(View v) {
-//				
-//			}
-//		});
 		listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 			@Override
@@ -101,7 +83,6 @@ public class BorrowAndOrderActivity extends BaseActivity {
 	private Listener<String> borrowlist_ls = new Listener<String>() {
 		@Override
 		public void onResponse(String response) {
-			// TODO Auto-generated method stub
 			customProgressDialog.dismiss();
 			try {
 				List<BorrowBook>lists = BorrowBook.formList(response);
@@ -194,45 +175,5 @@ public class BorrowAndOrderActivity extends BaseActivity {
 	          }
 	      };
 
-
-//	@Override
-//	public void refresh(Object... obj) {
-//		customProgressDialog.dismiss();
-//		Integer type = (Integer)obj[0];
-//		switch(type){
-//		case BORROWLIST:
-//			lists = (List<BorrowBook>)obj[1];
-//			if(lists==null||lists.isEmpty()){
-//				listview.setVisibility(View.GONE);
-//				noborrow_rl.setVisibility(View.VISIBLE);
-//			   //Tool.ShowMessages(context, "查询无记录");
-//			}else {
-//				listview.setVisibility(View.VISIBLE);
-//				noborrow_rl.setVisibility(View.GONE);
-//				adapter = new BorrowBookAdapter(BorrowAndOrderActivity.this,lists);
-//				listview.setAdapter(adapter);
-//			}
-//			break;
-//			
-//		case RENEW:
-//			//成功
-//			ShortBook result = (ShortBook)obj[1];
-//			if(result!=null){
-////				if(result.getSucesss().equals("true")){
-//				for(int i=0;i<lists.size();i++){
-//					if(result.getId().equals(lists.get(i).getBarcode())){
-//						lists.get(i).setRenew(1);
-//						lists.get(i).setReturndate(result.getDate()+getResources().getString(R.string.alreadyrenew));
-//						adapter.notifyDataSetChanged();
-//						break;
-//					}
-//				  }
-////				}
-//				Tool.ShowMessages(BorrowAndOrderActivity.this, result.getMessage());
-//			}
-//			break;
-//			
-//		}
-//	}
 	
 }

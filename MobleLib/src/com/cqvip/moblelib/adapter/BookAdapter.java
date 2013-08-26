@@ -155,7 +155,6 @@ public class BookAdapter extends BaseAdapter {
 		holder.isbn.setText("ISBN:" + book.getIsbn());
 
 		String url=book.getCover_path();
-		Log.i("BookAdapter", url+position);
         if(!TextUtils.isEmpty(url)){
         	holder.img.setImageUrl(url, mImageLoader);
         } else {

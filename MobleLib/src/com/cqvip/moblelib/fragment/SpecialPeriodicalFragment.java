@@ -107,7 +107,6 @@ private int mImageThumbSize;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		Log.i("SpecialPeriodicalFragment","===========onCreateView=========");
 		
 		final View rootView = inflater.inflate(R.layout.fragment_special_periodic,
 				container, false);
