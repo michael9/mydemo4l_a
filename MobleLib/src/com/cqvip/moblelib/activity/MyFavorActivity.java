@@ -362,12 +362,12 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 		 * default implementation assumes that items will never change position
 		 * and always returns POSITION_UNCHANGED.
 		 */
-		@Override
-		public int getItemPosition(Object object) {
-			// TODO Auto-generated method stub
-			Log.i("MyFavorActivity", "SectionsPagerAdapter_getItemPosition:");
-			return POSITION_NONE;
-		}
+//		@Override
+//		public int getItemPosition(Object object) {
+//			// TODO Auto-generated method stub
+//			Log.i("MyFavorActivity", "SectionsPagerAdapter_getItemPosition:");
+//			return POSITION_NONE;
+//		}
 
 		@Override
 		public int getCount() {
@@ -713,4 +713,5 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 					getResources().getString(R.string.cancelfavorfail));
 		}
 	}
+	
 }
