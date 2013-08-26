@@ -65,7 +65,7 @@ public class BigImgActivity extends Activity implements OnTouchListener {
 	
 	        ImageCache.ImageCacheParams cacheParams =
 	                new ImageCache.ImageCacheParams(this, IMAGE_CACHE_DIR);
-	        cacheParams.setMemCacheSizePercent(0.25f); // Set memory cache to 25% of app memory
+	        cacheParams.setMemCacheSizePercent(0.125f); // Set memory cache to 25% of app memory
 	
 	        // The ImageFetcher takes care of loading images into our ImageView children asynchronously
 	        mImageFetcher = new ImageFetcher(this, longest);

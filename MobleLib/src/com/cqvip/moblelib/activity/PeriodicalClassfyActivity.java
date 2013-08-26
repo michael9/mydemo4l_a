@@ -2,7 +2,6 @@ package com.cqvip.moblelib.activity;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -19,9 +18,12 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 
+import com.android.volley.RequestQueue;
+import com.cqvip.mobelib.imgutils.ImageFetcher;
 import com.cqvip.moblelib.R;
 import com.cqvip.moblelib.fragment.PeriodicalTypeFragment;
 import com.cqvip.moblelib.fragment.SpecialPeriodicalFragment;
+import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.moblelib.view.SwipHorizontalScrollView;
 
 /**
@@ -29,7 +31,7 @@ import com.cqvip.moblelib.view.SwipHorizontalScrollView;
  * @author luojiang
  *
  */
-public class PeriodicalClassfyActivity extends FragmentActivity {
+public class PeriodicalClassfyActivity extends BaseFragmentImageActivity {
 
 	private RelativeLayout rl_nav;
 	private SwipHorizontalScrollView mHsv;
@@ -170,7 +172,21 @@ public class PeriodicalClassfyActivity extends FragmentActivity {
 		getMenuInflater().inflate(R.menu.periodical_classfy, menu);
 		return true;
 	}
+	
+	  /**
+     * Called by the ViewPager child fragments to load images via the one ImageFetcher
+     */
+    public ImageFetcher getImageFetcher() {
+        return mImageFetcher;
+    }
+    
+    public RequestQueue getRequestQueue(){
+    	return mQueue;
+    }
 
+    public CustomProgressDialog getCustomDialog(){
+    	return customProgressDialog;
+    }
 	public static class TabFragmentPagerAdapter extends FragmentPagerAdapter{
 
 		public TabFragmentPagerAdapter(FragmentManager fm) {
@@ -182,16 +198,10 @@ public class PeriodicalClassfyActivity extends FragmentActivity {
 			Fragment ft = null;
 			switch (arg0) {
 			case 0:
-				Log.i("TabFragmentPagerAdapter","==============SpecialPeriodicalFragment=============");
-				ft = new SpecialPeriodicalFragment();
+				ft =SpecialPeriodicalFragment.instance(arg0);
 				break;
 			default:
-				ft = new PeriodicalTypeFragment();
-				
-				Bundle args = new Bundle();
-				args.putInt("type", arg0);
-				ft.setArguments(args);
-				
+				ft = PeriodicalTypeFragment.instance(arg0);
 				break;
 			}
 			return ft;

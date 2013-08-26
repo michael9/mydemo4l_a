@@ -56,6 +56,7 @@ public class ResultOnSearchActivity extends BaseActivity implements
 	private RelativeLayout noResult_rl;
 	private View title_bar;
 	private Map<String, String> gparams;
+	private BitmapCache cache;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -171,7 +172,8 @@ public class ResultOnSearchActivity extends BaseActivity implements
 				if (lists != null && !lists.isEmpty()) {
 					listview.setVisibility(View.VISIBLE);
 					noResult_rl.setVisibility(View.GONE);
-					adapter = new BookAdapter(context, lists,  new ImageLoader(mQueue, new BitmapCache()));
+					cache = new BitmapCache(Tool.getCachSize());
+					adapter = new BookAdapter(context, lists,  new ImageLoader(mQueue, cache));
 					listview.setAdapter(adapter);
 				} else {
 					listview.setVisibility(View.GONE);
@@ -300,6 +302,13 @@ public class ResultOnSearchActivity extends BaseActivity implements
 			// _intent.putExtra("detaiinfo", bundle);
 			// startActivityForResult(_intent, 1);
 		}
+	}
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		  if (cache != null) {
+			  cache = null;
+	        }
 	}
 
 }

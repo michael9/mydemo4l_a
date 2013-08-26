@@ -26,6 +26,7 @@ import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.StringRequest;
+import com.cqvip.moblelib.BuildConfig;
 import com.cqvip.moblelib.R;
 import com.cqvip.moblelib.adapter.EbookAdapter;
 import com.cqvip.moblelib.constant.GlobleData;
@@ -51,8 +52,9 @@ public class EBookSearchActivity extends BaseActivity implements
 	private EbookAdapter adapter;
 	private RelativeLayout noResult_rl;
 	private View title_bar;
-	// private ImageFetcher mImageFetcher;
+	private BitmapCache cache;
 	private Map<String, String> gparams;
+	
 	public static HashMap<String, Boolean> favors = new HashMap<String, Boolean>();// 保持收藏状态，更新界面
 
 	@Override
@@ -154,7 +156,8 @@ public class EBookSearchActivity extends BaseActivity implements
 				if (lists != null && !lists.isEmpty()) {
 					listview.setVisibility(View.VISIBLE);
 					noResult_rl.setVisibility(View.GONE);
-					adapter = new EbookAdapter(context, lists,  new ImageLoader(mQueue, new BitmapCache()));
+					cache = new BitmapCache(Tool.getCachSize());
+					adapter = new EbookAdapter(context, lists,  new ImageLoader(mQueue, cache));
 					listview.setAdapter(adapter);
 				} else {
 					listview.setVisibility(View.GONE);
@@ -303,5 +306,11 @@ public class EBookSearchActivity extends BaseActivity implements
 			// startActivityForResult(_intent, 1);
 		}
 	}
-
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		  if (cache != null) {
+			  cache = null;
+	        }
+	}
 }

@@ -16,7 +16,7 @@ public class BaseImageActivity extends BaseActivity{
 		super.onCreate(savedInstanceState);
 		//内存占用整个app1/8
 		ImageCacheParams cacheParams = new ImageCacheParams(this, GlobleData.IMAGE_CACHE_DIR);
-        cacheParams.setMemCacheSizePercent(0.25f); // Set memory cache to 12.5% of app memory
+        cacheParams.setMemCacheSizePercent(0.125f); // Set memory cache to 12.5% of app memory
 		mImageFetcher = new ImageFetcher(this, getResources().getDimensionPixelSize(R.dimen.bookicon_width),
 				   getResources().getDimensionPixelSize(R.dimen.bookicon_height));
 	    mImageFetcher.setLoadingImage(R.drawable.defaut_book);

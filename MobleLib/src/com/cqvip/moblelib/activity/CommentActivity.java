@@ -86,7 +86,7 @@ public class CommentActivity extends BaseActivity implements
 
 		if (!TextUtils.isEmpty(dBook.getCover_path())) {
 			//mImageFetcher.loadImage(dBook.getCover_path(), img);
-	        ImageLoader mImageLoader = new ImageLoader(mQueue, new BitmapCache());
+	        ImageLoader mImageLoader = new ImageLoader(mQueue, new BitmapCache(Tool.getCachSize()));
 			ImageListener listener = ImageLoader.getImageListener(img, R.drawable.defaut_book, R.drawable.defaut_book);
 			mImageLoader.get(dBook.getCover_path(), listener);
 		} else {

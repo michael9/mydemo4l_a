@@ -64,7 +64,7 @@ public class DetailBookActivity extends BaseActivity {
 		textView10 = (TextView) findViewById(R.id.textView10);
 		textView11 = (TextView) findViewById(R.id.textView11);
 		
-		ImageLoader mImageLoader = new ImageLoader(mQueue, new BitmapCache());
+		ImageLoader mImageLoader = new ImageLoader(mQueue, new BitmapCache(Tool.getCachSize()));
 		ImageListener listener = ImageLoader.getImageListener(imgview, R.drawable.defaut_book, R.drawable.defaut_book);
 		mImageLoader.get(dBook.getCover_path(), listener);
 
