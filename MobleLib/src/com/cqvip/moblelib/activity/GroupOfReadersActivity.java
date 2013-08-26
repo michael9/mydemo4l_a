@@ -287,11 +287,11 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 		 * default implementation assumes that items will never change position
 		 * and always returns POSITION_UNCHANGED.
 		 */
-		@Override
-		public int getItemPosition(Object object) {
-			// TODO Auto-generated method stub
-			return POSITION_NONE;
-		}
+//		@Override
+//		public int getItemPosition(Object object) {
+//			// TODO Auto-generated method stub
+//			return POSITION_NONE;
+//		}
 
 		@Override
 		public int getCount() {
