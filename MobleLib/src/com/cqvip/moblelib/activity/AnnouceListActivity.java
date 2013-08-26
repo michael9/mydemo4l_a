@@ -262,11 +262,9 @@ public class AnnouceListActivity extends BaseActivity implements OnItemClickList
 			
 			if(convertView==null||convertView.findViewById(R.id.linemore) != null){
 				convertView = LayoutInflater.from(context).inflate(R.layout.item_news, null);
-				
-				TextView tx = (TextView)convertView.findViewById(R.id.tv_item_topic);
-				//判断如果是常见问题
-				tx.setText(mlists.get(position).getMessage());
 			}
+			TextView tx = (TextView)convertView.findViewById(R.id.tv_item_topic);
+			tx.setText(mlists.get(position).getMessage());
 			return convertView;
 		}
 		
@@ -298,6 +296,7 @@ public class AnnouceListActivity extends BaseActivity implements OnItemClickList
 
 	@Override
 	public void onRefresh() {
+		page=1;
 		getHomePage(1, Constant.DEFAULT_COUNT,GETHOMEPAGE);
 		new AsyncTask<Void, Void, Void>() {
 			protected Void doInBackground(Void... params) {
