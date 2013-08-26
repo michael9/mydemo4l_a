@@ -135,7 +135,7 @@ public class PeriodicalClassfyActivity extends BaseFragmentImageActivity {
 		
 		mAdapter = new TabFragmentPagerAdapter(getSupportFragmentManager());
 		mViewPager.setAdapter(mAdapter);
-		//mViewPager.setOffscreenPageLimit(5);
+		mViewPager.setOffscreenPageLimit(5);
 	}
 
 	private void initNavigationHSV() {

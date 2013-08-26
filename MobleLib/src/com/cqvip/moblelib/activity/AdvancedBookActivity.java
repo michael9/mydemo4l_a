@@ -46,7 +46,7 @@ public class AdvancedBookActivity extends BaseActivity implements
 	private View moreprocess;
 	private int sendtype;
 	private Map<String, String> gparams;
-
+	private BitmapCache cache;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -105,7 +105,8 @@ public class AdvancedBookActivity extends BaseActivity implements
 			try {
 				List<ShortBook> lists = ShortBook.formList(sendtype, response);
 				if (lists != null && !lists.isEmpty()) {
-					adapter = new AdvancedBookAdapter(context, lists, new ImageLoader(mQueue, new BitmapCache(Tool.getCachSize())));
+					cache = new BitmapCache(Tool.getCachSize());
+					adapter = new AdvancedBookAdapter(context, lists, new ImageLoader(mQueue, cache));
 					gridview_abook.setAdapter(adapter);
 				}
 			} catch (Exception e) {
@@ -222,5 +223,11 @@ public class AdvancedBookActivity extends BaseActivity implements
 	// }.execute(null, null);
 	//
 	// }
-
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		  if (cache != null) {
+			  cache = null;
+	        }
+	}
 }
