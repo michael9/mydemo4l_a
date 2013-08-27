@@ -48,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20.0dip"
                 android:paddingRight="20.0dip"
-                android:src="@drawable/guide_safe_icon" />
+                android:src="@drawable/icon_content_paste" />
 
             <TextView
                 android:id="@+id/guide_enter_title"
@@ -83,7 +83,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20.0dip"
                 android:paddingRight="20.0dip"
-                android:src="@drawable/guide_safe_icon" />
+                android:src="@drawable/icon_action_search" />
 
             <TextView
                 android:id="@+id/guide_card_title"
@@ -118,7 +118,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20.0dip"
                 android:paddingRight="20.0dip"
-                android:src="@drawable/guide_safe_icon" />
+                android:src="@drawable/icon_device_access_time" />
 
             <TextView
                 android:id="@+id/guide_time_title"
@@ -153,7 +153,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20.0dip"
                 android:paddingRight="20.0dip"
-                android:src="@drawable/guide_safe_icon" />
+                android:src="@drawable/icon_content_paste" />
 
             <TextView
                 android:id="@+id/guide_reader_title"
@@ -188,7 +188,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20.0dip"
                 android:paddingRight="20.0dip"
-                android:src="@drawable/guide_safe_icon" />
+                android:src="@drawable/icon_collections_cloud" />
 
             <TextView
                 android:id="@+id/guide_server_txt"
@@ -223,7 +223,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20.0dip"
                 android:paddingRight="20.0dip"
-                android:src="@drawable/guide_safe_icon" />
+                android:src="@drawable/icon_location_web_site" />
 
             <TextView
                 android:id="@+id/guide_transport_title"
@@ -258,7 +258,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20.0dip"
                 android:paddingRight="20.0dip"
-                android:src="@drawable/guide_safe_icon" />
+                android:src="@drawable/icon_location_directions" />
 
             <TextView
                 android:id="@+id/guide_navigation_txt"
@@ -293,7 +293,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20.0dip"
                 android:paddingRight="20.0dip"
-                android:src="@drawable/guide_safe_icon" />
+                android:src="@drawable/icon_problem" />
 
             <TextView
                 android:id="@+id/guide_problem_title"

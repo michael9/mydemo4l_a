@@ -47,13 +47,13 @@ public class mylinearlayout extends LinearLayout {
 	@Override
 	public boolean dispatchTouchEvent(MotionEvent ev) {
 		if (mGestureDetector.onTouchEvent(ev)) {
-			Log.e("mylinearlayout", "dispatchTouchEvent_true");
+			//Log.e("mylinearlayout", "dispatchTouchEvent_true");
 			istouchleft = true;
 			return true;
 
 		} else {
 			boolean temp=super.dispatchTouchEvent(ev);
-			Log.e("mylinearlayout", "dispatchTouchEvent_"+temp);
+			//Log.e("mylinearlayout", "dispatchTouchEvent_"+temp);
 			return temp;
 		}
 	}
