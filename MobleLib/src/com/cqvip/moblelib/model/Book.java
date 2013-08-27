@@ -45,7 +45,6 @@ public class Book implements Serializable  {
 	//Favorite转换为Book
 	public Book(String isbn, String publisher, String title, String author,
 			String callno, String subject, String u_price,String u_abstract,String imageurl) {
-		super();
 		this.isbn = isbn;
 		this.publisher = publisher;
 		this.title = title;
@@ -55,6 +54,22 @@ public class Book implements Serializable  {
 		this.u_price = u_price;
 		this.u_abstract=u_abstract;
 		this.cover_path=imageurl;
+	}
+	//Favorite转换为Book
+	public Book(String isbn, String publisher, String title, String author,
+			String callno,String u_abstract,
+			String imageurl,String pulishyear,String page,String classno,String subject) {
+		this.isbn = isbn;
+		this.publisher = publisher;//getName_c())
+		this.title = title; //getTitle_c())
+		this.author = author; //getWriter())
+		this.callno = callno; //getLngid()
+		this.u_abstract=u_abstract; //getRemark_c());
+		this.cover_path=imageurl;//getImgurl()
+		this.publishyear = pulishyear; //getYears() 
+		this.u_page = page; //getPagecount());
+		this.classno = classno;//getNum()
+		this.subject = subject; //getPdfsize()
 	}
 	
 	public boolean isIsfavorite() {

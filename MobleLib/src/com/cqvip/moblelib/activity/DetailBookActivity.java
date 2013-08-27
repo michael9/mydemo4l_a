@@ -49,6 +49,7 @@ public class DetailBookActivity extends BaseActivity {
 			btn_item_result_search_share, btn_item_result_search_buzz,
 			btn_item_result_search_download;
 
+	private int fromFlage;//表示从哪个activity跳转过来，评论过来不显示评论按钮
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -58,6 +59,7 @@ public class DetailBookActivity extends BaseActivity {
 		imgview = (ImageView) findViewById(R.id.book_big_img);
 		Bundle bundle = getIntent().getBundleExtra("detaiinfo");
 		dBook = (Book) bundle.getSerializable("book");
+		fromFlage = getIntent().getIntExtra("from",0);
 		ismyfavor = getIntent().getBooleanExtra("ismyfavor", false);
 		booktitle_tv = (TextView) findViewById(R.id.booktitle_tv);
 		textView9 = (TextView) findViewById(R.id.textView9);
@@ -166,6 +168,9 @@ public class DetailBookActivity extends BaseActivity {
 		// 评论
 		btn_item_result_search_buzz = (TextView) book_action_bar
 				.findViewById(R.id.btn_item_buzz);
+		if(fromFlage == 1){
+			btn_item_result_search_buzz.setVisibility(View.GONE);
+		}
 		btn_item_result_search_buzz.setOnClickListener(new OnClickListener() {
 
 			@Override
