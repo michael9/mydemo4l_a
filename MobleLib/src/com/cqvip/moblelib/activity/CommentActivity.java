@@ -8,6 +8,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -57,6 +58,7 @@ public class CommentActivity extends BaseActivity implements
 	private View moreprocess;
 	private String keyid;// �鼮Ψһid
 	private ImageView img;
+	private View upView;
 	public final static String TAG="CommentActivity";
 
 	@Override
@@ -97,11 +99,16 @@ public class CommentActivity extends BaseActivity implements
 	}
 
 	public void init() {
+		
 		listview = (DownFreshListView) findViewById(R.id.comment_lv);
+		
+		upView = LayoutInflater.from(this).inflate(R.layout.activity_comment_up, null);
+		listview.addHeaderView(upView);
+		
 		listview.setOnItemClickListener(this);
 		listview.setOnRefreshListener(this);
-		baseinfo_tv = (TextView) findViewById(R.id.baseinfo_tv);
-		intro_tv = (TextView) findViewById(R.id.intro_tv);
+		baseinfo_tv = (TextView) upView.findViewById(R.id.baseinfo_tv);
+		intro_tv = (TextView) upView.findViewById(R.id.intro_tv);
 		commit_btn = (Button) findViewById(R.id.commit_btn);
 		delete_com= (Button) findViewById(R.id.delete_com);
 		comment_et = (EditText) findViewById(R.id.comment_et);
@@ -115,7 +122,7 @@ public class CommentActivity extends BaseActivity implements
 		commit_btn.setOnClickListener(this);
 		delete_com.setOnClickListener(this);
 		
-		img = (ImageView) findViewById(R.id.book_big_img);
+		img = (ImageView) upView.findViewById(R.id.book_big_img);
 
 		back.setOnClickListener(new View.OnClickListener() {
 			@Override

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        >
+        
+    <RelativeLayout
+        android:id="@+id/baseinfo_rl"
+        android:layout_width="fill_parent"
+        android:layout_height="118dp"
+        android:background="@drawable/linearlayout_shape2"
+        android:padding="1dp" >
+
+        <ImageView
+            android:id="@+id/book_big_img"
+            android:layout_width="82dp"
+            android:layout_height="118dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="5dp"
+            android:background="@android:color/transparent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/defaut_book" />
+
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="1dp"
+            android:layout_toRightOf="@id/book_big_img" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/baseinfo_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="基本信息"
+                    android:textSize="18.0sp" />
+
+                <TextView
+                    android:id="@+id/intro_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="图书简介"
+                    android:textSize="14sp" />
+            </LinearLayout>
+        </ScrollView>
+    </RelativeLayout>
+</RelativeLayout>
