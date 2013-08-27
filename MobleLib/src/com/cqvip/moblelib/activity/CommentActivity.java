@@ -344,6 +344,7 @@ public class CommentActivity extends BaseActivity implements
 
 	@Override
 	public void onRefresh() {
+		page=1;
 		getHomeComment(typeid, keyid, 1, Constant.DEFAULT_COUNT, GETHOMEPAGE);
 		new AsyncTask<Void, Void, Void>() {
 			protected Void doInBackground(Void... params) {
