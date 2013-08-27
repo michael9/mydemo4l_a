@@ -255,22 +255,17 @@ public class AnnouceListActivity extends BaseActivity implements OnItemClickList
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			//更多
-			View v;
 			if (position == this.getCount() - 1) {
-				v = LayoutInflater.from(context).inflate(R.layout.moreitemsview, null);
-				return v;
+				convertView = LayoutInflater.from(context).inflate(R.layout.moreitemsview, null);
+				return convertView;
 			}
 			
 			if(convertView==null||convertView.findViewById(R.id.linemore) != null){
-				v = LayoutInflater.from(context).inflate(R.layout.item_news, null);
-				
-			}else{
-				v = convertView;
+				convertView = LayoutInflater.from(context).inflate(R.layout.item_news, null);
 			}
-			TextView tx = (TextView)v.findViewById(R.id.tv_item_topic);
-			//判断如果是常见问题
+			TextView tx = (TextView)convertView.findViewById(R.id.tv_item_topic);
 			tx.setText(mlists.get(position).getMessage());
-			return v;
+			return convertView;
 		}
 		
 	}

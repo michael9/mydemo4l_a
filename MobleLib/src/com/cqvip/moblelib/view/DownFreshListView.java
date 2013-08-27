@@ -196,11 +196,11 @@ implements OnScrollListener,android.widget.AdapterView.OnItemLongClickListener{
             case MotionEvent.ACTION_MOVE:  
                 int tempY = (int) event.getY();  
   
-//                if (!isRecored && firstItemIndex == 0) {  
-////                    Log.v(TAG, "在move时候记录下位置");  
-//                    isRecored = true;  
-//                    startY = tempY;  
-//                }  
+                if (!isRecored && firstItemIndex == 0) {  
+//                    Log.v(TAG, "在move时候记录下位置");  
+                    isRecored = true;  
+                    startY = tempY;  
+                }  
   
                 if (state != REFRESHING && isRecored && state != LOADING) {  
   
