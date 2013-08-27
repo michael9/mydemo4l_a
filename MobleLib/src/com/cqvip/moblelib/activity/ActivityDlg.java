@@ -6,6 +6,8 @@ import java.util.Map;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -50,6 +52,9 @@ public class ActivityDlg extends BaseActivity  {
 	private TextView msg_box_txt;
 	private Context context;
 	private Map<String, String> gparams;
+	//保存用户名
+	private Editor editor;
+	private SharedPreferences localUsers;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +70,7 @@ public class ActivityDlg extends BaseActivity  {
 		customProgressDialog = CustomProgressDialog.createDialog(this);
 		//customProgressDialog.setMessage("正在加载中...");
 //		login_status_ll.setVisibility(View.GONE);
-		
+	
 		switch (getIntent().getIntExtra("ACTIONID", 0)) {
 		
 		case 0:
@@ -83,13 +88,16 @@ public class ActivityDlg extends BaseActivity  {
 	String name, pwd;
 
 	private void login() {
+		localUsers = getSharedPreferences("mobliereader", MODE_PRIVATE);
+		editor = localUsers.edit();
+		String uname = localUsers.getString("readercardid", "");
 		login_layout.setVisibility(View.VISIBLE);
 		log_in_username = (AutoCompleteTextView) findViewById(R.id.log_in_username);
 		log_in_passwords = (EditText) findViewById(R.id.log_in_passwords);
 //		login_status_ll = (LinearLayout) findViewById(R.id.login_status);
 		login_btn = (Button)findViewById(R.id.login_ok_btn);
 		cancel_btn = (Button)findViewById(R.id.login_cancel_btn);
-		
+		log_in_username.setText(uname);
 		dao = new MUserDao(this);
 				
 		login_btn.setOnClickListener(new View.OnClickListener() {
@@ -210,11 +218,12 @@ public class ActivityDlg extends BaseActivity  {
 				Result res = new Result(response);
 				if (res.getSuccess()) {
 					GlobleData.islogin = true;
-
 					User user = new User(response);
 					GlobleData.userid = user.getCardno();
 					GlobleData.readerid = user.getReaderno();
 					GlobleData.cqvipid = user.getVipuserid()+"";
+					editor.putString("readercardid",GlobleData.userid);
+					editor.commit();
 					MUser muser = new MUser();
 					muser.setCardno(user.getCardno());
 					muser.setReaderno(user.getReaderno());

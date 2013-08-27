@@ -8,11 +8,17 @@
         android:id="@+id/head_bar"
         layout="@layout/header" />
 
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/head_bar"
+            android:layout_above="@+id/ll_action_bar"
+             >
+    
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/head_bar"
-        android:layout_marginBottom="40dp" >
+        android:layout_height="wrap_content"
+        >
 
         <!-- 图书 -->
 
@@ -99,23 +105,22 @@
             </LinearLayout>
         </RelativeLayout>
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/detail_up_rl"
-            android:layout_margin="5dp" >
+        
 
             <TextView
                 android:id="@+id/ebook_content_abst"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/detail_up_rl"
                 android:text=""
                 android:textColor="@color/txt_black"
                 android:textSize="@dimen/search_detail_txtsize_btn" />
-        </ScrollView>
+       
     </RelativeLayout>
-
+	 </ScrollView>
+    
     <LinearLayout
+        android:id="@+id/ll_action_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

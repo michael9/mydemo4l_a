@@ -95,7 +95,7 @@ public class CommentActivity extends BaseActivity implements
 			img.setImageDrawable(getResources().getDrawable(
 					R.drawable.defaut_book));
 		}
-
+		listview.setAdapter(adapter);
 	}
 
 	public void init() {
