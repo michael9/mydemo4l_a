@@ -104,6 +104,7 @@ public class CommentActivity extends BaseActivity implements
 		
 		upView = LayoutInflater.from(this).inflate(R.layout.activity_comment_up, null);
 		listview.addHeaderView(upView);
+		listview.addHeaderView();
 		
 		listview.setOnItemClickListener(this);
 		listview.setOnRefreshListener(this);

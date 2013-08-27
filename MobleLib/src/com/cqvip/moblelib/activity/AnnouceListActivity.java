@@ -52,6 +52,7 @@ public class AnnouceListActivity extends BaseActivity implements OnItemClickList
 		context = this;
 		type = getIntent().getIntExtra("type", 1);
 		listview = (DownFreshListView) findViewById(R.id.listview_new);
+		listview.addHeaderView();
 		listview.setOnItemClickListener(this);
 		listview.setOnRefreshListener(this);
 		adapter = new MyNewAdapter(context,null);
