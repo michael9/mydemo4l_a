@@ -133,7 +133,7 @@ public class EbookDetailActivity extends BaseActivity {
 							CommentActivity.class);
 					Book book = new Book(null, dBook.getOrgan(), dBook
 							.getTitle_c(), dBook.getWriter(), dBook.getLngid(),
-							null, null, dBook.getRemark_c(), "");
+							null, null, dBook.getRemark_c(),dBook.getImgurl());
 					Bundle bundle = new Bundle();
 					bundle.putSerializable("book", book);
 					_intent.putExtra("detaiinfo", bundle);
