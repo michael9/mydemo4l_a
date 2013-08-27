@@ -21,6 +21,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.drawable.AnimationDrawable;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
@@ -110,5 +111,11 @@ public class CustomProgressDialog extends Dialog {
     	}
     	
     	return customProgressDialog;
+    }
+    
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+    	// TODO Auto-generated method stub
+    	return true;
     }
 }
