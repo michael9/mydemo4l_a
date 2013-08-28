@@ -122,7 +122,7 @@ implements OnScrollListener,android.widget.AdapterView.OnItemLongClickListener{
 //        Log.v("size", "width:" + headContentWidth + " height:"  
 //                + headContentHeight);  
   
-        addHeaderView(headView, null, false);  
+        //addHeaderView(headView, null, false);  
         setOnScrollListener(this);  
   
         animation = new RotateAnimation(0, -180,  
@@ -146,6 +146,10 @@ implements OnScrollListener,android.widget.AdapterView.OnItemLongClickListener{
         }
     }  
   
+    public void addHeaderView() {
+    	addHeaderView(headView, null, false); 
+    }
+    
     public void onScroll(AbsListView arg0, int firstVisiableItem, int arg2,  
             int arg3) {  
         firstItemIndex = firstVisiableItem;  

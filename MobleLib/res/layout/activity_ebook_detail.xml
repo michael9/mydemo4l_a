@@ -40,7 +40,7 @@
                 android:id="@+id/lyRightLayout"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5.0dip"
+                android:layout_margin="2.0dip"
                 android:layout_toRightOf="@+id/ebook_icon_img"
                 android:orientation="vertical" >
 
@@ -48,21 +48,21 @@
 
                 <TextView
                     android:id="@+id/ebook_title_txt"
-                    android:layout_width="wrap_content"
+                    style="@style/TextTitleBigBlueStyle"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:singleLine="true"
+                    android:layout_marginLeft="3.0dip"
                     android:text="编程的艺术"
-                    android:textColor="@color/txt_black"
-                    android:textSize="18.0sp"
-                    android:textStyle="bold" />
+                    />
                 <!-- author -->
 
                 <TextView
                     android:id="@+id/ebook_author_txt"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="6.0dip"
+                    android:layout_marginTop="2.0dip"
                     android:text="作者：托马斯"
+                    android:maxLines="2"
                     android:textColor="@color/txt_black"
                     android:textSize="@dimen/search_detail_txtsize_tv" />
                 <!-- address -->
@@ -71,7 +71,8 @@
                     android:id="@+id/ebook_from_txt"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="来源期刊：电子工业出版社"
+                    android:text="来源：《电子工业出版社》2012年,第三期"
+                    android:maxLines="2"
                     android:textColor="@color/txt_black"
                     android:textSize="@dimen/search_detail_txtsize_tv" />
                 <!-- time -->
@@ -80,7 +81,8 @@
                     android:id="@+id/ebook_time_txt"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="来源期刊：电子工业出版社"
+                    android:text="出版：电子工业出版社"
+                    android:maxLines="3"
                     android:textColor="@color/txt_black"
                     android:textSize="@dimen/search_detail_txtsize_tv" />
                 <!-- page -->
@@ -89,7 +91,7 @@
                     android:id="@+id/ebook_page_txt"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:maxLines="2"
+                    android:singleLine="true"
                     android:text="页数："
                     android:textColor="@color/txt_black"
                     android:textSize="@dimen/search_detail_txtsize_tv" />
@@ -100,6 +102,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:text="格式：2012-06"
+                    android:singleLine="true"
                     android:textColor="@color/txt_black"
                     android:textSize="@dimen/search_detail_txtsize_tv" />
             </LinearLayout>
@@ -111,6 +114,8 @@
                 android:id="@+id/ebook_content_abst"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
                 android:layout_below="@+id/detail_up_rl"
                 android:text=""
                 android:textColor="@color/txt_black"

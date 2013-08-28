@@ -114,6 +114,7 @@ public class CommentActivity extends BaseActivity implements
 							bundle.putSerializable("book", dBook);
 							_intent.putExtra("detaiinfo", bundle);
 							_intent.putExtra("ismyfavor", true);
+							_intent.putExtra("from", 1);
 							startActivity(_intent);
 						}
 					}else{
@@ -135,6 +136,7 @@ public class CommentActivity extends BaseActivity implements
 							Bundle bundle = new Bundle();
 							bundle.putSerializable("book", mebook);
 							intent.putExtra("detaiinfo", bundle);
+							intent.putExtra("from", 1);
 							startActivity(intent);
 						}
 					}else{
@@ -162,6 +164,7 @@ public class CommentActivity extends BaseActivity implements
 		
 		upView = LayoutInflater.from(this).inflate(R.layout.activity_comment_up, null);
 		listview.addHeaderView(upView);
+		listview.addHeaderView();
 		
 		listview.setOnItemClickListener(this);
 		listview.setOnRefreshListener(this);

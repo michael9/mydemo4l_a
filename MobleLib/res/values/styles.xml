@@ -79,5 +79,19 @@
         <item name="android:drawSelectorOnTop">true</item>
         <item name="android:listSelector">@drawable/photogrid_list_selector</item>
     </style>
+<!-- 	   搜索结果字体 -->
+	<style name="TextContentSmallStyle">
+        <item name="android:textColor">@color/txt_black</item>
+        <item name="android:textSize">12.0sp</item>
+    </style>
+	<style name="TextTitleBlueStyle">
+        <item name="android:textColor">@color/blue_title</item>
+        <item name="android:textSize">14.0sp</item>
+    </style>
+	<style name="TextTitleBigBlueStyle">
+        <item name="android:textColor">@color/blue_title</item>
+        <item name="android:textSize">16.0sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 
 </resources>

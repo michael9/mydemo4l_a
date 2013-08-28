@@ -236,11 +236,11 @@ private int mImageThumbSize;
 	        super.onDestroy();
 	        mImageFetcher.closeCache();
 	    }
+	    
 	private class ImageAdapter extends BaseAdapter {
-
+		private int mNumColumns = 0;
         private final Context mContext;
         private int mItemHeight = 0;
-        private int mNumColumns = 0;
         private int mActionBarHeight = 0;
         private GridView.LayoutParams mImageViewLayoutParams;
         //private String[] imgsurl;
@@ -349,7 +349,7 @@ private int mImageThumbSize;
         }
 
         public void setNumColumns(int numColumns) {
-            mNumColumns = numColumns;
+        	mNumColumns = numColumns;
         }
 
         public int getNumColumns() {
@@ -361,7 +361,7 @@ private int mImageThumbSize;
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
-		Periodical periodical = mAdapter.getList().get(position);
+		Periodical periodical = mAdapter.getList().get(position-mAdapter.getNumColumns());
 		Log.i("onItemClick","========================"+periodical.getImgurl());
 		 if(periodical!=null){
 		Intent _intent = new Intent(getActivity(),PeriodicalContentActivity.class);

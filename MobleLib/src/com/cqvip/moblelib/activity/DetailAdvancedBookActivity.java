@@ -27,7 +27,7 @@ public class DetailAdvancedBookActivity extends BaseActivity{
 
 	private TextView content;
 	private int type;
-	private String id;
+	private String id,bookname;
 	private Map<String, String> gparams;
 	private Context context;
 	@Override
@@ -38,10 +38,15 @@ public class DetailAdvancedBookActivity extends BaseActivity{
 		content = (TextView)findViewById(R.id.ad_book_content);
 		type = getIntent().getIntExtra("type",1);
 		id = getIntent().getStringExtra("id");
+		bookname=getIntent().getStringExtra("bookname");
 		if(type == Constant.QUESTION){
 			content.setText(id);
 			setheadbar(getResources().getString(R.string.title_FAQ));
-		}else{
+		}else if(type == Constant.HOTBOOK||type == Constant.NEWBOOK){
+			customProgressDialog.show();
+			getContent(id);
+			setheadbar(bookname);
+			}else{
 		customProgressDialog.show();
 		getContent(id);
 		setheadbar(getResources().getString(R.string.title_moredetail));
