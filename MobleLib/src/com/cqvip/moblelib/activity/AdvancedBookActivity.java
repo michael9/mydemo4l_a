@@ -168,6 +168,7 @@ public class AdvancedBookActivity extends BaseActivity implements
 					DetailAdvancedBookActivity.class);
 			_intent.putExtra("id", book.getId());
 			_intent.putExtra("type", type);
+			_intent.putExtra("bookname", book.getMessage());
 			startActivity(_intent);
 		}
 	}
