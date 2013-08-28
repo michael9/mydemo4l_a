@@ -626,7 +626,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 					// 放入缓存
 					loded.put(book.getDownloadid(), true);
 					// 更新数据库
-					book.setPdfsize(int_array[1]);
+					book.setPdfsize((long)int_array[1]);
 					updateDateBase(book);
 				}
 
