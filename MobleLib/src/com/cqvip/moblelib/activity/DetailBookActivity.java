@@ -114,7 +114,7 @@ public class DetailBookActivity extends BaseActivity {
 				+ "\n" + getString(R.string.item_publish)
 				+ dBook.getPublisher() + "\n" + timeortheme + "\n"
 				// +getString(R.string.item_callno)+dBook.getCallno()+"\n"
-				// +getString(R.string.item_classno)+dBook.getClassno()+"\n"
+			    +getString(R.string.item_classno)+dBook.getClassno()+"\n"
 				+ isbn + getString(R.string.item_price) + dBook.getU_price());
 		textView11.setText(dBook.getU_abstract());
 		// listview.setAdapter(adapter);

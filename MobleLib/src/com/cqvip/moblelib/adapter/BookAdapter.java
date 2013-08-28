@@ -91,11 +91,8 @@ public class BookAdapter extends BaseAdapter {
 		TextView title;// 书名
 		TextView author;// 作者
 		TextView publisher;// 出版社
-		TextView publishyear;// 出版时间
 		NetworkImageView img;// 时间图片 不用修改
-		// TextView u_page;//页数
 		TextView u_abstract;// 简介
-		TextView isbn;
 		// Button btn_comment,btn_item_result_search_share,favorite;
 	}
 
@@ -111,7 +108,7 @@ public class BookAdapter extends BaseAdapter {
 		if (convertView == null
 				|| convertView.findViewById(R.id.linemore) != null) {
 			convertView = LayoutInflater.from(context).inflate(
-					R.layout.item_result_search, null);
+					R.layout.item_book_search, null);
 			holder = new ViewHolder();
 
 			holder.title = (TextView) convertView
@@ -120,39 +117,25 @@ public class BookAdapter extends BaseAdapter {
 					.findViewById(R.id.re_author_txt);
 			holder.publisher = (TextView) convertView
 					.findViewById(R.id.re_addr_txt);
-			holder.publishyear = (TextView) convertView
-					.findViewById(R.id.re_time_txt);
 			holder.img = (NetworkImageView) convertView.findViewById(R.id.re_book_img);
 			holder.img.setDefaultImageResId(R.drawable.defaut_book);
 			holder.img.setErrorImageResId(R.drawable.defaut_book);
 			holder.u_abstract = (TextView) convertView
 					.findViewById(R.id.txt_abst);
-			holder.isbn = (TextView) convertView.findViewById(R.id.re_hot_txt);
-			// holder.btn_item_result_search_share=(Button)convertView.findViewById(R.id.btn_item_result_search_share);
-			// holder.favorite =
-			// (Button)convertView.findViewById(R.id.btn_item_result_search_collect);
-			// holder.btn_comment =
-			// (Button)convertView.findViewById(R.id.btn_comment);
 			convertView.setTag(holder);
-			// Log.i("BookAdapter", "convertView==null");
 		} else {
 			holder = (ViewHolder) convertView.getTag();
-			// Log.i("BookAdapter", "convertView==null_else");
 		}
-		// Log.i("BookAdapter", "getview");
 		String author = context.getResources().getString(R.string.item_author);
 		String publish = context.getResources()
 				.getString(R.string.item_publish);
-		String time = context.getResources().getString(R.string.item_time);
 		String describe = context.getResources().getString(
 				R.string.item_describe);
 		Book book = lists.get(position);
 		holder.title.setText(book.getTitle());
 		holder.author.setText(author + book.getAuthor());
-		holder.publisher.setText(publish + book.getPublisher());
-		holder.publishyear.setText(time + book.getPublishyear());
+		holder.publisher.setText(publish + book.getPublisher()+","+book.getPublishyear());
 		holder.u_abstract.setText(describe + book.getU_abstract());
-		holder.isbn.setText("ISBN:" + book.getIsbn());
 
 		String url=book.getCover_path();
         if(!TextUtils.isEmpty(url)){
@@ -160,73 +143,6 @@ public class BookAdapter extends BaseAdapter {
         } else {
             holder.img.setImageResource(R.drawable.defaut_book);
         }
-		
-//		if (lists.size()>illist.size()) {
-//			illist.add( new ImageLoader(mQueue, new BitmapCache()));
-//		}
-//		// if(book.listener==null)
-//		// {
-//		// book.listener=book. mImageLoader .getImageListener(holder.img,
-//		// R.drawable.defaut_book, R.drawable.defaut_book);
-//		// }
-//		// ImageLoader mImageLoader = new ImageLoader(mQueue, new
-//		// BitmapCache());
-//		ImageListener listener = ImageLoader.getImageListener(holder.img,
-//				R.drawable.defaut_book, R.drawable.defaut_book);
-//		(illist.get(position)).get(book.getCover_path(), listener);
-
-		// //图片
-		// if(!TextUtils.isEmpty(book.getCover_path())){
-		// fetch.loadImage(book.getCover_path(), holder.img);
-		// final String bigimg = Tool.getBigImg(book.getCover_path());
-		// holder.img.setOnClickListener(new View.OnClickListener() {
-		//
-		// @Override
-		// public void onClick(View v) {
-		// if(TextUtils.isEmpty(bigimg)){
-		// return;
-		// }
-		// Intent intent = new Intent(context,BigImgActivity.class);
-		// intent.putExtra("bigurl", bigimg);
-		// context.startActivity(intent);
-		// }
-		// });
-		// }else{
-		// holder.img.setImageDrawable(context.getResources().getDrawable(R.drawable.defaut_book));
-		// }
-
-		// //分享
-		// holder.btn_item_result_search_share.setTag(position);
-		// holder.btn_item_result_search_share.setOnClickListener(new
-		// OnClickListener() {
-		//
-		// @Override
-		// public void onClick(View v) {
-		// int pos=(Integer)v.getTag();
-		// Tool.bookshare(context, lists.get(pos));
-		// }
-		// });
-		// //评论
-		// holder.btn_comment.setTag(position);
-		// holder.btn_comment.setOnClickListener(new OnClickListener() {
-		//
-		// @Override
-		// public void onClick(View v) {
-		// int pos=(Integer)v.getTag();
-		// Tool.bookbuzz(context, lists.get(pos));
-		// }
-		// });
-		// //收藏
-		// holder.favorite .setTag(position);
-		// holder.favorite .setOnClickListener(new OnClickListener() {
-		//
-		// @Override
-		// public void onClick(View v) {
-		// int pos=(Integer)v.getTag();
-		// Tool.bookfavorite(context, lists.get(pos));
-		// }
-		// });
-
 		return convertView;
 	}
 

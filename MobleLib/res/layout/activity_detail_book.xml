@@ -27,28 +27,29 @@
             android:layout_height="96dp"
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="2.0dip"
-            android:layout_marginTop="2.0dip"
+            android:layout_marginTop="8.0dip"
             android:background="@android:color/transparent"
              android:saveEnabled="true"
             android:scaleType="centerCrop" />
 
         <TextView
             android:id="@+id/booktitle_tv"
+            style="@style/TextTitleBigBlueStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_margin="5dp"
+            android:layout_marginLeft="5.0dip"
             android:layout_toRightOf="@id/book_big_img"
             android:text="title"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            />
 
         <TextView
             android:id="@+id/textView10"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/booktitle_tv"
-            android:layout_margin="5dp"
+            android:layout_marginLeft="2.0dip"
+            android:layout_marginTop="2.0dip"
             android:layout_toRightOf="@id/book_big_img"
             android:text="base"
             android:textSize="@dimen/search_detail_txtsize_tv" />
@@ -74,7 +75,7 @@
                     android:id="@+id/textView9"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="10dp"
                     android:text="馆藏信息"
                     android:textSize="16dp" />
 
