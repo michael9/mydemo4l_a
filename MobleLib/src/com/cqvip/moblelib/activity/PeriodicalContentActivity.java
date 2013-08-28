@@ -230,9 +230,10 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
+				Log.i("setOnItemClickListener","===============setOnItemClickListener============="+position);
 				if(id!=-1){
 				if(adapter!=null&&adapter.getLists()!=null){
-				EBook book = adapter.getLists().get(position);
+				EBook book = adapter.getLists().get(position-1);
 				if (book != null) {
 					Intent _intent = new Intent(context, EbookDetailActivity.class);
 					Bundle bundle = new Bundle();
@@ -279,7 +280,6 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 				}
 				}else{
 				//第二次改变
-				Log.i("backlistener_content","==============backlistener_content================");
 				lists.clear();
 				List<EBook> mlists = EBook.formList(response);
 				lists.addAll(mlists);
