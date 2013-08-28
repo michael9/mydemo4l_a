@@ -92,6 +92,7 @@ public class Tool {
 			bundle.putSerializable("book", mbook);
 			intent.putExtra("detaiinfo", bundle);
 			intent.putExtra("type", type);
+			intent.putExtra("from", 1);// //1表示从GroupActivity评论入口进来的
 			mcontext.startActivity(intent);
 		}
 	}

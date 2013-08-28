@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -32,6 +33,7 @@ import com.cqvip.moblelib.constant.Constant;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.Book;
 import com.cqvip.moblelib.model.Comment;
+import com.cqvip.moblelib.model.EBook;
 import com.cqvip.moblelib.model.Result;
 import com.cqvip.moblelib.net.BookException;
 import com.cqvip.moblelib.view.DownFreshListView;
@@ -60,6 +62,7 @@ public class CommentActivity extends BaseActivity implements
 	private ImageView img;
 	private View upView;
 	public final static String TAG="CommentActivity";
+	private int fromActivity; //1表示从GroupActivity评论入口进来的
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +76,7 @@ public class CommentActivity extends BaseActivity implements
 		dBook = (Book) bundle.getSerializable("book");
 		// 获取书籍列席
 		typeid = getIntent().getIntExtra("type", GlobleData.BOOK_SZ_TYPE);
+		fromActivity = getIntent().getIntExtra("from", 0);
 		// 获取是否删除表识
 		delFlag = getIntent().getIntExtra("flag", 0);
 		// 书籍id
@@ -96,6 +100,62 @@ public class CommentActivity extends BaseActivity implements
 					R.drawable.defaut_book));
 		}
 		listview.setAdapter(adapter);
+		upView.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				//跳到详细界面
+				if(typeid == GlobleData.BOOK_SZ_TYPE){
+					if(fromActivity ==1){
+						if (dBook != null) {
+							Intent _intent = new Intent(context,
+									DetailBookActivity.class);
+							Bundle bundle = new Bundle();
+							bundle.putSerializable("book", dBook);
+							_intent.putExtra("detaiinfo", bundle);
+							_intent.putExtra("ismyfavor", true);
+							_intent.putExtra("from", 1);
+							startActivity(_intent);
+						}
+					}else{
+					Intent intent = new Intent(context, DetailBookActivity.class);
+					Bundle bundle = new Bundle();
+					bundle.putSerializable("book", dBook);
+					intent.putExtra("detaiinfo", bundle);
+					intent.putExtra("from", 1);//表示从commentActivity跳过去的，不显示评论按钮
+					context.startActivity(intent);
+					}
+				}else if(typeid == GlobleData.BOOK_ZK_TYPE){
+					if(fromActivity ==1){
+						EBook mebook = new EBook(dBook.getCallno(), dBook.getSubject(),null,
+								dBook.getTitle(), null,dBook.getU_abstract(),dBook.getAuthor(),
+								0,0, dBook.getCover_path());
+						if (mebook != null) {
+							Intent intent = new Intent(context,
+									EbookDetailActivity.class);
+							Bundle bundle = new Bundle();
+							bundle.putSerializable("book", mebook);
+							intent.putExtra("detaiinfo", bundle);
+							intent.putExtra("from", 1);
+							startActivity(intent);
+						}
+					}else{
+					Intent intent = new Intent(context, EbookDetailActivity.class);
+					EBook mmebook = new EBook(dBook.getCallno(), dBook.getPublishyear(),dBook.getClassno(),
+							dBook.getTitle(), dBook.getPublisher(),dBook.getU_abstract(),dBook.getAuthor(),
+							Integer.parseInt(dBook.getU_page()),Long.parseLong(dBook.getSubject()), dBook.getCover_path());
+					
+					Bundle bundle = new Bundle();
+					bundle.putSerializable("book", mmebook);
+					intent.putExtra("detaiinfo", bundle);
+					intent.putExtra("from", 1);//表示从commentActivity跳过去的，不显示评论按钮
+					startActivity(intent);
+					}
+				}
+				
+				
+			}
+		});
 	}
 
 	public void init() {
