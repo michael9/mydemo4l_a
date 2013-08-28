@@ -17,7 +17,7 @@ public class MEbook extends Model{
 	private String remark_c;//简述
 	private String writer;//用户
 	private int pagecount;//页数
-	private Long pdfsize;//大小
+	private int pdfsize;//大小
 	private String imgurl;//图片
 	private String beginpage;//开始页
 	private String endpage;//结束
@@ -64,7 +64,7 @@ public class MEbook extends Model{
 		this.pagecount = pagecount;
 	}
 
-	public void setPdfsize(Long pdfsize) {
+	public void setPdfsize(int pdfsize) {
 		this.pdfsize = pdfsize;
 	}
 
@@ -147,7 +147,7 @@ public class MEbook extends Model{
 
 
 
-	public Long getPdfsize() {
+	public int getPdfsize() {
 		return pdfsize;
 	}
 

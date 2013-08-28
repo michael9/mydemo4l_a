@@ -1,11 +1,13 @@
 package com.cqvip.moblelib.activity;
 
-import java.util.List;
+import java.lang.reflect.Method;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -33,7 +35,7 @@ public class BookSearchActivity extends BaseActivity {
 	
 	private Context context;
 	private ImageButton scan_iv;
-	
+	private EditText editText;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,11 +43,14 @@ public class BookSearchActivity extends BaseActivity {
 		setContentView(R.layout.activity_book_search1);
 		context = this;
 		View v = findViewById(R.id.seach_title);
+		editText=(EditText) findViewById(R.id.search_et);
 		TextView title = (TextView)v.findViewById(R.id.txt_header);
 		title.setText(R.string.main_search);
 		ImageView back = (ImageView)v.findViewById(R.id.img_back_header);
 		ImageView search = (ImageView)findViewById(R.id.search_seach_btn);
 		scan_iv=(ImageButton)findViewById(R.id.scan_iv);
+		
+		hideinputmethod();
 		
 		back.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -85,6 +90,17 @@ public class BookSearchActivity extends BaseActivity {
 	}
 
 
-
-	
+	private void hideinputmethod() {
+		if (android.os.Build.VERSION.SDK_INT <= 10) { 
+			editText.setInputType(InputType.TYPE_NULL);
+			} else {
+			this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+			try {
+			Class<EditText> cls = EditText.class;
+			Method setSoftInputShownOnFocus = cls.getMethod("setSoftInputShownOnFocus", boolean.class);
+			setSoftInputShownOnFocus.setAccessible(true);
+			setSoftInputShownOnFocus.invoke(editText, false);
+			} catch (Exception e) {}
+			}
+	}	
 }
