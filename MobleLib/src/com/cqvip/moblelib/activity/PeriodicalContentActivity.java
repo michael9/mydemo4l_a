@@ -8,9 +8,9 @@ import java.util.Map;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -386,7 +386,8 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 				v = convertView;
 			}
 			TextView tv = (TextView) v.findViewById(R.id.tv_item_topic);
-				tv.setText(mlists.get(position).getTitle_c());
+			tv.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
+			tv.setText(mlists.get(position).getTitle_c());
 			return v;
 		}
 		
