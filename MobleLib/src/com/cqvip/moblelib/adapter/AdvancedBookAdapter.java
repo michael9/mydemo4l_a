@@ -3,30 +3,26 @@ package com.cqvip.moblelib.adapter;
 import java.util.List;
 
 import android.content.Context;
-import android.content.Intent;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LinearInterpolator;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.ImageLoader.ImageListener;
-import com.cqvip.mobelib.imgutils.ImageFetcher;
 import com.cqvip.moblelib.R;
-import com.cqvip.moblelib.activity.BigImgActivity;
 import com.cqvip.moblelib.model.ShortBook;
 import com.cqvip.moblelib.view.NetworkImageView_rotate;
-import com.cqvip.utils.BitmapCache;
 
 public class AdvancedBookAdapter extends BaseAdapter {
 	private Context context;
 	private List<ShortBook> lists;
 	private ImageLoader mImageLoader;
+	Animation operatingAnim;
 	
 	public AdvancedBookAdapter(Context context){
 		this.context = context;
@@ -39,6 +35,9 @@ public class AdvancedBookAdapter extends BaseAdapter {
 		this.context = context;
 		this.lists = lists;
 		this.mImageLoader=imageLoader;
+	  	operatingAnim = AnimationUtils.loadAnimation(context, R.anim.loadingrotate);
+	  	LinearInterpolator lin = new LinearInterpolator();
+		operatingAnim.setInterpolator(lin);
 	}
 	public List<ShortBook> getLists(){
 		return lists;
@@ -81,8 +80,7 @@ public class AdvancedBookAdapter extends BaseAdapter {
 			NetworkImageView_rotate img;//时间图片 不用修改
 			
 			}
-	
-
+	  
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		final ViewHolder holder ;
@@ -91,6 +89,7 @@ public class AdvancedBookAdapter extends BaseAdapter {
 			holder = new ViewHolder();
 			holder.title = (TextView) convertView.findViewById(R.id.ad_booktitle_txt);
 			holder.img = (NetworkImageView_rotate) convertView.findViewById(R.id.loaded_book_img);
+			 convertView.findViewById(R.id.defaut_book_img).startAnimation(operatingAnim);
 			convertView.setTag(holder);
 		}else{
 			holder = (ViewHolder) convertView.getTag();

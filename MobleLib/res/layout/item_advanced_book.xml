@@ -7,22 +7,22 @@
     <FrameLayout
         android:id="@+id/container"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:background="@drawable/silvergray" >
 
         <ImageView
             android:id="@+id/defaut_book_img"
             android:layout_width="80dp"
             android:layout_height="110dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/defaut_book" />
+            android:scaleType="fitCenter"
+            android:src="@drawable/clock_dial" />
 
         <com.cqvip.moblelib.view.NetworkImageView_rotate
             android:id="@+id/loaded_book_img"
             android:layout_width="80dp"
             android:layout_height="110dp"
             android:scaleType="centerCrop"
-            android:visibility="invisible"
-             />
+            android:visibility="invisible" />
     </FrameLayout>
 
     <TextView
