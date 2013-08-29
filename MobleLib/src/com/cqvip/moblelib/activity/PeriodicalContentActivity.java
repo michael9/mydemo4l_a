@@ -143,7 +143,6 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 						//期数是否发生变化
 						if(ty!=yaer_record||tm!=month_record){
 							//发生变化，请求网络
-							Log.i("Periodical","======网络=======");
 							gparams = new HashMap<String, String>();
 							gparams.put("gch", gch);
 							gparams.put("years",mYear);
@@ -230,7 +229,6 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				Log.i("setOnItemClickListener","===============setOnItemClickListener============="+position);
 				if(id!=-1){
 				if(adapter!=null&&adapter.getLists()!=null){
 				EBook book = adapter.getLists().get(position-1);
