@@ -135,7 +135,8 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 			        mYear =  yearlist.get(yaer_record).getYear();
 			        mMonth = arr[month_record];
 				//confirm.setText(mYear+"ÄêµÚ"+mMonth+"ÆÚ");
-				confirm.setOnClickListener(new View.OnClickListener() {
+				
+			        confirm.setOnClickListener(new View.OnClickListener() {
 
 					@Override
 					public void onClick(View v) {
