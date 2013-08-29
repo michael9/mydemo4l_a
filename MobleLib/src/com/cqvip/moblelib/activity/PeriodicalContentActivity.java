@@ -8,9 +8,9 @@ import java.util.Map;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -143,7 +143,6 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 						//期数是否发生变化
 						if(ty!=yaer_record||tm!=month_record){
 							//发生变化，请求网络
-							Log.i("Periodical","======网络=======");
 							gparams = new HashMap<String, String>();
 							gparams.put("gch", gch);
 							gparams.put("years",mYear);
@@ -232,7 +231,7 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 					int position, long id) {
 				if(id!=-1){
 				if(adapter!=null&&adapter.getLists()!=null){
-				EBook book = adapter.getLists().get(position);
+				EBook book = adapter.getLists().get(position-1);
 				if (book != null) {
 					Intent _intent = new Intent(context, EbookDetailActivity.class);
 					Bundle bundle = new Bundle();
@@ -279,7 +278,6 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 				}
 				}else{
 				//第二次改变
-				Log.i("backlistener_content","==============backlistener_content================");
 				lists.clear();
 				List<EBook> mlists = EBook.formList(response);
 				lists.addAll(mlists);
@@ -388,6 +386,7 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 				v = convertView;
 			}
 			TextView tv = (TextView) v.findViewById(R.id.tv_item_topic);
+			tv.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
 				tv.setText(mlists.get(position).getTitle_c());
 			return v;
 		}
