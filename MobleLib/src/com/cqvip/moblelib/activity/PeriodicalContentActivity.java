@@ -143,7 +143,6 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 						//期数是否发生变化
 						if(ty!=yaer_record||tm!=month_record){
 							//发生变化，请求网络
-							Log.i("Periodical","======网络=======");
 							gparams = new HashMap<String, String>();
 							gparams.put("gch", gch);
 							gparams.put("years",mYear);
@@ -232,7 +231,7 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 					int position, long id) {
 				if(id!=-1){
 				if(adapter!=null&&adapter.getLists()!=null){
-				EBook book = adapter.getLists().get(position);
+				EBook book = adapter.getLists().get(position-1);
 				if (book != null) {
 					Intent _intent = new Intent(context, EbookDetailActivity.class);
 					Bundle bundle = new Bundle();
@@ -279,7 +278,6 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 				}
 				}else{
 				//第二次改变
-				Log.i("backlistener_content","==============backlistener_content================");
 				lists.clear();
 				List<EBook> mlists = EBook.formList(response);
 				lists.addAll(mlists);

@@ -10,12 +10,18 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.util.Log;
+
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.net.BookException;
 
 public class Favorite implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3219034814224955778L;
 	private String lngid;//Îª5Ê±£¬ÊÇisbnºÅ
 	private String title;
 	private String writer;
@@ -124,7 +130,7 @@ public class Favorite implements Serializable{
 				if (!json.getBoolean("success")) {
 					return null;
 				}
-				if ((favorite.recordcount=json.getInt("recordcount")) > 0) {
+				if ((favorite.recordcount=json.getInt("recordcount")) >0) {
 					JSONArray ary = json.getJSONArray("grouplist");
 					int count = ary.length();
 					if (count <= 0) {
@@ -166,7 +172,7 @@ public class Favorite implements Serializable{
 				if (!json.getBoolean("success")) {
 					return null;
 				}
-				if ((favorite.recordcount=json.getInt("recordcount")) > 0) {
+				if ((favorite.recordcount=json.getInt("recordcount")) >0) {
 					if(hasObject(json,"zkbooks")){
 					JSONArray ary = json.getJSONArray("zkbooks");
 					int count = ary.length();

@@ -189,9 +189,11 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 			customProgressDialog.dismiss();
 			try {
 				Favorite favorite=Favorite.formList(Task.TASK_GET_FAVOR, response);
+				if(favorite!=null){
 				arrayLists_sz = favorite.map;
 				sz_count=favorite.recordcount;
 				mSectionsPagerAdapter.notifyDataSetChanged();
+				}
 			} catch (BookException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -218,9 +220,11 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 			customProgressDialog.dismiss();
 			try {
 				Favorite favorite=Favorite.formList(Task.TASK_GET_FAVOR, response);
+				if(favorite!=null){
 				arrayLists_zk = favorite.map;
 				zk_count=favorite.recordcount;
 				mSectionsPagerAdapter.notifyDataSetChanged();
+				}
 			} catch (BookException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -400,7 +404,6 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 		public static final String ARG_SECTION_NUMBER = "section_number";
 
 		public DummySectionFragment() {
-			// Log.i("MyFavorActivity", "DummySectionFragment");
 		}
 
 		List<Favorite> arrayList_temp;
@@ -515,10 +518,7 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 		TextView title;// 书名
 		TextView author;// 作者
 		TextView publisher;// 出版社
-		TextView publishyear;// 出版时间
 		ImageView img;// 时间图片 不用修改
-		// TextView u_page;//页数
-		// TextView u_abstract;//简介
 		TextView isbn;
 		Button favor_cancel;
 		//Button btn_comment, btn_item_result_search_share, favorite;
@@ -602,25 +602,20 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 					|| convertView.findViewById(R.id.linemore) != null) {
 				//Log.i("convertView20130808", "convertView");
 				convertView = LayoutInflater.from(myContext).inflate(
-						R.layout.item_result_search, null);
+						R.layout.item_book_sns, null);
 				holder = new ViewHolder();
-				TextView txt_abst = (TextView) convertView
-						.findViewById(R.id.txt_abst);
-				txt_abst.setVisibility(View.GONE);
 				holder.title = (TextView) convertView
 						.findViewById(R.id.re_name_txt);
 				holder.author = (TextView) convertView
 						.findViewById(R.id.re_author_txt);
 				holder.publisher = (TextView) convertView
 						.findViewById(R.id.re_addr_txt);
-				holder.publishyear = (TextView) convertView
-						.findViewById(R.id.re_time_txt);
 				holder.img = (ImageView) convertView
 						.findViewById(R.id.re_book_img);
 				// holder.u_abstract = (TextView)
 				// convertView.findViewById(R.id.re_hot_txt);
 				holder.isbn = (TextView) convertView
-						.findViewById(R.id.re_hot_txt);
+						.findViewById(R.id.txt_abst);
 				holder.favor_cancel=(Button) convertView.findViewById(R.id.favor_cancel);
 				holder.favor_cancel.setVisibility(View.VISIBLE);
 //				holder.btn_item_result_search_share = (Button) convertView
@@ -643,8 +638,7 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 			Favorite favorite = arrayList.get(position);
 			holder.title.setText(favorite.getTitle());
 			holder.author.setText(author + favorite.getWriter());
-			holder.publisher.setText(publish + favorite.getOrgan());
-			holder.publishyear.setText(time + favorite.getYears());
+			holder.publisher.setText(publish + favorite.getOrgan()+","+favorite.getYears());
 			holder.isbn.setText("收藏时间:" + favorite.getFavoritetime());
 			final ViewGroup temp_parent=parent;
 			final int temp_position=position;

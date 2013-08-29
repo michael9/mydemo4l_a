@@ -153,9 +153,11 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 			customProgressDialog.dismiss();
 			try {
 				Favorite favorite=Favorite.formList(Task.TASK_COMMENT_BOOKLIST, response);
+				if(favorite!=null){
 				arrayLists_sz = favorite.map;
 				sz_count=favorite.recordcount;
 				mSectionsPagerAdapter.notifyDataSetChanged();
+				}
 			} catch (BookException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -179,9 +181,11 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 			//customProgressDialog.dismiss();
 			try {
 				Favorite favorite=Favorite.formList(Task.TASK_COMMENT_BOOKLIST, response);
+				if(favorite!=null){
 				arrayLists_zk = favorite.map;
 				zk_count=favorite.recordcount;
 				mSectionsPagerAdapter.notifyDataSetChanged();
+				}
 			} catch (BookException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -435,7 +439,6 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 		TextView title;// 书名
 		TextView author;// 作者
 		TextView publisher;// 出版社
-		TextView publishyear;// 出版时间
 		TextView commentcount;// 评论数
 		// TextView abst_tv;// 简介
 		ImageView img;// 时间图片 不用修改
@@ -511,7 +514,7 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 			if (convertView == null
 					|| convertView.findViewById(R.id.linemore) != null) {
 				convertView = LayoutInflater.from(myContext).inflate(
-						R.layout.item_result_search, null);
+						R.layout.item_book_sns, null);
 				holder = new ViewHolder();
 
 				holder.title = (TextView) convertView
@@ -520,14 +523,10 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 						.findViewById(R.id.re_author_txt);
 				holder.publisher = (TextView) convertView
 						.findViewById(R.id.re_addr_txt);
-				holder.publishyear = (TextView) convertView
-						.findViewById(R.id.re_time_txt);
 				holder.img = (ImageView) convertView
 						.findViewById(R.id.re_book_img);
 				holder.commentcount = (TextView) convertView
-						.findViewById(R.id.re_hot_txt);
-				convertView.findViewById(R.id.txt_abst)
-						.setVisibility(View.GONE);
+						.findViewById(R.id.txt_abst);
 				holder.commentcount.setTextColor(getResources().getColor(
 						R.color.green_light));
 				convertView.setTag(holder);
@@ -545,8 +544,7 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 			Favorite favorite = arrayList.get(position);
 			holder.title.setText(favorite.getTitle());
 			holder.author.setText(author + favorite.getWriter());
-			holder.publisher.setText(publish + favorite.getOrgan());
-			holder.publishyear.setText(time + favorite.getYears());
+			holder.publisher.setText(publish + favorite.getOrgan()+","+favorite.getYears());
 			holder.commentcount.setText(commentcount + "("
 					+ favorite.getCommentcount() + ")");
 			// 图片

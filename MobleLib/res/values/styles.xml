@@ -94,4 +94,12 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+	<style name="TextContentMiddleStyle">
+        <item name="android:textColor">@color/txt_black</item>
+        <item name="android:textSize">14.0sp</item>
+    </style>
+	<style name="TextTitleMiddleBlueStyle">
+        <item name="android:textColor">@color/blue_title</item>
+        <item name="android:textSize">16.0sp</item>
+    </style>
 </resources>

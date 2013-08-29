@@ -101,6 +101,7 @@ private int mImageThumbSize;
 	        // cache can be used over all pages in the ViewPager
 	        if (PeriodicalClassfyActivity.class.isInstance(getActivity())) {
 	            mImageFetcher = ((PeriodicalClassfyActivity) getActivity()).getImageFetcher();
+	            mImageFetcher.setLoadingImage(R.drawable.empty_photo);
 	        }
 
 	    }
@@ -162,7 +163,7 @@ private int mImageThumbSize;
 	                                final int columnWidth =
 	                                        (gridView.getWidth() / numColumns) - mImageThumbSpacing;
 	                                mAdapter.setNumColumns(numColumns);
-	                                mAdapter.setItemHeight((int)(columnWidth*1.5));
+	                                mAdapter.setItemHeight((int)(columnWidth*1.4));
 	                            }
 	                        }
 	                    }
