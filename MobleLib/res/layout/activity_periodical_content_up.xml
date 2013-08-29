@@ -44,13 +44,12 @@
 
                 <TextView
                     android:id="@+id/periodical_title_txt"
+                    style="@style/TextTitleBigBlueStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:singleLine="true"
                     android:text=""
-                    android:textColor="@color/txt_black"
-                    android:textSize="18.0sp"
-                    android:textStyle="bold" />
+                     />
                 <!-- author -->
 
                 <TextView
@@ -144,6 +143,8 @@
                android:layout_centerVertical="true"
                android:text="2013年12期：目录"
                android:drawableRight="@drawable/icon_navigation_expand"
+               android:gravity="center_vertical"
+               android:background="@drawable/btn_default_holo_light"
                />
            <ProgressBar
         android:id="@+id/footer_progress"

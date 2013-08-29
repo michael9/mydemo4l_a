@@ -56,6 +56,7 @@ public class EbookDetailActivity extends BaseActivity {
 	 public static final String     DOWNLOAD_FOLDER_NAME = "downloadmoblib";
 	 private long                   downloadId           = 0;
 	 private DownloadManager        downloadManager;
+	 private int fromFlage;//表示从哪个activity跳转过来，评论过来不显示评论按钮
 	 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +70,8 @@ public class EbookDetailActivity extends BaseActivity {
 		
 		Bundle bundle = getIntent().getBundleExtra("detaiinfo");
 		dBook = (EBook) bundle.getSerializable("book");
+		fromFlage = getIntent().getIntExtra("from",0);
+		
 		author = (TextView) findViewById(R.id.ebook_author_txt);
 		from = (TextView) findViewById(R.id.ebook_from_txt);
 		type = (TextView) findViewById(R.id.ebook_type_txt);
@@ -97,7 +100,7 @@ public class EbookDetailActivity extends BaseActivity {
 		}
 		String author1 = getResources().getString(R.string.item_author);
 		String from1 = getResources().getString(R.string.ebook_orang);
-		String time1 = getResources().getString(R.string.ebook_time);
+		String publish = getResources().getString(R.string.item_publish);
 		String page1 = getResources().getString(R.string.ebook_page);
 		String describe1 = getResources().getString(R.string.ebook_abstrac);
 		String type1 = getResources().getString(R.string.ebook_type);
@@ -109,19 +112,21 @@ public class EbookDetailActivity extends BaseActivity {
 
 		title.setText(dBook.getTitle_c());
 		author.setText(author1 + dBook.getWriter());
-		from.setText(from1 + dBook.getName_c());
-		time.setText(time1 + dBook.getYears() + "年," + "第" + dBook.getNum()
+		from.setText(from1 + "《"+dBook.getName_c()+"》"+dBook.getYears() + "年," + "第" + dBook.getNum()
 				+ "期");
+		time.setText(publish + dBook.getOrgan());
 		page.setText(page1 + dBook.getPagecount());
 		if (dBook.getPdfsize() != 0) {
 			type.setText(type1 + "PDF," + dBook.getPdfsize() / 1024 + "KB");
 		} else {
 			type.setVisibility(View.GONE);
 		}
-		content.setText(describe1 + dBook.getRemark_c());
+		content.setText(dBook.getRemark_c());
 		// //判断是否已经收藏
 		// btn_ebook_detail_collect.setText(isFavorite(dBook.isIsfavorite()));
-
+		if(fromFlage == 1){
+			btn_ebook_detail_buzz.setVisibility(View.GONE);
+		}
 		btn_ebook_detail_buzz.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -131,9 +136,10 @@ public class EbookDetailActivity extends BaseActivity {
 				if (GlobleData.islogin) {
 					Intent _intent = new Intent(EbookDetailActivity.this,
 							CommentActivity.class);
-					Book book = new Book(null, dBook.getOrgan(), dBook
-							.getTitle_c(), dBook.getWriter(), dBook.getLngid(),
-							null, null, dBook.getRemark_c(),dBook.getImgurl());
+					Book book = new Book(null, dBook.getName_c(), dBook.getTitle_c(),
+							dBook.getWriter(), dBook.getLngid(),dBook.getRemark_c(), 
+							dBook.getImgurl(),dBook.getYears(),
+							dBook.getPagecount()+"",dBook.getNum(),dBook.getPdfsize()+"");
 					Bundle bundle = new Bundle();
 					bundle.putSerializable("book", book);
 					_intent.putExtra("detaiinfo", bundle);

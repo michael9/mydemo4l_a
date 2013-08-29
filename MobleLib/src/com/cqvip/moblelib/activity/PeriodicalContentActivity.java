@@ -59,6 +59,8 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 	private MyAdapter adapter;
 	private Periodical perio;
 	private View progress;
+	private List<EBook> lists;//目录
+	private boolean isFirstFlag = false;
 	
 	
 	@Override
@@ -147,6 +149,10 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 							gparams.put("years",mYear);
 							gparams.put("num", mMonth);
 							gparams.put("perpage",GlobleData.BIG_PERPAGE+"");
+							//非第一次请求
+							if(lists!=null&&adapter!=null){
+								isFirstFlag = false;
+							}
 							requestVolley(GlobleData.SERVER_URL + "/zk/search.aspx",
 									backlistener_content, Method.POST);
 							progress.setVisibility(View.VISIBLE);
@@ -224,6 +230,7 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
+				if(id!=-1){
 				if(adapter!=null&&adapter.getLists()!=null){
 				EBook book = adapter.getLists().get(position);
 				if (book != null) {
@@ -235,6 +242,7 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 				}
 			  }
 			}
+		  }
 		});
 		
 	}
@@ -262,9 +270,22 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 			customProgressDialog.dismiss();
 			progress.setVisibility(View.GONE);
 			try {
-				List<EBook> lists = EBook.formList(response);
+				//第一次setAdapter
+				if(isFirstFlag){
+				lists = EBook.formList(response);
+				if(lists!=null&&!lists.isEmpty()){
 				adapter = new MyAdapter(context,lists);
 				listview.setAdapter(adapter);
+				}
+				}else{
+				//第二次改变
+				Log.i("backlistener_content","==============backlistener_content================");
+				lists.clear();
+				List<EBook> mlists = EBook.formList(response);
+				lists.addAll(mlists);
+				adapter.notifyDataSetChanged();
+				}
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -287,6 +308,8 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 				gparams.put("years", yearlist.get(0).getYear());
 				gparams.put("num",  tmpary[tmpary.length-1]);
 				gparams.put("perpage",GlobleData.BIG_PERPAGE+"");
+				//第一次请求
+				isFirstFlag = true;
 				requestVolley(GlobleData.SERVER_URL + "/zk/search.aspx",
 						backlistener_content, Method.POST);
 				progress.setVisibility(View.VISIBLE);
@@ -336,10 +359,10 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 		@Override
 		public int getCount() {
 			// TODO Auto-generated method stub
-			if(mlists == null){
-				return 0;
+			if(mlists != null){
+				return mlists.size();
 			}
-			return mlists.size();
+			return 0;
 		}
 
 		@Override
@@ -350,7 +373,10 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 
 		@Override
 		public long getItemId(int position) {
+			if(this.getCount()>0&&position < this.getCount()){
 			return position;
+			}
+			return -1;
 		}
 
 		@Override
