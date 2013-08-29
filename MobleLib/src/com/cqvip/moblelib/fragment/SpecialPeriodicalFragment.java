@@ -363,7 +363,6 @@ private int mImageThumbSize;
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
 		Periodical periodical = mAdapter.getList().get(position-mAdapter.getNumColumns());
-		Log.i("onItemClick","========================"+periodical.getImgurl());
 		 if(periodical!=null){
 		Intent _intent = new Intent(getActivity(),PeriodicalContentActivity.class);
 		Bundle bundle = new Bundle();
