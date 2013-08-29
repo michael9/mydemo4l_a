@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -25,10 +26,11 @@ import android.widget.GridView;
 import android.widget.ImageView;
 
 import com.android.volley.Request.Method;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
-import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.StringRequest;
 import com.cqvip.mobelib.imgutils.ImageFetcher;
 import com.cqvip.mobelib.imgutils.RecyclingImageView;
@@ -37,9 +39,11 @@ import com.cqvip.moblelib.activity.PeriodicalClassfyActivity;
 import com.cqvip.moblelib.activity.PeriodicalContentActivity;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
-import com.cqvip.moblelib.fragment.basefragment.BaseAbstractFragment;
 import com.cqvip.moblelib.model.Periodical;
 import com.cqvip.moblelib.view.CustomProgressDialog;
+import com.cqvip.moblelib.view.NetworkImageView_rotate;
+import com.cqvip.utils.BitmapCache;
+import com.cqvip.utils.Tool; 
 
 /**
  * ÌØ±ðÍÆ¼ö
@@ -56,6 +60,8 @@ private int mImageThumbSize;
 	private List<Periodical> lists = null;
     private ImageFetcher mImageFetcher;
 	private RequestQueue mQueue;
+	private ImageLoader mImageLoader;
+	private BitmapCache cache;
 	private CustomProgressDialog customProgressDialog;
 	public SpecialPeriodicalFragment(){
 		
@@ -199,7 +205,7 @@ private int mImageThumbSize;
 		@Override
 		public void onResponse(String response) {
 			// TODO Auto-generated method stub
-			customProgressDialog.dismiss();
+			//customProgressDialog.dismiss();
 			try {
 				Periodical temp =Periodical.formObject(response,Task.TASK_PERIODICAL_SPECIAL);
 				lists = temp.qklist;
@@ -209,6 +215,8 @@ private int mImageThumbSize;
 //					for(int i = 0;i<lists.size();i++){
 //						imgs[i]=lists.get(i).getImgurl();
 //					}
+					cache = new BitmapCache(Tool.getCachSize());
+					mImageLoader=new ImageLoader(mQueue, cache);
 					mAdapter = new ImageAdapter(getActivity(),lists);
 					gridView.setAdapter(mAdapter);
 				}
@@ -300,6 +308,9 @@ private int mImageThumbSize;
 
         @Override
         public View getView(int position, View convertView, ViewGroup container) {
+        	if(customProgressDialog.isShowing()){
+        		customProgressDialog.dismiss();
+        	}
             // First check if this is the top row
             if (position < mNumColumns) {
                 if (convertView == null) {
@@ -312,13 +323,14 @@ private int mImageThumbSize;
             }
 
             // Now handle the main ImageView thumbnails
-            ImageView imageView;
+            NetworkImageView_rotate imageView;
             if (convertView == null) { // if it's not recycled, instantiate and initialize
-                imageView = new RecyclingImageView(mContext);
+                imageView = new NetworkImageView_rotate(mContext);
                 imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 imageView.setLayoutParams(mImageViewLayoutParams);
+                imageView.setBackgroundColor(R.drawable.silvergray);
             } else { // Otherwise re-use the converted view
-                imageView = (ImageView) convertView;
+                imageView = (NetworkImageView_rotate) convertView;
             }
 
             // Check the height matches our calculated column width
@@ -328,7 +340,13 @@ private int mImageThumbSize;
 
             // Finally load the image asynchronously into the ImageView, this also takes care of
             // setting a placeholder image while the background thread runs
-            mImageFetcher.loadImage(mlists.get(position - mNumColumns).getImgurl(), imageView);
+           // mImageFetcher.loadImage(mlists.get(position - mNumColumns).getImgurl(), imageView);
+			String url=mlists.get(position - mNumColumns).getImgurl();
+	        if(!TextUtils.isEmpty(url)){
+	        	imageView.setImageUrl(url, mImageLoader);
+	        } else {
+	        	imageView.setImageResource(R.drawable.defaut_book);
+	        }
             return imageView;
         }
 
@@ -363,7 +381,6 @@ private int mImageThumbSize;
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
 		Periodical periodical = mAdapter.getList().get(position-mAdapter.getNumColumns());
-		Log.i("onItemClick","========================"+periodical.getImgurl());
 		 if(periodical!=null){
 		Intent _intent = new Intent(getActivity(),PeriodicalContentActivity.class);
 		Bundle bundle = new Bundle();

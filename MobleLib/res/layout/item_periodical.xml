@@ -70,6 +70,7 @@
                     android:singleLine="true"
                     android:text="国内统一刊号：45-1346/O1"
                     android:textColor="@color/txt_black"
+                    android:visibility="gone"
                     android:textSize="12.0sp" />
 
                 <!-- time -->
@@ -80,6 +81,7 @@
                     android:layout_height="wrap_content"
                     android:text="国际标准刊号：1673-6982"
                     android:textColor="@color/txt_black"
+                    android:visibility="gone"
                     android:textSize="12.0sp" />
 
             </LinearLayout>

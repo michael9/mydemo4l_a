@@ -114,10 +114,10 @@ public class EbookDetailActivity extends BaseActivity {
 		author.setText(author1 + dBook.getWriter());
 		from.setText(from1 + "《"+dBook.getName_c()+"》"+dBook.getYears() + "年," + "第" + dBook.getNum()
 				+ "期");
-		time.setText(publish + dBook.getOrgan());
-		page.setText(page1 + dBook.getPagecount());
+		//time.setText(publish + dBook.getOrgan());
+		//page.setText(page1 + dBook.getPagecount());
 		if (dBook.getPdfsize() != 0) {
-			type.setText(type1 + "PDF," + dBook.getPdfsize() / 1024 + "KB");
+			type.setText(type1 + "PDF," +dBook.getPagecount()+"页,大小"+ dBook.getPdfsize() / 1024 + "KB");
 		} else {
 			type.setVisibility(View.GONE);
 		}
