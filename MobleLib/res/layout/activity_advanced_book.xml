@@ -9,7 +9,7 @@
         android:id="@+id/head_bar"
         layout="@layout/header" />
 
-    <GridView
+    <GridView android:padding="2dp"
         android:id="@+id/gridview_abook"
         style="@style/PhotoGridLayout"
         android:layout_width="fill_parent"

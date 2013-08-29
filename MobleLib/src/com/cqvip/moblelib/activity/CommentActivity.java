@@ -77,6 +77,7 @@ public class CommentActivity extends BaseActivity implements
 		delFlag = getIntent().getIntExtra("flag", 0);
 		//  ÈºÆid
 		keyid = getLngId(dBook.getCallno(), dBook.getRecordid());
+		customProgressDialog.show();
 		getHomeComment(typeid, keyid, page, Constant.DEFAULT_COUNT, GETHOMEPAGE);
 		String describe = dBook.getU_abstract();
 		if (TextUtils.isEmpty(describe)) {
@@ -237,6 +238,7 @@ public class CommentActivity extends BaseActivity implements
 	Listener<String> backlistener_list = new Listener<String>() {
 		@Override
 		public void onResponse(String response) {
+			customProgressDialog.dismiss();
 			List<Comment> lists = null;
 			try {
 				lists = Comment.formList(response);
@@ -247,6 +249,7 @@ public class CommentActivity extends BaseActivity implements
 			if (lists != null && !lists.isEmpty()) {
 				adapter = new CommentItemAdapter(context, lists);
 				listview.setAdapter(adapter);
+				listview.setVisibility(View.VISIBLE);
 			}
 		}
 	};

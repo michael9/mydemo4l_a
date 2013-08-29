@@ -25,9 +25,9 @@ import com.cqvip.moblelib.view.CustomProgressDialog;
 
 public class DetailAdvancedBookActivity extends BaseActivity{
 
-	private TextView content;
+	private TextView title,content;
 	private int type;
-	private String id,bookname;
+	private String id;
 	private Map<String, String> gparams;
 	private Context context;
 	@Override
@@ -36,17 +36,13 @@ public class DetailAdvancedBookActivity extends BaseActivity{
 		setContentView(R.layout.activity_detail_advanced_book);
 		context = this;
 		content = (TextView)findViewById(R.id.ad_book_content);
+		title= (TextView)findViewById(R.id.ad_book_title);
 		type = getIntent().getIntExtra("type",1);
 		id = getIntent().getStringExtra("id");
-		bookname=getIntent().getStringExtra("bookname");
 		if(type == Constant.QUESTION){
 			content.setText(id);
 			setheadbar(getResources().getString(R.string.title_FAQ));
-		}else if(type == Constant.HOTBOOK||type == Constant.NEWBOOK){
-			customProgressDialog.show();
-			getContent(id);
-			setheadbar(bookname);
-			}else{
+		}else{
 		customProgressDialog.show();
 		getContent(id);
 		setheadbar(getResources().getString(R.string.title_moredetail));
@@ -85,6 +81,8 @@ public class DetailAdvancedBookActivity extends BaseActivity{
             	customProgressDialog.dismiss();
             	try {
     				if (json.getString("success").equalsIgnoreCase("true")) {
+    					title.setText(json.getString("title"));
+    					//String title="<div align=\"center\"> <h1><font  color=\"#0099cc\">"+json.getString("title")+"</font></h1></div>";
     					content.setText(Html.fromHtml(json.getString("contents")));
     				}
     			} catch (Exception e) {

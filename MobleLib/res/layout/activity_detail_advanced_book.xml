@@ -13,16 +13,27 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/head_bar"
-        android:layout_marginBottom="20dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/text_bck" >
+        android:background="@drawable/text_bck"
+        android:padding="8dp" >
 
-        <TextView
-            android:id="@+id/ad_book_content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/ad_book_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/title_suggest"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/ad_book_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
     </ScrollView>
 
 </RelativeLayout>
