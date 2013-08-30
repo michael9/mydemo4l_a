@@ -63,6 +63,7 @@ public class NetworkImageView_rotate extends ImageView {
 
 	private ViewGroup mContainer;
 	private ImageView readerinfo_f_lay, readerinfo_b_lay;
+	private boolean isrotate = true;
 
 	public NetworkImageView_rotate(Context context) {
 		this(context, null);
@@ -197,14 +198,18 @@ public class NetworkImageView_rotate extends ImageView {
 						if (response.getBitmap() != null) {
 							// Log.i("NetworkImageView_rotate",
 							// "response.getBitmap()");
-							mContainer = (ViewGroup) getParent();
-							if (mContainer != null) {
-								readerinfo_f_lay = (ImageView) mContainer
-										.findViewById(R.id.defaut_book_img);
+							if (isrotate) {
+								mContainer = (ViewGroup) getParent();
+								if (mContainer != null) {
+									readerinfo_f_lay = (ImageView) mContainer
+											.findViewById(R.id.defaut_book_img);
+								}
+								readerinfo_b_lay = NetworkImageView_rotate.this;
+								applyRotation(0, 0, 90);
+								isrotate=false;
 							}
-							readerinfo_b_lay = NetworkImageView_rotate.this;
 							setImageBitmap(response.getBitmap());
-							applyRotation(0, 0, 90);
+
 						} else if (mDefaultImageId != 0) {
 							setImageResource(mDefaultImageId);
 						}
@@ -287,9 +292,9 @@ public class NetworkImageView_rotate extends ImageView {
 
 		public void onAnimationEnd(Animation animation) {
 			if (mContainer != null && readerinfo_f_lay != null) {
-			mContainer.post(new SwapViews(mPosition));
-			}else{
-			readerinfo_b_lay.post(new SwapViews(mPosition));
+				mContainer.post(new SwapViews(mPosition));
+			} else {
+				readerinfo_b_lay.post(new SwapViews(mPosition));
 			}
 		}
 
