@@ -328,7 +328,7 @@ private int mImageThumbSize;
                 imageView = new NetworkImageView_rotate(mContext);
                 imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 imageView.setLayoutParams(mImageViewLayoutParams);
-                imageView.setBackgroundColor(R.drawable.silvergray);
+                imageView.setImageResource(R.drawable.silvergray);
             } else { // Otherwise re-use the converted view
                 imageView = (NetworkImageView_rotate) convertView;
             }
