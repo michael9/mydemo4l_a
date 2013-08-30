@@ -286,7 +286,11 @@ public class NetworkImageView_rotate extends ImageView {
 		}
 
 		public void onAnimationEnd(Animation animation) {
+			if (mContainer != null && readerinfo_f_lay != null) {
 			mContainer.post(new SwapViews(mPosition));
+			}else{
+			readerinfo_b_lay.post(new SwapViews(mPosition));
+			}
 		}
 
 		public void onAnimationRepeat(Animation animation) {
