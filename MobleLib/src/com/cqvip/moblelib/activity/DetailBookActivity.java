@@ -203,6 +203,7 @@ public class DetailBookActivity extends BaseActivity {
 		@Override
 		public void onResponse(String response) {
 			// TODO Auto-generated method stub
+			if(customProgressDialog!=null&&customProgressDialog.isShowing())
 			customProgressDialog.dismiss();
 			try {
 				Result r=new Result(response);
@@ -219,6 +220,7 @@ public class DetailBookActivity extends BaseActivity {
 		@Override
 		public void onResponse(String response) {
 			// TODO Auto-generated method stub
+			if(customProgressDialog!=null&&customProgressDialog.isShowing())
 			customProgressDialog.dismiss();
 			try {
 				final List<BookLoc> list = BookLoc.formList(response);
@@ -241,6 +243,7 @@ public class DetailBookActivity extends BaseActivity {
 		@Override
 		public void onErrorResponse(VolleyError arg0) {
 			// TODO Auto-generated method stub
+			if(customProgressDialog!=null&&customProgressDialog.isShowing())
 			customProgressDialog.dismiss();
 		}
 	};

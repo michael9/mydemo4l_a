@@ -355,6 +355,7 @@ public class EbookDetailActivity extends BaseActivity {
 		@Override
 		public void onResponse(String response) {
 			// TODO Auto-generated method stub
+			if(customProgressDialog!=null&&customProgressDialog.isShowing())
 			customProgressDialog.dismiss();
 			try {
 				List<ShortBook> book = ShortBook.formList(Task.TASK_EBOOK_DOWN,
@@ -380,6 +381,7 @@ public class EbookDetailActivity extends BaseActivity {
 		@Override
 		public void onResponse(String response) {
 			// TODO Auto-generated method stub
+			if(customProgressDialog!=null&&customProgressDialog.isShowing())
 			customProgressDialog.dismiss();
 			try {
 				Result result = new Result(response);
@@ -394,6 +396,7 @@ public class EbookDetailActivity extends BaseActivity {
 		@Override
 		public void onErrorResponse(VolleyError arg0) {
 			// TODO Auto-generated method stub
+			if(customProgressDialog!=null&&customProgressDialog.isShowing())
 			customProgressDialog.dismiss();
 
 		}

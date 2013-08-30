@@ -85,4 +85,14 @@ public class BaseActivity extends Activity {
 					.getString(R.string.favorfail));
 		}
 	}
+	
+	@Override
+	protected void onStop() {
+		// TODO Auto-generated method stub
+		super.onStop();
+		if(customProgressDialog!=null){
+			customProgressDialog.dismiss();
+			customProgressDialog=null;
+		}
+	}
 }

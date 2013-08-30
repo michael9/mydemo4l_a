@@ -267,6 +267,7 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 	Listener<String> backlistener_content = new Listener<String>() {
 		@Override
 		public void onResponse(String response) {
+			if(customProgressDialog!=null&&customProgressDialog.isShowing())
 			customProgressDialog.dismiss();
 			progress.setVisibility(View.GONE);
 			try {
@@ -294,6 +295,7 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 	Listener<String> backlistener = new Listener<String>() {
 		@Override
 		public void onResponse(String response) {
+			if(customProgressDialog!=null&&customProgressDialog.isShowing())
 			customProgressDialog.dismiss();
 			try {
 				Periodical periodical =Periodical.formObject(response,Task.TASK_PERIODICAL_DETAIL);	
@@ -323,6 +325,7 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 		@Override
 		public void onErrorResponse(VolleyError arg0) {
 			// TODO Auto-generated method stub
+			if(customProgressDialog!=null&&customProgressDialog.isShowing())
 			customProgressDialog.dismiss();
 
 		}

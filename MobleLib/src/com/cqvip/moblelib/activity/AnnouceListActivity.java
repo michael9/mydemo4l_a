@@ -103,6 +103,7 @@ public class AnnouceListActivity extends BaseActivity implements OnItemClickList
 		@Override
 		public void onResponse(String response) {
 			// TODO Auto-generated method stub
+			if(customProgressDialog!=null&&customProgressDialog.isShowing())
 			customProgressDialog.dismiss();
 			try {
 				List<ShortBook> lists= ShortBook.formList(sendtype, response);
@@ -138,6 +139,7 @@ public class AnnouceListActivity extends BaseActivity implements OnItemClickList
 		@Override
 		public void onErrorResponse(VolleyError arg0) {
 			// TODO Auto-generated method stub
+			if(customProgressDialog!=null&&customProgressDialog.isShowing())
 			customProgressDialog.dismiss();
 		}
 	};

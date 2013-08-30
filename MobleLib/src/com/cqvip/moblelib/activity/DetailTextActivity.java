@@ -94,6 +94,7 @@ public class DetailTextActivity extends BaseActivity {
 		@Override
 		public void onResponse(JSONObject arg0) {
 			// TODO Auto-generated method stub
+			if(customProgressDialog!=null&&customProgressDialog.isShowing())
 			customProgressDialog.dismiss();
 			try {
 				if (arg0.getString("success").equalsIgnoreCase("true")) {
@@ -112,6 +113,7 @@ public class DetailTextActivity extends BaseActivity {
 		@Override
 		public void onErrorResponse(VolleyError arg0) {
 			// TODO Auto-generated method stub
+			if(customProgressDialog!=null&&customProgressDialog.isShowing())
 			customProgressDialog.dismiss();
 			content.setText(DetailTextActivity.this.getResources().getString(
 					R.string.loadfail));
