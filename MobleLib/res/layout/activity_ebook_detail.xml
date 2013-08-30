@@ -35,6 +35,15 @@
                 android:layout_marginLeft="10.0dip"
                 android:layout_marginTop="5.0dip"
                 android:background="@android:color/transparent" />
+            
+            <TextView
+                android:id="@+id/txt_icon_desc"
+                style="@style/TextContentSmallStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ebook_icon_img"
+                android:layout_alignLeft="@+id/ebook_icon_img"
+                android:text="(来源期刊图片)" />
 
             <LinearLayout
                 android:id="@+id/lyRightLayout"

@@ -132,11 +132,12 @@ public class EbookAdapter extends BaseAdapter {
 				+ book.getNum() + "ÆÚ");
 		holder.u_abstract.setText(describe + book.getRemark_c());
 		String url=book.getImgurl();
-        if(!TextUtils.isEmpty(url)){
-        	holder.img.setImageUrl(url, mImageLoader);
-        } else {
-            holder.img.setImageResource(R.drawable.defaut_book);
-        }
+		holder.img.setVisibility(View.GONE);
+//        if(!TextUtils.isEmpty(url)){
+//        	holder.img.setImageUrl(url, mImageLoader);
+//        } else {
+//            holder.img.setImageResource(R.drawable.defaut_book);
+//        }
 		return convertView;
 	}
 
