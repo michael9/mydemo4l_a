@@ -84,8 +84,8 @@ public class PeriodicalAdapter extends BaseAdapter{
 		ImageView icon;
 		TextView name;
 		TextView ename;
-		TextView cnno;
-		TextView issn;
+//		TextView cnno;
+//		TextView issn;
 		
 	}
 	
@@ -104,8 +104,8 @@ public class PeriodicalAdapter extends BaseAdapter{
 			holder.icon = (ImageView) convertView.findViewById(R.id.re_book_img);
 			holder.name = (TextView) convertView.findViewById(R.id.re_name_txt);
 			holder.ename = (TextView) convertView.findViewById(R.id.re_author_txt);
-			holder.cnno = (TextView) convertView.findViewById(R.id.re_addr_txt);
-			holder.issn = (TextView) convertView.findViewById(R.id.re_time_txt);
+//			holder.cnno = (TextView) convertView.findViewById(R.id.re_addr_txt);
+//			holder.issn = (TextView) convertView.findViewById(R.id.re_time_txt);
 			convertView.setTag(holder);
 		}else{
 			holder = (ViewHolder) convertView.getTag();
@@ -120,8 +120,8 @@ public class PeriodicalAdapter extends BaseAdapter{
 		    }
 	        holder.name.setText(periodical.getName());
 	        holder.ename.setText(periodical.getEname());
-	        holder.cnno.setText(context.getResources().getString(R.string.title_cnno)+periodical.getCnno());
-	        holder.issn.setText(context.getResources().getString(R.string.title_issn)+periodical.getIssn());
+//	        holder.cnno.setText(context.getResources().getString(R.string.title_cnno)+periodical.getCnno());
+//	        holder.issn.setText(context.getResources().getString(R.string.title_issn)+periodical.getIssn());
 	        //·ÖÏí
 		return convertView;
 	}

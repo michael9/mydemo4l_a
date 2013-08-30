@@ -88,7 +88,8 @@ public class CommentActivity extends BaseActivity implements
 		}
 
 		baseinfo_tv.setText(dBook.getTitle());
-		intro_tv.setText(getString(R.string.item_author) + dBook.getAuthor()+ "\n"+getString(R.string.item_describe) + describe);
+		//intro_tv.setText(getString(R.string.item_author) + dBook.getAuthor()+ "\n"+getString(R.string.item_describe) + describe);
+		intro_tv.setText(getString(R.string.item_author) + dBook.getAuthor());
 
 		if (!TextUtils.isEmpty(dBook.getCover_path())) {
 			//mImageFetcher.loadImage(dBook.getCover_path(), img);

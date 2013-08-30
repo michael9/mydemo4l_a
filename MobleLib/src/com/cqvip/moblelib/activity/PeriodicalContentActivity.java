@@ -114,7 +114,7 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 							city.setCurrentItem(yearlist.get(newValue).getNum().length / 2);
 							}
 							mYear = yearlist.get(newValue).getYear();
-							confirm.setText(mYear+"年第"+mMonth+"期");
+							//confirm.setText(mYear+"年第"+mMonth+"期");
 							//记录下位置
 							yaer_record = newValue;
 						}
@@ -123,7 +123,7 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 						public void onChanged(WheelView wheel, int oldValue, int newValue) {
 							//mMonth =  newValue+1+"";
 							mMonth =  yearlist.get(yaer_record).getNum()[newValue];
-							confirm.setText(mYear+"年第"+mMonth+"期");
+							//confirm.setText(mYear+"年第"+mMonth+"期");
 							//记录下位置
 							month_record = newValue;
 						}
@@ -134,8 +134,9 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 			        city.setCurrentItem(month_record);
 			        mYear =  yearlist.get(yaer_record).getYear();
 			        mMonth = arr[month_record];
-				confirm.setText(mYear+"年第"+mMonth+"期");
-				confirm.setOnClickListener(new View.OnClickListener() {
+				//confirm.setText(mYear+"年第"+mMonth+"期");
+				
+			        confirm.setOnClickListener(new View.OnClickListener() {
 
 					@Override
 					public void onClick(View v) {

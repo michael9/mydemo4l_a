@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.Request.Method;
@@ -85,7 +86,8 @@ public class BorrowBookAdapter extends BaseAdapter{
 			TextView callno;//索书号
 			TextView borrowtime;//借书时间
 			TextView returntime;//还书时间
-			TextView renew;//续借
+//			TextView renew;//续借
+			ImageView renew;//续借
 			TextView price;//价格
 			
 			}
@@ -104,7 +106,8 @@ public class BorrowBookAdapter extends BaseAdapter{
 			holder.borrowtime = (TextView) convertView.findViewById(R.id.br_brtime_txt);
 			holder.returntime = (TextView) convertView.findViewById(R.id.br_retime_txt);
 			holder.price = (TextView) convertView.findViewById(R.id.br_price_txt);
-			holder.renew = (TextView) convertView.findViewById(R.id.re_brrenew_txt);
+			//holder.renew = (TextView) convertView.findViewById(R.id.re_brrenew_txt);
+			holder.renew = (ImageView) convertView.findViewById(R.id.re_brrenew_txt);
 		
 			convertView.setTag(holder);
 		}else{
@@ -122,20 +125,16 @@ public class BorrowBookAdapter extends BaseAdapter{
 	        holder.price.setText(price+book.getPrice());
 	        holder.borrowtime.setText(borrowtime+book.getLoandate());
 	        holder.renew.setTag(position);
+	        //判断是否续借过
 	        if(book.getRenew()!=0){
 	        holder.returntime.setText(returntime+book.getReturndate()+context.getResources().getString(R.string.alreadyrenew));
-	        holder.renew.setTextColor(context.getResources().getColor(R.color.txt_red));
+	        holder.renew.setVisibility(View.GONE);
 	        }else{
 	        	holder.returntime.setText(returntime+book.getReturndate());
-	        	holder.renew.setTextColor(context.getResources().getColor(R.color.green_light));
+	        	if(holder.renew.getVisibility()==View.GONE){
+	        		holder.renew.setVisibility(View.VISIBLE);
+	        	}
 	        }
-	        //判断是否续借过
-//	        if(book.getRenew()!=0){
-//	        	holder.renew.setVisibility(View.GONE);
-//	        }else{
-//	        	if(holder.renew.getVisibility()==View.GONE){
-//	        		holder.renew.setVisibility(View.VISIBLE);
-//	        	}
 	        		holder.renew.setOnClickListener(new View.OnClickListener() {
 						
 						@Override

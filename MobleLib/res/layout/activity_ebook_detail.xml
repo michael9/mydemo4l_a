@@ -84,6 +84,7 @@
                     android:text="出版：电子工业出版社"
                     android:maxLines="3"
                     android:textColor="@color/txt_black"
+                    android:visibility="gone"
                     android:textSize="@dimen/search_detail_txtsize_tv" />
                 <!-- page -->
 
@@ -94,6 +95,7 @@
                     android:singleLine="true"
                     android:text="页数："
                     android:textColor="@color/txt_black"
+                    android:visibility="gone"
                     android:textSize="@dimen/search_detail_txtsize_tv" />
                 <!-- size -->
 
