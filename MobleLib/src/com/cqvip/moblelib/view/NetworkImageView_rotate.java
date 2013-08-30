@@ -63,7 +63,11 @@ public class NetworkImageView_rotate extends ImageView {
 
 	private ViewGroup mContainer;
 	private ImageView readerinfo_f_lay, readerinfo_b_lay;
-	private boolean isrotate = true;
+	private boolean isrotate = false;
+
+	public void setIsrotate(boolean isrotate) {
+		this.isrotate = isrotate;
+	}
 
 	public NetworkImageView_rotate(Context context) {
 		this(context, null);
@@ -196,8 +200,8 @@ public class NetworkImageView_rotate extends ImageView {
 						}
 
 						if (response.getBitmap() != null) {
-							// Log.i("NetworkImageView_rotate",
-							// "response.getBitmap()");
+							 Log.i("NetworkImageView_rotate",
+							 "response.getBitmap()"+isrotate);
 							if (isrotate) {
 								mContainer = (ViewGroup) getParent();
 								if (mContainer != null) {

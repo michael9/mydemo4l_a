@@ -4,6 +4,7 @@ import java.util.List;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -80,7 +81,7 @@ public class AdvancedBookAdapter extends BaseAdapter {
 			NetworkImageView_rotate img;//时间图片 不用修改
 			
 			}
-	  
+	  private int rotate_position=-1;
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		final ViewHolder holder ;
@@ -101,7 +102,13 @@ public class AdvancedBookAdapter extends BaseAdapter {
 //			ImageListener listener = ImageLoader.getImageListener(holder.img,
 //					R.drawable.defaut_book, R.drawable.defaut_book);
 //			mImageLoader.get(book.getDate(), listener);
-			
+        	if(position>rotate_position){
+        		holder.img.setIsrotate(true);
+        		//Log.i("AdvancedBookAdapter", "rotate_position");
+        	}
+        	Log.i("AdvancedBookAdapter", rotate_position+"rotate_position+positon"+position);
+	        rotate_position=position>rotate_position?position:rotate_position;  
+	        
 			String url=book.getDate();
 	        if(!TextUtils.isEmpty(url)){
 	        	holder.img.setImageUrl(url, mImageLoader);

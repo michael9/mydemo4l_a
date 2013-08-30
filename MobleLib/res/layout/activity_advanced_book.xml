@@ -16,9 +16,7 @@
         android:layout_height="fill_parent"
         android:layout_below="@id/head_bar"
         android:horizontalSpacing="@dimen/image_thumbnail_spacing"
-        android:numColumns="auto_fit" 
-        android:columnWidth="@dimen/image_thumbnail_size"
-        android:stretchMode="columnWidth"
+        android:numColumns="3" 
         android:verticalSpacing="@dimen/gridview_vertical_spacing">
     </GridView>
 
