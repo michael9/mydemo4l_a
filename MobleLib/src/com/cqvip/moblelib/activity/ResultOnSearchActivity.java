@@ -30,6 +30,7 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.StringRequest;
 import com.cqvip.moblelib.R;
 import com.cqvip.moblelib.adapter.BookAdapter;
+import com.cqvip.moblelib.constant.Constant;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.Book;
 import com.cqvip.moblelib.model.EBook;
@@ -43,7 +44,7 @@ public class ResultOnSearchActivity extends BaseActivity implements
 	public  final int GETFIRSTPAGE = 1;
 	public  final int GETNEXTPAGE = 2;
 
-	public static final int DEFAULT_COUNT = 10;
+	public static final int DEFAULT_COUNT = Constant.DEFAULT_COUNT;
 	private EditText edit;
 	private TextView searchCount;
 	private ImageButton imgsearch;

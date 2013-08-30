@@ -10,11 +10,14 @@ import android.annotation.TargetApi;
 import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -224,6 +227,7 @@ public class EbookDetailActivity extends BaseActivity {
 					 }
 				}else{
 					Tool.ShowMessages(context,getString(R.string.tips_unable_download));
+					
 				}
 			}else{
 				// 进入下载界面
@@ -352,14 +356,17 @@ public class EbookDetailActivity extends BaseActivity {
 		public void onResponse(String response) {
 			// TODO Auto-generated method stub
 			customProgressDialog.dismiss();
-			btn_ebook_detail_download.setVisibility(View.VISIBLE);
 			try {
 				List<ShortBook> book = ShortBook.formList(Task.TASK_EBOOK_DOWN,
 						response);
+				btn_ebook_detail_download.setVisibility(View.VISIBLE);
 				if (book != null) {
 					download_url = book.get(0).getDate();
 				}else{
-					Tool.ShowMessages(context,getString(R.string.tips_unable_download));
+					//Tool.ShowMessages(context,getString(R.string.tips_unable_download));
+					Drawable forbit = getResources().getDrawable(R.drawable.icon_download_forbid);
+					forbit.setBounds(btn_ebook_detail_download.getCompoundDrawables()[1].getBounds());
+					btn_ebook_detail_download.setCompoundDrawables(null, forbit, null, null);
 				}
 				
 			} catch (Exception e) {

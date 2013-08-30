@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:tag="itemview" >
+
+    <!-- 图书 -->
+        <com.android.volley.toolbox.NetworkImageView 
+            android:id="@+id/re_book_img"
+            android:layout_width="72dp"
+            android:layout_height="96dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="2.0dip"
+            android:layout_marginTop="2.0dip"
+            android:background="@android:color/transparent"
+            android:saveEnabled="true"
+            android:scaleType="centerCrop" />
+
+            <RelativeLayout
+                android:id="@+id/childLayout"
+                  android:layout_width="fill_parent"
+                 android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/re_book_img"
+                android:layout_marginLeft="2.0dip"
+                 >
+
+                <!-- title -->
+
+                <TextView
+                    android:id="@+id/re_name_txt"
+                    style="@style/TextTitleMiddleBlueStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:layout_marginTop="2.0dip"
+                    android:text="编程的艺术"
+                    />
+                <!-- author -->
+
+                <TextView
+                    android:id="@+id/re_author_txt"
+                    style="@style/TextContentMiddleStyle"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2.0dip"
+                    android:layout_below="@+id/re_name_txt"
+                    android:singleLine="true"
+                    android:text="作者：托马斯"
+                     />
+				
+                <!-- address -->
+
+                <TextView
+                    android:id="@+id/re_addr_txt"
+                    style="@style/TextContentMiddleStyle"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:layout_below="@+id/re_author_txt"
+                    android:visibility="gone"
+                    android:text="出版者：电子工业出版社，2012"
+                   />
+
+                <!-- time -->
+				<TextView
+                    android:id="@+id/txt_abst"
+                    style="@style/TextContentMiddleStyle"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:layout_below="@+id/re_addr_txt"
+                    android:maxLines="3"
+                    />
+                
+                <TextView
+                    android:id="@+id/favor_cancel"
+                    style="@style/TextContentSmallStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                     android:layout_below="@+id/txt_abst"
+                     android:layout_alignParentRight="true"
+                     android:drawableLeft="@drawable/icon_cancle_favor"
+                     android:gravity="center_vertical"
+                     android:layout_marginRight="8.0dip"
+                    android:text="取消收藏"
+                    />
+        </RelativeLayout>
+            
+</RelativeLayout>

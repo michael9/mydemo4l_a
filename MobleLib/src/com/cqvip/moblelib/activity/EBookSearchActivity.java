@@ -29,6 +29,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.cqvip.moblelib.BuildConfig;
 import com.cqvip.moblelib.R;
 import com.cqvip.moblelib.adapter.EbookAdapter;
+import com.cqvip.moblelib.constant.Constant;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.EBook;
 import com.cqvip.moblelib.view.CustomProgressDialog;
@@ -41,7 +42,7 @@ public class EBookSearchActivity extends BaseActivity implements
 	public static final int GETFIRSTPAGE = 1;
 	public static final int GETNEXTPAGE = 2;
 	public static final int FAVOR = 3;
-	public static final int DEFAULT_COUNT = 10;
+	public static final int DEFAULT_COUNT = Constant.DEFAULT_COUNT;
 	private EditText edit;
 	private TextView searchCount;
 	private ImageView imgsearch;
