@@ -93,12 +93,12 @@
                     </LinearLayout>
                 </LinearLayout>
 
-                <Button
+                <TextView
                     android:id="@+id/download_cancel"
-                    android:layout_width="42dp"
-                    android:layout_height="42dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
-                    android:background="@drawable/icon_stop"
+                    android:drawableTop="@drawable/icon_del"
                     android:focusable="false" />
             </LinearLayout>
         </LinearLayout>

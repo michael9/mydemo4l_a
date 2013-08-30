@@ -39,6 +39,7 @@ import com.android.volley.toolbox.Volley;
 import com.cqvip.mobelib.imgutils.ImageFetcher;
 import com.cqvip.moblelib.R;
 import com.cqvip.moblelib.biz.Task;
+import com.cqvip.moblelib.constant.Constant;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.Book;
 import com.cqvip.moblelib.model.EBook;
@@ -54,7 +55,7 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 	public static final int GETNEXT = 3;
 
 	private int curpage = 1;// 第几页
-	private int perpage = 10;// 每页显示条数
+	private int perpage = Constant.DEFAULT_COUNT;// 每页显示条数
 	private Favorite del_favorite;
 	private View moreprocess;
 	private int curpage_sz = 1, curpage_zk = 1;// 第几页
@@ -520,7 +521,7 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 		TextView publisher;// 出版社
 		ImageView img;// 时间图片 不用修改
 		TextView isbn;
-		Button favor_cancel;
+		TextView favor_cancel;
 		//Button btn_comment, btn_item_result_search_share, favorite;
 
 	}
@@ -602,28 +603,23 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 					|| convertView.findViewById(R.id.linemore) != null) {
 				//Log.i("convertView20130808", "convertView");
 				convertView = LayoutInflater.from(myContext).inflate(
-						R.layout.item_book_sns, null);
+						R.layout.item_book_favor, null);
 				holder = new ViewHolder();
 				holder.title = (TextView) convertView
 						.findViewById(R.id.re_name_txt);
 				holder.author = (TextView) convertView
 						.findViewById(R.id.re_author_txt);
-				holder.publisher = (TextView) convertView
-						.findViewById(R.id.re_addr_txt);
+//				holder.publisher = (TextView) convertView
+//						.findViewById(R.id.re_addr_txt);
 				holder.img = (ImageView) convertView
 						.findViewById(R.id.re_book_img);
 				// holder.u_abstract = (TextView)
 				// convertView.findViewById(R.id.re_hot_txt);
 				holder.isbn = (TextView) convertView
 						.findViewById(R.id.txt_abst);
-				holder.favor_cancel=(Button) convertView.findViewById(R.id.favor_cancel);
-				holder.favor_cancel.setVisibility(View.VISIBLE);
-//				holder.btn_item_result_search_share = (Button) convertView
-//						.findViewById(R.id.btn_item_result_search_share);
-//				holder.favorite = (Button) convertView
-//						.findViewById(R.id.btn_item_result_search_collect);
-//				holder.btn_comment = (Button) convertView
-//						.findViewById(R.id.btn_comment);
+				holder.favor_cancel=(TextView) convertView.findViewById(R.id.favor_cancel);
+				holder.favor_cancel.setTextColor(getResources().getColor(
+						R.color.green_light));
 				convertView.setTag(holder);
 			} else {
 				holder = (ViewHolder) convertView.getTag();
@@ -638,7 +634,7 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 			Favorite favorite = arrayList.get(position);
 			holder.title.setText(favorite.getTitle());
 			holder.author.setText(author + favorite.getWriter());
-			holder.publisher.setText(publish + favorite.getOrgan()+","+favorite.getYears());
+//			holder.publisher.setText(publish + favorite.getOrgan()+","+favorite.getYears());
 			holder.isbn.setText("收藏时间:" + favorite.getFavoritetime());
 			final ViewGroup temp_parent=parent;
 			final int temp_position=position;

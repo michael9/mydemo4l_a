@@ -34,6 +34,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.cqvip.mobelib.imgutils.ImageFetcher;
 import com.cqvip.moblelib.R;
 import com.cqvip.moblelib.biz.Task;
+import com.cqvip.moblelib.constant.Constant;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.Book;
 import com.cqvip.moblelib.model.Favorite;
@@ -55,7 +56,7 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 	public static final int GETNEXT = 3;
 
 	private int curpage = 1;// 第几页
-	private int perpage = 10;// 每页显示条数
+	private int perpage = Constant.DEFAULT_COUNT;// 每页显示条数
 	private View moreprocess;
 	private int curpage_sz = 1, curpage_zk = 1;
 
@@ -514,7 +515,7 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 			if (convertView == null
 					|| convertView.findViewById(R.id.linemore) != null) {
 				convertView = LayoutInflater.from(myContext).inflate(
-						R.layout.item_book_sns, null);
+						R.layout.item_book_comment, null);
 				holder = new ViewHolder();
 
 				holder.title = (TextView) convertView

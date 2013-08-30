@@ -42,6 +42,7 @@ public class EBook implements Serializable{
 		    private long pdfsize;//大小
 		    private String imgurl;//图片
 		    private boolean isfavorite;//是否收藏
+		    private boolean allowdown;//是否
 	
 		    
 		    public EBook(String lngid, String years, String num, String title_c,
@@ -168,6 +169,7 @@ public class EBook implements Serializable{
 		    				pdfsize = getInt("pdfsize",json);
 		    				imgurl = json.getString("imgurl");
 		    				isfavorite = json.getBoolean("isfavorite");
+		    				allowdown = json.getBoolean("allowdown");
 		    			} catch (JSONException e) {
 		    				e.printStackTrace();
 		    				throw new BookException(e);

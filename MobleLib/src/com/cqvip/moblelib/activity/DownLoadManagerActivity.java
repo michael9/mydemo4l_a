@@ -365,7 +365,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 		TextView download_size;//
 		TextView download_precent;//
 		ProgressBar download_progress;//
-		Button download_cancel;//
+		TextView download_cancel;//
 		TextView downloadtip;
 	}
 
@@ -448,7 +448,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 						View.GONE);
 				convertView.findViewById(R.id.download_progress).setVisibility(
 						View.GONE);
-				holder.download_cancel = (Button) convertView
+				holder.download_cancel = (TextView) convertView
 						.findViewById(R.id.download_cancel);
 				convertView.findViewById(R.id.download_tip).setVisibility(
 						View.GONE);
@@ -592,7 +592,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 						.findViewById(R.id.download_precent);
 				holder.download_progress = (ProgressBar) convertView
 						.findViewById(R.id.download_progress);
-				holder.download_cancel = (Button) convertView
+				holder.download_cancel = (TextView) convertView
 						.findViewById(R.id.download_cancel);
 				holder.downloadtip = (TextView) convertView
 						.findViewById(R.id.download_tip);

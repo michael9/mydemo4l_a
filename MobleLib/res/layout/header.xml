@@ -32,7 +32,7 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="9dip"
-        android:src="@drawable/icon_download"
+        android:src="@drawable/icon_collection_download"
         android:visibility="gone" />
 
     <TextView

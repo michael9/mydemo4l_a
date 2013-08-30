@@ -26,6 +26,7 @@ import com.cqvip.moblelib.R;
 import com.cqvip.moblelib.adapter.EbookAdapter;
 import com.cqvip.moblelib.adapter.PeriodicalAdapter;
 import com.cqvip.moblelib.biz.Task;
+import com.cqvip.moblelib.constant.Constant;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.EBook;
 import com.cqvip.moblelib.model.Periodical;
@@ -42,7 +43,7 @@ public class PeriodicalListActivity extends BaseImageActivity implements
 	public static final int GETFIRSTPAGE = 1;
 	public static final int GETNEXTPAGE = 2;
 	public static final int FAVOR = 3;
-	public static final int DEFAULT_COUNT = 10;
+	public static final int DEFAULT_COUNT = Constant.DEFAULT_COUNT;
 	private TextView searchCount;
 	private Context context;
 	private ListView listview;
