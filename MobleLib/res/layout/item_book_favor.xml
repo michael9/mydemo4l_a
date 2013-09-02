@@ -80,10 +80,9 @@
                     android:layout_height="wrap_content"
                      android:layout_below="@+id/txt_abst"
                      android:layout_alignParentRight="true"
-                     android:drawableLeft="@drawable/icon_cancle_favor"
+                     android:drawableLeft="@drawable/icon_del"
                      android:gravity="center_vertical"
                      android:layout_marginRight="8.0dip"
-                    android:text="取消收藏"
                     />
         </RelativeLayout>
             

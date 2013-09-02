@@ -11,7 +11,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.TextUtils;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -26,11 +25,10 @@ import android.widget.GridView;
 import android.widget.ImageView;
 
 import com.android.volley.Request.Method;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
+import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.StringRequest;
 import com.cqvip.mobelib.imgutils.ImageFetcher;
 import com.cqvip.mobelib.imgutils.RecyclingImageView;
@@ -39,11 +37,9 @@ import com.cqvip.moblelib.activity.PeriodicalClassfyActivity;
 import com.cqvip.moblelib.activity.PeriodicalContentActivity;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
+import com.cqvip.moblelib.fragment.basefragment.BaseAbstractFragment;
 import com.cqvip.moblelib.model.Periodical;
 import com.cqvip.moblelib.view.CustomProgressDialog;
-import com.cqvip.moblelib.view.NetworkImageView_rotate;
-import com.cqvip.utils.BitmapCache;
-import com.cqvip.utils.Tool; 
 
 /**
  * 特别推荐
@@ -58,10 +54,8 @@ private int mImageThumbSize;
 	private GridView gridView;
 	private HashMap<String, String> gparams; // 参数
 	private List<Periodical> lists = null;
-    //private ImageFetcher mImageFetcher;
+    private ImageFetcher mImageFetcher;
 	private RequestQueue mQueue;
-	private ImageLoader mImageLoader;
-	private BitmapCache cache;
 	private CustomProgressDialog customProgressDialog;
 	public SpecialPeriodicalFragment(){
 		
@@ -75,14 +69,14 @@ private int mImageThumbSize;
 		return ft;
 	}
 	
-	@Override
-	public void onSaveInstanceState(Bundle outState) {
-		// TODO Auto-generated method stub
-		super.onSaveInstanceState(outState);
-		if(lists!=null){
-		outState.putSerializable("imgs", (Serializable) lists);
-		}
-	}
+//	@Override
+//	public void onSaveInstanceState(Bundle outState) {
+//		// TODO Auto-generated method stub
+//		super.onSaveInstanceState(outState);
+//		if(lists!=null){
+//		outState.putSerializable("imgs", (Serializable) lists);
+//		}
+//	}
 	@Override
 		public void onAttach(Activity activity) {
 			// TODO Auto-generated method stub
@@ -99,18 +93,19 @@ private int mImageThumbSize;
          customProgressDialog = ((PeriodicalClassfyActivity) getActivity()).getCustomDialog();
          
 	}
-//	 @Override
-//	    public void onActivityCreated(Bundle savedInstanceState) {
-//	        super.onActivityCreated(savedInstanceState);
-//
-//	        // Use the parent activity to load the image asynchronously into the ImageView (so a single
-//	        // cache can be used over all pages in the ViewPager
-//	        if (PeriodicalClassfyActivity.class.isInstance(getActivity())) {
-//	            mImageFetcher = ((PeriodicalClassfyActivity) getActivity()).getImageFetcher();
-//	            mImageFetcher.setLoadingImage(R.drawable.empty_photo);
-//	        }
-//
-//	    }
+	 @Override
+	    public void onActivityCreated(Bundle savedInstanceState) {
+	        super.onActivityCreated(savedInstanceState);
+
+	        // Use the parent activity to load the image asynchronously into the ImageView (so a single
+	        // cache can be used over all pages in the ViewPager
+	        if (PeriodicalClassfyActivity.class.isInstance(getActivity())) {
+	            mImageFetcher = ((PeriodicalClassfyActivity) getActivity()).getImageFetcher();
+	            mImageFetcher.setLoadingImage(R.drawable.empty_photo);
+	            mImageFetcher.setImageFadeIn(true);
+	        }
+
+	    }
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -140,29 +135,28 @@ private int mImageThumbSize;
 	    			 Method.GET);
 	//     }
 	     
-//	     gridView.setOnScrollListener(new AbsListView.OnScrollListener() {
-//	            @Override
-//	            public void onScrollStateChanged(AbsListView absListView, int scrollState) {
-//	                // Pause fetcher to ensure smoother scrolling when flinging
-//	                if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_FLING) {
-//	                    mImageFetcher.setPauseWork(true);
-//	                } else {
-//	                    mImageFetcher.setPauseWork(false);
-//	                }
-//	            }
-//
-//	            @Override
-//	            public void onScroll(AbsListView absListView, int firstVisibleItem,
-//	                    int visibleItemCount, int totalItemCount) {
-//	            }
-//	        });
+	     gridView.setOnScrollListener(new AbsListView.OnScrollListener() {
+	            @Override
+	            public void onScrollStateChanged(AbsListView absListView, int scrollState) {
+	                // Pause fetcher to ensure smoother scrolling when flinging
+	                if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_FLING) {
+	                    mImageFetcher.setPauseWork(true);
+	                } else {
+	                    mImageFetcher.setPauseWork(false);
+	                }
+	            }
+
+	            @Override
+	            public void onScroll(AbsListView absListView, int firstVisibleItem,
+	                    int visibleItemCount, int totalItemCount) {
+	            }
+	        });
  
 	     
 		gridView.getViewTreeObserver().addOnGlobalLayoutListener(
 	                new ViewTreeObserver.OnGlobalLayoutListener() {
 	                    @Override
 	                    public void onGlobalLayout() {
-	                    	Log.i("SpecialPeriodicalFragment", "onGlobalLayout");
 	                        if (mAdapter.getNumColumns() == 0) {
 	                            final int numColumns = (int) Math.floor(
 	                            		gridView.getWidth() / (mImageThumbSize + mImageThumbSpacing));
@@ -178,7 +172,6 @@ private int mImageThumbSize;
 		
 		
 		
-		
 		return rootView;
 	}
 	private void requestVolley(String addr, Listener<String> mj,
@@ -189,7 +182,7 @@ private int mImageThumbSize;
 			mQueue.add(myjson);
 			mQueue.start();
 		} catch (Exception e) {
-e.printStackTrace();
+
 		}
 
 	}
@@ -198,7 +191,6 @@ e.printStackTrace();
 		@Override
 		public void onErrorResponse(VolleyError arg0) {
 			// TODO Auto-generated method stub
-			if(customProgressDialog!=null&&customProgressDialog.isShowing())
 			customProgressDialog.dismiss();
 		}
 	};
@@ -206,48 +198,43 @@ e.printStackTrace();
 	private Listener<String> backlistener = new Listener<String>() {
 		@Override
 		public void onResponse(String response) {
-			// TODO Auto-generated method stub
-			if(customProgressDialog!=null&&customProgressDialog.isShowing())
-			customProgressDialog.dismiss();
 			try {
 				Periodical temp =Periodical.formObject(response,Task.TASK_PERIODICAL_SPECIAL);
 				lists = temp.qklist;
-				
 				if (lists != null && !lists.isEmpty()) {
 //					String[] imgs = new String[lists.size()];
 //					for(int i = 0;i<lists.size();i++){
 //						imgs[i]=lists.get(i).getImgurl();
 //					}
-					cache = new BitmapCache(Tool.getCachSize());
-					mImageLoader=new ImageLoader(mQueue, cache);
 					mAdapter = new ImageAdapter(getActivity(),lists);
 					gridView.setAdapter(mAdapter);
 				}
+				customProgressDialog.dismiss();
 			} catch (Exception e) {
+				customProgressDialog.dismiss();
 				return;
 			}
 		}
 	};
-//	  @Override
-//	    public void onResume() {
-//	        super.onResume();
-//	        mImageFetcher.setExitTasksEarly(false);
-//	        mAdapter.notifyDataSetChanged();
-//	    }
+	  @Override
+	    public void onResume() {
+	        super.onResume();
+	        mImageFetcher.setExitTasksEarly(false);
+	        mAdapter.notifyDataSetChanged();
+	    }
 
-//	    @Override
-//	    public void onPause() {
-//	        super.onPause();
-//	        mImageFetcher.setPauseWork(false);
-//	        mImageFetcher.setExitTasksEarly(true);
-//	        mImageFetcher.flushCache();
-//	    }
+	    @Override
+	    public void onPause() {
+	        super.onPause();
+	        mImageFetcher.setPauseWork(false);
+	        mImageFetcher.setExitTasksEarly(true);
+	        mImageFetcher.flushCache();
+	    }
 
 	    @Override
 	    public void onDestroy() {
 	        super.onDestroy();
-	       // mImageFetcher.closeCache();
-	        cache=null;
+	        mImageFetcher.closeCache();
 	    }
 	    
 	private class ImageAdapter extends BaseAdapter {
@@ -279,7 +266,7 @@ e.printStackTrace();
         
         @Override
         public int getCount() {
-        	rotate_position=mNumColumns-1;
+            // Size + number of columns for top empty row
             return mlists.size() + mNumColumns;
         }
 
@@ -309,8 +296,7 @@ e.printStackTrace();
         public boolean hasStableIds() {
             return true;
         }
-        
-        private int rotate_position;
+
         @Override
         public View getView(int position, View convertView, ViewGroup container) {
             // First check if this is the top row
@@ -325,14 +311,13 @@ e.printStackTrace();
             }
 
             // Now handle the main ImageView thumbnails
-            NetworkImageView_rotate imageView;
+            ImageView imageView;
             if (convertView == null) { // if it's not recycled, instantiate and initialize
-                imageView = new NetworkImageView_rotate(mContext);
+                imageView = new RecyclingImageView(mContext);
                 imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 imageView.setLayoutParams(mImageViewLayoutParams);
-                imageView.setImageResource(R.drawable.silvergray);
             } else { // Otherwise re-use the converted view
-                imageView = (NetworkImageView_rotate) convertView;
+                imageView = (ImageView) convertView;
             }
 
             // Check the height matches our calculated column width
@@ -342,19 +327,7 @@ e.printStackTrace();
 
             // Finally load the image asynchronously into the ImageView, this also takes care of
             // setting a placeholder image while the background thread runs
-           // mImageFetcher.loadImage(mlists.get(position - mNumColumns).getImgurl(), imageView);
-        	if(position>rotate_position){
-        		imageView.setIsrotate(true);
-        		Log.i("AdvancedBookAdapter", rotate_position+"rotate_position+positon"+position);
-        	}
-	        rotate_position=position>rotate_position?position:rotate_position;  
-            
-			String url=mlists.get(position - mNumColumns).getImgurl();
-	        if(!TextUtils.isEmpty(url)){
-	        	imageView.setImageUrl(url, mImageLoader);
-	        } else {
-	        	imageView.setImageResource(R.drawable.defaut_book);
-	        }
+            mImageFetcher.loadImage(mlists.get(position - mNumColumns).getImgurl(), imageView);
             return imageView;
         }
 
@@ -371,9 +344,8 @@ e.printStackTrace();
             mItemHeight = height;
             mImageViewLayoutParams =
                     new GridView.LayoutParams(LayoutParams.MATCH_PARENT, mItemHeight);
-           // mImageFetcher.setImageSize(height);
+            mImageFetcher.setImageSize(height);
             notifyDataSetChanged();
-           
         }
 
         public void setNumColumns(int numColumns) {

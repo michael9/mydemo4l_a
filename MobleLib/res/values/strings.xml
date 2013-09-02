@@ -79,6 +79,7 @@
     <string name="item_volume">期卷：</string>
     <string name="item_cirtype">流通类别：</string>
     <string name="item_price">价格:</string>
+    <string name="item_size">大小:</string>
     <string name="item_brtime">借出时间:</string>
     <string name="item_retime">还回日期:</string>
     <string name="item_renew">续借..</string>
