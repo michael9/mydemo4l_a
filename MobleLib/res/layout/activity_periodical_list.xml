@@ -17,6 +17,7 @@
         android:padding="1dp"
         android:text=""
         android:textSize="12sp"
+        android:textColor="@android:color/black"
         android:visibility="gone" />
     
     <ListView
