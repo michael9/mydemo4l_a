@@ -17,6 +17,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.Request.Method;
@@ -61,6 +62,7 @@ public class CommentActivity extends BaseActivity implements
 	private String keyid;// 书籍唯一id
 	private ImageView img;
 	private View upView;
+	private RelativeLayout rl_baseinfo;
 	public final static String TAG="CommentActivity";
 	private int fromActivity; //1表示从GroupActivity评论入口进来的
 
@@ -91,6 +93,10 @@ public class CommentActivity extends BaseActivity implements
 		//intro_tv.setText(getString(R.string.item_author) + dBook.getAuthor()+ "\n"+getString(R.string.item_describe) + describe);
 		intro_tv.setText(getString(R.string.item_author) + dBook.getAuthor());
 
+		if(typeid==GlobleData.BOOK_ZK_TYPE){
+			img.setVisibility(View.GONE);
+		}else{
+		
 		if (!TextUtils.isEmpty(dBook.getCover_path())) {
 			//mImageFetcher.loadImage(dBook.getCover_path(), img);
 	        ImageLoader mImageLoader = new ImageLoader(mQueue, new BitmapCache(Tool.getCachSize()));
@@ -100,8 +106,9 @@ public class CommentActivity extends BaseActivity implements
 			img.setImageDrawable(getResources().getDrawable(
 					R.drawable.defaut_book));
 		}
+		}
 		listview.setAdapter(adapter);
-		upView.setOnClickListener(new View.OnClickListener() {
+		rl_baseinfo.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
@@ -169,6 +176,7 @@ public class CommentActivity extends BaseActivity implements
 		
 		listview.setOnItemClickListener(this);
 		listview.setOnRefreshListener(this);
+		rl_baseinfo = (RelativeLayout) upView.findViewById(R.id.baseinfo_rl);
 		baseinfo_tv = (TextView) upView.findViewById(R.id.baseinfo_tv);
 		intro_tv = (TextView) upView.findViewById(R.id.intro_tv);
 		commit_btn = (Button) findViewById(R.id.commit_btn);

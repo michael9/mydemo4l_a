@@ -547,9 +547,17 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 			Favorite favorite = arrayList.get(position);
 			holder.title.setText(favorite.getTitle());
 			holder.author.setText(author + favorite.getWriter());
+			if(favorite.getTypeid().equals(GlobleData.BOOK_ZK_TYPE+"")){
+				holder.publisher.setVisibility(View.GONE);
+			}else{
 			holder.publisher.setText(publish + favorite.getOrgan()+","+favorite.getYears());
+			}
 			holder.commentcount.setText(commentcount + "("
 					+ favorite.getCommentcount() + ")");
+			
+			if(favorite.getTypeid().equals(GlobleData.BOOK_ZK_TYPE+"")){
+				holder.img.setVisibility(View.GONE);
+			}else{
 			// ͼƬ
 			if (!TextUtils.isEmpty(favorite.getImgurl())) {
 				fetch.loadImage(favorite.getImgurl(), holder.img);
@@ -557,7 +565,7 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 				holder.img.setImageDrawable(getResources().getDrawable(
 						R.drawable.defaut_book));
 			}
-
+			}
 			return convertView;
 		}
 	}

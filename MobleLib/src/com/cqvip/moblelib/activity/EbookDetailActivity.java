@@ -115,7 +115,7 @@ public class EbookDetailActivity extends BaseActivity {
 
 		title.setText(dBook.getTitle_c());
 		author.setText(author1 + dBook.getWriter());
-		if(dBook.getName_c()==null||dBook.getNum()==null||dBook.getYears()==null){
+		if(dBook.getName_c()==null||dBook.getName_c().equals("²»Ïê")||dBook.getNum()==null||dBook.getYears()==null){
 			from.setVisibility(View.GONE);
 		}else{
 		from.setText(from1 + "¡¶"+dBook.getName_c()+"¡·"+dBook.getYears() + "Äê," + "µÚ" + dBook.getNum()

@@ -20,13 +20,15 @@
             android:layout_marginLeft="5dp"
             android:background="@android:color/transparent"
             android:scaleType="centerCrop"
+            android:focusable="false"
             android:src="@drawable/defaut_book" />
 
-        <ScrollView
+        <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="1dp"
+            android:focusable="false"
             android:layout_toRightOf="@id/book_big_img" >
 
             <LinearLayout
@@ -48,6 +50,6 @@
                     android:text="图书简介"
                     android:textSize="14sp" />
             </LinearLayout>
-        </ScrollView>
+        </RelativeLayout>
     </RelativeLayout>
 </RelativeLayout>
