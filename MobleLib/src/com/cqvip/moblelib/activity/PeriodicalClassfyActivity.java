@@ -103,10 +103,9 @@ public class PeriodicalClassfyActivity extends BaseFragmentImageActivity {
 					
 					//记录当前 下标的距最左侧的 距离
 					currentIndicatorLeft = ((RadioButton) rg_nav_content.getChildAt(checkedId)).getLeft();
+					Log.i("PeriodicalClassfyActivity", ""+((checkedId > 1 ? ((RadioButton) rg_nav_content.getChildAt(checkedId)).getLeft() : 0) - ((RadioButton) rg_nav_content.getChildAt(2)).getLeft()));
 					mHsv.smoothScrollTo(
 							(checkedId > 1 ? ((RadioButton) rg_nav_content.getChildAt(checkedId)).getLeft() : 0) - ((RadioButton) rg_nav_content.getChildAt(2)).getLeft(), 0);
-					
-					
 				}
 			}
 		});
