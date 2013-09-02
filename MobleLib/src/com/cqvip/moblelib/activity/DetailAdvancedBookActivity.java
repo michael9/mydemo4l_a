@@ -82,6 +82,7 @@ public class DetailAdvancedBookActivity extends BaseActivity{
         return new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject json) {
+            	if(customProgressDialog!=null&&customProgressDialog.isShowing())
             	customProgressDialog.dismiss();
             	try {
     				if (json.getString("success").equalsIgnoreCase("true")) {
@@ -101,6 +102,7 @@ public class DetailAdvancedBookActivity extends BaseActivity{
         return new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+            	if(customProgressDialog!=null&&customProgressDialog.isShowing())
         		customProgressDialog.dismiss();
         		content.setText(getResources()
 						.getString(R.string.loadfail));

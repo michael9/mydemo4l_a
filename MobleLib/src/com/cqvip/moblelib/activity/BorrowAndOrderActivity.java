@@ -83,6 +83,7 @@ public class BorrowAndOrderActivity extends BaseActivity {
 	private Listener<String> borrowlist_ls = new Listener<String>() {
 		@Override
 		public void onResponse(String response) {
+			if(customProgressDialog!=null&&customProgressDialog.isShowing())
 			customProgressDialog.dismiss();
 			try {
 				List<BorrowBook>lists = BorrowBook.formList(response);
@@ -106,6 +107,7 @@ public class BorrowAndOrderActivity extends BaseActivity {
 		@Override
 		public void onErrorResponse(VolleyError arg0) {
 			// TODO Auto-generated method stub
+			if(customProgressDialog!=null&&customProgressDialog.isShowing())
 			customProgressDialog.dismiss();
 		}
 	};
@@ -141,6 +143,7 @@ public class BorrowAndOrderActivity extends BaseActivity {
   	  private Response.Listener<String> cl_renew = new Response.Listener<String>() {
 	          @Override
 	          public void onResponse(String response) {
+	        	  if(customProgressDialog!=null&&customProgressDialog.isShowing())
 	        		customProgressDialog.dismiss();
 	    			try {
 	    				ShortBook result = new ShortBook(Task.TASK_BOOK_RENEW,response);
@@ -170,6 +173,7 @@ public class BorrowAndOrderActivity extends BaseActivity {
 	  private Response.ErrorListener el_new = new Response.ErrorListener() {
 	          @Override
 	          public void onErrorResponse(VolleyError error) {
+	        	  if(customProgressDialog!=null&&customProgressDialog.isShowing())
 	        	  customProgressDialog.dismiss();
 	        	  //提示用户异常
 	          }

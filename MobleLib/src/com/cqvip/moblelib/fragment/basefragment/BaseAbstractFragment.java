@@ -26,4 +26,14 @@ public class BaseAbstractFragment extends Fragment{
 		 customProgressDialog = CustomProgressDialog.createDialog(getActivity());
 		 
 	}
+
+	@Override
+	public void onStop() {
+		// TODO Auto-generated method stub
+		super.onStop();
+		if(customProgressDialog!=null){
+			customProgressDialog.dismiss();
+			customProgressDialog=null;
+		}
+	}
 }

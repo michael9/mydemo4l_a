@@ -187,6 +187,7 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 		@Override
 		public void onResponse(String response) {
 			// TODO Auto-generated method stub
+			if(customProgressDialog!=null&&customProgressDialog.isShowing())
 			customProgressDialog.dismiss();
 			try {
 				Favorite favorite=Favorite.formList(Task.TASK_GET_FAVOR, response);
@@ -218,6 +219,7 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 		@Override
 		public void onResponse(String response) {
 			// TODO Auto-generated method stub
+			if(customProgressDialog!=null&&customProgressDialog.isShowing())
 			customProgressDialog.dismiss();
 			try {
 				Favorite favorite=Favorite.formList(Task.TASK_GET_FAVOR, response);
@@ -328,6 +330,7 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 		@Override
 		public void onErrorResponse(VolleyError arg0) {
 			// TODO Auto-generated method stub
+			if(customProgressDialog!=null&&customProgressDialog.isShowing())
 			customProgressDialog.dismiss();
 			arg0.printStackTrace();
 			onError(2);
@@ -695,4 +698,13 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 		}
 	}
 	
+	@Override
+	protected void onStop() {
+		// TODO Auto-generated method stub
+		super.onStop();
+		if(customProgressDialog!=null){
+			customProgressDialog.dismiss();
+			customProgressDialog=null;
+		}
+	}
 }

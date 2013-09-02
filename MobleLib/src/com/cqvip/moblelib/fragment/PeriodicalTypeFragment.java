@@ -153,6 +153,7 @@ public class PeriodicalTypeFragment extends Fragment {
 		@Override
 		public void onErrorResponse(VolleyError arg0) {
 			// TODO Auto-generated method stub
+			if(customProgressDialog!=null&&customProgressDialog.isShowing())
 			customProgressDialog.dismiss();
 		}
 	};
@@ -160,6 +161,7 @@ public class PeriodicalTypeFragment extends Fragment {
 		@Override
 		public void onResponse(String response) {
 			// TODO Auto-generated method stub
+			if(customProgressDialog!=null&&customProgressDialog.isShowing())
 			customProgressDialog.dismiss();
 			try {
 				List<ShortBook> lists = ShortBook.formList(

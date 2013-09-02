@@ -274,6 +274,7 @@ public class CommentActivity extends BaseActivity implements
 		@Override
 		public void onResponse(String response) {
 			// TODO Auto-generated method stub
+			if(customProgressDialog!=null&&customProgressDialog.isShowing())
 			customProgressDialog.dismiss();
 			Result res = null;
 			try {
@@ -336,6 +337,7 @@ public class CommentActivity extends BaseActivity implements
 		@Override
 		public void onErrorResponse(VolleyError arg0) {
 			// TODO Auto-generated method stub
+			if(customProgressDialog!=null&&customProgressDialog.isShowing())
 			customProgressDialog.dismiss();
 			arg0.printStackTrace();
 			onError(2);

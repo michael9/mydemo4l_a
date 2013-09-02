@@ -201,6 +201,7 @@ public class ReaderinfoActivity extends BaseActivity {
 		@Override
 		public void onResponse(String response) {
 			// TODO Auto-generated method stub
+			if(customProgressDialog!=null&&customProgressDialog.isShowing())
 			customProgressDialog.dismiss();
 			try {
 				Reader reader = Reader.formReaderInfo(response);
@@ -223,6 +224,7 @@ public class ReaderinfoActivity extends BaseActivity {
 		@Override
 		public void onErrorResponse(VolleyError arg0) {
 			// TODO Auto-generated method stub
+			if(customProgressDialog!=null&&customProgressDialog.isShowing())
 			customProgressDialog.dismiss();
 
 		}

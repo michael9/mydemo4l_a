@@ -158,6 +158,7 @@ public class ResultOnSearchActivity extends BaseActivity implements
 		@Override
 		public void onResponse(String response) {
 			// TODO Auto-generated method stub
+			if(customProgressDialog!=null&&customProgressDialog.isShowing())
 			customProgressDialog.dismiss();
 			try {
 				//获取返回记录数
@@ -191,6 +192,7 @@ public class ResultOnSearchActivity extends BaseActivity implements
 		@Override
 		public void onResponse(String response) {
 			// TODO Auto-generated method stub
+			if(customProgressDialog!=null&&customProgressDialog.isShowing())
 			customProgressDialog.dismiss();
 			moreprocess.setVisibility(View.GONE);
 			try {
@@ -212,6 +214,7 @@ public class ResultOnSearchActivity extends BaseActivity implements
 		@Override
 		public void onErrorResponse(VolleyError arg0) {
 			// TODO Auto-generated method stub
+			if(customProgressDialog!=null&&customProgressDialog.isShowing())
 			customProgressDialog.dismiss();
 
 		}

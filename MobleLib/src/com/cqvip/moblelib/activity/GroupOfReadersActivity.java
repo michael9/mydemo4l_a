@@ -151,6 +151,7 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 		@Override
 		public void onResponse(String response) {
 			// TODO Auto-generated method stub
+			if(customProgressDialog!=null&&customProgressDialog.isShowing())
 			customProgressDialog.dismiss();
 			try {
 				Favorite favorite=Favorite.formList(Task.TASK_COMMENT_BOOKLIST, response);
@@ -253,6 +254,7 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 		@Override
 		public void onErrorResponse(VolleyError arg0) {
 			// TODO Auto-generated method stub
+			if(customProgressDialog!=null&&customProgressDialog.isShowing())
 			customProgressDialog.dismiss();
 			arg0.printStackTrace();
 			onError(2);
@@ -628,6 +630,16 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 		} else if (a == 6) {
 			Tool.ShowMessages(this,
 					getResources().getString(R.string.cancelcommentfail));
+		}
+	}
+	
+	@Override
+	protected void onStop() {
+		// TODO Auto-generated method stub
+		super.onStop();
+		if(customProgressDialog!=null){
+			customProgressDialog.dismiss();
+			customProgressDialog=null;
 		}
 	}
 }
