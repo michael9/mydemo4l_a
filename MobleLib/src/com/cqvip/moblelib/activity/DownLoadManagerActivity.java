@@ -4,7 +4,6 @@ import java.io.File;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Locale;
 
 import android.app.DownloadManager;
 import android.content.Context;
@@ -18,21 +17,25 @@ import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.PagerTitleStrip;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.artifex.mupdfdemo.MuPDFActivity;
@@ -42,14 +45,15 @@ import com.cqvip.moblelib.R;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.db.MEBookDao;
 import com.cqvip.moblelib.entity.MEbook;
+import com.cqvip.moblelib.view.SwipHorizontalScrollView;
 import com.cqvip.utils.DownloadManagerPro;
 import com.cqvip.utils.FileUtils;
 import com.cqvip.utils.Tool;
 
 public class DownLoadManagerActivity extends BaseFragmentImageActivity {
-//	public static final int GETFIRSTPAGE_SZ = 1;
-//	public static final int GETFIRSTPAGE_ZK = 2;
-	//public static final int GETNEXT = 3;
+	// public static final int GETFIRSTPAGE_SZ = 1;
+	// public static final int GETFIRSTPAGE_ZK = 2;
+	// public static final int GETNEXT = 3;
 
 	// private int curpage = 1;// 第几页
 	// private int perpage = 10;// 每页显示条数
@@ -72,9 +76,18 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 	/**
 	 * The {@link ViewPager} that will host the section contents.
 	 */
-	ViewPager mViewPager;
-	PagerTitleStrip mPagerTitleStrip;
 	Context context;
+	private RelativeLayout rl_nav;
+	private SwipHorizontalScrollView mHsv;
+	private RadioGroup rg_nav_content;
+	private ImageView iv_nav_indicator;
+	private ImageView iv_nav_left;
+	private ImageView iv_nav_right;
+	private ViewPager mViewPager;
+	private int indicatorWidth;
+	public static String[] tabTitle = { "已下载", "下载中" }; // 标题
+	private LayoutInflater mInflater;
+	private int currentIndicatorLeft = 0;
 	// protected CustomProgressDialog customProgressDialog;
 	// Map<Integer, List<Favorite>> arrayLists_sz, arrayLists_zk;
 	// ArrayList<Favorite> arrayList_zk = new ArrayList<Favorite>();
@@ -90,12 +103,14 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 	private ArrayList<int[]> _lists = new ArrayList<int[]>();// 获取下载状态
 
 	// private ArrayList<int[]> _listsloaded= new ArrayList<int[]>();//已下载id
-    final static String TAG="DownLoadManagerActivity";
+	final static String TAG = "DownLoadManagerActivity";
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.myfavor);
+		setContentView(R.layout.activity_periodical_classfy);
 		init();
+		setListener();
 		initData();
 		context = this;
 		// Create the adapter that will return a fragment for each of the three
@@ -103,7 +118,6 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 		mSectionsPagerAdapter = new SectionsPagerAdapter(
 				getSupportFragmentManager());
 		// Set up the ViewPager with the sections adapter.
-		mViewPager = (ViewPager) findViewById(R.id.pager);
 		mViewPager.setAdapter(mSectionsPagerAdapter);
 		// 获取数据
 		// getfavorlist(curpage, perpage, GlobleData.BOOK_SZ_TYPE,
@@ -127,9 +141,92 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 		getContentResolver().unregisterContentObserver(downloadObserver);
 	}
 
+	private void setListener() {
+		mViewPager
+				.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
+					@Override
+					public void onPageSelected(int position) {
+						// RadioButton点击 performClick()
+						if (rg_nav_content != null
+								&& rg_nav_content.getChildCount() > position) {
+							((RadioButton) rg_nav_content.getChildAt(position))
+									.performClick();
+						}
+					}
+
+					@Override
+					public void onPageScrolled(int arg0, float arg1, int arg2) {
+						// TODO Auto-generated method stub
+
+					}
+
+					@Override
+					public void onPageScrollStateChanged(int arg0) {
+						// TODO Auto-generated method stub
+
+					}
+				});
+
+		rg_nav_content
+				.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+
+					@Override
+					public void onCheckedChanged(RadioGroup group, int checkedId) {
+						if (rg_nav_content.getChildAt(checkedId) != null) {
+							// 滑动动画
+							TranslateAnimation animation = new TranslateAnimation(
+									currentIndicatorLeft,
+									((RadioButton) rg_nav_content
+											.getChildAt(checkedId)).getLeft(),
+									0f, 0f);
+							animation.setInterpolator(new LinearInterpolator());
+							animation.setDuration(100);
+							animation.setFillAfter(true);
+
+							// 滑块执行位移动画
+							iv_nav_indicator.startAnimation(animation);
+
+							mViewPager.setCurrentItem(checkedId); // ViewPager
+																	// 跟随一起 切换
+
+							// 记录当前 下标的距最左侧的 距离
+							currentIndicatorLeft = ((RadioButton) rg_nav_content
+									.getChildAt(checkedId)).getLeft();
+							// Log.i("PeriodicalClassfyActivity", ""+((checkedId
+							// > 1 ? ((RadioButton)
+							// rg_nav_content.getChildAt(checkedId)).getLeft() :
+							// 0) - ((RadioButton)
+							// rg_nav_content.getChildAt(2)).getLeft()));
+							// mHsv.smoothScrollTo(
+							// (checkedId > 1 ? ((RadioButton)
+							// rg_nav_content.getChildAt(checkedId)).getLeft() :
+							// 0) - ((RadioButton)
+							// rg_nav_content.getChildAt(2)).getLeft(), 0);
+						}
+					}
+				});
+
+	}
+
 	MEBookDao meBookDao;
 
 	private void initData() {
+		DisplayMetrics dm = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(dm);
+		indicatorWidth = dm.widthPixels / tabTitle.length;
+		// TODO step0 初始化滑动下标的宽 根据屏幕宽度和可见数量 来设置RadioButton的宽度)
+		LayoutParams cursor_Params = iv_nav_indicator.getLayoutParams();
+		cursor_Params.width = indicatorWidth;// 初始化滑动下标的宽
+		iv_nav_indicator.setLayoutParams(cursor_Params);
+		mHsv.setSomeParam(rl_nav, iv_nav_left, iv_nav_right, this);
+		// 获取布局填充器
+		mInflater = (LayoutInflater) this
+				.getSystemService(LAYOUT_INFLATER_SERVICE);
+		// 另一种方式获取
+		// LayoutInflater mInflater = LayoutInflater.from(this);
+		initNavigationHSV();
+
 		downloadManager = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
 		downloadObserver = new DownloadChangeObserver();
 		handler = new MyHandler();
@@ -145,6 +242,23 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 		}// 下载中
 
 		getDownloadStatus();
+	}
+
+	private void initNavigationHSV() {
+		rg_nav_content.removeAllViews();
+		for (int i = 0; i < tabTitle.length; i++) {
+			RadioButton rb = (RadioButton) mInflater.inflate(
+					R.layout.nav_radiogroup_item, null);
+			if (i == 0) {
+				rb.setChecked(true);
+			}
+			rb.setId(i);
+			rb.setText(tabTitle[i]);
+			rb.setLayoutParams(new LayoutParams(indicatorWidth,
+					LayoutParams.MATCH_PARENT));
+			rg_nav_content.addView(rb);
+		}
+
 	}
 
 	public void getDownloadStatus() {
@@ -210,37 +324,40 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 			return fragment;
 		}
 
-		/**
-		 * 重写此方法为了使notifyDataSetChanged有效 Called when the host view is
-		 * attempting to determine if an item's position has changed. Returns
-		 * POSITION_UNCHANGED if the position of the given item has not changed
-		 * or POSITION_NONE if the item is no longer present in the adapter. The
-		 * default implementation assumes that items will never change position
-		 * and always returns POSITION_UNCHANGED.
-		 */
-		@Override
-		public int getItemPosition(Object object) {
-			// TODO Auto-generated method stub
-			return POSITION_NONE;
-		}
+		// /**
+		// * 重写此方法为了使notifyDataSetChanged有效 Called when the host view is
+		// * attempting to determine if an item's position has changed. Returns
+		// * POSITION_UNCHANGED if the position of the given item has not
+		// changed
+		// * or POSITION_NONE if the item is no longer present in the adapter.
+		// The
+		// * default implementation assumes that items will never change
+		// position
+		// * and always returns POSITION_UNCHANGED.
+		// */
+		// @Override
+		// public int getItemPosition(Object object) {
+		// // TODO Auto-generated method stub
+		// return POSITION_NONE;
+		// }
 
 		@Override
 		public int getCount() {
-			return 2;
+			return tabTitle.length;
 		}
 
-		@Override
-		public CharSequence getPageTitle(int position) {
-			Locale l = Locale.getDefault();
-
-			switch (position) {
-			case 0:
-				return "已下载".toUpperCase(l);
-			case 1:
-				return "下载中".toUpperCase(l);
-			}
-			return null;
-		}
+		// @Override
+		// public CharSequence getPageTitle(int position) {
+		// Locale l = Locale.getDefault();
+		//
+		// switch (position) {
+		// case 0:
+		// return "已下载".toUpperCase(l);
+		// case 1:
+		// return "下载中".toUpperCase(l);
+		// }
+		// return null;
+		// }
 	}
 
 	/**
@@ -313,7 +430,8 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 					mEbook = mebooks_listloaded.get(positon);
 				}
 				String filename = getfillName(mEbook.getDownloadid());
-				if (mEbook != null && mEbook.getIsdownload() == 1&&!filename.equals("")) {
+				if (mEbook != null && mEbook.getIsdownload() == 1
+						&& !filename.equals("")) {
 					String filepath = Environment.getExternalStorageDirectory()
 							+ File.separator
 							+ EbookDetailActivity.DOWNLOAD_FOLDER_NAME
@@ -460,7 +578,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 
 			final MEbook book = arrayList.get(position);
 			final String bookname = getfillName(book.getDownloadid());
-			if (book != null&&!bookname.equals("")) {
+			if (book != null && !bookname.equals("")) {
 				holder.download_title.setText(bookname);
 				holder.download_size.setText(getAppSize(book.getPdfsize()));
 				// 图片
@@ -507,9 +625,9 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 
 	private String getfillName(Long downloadid) {
 		String title = downloadManagerPro.getFileName(downloadid);
-		if(title!=null){
-		return title.substring(title.lastIndexOf("/") + 1, title.length());
-		}else{
+		if (title != null) {
+			return title.substring(title.lastIndexOf("/") + 1, title.length());
+		} else {
 			return "";
 		}
 	}
@@ -615,7 +733,10 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 				holder.download_title.setText(book.getTitle_c());
 				holder.download_progress.setMax(int_array[1]);
 				holder.download_progress.setProgress(int_array[0]);
-				holder.download_size.setText(getAppSize(int_array[0]) + "/"
+				holder.download_size.setText(getResources().getString(
+						R.string.item_size)
+						+ getAppSize(int_array[0])
+						+ "/"
 						+ getAppSize(int_array[1]));
 				holder.download_precent.setText(getNotiPercent(int_array[0],
 						int_array[1]));
@@ -626,40 +747,41 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 					// 放入缓存
 					loded.put(book.getDownloadid(), true);
 					// 更新数据库
-					book.setPdfsize((long)int_array[1]);
+					book.setPdfsize((long) int_array[1]);
 					updateDateBase(book);
 				}
 
 				final String bookname = getfillName(book.getDownloadid());
-				if(!bookname.equals("")){
-				holder.download_cancel
-						.setOnClickListener(new View.OnClickListener() {
-							@Override
-							public void onClick(View v) {
-								Log.i(TAG, "onClick");
-								if (mebooks_list != null
-										&& !mebooks_list.isEmpty()) {
-									try {
-										downloadManager.remove(book
-												.getDownloadid());
-										meBookDao.deldownload(book
-												.getDownloadid());
-										mebooks_list.remove(book);
-										if (downloadstatus == DownloadManager.STATUS_SUCCESSFUL) {
-											FileUtils.DeleteFolder(Environment
-													.getExternalStorageDirectory()
-													+ File.separator
-													+ EbookDetailActivity.DOWNLOAD_FOLDER_NAME
-													+ File.separator + bookname);
+				if (!bookname.equals("")) {
+					holder.download_cancel
+							.setOnClickListener(new View.OnClickListener() {
+								@Override
+								public void onClick(View v) {
+									Log.i(TAG, "onClick");
+									if (mebooks_list != null
+											&& !mebooks_list.isEmpty()) {
+										try {
+											downloadManager.remove(book
+													.getDownloadid());
+											meBookDao.deldownload(book
+													.getDownloadid());
+											mebooks_list.remove(book);
+											if (downloadstatus == DownloadManager.STATUS_SUCCESSFUL) {
+												FileUtils.DeleteFolder(Environment
+														.getExternalStorageDirectory()
+														+ File.separator
+														+ EbookDetailActivity.DOWNLOAD_FOLDER_NAME
+														+ File.separator
+														+ bookname);
+											}
+										} catch (DaoException e) {
+											// TODO Auto-generated catch block
+											e.printStackTrace();
 										}
-									} catch (DaoException e) {
-										// TODO Auto-generated catch block
-										e.printStackTrace();
+										getDownloadStatus();
 									}
-									getDownloadStatus();
 								}
-							}
-						});
+							});
 				}
 			}
 			// 图片
@@ -722,8 +844,16 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 	}
 
 	public void init() {
-		mPagerTitleStrip = (PagerTitleStrip) findViewById(R.id.pager_title_strip);
-		mPagerTitleStrip.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
+		rl_nav = (RelativeLayout) findViewById(R.id.rl_nav);
+		mHsv = (SwipHorizontalScrollView) findViewById(R.id.mHsv);
+		// 内容
+		rg_nav_content = (RadioGroup) findViewById(R.id.rg_nav_content);
+		iv_nav_indicator = (ImageView) findViewById(R.id.iv_nav_indicator);
+		iv_nav_left = (ImageView) findViewById(R.id.iv_nav_left);
+		iv_nav_right = (ImageView) findViewById(R.id.iv_nav_right);
+		mViewPager = (ViewPager) findViewById(R.id.mViewPager);
+		iv_nav_right.setVisibility(View.GONE);
+
 		TextView title = (TextView) findViewById(R.id.txt_header);
 		title.setText(R.string.serv_download);
 		ImageView back = (ImageView) findViewById(R.id.img_back_header);

@@ -2,13 +2,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity" >
-
-    <RelativeLayout
+    tools:context=".MainActivity" android:background="@drawable/bg_list">
+    <include
+        android:id="@+id/readerserve_title"
+        layout="@layout/header" />
+    <RelativeLayout android:layout_below="@id/readerserve_title"
         android:id="@+id/rl_tab"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="#F2F2F2" >
+         >
 
         <com.cqvip.moblelib.view.SwipHorizontalScrollView
             android:id="@+id/mHsv"
@@ -22,7 +24,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="top"
-                android:background="#5AB0EB" >
+                android:background="#885AB0EB" >
 
                 <RadioGroup
                     android:id="@+id/rg_nav_content"
@@ -73,7 +75,6 @@
         android:layout_alignParentBottom="true"
         android:layout_below="@id/rl_tab"
         android:layout_gravity="center"
-        android:background="#ffffff"
         android:flipInterval="30"
         android:persistentDrawingCache="animation" />
 
