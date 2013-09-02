@@ -25,7 +25,7 @@ import com.cqvip.moblelib.view.CustomProgressDialog;
 
 public class DetailAdvancedBookActivity extends BaseActivity{
 
-	private TextView content;
+	private TextView title,content;
 	private int type;
 	private String id,bookname;
 	private Map<String, String> gparams;
@@ -36,17 +36,14 @@ public class DetailAdvancedBookActivity extends BaseActivity{
 		setContentView(R.layout.activity_detail_advanced_book);
 		context = this;
 		content = (TextView)findViewById(R.id.ad_book_content);
+		title= (TextView)findViewById(R.id.ad_book_title);
 		type = getIntent().getIntExtra("type",1);
 		id = getIntent().getStringExtra("id");
 		bookname=getIntent().getStringExtra("bookname");
 		if(type == Constant.QUESTION){
 			content.setText(id);
 			setheadbar(getResources().getString(R.string.title_FAQ));
-		}else if(type == Constant.HOTBOOK||type == Constant.NEWBOOK){
-			customProgressDialog.show();
-			getContent(id);
-			setheadbar(bookname);
-			}else{
+		}else{
 		customProgressDialog.show();
 		getContent(id);
 		setheadbar(getResources().getString(R.string.title_moredetail));
@@ -80,6 +77,9 @@ public class DetailAdvancedBookActivity extends BaseActivity{
 	}
 	private Response.Listener<JSONObject> createDetailListener() {
         return new Response.Listener<JSONObject>() {
+            /**
+             * @param json
+             */
             @Override
             public void onResponse(JSONObject json) {
             	if(customProgressDialog!=null&&customProgressDialog.isShowing())
@@ -87,6 +87,7 @@ public class DetailAdvancedBookActivity extends BaseActivity{
             	try {
     				if (json.getString("success").equalsIgnoreCase("true")) {
     					content.setText(Html.fromHtml(json.getString("contents")));
+    					title.setText(json.getString("title"));
     				}
     			} catch (Exception e) {
     				content.setText(getResources()
