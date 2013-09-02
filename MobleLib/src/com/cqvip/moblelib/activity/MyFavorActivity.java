@@ -651,6 +651,9 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 						senddel();
 				}
 			});
+			if(favorite.getTypeid().equals(GlobleData.BOOK_ZK_TYPE+"")){
+				holder.img.setVisibility(View.GONE);
+			}else{
 			// ͼƬ
 			if (!TextUtils.isEmpty(favorite.getImgurl())) {
 				fetch.loadImage(favorite.getImgurl(), holder.img);
@@ -658,7 +661,7 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 				holder.img.setImageDrawable(getResources().getDrawable(
 						R.drawable.defaut_book));
 			}
-
+			}
 			return convertView;
 		}
 	}
