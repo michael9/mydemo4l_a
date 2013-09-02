@@ -483,7 +483,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 		TextView download_size;//
 		TextView download_precent;//
 		ProgressBar download_progress;//
-		TextView download_cancel;//
+		ImageView download_cancel;//
 		TextView downloadtip;
 	}
 
@@ -566,7 +566,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 						View.GONE);
 				convertView.findViewById(R.id.download_progress).setVisibility(
 						View.GONE);
-				holder.download_cancel = (TextView) convertView
+				holder.download_cancel = (ImageView) convertView
 						.findViewById(R.id.download_cancel);
 				convertView.findViewById(R.id.download_tip).setVisibility(
 						View.GONE);
@@ -580,7 +580,9 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 			final String bookname = getfillName(book.getDownloadid());
 			if (book != null && !bookname.equals("")) {
 				holder.download_title.setText(bookname);
-				holder.download_size.setText(getAppSize(book.getPdfsize()));
+				holder.download_size.setText(getResources().getString(
+						R.string.item_size)
+						+ getAppSize(book.getPdfsize()));
 				// 图片
 				if (!TextUtils.isEmpty(book.getImgurl())) {
 					fetch.loadImage(book.getImgurl(), holder.download_image);
@@ -681,6 +683,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 				convertView.setClickable(false);
 				TextView tv = (TextView) convertView
 						.findViewById(R.id.footer_txt);
+				tv.setTextSize(R.dimen.listview_nullcontent_textsize);
 				tv.setText("亲，没有下载中的电子书");
 				tv.setTextColor(context.getResources().getColor(
 						R.drawable.silvergray));
@@ -710,7 +713,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 						.findViewById(R.id.download_precent);
 				holder.download_progress = (ProgressBar) convertView
 						.findViewById(R.id.download_progress);
-				holder.download_cancel = (TextView) convertView
+				holder.download_cancel = (ImageView) convertView
 						.findViewById(R.id.download_cancel);
 				holder.downloadtip = (TextView) convertView
 						.findViewById(R.id.download_tip);
@@ -733,10 +736,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 				holder.download_title.setText(book.getTitle_c());
 				holder.download_progress.setMax(int_array[1]);
 				holder.download_progress.setProgress(int_array[0]);
-				holder.download_size.setText(getResources().getString(
-						R.string.item_size)
-						+ getAppSize(int_array[0])
-						+ "/"
+				holder.download_size.setText(getAppSize(int_array[0]) + "/"
 						+ getAppSize(int_array[1]));
 				holder.download_precent.setText(getNotiPercent(int_array[0],
 						int_array[1]));

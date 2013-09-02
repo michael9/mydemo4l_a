@@ -142,6 +142,9 @@ public class PeriodicalClassfyActivity extends BaseFragmentImageActivity {
 			rg_nav_content.removeAllViews();
 		for(int i=0;i<tabTitle.length;i++){
 			RadioButton rb = (RadioButton) mInflater.inflate(R.layout.nav_radiogroup_item, null);
+			if (i == 0) {
+				rb.setChecked(true);
+			}
 			rb.setId(i);
 			rb.setText(tabTitle[i]);
 			rb.setLayoutParams(new LayoutParams(indicatorWidth,

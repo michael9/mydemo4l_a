@@ -86,7 +86,7 @@
     </style>
 	<style name="TextTitleBlueStyle">
         <item name="android:textColor">@color/blue_title</item>
-        <item name="android:textSize">14.0sp</item>
+        <item name="android:textSize">16.0sp</item>
     </style>
 	<style name="TextTitleBigBlueStyle">
         <item name="android:textColor">@color/blue_title</item>
