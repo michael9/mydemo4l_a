@@ -156,6 +156,9 @@ public class EBookActiviy extends BaseActivity {
 //			CheckedTextView checkedTextView = (CheckedTextView) convertView
 //					.findViewById(android.R.id.text1);
 			CheckBox checkBox=(CheckBox) convertView.findViewById(R.id.checkbox);
+			if(position==0){
+				checkBox.setChecked(true);
+			}
 			iv.setImageResource(drawableids[position]);
 			tv.setText(eBookTypes[position]);
 //			  if(position==this.currentID)
