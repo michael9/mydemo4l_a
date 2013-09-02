@@ -9,6 +9,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.view.animation.LinearInterpolator;
@@ -163,6 +164,7 @@ public class PeriodicalClassfyActivity extends BaseFragmentImageActivity {
 		
 		mViewPager = (ViewPager) findViewById(R.id.mViewPager);
 		
+		findViewById(R.id.readerserve_title).setVisibility(View.GONE);
 	}
 
 	@Override

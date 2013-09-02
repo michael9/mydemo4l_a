@@ -3,7 +3,6 @@ package com.cqvip.moblelib.activity;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import android.content.Context;
@@ -12,30 +11,31 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.PagerTitleStrip;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.Request.Method;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.cqvip.mobelib.imgutils.ImageFetcher;
 import com.cqvip.moblelib.R;
 import com.cqvip.moblelib.biz.Task;
@@ -47,6 +47,7 @@ import com.cqvip.moblelib.model.Favorite;
 import com.cqvip.moblelib.model.Result;
 import com.cqvip.moblelib.net.BookException;
 import com.cqvip.moblelib.view.CustomProgressDialog;
+import com.cqvip.moblelib.view.SwipHorizontalScrollView;
 import com.cqvip.utils.Tool;
 
 public class MyFavorActivity extends BaseFragmentImageActivity {
@@ -74,22 +75,33 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 	/**
 	 * The {@link ViewPager} that will host the section contents.
 	 */
-	ViewPager mViewPager;
-	PagerTitleStrip mPagerTitleStrip;
 	Context context;
+	private RelativeLayout rl_nav;
+	private SwipHorizontalScrollView mHsv;
+	private RadioGroup rg_nav_content;
+	private ImageView iv_nav_indicator;
+	private ImageView iv_nav_left;
+	private ImageView iv_nav_right;
+	private ViewPager mViewPager;
+	private int indicatorWidth;
+	private LayoutInflater mInflater;
+	private int currentIndicatorLeft = 0;
+	public String[] tabTitle = new String[2]; // 标题
+
 	protected CustomProgressDialog customProgressDialog;
 	Map<Integer, List<Favorite>> arrayLists_sz, arrayLists_zk;
 	ArrayList<Favorite> arrayList_zk = new ArrayList<Favorite>();
 	ArrayList<Favorite> arrayList_sz = new ArrayList<Favorite>();
-	private int listviewpagetag=GlobleData.BOOK_SZ_TYPE;
-	
-	private int sz_count,zk_count; //条数
+	private int listviewpagetag = GlobleData.BOOK_SZ_TYPE;
+
+	private int sz_count, zk_count; // 条数
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.myfavor);
+		setContentView(R.layout.activity_periodical_classfy);
 		init();
+		setListener();
 		context = this;
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the app.
@@ -97,11 +109,70 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 				getSupportFragmentManager());
 
 		// Set up the ViewPager with the sections adapter.
-		mViewPager = (ViewPager) findViewById(R.id.pager);
 		mViewPager.setAdapter(mSectionsPagerAdapter);
 		// 获取数据
 		getfavorlist(curpage, perpage, GlobleData.BOOK_SZ_TYPE, GETFIRSTPAGE_SZ);
 		getfavorlist(curpage, perpage, GlobleData.BOOK_ZK_TYPE, GETFIRSTPAGE_ZK);
+	}
+
+	private void setListener() {
+		mViewPager
+				.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+					@Override
+					public void onPageSelected(int position) {
+						// RadioButton点击 performClick()
+						if (rg_nav_content != null
+								&& rg_nav_content.getChildCount() > position) {
+							((RadioButton) rg_nav_content.getChildAt(position))
+									.performClick();
+						}
+					}
+
+					@Override
+					public void onPageScrolled(int arg0, float arg1, int arg2) {
+						// TODO Auto-generated method stub
+					}
+
+					@Override
+					public void onPageScrollStateChanged(int arg0) {
+						// TODO Auto-generated method stub
+					}
+				});
+
+		rg_nav_content
+				.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+					@Override
+					public void onCheckedChanged(RadioGroup group, int checkedId) {
+						if (rg_nav_content.getChildAt(checkedId) != null) {
+							// 滑动动画
+							TranslateAnimation animation = new TranslateAnimation(
+									currentIndicatorLeft,
+									((RadioButton) rg_nav_content
+											.getChildAt(checkedId)).getLeft(),
+									0f, 0f);
+							animation.setInterpolator(new LinearInterpolator());
+							animation.setDuration(100);
+							animation.setFillAfter(true);
+							// 滑块执行位移动画
+							iv_nav_indicator.startAnimation(animation);
+							mViewPager.setCurrentItem(checkedId); // ViewPager
+																	// 跟随一起 切换
+							// 记录当前 下标的距最左侧的 距离
+							currentIndicatorLeft = ((RadioButton) rg_nav_content
+									.getChildAt(checkedId)).getLeft();
+							// Log.i("PeriodicalClassfyActivity", ""+((checkedId
+							// > 1 ? ((RadioButton)
+							// rg_nav_content.getChildAt(checkedId)).getLeft() :
+							// 0) - ((RadioButton)
+							// rg_nav_content.getChildAt(2)).getLeft()));
+							// mHsv.smoothScrollTo(
+							// (checkedId > 1 ? ((RadioButton)
+							// rg_nav_content.getChildAt(checkedId)).getLeft() :
+							// 0) - ((RadioButton)
+							// rg_nav_content.getChildAt(2)).getLeft(), 0);
+						}
+					}
+				});
 	}
 
 	@Override
@@ -187,14 +258,16 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 		@Override
 		public void onResponse(String response) {
 			// TODO Auto-generated method stub
-			if(customProgressDialog!=null&&customProgressDialog.isShowing())
-			customProgressDialog.dismiss();
+			if (customProgressDialog != null
+					&& customProgressDialog.isShowing())
+				customProgressDialog.dismiss();
 			try {
-				Favorite favorite=Favorite.formList(Task.TASK_GET_FAVOR, response);
-				if(favorite!=null){
-				arrayLists_sz = favorite.map;
-				sz_count=favorite.recordcount;
-				mSectionsPagerAdapter.notifyDataSetChanged();
+				Favorite favorite = Favorite.formList(Task.TASK_GET_FAVOR,
+						response);
+				if (favorite != null) {
+					arrayLists_sz = favorite.map;
+					sz_count = favorite.recordcount;
+					mSectionsPagerAdapter.notifyDataSetChanged();
 				}
 			} catch (BookException e) {
 				// TODO Auto-generated catch block
@@ -219,14 +292,16 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 		@Override
 		public void onResponse(String response) {
 			// TODO Auto-generated method stub
-			if(customProgressDialog!=null&&customProgressDialog.isShowing())
-			customProgressDialog.dismiss();
+			if (customProgressDialog != null
+					&& customProgressDialog.isShowing())
+				customProgressDialog.dismiss();
 			try {
-				Favorite favorite=Favorite.formList(Task.TASK_GET_FAVOR, response);
-				if(favorite!=null){
-				arrayLists_zk = favorite.map;
-				zk_count=favorite.recordcount;
-				mSectionsPagerAdapter.notifyDataSetChanged();
+				Favorite favorite = Favorite.formList(Task.TASK_GET_FAVOR,
+						response);
+				if (favorite != null) {
+					arrayLists_zk = favorite.map;
+					zk_count = favorite.recordcount;
+					mSectionsPagerAdapter.notifyDataSetChanged();
 				}
 			} catch (BookException e) {
 				// TODO Auto-generated catch block
@@ -251,7 +326,8 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 		@Override
 		public void onResponse(String response) {
 			try {
-				Favorite favorite=Favorite.formList(Task.TASK_GET_FAVOR, response);
+				Favorite favorite = Favorite.formList(Task.TASK_GET_FAVOR,
+						response);
 				arrayLists_sz = favorite.map;
 			} catch (BookException e) {
 				// TODO Auto-generated catch block
@@ -273,14 +349,16 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 						&& arrayLists_sz.get(GlobleData.BOOK_SZ_TYPE).isEmpty()) {
 					return;
 				}
-				if(listviewpagetag==GlobleData.BOOK_SZ_TYPE){
+				if (listviewpagetag == GlobleData.BOOK_SZ_TYPE) {
 					curpage_sz++;
-				arrayList_sz.addAll(arrayLists_sz.get(GlobleData.BOOK_SZ_TYPE));
-				// mSectionsPagerAdapter.notifyDataSetChanged();
-				adapter_sz.notifyDataSetChanged();
-				}else{
+					arrayList_sz.addAll(arrayLists_sz
+							.get(GlobleData.BOOK_SZ_TYPE));
+					// mSectionsPagerAdapter.notifyDataSetChanged();
+					adapter_sz.notifyDataSetChanged();
+				} else {
 					curpage_zk++;
-					arrayList_zk.addAll(arrayLists_sz.get(GlobleData.BOOK_ZK_TYPE));
+					arrayList_zk.addAll(arrayLists_sz
+							.get(GlobleData.BOOK_ZK_TYPE));
 					adapter_zk.notifyDataSetChanged();
 				}
 
@@ -330,8 +408,9 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 		@Override
 		public void onErrorResponse(VolleyError arg0) {
 			// TODO Auto-generated method stub
-			if(customProgressDialog!=null&&customProgressDialog.isShowing())
-			customProgressDialog.dismiss();
+			if (customProgressDialog != null
+					&& customProgressDialog.isShowing())
+				customProgressDialog.dismiss();
 			arg0.printStackTrace();
 			onError(2);
 		}
@@ -368,30 +447,37 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 		 * default implementation assumes that items will never change position
 		 * and always returns POSITION_UNCHANGED.
 		 */
-//		@Override
-//		public int getItemPosition(Object object) {
-//			// TODO Auto-generated method stub
-//			Log.i("MyFavorActivity", "SectionsPagerAdapter_getItemPosition:");
-//			return POSITION_NONE;
-//		}
+		@Override
+		public int getItemPosition(Object object) {
+			// TODO Auto-generated method stub
+			Log.i("MyFavorActivity", "SectionsPagerAdapter_getItemPosition:");
+			tabTitle[0] = getString(R.string.title_section1) + "(" + sz_count
+					+ ")";
+			tabTitle[1] = getString(R.string.title_section2) + "(" + zk_count
+					+ ")";
+			initNavigationHSV();
+			return POSITION_UNCHANGED;
+		}
 
 		@Override
 		public int getCount() {
-			return 2;
+			return tabTitle.length;
 		}
 
-		@Override
-		public CharSequence getPageTitle(int position) {
-			//Log.i("getPageTitle", "getPageTitle");
-			Locale l = Locale.getDefault();
-			switch (position) {
-			case 0:
-				return (getString(R.string.title_section1)+"("+sz_count+")").toUpperCase(l);
-			case 1:
-				return (getString(R.string.title_section2)+"("+zk_count+")").toUpperCase(l);
-			}
-			return null;
-		}
+		// @Override
+		// public CharSequence getPageTitle(int position) {
+		// //Log.i("getPageTitle", "getPageTitle");
+		// Locale l = Locale.getDefault();
+		// switch (position) {
+		// case 0:
+		// return
+		// (getString(R.string.title_section1)+"("+sz_count+")").toUpperCase(l);
+		// case 1:
+		// return
+		// (getString(R.string.title_section2)+"("+zk_count+")").toUpperCase(l);
+		// }
+		// return null;
+		// }
 	}
 
 	/**
@@ -435,7 +521,7 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 			}
 
 			listView.setOnItemClickListener(this);
-			//listView.setOnItemLongClickListener(this);
+			// listView.setOnItemLongClickListener(this);
 			return rootView;
 		}
 
@@ -451,15 +537,15 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 				// 进度条
 				moreprocess = view.findViewById(R.id.footer_progress);
 				moreprocess.setVisibility(View.VISIBLE);
-				//Log.i("parent.getTag()", "" + parent.getTag());
-				listviewpagetag=(Integer) parent.getTag();
+				// Log.i("parent.getTag()", "" + parent.getTag());
+				listviewpagetag = (Integer) parent.getTag();
 				// 请求网络更多
 				if (listviewpagetag == GlobleData.BOOK_SZ_TYPE) {
-					getfavorlist(curpage_sz+1, perpage, GlobleData.BOOK_SZ_TYPE,
-							GETNEXT);
+					getfavorlist(curpage_sz + 1, perpage,
+							GlobleData.BOOK_SZ_TYPE, GETNEXT);
 				} else if (listviewpagetag == GlobleData.BOOK_ZK_TYPE) {
-					getfavorlist(curpage_zk+1, perpage, GlobleData.BOOK_ZK_TYPE,
-							GETNEXT);
+					getfavorlist(curpage_zk + 1, perpage,
+							GlobleData.BOOK_ZK_TYPE, GETNEXT);
 				}
 			} else {
 				if ((Integer) parent.getTag() == GlobleData.BOOK_SZ_TYPE) {
@@ -499,19 +585,19 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 			}
 		}
 
-//		@Override
-//		public boolean onItemLongClick(AdapterView<?> parent, View view,
-//				int position, long id) {
-//			if (parent.getAdapter().getItemId(position) != -2) {
-//				int listviewid = (Integer) parent.getTag();
-//				listview_id = listviewid;
-//				listview_item_position = position;
-//				del_favorite = arrayList_temp.get(position);
-//
-//				senddel();
-//			}
-//			return false;
-//		}
+		// @Override
+		// public boolean onItemLongClick(AdapterView<?> parent, View view,
+		// int position, long id) {
+		// if (parent.getAdapter().getItemId(position) != -2) {
+		// int listviewid = (Integer) parent.getTag();
+		// listview_id = listviewid;
+		// listview_item_position = position;
+		// del_favorite = arrayList_temp.get(position);
+		//
+		// senddel();
+		// }
+		// return false;
+		// }
 	}
 
 	private int listview_id = GlobleData.BOOK_SZ_TYPE;
@@ -525,7 +611,7 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 		ImageView img;// 时间图片 不用修改
 		TextView isbn;
 		TextView favor_cancel;
-		//Button btn_comment, btn_item_result_search_share, favorite;
+		// Button btn_comment, btn_item_result_search_share, favorite;
 
 	}
 
@@ -579,7 +665,7 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-			//Log.i("getView20130808", "getView");
+			// Log.i("getView20130808", "getView");
 			final ViewHolder holder;
 			if (this.getCount() == 1) {
 				convertView = LayoutInflater.from(myContext).inflate(
@@ -604,7 +690,7 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 
 			if (convertView == null
 					|| convertView.findViewById(R.id.linemore) != null) {
-				//Log.i("convertView20130808", "convertView");
+				// Log.i("convertView20130808", "convertView");
 				convertView = LayoutInflater.from(myContext).inflate(
 						R.layout.item_book_favor, null);
 				holder = new ViewHolder();
@@ -612,15 +698,16 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 						.findViewById(R.id.re_name_txt);
 				holder.author = (TextView) convertView
 						.findViewById(R.id.re_author_txt);
-//				holder.publisher = (TextView) convertView
-//						.findViewById(R.id.re_addr_txt);
+				// holder.publisher = (TextView) convertView
+				// .findViewById(R.id.re_addr_txt);
 				holder.img = (ImageView) convertView
 						.findViewById(R.id.re_book_img);
 				// holder.u_abstract = (TextView)
 				// convertView.findViewById(R.id.re_hot_txt);
 				holder.isbn = (TextView) convertView
 						.findViewById(R.id.txt_abst);
-				holder.favor_cancel=(TextView) convertView.findViewById(R.id.favor_cancel);
+				holder.favor_cancel = (TextView) convertView
+						.findViewById(R.id.favor_cancel);
 				holder.favor_cancel.setTextColor(getResources().getColor(
 						R.color.green_light));
 				convertView.setTag(holder);
@@ -632,44 +719,70 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 			String publish = context.getResources().getString(
 					R.string.item_publish);
 			String time = context.getResources().getString(R.string.item_time);
-//			String describe = context.getResources().getString(
-//					R.string.item_describe);
+			// String describe = context.getResources().getString(
+			// R.string.item_describe);
 			Favorite favorite = arrayList.get(position);
 			holder.title.setText(favorite.getTitle());
 			holder.author.setText(author + favorite.getWriter());
-//			holder.publisher.setText(publish + favorite.getOrgan()+","+favorite.getYears());
+			// holder.publisher.setText(publish +
+			// favorite.getOrgan()+","+favorite.getYears());
 			holder.isbn.setText("收藏时间:" + favorite.getFavoritetime());
-			final ViewGroup temp_parent=parent;
-			final int temp_position=position;
+			final ViewGroup temp_parent = parent;
+			final int temp_position = position;
 			holder.favor_cancel.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-						int listviewid = (Integer) temp_parent.getTag();
-						listview_id = listviewid;
-						listview_item_position = temp_position;
-						del_favorite = arrayList.get(temp_position);
-						senddel();
+					int listviewid = (Integer) temp_parent.getTag();
+					listview_id = listviewid;
+					listview_item_position = temp_position;
+					del_favorite = arrayList.get(temp_position);
+					senddel();
 				}
 			});
-			if(favorite.getTypeid().equals(GlobleData.BOOK_ZK_TYPE+"")){
+			if (favorite.getTypeid().equals(GlobleData.BOOK_ZK_TYPE + "")) {
 				holder.img.setVisibility(View.GONE);
-			}else{
-			// 图片
-			if (!TextUtils.isEmpty(favorite.getImgurl())) {
-				fetch.loadImage(favorite.getImgurl(), holder.img);
 			} else {
-				holder.img.setImageDrawable(getResources().getDrawable(
-						R.drawable.defaut_book));
-			}
+				// 图片
+				if (!TextUtils.isEmpty(favorite.getImgurl())) {
+					fetch.loadImage(favorite.getImgurl(), holder.img);
+				} else {
+					holder.img.setImageDrawable(getResources().getDrawable(
+							R.drawable.defaut_book));
+				}
 			}
 			return convertView;
 		}
 	}
 
 	public void init() {
-		mPagerTitleStrip = (PagerTitleStrip) findViewById(R.id.pager_title_strip);
-		mPagerTitleStrip.setTextSpacing(-50);
-		mPagerTitleStrip.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
+		tabTitle[0] = getString(R.string.title_section1) + "(" + sz_count + ")";
+		tabTitle[1] = getString(R.string.title_section2) + "(" + zk_count + ")";
+
+		rl_nav = (RelativeLayout) findViewById(R.id.rl_nav);
+		mHsv = (SwipHorizontalScrollView) findViewById(R.id.mHsv);
+		// 内容
+		rg_nav_content = (RadioGroup) findViewById(R.id.rg_nav_content);
+		iv_nav_indicator = (ImageView) findViewById(R.id.iv_nav_indicator);
+		iv_nav_left = (ImageView) findViewById(R.id.iv_nav_left);
+		iv_nav_right = (ImageView) findViewById(R.id.iv_nav_right);
+		mViewPager = (ViewPager) findViewById(R.id.mViewPager);
+		iv_nav_right.setVisibility(View.GONE);
+
+		DisplayMetrics dm = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(dm);
+		indicatorWidth = dm.widthPixels / tabTitle.length;
+		// TODO step0 初始化滑动下标的宽 根据屏幕宽度和可见数量 来设置RadioButton的宽度)
+		LayoutParams cursor_Params = iv_nav_indicator.getLayoutParams();
+		cursor_Params.width = indicatorWidth;// 初始化滑动下标的宽
+		iv_nav_indicator.setLayoutParams(cursor_Params);
+		mHsv.setSomeParam(rl_nav, iv_nav_left, iv_nav_right, this);
+		// 获取布局填充器
+		mInflater = (LayoutInflater) this
+				.getSystemService(LAYOUT_INFLATER_SERVICE);
+		// 另一种方式获取
+		// LayoutInflater mInflater = LayoutInflater.from(this);
+		initNavigationHSV();
+
 		TextView title = (TextView) findViewById(R.id.txt_header);
 		title.setText(R.string.serv_favorite);
 		ImageView back = (ImageView) findViewById(R.id.img_back_header);
@@ -686,6 +799,22 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 		customProgressDialog.show();
 	}
 
+	private void initNavigationHSV() {
+		rg_nav_content.removeAllViews();
+		for (int i = 0; i < tabTitle.length; i++) {
+			RadioButton rb = (RadioButton) mInflater.inflate(
+					R.layout.nav_radiogroup_item, null);
+			if (i == 0) {
+				rb.setChecked(true);
+			}
+			rb.setId(i);
+			rb.setText(tabTitle[i]);
+			rb.setLayoutParams(new LayoutParams(indicatorWidth,
+					LayoutParams.MATCH_PARENT));
+			rg_nav_content.addView(rb);
+		}
+	}
+
 	private boolean isdeleted_sz = false;
 	private boolean isdeleted_zk = false;
 
@@ -700,14 +829,14 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 					getResources().getString(R.string.cancelfavorfail));
 		}
 	}
-	
+
 	@Override
 	protected void onStop() {
 		// TODO Auto-generated method stub
 		super.onStop();
-		if(customProgressDialog!=null){
+		if (customProgressDialog != null) {
 			customProgressDialog.dismiss();
-			customProgressDialog=null;
+			customProgressDialog = null;
 		}
 	}
 }

@@ -14,16 +14,23 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerTitleStrip;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.Request.Method;
@@ -40,6 +47,7 @@ import com.cqvip.moblelib.model.Book;
 import com.cqvip.moblelib.model.Favorite;
 import com.cqvip.moblelib.net.BookException;
 import com.cqvip.moblelib.view.CustomProgressDialog;
+import com.cqvip.moblelib.view.SwipHorizontalScrollView;
 import com.cqvip.utils.Tool;
 
 /**
@@ -74,9 +82,19 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 	/**
 	 * The {@link ViewPager} that will host the section contents.
 	 */
-	ViewPager mViewPager;
-	PagerTitleStrip mPagerTitleStrip;
 	Context context;
+	private RelativeLayout rl_nav;
+	private SwipHorizontalScrollView mHsv;
+	private RadioGroup rg_nav_content;
+	private ImageView iv_nav_indicator;
+	private ImageView iv_nav_left;
+	private ImageView iv_nav_right;
+	private ViewPager mViewPager;
+	private int indicatorWidth;
+	private LayoutInflater mInflater;
+	private int currentIndicatorLeft = 0;
+	public  String[] tabTitle=new String[2]; // 标题
+	
 	protected CustomProgressDialog customProgressDialog;
 	Map<Integer, List<Favorite>> arrayLists_sz, arrayLists_zk;
 	ArrayList<Favorite> arrayList_zk = new ArrayList<Favorite>();
@@ -88,8 +106,9 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.myfavor);
+		setContentView(R.layout.activity_periodical_classfy);
 		init();
+		setListener();
 		context = this;
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the app.
@@ -97,13 +116,72 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 				getSupportFragmentManager());
 
 		// Set up the ViewPager with the sections adapter.
-		mViewPager = (ViewPager) findViewById(R.id.pager);
 		mViewPager.setAdapter(mSectionsPagerAdapter);
 		// 获取数据
 		getfavorlist(curpage, perpage, GlobleData.BOOK_SZ_TYPE, GETFIRSTPAGE_SZ);
 		getfavorlist(curpage, perpage, GlobleData.BOOK_ZK_TYPE, GETFIRSTPAGE_ZK);
 	}
 
+	private void setListener() {
+		mViewPager
+				.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+					@Override
+					public void onPageSelected(int position) {
+						// RadioButton点击 performClick()
+						if (rg_nav_content != null
+								&& rg_nav_content.getChildCount() > position) {
+							((RadioButton) rg_nav_content.getChildAt(position))
+									.performClick();
+						}
+					}
+
+					@Override
+					public void onPageScrolled(int arg0, float arg1, int arg2) {
+						// TODO Auto-generated method stub
+					}
+
+					@Override
+					public void onPageScrollStateChanged(int arg0) {
+						// TODO Auto-generated method stub
+					}
+				});
+
+		rg_nav_content
+				.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+					@Override
+					public void onCheckedChanged(RadioGroup group, int checkedId) {
+						if (rg_nav_content.getChildAt(checkedId) != null) {
+							// 滑动动画
+							TranslateAnimation animation = new TranslateAnimation(
+									currentIndicatorLeft,
+									((RadioButton) rg_nav_content
+											.getChildAt(checkedId)).getLeft(),
+									0f, 0f);
+							animation.setInterpolator(new LinearInterpolator());
+							animation.setDuration(100);
+							animation.setFillAfter(true);
+							// 滑块执行位移动画
+							iv_nav_indicator.startAnimation(animation);
+							mViewPager.setCurrentItem(checkedId); // ViewPager
+																	// 跟随一起 切换
+							// 记录当前 下标的距最左侧的 距离
+							currentIndicatorLeft = ((RadioButton) rg_nav_content
+									.getChildAt(checkedId)).getLeft();
+							// Log.i("PeriodicalClassfyActivity", ""+((checkedId
+							// > 1 ? ((RadioButton)
+							// rg_nav_content.getChildAt(checkedId)).getLeft() :
+							// 0) - ((RadioButton)
+							// rg_nav_content.getChildAt(2)).getLeft()));
+							// mHsv.smoothScrollTo(
+							// (checkedId > 1 ? ((RadioButton)
+							// rg_nav_content.getChildAt(checkedId)).getLeft() :
+							// 0) - ((RadioButton)
+							// rg_nav_content.getChildAt(2)).getLeft(), 0);
+						}
+					}
+				});
+	}
+	
 	private void getfavorlist(int pagecount, int perpage, int typeid, int type) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("libid", GlobleData.LIBIRY_ID);
@@ -292,29 +370,35 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 		 * default implementation assumes that items will never change position
 		 * and always returns POSITION_UNCHANGED.
 		 */
-//		@Override
-//		public int getItemPosition(Object object) {
-//			// TODO Auto-generated method stub
-//			return POSITION_NONE;
-//		}
+		@Override
+		public int getItemPosition(Object object) {
+			// TODO Auto-generated method stub
+			Log.i("MyFavorActivity", "SectionsPagerAdapter_getItemPosition:");
+			tabTitle[0] = getString(R.string.title_section1) + "(" + sz_count
+					+ ")";
+			tabTitle[1] = getString(R.string.title_section2) + "(" + zk_count
+					+ ")";
+			initNavigationHSV();
+			return POSITION_UNCHANGED;
+		}
 
 		@Override
 		public int getCount() {
-			return 2;
+			return tabTitle.length;
 		}
 
-		@Override
-		public CharSequence getPageTitle(int position) {
-			//Log.i("getPageTitle", "getPageTitle_"+position);
-			Locale l = Locale.getDefault();
-			switch (position) {
-			case 0:
-				return (getString(R.string.title_section1)+"("+sz_count+")").toUpperCase(l);
-			case 1:
-				return (getString(R.string.title_section2)+"("+zk_count+")").toUpperCase(l);
-			}
-			return null;
-		}
+//		@Override
+//		public CharSequence getPageTitle(int position) {
+//			//Log.i("getPageTitle", "getPageTitle_"+position);
+//			Locale l = Locale.getDefault();
+//			switch (position) {
+//			case 0:
+//				return (getString(R.string.title_section1)+"("+sz_count+")").toUpperCase(l);
+//			case 1:
+//				return (getString(R.string.title_section2)+"("+zk_count+")").toUpperCase(l);
+//			}
+//			return null;
+//		}
 	}
 
 	/**
@@ -571,8 +655,34 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 	}
 
 	public void init() {
-		mPagerTitleStrip = (PagerTitleStrip) findViewById(R.id.pager_title_strip);
-		mPagerTitleStrip.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
+		tabTitle[0] =getString(R.string.title_section1)+"("+sz_count+")";
+		tabTitle[1] =getString(R.string.title_section2)+"("+zk_count+")";
+		
+		rl_nav = (RelativeLayout) findViewById(R.id.rl_nav);
+		mHsv = (SwipHorizontalScrollView) findViewById(R.id.mHsv);
+		// 内容
+		rg_nav_content = (RadioGroup) findViewById(R.id.rg_nav_content);
+		iv_nav_indicator = (ImageView) findViewById(R.id.iv_nav_indicator);
+		iv_nav_left = (ImageView) findViewById(R.id.iv_nav_left);
+		iv_nav_right = (ImageView) findViewById(R.id.iv_nav_right);
+		mViewPager = (ViewPager) findViewById(R.id.mViewPager);
+		iv_nav_right.setVisibility(View.GONE);
+		
+		DisplayMetrics dm = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(dm);
+		indicatorWidth = dm.widthPixels / tabTitle.length;
+		// TODO step0 初始化滑动下标的宽 根据屏幕宽度和可见数量 来设置RadioButton的宽度)
+		LayoutParams cursor_Params = iv_nav_indicator.getLayoutParams();
+		cursor_Params.width = indicatorWidth;// 初始化滑动下标的宽
+		iv_nav_indicator.setLayoutParams(cursor_Params);
+		mHsv.setSomeParam(rl_nav, iv_nav_left, iv_nav_right, this);
+		// 获取布局填充器
+		mInflater = (LayoutInflater) this
+				.getSystemService(LAYOUT_INFLATER_SERVICE);
+		// 另一种方式获取
+		// LayoutInflater mInflater = LayoutInflater.from(this);
+		initNavigationHSV();
+		
 		TextView title = (TextView) findViewById(R.id.txt_header);
 		title.setText(R.string.mycomments);
 		ImageView back = (ImageView) findViewById(R.id.img_back_header);
@@ -584,11 +694,25 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 				// R.anim.slide_right_out);
 			}
 		});
-
 		customProgressDialog = CustomProgressDialog.createDialog(this);
 		customProgressDialog.show();
 	}
 
+	private void initNavigationHSV() {
+		rg_nav_content.removeAllViews();
+		for (int i = 0; i < tabTitle.length; i++) {
+			RadioButton rb = (RadioButton) mInflater.inflate(
+					R.layout.nav_radiogroup_item, null);
+			if (i == 0) {
+				rb.setChecked(true);
+			}
+			rb.setId(i);
+			rb.setText(tabTitle[i]);
+			rb.setLayoutParams(new LayoutParams(indicatorWidth,
+					LayoutParams.MATCH_PARENT));
+			rg_nav_content.addView(rb);
+		}
+	}
 	// @Override
 	// public void refresh(Object... obj) {
 	// customProgressDialog.dismiss();

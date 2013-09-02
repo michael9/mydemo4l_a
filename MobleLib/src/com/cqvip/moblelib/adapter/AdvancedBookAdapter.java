@@ -23,7 +23,7 @@ public class AdvancedBookAdapter extends BaseAdapter {
 	private Context context;
 	private List<ShortBook> lists;
 	private ImageLoader mImageLoader;
-	Animation operatingAnim;
+	//Animation operatingAnim;
 	
 	public AdvancedBookAdapter(Context context){
 		this.context = context;
@@ -36,9 +36,9 @@ public class AdvancedBookAdapter extends BaseAdapter {
 		this.context = context;
 		this.lists = lists;
 		this.mImageLoader=imageLoader;
-	  	operatingAnim = AnimationUtils.loadAnimation(context, R.anim.loadingrotate);
-	  	LinearInterpolator lin = new LinearInterpolator();
-		operatingAnim.setInterpolator(lin);
+//	  	operatingAnim = AnimationUtils.loadAnimation(context, R.anim.loadingrotate);
+//	  	LinearInterpolator lin = new LinearInterpolator();
+//		operatingAnim.setInterpolator(lin);
 	}
 	public List<ShortBook> getLists(){
 		return lists;
@@ -90,7 +90,7 @@ public class AdvancedBookAdapter extends BaseAdapter {
 			holder = new ViewHolder();
 			holder.title = (TextView) convertView.findViewById(R.id.ad_booktitle_txt);
 			holder.img = (NetworkImageView_rotate) convertView.findViewById(R.id.loaded_book_img);
-			 convertView.findViewById(R.id.defaut_book_img).startAnimation(operatingAnim);
+			// convertView.findViewById(R.id.defaut_book_img).startAnimation(operatingAnim);
 			convertView.setTag(holder);
 		}else{
 			holder = (ViewHolder) convertView.getTag();

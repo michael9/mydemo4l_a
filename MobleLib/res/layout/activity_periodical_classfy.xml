@@ -31,7 +31,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="38dip"
                     android:layout_alignParentTop="true"
-                    android:background="#F2F2F2"
+                    android:background="#88F2F2F2"
                     android:orientation="horizontal" >
                 </RadioGroup>
 
