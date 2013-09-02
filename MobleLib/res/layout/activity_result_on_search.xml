@@ -48,6 +48,7 @@
             android:layout_below="@+id/searchbar"
             android:text=""
             android:textSize="12sp"
+            android:textColor="@android:color/black"
             android:layout_marginLeft="8dp"
             android:visibility="gone"
             android:padding="1dp"
