@@ -91,7 +91,6 @@
                 android:layout_width="42dp"
                 android:layout_height="42dp"
                 android:layout_gravity="bottom"
-                android:background="@drawable/icon_stop"
                 android:focusable="false" android:visibility="gone"/>
         </LinearLayout>
     </RelativeLayout>

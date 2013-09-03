@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
 import com.cqvip.mobelib.imgutils.ImageFetcher;
@@ -133,6 +134,18 @@ public class PeriodicalClassfyActivity extends BaseFragmentImageActivity {
 		
 		initNavigationHSV();
 		
+		TextView title = (TextView) findViewById(R.id.txt_header);
+		title.setText(R.string.title_section2);
+		ImageView back = (ImageView) findViewById(R.id.img_back_header);
+		back.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				finish();
+				// overridePendingTransition(R.anim.slide_left_in,
+				// R.anim.slide_right_out);
+			}
+		});
+		
 		mAdapter = new TabFragmentPagerAdapter(getSupportFragmentManager());
 		mViewPager.setAdapter(mAdapter);
 		mViewPager.setOffscreenPageLimit(5);
@@ -167,7 +180,6 @@ public class PeriodicalClassfyActivity extends BaseFragmentImageActivity {
 		
 		mViewPager = (ViewPager) findViewById(R.id.mViewPager);
 		
-		findViewById(R.id.readerserve_title).setVisibility(View.GONE);
 	}
 
 	@Override

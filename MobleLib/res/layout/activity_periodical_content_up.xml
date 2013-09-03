@@ -29,7 +29,6 @@
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="10.0dip"
                 android:layout_marginTop="5.0dip"
-                android:src="@drawable/eg_bibliosm_958641"
                 android:background="@android:color/transparent" />
 
             <LinearLayout

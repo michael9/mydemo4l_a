@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Message;
 import android.view.Window;
@@ -17,24 +18,17 @@ import com.cqvip.moblelib.R;
 
 public class WelcomeActivity extends Activity {
 
-	private ImageView welcomimg = null;
-	private AnimationDrawable animator = null;
+//	private ImageView welcomimg = null;
+//	private AnimationDrawable animator = null;
 	private Timer timer_sys_check;
-	private int n = 0;
+//	private int n = 0;
     private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
             switch (msg.what) {
             case 1:
-               n++;
-               if(n==2)
-                   animator.start();     
-                   
-               if(n==140){  
-                   animator.stop();
             	   timer_sys_check.cancel();
             	   finish();
                    startHelperActivity();
-                   }
                 break;
             }
        
@@ -79,9 +73,6 @@ public class WelcomeActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.welcome);
-		welcomimg = (ImageView) findViewById(R.id.welcome_img);
-		welcomimg.setBackgroundResource(R.anim.welcome_anim);
-		animator = (AnimationDrawable) welcomimg.getBackground();
 	}
 
 	@Override
@@ -89,14 +80,14 @@ public class WelcomeActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onResume();
 		timer_sys_check = new Timer();
-		timer_sys_check.schedule(new Page_check_task(), 0, 20);
+		timer_sys_check.schedule(new Page_check_task(), 2000);
 	}
 
 	@Override
 	protected void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
-		overridePendingTransition(R.anim.slide_fade_in, R.anim.slide_fade_out);
+		overridePendingTransition(0, R.anim.welcome_slide_fade_out);
 	}
 
 }

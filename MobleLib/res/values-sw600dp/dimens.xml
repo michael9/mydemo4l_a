@@ -7,6 +7,7 @@
      <dimen name="bookicon_width">148dp</dimen>
     <dimen name="bookicon_height">148dp</dimen>
 	  <dimen name="image_thumbnail_size">148dp</dimen>
+	  <dimen name="image_thumbnail_heightsize">210dp</dimen>
     <dimen name="image_thumbnail_spacing">2dp</dimen>
      <dimen name="listview_nullcontent_textsize">16sp</dimen>
 </resources>

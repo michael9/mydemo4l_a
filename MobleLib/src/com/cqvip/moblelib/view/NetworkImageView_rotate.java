@@ -272,11 +272,7 @@ public class NetworkImageView_rotate extends ImageView {
 		rotation.setInterpolator(new LinearInterpolator());
 		rotation.setAnimationListener(new DisplayNextView(position));
 
-		if (mContainer != null && readerinfo_f_lay != null) {
-			mContainer.startAnimation(rotation);
-		} else {
-			readerinfo_b_lay.startAnimation(rotation);
-		}
+			readerinfo_f_lay.startAnimation(rotation);
 	}
 
 	/**
@@ -349,11 +345,8 @@ public class NetworkImageView_rotate extends ImageView {
 			rotation.setDuration(200);
 			rotation.setFillAfter(true);
 			rotation.setInterpolator(new LinearInterpolator());
-			if (mContainer != null && readerinfo_f_lay != null) {
-				mContainer.startAnimation(rotation);
-			} else {
+	
 				readerinfo_b_lay.startAnimation(rotation);
-			}
 		}
 	}
 }

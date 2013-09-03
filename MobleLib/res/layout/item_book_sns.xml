@@ -78,7 +78,6 @@
              android:layout_height="42dp"
              android:layout_alignParentRight="true"
              android:layout_centerVertical="true"
-             android:background="@drawable/icon_stop"
              android:focusable="false" android:visibility="gone"/>
             
 </RelativeLayout>

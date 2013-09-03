@@ -1,12 +1,16 @@
 package com.cqvip.moblelib.activity;
 
+import java.lang.reflect.Method;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -38,11 +42,13 @@ public class EBookActiviy extends BaseActivity {
 	private int[] drawableids = { R.drawable.sign_vip, R.drawable.sign_chaoxing,
 			R.drawable.sign_fangzheng };
 	private  int currentID=-1;
+	private EditText editText;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_ebook_activiy);
+		editText=(EditText) findViewById(R.id.ebook_edit);
 		View v = findViewById(R.id.ebook_title);
 		TextView title = (TextView) v.findViewById(R.id.txt_header);
 		title.setText(R.string.main_ebook);
@@ -55,7 +61,8 @@ public class EBookActiviy extends BaseActivity {
 
 			}
 		});
-
+		hideinputmethod();
+		
 		// SearchView sc = (SearchView)findViewById(R.id.search_view);
 		EBOOKTYPE = getResources().getStringArray(R.array.ebooktype);
 
@@ -167,6 +174,19 @@ public class EBookActiviy extends BaseActivity {
 //				  checkBox.setChecked(false);
 			return convertView;
 		}
-
 	}
+	
+	private void hideinputmethod() {
+		if (android.os.Build.VERSION.SDK_INT <= 10) { 
+			editText.setInputType(InputType.TYPE_NULL);
+			} else {
+			this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+			try {
+			Class<EditText> cls = EditText.class;
+			Method setSoftInputShownOnFocus = cls.getMethod("setSoftInputShownOnFocus", boolean.class);
+			setSoftInputShownOnFocus.setAccessible(true);
+			setSoftInputShownOnFocus.invoke(editText, false);
+			} catch (Exception e) {}
+			}
+	}	
 }

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
    <integer name="activity_switch_duration">600</integer>  
+   <integer name="welcomeactivity_switch_duration">2000</integer> 
 </resources>
