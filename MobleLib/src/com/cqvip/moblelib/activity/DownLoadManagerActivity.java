@@ -537,10 +537,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 				TextView tv = (TextView) convertView
 						.findViewById(R.id.footer_txt);
 				tv.setText("亲，没有已下载的电子书");
-				tv.setTextColor(context.getResources().getColor(
-						R.drawable.silvergray));
-				tv.setTextSize(context.getResources().getDimension(
-						R.dimen.search_detail_txtsize_tv));
+				tv.setTextAppearance(myContext, R.style.TextStyle_nullcontent);
 				tv.setClickable(false);
 				return convertView;
 			}
@@ -685,10 +682,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 						.findViewById(R.id.footer_txt);
 				tv.setTextSize(R.dimen.listview_nullcontent_textsize);
 				tv.setText("亲，没有下载中的电子书");
-				tv.setTextColor(context.getResources().getColor(
-						R.drawable.silvergray));
-				tv.setTextSize(context.getResources().getDimension(
-						R.dimen.search_detail_txtsize_tv));
+				tv.setTextAppearance(myContext, R.style.TextStyle_nullcontent);
 				tv.setClickable(false);
 				return convertView;
 			}

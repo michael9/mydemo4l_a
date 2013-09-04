@@ -674,10 +674,7 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 				TextView tv = (TextView) convertView
 						.findViewById(R.id.footer_txt);
 				tv.setText("亲，您所在分类没有收藏哦");
-				tv.setTextColor(context.getResources().getColor(
-						R.drawable.silvergray));
-				tv.setTextSize(context.getResources().getDimension(
-						R.dimen.search_detail_txtsize_tv));
+				tv.setTextAppearance(myContext, R.style.TextStyle_nullcontent);
 				tv.setClickable(false);
 				return convertView;
 			}
