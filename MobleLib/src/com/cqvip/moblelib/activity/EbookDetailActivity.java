@@ -228,6 +228,7 @@ public class EbookDetailActivity extends BaseActivity {
 						} catch (DaoException e) {
 							e.printStackTrace();
 						}
+						   startActivity(new Intent(EbookDetailActivity.this, DownLoadManagerActivity.class));
 					 }
 				}else{
 					Tool.ShowMessages(context,getString(R.string.tips_unable_download));
@@ -280,6 +281,7 @@ public class EbookDetailActivity extends BaseActivity {
 			} catch (DaoException e) {
 				e.printStackTrace();
 			}
+			   startActivity(new Intent(EbookDetailActivity.this, DownLoadManagerActivity.class));
 		}
 	}
 	/**

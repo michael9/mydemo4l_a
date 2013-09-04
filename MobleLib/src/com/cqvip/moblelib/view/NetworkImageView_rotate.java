@@ -22,12 +22,9 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
-import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
-import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
@@ -291,9 +288,7 @@ public class NetworkImageView_rotate extends ImageView {
 		}
 
 		public void onAnimationEnd(Animation animation) {
-			if (mContainer != null && readerinfo_f_lay != null) {
-				mContainer.post(new SwapViews(mPosition));
-			} else {
+			if (!(readerinfo_b_lay.getVisibility()==View.VISIBLE)){
 				readerinfo_b_lay.post(new SwapViews(mPosition));
 			}
 		}

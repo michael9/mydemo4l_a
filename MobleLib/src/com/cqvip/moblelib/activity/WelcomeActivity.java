@@ -28,6 +28,7 @@ public class WelcomeActivity extends Activity {
             case 1:
             	   timer_sys_check.cancel();
             	   finish();
+            	   overridePendingTransition(R.anim.welcome_slide_fade_in, R.anim.welcome_slide_fade_out);
                    startHelperActivity();
                 break;
             }
@@ -56,6 +57,7 @@ public class WelcomeActivity extends Activity {
 			Intent intent = new Intent();
 			intent.setClass(WelcomeActivity.this, HelperActivity.class);
 			startActivity(intent);
+			overridePendingTransition(R.anim.welcome_slide_fade_in, R.anim.welcome_slide_fade_out);
 		}
 	}
 
@@ -80,14 +82,14 @@ public class WelcomeActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onResume();
 		timer_sys_check = new Timer();
-		timer_sys_check.schedule(new Page_check_task(), 2000);
+		timer_sys_check.schedule(new Page_check_task(), 1000);
 	}
 
 	@Override
 	protected void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
-		overridePendingTransition(0, R.anim.welcome_slide_fade_out);
+		//overridePendingTransition(0, R.anim.welcome_slide_fade_out);
 	}
 
 }

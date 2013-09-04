@@ -62,7 +62,7 @@ public class MainMenuActivity extends BaseActivity {
 	private StableGridView gridview;
 	static public boolean cantouch;
 	private MUserDao dao;
-	private WebView adwebview;
+	//private WebView adwebview;
 	String updata_url;
 	private GridViewImgAdapter adapter;
 	private Timer mtimer;
@@ -73,7 +73,7 @@ public class MainMenuActivity extends BaseActivity {
 			MyFavorActivity.class, AnnounceActivity.class,
 			BorrowAndOrderActivity.class, GroupOfReadersActivity.class };
 	// ³éÌë
-	private SlidingDrawer sd;
+	//private SlidingDrawer sd;
 	// private ImageView iv;
 	Handler handler = new Handler() {
 		public void handleMessage(Message msg) {
@@ -107,12 +107,12 @@ public class MainMenuActivity extends BaseActivity {
 	}
 
 	private int width, height;
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		// requestWindowFeature(Window.);
-
+		//Log.i("MainMenuActivity", "onCreate");
 		Intent intent = new Intent(MainMenuActivity.this, WelcomeActivity.class);
 		startActivity(intent);
 
@@ -121,11 +121,11 @@ public class MainMenuActivity extends BaseActivity {
 		height = display.getHeight();
 		setContentView(R.layout.activity_main);
 		context = this;
-		sd = (SlidingDrawer) findViewById(R.id.sd);
-		adwebview = (WebView) findViewById(R.id.adwebview);
-		adwebview.getSettings().setSupportZoom(true);
-		adwebview
-				.loadUrl("http://www.szlglib.com.cn/uploads/Image/2013/06/24/20130624154214468.jpg");
+		//sd = (SlidingDrawer) findViewById(R.id.sd);
+//		adwebview = (WebView) findViewById(R.id.adwebview);
+//		adwebview.getSettings().setSupportZoom(true);
+//		adwebview
+//				.loadUrl("http://www.szlglib.com.cn/uploads/Image/2013/06/24/20130624154214468.jpg");
 		dao = new MUserDao(this);
 		gridview = (StableGridView) findViewById(R.id.grid_main);
 		adapter = new GridViewImgAdapter(this, activities);
@@ -143,7 +143,12 @@ public class MainMenuActivity extends BaseActivity {
         String info=phinfo.tojson(phinfo);
         Log.i("phinfo", info);
 	}
-
+@Override
+protected void onStart() {
+	// TODO Auto-generated method stub
+	super.onStart();
+	//Log.i("MainMenuActivity", "onStart");
+}
 	private void init_login() {
 		if (dao == null) {
 			dao = new MUserDao(context);
@@ -224,6 +229,7 @@ public class MainMenuActivity extends BaseActivity {
 	protected void onResume() {
 		super.onResume();
 		cantouch = true;
+		//Log.i("MainMenuActivity", "onResume");
 	}
 
 	public void init() {
@@ -310,14 +316,15 @@ public class MainMenuActivity extends BaseActivity {
 	protected void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
-		overridePendingTransition(R.anim.slide_fade_in, R.anim.slide_fade_out);
+		//Log.i("MainMenuActivity", "onPause");
+		//overridePendingTransition(R.anim.slide_fade_in, R.anim.slide_fade_out);
 	}
 
 	@Override
 	protected void onStop() {
 		// TODO Auto-generated method stub
 		super.onStop();
-		// Log.i("MainMenuActivity", "onStop");
+		//Log.i("MainMenuActivity", "onStop");
 	}
 
 	// @Override

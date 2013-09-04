@@ -4,4 +4,11 @@
         android:fromAlpha="1"
         android:toAlpha="0"
         android:duration="@integer/welcomeactivity_switch_duration"/>
+        <translate android:startOffset="500"
+         android:fillBefore="true" 
+         android:fillAfter="true" 
+         android:fillEnabled="true"
+        android:fromXDelta="0" 
+        android:toXDelta="-100%p" 
+         android:duration="@integer/welcomeactivity_translate_duration"/>
 </set>

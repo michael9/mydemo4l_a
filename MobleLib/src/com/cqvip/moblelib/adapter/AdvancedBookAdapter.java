@@ -102,6 +102,7 @@ public class AdvancedBookAdapter extends BaseAdapter {
 //			ImageListener listener = ImageLoader.getImageListener(holder.img,
 //					R.drawable.defaut_book, R.drawable.defaut_book);
 //			mImageLoader.get(book.getDate(), listener);
+	        
         	if(position>rotate_position){
         		holder.img.setIsrotate(true);
         		//Log.i("AdvancedBookAdapter", "rotate_position");

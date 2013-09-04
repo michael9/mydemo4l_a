@@ -15,8 +15,8 @@
 -->
 
 <gridLayoutAnimation xmlns:android="http://schemas.android.com/apk/res/android"
-        android:rowDelay="80%"
-        android:columnDelay="10%"
+        android:rowDelay="100%"
+        android:columnDelay="20%"
         android:directionPriority="none"
         android:animation="@anim/gridview_press"
         />
