@@ -34,20 +34,26 @@
             android:gravity="right"
             android:orientation="horizontal" >
 
-            <Button
+             <Button
                 android:id="@+id/dlg_cancel_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="33dp"
                 android:background="@drawable/btn_dlg"
-                android:text="取消" android:layout_weight="1"/>
+                android:textColor="@android:color/white"
+                android:gravity="center"
+                android:text="取消" 
+                android:layout_weight="1"/>
 
             <Button
                 android:id="@+id/dlg_ok_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="33dp"
                 android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:textColor="@android:color/white"
                 android:background="@drawable/btn_dlg"
-                android:text="确定" android:layout_weight="1"/>
+                android:text="确定" 
+                android:layout_weight="1"/>
         </LinearLayout>
     </LinearLayout>
 
