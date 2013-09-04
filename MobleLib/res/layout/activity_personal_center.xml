@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20.0dip"
                 android:paddingRight="20.0dip"
-                android:src="@drawable/guide_safe_icon" />
+                android:src="@drawable/icon_center_info" />
 
             <TextView
                 android:id="@+id/serv_reader_title"
@@ -112,7 +112,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20.0dip"
                 android:paddingRight="20.0dip"
-                android:src="@drawable/guide_safe_icon" />
+                android:src="@drawable/icon_collection_download" />
 
             <TextView
                 android:id="@+id/serv_download_txt"
@@ -147,7 +147,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20.0dip"
                 android:paddingRight="20.0dip"
-                android:src="@drawable/guide_safe_icon" />
+                android:src="@drawable/icon_center_loginout" />
 
             <TextView
                 android:id="@+id/serv_logout_title"
