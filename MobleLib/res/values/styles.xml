@@ -102,4 +102,9 @@
         <item name="android:textColor">@color/blue_title</item>
         <item name="android:textSize">16.0sp</item>
     </style>
+    
+	<style name="TextStyle_nullcontent">
+        <item name="android:textColor">@drawable/silvergray</item>
+        <item name="android:textSize">16.0sp</item>
+    </style>
 </resources>
