@@ -122,7 +122,7 @@ public class DetailBookActivity extends BaseActivity {
 					+getString(R.string.item_classno)+dBook.getClassno()+"\n"
 					+ isbn + getString(R.string.item_price) + dBook.getU_price());
 		}
-		textView11.setText(dBook.getU_abstract());
+		textView11.setText("    "+dBook.getU_abstract());
 		// listview.setAdapter(adapter);
 		title_bar = findViewById(R.id.head_bar);
 		TextView title = (TextView) title_bar.findViewById(R.id.txt_header);
