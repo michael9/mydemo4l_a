@@ -482,6 +482,23 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 						favorite.getImgurl());
 				Tool.getCommentList(context, book, typeflag);
 
+				// Book book = adapter.getLists().get(positon);
+				// if(book!=null){
+				// Log.i("ResultOnSearchActivity",book.toString());
+				// Intent _intent = new
+				// Intent(context,DetailBookActivity.class);
+				// Bundle bundle = new Bundle();
+				// bundle.putSerializable("book", book);
+				// _intent.putExtra("detaiinfo", bundle);
+				// startActivity(_intent);
+				// }
+
+				// Book book = lists.get(position-1);
+				// if(book!=null){
+				// Bundle bundle = new Bundle();
+				// bundle.putSerializable("book", book);
+				// _intent.putExtra("detaiinfo", bundle);
+				// startActivityForResult(_intent, 1);
 			}
 		}
 
