@@ -23,6 +23,7 @@
           android:paddingLeft="5.0dip"
 		android:paddingTop="5.0dip"
 		android:paddingBottom="5.0dip"
+		android:textColor="@android:color/black"
         android:textSize="18sp"
           android:text="预防医学、卫生学" />
 

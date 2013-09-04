@@ -180,6 +180,7 @@ public class PeriodicalListActivity extends BaseImageActivity implements
 	 * @param count
 	 */
 	private void getHomePage(String key, int page, int count, int type) {
+		customProgressDialog.show();
 		gparams = new HashMap<String, String>();
 		gparams.put("classid", key);
 		gparams.put("perpage", count+"");
