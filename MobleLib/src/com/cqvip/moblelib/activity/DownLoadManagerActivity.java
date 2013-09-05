@@ -104,6 +104,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 
 	// private ArrayList<int[]> _listsloaded= new ArrayList<int[]>();//已下载id
 	final static String TAG = "DownLoadManagerActivity";
+	private boolean ispressdownbutton;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -124,6 +125,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 		// GETFIRSTPAGE_SZ);
 		// getfavorlist(curpage, perpage, GlobleData.BOOK_ZK_TYPE,
 		// GETFIRSTPAGE_ZK);
+		ispressdownbutton=getIntent().getBooleanExtra("ispressdownbutton", false);
 	}
 
 	@Override
@@ -141,9 +143,17 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 		getContentResolver().unregisterContentObserver(downloadObserver);
 	}
 
+	@Override  
+    public void onWindowFocusChanged(boolean hasFocus)  
+    {  
+        if (hasFocus&&ispressdownbutton)  
+        {  
+        	mViewPager.setCurrentItem(1);
+        }  
+    } 
+	
 	private void setListener() {
-		mViewPager
-				.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+		mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
 					@Override
 					public void onPageSelected(int position) {
@@ -175,6 +185,8 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 					public void onCheckedChanged(RadioGroup group, int checkedId) {
 						if (rg_nav_content.getChildAt(checkedId) != null) {
 							// 滑动动画
+							Log.i(TAG, "currentIndicatorLeft:"+currentIndicatorLeft+"--checkedId:"+checkedId+"--"+((RadioButton) rg_nav_content
+									.getChildAt(checkedId)).getLeft());
 							TranslateAnimation animation = new TranslateAnimation(
 									currentIndicatorLeft,
 									((RadioButton) rg_nav_content
@@ -183,7 +195,6 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 							animation.setInterpolator(new LinearInterpolator());
 							animation.setDuration(100);
 							animation.setFillAfter(true);
-
 							// 滑块执行位移动画
 							iv_nav_indicator.startAnimation(animation);
 

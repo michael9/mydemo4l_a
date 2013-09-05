@@ -30,8 +30,14 @@ public class BaseActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		mGestureDetector = new GestureDetector(this,
 				new MyGestrueListener(this));
-		customProgressDialog=CustomProgressDialog.createDialog(this);
 		mQueue=Volley.newRequestQueue(this);
+	}
+	
+	@Override
+	protected void onStart() {
+		// TODO Auto-generated method stub
+		super.onStart();
+		customProgressDialog=CustomProgressDialog.createDialog(this);
 	}
 
 //	@Override

@@ -31,7 +31,13 @@ public class BaseFragmentImageActivity  extends FragmentActivity{
 	    mImageFetcher.addImageCache(this, cacheParams);
 	    mImageFetcher.setImageFadeIn(false);
 	    mQueue = Volley.newRequestQueue(this);
-	    customProgressDialog = CustomProgressDialog.createDialog(this);
+	}
+	
+	@Override
+	protected void onStart() {
+		// TODO Auto-generated method stub
+		super.onStart();
+		customProgressDialog=CustomProgressDialog.createDialog(this);
 	}
 	
 	@Override
@@ -54,6 +60,15 @@ public class BaseFragmentImageActivity  extends FragmentActivity{
         mImageFetcher.closeCache();
     }
 	
+	@Override
+	protected void onStop() {
+		// TODO Auto-generated method stub
+		super.onStop();
+		if(customProgressDialog!=null){
+			customProgressDialog.dismiss();
+			customProgressDialog=null;
+		}
+	}
 	
 
 }

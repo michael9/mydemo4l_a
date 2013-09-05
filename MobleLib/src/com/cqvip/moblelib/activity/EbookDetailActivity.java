@@ -228,7 +228,7 @@ public class EbookDetailActivity extends BaseActivity {
 						} catch (DaoException e) {
 							e.printStackTrace();
 						}
-						   startActivity(new Intent(EbookDetailActivity.this, DownLoadManagerActivity.class));
+						   start_DownLoadManagerActivity();
 					 }
 				}else{
 					Tool.ShowMessages(context,getString(R.string.tips_unable_download));
@@ -268,6 +268,12 @@ public class EbookDetailActivity extends BaseActivity {
 		});
 	}
 	
+	private void start_DownLoadManagerActivity(){
+		   Intent intent= new Intent(EbookDetailActivity.this, DownLoadManagerActivity.class);
+		   intent.putExtra("ispressdownbutton", true);
+		   startActivity(intent);
+	}
+	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
@@ -281,7 +287,7 @@ public class EbookDetailActivity extends BaseActivity {
 			} catch (DaoException e) {
 				e.printStackTrace();
 			}
-			   startActivity(new Intent(EbookDetailActivity.this, DownLoadManagerActivity.class));
+			   start_DownLoadManagerActivity();
 		}
 	}
 	/**

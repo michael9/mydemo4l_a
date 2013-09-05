@@ -258,6 +258,7 @@ public class CommentActivity extends BaseActivity implements
 			// map.put("recordid", recordid);
 			map.put("info", info);
 			// ManagerService.addNewTask(new Task(Task.TASK_ADD_COMMENT, map));
+			if(customProgressDialog!=null)
 			customProgressDialog.show();
 			requestVolley(map, GlobleData.SERVER_URL + "/cloud/comment.aspx",
 					backlistener_add, Method.POST);
