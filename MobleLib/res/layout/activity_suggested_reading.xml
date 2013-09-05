@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20.0dip"
                 android:paddingRight="20.0dip"
-                android:src="@drawable/guide_safe_icon" />
+                android:src="@drawable/icon_book_icon"/>
 
             <TextView
                 android:id="@+id/suggest_profession_title"
@@ -64,7 +64,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="20.0dip"
-                android:src="@drawable/eg_arrow" />
+                android:src="@drawable/icon_array_hot" />
          </LinearLayout>
 
 <!--         <LinearLayout -->
@@ -187,7 +187,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20.0dip"
                 android:paddingRight="20.0dip"
-                android:src="@drawable/guide_safe_icon" />
+                android:src="@drawable/icon_rating_good"/>
+                
 
             <TextView
                 android:id="@+id/suggest_newbook_txt"
@@ -204,7 +205,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="20.0dip"
-                android:src="@drawable/eg_arrow" />
+                android:src="@drawable/icon_arraw_new" />
         </LinearLayout>
     </LinearLayout>
 

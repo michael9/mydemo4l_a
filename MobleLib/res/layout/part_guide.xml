@@ -48,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20.0dip"
                 android:paddingRight="20.0dip"
-                android:src="@drawable/icon_content_paste" />
+                android:src="@drawable/icon_lib_announce" />
 
             <TextView
                 android:id="@+id/guide_enter_title"
