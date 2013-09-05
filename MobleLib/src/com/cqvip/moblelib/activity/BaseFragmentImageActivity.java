@@ -22,6 +22,8 @@ public class BaseFragmentImageActivity  extends FragmentActivity{
 	protected void onCreate(Bundle arg0) {
 		// TODO Auto-generated method stub
 		super.onCreate(arg0);
+		customProgressDialog=CustomProgressDialog.createDialog(this);
+		
 		ImageCacheParams cacheParams = new ImageCacheParams(this, GlobleData.IMAGE_CACHE_DIR);
         cacheParams.setMemCacheSizePercent(0.125f); // Set memory cache to 12.5% of app memory
 		mImageFetcher = new ImageFetcher(this, getResources().getDimensionPixelSize(R.dimen.bookicon_width),
@@ -37,6 +39,7 @@ public class BaseFragmentImageActivity  extends FragmentActivity{
 	protected void onStart() {
 		// TODO Auto-generated method stub
 		super.onStart();
+		if(customProgressDialog==null)
 		customProgressDialog=CustomProgressDialog.createDialog(this);
 	}
 	
