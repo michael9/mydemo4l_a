@@ -51,7 +51,9 @@ import com.cqvip.utils.FileUtils;
 import com.cqvip.utils.Tool;
 
 public class DownLoadManagerActivity extends BaseFragmentImageActivity {
-	// public static final int GETFIRSTPAGE_SZ = 1;
+
+	public static final int LOADING_BOOK = 98;
+	public static final int LOADED_BOOK = 99;
 	// public static final int GETFIRSTPAGE_ZK = 2;
 	// public static final int GETNEXT = 3;
 
@@ -106,6 +108,10 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 	final static String TAG = "DownLoadManagerActivity";
 	private boolean ispressdownbutton;
 
+	private String del_bookname;
+	private int download_status;
+	private MEbook del_book;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -125,7 +131,8 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 		// GETFIRSTPAGE_SZ);
 		// getfavorlist(curpage, perpage, GlobleData.BOOK_ZK_TYPE,
 		// GETFIRSTPAGE_ZK);
-		ispressdownbutton=getIntent().getBooleanExtra("ispressdownbutton", false);
+		ispressdownbutton = getIntent().getBooleanExtra("ispressdownbutton",
+				false);
 	}
 
 	@Override
@@ -143,17 +150,16 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 		getContentResolver().unregisterContentObserver(downloadObserver);
 	}
 
-	@Override  
-    public void onWindowFocusChanged(boolean hasFocus)  
-    {  
-        if (hasFocus&&ispressdownbutton)  
-        {  
-        	mViewPager.setCurrentItem(1);
-        }  
-    } 
-	
+	@Override
+	public void onWindowFocusChanged(boolean hasFocus) {
+		if (hasFocus && ispressdownbutton) {
+			mViewPager.setCurrentItem(1);
+		}
+	}
+
 	private void setListener() {
-		mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+		mViewPager
+				.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
 					@Override
 					public void onPageSelected(int position) {
@@ -185,8 +191,15 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 					public void onCheckedChanged(RadioGroup group, int checkedId) {
 						if (rg_nav_content.getChildAt(checkedId) != null) {
 							// 滑动动画
-							Log.i(TAG, "currentIndicatorLeft:"+currentIndicatorLeft+"--checkedId:"+checkedId+"--"+((RadioButton) rg_nav_content
-									.getChildAt(checkedId)).getLeft());
+							Log.i(TAG,
+									"currentIndicatorLeft:"
+											+ currentIndicatorLeft
+											+ "--checkedId:"
+											+ checkedId
+											+ "--"
+											+ ((RadioButton) rg_nav_content
+													.getChildAt(checkedId))
+													.getLeft());
 							TranslateAnimation animation = new TranslateAnimation(
 									currentIndicatorLeft,
 									((RadioButton) rg_nav_content
@@ -602,22 +615,10 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 						.setOnClickListener(new View.OnClickListener() {
 							@Override
 							public void onClick(View v) {
-								if (!mebooks_listloaded.isEmpty()) {
-									try {
-										meBookDao.deldownload(book
-												.getDownloadid());
-										mebooks_listloaded.remove(book);
-										adapter_zk.notifyDataSetChanged();
-										FileUtils.DeleteFolder(Environment
-												.getExternalStorageDirectory()
-												+ File.separator
-												+ EbookDetailActivity.DOWNLOAD_FOLDER_NAME
-												+ File.separator + bookname);
-									} catch (DaoException e) {
-										// TODO Auto-generated catch block
-										e.printStackTrace();
-									}
-								}
+
+								saveObject(bookname, 0, book);
+								senddel(LOADED_BOOK);
+
 							}
 						});
 			}
@@ -762,30 +763,10 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 							.setOnClickListener(new View.OnClickListener() {
 								@Override
 								public void onClick(View v) {
-									Log.i(TAG, "onClick");
-									if (mebooks_list != null
-											&& !mebooks_list.isEmpty()) {
-										try {
-											downloadManager.remove(book
-													.getDownloadid());
-											meBookDao.deldownload(book
-													.getDownloadid());
-											mebooks_list.remove(book);
-											if (downloadstatus == DownloadManager.STATUS_SUCCESSFUL) {
-												FileUtils.DeleteFolder(Environment
-														.getExternalStorageDirectory()
-														+ File.separator
-														+ EbookDetailActivity.DOWNLOAD_FOLDER_NAME
-														+ File.separator
-														+ bookname);
-											}
-										} catch (DaoException e) {
-											// TODO Auto-generated catch block
-											e.printStackTrace();
-										}
-										getDownloadStatus();
-									}
+									saveObject(bookname, downloadstatus, book);
+									senddel(LOADING_BOOK);
 								}
+
 							});
 				}
 			}
@@ -806,6 +787,81 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 				meBookDao.updateState(book);
 			} catch (DaoException e) {
 				e.printStackTrace();
+			}
+		}
+	}
+
+	/**
+	 * 删除对话框
+	 */
+	public void senddel(int type) {
+		Intent intent = new Intent();
+		intent.setClass(this, ActivityDlg.class);
+		intent.putExtra("ACTIONID", 0);
+		intent.putExtra("MSGBODY", "确定删除该记录？");
+		intent.putExtra("BTN_CANCEL", 1);
+		startActivityForResult(intent, type);
+	}
+
+	/**
+	 * 删除更新，暂存
+	 * 
+	 * @param bookname
+	 * @param downloadstatus
+	 * @param book
+	 */
+	private void saveObject(String bookname, int downloadstatus, MEbook book) {
+		del_bookname = bookname;
+		del_book = book;
+		download_status = downloadstatus;
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+		if (resultCode == 0) {
+			switch (requestCode) {
+			case LOADING_BOOK:
+				if (mebooks_list != null && !mebooks_list.isEmpty()) {
+					try {
+						downloadManager.remove(del_book.getDownloadid());
+						meBookDao.deldownload(del_book.getDownloadid());
+						mebooks_list.remove(del_book);
+						if (download_status == DownloadManager.STATUS_SUCCESSFUL) {
+							FileUtils.DeleteFolder(Environment
+									.getExternalStorageDirectory()
+									+ File.separator
+									+ EbookDetailActivity.DOWNLOAD_FOLDER_NAME
+									+ File.separator + del_bookname);
+						}
+					} catch (DaoException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					getDownloadStatus();
+				}
+
+				break;
+			case LOADED_BOOK:
+				if (!mebooks_listloaded.isEmpty()) {
+					try {
+						meBookDao.deldownload(del_book.getDownloadid());
+						mebooks_listloaded.remove(del_book);
+						adapter_zk.notifyDataSetChanged();
+						FileUtils.DeleteFolder(Environment
+								.getExternalStorageDirectory()
+								+ File.separator
+								+ EbookDetailActivity.DOWNLOAD_FOLDER_NAME
+								+ File.separator + del_bookname);
+					} catch (DaoException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				break;
+			default:
+				break;
 			}
 		}
 	}
@@ -866,64 +922,9 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 			@Override
 			public void onClick(View v) {
 				finish();
-				// overridePendingTransition(R.anim.slide_left_in,
-				// R.anim.slide_right_out);
 			}
 		});
 
-		// customProgressDialog = CustomProgressDialog.createDialog(this);
-		// customProgressDialog.show();
 	}
 
-	// @Override
-	// public void refresh(Object... obj) {
-	// customProgressDialog.dismiss();
-	// Log.i("MyFavorActivity_refresh", "refresh");
-	// int temp = (Integer) obj[0];
-	// if (temp == COMMENTLIST) {
-	// arrayLists = (Map<Integer, List<Favorite>>) obj[1];
-	// if (arrayLists != null && !arrayLists.isEmpty()) {
-	// // if
-	// //
-	// ((curpage_sz>1||curpage_zk>1)&&(arrayLists.get(GlobleData.BOOK_ZK_TYPE)==null||arrayLists.get(GlobleData.BOOK_ZK_TYPE).isEmpty())&&
-	// //
-	// (arrayLists.get(GlobleData.BOOK_SZ_TYPE)==null||arrayLists.get(GlobleData.BOOK_SZ_TYPE).isEmpty()))
-	// // {
-	// // Tool.ShowMessages(context, "没有更多内容可供加载");
-	// // moreprocess.setVisibility(View.GONE);
-	// // return;
-	// // }
-	// ArrayList<Favorite> temp_sz_list = (ArrayList<Favorite>) arrayLists
-	// .get(GlobleData.BOOK_SZ_TYPE);
-	// ArrayList<Favorite> temp_zk_list = (ArrayList<Favorite>) arrayLists
-	// .get(GlobleData.BOOK_ZK_TYPE);
-	// if (temp_sz_list != null) {
-	// arrayList_sz
-	// .addAll(arrayLists.get(GlobleData.BOOK_SZ_TYPE));
-	// // mSectionsPagerAdapter.notifyDataSetChanged();
-	// adapter_sz.notifyDataSetChanged();
-	// } else if (temp_zk_list != null) {
-	// arrayList_zk
-	// .addAll(arrayLists.get(GlobleData.BOOK_ZK_TYPE));
-	// adapter_zk.notifyDataSetChanged();
-	// }
-	// } else if (curpage_sz > 1 || curpage_zk > 1) {
-	// Tool.ShowMessages(context, "没有更多内容可供加载");
-	// if (moreprocess != null)
-	// moreprocess.setVisibility(View.GONE);
-	// }
-	// }
-	// }
-
-	// public void onError(int a) {
-	// if (customProgressDialog != null && customProgressDialog.isShowing()) {
-	// customProgressDialog.dismiss();
-	// }
-	// if (a == 2) {// 加载失败
-	// Tool.ShowMessages(this, getResources().getString(R.string.loadfail));
-	// } else if (a == 6) {
-	// Tool.ShowMessages(this,
-	// getResources().getString(R.string.cancelcommentfail));
-	// }
-	// }
 }
