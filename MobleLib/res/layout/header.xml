@@ -28,10 +28,10 @@
     <ImageView
         android:id="@+id/btn_right_header"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="9dip"
+        android:layout_height="32dp"
         android:src="@drawable/icon_collection_download"
         android:visibility="gone" />
 

@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -71,6 +72,15 @@ public class ResultOnSearchActivity extends BaseActivity implements
 		listview.setOnItemClickListener((OnItemClickListener) this);
 		noResult_rl = (RelativeLayout) findViewById(R.id.noresult_rl);
 		edit.setText(getIntent().getStringExtra("ISBN"));
+		
+		if(getIntent().getBooleanExtra("isfromDetailAdvancedBookActivity", false)){
+			key=getIntent().getStringExtra("bookname");
+			imgsearch.setFocusable(true);
+			customProgressDialog.show();
+			getHomePage(key, GETFIRSTPAGE, DEFAULT_COUNT, GETFIRSTPAGE,
+					GlobleData.QUERY_ALL);
+			this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+		}
 
 		imgsearch.setOnClickListener(new View.OnClickListener() {
 
@@ -141,7 +151,6 @@ public class ResultOnSearchActivity extends BaseActivity implements
 				finish();
 			}
 		});
-
 	}
 
 	/**
@@ -184,7 +193,6 @@ public class ResultOnSearchActivity extends BaseActivity implements
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-
 		}
 	};
 
@@ -279,7 +287,7 @@ public class ResultOnSearchActivity extends BaseActivity implements
 			moreprocess = arg1.findViewById(R.id.footer_progress);
 			moreprocess.setVisibility(View.VISIBLE);
 			// ÇëÇóÍøÂç¸ü¶à
-			if (Tool.isbnMatch(key)) {
+			if (!TextUtils.isEmpty(key)&&Tool.isbnMatch(key)) {
 				getHomePage(key, page + 1, DEFAULT_COUNT, GETNEXTPAGE,
 						GlobleData.QUERY_ISBN);
 			} else {
