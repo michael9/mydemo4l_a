@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Html;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.View;
@@ -49,7 +50,8 @@ public class DetailBookActivity extends BaseActivity {
 			btn_item_result_search_share, btn_item_result_search_buzz,
 			btn_item_result_search_download;
 
-	private int fromFlage;//表示从哪个activity跳转过来，评论过来不显示评论按钮
+	private int fromFlage;// 表示从哪个activity跳转过来，评论过来不显示评论按钮
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -59,15 +61,17 @@ public class DetailBookActivity extends BaseActivity {
 		imgview = (ImageView) findViewById(R.id.book_big_img);
 		Bundle bundle = getIntent().getBundleExtra("detaiinfo");
 		dBook = (Book) bundle.getSerializable("book");
-		fromFlage = getIntent().getIntExtra("from",0);
+		fromFlage = getIntent().getIntExtra("from", 0);
 		ismyfavor = getIntent().getBooleanExtra("ismyfavor", false);
 		booktitle_tv = (TextView) findViewById(R.id.booktitle_tv);
 		textView9 = (TextView) findViewById(R.id.textView9);
 		textView10 = (TextView) findViewById(R.id.textView10);
 		textView11 = (TextView) findViewById(R.id.textView11);
-		
-		ImageLoader mImageLoader = new ImageLoader(mQueue, new BitmapCache(Tool.getCachSize()));
-		ImageListener listener = ImageLoader.getImageListener(imgview, R.drawable.defaut_book, R.drawable.defaut_book);
+
+		ImageLoader mImageLoader = new ImageLoader(mQueue, new BitmapCache(
+				Tool.getCachSize()));
+		ImageListener listener = ImageLoader.getImageListener(imgview,
+				R.drawable.defaut_book, R.drawable.defaut_book);
 		mImageLoader.get(dBook.getCover_path(), listener);
 
 		imgview.setOnClickListener(new View.OnClickListener() {
@@ -109,20 +113,24 @@ public class DetailBookActivity extends BaseActivity {
 		if (!TextUtils.isEmpty(recordid)) {
 			getLocalinfo(recordid);
 		}
-		if (ismyfavor){
-			
-			textView10.setText(getString(R.string.item_author) + dBook.getAuthor()
-					+ "\n" + getString(R.string.item_publish)
-					+ dBook.getPublisher() + "\n" + timeortheme);
-		}else{
-			textView10.setText(getString(R.string.item_author) + dBook.getAuthor()
-					+ "\n" + getString(R.string.item_publish)
-					+ dBook.getPublisher() + "\n" + timeortheme + "\n"
+		if (ismyfavor) {
+
+			textView10.setText(getString(R.string.item_author)
+					+ dBook.getAuthor() + "\n"
+					+ getString(R.string.item_publish) + dBook.getPublisher()
+					+ "\n" + timeortheme);
+		} else {
+			textView10.setText(getString(R.string.item_author)
+					+ dBook.getAuthor() + "\n"
+					+ getString(R.string.item_publish) + dBook.getPublisher()
+					+ "\n" + timeortheme
+					+ "\n"
 					// +getString(R.string.item_callno)+dBook.getCallno()+"\n"
-					+getString(R.string.item_classno)+dBook.getClassno()+"\n"
-					+ isbn + getString(R.string.item_price) + dBook.getU_price());
+					+ getString(R.string.item_classno) + dBook.getClassno()
+					+ "\n" + isbn + getString(R.string.item_price)
+					+ dBook.getU_price());
 		}
-		textView11.setText("    "+dBook.getU_abstract());
+		textView11.setText("        "+dBook.getU_abstract());
 		// listview.setAdapter(adapter);
 		title_bar = findViewById(R.id.head_bar);
 		TextView title = (TextView) title_bar.findViewById(R.id.txt_header);
@@ -146,13 +154,18 @@ public class DetailBookActivity extends BaseActivity {
 					@Override
 					public void onClick(View v) {
 						if (GlobleData.islogin) {
-							gparams=new HashMap<String, String>();
-							gparams.put("libid",  GlobleData.LIBIRY_ID);
+							gparams = new HashMap<String, String>();
+							gparams.put("libid", GlobleData.LIBIRY_ID);
 							gparams.put("vipuserid", GlobleData.cqvipid);
-							gparams.put("typeid", ""+GlobleData.BOOK_SZ_TYPE);
-							gparams.put("keyid", Tool.formSZbookID(dBook.getCallno(),dBook.getRecordid()));
+							gparams.put("typeid", "" + GlobleData.BOOK_SZ_TYPE);
+							gparams.put(
+									"keyid",
+									Tool.formSZbookID(dBook.getCallno(),
+											dBook.getRecordid()));
 							customProgressDialog.show();
-							requestVolley(GlobleData.SERVER_URL+"/cloud/favorite.aspx",bookfavorite_ls,Method.POST);
+							requestVolley(GlobleData.SERVER_URL
+									+ "/cloud/favorite.aspx", bookfavorite_ls,
+									Method.POST);
 						} else {
 							// 只是登陆而已
 							showLoginDialog(4);
@@ -174,7 +187,7 @@ public class DetailBookActivity extends BaseActivity {
 		// 评论
 		btn_item_result_search_buzz = (TextView) book_action_bar
 				.findViewById(R.id.btn_item_buzz);
-		if(fromFlage == 1){
+		if (fromFlage == 1) {
 			btn_item_result_search_buzz.setVisibility(View.GONE);
 		}
 		btn_item_result_search_buzz.setOnClickListener(new OnClickListener() {
@@ -202,17 +215,17 @@ public class DetailBookActivity extends BaseActivity {
 		intent.putExtra("ACTIONID", id);
 		startActivityForResult(intent, id);
 	}
-	
 
 	private Listener<String> bookfavorite_ls = new Listener<String>() {
 
 		@Override
 		public void onResponse(String response) {
 			// TODO Auto-generated method stub
-			if(customProgressDialog!=null&&customProgressDialog.isShowing())
-			customProgressDialog.dismiss();
+			if (customProgressDialog != null
+					&& customProgressDialog.isShowing())
+				customProgressDialog.dismiss();
 			try {
-				Result r=new Result(response);
+				Result r = new Result(response);
 				Tool.ShowMessagel(DetailBookActivity.this, r.getMessage());
 			} catch (Exception e) {
 				// TODO: handle exception
@@ -220,24 +233,25 @@ public class DetailBookActivity extends BaseActivity {
 			}
 		}
 	};
-	
+
 	private Listener<String> back_ls = new Listener<String>() {
 
 		@Override
 		public void onResponse(String response) {
 			// TODO Auto-generated method stub
-			if(customProgressDialog!=null&&customProgressDialog.isShowing())
-			customProgressDialog.dismiss();
+			if (customProgressDialog != null
+					&& customProgressDialog.isShowing())
+				customProgressDialog.dismiss();
 			try {
 				final List<BookLoc> list = BookLoc.formList(response);
 				new Thread(new Runnable() {
-					
+
 					@Override
 					public void run() {
 						add2gc(list);
 					}
 				}).start();
-				
+
 			} catch (Exception e) {
 				// TODO: handle exception
 				return;
@@ -249,8 +263,9 @@ public class DetailBookActivity extends BaseActivity {
 		@Override
 		public void onErrorResponse(VolleyError arg0) {
 			// TODO Auto-generated method stub
-			if(customProgressDialog!=null&&customProgressDialog.isShowing())
-			customProgressDialog.dismiss();
+			if (customProgressDialog != null
+					&& customProgressDialog.isShowing())
+				customProgressDialog.dismiss();
 		}
 	};
 
@@ -286,15 +301,16 @@ public class DetailBookActivity extends BaseActivity {
 		getMenuInflater().inflate(R.menu.detail_book, menu);
 		return true;
 	}
-	
+
 	LinearLayout mll;
+
 	private void add2gc(List<BookLoc> list) {
 		if (list == null || list.isEmpty())
 			return;
 		for (BookLoc bl : list) {
 			// LinearLayout mll=new LinearLayout(this);
-			 mll = (LinearLayout) getLayoutInflater().inflate(
-					R.layout.item_location_book, loc_list_ll,false);
+			mll = (LinearLayout) getLayoutInflater().inflate(
+					R.layout.item_location_book, loc_list_ll, false);
 			// mll.inflate(this, R.layout.item_location_book, null);
 			TextView barcode = (TextView) mll
 					.findViewById(R.id.loc_barcode_txt);
@@ -324,10 +340,10 @@ public class DetailBookActivity extends BaseActivity {
 			}
 		}
 	}
-	
-	Handler handler=new Handler(){
+
+	Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
-			loc_list_ll.addView(mll,0);
+			loc_list_ll.addView(mll, 0);
 		};
 	};
 

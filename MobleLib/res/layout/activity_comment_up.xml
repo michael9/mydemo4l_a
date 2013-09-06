@@ -34,14 +34,14 @@
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:orientation="vertical" android:layout_marginLeft="5.0dip">
 
                 <TextView
                     android:id="@+id/baseinfo_tv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="基本信息"
-                    android:textSize="18.0sp" />
+                    style="@style/TextTitleBigBlueStyle"/>
 
                 <TextView
                     android:id="@+id/intro_tv"

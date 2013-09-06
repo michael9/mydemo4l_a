@@ -128,7 +128,7 @@ public class EbookDetailActivity extends BaseActivity {
 		} else {
 			type.setVisibility(View.GONE);
 		}
-		content.setText("    "+dBook.getRemark_c());
+		content.setText("        "+dBook.getRemark_c());
 		// //判断是否已经收藏
 		// btn_ebook_detail_collect.setText(isFavorite(dBook.isIsfavorite()));
 		if(fromFlage == 1){

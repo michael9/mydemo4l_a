@@ -8,86 +8,94 @@
         android:id="@+id/head_bar"
         layout="@layout/header" />
 
+    <RelativeLayout
+        android:id="@+id/rl_basecontent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/head_bar"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp" >
+
+        <ImageView
+            android:id="@+id/book_big_img"
+            android:layout_width="90dp"
+            android:layout_height="125dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="2.0dip"
+            android:background="@android:color/transparent"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/booktitle_tv"
+            style="@style/TextTitleBigBlueStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="5.0dip"
+            android:layout_toRightOf="@id/book_big_img"
+            android:text="title" />
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/booktitle_tv"
+            android:layout_marginLeft="2.0dip"
+            android:layout_marginTop="2.0dip"
+            android:layout_toRightOf="@id/book_big_img"
+            android:text="base"
+            android:textSize="@dimen/search_detail_txtsize_tv" />
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/rl_basecontent"
+        android:background="@drawable/silvergray" />
+
     <ScrollView
         android:id="@+id/detail_main_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/ll_action_bar"
-        android:layout_below="@id/head_bar"
+        android:layout_below="@id/rl_basecontent"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp" >
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-
-            <ImageView
-                android:id="@+id/book_big_img"
-                android:layout_width="72dp"
-                android:layout_height="96dp"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="2.0dip"
-                android:layout_marginTop="8.0dip"
-                android:background="@android:color/transparent"
-                android:saveEnabled="true"
-                android:scaleType="centerCrop" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
             <TextView
-                android:id="@+id/booktitle_tv"
-                style="@style/TextTitleBigBlueStyle"
+                android:id="@+id/textView11"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginLeft="5.0dip"
-                android:layout_toRightOf="@id/book_big_img"
-                android:text="title" />
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="2dp"
+                android:text="图书简介"
+                android:textSize="@dimen/search_detail_txtsize_btn" />
 
             <TextView
-                android:id="@+id/textView10"
+                android:id="@+id/textView9"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/booktitle_tv"
-                android:layout_marginLeft="2.0dip"
-                android:layout_marginTop="2.0dip"
-                android:layout_toRightOf="@id/book_big_img"
-                android:text="base"
-                android:textSize="@dimen/search_detail_txtsize_tv" />
+                android:layout_marginTop="10dp"
+                android:text="馆藏信息"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <LinearLayout
+                android:id="@+id/loc_list_ll"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@id/textView10"
-                android:orientation="vertical" >
-
-                <TextView
-                    android:id="@+id/textView11"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginTop="10dp"
-                    android:text="图书简介"
-                    android:textSize="@dimen/search_detail_txtsize_btn" />
-
-                <TextView
-                    android:id="@+id/textView9"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="馆藏信息"
-                    android:textSize="16dp" />
-
-                <LinearLayout
-                    android:id="@+id/loc_list_ll"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:animateLayoutChanges="true"
-                    android:divider="?android:attr/listDivider"
-                    android:dividerPadding="1dp"
-                    android:orientation="vertical"
-                    android:showDividers="middle" />
-            </LinearLayout>
-        </RelativeLayout>
+                android:layout_height="wrap_content"
+                android:animateLayoutChanges="true"
+                android:divider="?android:attr/listDivider"
+                android:dividerPadding="1dp"
+                android:orientation="vertical"
+                android:showDividers="middle" />
+        </LinearLayout>
     </ScrollView>
 
     <LinearLayout
