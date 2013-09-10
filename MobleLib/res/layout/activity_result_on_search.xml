@@ -1,4 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:dlistView="http://schemas.android.com/apk/res/com.cqvip.moblelib"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -54,7 +55,7 @@
             android:padding="1dp"
         />
     
-    <ListView
+    <com.cqvip.moblelib.view.DropDownListView
         android:id="@+id/search_res_lv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -62,6 +63,8 @@
         android:layout_marginBottom="12dp"
         android:background="@drawable/text_bck"
         android:divider="@color/divider_color"
+        dlistView:isOnBottomStyle="true"
+        dlistView:isAutoLoadOnBottom="true"
         android:dividerHeight="0.5dp" />
 
     <RelativeLayout

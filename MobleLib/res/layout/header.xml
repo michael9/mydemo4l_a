@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:ellipsize="end" 
-        android:singleLine="true" android:maxEms="8"
+        android:singleLine="true" android:maxEms="6"
         android:text="@string/main_guide"
         android:textColor="@color/txt_black"
         android:textIsSelectable="false"

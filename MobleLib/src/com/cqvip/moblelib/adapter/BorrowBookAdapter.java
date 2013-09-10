@@ -122,7 +122,7 @@ public class BorrowBookAdapter extends BaseAdapter{
 	        holder.title.setText(book.getTitle());
 	        holder.barcode.setText(barcode+book.getBarcode());
 	        holder.callno.setText(callno+book.getCallno());
-	        holder.price.setText(price+book.getPrice());
+	        holder.price.setText(price+"CNY"+book.getPrice());
 	        holder.borrowtime.setText(borrowtime+book.getLoandate());
 	        holder.renew.setTag(position);
 	        //ÅÐ¶ÏÊÇ·ñÐø½è¹ý

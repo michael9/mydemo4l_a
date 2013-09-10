@@ -65,23 +65,23 @@
     <string name="floor_7">七楼</string>
     <string name="floor_8">八楼</string>
     <string name="floor_9">九楼</string>
-    <string name="item_author">作者:</string>
-    <string name="item_publish">出版社:</string>
-    <string name="item_classno">分类号:</string>
-    <string name="item_subject">主题:</string>
-    <string name="item_time">出版时间:</string>
-    <string name="item_describe">简介:</string>
+    <string name="item_author">作者：</string>
+    <string name="item_publish">出版社：</string>
+    <string name="item_classno">分类号：</string>
+    <string name="item_subject">主题：</string>
+    <string name="item_time">出版时间：</string>
+    <string name="item_describe">简介：</string>
     <string name="item_comment_count">评论</string>
-    <string name="item_barcode">条码号:</string>
+    <string name="item_barcode">条码号：</string>
     <string name="item_callno">索取号：</string>
     <string name="item_loc">馆藏地址：</string>
     <string name="item_status">状态：</string>
     <string name="item_volume">期卷：</string>
     <string name="item_cirtype">流通类别：</string>
-    <string name="item_price">价格:</string>
-    <string name="item_size">大小:</string>
-    <string name="item_brtime">借出时间:</string>
-    <string name="item_retime">还回日期:</string>
+    <string name="item_price">价格：</string>
+    <string name="item_size">大小：</string>
+    <string name="item_brtime">借出日期：</string>
+    <string name="item_retime">还回日期：</string>
     <string name="item_renew">续借..</string>
     <string name="alreadyrenew">(已续借)</string>
     <string name="beginrenew">开始续借</string>
@@ -99,11 +99,11 @@
     <string name="confirm_quit">确定注销此账号?</string>
     <string name="confirm_ok">确定</string>
     <string name="confirm_cancel">取消</string>
-    <string name="ebook_page">页数:</string>
-    <string name="ebook_orang">来源:</string>
-    <string name="ebook_type">格式:</string>
-    <string name="ebook_abstrac">简介:</string>
-    <string name="ebook_time">刊号:</string>
+    <string name="ebook_page">页数：</string>
+    <string name="ebook_orang">来源：</string>
+    <string name="ebook_type">格式：</string>
+    <string name="ebook_abstrac">简介：</string>
+    <string name="ebook_time">刊号：</string>
     <string name="no_result">没有找到相关结果\n试试别的关键字吧!</string>
     <string name="no_borrow">您没有借阅书籍信息!</string>
     <string name="book_detail">详细</string>
@@ -153,4 +153,13 @@
     <string name="title_activity_periodical_content">PeriodicalContentActivity</string>
     <string name="title_activity_periodical_center">PeriodicalCenterActivity</string>
 
+    <string name="drop_down_list_header_default_text">点击可以刷新&#8230;</string>
+    <string name="drop_down_list_header_pull_text">下拉可以刷新</string>
+    <string name="drop_down_list_header_release_text">松开进行刷新</string>
+    <string name="drop_down_list_header_loading_text">加载中&#8230;</string>
+    <string name="drop_down_list_footer_default_text">更多</string>
+    <string name="drop_down_list_footer_loading_text">加载中&#8230;</string>
+    <string name="drop_down_list_footer_no_more_text">没有更多内容可供加载</string>
+    <string name="update_at">更新于：</string>
+    
 </resources>

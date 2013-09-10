@@ -1,4 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:dlistView="http://schemas.android.com/apk/res/com.cqvip.moblelib"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,11 +10,13 @@
         android:id="@+id/head_bar"
         layout="@layout/header" />
 
-    <com.cqvip.moblelib.view.DownFreshListView
+    <com.cqvip.moblelib.view.DropDownListView
         android:id="@+id/listview_new"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_below="@id/head_bar"
+        dlistView:isOnBottomStyle="true"
+        dlistView:isAutoLoadOnBottom="true"
         android:layout_marginBottom="20dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
