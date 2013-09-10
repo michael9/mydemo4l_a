@@ -1,5 +1,7 @@
 package com.cqvip.moblelib.activity;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,7 +9,6 @@ import java.util.Map;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -30,13 +31,15 @@ import com.cqvip.moblelib.constant.Constant;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.ShortBook;
 import com.cqvip.moblelib.view.DownFreshListView;
+import com.cqvip.moblelib.view.DropDownListView;
+import com.cqvip.moblelib.view.DropDownListView.OnDropDownListener;
 import com.cqvip.utils.Tool;
 
-public class AnnouceListActivity extends BaseActivity implements OnItemClickListener,DownFreshListView.OnRefreshListener{
+public class AnnouceListActivity extends BaseActivity implements OnItemClickListener{
 
 	private  final int GETMORE = 1;
 	private  final int GETHOMEPAGE = 0;
-	private DownFreshListView listview;
+	private DropDownListView listview;
 	private int type;
 	private Context context;
 	private int page=1;
@@ -44,6 +47,7 @@ public class AnnouceListActivity extends BaseActivity implements OnItemClickList
 	private MyNewAdapter adapter;
 	private Map<String, String> gparams;
 	private int sendtype;
+	//private boolean isFirstLoad = false; 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -51,10 +55,30 @@ public class AnnouceListActivity extends BaseActivity implements OnItemClickList
 		
 		context = this;
 		type = getIntent().getIntExtra("type", 1);
-		listview = (DownFreshListView) findViewById(R.id.listview_new);
-		listview.addHeaderView();
+		listview = (DropDownListView) findViewById(R.id.listview_new);
 		listview.setOnItemClickListener(this);
-		listview.setOnRefreshListener(this);
+		  // set drop down listener
+//        listview.setOnDropDownListener(new OnDropDownListener() {
+//
+//            @Override
+//            public void onDropDown() {
+//            	page = 1;//重置page
+//            	isFirstLoad = false;
+//        		getHomePage(page, Constant.DEFAULT_COUNT,GETHOMEPAGE);
+//            }
+//        });
+
+        // set on bottom listener
+        listview.setOnBottomListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+            	getHomePage(page+1,Constant.DEFAULT_COUNT,GETMORE);
+    			page = page+1;
+            }
+        });
+		
+		
 		adapter = new MyNewAdapter(context,null);
 		
 		switch (type) {
@@ -76,8 +100,8 @@ public class AnnouceListActivity extends BaseActivity implements OnItemClickList
 			break;
 		}
 		customProgressDialog.show();
+		//isFirstLoad = true;
 		getHomePage(page, Constant.DEFAULT_COUNT,GETHOMEPAGE);
-		
 	}
 	
 	private void setheadbar(String title)
@@ -102,14 +126,24 @@ public class AnnouceListActivity extends BaseActivity implements OnItemClickList
 	private Listener<String> backlistener = new Listener<String>() {
 		@Override
 		public void onResponse(String response) {
-			// TODO Auto-generated method stub
 			if(customProgressDialog!=null&&customProgressDialog.isShowing())
 			customProgressDialog.dismiss();
+//			 if(!isFirstLoad){
+//			 SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd HH:mm:ss");
+//             listview.onDropDownComplete(getString(R.string.update_at) + dateFormat.format(new Date()));
+//			 }
 			try {
 				List<ShortBook> lists= ShortBook.formList(sendtype, response);
 				if(lists!=null&&!lists.isEmpty()){
 					adapter = new MyNewAdapter(context,lists);
-					listview.setAdapter(adapter);
+					if(lists.size()<Constant.DEFAULT_COUNT){
+						listview.setHasMore(false);
+						listview.setAdapter(adapter);
+						listview.onBottomComplete();
+					}else{
+						listview.setHasMore(true);
+						listview.setAdapter(adapter);
+					}
 					}				
 			} catch (Exception e) {
 				// TODO: handle exception
@@ -121,13 +155,16 @@ public class AnnouceListActivity extends BaseActivity implements OnItemClickList
 	private Listener<String> backlistenermore = new Listener<String>() {
 		@Override
 		public void onResponse(String response) {
-			moreprocess.setVisibility(View.GONE);
+			
 			try {
 				List<ShortBook> lists= ShortBook.formList(sendtype, response);
 				if(lists!=null&&!lists.isEmpty()){
 					adapter.addMoreData(lists);
+					listview.onBottomComplete();
 				  }else{
-						Tool.ShowMessages(context, getResources().getString(R.string.tips_nomore_data));
+						//Tool.ShowMessages(context, getResources().getString(R.string.tips_nomore_data));
+					  listview.setHasMore(false);
+					  listview.onBottomComplete();
 					}
 			} catch (Exception e) {
 				// TODO: handle exception
@@ -233,9 +270,9 @@ public class AnnouceListActivity extends BaseActivity implements OnItemClickList
 		public int getCount() {
 			 if(mlists!=null){
 					
-					return mlists.size()+1;
+					return mlists.size();
 				}
-				return 1;
+				return 0;
 			}
 		public List<ShortBook> getList(){
 			return mlists;
@@ -248,22 +285,16 @@ public class AnnouceListActivity extends BaseActivity implements OnItemClickList
 
 		@Override
 		public long getItemId(int position) {
-			if((this.getCount()-1)>0&&position < (this.getCount()-1)){
+			if(this.getCount()>0&&position < this.getCount()){
 				return position;
 			}else{
-				return -2;
+				return 0;
 			}
 		}
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-			//更多
-			if (position == this.getCount() - 1) {
-				convertView = LayoutInflater.from(context).inflate(R.layout.moreitemsview, null);
-				return convertView;
-			}
-			
-			if(convertView==null||convertView.findViewById(R.id.linemore) != null){
+			if(convertView==null){
 				convertView = LayoutInflater.from(context).inflate(R.layout.item_news, null);
 			}
 			TextView tx = (TextView)convertView.findViewById(R.id.tv_item_topic);
@@ -274,16 +305,6 @@ public class AnnouceListActivity extends BaseActivity implements OnItemClickList
 	}
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int position, long id) {
-		if (id == -2) //更多
-		{
-			//进度条
-		    moreprocess = arg1.findViewById(R.id.footer_progress);
-			moreprocess.setVisibility(View.VISIBLE);
-			//请求网络更多
-			getHomePage(page+1,Constant.DEFAULT_COUNT,GETMORE);
-			page = page+1;
-		}else{
-			//可滑动的listview需要 position-1
 			ShortBook book = adapter.getList().get(position-1);
 			if(book!=null){
 				Intent _intent = new Intent(context,DetailAdvancedBookActivity.class);
@@ -291,35 +312,7 @@ public class AnnouceListActivity extends BaseActivity implements OnItemClickList
 				_intent.putExtra("type", type);
 				startActivity(_intent);
 			}
-		}
-		
-		
 	}
 
 
-	@Override
-	public void onRefresh() {
-		page = 1;//重置page
-		getHomePage(page, Constant.DEFAULT_COUNT,GETHOMEPAGE);
-		new AsyncTask<Void, Void, Void>() {
-			protected Void doInBackground(Void... params) {
-
-				try {
-					Thread.sleep(2000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				return null;
-			}
-			//刷新完成
-			@Override
-			protected void onPostExecute(Void result) {
-				
-				listview.onRefreshComplete();
-
-			}
-
-		}.execute(null, null);
-		
-	}
 }

@@ -107,4 +107,30 @@
         <item name="android:textColor">@drawable/silvergray</item>
         <item name="android:textSize">16.0sp</item>
     </style>
+    
+	
+	 <style name="drop_down_list_header_progress_bar_style">
+        <item name="android:minHeight">@dimen/drop_down_list_header_progress_bar_height</item>
+        <item name="android:maxHeight">@dimen/drop_down_list_header_progress_bar_height</item>
+    </style>
+
+    <style name="drop_down_list_footer_progress_bar_style">
+        <item name="android:minHeight">@dimen/drop_down_list_footer_progress_bar_height</item>
+        <item name="android:maxHeight">@dimen/drop_down_list_footer_progress_bar_height</item>
+    </style>
+
+    <style name="drop_down_list_header_font_style">
+        <item name="android:textColor">@color/drop_down_list_header_font_color</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+    </style>
+
+    <style name="drop_down_list_header_second_font_style">
+        <item name="android:textColor">@color/drop_down_list_header_second_font_color</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+    </style>
+
+    <style name="drop_down_list_footer_font_style">
+        <item name="android:textColor">@color/drop_down_list_footer_font_color</item>
+    </style>
+    
 </resources>

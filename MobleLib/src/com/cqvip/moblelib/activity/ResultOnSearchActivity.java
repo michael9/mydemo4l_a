@@ -8,7 +8,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
@@ -33,8 +32,8 @@ import com.cqvip.moblelib.adapter.BookAdapter;
 import com.cqvip.moblelib.constant.Constant;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.Book;
-import com.cqvip.moblelib.model.EBook;
-import com.cqvip.moblelib.view.CustomProgressDialog;
+import com.cqvip.moblelib.view.DropDownListView;
+import com.cqvip.moblelib.view.DropDownListView.OnDropDownListener;
 import com.cqvip.utils.BitmapCache;
 import com.cqvip.utils.Tool;
 
@@ -49,7 +48,7 @@ public class ResultOnSearchActivity extends BaseActivity implements
 	private TextView searchCount;
 	private ImageButton imgsearch;
 	private Context context;
-	private ListView listview;
+	private DropDownListView listview;
 	private String key;
 	private int page = 1;
 	private BookAdapter adapter;
@@ -67,8 +66,22 @@ public class ResultOnSearchActivity extends BaseActivity implements
 		imgsearch = (ImageButton) findViewById(R.id.search_seach_btn);
 		edit = (EditText) findViewById(R.id.search_et);
 		searchCount = (TextView) findViewById(R.id.txt_total_esearch);
-		listview = (ListView) findViewById(R.id.search_res_lv);
+		listview = (DropDownListView) findViewById(R.id.search_res_lv);
 		listview.setOnItemClickListener((OnItemClickListener) this);
+		listview.setOnBottomListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if (Tool.isbnMatch(key)) {
+					getHomePage(key, page + 1, DEFAULT_COUNT, GETNEXTPAGE,
+							GlobleData.QUERY_ISBN);
+				} else {
+					getHomePage(key, page + 1, DEFAULT_COUNT, GETNEXTPAGE,
+							GlobleData.QUERY_ALL);
+				}
+				page = page + 1;
+			}
+		});
 		noResult_rl = (RelativeLayout) findViewById(R.id.noresult_rl);
 		edit.setText(getIntent().getStringExtra("ISBN"));
 
@@ -176,7 +189,14 @@ public class ResultOnSearchActivity extends BaseActivity implements
 					noResult_rl.setVisibility(View.GONE);
 					cache = new BitmapCache(Tool.getCachSize());
 					adapter = new BookAdapter(context, lists,  new ImageLoader(mQueue, cache));
-					listview.setAdapter(adapter);
+					if(lists.size()<DEFAULT_COUNT){
+						listview.setHasMore(false);
+						listview.setAdapter(adapter);
+						listview.onBottomComplete();
+					}else{
+						listview.setHasMore(true);
+						listview.setAdapter(adapter);
+					}
 				} else {
 					listview.setVisibility(View.GONE);
 					noResult_rl.setVisibility(View.VISIBLE);
@@ -191,17 +211,19 @@ public class ResultOnSearchActivity extends BaseActivity implements
 	Listener<String> backlistenermore = new Listener<String>() {
 		@Override
 		public void onResponse(String response) {
-			// TODO Auto-generated method stub
+		
 			if(customProgressDialog!=null&&customProgressDialog.isShowing())
 			customProgressDialog.dismiss();
-			moreprocess.setVisibility(View.GONE);
+		//moreprocess.setVisibility(View.GONE);
 			try {
 				// JSONObject mj=new JSONObject(response);
 				List<Book> lists = Book.formList(response);
 				if (lists != null && !lists.isEmpty()) {
 					adapter.addMoreData(lists);
+					listview.onBottomComplete();
 				} else {
-					Tool.ShowMessages(context, "没有更多内容可供加载");
+					listview.setHasMore(false);
+					listview.onBottomComplete();
 				}
 			} catch (Exception e) {
 				// TODO: handle exception
@@ -273,21 +295,7 @@ public class ResultOnSearchActivity extends BaseActivity implements
 
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int positon, long id) {
-		if (id == -2) // 更多
-		{
-			// 进度条
-			moreprocess = arg1.findViewById(R.id.footer_progress);
-			moreprocess.setVisibility(View.VISIBLE);
-			// 请求网络更多
-			if (Tool.isbnMatch(key)) {
-				getHomePage(key, page + 1, DEFAULT_COUNT, GETNEXTPAGE,
-						GlobleData.QUERY_ISBN);
-			} else {
-				getHomePage(key, page + 1, DEFAULT_COUNT, GETNEXTPAGE,
-						GlobleData.QUERY_ALL);
-			}
-			page = page + 1;
-		} else {
+		
 			Book book = adapter.getLists().get(positon);
 			if (book != null) {
 				Intent _intent = new Intent(context, DetailBookActivity.class);
@@ -296,15 +304,8 @@ public class ResultOnSearchActivity extends BaseActivity implements
 				_intent.putExtra("detaiinfo", bundle);
 				startActivity(_intent);
 			}
-
-			// Book book = lists.get(position-1);
-			// if(book!=null){
-			// Bundle bundle = new Bundle();
-			// bundle.putSerializable("book", book);
-			// _intent.putExtra("detaiinfo", bundle);
-			// startActivityForResult(_intent, 1);
 		}
-	}
+	
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();

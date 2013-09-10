@@ -6,7 +6,6 @@ import java.util.Map;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.FeatureInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -23,13 +22,12 @@ import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.cqvip.moblelib.R;
-import com.cqvip.moblelib.adapter.EbookAdapter;
 import com.cqvip.moblelib.adapter.PeriodicalAdapter;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.Constant;
 import com.cqvip.moblelib.constant.GlobleData;
-import com.cqvip.moblelib.model.EBook;
 import com.cqvip.moblelib.model.Periodical;
+import com.cqvip.moblelib.view.DropDownListView;
 import com.cqvip.utils.Tool;
 
 /**
@@ -46,7 +44,7 @@ public class PeriodicalListActivity extends BaseImageActivity implements
 	public static final int DEFAULT_COUNT = Constant.DEFAULT_COUNT;
 	private TextView searchCount;
 	private Context context;
-	private ListView listview;
+	private DropDownListView listview;
 	// private String editekey;
 	private int page = 1;
 	private PeriodicalAdapter adapter;
@@ -65,10 +63,18 @@ public class PeriodicalListActivity extends BaseImageActivity implements
 		setContentView(R.layout.activity_periodical_list);
 		context = this;
 		searchCount = (TextView) findViewById(R.id.txt_total_esearch);
-		listview = (ListView) findViewById(R.id.search_res_lv);
+		listview = (DropDownListView) findViewById(R.id.search_res_lv);
 		listview.setOnItemClickListener((OnItemClickListener) this);
 		noResult_rl = (RelativeLayout) findViewById(R.id.noresult_rl);
-
+		//获取更多
+		listview.setOnBottomListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				getHomePage(classid, page + 1,
+						DEFAULT_COUNT, 1);
+				page = page + 1;
+			}
+		});
 		title_bar = findViewById(R.id.head_bar);
 		TextView title = (TextView) title_bar.findViewById(R.id.txt_header);
 		title.setText(R.string.main_periodical);
@@ -84,7 +90,6 @@ public class PeriodicalListActivity extends BaseImageActivity implements
 				finish();
 			}
 		});
-
 		getHomePage(classid, page, DEFAULT_COUNT, 0);
 	}
 
@@ -111,7 +116,14 @@ public class PeriodicalListActivity extends BaseImageActivity implements
 					listview.setVisibility(View.VISIBLE);
 					noResult_rl.setVisibility(View.GONE);
 					adapter = new PeriodicalAdapter(context, lists,mImageFetcher);
-					listview.setAdapter(adapter);
+					if(lists.size()<DEFAULT_COUNT){
+						listview.setHasMore(false);
+						listview.setAdapter(adapter);
+						listview.onBottomComplete();
+					}else{
+						listview.setHasMore(true);
+						listview.setAdapter(adapter);
+					}
 				} else {
 					listview.setVisibility(View.GONE);
 					noResult_rl.setVisibility(View.VISIBLE);
@@ -127,18 +139,16 @@ public class PeriodicalListActivity extends BaseImageActivity implements
 	Listener<String> backlistenermore = new Listener<String>() {
 		@Override
 		public void onResponse(String response) {
-			// TODO Auto-generated method stub
-			if(customProgressDialog!=null&&customProgressDialog.isShowing())
-			customProgressDialog.dismiss();
-			moreprocess.setVisibility(View.GONE);
 			try {
 				// JSONObject mj=new JSONObject(response);
 				Periodical temp =Periodical.formObject(response,Task.TASK_PERIODICAL_SUBTYPE);
 				List<Periodical> lists = temp.qklist;
 				if (lists != null && !lists.isEmpty()) {
 					adapter.addMoreData(lists);
+					listview.onBottomComplete();
 				} else {
-					Tool.ShowMessages(context, "没有更多内容可供加载");
+					listview.setHasMore(false);
+					listview.onBottomComplete();
 				}
 			} catch (Exception e) {
 				// TODO: handle exception
@@ -180,7 +190,6 @@ public class PeriodicalListActivity extends BaseImageActivity implements
 	 * @param count
 	 */
 	private void getHomePage(String key, int page, int count, int type) {
-		customProgressDialog.show();
 		gparams = new HashMap<String, String>();
 		gparams.put("classid", key);
 		gparams.put("perpage", count+"");
@@ -194,20 +203,9 @@ public class PeriodicalListActivity extends BaseImageActivity implements
 					backlistenermore, Method.POST); 
 		}
 	}
-	View moreprocess;
 
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int positon, long id) {
-		if (id == -2) // 更多
-		{
-			// 进度条
-			moreprocess = arg1.findViewById(R.id.footer_progress);
-			moreprocess.setVisibility(View.VISIBLE);
-			// 请求网络更多
-			getHomePage(classid, page + 1,
-					DEFAULT_COUNT, 1);
-			page = page + 1;
-		} else {
 			Periodical periodical = adapter.getLists().get(positon);
 			// Book book = lists.get(position-1);
 			 if(periodical!=null){
@@ -218,6 +216,4 @@ public class PeriodicalListActivity extends BaseImageActivity implements
 		    context.startActivity(_intent);
 			 }
 		}
-	}
-
 }

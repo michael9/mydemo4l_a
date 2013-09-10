@@ -43,31 +43,26 @@ public class PeriodicalAdapter extends BaseAdapter{
 	public List<Periodical> getLists(){
 		return lists;
 	}
-	/**
-	 * 底部更多按钮，返回+1
-	 */
 	@Override
 	public int getCount() {
-      if(lists!=null){
-				
-				return lists.size()+1;
-			}
-			return 1;
+		if (lists != null) {
+			return lists.size();
 		}
+		return 0;
+	}
 
 	@Override
 	public Object getItem(int position) {
 		return lists.get(position);
 	}
-	/**
-	 * 如果点击到最底部的更多按钮，返回-2
-	 */
+
+	
 	@Override
 	public long getItemId(int position) {
-		if((this.getCount()-1)>0&&position < (this.getCount()-1)){
+		if (this.getCount() > 0 && position < (this.getCount())) {
 			return position;
-		}else{
-			return -2;
+		} else {
+			return 0;
 		}
 	}
 	/**
@@ -94,10 +89,10 @@ public class PeriodicalAdapter extends BaseAdapter{
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder = null;
 		//更多
-		if (position == this.getCount() - 1) {
-			convertView = LayoutInflater.from(context).inflate(R.layout.moreitemsview, null);
-			return convertView;
-		}
+//		if (position == this.getCount() - 1) {
+//			convertView = LayoutInflater.from(context).inflate(R.layout.moreitemsview, null);
+//			return convertView;
+//		}
 		if(convertView==null||convertView.findViewById(R.id.linemore) != null){
 			convertView=LayoutInflater.from(context).inflate(R.layout.item_periodical, null);
 			holder = new ViewHolder();

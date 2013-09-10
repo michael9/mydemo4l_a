@@ -39,16 +39,13 @@ public class EbookAdapter extends BaseAdapter {
 		return lists;
 	}
 
-	/**
-	 * 底部更多按钮，返回+1
-	 */
+
 	@Override
 	public int getCount() {
 		if (lists != null) {
-
-			return lists.size() + 1;
+			return lists.size();
 		}
-		return 1;
+		return 0;
 	}
 
 	@Override
@@ -56,15 +53,13 @@ public class EbookAdapter extends BaseAdapter {
 		return lists.get(position);
 	}
 
-	/**
-	 * 如果点击到最底部的更多按钮，返回-2
-	 */
+	
 	@Override
 	public long getItemId(int position) {
-		if ((this.getCount() - 1) > 0 && position < (this.getCount() - 1)) {
+		if (this.getCount() > 0 && position < (this.getCount())) {
 			return position;
 		} else {
-			return -2;
+			return 0;
 		}
 	}
 
@@ -92,12 +87,6 @@ public class EbookAdapter extends BaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		final ViewHolder holder;
 		final long id;
-		// 更多
-		if (position == this.getCount() - 1) {
-			convertView = LayoutInflater.from(context).inflate(
-					R.layout.moreitemsview, null);
-			return convertView;
-		}
 		if (convertView == null
 				|| convertView.findViewById(R.id.linemore) != null) {
 			convertView = LayoutInflater.from(context).inflate(
