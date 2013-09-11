@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import android.R.integer;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,15 +15,12 @@ import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.TranslateAnimation;
-import android.widget.AbsListView;
-import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
@@ -57,12 +53,10 @@ import com.cqvip.utils.Tool;
 public class MyFavorActivity extends BaseFragmentImageActivity {
 	public static final int GETFIRSTPAGE_SZ = 1;
 	public static final int GETFIRSTPAGE_ZK = 2;
-	public static final int GETNEXT_SZ= 3;
-	public static final int GETNEXT_ZK= 4;
-	public static final String TAG= "MyFavor";
+	public static final int GETNEXT = 3;
 
 	private int curpage = 1;// 第几页
-	private int perpage =2;// 每页显示条数
+	private int perpage = Constant.DEFAULT_COUNT;// 每页显示条数
 	private Favorite del_favorite;
 	private View moreprocess;
 	private int curpage_sz = 1, curpage_zk = 1;// 第几页
@@ -100,9 +94,7 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 	ArrayList<Favorite> arrayList_sz = new ArrayList<Favorite>();
 	private int listviewpagetag = GlobleData.BOOK_SZ_TYPE;
 
-	//private int sz_count, zk_count; // 条数
-	private int[] sz_counts = new int[1];
-	private int[] zk_counts = new int[1];
+	private int sz_count, zk_count; // 条数
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -133,11 +125,6 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 								&& rg_nav_content.getChildCount() > position) {
 							((RadioButton) rg_nav_content.getChildAt(position))
 									.performClick();
-						}
-						if (position == 0) {
-							listviewpagetag = GlobleData.BOOK_SZ_TYPE;
-						} else {
-							listviewpagetag = GlobleData.BOOK_ZK_TYPE;
 						}
 					}
 
@@ -243,14 +230,9 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 					+ "/cloud/favoritelistuser.aspx", backlistener_zk,
 					Method.POST);
 			break;
-		case GETNEXT_SZ:
+		case GETNEXT:
 			requestVolley(gparams, GlobleData.SERVER_URL
-					+ "/cloud/favoritelistuser.aspx", backlistenermore_sz,
-					Method.POST);
-			break;
-		case GETNEXT_ZK:
-			requestVolley(gparams, GlobleData.SERVER_URL
-					+ "/cloud/favoritelistuser.aspx", backlistenermore_zk,
+					+ "/cloud/favoritelistuser.aspx", backlistenermore,
 					Method.POST);
 			break;
 		default:
@@ -267,7 +249,6 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 				return gparams_t;
 			};
 		};
-		mys.setTag(TAG);
 		mQueue.add(mys);
 		mQueue.start();
 
@@ -277,7 +258,6 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 		@Override
 		public void onResponse(String response) {
 			// TODO Auto-generated method stub
-			isloading_sz=false;
 			if (customProgressDialog != null
 					&& customProgressDialog.isShowing())
 				customProgressDialog.dismiss();
@@ -286,13 +266,9 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 						response);
 				if (favorite != null) {
 					arrayLists_sz = favorite.map;
-					sz_counts[0] = favorite.recordcount;
-				}else{
-					sz_counts[0] = 0;
-					if(arrayLists_sz!=null)
-					arrayLists_sz.clear();
+					sz_count = favorite.recordcount;
+					mSectionsPagerAdapter.notifyDataSetChanged();
 				}
-				mSectionsPagerAdapter.notifyDataSetChanged();
 			} catch (BookException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -316,7 +292,6 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 		@Override
 		public void onResponse(String response) {
 			// TODO Auto-generated method stub
-			isloading_zk=false;
 			if (customProgressDialog != null
 					&& customProgressDialog.isShowing())
 				customProgressDialog.dismiss();
@@ -325,13 +300,9 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 						response);
 				if (favorite != null) {
 					arrayLists_zk = favorite.map;
-					zk_counts[0] = favorite.recordcount;
-				}else{
-					zk_counts[0] = 0;
-					if(arrayLists_zk!=null)
-						arrayLists_zk.clear();
+					zk_count = favorite.recordcount;
+					mSectionsPagerAdapter.notifyDataSetChanged();
 				}
-				mSectionsPagerAdapter.notifyDataSetChanged();
 			} catch (BookException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -351,7 +322,7 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 		}
 	};
 
-	Listener<String> backlistenermore_sz = new Listener<String>() {
+	Listener<String> backlistenermore = new Listener<String>() {
 		@Override
 		public void onResponse(String response) {
 			try {
@@ -364,66 +335,34 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 				onError(2);
 			}
 			if (arrayLists_sz != null && !arrayLists_sz.isEmpty()) {
-				if (arrayLists_sz.get(GlobleData.BOOK_SZ_TYPE) == null || arrayLists_sz
-								.get(GlobleData.BOOK_SZ_TYPE).isEmpty()) {
+				if ((arrayLists_sz.get(GlobleData.BOOK_ZK_TYPE) == null || arrayLists_sz
+						.get(GlobleData.BOOK_ZK_TYPE).isEmpty())
+						&& (arrayLists_sz.get(GlobleData.BOOK_SZ_TYPE) == null || arrayLists_sz
+								.get(GlobleData.BOOK_SZ_TYPE).isEmpty())) {
 					Tool.ShowMessages(context, "没有更多内容可供加载");
-					// moreprocess.setVisibility(View.GONE);
+					moreprocess.setVisibility(View.GONE);
 					return;
 				}
-				if (arrayLists_sz.get(GlobleData.BOOK_SZ_TYPE).isEmpty()) {
-					return;
-				}
-			}else{
-				return;
 			}
+			if (arrayLists_sz != null && !arrayLists_sz.isEmpty()) {
+				if (arrayLists_sz.get(GlobleData.BOOK_ZK_TYPE).isEmpty()
+						&& arrayLists_sz.get(GlobleData.BOOK_SZ_TYPE).isEmpty()) {
+					return;
+				}
+				if (listviewpagetag == GlobleData.BOOK_SZ_TYPE) {
 					curpage_sz++;
 					arrayList_sz.addAll(arrayLists_sz
 							.get(GlobleData.BOOK_SZ_TYPE));
 					// mSectionsPagerAdapter.notifyDataSetChanged();
 					adapter_sz.notifyDataSetChanged();
-
-					// Bundle args = mSectionsPagerAdapter.getItem(0)
-					// .getArguments();
-					if (totalItemCount_sz - 1 != sz_counts[0]) {
-						isloading_sz = false;
-					}
-		}
-	};
-	
-	Listener<String> backlistenermore_zk = new Listener<String>() {
-		@Override
-		public void onResponse(String response) {
-			try {
-				Favorite favorite = Favorite.formList(Task.TASK_GET_FAVOR,
-						response);
-				arrayLists_sz = favorite.map;
-			} catch (BookException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				onError(2);
-			}
-			if (arrayLists_sz != null && !arrayLists_sz.isEmpty()) {
-				if (arrayLists_sz.get(GlobleData.BOOK_ZK_TYPE) == null || arrayLists_sz
-						.get(GlobleData.BOOK_ZK_TYPE).isEmpty()) {
-					Tool.ShowMessages(context, "没有更多内容可供加载");
-					// moreprocess.setVisibility(View.GONE);
-					return;
-				}
-				if (arrayLists_sz.get(GlobleData.BOOK_ZK_TYPE).isEmpty()) {
-					return;
-				}
-			}else{
-				return;
-			}
-
+				} else {
 					curpage_zk++;
 					arrayList_zk.addAll(arrayLists_sz
 							.get(GlobleData.BOOK_ZK_TYPE));
 					adapter_zk.notifyDataSetChanged();
-Log.i("backlistenermore", "totalItemCount_zk="+totalItemCount_zk+"   zk_count="+zk_counts[0]);
-					if (totalItemCount_zk - 1 != zk_counts[0]) {
-						isloading_zk = false;
-					}
+				}
+
+			}
 		}
 	};
 
@@ -512,9 +451,9 @@ Log.i("backlistenermore", "totalItemCount_zk="+totalItemCount_zk+"   zk_count="+
 		public int getItemPosition(Object object) {
 			// TODO Auto-generated method stub
 			Log.i("MyFavorActivity", "SectionsPagerAdapter_getItemPosition:");
-			tabTitle[0] = getString(R.string.title_section1) + "(" + sz_counts[0]
+			tabTitle[0] = getString(R.string.title_section1) + "(" + sz_count
 					+ ")";
-			tabTitle[1] = getString(R.string.title_section2) + "(" + zk_counts[0]
+			tabTitle[1] = getString(R.string.title_section2) + "(" + zk_count
 					+ ")";
 			initNavigationHSV();
 			return POSITION_UNCHANGED;
@@ -545,53 +484,44 @@ Log.i("backlistenermore", "totalItemCount_zk="+totalItemCount_zk+"   zk_count="+
 	 * A dummy fragment representing a section of the app, but that simply
 	 * displays dummy text.
 	 */
-	private int totalItemCount_sz, totalItemCount_zk;
-	private boolean isloading_sz, isloading_zk;
 
 	public class DummySectionFragment extends Fragment implements
-			OnItemClickListener, OnScrollListener {
+			OnItemClickListener {
 		/**
 		 * The fragment argument representing the section number for this
 		 * fragment.
 		 */
 		public static final String ARG_SECTION_NUMBER = "section_number";
-		int lastItem;
-		int totalItemCount;
-		int firstItemIndex;
-		int i;
-
-		// boolean isloading = false;
 
 		public DummySectionFragment() {
 		}
 
 		List<Favorite> arrayList_temp;
-		ListView listView;
+
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
 			View rootView = inflater.inflate(R.layout.myfavor_fragment,
 					container, false);
-			listView = (ListView) rootView
+			ListView listView = (ListView) rootView
 					.findViewById(R.id.favorlist);
-			i = getArguments().getInt(ARG_SECTION_NUMBER);
+			int i = getArguments().getInt(ARG_SECTION_NUMBER);
 			if (i == 0) {
 				arrayList_temp = arrayList_sz;
 				adapter_sz = new MyGridViewAdapter(getActivity(), arrayList_sz,
-						sz_counts, mImageFetcher);
+						mImageFetcher);
 				listView.setAdapter(adapter_sz);
 				listView.setTag(GlobleData.BOOK_SZ_TYPE);
 			} else if (i == 1) {
 				listView.setTag(GlobleData.BOOK_ZK_TYPE);
 				arrayList_temp = arrayList_zk;
 				adapter_zk = new MyGridViewAdapter(getActivity(), arrayList_zk,
-						zk_counts, mImageFetcher);
+						mImageFetcher);
 				listView.setAdapter(adapter_zk);
 			}
 
 			listView.setOnItemClickListener(this);
 			// listView.setOnItemLongClickListener(this);
-			listView.setOnScrollListener(this);
 			return rootView;
 		}
 
@@ -612,10 +542,10 @@ Log.i("backlistenermore", "totalItemCount_zk="+totalItemCount_zk+"   zk_count="+
 				// 请求网络更多
 				if (listviewpagetag == GlobleData.BOOK_SZ_TYPE) {
 					getfavorlist(curpage_sz + 1, perpage,
-							GlobleData.BOOK_SZ_TYPE, GETNEXT_SZ);
+							GlobleData.BOOK_SZ_TYPE, GETNEXT);
 				} else if (listviewpagetag == GlobleData.BOOK_ZK_TYPE) {
 					getfavorlist(curpage_zk + 1, perpage,
-							GlobleData.BOOK_ZK_TYPE, GETNEXT_ZK);
+							GlobleData.BOOK_ZK_TYPE, GETNEXT);
 				}
 			} else {
 				if ((Integer) parent.getTag() == GlobleData.BOOK_SZ_TYPE) {
@@ -655,86 +585,6 @@ Log.i("backlistenermore", "totalItemCount_zk="+totalItemCount_zk+"   zk_count="+
 			}
 		}
 
-		@Override
-		public void onScrollStateChanged(AbsListView view, int scrollState) {
-//			Log.i("Myfavor01",
-//					"scrollState="
-//							+ scrollState
-//							+ "--"
-//							+ lastItem
-//							+ "--"
-//							+ totalItemCount
-//							+ "--"
-//							);
-			// 下拉到空闲是，且最后一个item的数等于数据的总数时，进行更新
-			if (i== 0) {
-				if (lastItem == totalItemCount && !isloading_sz) {
-					Log.i("Myfavor_0",
-							"scrollState="
-									+ scrollState
-									+ "--"
-									+ lastItem
-									+ "--"
-									+ totalItemCount
-									+ "--"
-									+ isdeleted_sz);
-					totalItemCount_sz = totalItemCount;
-					isloading_sz = true;
-					Log.i("Myfavor_0", "拉到最底部" +  GlobleData.BOOK_SZ_TYPE);
-					getfavorlist(curpage_sz + 1, perpage, GlobleData.BOOK_SZ_TYPE,
-							GETNEXT_SZ);
-					// if (listviewpagetag == GlobleData.BOOK_SZ_TYPE) {
-					// getfavorlist(curpage_sz + 1, perpage, listviewpagetag,
-					// GETNEXT);
-					// } else {
-					// getfavorlist(curpage_zk + 1, perpage, listviewpagetag,
-					// GETNEXT);
-					// }
-					// count=list.size();
-				}
-			} else if (i==1) {
-				Log.i("Myfavor_1",
-						"scrollState="
-								+ scrollState
-								+ "--"
-								+ lastItem
-								+ "--"
-								+ totalItemCount
-								+ "--"
-								+ isloading_zk);
-				if (lastItem == totalItemCount && !isloading_zk) {
-					totalItemCount_zk = totalItemCount;
-					isloading_zk = true;
-					Log.i("Myfavor_1", "拉到最底部" + GlobleData.BOOK_ZK_TYPE);
-					getfavorlist(curpage_zk + 1, perpage, GlobleData.BOOK_ZK_TYPE,
-							GETNEXT_ZK);
-				}
-			}
-		}
-
-		@Override
-		public void onScroll(AbsListView view, int firstVisibleItem,
-				int visibleItemCount, int totalItemCount01) {
-			this.firstItemIndex = firstVisibleItem;
-			Log.i("Myfavor_onscroll", "firstVisibleItem=" + firstVisibleItem
-					+ "  visibleItemCount=" + visibleItemCount
-					+ "  totalItemCount" + totalItemCount01);
-
-			lastItem = firstVisibleItem + visibleItemCount;
-			this.totalItemCount = totalItemCount01;
-			if(i==0){
-			if(visibleItemCount==totalItemCount01&&totalItemCount01<=sz_counts[0]&&visibleItemCount>1){
-				onScrollStateChanged(listView, 0);
-				Log.i("Myfavor_onscroll_if_0", ""+totalItemCount01);
-			}
-			}else if(i==1){
-				if(visibleItemCount==totalItemCount01&&totalItemCount01<=zk_counts[0]&&visibleItemCount>1){
-					onScrollStateChanged(listView, 0);
-					Log.i("Myfavor_onscroll_if_1", ""+totalItemCount01);
-				}
-			}
-		}
-
 		// @Override
 		// public boolean onItemLongClick(AdapterView<?> parent, View view,
 		// int position, long id) {
@@ -769,7 +619,6 @@ Log.i("backlistenermore", "totalItemCount_zk="+totalItemCount_zk+"   zk_count="+
 		private Context myContext;
 		private List<Favorite> arrayList;
 		private ImageFetcher fetch;
-		private int[] countall;
 
 		public MyGridViewAdapter(Context context, List<Favorite> list) {
 			this.myContext = context;
@@ -777,11 +626,10 @@ Log.i("backlistenermore", "totalItemCount_zk="+totalItemCount_zk+"   zk_count="+
 		}
 
 		public MyGridViewAdapter(Context context, List<Favorite> list,
-				int[] countall, ImageFetcher fetch) {
+				ImageFetcher fetch) {
 			this.myContext = context;
 			this.arrayList = list;
 			this.fetch = fetch;
-			this.countall = countall;
 		}
 
 		public List<Favorite> getList() {
@@ -814,49 +662,31 @@ Log.i("backlistenermore", "totalItemCount_zk="+totalItemCount_zk+"   zk_count="+
 		public void refresh() {
 			notifyDataSetChanged();
 		}
-		 int tag;
+
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			// Log.i("getView20130808", "getView");
 			final ViewHolder holder;
-			tag = (Integer) (parent.getTag());
 			if (this.getCount() == 1) {
-				TextView textView = new TextView(myContext);
-				textView.setId(R.id.nocontent_textview_tips);
-				textView.setGravity(Gravity.CENTER);
-				textView.setLayoutParams(new AbsListView.LayoutParams(
-						LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
-				textView.setTextAppearance(myContext,
-						R.style.TextStyle_nullcontent);
-				textView.setClickable(false);
-				if (tag == GlobleData.BOOK_SZ_TYPE ) {
-					textView.setText("亲，您所在分类没有收藏哦");
-					parent.setVisibility(View.VISIBLE);
-				} else if (tag == GlobleData.BOOK_ZK_TYPE ) {
-					textView.setText("亲，您所在分类没有收藏哦");
-					parent.setVisibility(View.VISIBLE);
-				}
-				return textView;
+				convertView = LayoutInflater.from(myContext).inflate(
+						R.layout.moreitemsview, null);
+				convertView.setClickable(false);
+				TextView tv = (TextView) convertView
+						.findViewById(R.id.footer_txt);
+				tv.setText("亲，您所在分类没有收藏哦");
+				tv.setTextAppearance(myContext, R.style.TextStyle_nullcontent);
+				tv.setClickable(false);
+				return convertView;
 			}
 			// 更多
 			if (position == this.getCount() - 1) {
 				convertView = LayoutInflater.from(myContext).inflate(
 						R.layout.moreitemsview, null);
-				//Log.i("myfavor", "countall" + countall[0]);
-				if (position == countall[0]) {
-					convertView.findViewById(R.id.footer_progress)
-							.setVisibility(View.GONE);
-					((TextView) convertView.findViewById(R.id.footer_txt))
-							.setText(context.getResources().getString(
-									R.string.tips_nomore_page));
-				}
 				return convertView;
 			}
 
 			if (convertView == null
-					|| convertView.findViewById(R.id.linemore) != null
-					|| convertView.findViewById(R.id.nocontent_textview_tips) != null) {
-				parent.setVisibility(View.VISIBLE);
+					|| convertView.findViewById(R.id.linemore) != null) {
 				// Log.i("convertView20130808", "convertView");
 				convertView = LayoutInflater.from(myContext).inflate(
 						R.layout.item_book_favor, null);
@@ -896,18 +726,9 @@ Log.i("backlistenermore", "totalItemCount_zk="+totalItemCount_zk+"   zk_count="+
 			holder.isbn.setText("收藏时间:" + favorite.getFavoritetime());
 			final ViewGroup temp_parent = parent;
 			final int temp_position = position;
-			
 			holder.favor_cancel.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					mQueue.cancelAll(TAG); 
-					if (tag == GlobleData.BOOK_SZ_TYPE ) {
-					isloading_sz=true;
-					isloading_zk=false;
-					}else{
-					isloading_zk=true;	
-					isloading_sz=false;;
-					}
 					int listviewid = (Integer) temp_parent.getTag();
 					listview_id = listviewid;
 					listview_item_position = temp_position;
@@ -931,8 +752,8 @@ Log.i("backlistenermore", "totalItemCount_zk="+totalItemCount_zk+"   zk_count="+
 	}
 
 	public void init() {
-		tabTitle[0] = getString(R.string.title_section1) + "(" + sz_counts[0] + ")";
-		tabTitle[1] = getString(R.string.title_section2) + "(" + zk_counts[0] + ")";
+		tabTitle[0] = getString(R.string.title_section1) + "(" + sz_count + ")";
+		tabTitle[1] = getString(R.string.title_section2) + "(" + zk_count + ")";
 
 		rl_nav = (RelativeLayout) findViewById(R.id.rl_nav);
 		mHsv = (SwipHorizontalScrollView) findViewById(R.id.mHsv);
