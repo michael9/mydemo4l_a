@@ -8,8 +8,8 @@
     <dimen name="bookicon_height">96dp</dimen>
     <dimen name="search_detail_txtsize_tv">14sp</dimen>
     <dimen name="search_detail_txtsize_btn">16sp</dimen>
-    <dimen name="image_thumbnail_size">120dp</dimen>
-    <dimen name="image_thumbnail_heightsize">170dp</dimen>
+    <dimen name="image_thumbnail_size">100dp</dimen>
+    <dimen name="image_thumbnail_heightsize">145dp</dimen>
     <dimen name="image_thumbnail_spacing">3dp</dimen>
     <dimen name="gridview_vertical_spacing">5dp</dimen>
 

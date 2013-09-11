@@ -145,6 +145,7 @@
     <string name="tips_fail_download">下载失败</string>
     <string name="tips_unable_download">该文件暂时不能下载</string>
     <string name="tips_nomore_data">没有更多内容可供加载</string>
+    <string name="tips_nomore_page">已经最后一页了</string>
     
     
     <string name="title_activity_periodical_classfy">PeriodicalClassfyActivity</string>

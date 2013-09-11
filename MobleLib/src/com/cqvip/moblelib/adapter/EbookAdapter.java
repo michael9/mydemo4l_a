@@ -19,6 +19,7 @@ public class EbookAdapter extends BaseAdapter {
 	private Context context;
 	private List<EBook> lists;
 	 private ImageLoader mImageLoader;
+	 private int countall;
 
 	public EbookAdapter(Context context) {
 		this.context = context;
@@ -29,10 +30,11 @@ public class EbookAdapter extends BaseAdapter {
 		this.lists = lists;
 	}
 
-	public EbookAdapter(Context context, List<EBook> lists, ImageLoader imageLoader) {
+	public EbookAdapter(Context context, List<EBook> lists, int countall,ImageLoader imageLoader) {
 		this.context = context;
 		this.lists = lists;
         this.mImageLoader=imageLoader;
+        this.countall=countall;
 	}
 
 	public List<EBook> getLists() {
@@ -96,6 +98,10 @@ public class EbookAdapter extends BaseAdapter {
 		if (position == this.getCount() - 1) {
 			convertView = LayoutInflater.from(context).inflate(
 					R.layout.moreitemsview, null);
+			if(position==countall){
+			convertView.findViewById(R.id.footer_progress).setVisibility(View.GONE);
+			((TextView)convertView.findViewById(R.id.footer_txt)).setText(context.getResources().getString(R.string.tips_nomore_page));
+			}
 			return convertView;
 		}
 		if (convertView == null
