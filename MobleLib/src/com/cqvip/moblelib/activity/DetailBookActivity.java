@@ -122,7 +122,7 @@ public class DetailBookActivity extends BaseActivity {
 		} else {
 			textView10.setText(getString(R.string.item_author)
 					+ dBook.getAuthor() + "\n"
-					+ getString(R.string.item_publish) + dBook.getPublisher()
+					+ getString(R.string.item_publish) + dBook.getPublisher()+","+dBook.getPublishyear()
 					+ "\n" + timeortheme
 					+ "\n"
 					// +getString(R.string.item_callno)+dBook.getCallno()+"\n"
