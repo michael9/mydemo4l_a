@@ -179,7 +179,7 @@ public class AdvancedBookActivity extends BaseActivity implements
 		gparams = new HashMap<String, String>();
 		gparams.put("libid", GlobleData.LIBIRY_ID);
 		gparams.put("curpage", "" + page);
-		gparams.put("perpage", "" + Constant.DEFAULT_COUNT);
+		gparams.put("perpage", "" + Constant.DEFAULT_COUNT_SuggestedReading);
 
 		switch (type) {
 		case Constant.HOTBOOK:

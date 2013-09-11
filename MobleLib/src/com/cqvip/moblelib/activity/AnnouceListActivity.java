@@ -298,14 +298,18 @@ public class AnnouceListActivity extends BaseActivity implements OnItemClickList
 				convertView = LayoutInflater.from(context).inflate(R.layout.item_news, null);
 			}
 			TextView tx = (TextView)convertView.findViewById(R.id.tv_item_topic);
+			if(type==Constant.SPPECH_FREE){
+				tx.setText(getResources().getString(R.string.lecture_source)+mlists.get(position).getMessage());
+			}else{
 			tx.setText(mlists.get(position).getMessage());
+			}
 			return convertView;
 		}
 		
 	}
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int position, long id) {
-			ShortBook book = adapter.getList().get(position-1);
+			ShortBook book = adapter.getList().get(position);
 			if(book!=null){
 				Intent _intent = new Intent(context,DetailAdvancedBookActivity.class);
 				_intent.putExtra("id", book.getId());

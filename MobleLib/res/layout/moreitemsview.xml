@@ -21,7 +21,8 @@
         android:layout_centerInParent="true"
         android:layout_marginLeft="5.0dip"
         android:layout_toRightOf="@id/footer_txt"
+        android:visibility="gone"
         style="@android:style/Widget.ProgressBar.Small.Inverse"
-        android:visibility="gone" />
+         />
 
 </RelativeLayout>
