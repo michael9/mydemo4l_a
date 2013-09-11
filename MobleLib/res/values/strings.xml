@@ -145,6 +145,7 @@
     <string name="tips_fail_download">下载失败</string>
     <string name="tips_unable_download">该文件暂时不能下载</string>
     <string name="tips_nomore_data">没有更多内容可供加载</string>
+    <string name="tips_nomore_page">已经最后一页了</string>
     
     
     <string name="title_activity_periodical_classfy">PeriodicalClassfyActivity</string>
@@ -161,5 +162,7 @@
     <string name="drop_down_list_footer_loading_text">加载中&#8230;</string>
     <string name="drop_down_list_footer_no_more_text">没有更多内容可供加载</string>
     <string name="update_at">更新于：</string>
+    
+    <string name="lecture_source">龙岗大讲堂：</string>
     
 </resources>
