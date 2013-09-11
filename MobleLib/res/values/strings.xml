@@ -163,4 +163,6 @@
     <string name="drop_down_list_footer_no_more_text">没有更多内容可供加载</string>
     <string name="update_at">更新于：</string>
     
+    <string name="lecture_source">龙岗大讲堂：</string>
+    
 </resources>
