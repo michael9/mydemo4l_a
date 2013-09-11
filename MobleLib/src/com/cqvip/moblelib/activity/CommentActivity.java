@@ -48,7 +48,8 @@ public class CommentActivity extends BaseActivity implements
 	private static final int GETMORE = 1;
 	private static final int GETHOMEPAGE = 0;
 
-	private TextView baseinfo_tv, intro_tv;
+	//private TextView baseinfo_tv, intro_tv;
+	private TextView title;//标题
 	private EditText comment_et;
 	private Button commit_btn,delete_com;
 	private Book dBook;
@@ -60,9 +61,9 @@ public class CommentActivity extends BaseActivity implements
 	private Context context;
 	private View moreprocess;
 	private String keyid;// 书籍唯一id
-	private ImageView img;
+ 	//private ImageView img;
 	private View upView;
-	private RelativeLayout rl_baseinfo;
+	//private RelativeLayout rl_baseinfo;
 	public final static String TAG="CommentActivity";
 	private int fromActivity; //1表示从GroupActivity评论入口进来的
 
@@ -88,102 +89,102 @@ public class CommentActivity extends BaseActivity implements
 		if (TextUtils.isEmpty(describe)) {
 			describe = "无";
 		}
-
-		baseinfo_tv.setText(dBook.getTitle());
+		title.setText(dBook.getTitle());
+		//baseinfo_tv.setText(dBook.getTitle());
 		//intro_tv.setText(getString(R.string.item_author) + dBook.getAuthor()+ "\n"+getString(R.string.item_describe) + describe);
-		intro_tv.setText(getString(R.string.item_author) + dBook.getAuthor());
+		//intro_tv.setText(getString(R.string.item_author) + dBook.getAuthor());
 
-		if(typeid==GlobleData.BOOK_ZK_TYPE){
-			img.setVisibility(View.GONE);
-		}else{
+		//if(typeid==GlobleData.BOOK_ZK_TYPE){
+			//img.setVisibility(View.GONE);
+		//}else{
 		
-		if (!TextUtils.isEmpty(dBook.getCover_path())) {
-			//mImageFetcher.loadImage(dBook.getCover_path(), img);
-	        ImageLoader mImageLoader = new ImageLoader(mQueue, new BitmapCache(Tool.getCachSize()));
-			ImageListener listener = ImageLoader.getImageListener(img, R.drawable.defaut_book, R.drawable.defaut_book);
-			mImageLoader.get(dBook.getCover_path(), listener);
-		} else {
-			img.setImageDrawable(getResources().getDrawable(
-					R.drawable.defaut_book));
-		}
-		}
+//		if (!TextUtils.isEmpty(dBook.getCover_path())) {
+//			//mImageFetcher.loadImage(dBook.getCover_path(), img);
+//	        ImageLoader mImageLoader = new ImageLoader(mQueue, new BitmapCache(Tool.getCachSize()));
+//			ImageListener listener = ImageLoader.getImageListener(img, R.drawable.defaut_book, R.drawable.defaut_book);
+//			mImageLoader.get(dBook.getCover_path(), listener);
+//		} else {
+//			img.setImageDrawable(getResources().getDrawable(
+//					R.drawable.defaut_book));
+//		}
+		//}
 		listview.setAdapter(adapter);
-		rl_baseinfo.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				//跳到详细界面
-				if(typeid == GlobleData.BOOK_SZ_TYPE){
-					if(fromActivity ==1){
-						if (dBook != null) {
-							Intent _intent = new Intent(context,
-									DetailBookActivity.class);
-							Bundle bundle = new Bundle();
-							bundle.putSerializable("book", dBook);
-							_intent.putExtra("detaiinfo", bundle);
-							_intent.putExtra("ismyfavor", true);
-							_intent.putExtra("from", 1);
-							startActivity(_intent);
-						}
-					}else{
-					Intent intent = new Intent(context, DetailBookActivity.class);
-					Bundle bundle = new Bundle();
-					bundle.putSerializable("book", dBook);
-					intent.putExtra("detaiinfo", bundle);
-					intent.putExtra("from", 1);//表示从commentActivity跳过去的，不显示评论按钮
-					context.startActivity(intent);
-					}
-				}else if(typeid == GlobleData.BOOK_ZK_TYPE){
-					if(fromActivity ==1){
-						EBook mebook = new EBook(dBook.getCallno(), dBook.getSubject(),null,
-								dBook.getTitle(), null,dBook.getU_abstract(),dBook.getAuthor(),
-								0,0, dBook.getCover_path());
-						if (mebook != null) {
-							Intent intent = new Intent(context,
-									EbookDetailActivity.class);
-							Bundle bundle = new Bundle();
-							bundle.putSerializable("book", mebook);
-							intent.putExtra("detaiinfo", bundle);
-							intent.putExtra("from", 1);
-							startActivity(intent);
-						}
-					}else{
-					Intent intent = new Intent(context, EbookDetailActivity.class);
-					EBook mmebook = new EBook(dBook.getCallno(), dBook.getPublishyear(),dBook.getClassno(),
-							dBook.getTitle(), dBook.getPublisher(),dBook.getU_abstract(),dBook.getAuthor(),
-							Integer.parseInt(dBook.getU_page()),Long.parseLong(dBook.getSubject()), dBook.getCover_path());
-					
-					Bundle bundle = new Bundle();
-					bundle.putSerializable("book", mmebook);
-					intent.putExtra("detaiinfo", bundle);
-					intent.putExtra("from", 1);//表示从commentActivity跳过去的，不显示评论按钮
-					startActivity(intent);
-					}
-				}
-				
-				
-			}
-		});
+//		rl_baseinfo.setOnClickListener(new View.OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				//跳到详细界面
+//				if(typeid == GlobleData.BOOK_SZ_TYPE){
+//					if(fromActivity ==1){
+//						if (dBook != null) {
+//							Intent _intent = new Intent(context,
+//									DetailBookActivity.class);
+//							Bundle bundle = new Bundle();
+//							bundle.putSerializable("book", dBook);
+//							_intent.putExtra("detaiinfo", bundle);
+//							_intent.putExtra("ismyfavor", true);
+//							_intent.putExtra("from", 1);
+//							startActivity(_intent);
+//						}
+//					}else{
+//					Intent intent = new Intent(context, DetailBookActivity.class);
+//					Bundle bundle = new Bundle();
+//					bundle.putSerializable("book", dBook);
+//					intent.putExtra("detaiinfo", bundle);
+//					intent.putExtra("from", 1);//表示从commentActivity跳过去的，不显示评论按钮
+//					context.startActivity(intent);
+//					}
+//				}else if(typeid == GlobleData.BOOK_ZK_TYPE){
+//					if(fromActivity ==1){
+//						EBook mebook = new EBook(dBook.getCallno(), dBook.getSubject(),null,
+//								dBook.getTitle(), null,dBook.getU_abstract(),dBook.getAuthor(),
+//								0,0, dBook.getCover_path());
+//						if (mebook != null) {
+//							Intent intent = new Intent(context,
+//									EbookDetailActivity.class);
+//							Bundle bundle = new Bundle();
+//							bundle.putSerializable("book", mebook);
+//							intent.putExtra("detaiinfo", bundle);
+//							intent.putExtra("from", 1);
+//							startActivity(intent);
+//						}
+//					}else{
+//					Intent intent = new Intent(context, EbookDetailActivity.class);
+//					EBook mmebook = new EBook(dBook.getCallno(), dBook.getPublishyear(),dBook.getClassno(),
+//							dBook.getTitle(), dBook.getPublisher(),dBook.getU_abstract(),dBook.getAuthor(),
+//							Integer.parseInt(dBook.getU_page()),Long.parseLong(dBook.getSubject()), dBook.getCover_path());
+//					
+//					Bundle bundle = new Bundle();
+//					bundle.putSerializable("book", mmebook);
+//					intent.putExtra("detaiinfo", bundle);
+//					intent.putExtra("from", 1);//表示从commentActivity跳过去的，不显示评论按钮
+//					startActivity(intent);
+//					}
+//				}
+//				
+//				
+//			}
+//		});
 	}
 
 	public void init() {
 		
 		listview = (DownFreshListView) findViewById(R.id.comment_lv);
 		
-		upView = LayoutInflater.from(this).inflate(R.layout.activity_comment_up, null);
-		listview.addHeaderView(upView);
+		//upView = LayoutInflater.from(this).inflate(R.layout.activity_comment_up, null);
+		//listview.addHeaderView(upView);
 		listview.addHeaderView();
-		
+		//upView.setVisibility(View.GONE);
 		listview.setOnItemClickListener(this);
 		listview.setOnRefreshListener(this);
-		rl_baseinfo = (RelativeLayout) upView.findViewById(R.id.baseinfo_rl);
-		baseinfo_tv = (TextView) upView.findViewById(R.id.baseinfo_tv);
-		intro_tv = (TextView) upView.findViewById(R.id.intro_tv);
+//		rl_baseinfo = (RelativeLayout) upView.findViewById(R.id.baseinfo_rl);
+//		baseinfo_tv = (TextView) upView.findViewById(R.id.baseinfo_tv);
+//		intro_tv = (TextView) upView.findViewById(R.id.intro_tv);
 		commit_btn = (Button) findViewById(R.id.commit_btn);
 		delete_com= (Button) findViewById(R.id.delete_com);
 		comment_et = (EditText) findViewById(R.id.comment_et);
-		TextView title = (TextView) findViewById(R.id.txt_header);
-		title.setText(R.string.book_comment);
+		title = (TextView) findViewById(R.id.txt_header);
+		//title.setText(R.string.book_comment);
 		ImageView back = (ImageView) findViewById(R.id.img_back_header);
 		adapter = new CommentItemAdapter(context, null);
 		// 加载数据
@@ -192,7 +193,7 @@ public class CommentActivity extends BaseActivity implements
 		commit_btn.setOnClickListener(this);
 		delete_com.setOnClickListener(this);
 		
-		img = (ImageView) upView.findViewById(R.id.book_big_img);
+		//img = (ImageView) upView.findViewById(R.id.book_big_img);
 
 		back.setOnClickListener(new View.OnClickListener() {
 			@Override

@@ -8,7 +8,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -28,13 +27,12 @@ import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.StringRequest;
-import com.cqvip.moblelib.BuildConfig;
 import com.cqvip.moblelib.R;
 import com.cqvip.moblelib.adapter.EbookAdapter;
 import com.cqvip.moblelib.constant.Constant;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.EBook;
-import com.cqvip.moblelib.view.CustomProgressDialog;
+import com.cqvip.moblelib.view.DropDownListView;
 import com.cqvip.utils.BitmapCache;
 import com.cqvip.utils.Tool;
 
@@ -49,21 +47,15 @@ public class EBookSearchActivity extends BaseActivity implements
 	private TextView searchCount;
 	private ImageView imgsearch;
 	private Context context;
-	private ListView listview;
-//	private String editekey;
+	private DropDownListView listview;
 	private int page = 1;
 	private EbookAdapter adapter;
 	private RelativeLayout noResult_rl;
 	private View title_bar;
 	private BitmapCache cache;
 	private Map<String, String> gparams;
-	public static HashMap<String, Boolean> favors = new HashMap<String, Boolean>();// 保持收藏状态，更新界面
-	private int countall;
 	
-	int lastItem;
-	int totalItemCount;
-    int firstItemIndex;  
-    boolean isloading=false;
+	public static HashMap<String, Boolean> favors = new HashMap<String, Boolean>();// 保持收藏状态，更新界面
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -73,9 +65,17 @@ public class EBookSearchActivity extends BaseActivity implements
 		imgsearch = (ImageView) findViewById(R.id.search_seach_btn);
 		edit = (EditText) findViewById(R.id.search_et);
 		searchCount = (TextView) findViewById(R.id.txt_total_esearch);
-		listview = (ListView) findViewById(R.id.search_res_lv);
+		listview = (DropDownListView) findViewById(R.id.search_res_lv);
 		listview.setOnItemClickListener((OnItemClickListener) this);
 		noResult_rl = (RelativeLayout) findViewById(R.id.noresult_rl);
+		//获取更多
+		listview.setOnBottomListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				getHomePage(edit.getText().toString().trim(), page + 1, DEFAULT_COUNT, 1);
+				page = page + 1;
+			}
+		});
 		imgsearch.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -85,15 +85,13 @@ public class EBookSearchActivity extends BaseActivity implements
 					Tool.ShowMessages(context, "请输入关键字");
 					return;
 				}
-				// 搜索新鲜事
 				if (!Tool.checkNetWork(context)) {
 					return;
 				}
-				initdata();
 				customProgressDialog.show();
+				page = 1;
 				getHomePage(edit.getText().toString().trim(), page,
 						DEFAULT_COUNT, 0);
-				// Tool.ShowMessages(context, "开始搜索");
 			}
 		});
 		edit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -104,7 +102,6 @@ public class EBookSearchActivity extends BaseActivity implements
 				if (TextUtils.isEmpty(edit.getText().toString())) {
 					return true;
 				}
-//				editekey = edit.getText().toString();
 				// 隐藏键盘
 				hideKeybord();
 				// 检查网络
@@ -112,11 +109,10 @@ public class EBookSearchActivity extends BaseActivity implements
 					return false;
 				}
 				// 网络访问,获取首页
-				initdata();
 				customProgressDialog.show();
+				page = 1;
 				getHomePage(edit.getText().toString().trim(), 1, DEFAULT_COUNT,
 						0);
-				// Tool.ShowMessages(context, "开始搜索");
 				return true;
 			}
 
@@ -135,40 +131,22 @@ public class EBookSearchActivity extends BaseActivity implements
 			}
 		});
 		
-
 		listview.setOnScrollListener(new OnScrollListener() {
 			@Override
 			public void onScrollStateChanged(AbsListView view, int scrollState) {
-				Log.i("EbookSearchAct", "scrollState="+scrollState);
-				//下拉到空闲是，且最后一个item的数等于数据的总数时，进行更新
-				if(lastItem == totalItemCount &&!isloading){ 
-					Log.i("EbookSearchAct", "拉到最底部");	
-					getHomePage(edit.getText().toString().trim(), page + 1, DEFAULT_COUNT, 1);
-					//count=list.size();
-					isloading=true;
-				}
+				// TODO Auto-generated method stub
+				
 			}
 			
 			@Override
 			public void onScroll(AbsListView view, int firstVisibleItem,
 					int visibleItemCount, int totalItemCount) {
-				  EBookSearchActivity.this.firstItemIndex = firstVisibleItem;  
-					Log.i("EbookSearchAct", "firstVisibleItem="+firstVisibleItem+"\nvisibleItemCount="+
-							visibleItemCount+"\ntotalItemCount"+totalItemCount);
-					
-					lastItem = firstVisibleItem + visibleItemCount;  //减1是因为上面加了个addFooterView
-					 EBookSearchActivity.this.totalItemCount=totalItemCount;
+				// TODO Auto-generated method stub
+				
 			}
 		});
 	}
 
-	private void initdata(){
-		lastItem=0;
-		totalItemCount=0;
-	    firstItemIndex=0;  
-	    isloading=false;
-	    page = 1;
-	};
 	/**
 	 * 隐藏键盘
 	 */
@@ -188,7 +166,6 @@ public class EBookSearchActivity extends BaseActivity implements
 			try {
 				//获取返回记录数
 				int count = EBook.ebookCount(response);
-				countall=count;
 				if(count>0){
 					searchCount.setVisibility(View.VISIBLE);
 					searchCount.setText("共计搜索到"+count+"条记录");
@@ -201,8 +178,15 @@ public class EBookSearchActivity extends BaseActivity implements
 					listview.setVisibility(View.VISIBLE);
 					noResult_rl.setVisibility(View.GONE);
 					cache = new BitmapCache(Tool.getCachSize());
-					adapter = new EbookAdapter(context, lists, countall, new ImageLoader(mQueue, cache));
-					listview.setAdapter(adapter);
+					adapter = new EbookAdapter(context, lists,  new ImageLoader(mQueue, cache));
+					if(lists.size()<DEFAULT_COUNT){
+						listview.setHasMore(false);
+						listview.setAdapter(adapter);
+						listview.onBottomComplete();
+					}else{
+						listview.setHasMore(true);
+						listview.setAdapter(adapter);
+					}
 				} else {
 					listview.setVisibility(View.GONE);
 					noResult_rl.setVisibility(View.VISIBLE);
@@ -218,22 +202,20 @@ public class EBookSearchActivity extends BaseActivity implements
 	Listener<String> backlistenermore = new Listener<String>() {
 		@Override
 		public void onResponse(String response) {
-			// TODO Auto-generated method stub
 			try {
 				// JSONObject mj=new JSONObject(response);
 				List<EBook> lists = EBook.formList(response);
 				if (lists != null && !lists.isEmpty()) {
 					adapter.addMoreData(lists);
-					page = page + 1;
+					listview.onBottomComplete();
 				} else {
-					Tool.ShowMessages(context, "没有更多内容可供加载");
+					listview.setHasMore(false);
+					listview.onBottomComplete();
 				}
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
-			if((totalItemCount-1)!=countall){
-			isloading=false;
-			}
+
 		}
 	};
 
@@ -284,56 +266,8 @@ public class EBookSearchActivity extends BaseActivity implements
 		}
 	}
 
-	// @Override
-	// public void refresh(Object... obj) {
-	// customProgressDialog.dismiss();
-	// hideKeybord();
-	// //显示
-	// int type = (Integer)obj[0];
-	//
-	// //判断收藏是否成功
-	// if(type == FAVOR){
-	// Result res = (Result) obj[1];
-	// if (res.getSuccess()) {
-	// Tool.ShowMessages(context, "收藏成功");
-	// }else{
-	// Tool.ShowMessages(context, "收藏失败");
-	// }
-	// return;
-	// }
-	//
-	// List<EBook> lists = (List<EBook>)obj[1];
-	// if(type == GETFIRSTPAGE ){
-	// if(lists!=null&&!lists.isEmpty()){
-	// listview.setVisibility(View.VISIBLE);
-	// noResult_rl.setVisibility(View.GONE);
-	// adapter = new EbookAdapter(context,lists,mImageFetcher);
-	// listview.setAdapter(adapter);
-	//
-	// }else{
-	// listview.setVisibility(View.GONE);
-	// noResult_rl.setVisibility(View.VISIBLE);
-	// }
-	// }else if(type == GETNEXTPAGE){
-	// if(lists!=null&&!lists.isEmpty()){
-	// adapter.addMoreData(lists);
-	// }else{
-	// Tool.ShowMessages(context, "没有更多内容可供加载");
-	// }
-	// }
-	// }
-	View moreprocess;
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int positon, long id) {
-		if (id == -2) // 更多
-		{
-			// 进度条
-		    moreprocess = arg1.findViewById(R.id.footer_progress);
-			moreprocess.setVisibility(View.VISIBLE);
-			// 请求网络更多
-			getHomePage(edit.getText().toString().trim(), page + 1, DEFAULT_COUNT, 1);
-			page = page + 1;
-		} else {
 			EBook book = adapter.getLists().get(positon);
 			if (book != null) {
 				Intent _intent = new Intent(context, EbookDetailActivity.class);
@@ -342,14 +276,6 @@ public class EBookSearchActivity extends BaseActivity implements
 				_intent.putExtra("detaiinfo", bundle);
 				startActivity(_intent);
 			}
-
-			// Book book = lists.get(position-1);
-			// if(book!=null){
-			// Bundle bundle = new Bundle();
-			// bundle.putSerializable("book", book);
-			// _intent.putExtra("detaiinfo", bundle);
-			// startActivityForResult(_intent, 1);
-		}
 	}
 	@Override
 	protected void onDestroy() {
