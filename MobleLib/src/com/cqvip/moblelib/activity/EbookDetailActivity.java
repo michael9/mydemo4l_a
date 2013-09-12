@@ -124,7 +124,7 @@ public class EbookDetailActivity extends BaseActivity {
 		//time.setText(publish + dBook.getOrgan());
 		//page.setText(page1 + dBook.getPagecount());
 		if (dBook.getPdfsize() != 0) {
-			type.setText(type1 + "PDF," +dBook.getPagecount()+"页,大小"+ dBook.getPdfsize() / 1024 + "KB");
+			type.setText(type1 + "PDF,共" +dBook.getPagecount()+"页,大小"+ dBook.getPdfsize() / 1024 + "KB");
 		} else {
 			type.setVisibility(View.GONE);
 		}

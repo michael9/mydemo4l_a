@@ -70,71 +70,81 @@
 
                 <TextView
                     android:id="@+id/ebook_author_txt"
+                    style="@style/TextContentMiddleStyle"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2.0dip"
                     android:text="作者：托马斯"
                     android:maxLines="2"
-                    android:textColor="@color/txt_black"
-                    android:textSize="@dimen/search_detail_txtsize_tv" />
+                    />
                 <!-- address -->
 
                 <TextView
                     android:id="@+id/ebook_from_txt"
+                     style="@style/TextContentMiddleStyle"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:text="来源：《电子工业出版社》2012年,第三期"
                     android:maxLines="2"
-                    android:textColor="@color/txt_black"
-                    android:textSize="@dimen/search_detail_txtsize_tv" />
+                 />
                 <!-- time -->
 
                 <TextView
                     android:id="@+id/ebook_time_txt"
+                     style="@style/TextContentMiddleStyle"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:text="出版：电子工业出版社"
                     android:maxLines="3"
-                    android:textColor="@color/txt_black"
                     android:visibility="gone"
-                    android:textSize="@dimen/search_detail_txtsize_tv" />
+                   />
                 <!-- page -->
 
                 <TextView
                     android:id="@+id/ebook_page_txt"
+                    style="@style/TextContentMiddleStyle"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:singleLine="true"
                     android:text="页数："
-                    android:textColor="@color/txt_black"
                     android:visibility="gone"
-                    android:textSize="@dimen/search_detail_txtsize_tv" />
+                     />
                 <!-- size -->
 
                 <TextView
                     android:id="@+id/ebook_type_txt"
+                    style="@style/TextContentMiddleStyle"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:text="格式：2012-06"
                     android:singleLine="true"
-                    android:textColor="@color/txt_black"
-                    android:textSize="@dimen/search_detail_txtsize_tv" />
+                   />
             </LinearLayout>
         </RelativeLayout>
 
-        
-
+         <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/detail_up_rl"
+                android:orientation="vertical" >
+         <TextView
+                    android:id="@+id/txt_abst_tips"
+                    style="@style/TextTitleSmallgBlueStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:gravity="center"
+                    android:text="简    介"/>
+																
             <TextView
                 android:id="@+id/ebook_content_abst"
+                 style="@style/TextContentBigStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:layout_below="@+id/detail_up_rl"
-                android:text=""
-                android:textColor="@color/txt_black"
-                android:textSize="@dimen/search_detail_txtsize_btn" />
+                android:text=""/>
+            </LinearLayout>
        
     </RelativeLayout>
 	 </ScrollView>
