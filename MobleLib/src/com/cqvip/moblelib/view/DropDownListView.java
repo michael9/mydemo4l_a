@@ -305,6 +305,11 @@ public class DropDownListView extends ListView implements OnScrollListener {
         return footerButton;
     }
 
+    public void addfootview(){
+    	if(footerLayout!=null)
+    	addFooterView(footerLayout);
+    }
+    
     @Override
     public void setAdapter(ListAdapter adapter) {
         super.setAdapter(adapter);
@@ -332,23 +337,36 @@ public class DropDownListView extends ListView implements OnScrollListener {
         footerButton.setOnClickListener(onBottomListener);
     }
 
+    private boolean isaddfoot=true;
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if (!isDropDownStyle) {
-            return super.onTouchEvent(event);
-        }
-
+//        if (!isDropDownStyle) {
+//            return super.onTouchEvent(event);
+//        }
+      //  Log.i("DropDownListView_ACTION_MOVE", "onTouchEvent");
         hasReachedTop = false;
         switch (event.getAction()) {
+        
             case MotionEvent.ACTION_DOWN:
                 actionDownPointY = event.getY();
                 break;
             case MotionEvent.ACTION_MOVE:
-                adjustHeaderPadding(event);
+               // adjustHeaderPadding(event);
+                if(event.getY()+50<actionDownPointY&&!hasMore&&isaddfoot){
+                	this.addFooterView(footerLayout);
+                	Log.i("DropDownListView_ACTION_MOVE", "ACTION_MOVE");
+                	isaddfoot=false;
+                }
                 break;
             case MotionEvent.ACTION_UP:
                 if (!isVerticalScrollBarEnabled()) {
                     setVerticalScrollBarEnabled(true);
+                }
+                Log.i("DropDownListView_ACTION_UP", "ACTION_UP");
+                if(!isaddfoot&&!hasMore){
+                	isaddfoot=true;
+                	this.removeFooterView(footerLayout);
+                	//Log.i("DropDownListView_ACTION_UP", "ACTION_UP");
                 }
                 /**
                  * set status when finger leave screen if first item visible and header status is not
@@ -359,20 +377,20 @@ public class DropDownListView extends ListView implements OnScrollListener {
                  * HEADER_STATUS_CLICK_TO_LOAD and hide header layout.</li>
                  * </ul>
                  */
-                if (getFirstVisiblePosition() == 0 && currentHeaderStatus != HEADER_STATUS_LOADING) {
-                    switch (currentHeaderStatus) {
-                        case HEADER_STATUS_RELEASE_TO_LOAD:
-                            onDropDown();
-                            break;
-                        case HEADER_STATUS_DROP_DOWN_TO_LOAD:
-                            setHeaderStatusClickToLoad();
-                            setSecondPositionVisible();
-                            break;
-                        case HEADER_STATUS_CLICK_TO_LOAD:
-                        default:
-                            break;
-                    }
-                }
+//                if (getFirstVisiblePosition() == 0 && currentHeaderStatus != HEADER_STATUS_LOADING) {
+//                    switch (currentHeaderStatus) {
+//                        case HEADER_STATUS_RELEASE_TO_LOAD:
+//                            onDropDown();
+//                            break;
+//                        case HEADER_STATUS_DROP_DOWN_TO_LOAD:
+//                            setHeaderStatusClickToLoad();
+//                            setSecondPositionVisible();
+//                            break;
+//                        case HEADER_STATUS_CLICK_TO_LOAD:
+//                        default:
+//                            break;
+//                    }
+//                }
                 break;
         }
         return super.onTouchEvent(event);
@@ -437,6 +455,7 @@ public class DropDownListView extends ListView implements OnScrollListener {
             if (firstVisibleItem > 0 && totalItemCount > 0 && (firstVisibleItem + visibleItemCount == totalItemCount)) {
                 onBottom();
             }
+            Log.i("DropDownListview_onScroll", "onBottom()");
         }
         if (onScrollListener != null) {
             onScrollListener.onScroll(view, firstVisibleItem, visibleItemCount, totalItemCount);
@@ -555,6 +574,7 @@ public class DropDownListView extends ListView implements OnScrollListener {
             footerButton.setEnabled(true);
             if (!hasMore) {
                 footerButton.setText(footerNoMoreText);
+                this.removeFooterView(footerLayout);
             } else {
                 footerButton.setText(footerDefaultText);
             }

@@ -32,7 +32,6 @@ public class DetailAdvancedBookActivity extends BaseActivity {
 	private String id, bookname;
 	private Map<String, String> gparams;
 	private Context context;
-	private ImageView btn_right_header;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,9 +59,28 @@ public class DetailAdvancedBookActivity extends BaseActivity {
 		// customProgressDialog=CustomProgressDialog.createDialog(context);
 		headbar = findViewById(R.id.head_bar);
 		bar_title = (TextView) headbar.findViewById(R.id.txt_header);
-		btn_right_header = (ImageView) findViewById(R.id.btn_right_header);
-		btn_right_header.setImageResource(R.drawable.btn_selector_sreach);
-		btn_right_header.setVisibility(View.VISIBLE);
+
+		if (type == Constant.NEWBOOK || type == Constant.HOTBOOK) {
+			ImageView btn_right_header = (ImageView) findViewById(R.id.btn_right_header);
+			btn_right_header.setImageResource(R.drawable.btn_selector_sreach);
+			btn_right_header.setVisibility(View.VISIBLE);
+			btn_right_header.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					if (!bookname.isEmpty()) {
+						Intent intent = new Intent(
+								DetailAdvancedBookActivity.this,
+								ResultOnSearchActivity.class);
+						intent.putExtra("isfromDetailAdvancedBookActivity",
+								true);
+						intent.putExtra("bookname", bookname);
+						startActivity(intent);
+					}
+				}
+			});
+		}
+
 		bar_title.setText(title);
 		btn_back = headbar.findViewById(R.id.img_back_header);
 		btn_back.setOnClickListener(new OnClickListener() {
@@ -71,19 +89,6 @@ public class DetailAdvancedBookActivity extends BaseActivity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				finish();
-			}
-		});
-		btn_right_header.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				if (!bookname.isEmpty()) {
-					Intent intent = new Intent(DetailAdvancedBookActivity.this,
-							ResultOnSearchActivity.class);
-					intent.putExtra("isfromDetailAdvancedBookActivity", true);
-					intent.putExtra("bookname", bookname);
-					startActivity(intent);
-				}
 			}
 		});
 	}

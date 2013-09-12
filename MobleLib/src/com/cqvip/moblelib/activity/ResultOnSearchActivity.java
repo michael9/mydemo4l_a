@@ -211,6 +211,7 @@ public class ResultOnSearchActivity extends BaseActivity implements
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
+				onError(2);
 			}
 
 		}
@@ -226,7 +227,7 @@ public class ResultOnSearchActivity extends BaseActivity implements
 			try {
 				// JSONObject mj=new JSONObject(response);
 				List<Book> lists = Book.formList(response);
-				if (lists != null && !lists.isEmpty()) {
+				if (lists != null && !lists.isEmpty()&&lists.size()==DEFAULT_COUNT) {
 					adapter.addMoreData(lists);
 					listview.onBottomComplete();
 				} else {
@@ -234,7 +235,7 @@ public class ResultOnSearchActivity extends BaseActivity implements
 					listview.onBottomComplete();
 				}
 			} catch (Exception e) {
-				// TODO: handle exception
+				onError(2);
 			}
 
 		}
@@ -283,6 +284,9 @@ public class ResultOnSearchActivity extends BaseActivity implements
 		gparams.put("field", field);
 
 		if (type == GETFIRSTPAGE) {
+			if(listview.getFooterViewsCount()==0){
+				listview.addfootview();
+			}
 			requestVolley(GlobleData.SERVER_URL
 					+ "/library/bookquery/search.aspx", backlistener,
 					Method.POST);

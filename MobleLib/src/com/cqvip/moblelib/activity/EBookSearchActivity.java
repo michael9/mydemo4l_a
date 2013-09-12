@@ -131,20 +131,20 @@ public class EBookSearchActivity extends BaseActivity implements
 			}
 		});
 		
-		listview.setOnScrollListener(new OnScrollListener() {
-			@Override
-			public void onScrollStateChanged(AbsListView view, int scrollState) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void onScroll(AbsListView view, int firstVisibleItem,
-					int visibleItemCount, int totalItemCount) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
+//		listview.setOnScrollListener(new OnScrollListener() {
+//			@Override
+//			public void onScrollStateChanged(AbsListView view, int scrollState) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//			
+//			@Override
+//			public void onScroll(AbsListView view, int firstVisibleItem,
+//					int visibleItemCount, int totalItemCount) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//		});
 	}
 
 	/**
@@ -192,7 +192,7 @@ public class EBookSearchActivity extends BaseActivity implements
 					noResult_rl.setVisibility(View.VISIBLE);
 				}
 			} catch (Exception e) {
-				
+				onError(2);
 				e.printStackTrace();
 			}
 
@@ -205,7 +205,7 @@ public class EBookSearchActivity extends BaseActivity implements
 			try {
 				// JSONObject mj=new JSONObject(response);
 				List<EBook> lists = EBook.formList(response);
-				if (lists != null && !lists.isEmpty()) {
+				if (lists != null && !lists.isEmpty()&&lists.size()==DEFAULT_COUNT) {
 					adapter.addMoreData(lists);
 					listview.onBottomComplete();
 				} else {
@@ -213,7 +213,7 @@ public class EBookSearchActivity extends BaseActivity implements
 					listview.onBottomComplete();
 				}
 			} catch (Exception e) {
-				// TODO: handle exception
+				onError(2);
 			}
 
 		}
@@ -258,6 +258,9 @@ public class EBookSearchActivity extends BaseActivity implements
 		gparams.put("perpage", "" + count);// ÌõÊý
 
 		if (type == 0) {
+			if(listview.getFooterViewsCount()==0){
+				listview.addfootview();
+			}
 			requestVolley(GlobleData.SERVER_URL + "/zk/search.aspx",
 					backlistener, Method.POST);
 		} else {

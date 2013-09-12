@@ -146,7 +146,7 @@ public class AnnouceListActivity extends BaseActivity implements OnItemClickList
 					}
 					}				
 			} catch (Exception e) {
-				// TODO: handle exception
+				onError(2);
 				return;
 			}
 		}
@@ -158,7 +158,7 @@ public class AnnouceListActivity extends BaseActivity implements OnItemClickList
 			
 			try {
 				List<ShortBook> lists= ShortBook.formList(sendtype, response);
-				if(lists!=null&&!lists.isEmpty()){
+				if(lists!=null&&!lists.isEmpty()&&lists.size()==Constant.DEFAULT_COUNT){
 					adapter.addMoreData(lists);
 					listview.onBottomComplete();
 				  }else{
@@ -167,7 +167,7 @@ public class AnnouceListActivity extends BaseActivity implements OnItemClickList
 					  listview.onBottomComplete();
 					}
 			} catch (Exception e) {
-				// TODO: handle exception
+				onError(2);
 			}
 		}
 	};
