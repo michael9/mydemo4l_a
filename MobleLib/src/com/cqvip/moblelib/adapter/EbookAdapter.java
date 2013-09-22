@@ -100,8 +100,8 @@ public class EbookAdapter extends BaseAdapter {
 			holder.publisher = (TextView) convertView
 					.findViewById(R.id.re_addr_txt);
 			holder.img = (NetworkImageView) convertView.findViewById(R.id.re_book_img);
-			holder.img.setDefaultImageResId(R.drawable.defaut_book);
-			holder.img.setErrorImageResId(R.drawable.defaut_book);
+//			holder.img.setDefaultImageResId(R.drawable.defaut_book);
+//			holder.img.setErrorImageResId(R.drawable.defaut_book);
 			holder.u_abstract = (TextView) convertView
 					.findViewById(R.id.txt_abst);
 			convertView.setTag(holder);

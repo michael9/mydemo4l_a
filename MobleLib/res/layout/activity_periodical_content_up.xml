@@ -169,6 +169,18 @@
                     />
 
            </RelativeLayout>
+           
        </RelativeLayout>
+
+		  <TextView
+		      android:id="@+id/txt_null_tips"
+		      style="@style/TextContentMiddleStyle"
+		      android:layout_width="wrap_content"
+		      android:layout_height="wrap_content"
+		      android:layout_below="@+id/rl_img_and_txt"
+		      android:layout_centerHorizontal="true"
+		      android:layout_margin="8.0dip"
+		      android:visibility="gone"
+		      android:text="TextView" />
 
 </RelativeLayout>

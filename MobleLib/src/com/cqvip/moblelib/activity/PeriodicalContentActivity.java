@@ -20,13 +20,16 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.Request.Method;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.ImageLoader.ImageListener;
 import com.cqvip.moblelib.R;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
@@ -36,19 +39,21 @@ import com.cqvip.moblelib.model.PeriodicalYear;
 import com.cqvip.moblelib.view.picker.ArrayWheelAdapter;
 import com.cqvip.moblelib.view.picker.OnWheelChangedListener;
 import com.cqvip.moblelib.view.picker.WheelView;
+import com.cqvip.utils.BitmapCache;
+import com.cqvip.utils.Tool;
 
 /**
  * 期刊详细界面
  * @author luojiang
  *
  */
-public class PeriodicalContentActivity extends BaseImageActivity{
+public class PeriodicalContentActivity extends BaseActivity{
 	private String mYear = null;
 	private String mMonth = null;
 	private ListView listview;
 	private Context context;
 	private TextView txt_date;
-	private TextView title,directordept,publisher,chiefedit,pubcycle,price,num,remark;
+	private TextView title,directordept,publisher,chiefedit,pubcycle,price,num,remark,tips;
 	private View upView;
 	private ImageView img,img_back;
 	private String gch;
@@ -61,6 +66,8 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 	private View progress;
 	private List<EBook> lists;//目录
 	private boolean isFirstFlag = false;
+	private RelativeLayout rlFromAndDate;
+	private BitmapCache cache;
 	
 	
 	@Override
@@ -83,7 +90,9 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 			
 			@Override
 			public void onClick(View v) {
-			
+				if(yearlist==null){
+					return;
+				}
 				final Dialog dialog = new Dialog(v.getContext(), R.style.dialog_fullscreen);
 				dialog.setContentView(R.layout.dialog_picker);
 				//记录下位置
@@ -172,7 +181,13 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 		price.setText(getResources().getString(R.string.title_cnno)+perio.getCnno());
 		num.setText(getResources().getString(R.string.title_issn)+perio.getIssn());
 		if (!TextUtils.isEmpty(perio.getImgurl())) {
-	    	mImageFetcher.loadImage(perio.getImgurl(), img);
+			
+			ImageLoader mImageLoader = new ImageLoader(mQueue, new BitmapCache(
+					Tool.getCachSize()));
+			ImageListener listener = ImageLoader.getImageListener(img,
+					R.drawable.defaut_book, R.drawable.defaut_book);
+			mImageLoader.get(perio.getImgurl(), listener);
+	    	
 	    } else {
 	    	img.setImageDrawable(context.getResources().getDrawable(
 	    			R.drawable.defaut_book));
@@ -210,6 +225,8 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 		price = (TextView)findViewById(R.id.periodical_price_txt);
 		num = (TextView)findViewById(R.id.periodical_num_txt);
 		remark = (TextView)findViewById(R.id.periodical_content_abst);
+		tips =  (TextView)findViewById(R.id.txt_null_tips);
+		rlFromAndDate = (RelativeLayout)findViewById(R.id.rlFromAndDate);
 		//期刊日期
 		txt_date = (TextView) findViewById(R.id.txt_year_month);
 		//图片
@@ -255,14 +272,20 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 		remark.setText(getResources().getString(R.string.title_perio_remark)+periodical.getRemark());
 		
 		//初始化期刊日期
+		if(yearlist==null){
+			txt_date.setVisibility(View.GONE);
+			rlFromAndDate.setVisibility(View.GONE);
+			tips.setVisibility(View.VISIBLE);
+			tips.setText(getResources().getString(R.string.tips_periodical_null));
+		}else{
+		
 		year = yearlist.get(0).getYear();
 		String[] arr = yearlist.get(0).getNum();
 		month = arr[arr.length-1];
 		txt_date.setText(year+"年第"+month+"期：目录");
 		yaer_record = 0;
 		month_record = arr.length-1;
-	
-		
+		}
 	}
 	Listener<String> backlistener_content = new Listener<String>() {
 		@Override
@@ -299,10 +322,16 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 			customProgressDialog.dismiss();
 			try {
 				Periodical periodical =Periodical.formObject(response,Task.TASK_PERIODICAL_DETAIL);	
+				if(periodical!=null){
 				yearlist = periodical.getYearsnumlist();
 				//完成view的初始化;
+				System.out.println(yearlist);
+				
+				
+				
 				initView(periodical);
 				//获取最新期刊目录书籍
+				if(yearlist!=null){
 				String[] tmpary = yearlist.get(0).getNum();
 				gparams = new HashMap<String, String>();
 				gparams.put("gch", periodical.getGch());
@@ -314,6 +343,8 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 				requestVolley(GlobleData.SERVER_URL + "/zk/search.aspx",
 						backlistener_content, Method.POST);
 				progress.setVisibility(View.VISIBLE);
+				}
+				}
 			} catch (Exception e) {
 
 				e.printStackTrace();

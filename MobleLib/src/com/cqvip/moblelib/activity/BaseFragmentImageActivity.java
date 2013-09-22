@@ -29,8 +29,8 @@ public class BaseFragmentImageActivity  extends FragmentActivity{
 		mImageFetcher = new ImageFetcher(this, getResources().getDimensionPixelSize(R.dimen.bookicon_width),
 				   getResources().getDimensionPixelSize(R.dimen.bookicon_height));
 	    mImageFetcher.setLoadingImage(R.drawable.defaut_book);
-	    //mImageFetcher.addImageCache(getSupportFragmentManager(), cacheParams);
-	    mImageFetcher.addImageCache(this, cacheParams);
+	    mImageFetcher.addImageCache(getSupportFragmentManager(), cacheParams);
+	   // mImageFetcher.addImageCache(this, cacheParams);
 	    mImageFetcher.setImageFadeIn(false);
 	    mQueue = Volley.newRequestQueue(this);
 	}
