@@ -22,6 +22,7 @@
     <drawable name="LightSkyBlue">#7387CEFA</drawable>
     <drawable name="DeepSkyBlue">#7300BFFF</drawable>
     <drawable name="silvergray">#a9a9a9</drawable>
+     <drawable name="lightgray">#e0e0e0</drawable>
     <drawable name="GreenYellow">#ADFF2F</drawable>
     <drawable name="titlegreen">#73cfeca0</drawable>
     <drawable name="btngreen">#ffcfeca0</drawable>
@@ -33,12 +34,5 @@
     <color name="grid_state_focused">#777dbcd3</color>
     
     <color name="blue_title">#FF0099CC</color>
-    
-        <!-- drop down list header font color -->
-    <color name="drop_down_list_header_font_color">#000000</color>
-    <!-- drop down list header second font color -->
-    <color name="drop_down_list_header_second_font_color">#000000</color>
-    <!-- drop down list footer font color -->
-    <color name="drop_down_list_footer_font_color">#000000</color>
     
 </resources>

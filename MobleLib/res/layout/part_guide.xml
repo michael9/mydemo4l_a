@@ -1,319 +1,363 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<RelativeLayout  
-     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-     android:background="@drawable/bg_list"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-    
-    <ImageView   android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:src="@drawable/main_log_img"
-    android:layout_alignParentBottom="true"
-    android:layout_marginBottom="8dp"
-    />
-
-<com.cqvip.moblelib.view.mylinearlayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    
-    android:orientation="vertical" android:id="@+id/myll">
+    android:background="@drawable/lightgray" >
 
-    <include
-        android:id="@+id/guide_title"
-        layout="@layout/header" />
+    <com.cqvip.moblelib.view.mylinearlayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/myll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:background="@drawable/a30"
-        android:orientation="vertical"
-        android:paddingBottom="9.0dip"
-        android:paddingLeft="9.0dip"
-        android:paddingRight="9.0dip"
-        android:paddingTop="9.0dip" >
+        <ImageView
+            android:id="@+id/main02_iv"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/main_marginleftright"
+            android:layout_marginRight="@dimen/main_marginleftright"
+            android:layout_marginTop="@dimen/main_marginleftright"
+            android:scaleType="fitXY"
+            android:src="@drawable/main_02" />
 
         <LinearLayout
-            android:id="@+id/enterguideLayout"
             android:layout_width="fill_parent"
-            android:layout_height="45.0dip"
-            android:background="@drawable/linearlayout_shape_top"
-            android:gravity="center"
-            android:orientation="horizontal" >
+            android:layout_height="fill_parent"
+            android:layout_marginBottom="@dimen/main_margintop"
+            android:layout_marginLeft="@dimen/main_marginleftright"
+            android:layout_marginRight="@dimen/main_marginleftright"
+            android:layout_marginTop="@dimen/main_margintop"
+            android:background="@drawable/linearlayout_shape1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingBottom="9.0dip"
+            android:paddingLeft="9.0dip"
+            android:paddingRight="9.0dip"
+            android:paddingTop="9.0dip" >
 
-            <ImageView
-                android:id="@+id/guide_enter_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20.0dip"
-                android:paddingRight="20.0dip"
-                android:src="@drawable/icon_lib_announce" />
-
-            <TextView
-                android:id="@+id/guide_enter_title"
+            <LinearLayout
+                android:id="@+id/enterguideLayout"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.0"
-                android:duplicateParentState="true"
-                android:gravity="center_vertical"
-                android:text="@string/guide_needknow"
-                android:textSize="16sp" />
+                android:layout_height="45.0dip"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:id="@+id/guide_enter_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20.0dip"
+                    android:paddingRight="20.0dip"
+                    android:src="@drawable/icon_content_paste" />
+
+                <TextView
+                    android:id="@+id/guide_enter_title"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0"
+                    android:duplicateParentState="true"
+                    android:gravity="center_vertical"
+                    android:text="@string/guide_needknow"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="20.0dip"
+                    android:src="@drawable/eg_arrow" />
+            </LinearLayout>
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginRight="20.0dip"
-                android:src="@drawable/eg_arrow" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/cardLayout"
-            android:layout_width="fill_parent"
-            android:layout_height="45.0dip"
-            android:layout_marginTop="-1dp"
-            android:background="@drawable/linearlayout_shape2"
-            android:gravity="center"
-            android:orientation="horizontal" >
-
-            <ImageView
-                android:id="@+id/guide_card_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20.0dip"
-                android:paddingRight="20.0dip"
-                android:src="@drawable/icon_action_search" />
-
-            <TextView
-                android:id="@+id/guide_card_title"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.0"
-                android:duplicateParentState="true"
-                android:gravity="center_vertical"
-                android:text="@string/guide_cardguide"
-                android:textSize="16sp" />
+                android:layout_height="1dp"
+                android:src="@drawable/lightgray" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:paddingRight="20.0dip"
-                android:src="@drawable/eg_arrow" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/timeLayout"
-            android:layout_width="fill_parent"
-            android:layout_height="44.0dip"
-            android:layout_marginTop="-1dp"
-            android:background="@drawable/linearlayout_shape2"
-            android:gravity="center"
-            android:orientation="horizontal" >
-
-            <ImageView
-                android:id="@+id/guide_time_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20.0dip"
-                android:paddingRight="20.0dip"
-                android:src="@drawable/icon_device_access_time" />
-
-            <TextView
-                android:id="@+id/guide_time_title"
+            <LinearLayout
+                android:id="@+id/cardLayout"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.0"
-                android:duplicateParentState="true"
-                android:gravity="center_vertical"
-                android:text="@string/guide_time"
-                android:textSize="16sp" />
+                android:layout_height="45.0dip"
+                android:layout_marginTop="-1dp"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:id="@+id/guide_card_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20.0dip"
+                    android:paddingRight="20.0dip"
+                    android:src="@drawable/icon_action_search" />
+
+                <TextView
+                    android:id="@+id/guide_card_title"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0"
+                    android:duplicateParentState="true"
+                    android:gravity="center_vertical"
+                    android:text="@string/guide_cardguide"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingRight="20.0dip"
+                    android:src="@drawable/eg_arrow" />
+            </LinearLayout>
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:paddingRight="20.0dip"
-                android:src="@drawable/eg_arrow" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/readerknowLayout"
-            android:layout_width="fill_parent"
-            android:layout_height="45.0dip"
-            android:layout_marginTop="-1dp"
-            android:background="@drawable/linearlayout_shape2"
-            android:gravity="center"
-            android:orientation="horizontal" >
-
-            <ImageView
-                android:id="@+id/guide_reader_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20.0dip"
-                android:paddingRight="20.0dip"
-                android:src="@drawable/icon_content_paste" />
-
-            <TextView
-                android:id="@+id/guide_reader_title"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.0"
-                android:duplicateParentState="true"
-                android:gravity="center_vertical"
-                android:text="@string/guide_readerknow"
-                android:textSize="16sp" />
+                android:layout_height="1dp"
+                android:src="@drawable/lightgray" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:paddingRight="20.0dip"
-                android:src="@drawable/eg_arrow" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/serverLayout"
-            android:layout_width="fill_parent"
-            android:layout_height="45.0dip"
-            android:layout_marginTop="-1dp"
-            android:background="@drawable/linearlayout_shape2"
-            android:gravity="center"
-            android:orientation="horizontal" >
-
-            <ImageView
-                android:id="@+id/guide_server_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20.0dip"
-                android:paddingRight="20.0dip"
-                android:src="@drawable/icon_collections_cloud" />
-
-            <TextView
-                android:id="@+id/guide_server_txt"
+            <LinearLayout
+                android:id="@+id/timeLayout"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.0"
-                android:duplicateParentState="true"
-                android:gravity="center_vertical"
-                android:text="@string/guide_server"
-                android:textSize="16sp" />
+                android:layout_height="44.0dip"
+                android:layout_marginTop="-1dp"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:id="@+id/guide_time_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20.0dip"
+                    android:paddingRight="20.0dip"
+                    android:src="@drawable/icon_device_access_time" />
+
+                <TextView
+                    android:id="@+id/guide_time_title"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0"
+                    android:duplicateParentState="true"
+                    android:gravity="center_vertical"
+                    android:text="@string/guide_time"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingRight="20.0dip"
+                    android:src="@drawable/eg_arrow" />
+            </LinearLayout>
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:paddingRight="20.0dip"
-                android:src="@drawable/eg_arrow" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/transportLayout"
-            android:layout_width="fill_parent"
-            android:layout_height="45.0dip"
-            android:layout_marginTop="-1dp"
-            android:background="@drawable/linearlayout_shape2"
-            android:gravity="center"
-            android:orientation="horizontal" >
-
-            <ImageView
-                android:id="@+id/guide_transport_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20.0dip"
-                android:paddingRight="20.0dip"
-                android:src="@drawable/icon_location_web_site" />
-
-            <TextView
-                android:id="@+id/guide_transport_title"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.0"
-                android:duplicateParentState="true"
-                android:gravity="center_vertical"
-                android:text="@string/guide_transport"
-                android:textSize="16sp" />
+                android:layout_height="1dp"
+                android:src="@drawable/lightgray" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:paddingRight="20.0dip"
-                android:src="@drawable/eg_arrow" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/gpsLayout"
-            android:layout_width="fill_parent"
-            android:layout_height="45.0dip"
-            android:layout_marginTop="-1dp"
-            android:background="@drawable/linearlayout_shape2"
-            android:gravity="center"
-            android:orientation="horizontal" >
-
-            <ImageView
-                android:id="@+id/guide_navigation_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20.0dip"
-                android:paddingRight="20.0dip"
-                android:src="@drawable/icon_location_directions" />
-
-            <TextView
-                android:id="@+id/guide_navigation_txt"
+            <LinearLayout
+                android:id="@+id/readerknowLayout"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.0"
-                android:duplicateParentState="true"
-                android:gravity="center_vertical"
-                android:text="@string/guide_navigation"
-                android:textSize="16sp" />
+                android:layout_height="45.0dip"
+                android:layout_marginTop="-1dp"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:id="@+id/guide_reader_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20.0dip"
+                    android:paddingRight="20.0dip"
+                    android:src="@drawable/icon_content_paste" />
+
+                <TextView
+                    android:id="@+id/guide_reader_title"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0"
+                    android:duplicateParentState="true"
+                    android:gravity="center_vertical"
+                    android:text="@string/guide_readerknow"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingRight="20.0dip"
+                    android:src="@drawable/eg_arrow" />
+            </LinearLayout>
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:paddingRight="20.0dip"
-                android:src="@drawable/eg_arrow" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/probLayout"
-            android:layout_width="fill_parent"
-            android:layout_height="45.0dip"
-            android:layout_marginTop="-1dp"
-            android:background="@drawable/linearlayout_shape_down"
-            android:gravity="center"
-            android:orientation="horizontal" >
-
-            <ImageView
-                android:id="@+id/guide_problem_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20.0dip"
-                android:paddingRight="20.0dip"
-                android:src="@drawable/icon_problem" />
-
-            <TextView
-                android:id="@+id/guide_problem_title"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.0"
-                android:duplicateParentState="true"
-                android:gravity="center_vertical"
-                android:text="@string/guide_problem"
-                android:textSize="16sp" />
+                android:layout_height="1dp"
+                android:src="@drawable/lightgray" />
+
+            <LinearLayout
+                android:id="@+id/serverLayout"
+                android:layout_width="fill_parent"
+                android:layout_height="45.0dip"
+                android:layout_marginTop="-1dp"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:id="@+id/guide_server_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20.0dip"
+                    android:paddingRight="20.0dip"
+                    android:src="@drawable/icon_collections_cloud" />
+
+                <TextView
+                    android:id="@+id/guide_server_txt"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0"
+                    android:duplicateParentState="true"
+                    android:gravity="center_vertical"
+                    android:text="@string/guide_server"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingRight="20.0dip"
+                    android:src="@drawable/eg_arrow" />
+            </LinearLayout>
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:paddingRight="20.0dip"
-                android:src="@drawable/eg_arrow" />
-        </LinearLayout>
-    </LinearLayout>
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:src="@drawable/lightgray" />
 
-</com.cqvip.moblelib.view.mylinearlayout>
+            <LinearLayout
+                android:id="@+id/transportLayout"
+                android:layout_width="fill_parent"
+                android:layout_height="45.0dip"
+                android:layout_marginTop="-1dp"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:id="@+id/guide_transport_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20.0dip"
+                    android:paddingRight="20.0dip"
+                    android:src="@drawable/icon_location_web_site" />
+
+                <TextView
+                    android:id="@+id/guide_transport_title"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0"
+                    android:duplicateParentState="true"
+                    android:gravity="center_vertical"
+                    android:text="@string/guide_transport"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingRight="20.0dip"
+                    android:src="@drawable/eg_arrow" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:src="@drawable/lightgray" />
+
+            <LinearLayout
+                android:id="@+id/gpsLayout"
+                android:layout_width="fill_parent"
+                android:layout_height="45.0dip"
+                android:layout_marginTop="-1dp"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:id="@+id/guide_navigation_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20.0dip"
+                    android:paddingRight="20.0dip"
+                    android:src="@drawable/icon_location_directions" />
+
+                <TextView
+                    android:id="@+id/guide_navigation_txt"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0"
+                    android:duplicateParentState="true"
+                    android:gravity="center_vertical"
+                    android:text="@string/guide_navigation"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingRight="20.0dip"
+                    android:src="@drawable/eg_arrow" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:src="@drawable/lightgray" />
+
+            <LinearLayout
+                android:id="@+id/probLayout"
+                android:layout_width="fill_parent"
+                android:layout_height="45.0dip"
+                android:layout_marginTop="-1dp"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:id="@+id/guide_problem_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20.0dip"
+                    android:paddingRight="20.0dip"
+                    android:src="@drawable/icon_problem" />
+
+                <TextView
+                    android:id="@+id/guide_problem_title"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0"
+                    android:duplicateParentState="true"
+                    android:gravity="center_vertical"
+                    android:text="@string/guide_problem"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingRight="20.0dip"
+                    android:src="@drawable/eg_arrow" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:src="@drawable/lightgray" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" android:gravity="bottom|right">
+
+                <ImageView 
+                    android:id="@+id/return_iv"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/retunsign" android:layout_marginBottom="10dp" android:layout_marginRight="10dp"/>
+            </LinearLayout>
+        </LinearLayout>
+    </com.cqvip.moblelib.view.mylinearlayout>
 
 </RelativeLayout>

@@ -38,10 +38,11 @@ public class EntanceGuideActivity extends BaseActivity {
 		context = this;
 		initialView();
 		setOnclickListener();
-		View v = findViewById(R.id.guide_title);
-		TextView title = (TextView) v.findViewById(R.id.txt_header);
-		title.setText(R.string.main_guide);
-		ImageView back = (ImageView) v.findViewById(R.id.img_back_header);
+		//View v = findViewById(R.id.guide_title);
+//		TextView title = (TextView) v.findViewById(R.id.txt_header);
+//		title.setText(R.string.main_guide);
+//		ImageView back = (ImageView) v.findViewById(R.id.img_back_header);
+		ImageView back = (ImageView)findViewById(R.id.return_iv);
 		back.setOnClickListener(new View.OnClickListener() {
 
 			@Override

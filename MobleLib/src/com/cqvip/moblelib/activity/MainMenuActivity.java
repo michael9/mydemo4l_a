@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
 
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
@@ -16,12 +17,15 @@ import android.os.Message;
 import android.util.Log;
 import android.view.Display;
 import android.view.KeyEvent;
-import android.webkit.WebView;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
-import android.widget.SlidingDrawer;
 
 import com.android.volley.Request.Method;
 import com.android.volley.Response.ErrorListener;
@@ -49,7 +53,7 @@ import com.cqvip.utils.Tool;
  * 
  * @author LHP,LJ
  */
-public class MainMenuActivity extends BaseActivity {
+public class MainMenuActivity extends BaseActivity implements OnClickListener {
 
 	private SharedPreferences preferences;
 	private Context context;
@@ -67,6 +71,9 @@ public class MainMenuActivity extends BaseActivity {
 	private GridViewImgAdapter adapter;
 	private Timer mtimer;
 	private int mtimern;
+	
+	private ImageView iv_top,iv_EntanceGuide,iv02;
+	
 	private final Class[] activities = { EntanceGuideActivity.class,
 			BookSearchActivity.class, EBookActiviy.class,
 			SuggestedReadingActivity.class, PersonalCenterActivity.class,
@@ -107,12 +114,12 @@ public class MainMenuActivity extends BaseActivity {
 	}
 
 	private int width, height;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		// requestWindowFeature(Window.);
-		//Log.i("MainMenuActivity", "onCreate");
+
 		Intent intent = new Intent(MainMenuActivity.this, WelcomeActivity.class);
 		startActivity(intent);
 
@@ -121,8 +128,6 @@ public class MainMenuActivity extends BaseActivity {
 		height = display.getHeight();
 		setContentView(R.layout.activity_main);
 		context = this;
-		//sd = (SlidingDrawer) findViewById(R.id.sd);
-//		adwebview = (WebView) findViewById(R.id.adwebview);
 //		adwebview.getSettings().setSupportZoom(true);
 //		adwebview
 //				.loadUrl("http://www.szlglib.com.cn/uploads/Image/2013/06/24/20130624154214468.jpg");
@@ -143,12 +148,7 @@ public class MainMenuActivity extends BaseActivity {
         String info=phinfo.tojson(phinfo);
         Log.i("phinfo", info);
 	}
-@Override
-protected void onStart() {
-	// TODO Auto-generated method stub
-	super.onStart();
-	//Log.i("MainMenuActivity", "onStart");
-}
+
 	private void init_login() {
 		if (dao == null) {
 			dao = new MUserDao(context);
@@ -229,7 +229,6 @@ protected void onStart() {
 	protected void onResume() {
 		super.onResume();
 		cantouch = true;
-		//Log.i("MainMenuActivity", "onResume");
 	}
 
 	public void init() {
@@ -240,10 +239,13 @@ protected void onStart() {
 		// this.startService(it);
 		// }
 		// 检查网络是否可用
-		if (Tool.checkNetWork(context)) {
-
-		}
-
+//		if (Tool.checkNetWork(context)) {
+//
+//		}
+		iv_EntanceGuide=(ImageView) findViewById(R.id.main02_iv);
+		iv_top=(ImageView) findViewById(R.id.main01_iv);
+//		iv_EntanceGuide.setOnClickListener(this);
+//		iv_top.setOnClickListener(this);
 	}
 
 	private void startCheckUpdate() {
@@ -316,15 +318,14 @@ protected void onStart() {
 	protected void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
-		//Log.i("MainMenuActivity", "onPause");
-		//overridePendingTransition(R.anim.slide_fade_in, R.anim.slide_fade_out);
+		overridePendingTransition(R.anim.slide_fade_in, R.anim.slide_fade_out);
 	}
 
 	@Override
 	protected void onStop() {
 		// TODO Auto-generated method stub
 		super.onStop();
-		//Log.i("MainMenuActivity", "onStop");
+		// Log.i("MainMenuActivity", "onStop");
 	}
 
 	// @Override
@@ -364,5 +365,93 @@ protected void onStart() {
 		// ManagerService.isrun = false;
 
 	}
+
+	@Override
+	public void onClick(View v) {
+		Intent intent = new Intent();
+		switch (v.getId()) {
+		case R.id.main02_iv:
+			intent.setClass(MainMenuActivity.this, activities[0]);
+			startActivity(intent);
+			break;
+		case R.id.main03_iv:
+			intent.setClass(MainMenuActivity.this, activities[1]);
+			startActivity(intent);
+			break;
+		case R.id.main04_iv:
+			intent.setClass(MainMenuActivity.this, activities[2]);
+			startActivity(intent);
+			break;
+		case R.id.main05_iv:
+			intent.setClass(MainMenuActivity.this, activities[3]);
+			startActivity(intent);
+			break;
+		case R.id.main06_iv://个人中心
+			if (GlobleData.islogin) {
+				intent.setClass(context, activities[4]);
+				startActivity(intent);
+			} else {
+				showLoginDialog(4);
+			}
+			break;
+		case R.id.main07_iv://借阅管理
+			if (GlobleData.islogin) {
+				intent.setClass(context, activities[7]);
+				startActivity(intent);
+			} else {
+				showLoginDialog(7);
+			}
+			break;
+		case R.id.main08_iv://参考咨询
+			intent.setClass(MainMenuActivity.this, activities[5]);
+			startActivity(intent);
+			break;
+		case R.id.main09_iv://管内公告
+			intent.setClass(MainMenuActivity.this, activities[6]);
+			startActivity(intent);
+			break;
+		case R.id.main10_iv://书友圈
+			if (GlobleData.islogin) {
+				intent.setClass(context, activities[8]);
+				startActivity(intent);
+			} else {
+				showLoginDialog(8);
+			}
+			break;
+		default:
+			break;
+		}
+	}
+	
+	private void showLoginDialog(int id) {
+		MainMenuActivity.cantouch = true;
+		Intent intent = new Intent(context, ActivityDlg.class);
+		intent.putExtra("ACTIONID", id);
+		startActivityForResult(intent, id);
+	}
+//	ImageView imageView;
+//	ViewGroup decor;
+//	@Override
+//	public boolean onTouchEvent(MotionEvent event) {
+//		// TODO Auto-generated method stub
+//		switch (event.getAction()) {
+//		case MotionEvent.ACTION_DOWN:
+//			Log.i("MainMenu", "onTouchEvent");
+//			if(imageView==null){
+//			imageView=new ImageView(context);
+//			imageView.setImageResource(R.drawable.icon_cancle_favor);
+//			}
+//			if(decor==null)
+//			decor = (ViewGroup)getWindow().getDecorView();
+//			decor.addView(imageView);
+//			break;
+//		case MotionEvent.ACTION_UP:
+//			decor.removeView(imageView);
+//
+//		default:
+//			break;
+//		}
+//		return super.onTouchEvent(event);
+//	}
 
 }

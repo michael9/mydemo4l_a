@@ -20,4 +20,7 @@
     <dimen name="drop_down_list_header_progress_bar_height">36dp</dimen>
     <dimen name="drop_down_list_footer_progress_bar_height">36dp</dimen>
      
+     <dimen name="main_marginleftright">5dp</dimen>
+     <dimen name="main_margintop">8dp</dimen>
+     <dimen name="main_marginmiddle">6dp</dimen>
 </resources>

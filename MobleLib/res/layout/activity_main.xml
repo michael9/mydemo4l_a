@@ -1,60 +1,188 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.cqvip.moblelib.view.MyScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_list"
-    tools:context=".MainMenuActivity" >
-<!--
-    <SurfaceView
-        android:id="@+id/main_anim_background"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />-->
-        <ImageView 
-             android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/main_log_img"
-            />
+    android:background="@drawable/lightgray" android:id="@+id/myScrollView">
 
-    <com.cqvip.moblelib.view.StableGridView
-        android:id="@+id/grid_main"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:gravity="center"
-        android:horizontalSpacing="10.0dip"
-        android:isScrollContainer="false"
-        android:layoutAnimation="@anim/layout_wave_scale"
-        android:listSelector="@drawable/transparent"
-        android:numColumns="3"
-        android:stretchMode="columnWidth"
-        android:verticalSpacing="20.0dip" />
-<!--  
-    <SlidingDrawer
-        android:id="@+id/sd"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="220dp"
-        android:layout_alignParentBottom="true"
-        android:content="@+id/myContent"
-        android:handle="@+id/iv"
-        android:orientation="vertical" >
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <com.cqvip.moblelib.view.ScaleImageView
+                android:id="@+id/main01_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/main_01" />
+
+            <com.cqvip.moblelib.view.MyImageView
+                android:id="@+id/main02_iv"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/main_marginleftright"
+                android:layout_marginRight="@dimen/main_marginleftright"
+                android:layout_marginTop="@dimen/main_margintop"
+                android:onClick="onClick"
+                android:src="@drawable/main_02" />
+
+            <com.cqvip.moblelib.view.MyImageView
+                android:id="@+id/main03_iv"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/main_marginleftright"
+                android:layout_marginRight="@dimen/main_marginleftright"
+                android:layout_marginTop="@dimen/main_margintop"
+                android:onClick="onClick"
+                android:scaleType="fitXY"
+                android:src="@drawable/main_03" />
+
+            <LinearLayout
+                android:id="@+id/ll01"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/main_marginleftright"
+                android:layout_marginRight="@dimen/main_marginleftright"
+                android:layout_marginTop="@dimen/main_margintop"
+                android:orientation="horizontal" >
+
+                <com.cqvip.moblelib.view.MyImageView
+                    android:id="@+id/main04_iv"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="onClick"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/main_04" />
+
+                <com.cqvip.moblelib.view.MyImageView
+                    android:id="@+id/main05_iv"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/main_marginmiddle"
+                    android:layout_weight="1"
+                    android:onClick="onClick"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/main_05" />
+            </LinearLayout>
+
+            <com.cqvip.moblelib.view.MyImageView
+                android:id="@+id/main06_iv"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/main_marginleftright"
+                android:layout_marginRight="@dimen/main_marginleftright"
+                android:layout_marginTop="@dimen/main_margintop"
+                android:onClick="onClick"
+                android:scaleType="fitXY"
+                android:src="@drawable/main_06" />
+
+            <LinearLayout
+                android:id="@+id/rl01"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/main_marginleftright"
+                android:layout_marginRight="@dimen/main_marginleftright"
+                android:layout_marginTop="@dimen/main_margintop"
+                android:orientation="horizontal" >
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical" >
+
+                    <com.cqvip.moblelib.view.MyImageView
+                        android:id="@+id/main07_iv"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:onClick="onClick"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/main_07" />
+
+                    <com.cqvip.moblelib.view.MyImageView
+                        android:id="@+id/main08_iv"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/main_margintop"
+                        android:onClick="onClick"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/main_08" />
+                </LinearLayout>
+
+                <com.cqvip.moblelib.view.MyImageView
+                    android:id="@+id/main09_iv"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/main_marginmiddle"
+                    android:layout_weight="1"
+                    android:onClick="onClick"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/main_09" />
+            </LinearLayout>
+
+            <com.cqvip.moblelib.view.MyImageView
+                android:id="@+id/main10_iv"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/main_marginleftright"
+                android:layout_marginRight="@dimen/main_marginleftright"
+                android:layout_marginTop="@dimen/main_margintop"
+                android:onClick="onClick"
+                android:scaleType="fitXY"
+                android:src="@drawable/main_10" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/main_marginleftright"
+                android:layout_marginRight="@dimen/main_marginleftright"
+                android:layout_marginTop="@dimen/main_margintop"
+                android:orientation="horizontal" >
+
+                <com.cqvip.moblelib.view.ScaleImageView
+                    android:id="@+id/main11_iv"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/main_11" />
+
+                <com.cqvip.moblelib.view.MyImageView
+                    android:id="@+id/main12_iv"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/main_marginmiddle"
+                    android:layout_weight="1"
+                    android:onClick="onClick"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/main_12" />
+            </LinearLayout>
+
+            <com.cqvip.moblelib.view.StableGridView
+                android:id="@+id/grid_main"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:horizontalSpacing="10.0dip"
+                android:isScrollContainer="false"
+                android:layoutAnimation="@anim/layout_wave_scale"
+                android:listSelector="@drawable/transparent"
+                android:numColumns="3"
+                android:stretchMode="columnWidth"
+                android:verticalSpacing="20.0dip" android:visibility="gone"/>
+        </LinearLayout>
 
         <ImageView
-            android:id="@+id/iv"
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/sh" />
+            android:id="@+id/finger_iv"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:scaleType="matrix"
+            android:src="@drawable/fingerprint"
+            android:visibility="invisible" />
+    </FrameLayout>
 
-       <RelativeLayout
-  			android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/myContent">
-           <WebView
-               android:id="@+id/adwebview"
-                 android:layout_width="match_parent"
-            android:layout_height="match_parent"
-               /> 
-       </RelativeLayout>
-    </SlidingDrawer>
--->
-</RelativeLayout>
+</com.cqvip.moblelib.view.MyScrollView>
