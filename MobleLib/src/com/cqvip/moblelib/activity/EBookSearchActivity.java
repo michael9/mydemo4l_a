@@ -7,6 +7,7 @@ import java.util.Map;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
@@ -118,11 +119,10 @@ public class EBookSearchActivity extends BaseActivity implements
 
 		});
 
-		title_bar = findViewById(R.id.head_bar);
-		TextView title = (TextView) title_bar.findViewById(R.id.txt_header);
-		title.setText(R.string.main_ebook);
-		ImageView back = (ImageView) title_bar
-				.findViewById(R.id.img_back_header);
+//		title_bar = findViewById(R.id.head_bar);
+//		TextView title = (TextView) title_bar.findViewById(R.id.txt_header);
+//		title.setText(R.string.main_ebook);
+		ImageView back = (ImageView)findViewById(R.id.return_iv);
 		back.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -168,7 +168,8 @@ public class EBookSearchActivity extends BaseActivity implements
 				int count = EBook.ebookCount(response);
 				if(count>0){
 					searchCount.setVisibility(View.VISIBLE);
-					searchCount.setText("共计搜索到"+count+"条记录");
+					String temp="搜索到与 \"<font face=\"arial\" color=\"red\">"+edit.getText().toString().trim()+"</font>\"  相关内容 "+count+" 个";
+					searchCount.setText(Html.fromHtml(temp));
 				}else{
 					searchCount.setVisibility(View.GONE);
 				}
@@ -241,6 +242,7 @@ public class EBookSearchActivity extends BaseActivity implements
 			mQueue.start();
 		} catch (Exception e) {
 			e.printStackTrace();
+			onError(2);
 		}
 	}
 

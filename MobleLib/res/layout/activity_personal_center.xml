@@ -1,173 +1,165 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_list"
-    tools:context=".PersonalCenterActivity" >
+    android:background="@drawable/lightgray" >
 
-    <include
-        android:id="@+id/readerserve_title"
-        layout="@layout/header" />
-
-    <ImageView
+    <com.cqvip.moblelib.view.mylinearlayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/myll"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <com.cqvip.moblelib.view.ScaleImageView
+            android:id="@+id/main02_iv"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/main_marginleftright"
+            android:layout_marginRight="@dimen/main_marginleftright"
+            android:layout_marginTop="@dimen/main_marginleftright"
+            android:src="@drawable/main_06" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginBottom="@dimen/main_margintop"
+            android:layout_marginLeft="@dimen/main_marginleftright"
+            android:layout_marginRight="@dimen/main_marginleftright"
+            android:layout_marginTop="@dimen/main_margintop"
+             android:background="@drawable/linearlayout_shape1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingBottom="9.0dip"
+            android:paddingLeft="9.0dip"
+            android:paddingRight="9.0dip"
+            android:paddingTop="9.0dip" >
+
+            <LinearLayout
+                android:id="@+id/readerinfoLayout"
+                android:layout_width="fill_parent"
+                android:layout_height="45.0dip"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:id="@+id/serv_reader_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20.0dip"
+                    android:paddingRight="20.0dip"
+                    android:src="@drawable/icon_center_info" />
+
+                <TextView
+                    android:id="@+id/serv_reader_title"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0"
+                    android:duplicateParentState="true"
+                    android:gravity="center_vertical"
+                    android:text="@string/serv_readerinfo"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="20.0dip"
+                    android:src="@drawable/eg_arrow" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:src="@drawable/lightgray" />
+
+
+            <LinearLayout
+                android:id="@+id/downloadLayout"
+                android:layout_width="fill_parent"
+                android:layout_height="45.0dip"
+                android:layout_marginTop="-1dp"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:id="@+id/serv_download_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20.0dip"
+                    android:paddingRight="20.0dip"
+                    android:src="@drawable/icon_collection_download" />
+
+                <TextView
+                    android:id="@+id/serv_download_txt"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0"
+                    android:duplicateParentState="true"
+                    android:gravity="center_vertical"
+                    android:text="@string/serv_download"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="20.0dip"
+                    android:src="@drawable/eg_arrow" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:src="@drawable/lightgray" />
+
+            <LinearLayout
+                android:id="@+id/logoutLayout"
+                android:layout_width="fill_parent"
+                android:layout_height="45.0dip"
+                android:layout_marginTop="-1dp"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:id="@+id/serv_reader_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20.0dip"
+                    android:paddingRight="20.0dip"
+                    android:src="@drawable/icon_center_loginout" />
+
+                <TextView
+                    android:id="@+id/serv_logout_title"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0"
+                    android:duplicateParentState="true"
+                    android:gravity="center_vertical"
+                    android:text="@string/serv_logout"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="20.0dip"
+                    android:src="@drawable/eg_arrow" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:src="@drawable/lightgray" />
+        </LinearLayout>
+    </com.cqvip.moblelib.view.mylinearlayout>
+    <ImageView
+        android:id="@+id/return_iv"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="8dp"
-        android:src="@drawable/main_log_img" />
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/readerserve_title"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:paddingBottom="9.0dip"
-        android:paddingLeft="9.0dip"
-        android:paddingRight="9.0dip"
-        android:paddingTop="9.0dip" >
-
-        <LinearLayout
-            android:id="@+id/readerinfoLayout"
-            android:layout_width="fill_parent"
-            android:layout_height="45.0dip"
-            android:background="@drawable/linearlayout_shape_top"
-            android:gravity="center"
-            android:orientation="horizontal" >
-
-            <ImageView
-                android:id="@+id/serv_reader_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20.0dip"
-                android:paddingRight="20.0dip"
-                android:src="@drawable/icon_center_info" />
-
-            <TextView
-                android:id="@+id/serv_reader_title"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.0"
-                android:duplicateParentState="true"
-                android:gravity="center_vertical"
-                android:text="@string/serv_readerinfo"
-                android:textSize="16sp" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginRight="20.0dip"
-                android:src="@drawable/eg_arrow" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/favorLayout"
-            android:layout_width="fill_parent"
-            android:layout_height="45.0dip"
-            android:layout_marginTop="-1dp"
-            android:background="@drawable/linearlayout_shape2"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:visibility="gone" >
-
-            <ImageView
-                android:id="@+id/serv_favor_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20.0dip"
-                android:paddingRight="20.0dip"
-                android:src="@drawable/guide_safe_icon" />
-
-            <TextView
-                android:id="@+id/serv_favor_title"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.0"
-                android:duplicateParentState="true"
-                android:gravity="center_vertical"
-                android:text="@string/serv_favorite"
-                android:textSize="16sp" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginRight="20.0dip"
-                android:src="@drawable/eg_arrow" />
-        </LinearLayout>
-        
-        <LinearLayout
-            android:id="@+id/downloadLayout"
-            android:layout_width="fill_parent"
-            android:layout_height="45.0dip"
-            android:layout_marginTop="-1dp"
-            android:gravity="center"
-            android:background="@drawable/linearlayout_shape2"
-            android:orientation="horizontal" >
-
-            <ImageView
-                android:id="@+id/serv_download_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20.0dip"
-                android:paddingRight="20.0dip"
-                android:src="@drawable/icon_collection_download" />
-
-            <TextView
-                android:id="@+id/serv_download_txt"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.0"
-                android:duplicateParentState="true"
-                android:gravity="center_vertical"
-                android:text="@string/serv_download"
-                android:textSize="16sp" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginRight="20.0dip"
-                android:src="@drawable/eg_arrow" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/logoutLayout"
-            android:layout_width="fill_parent"
-            android:layout_height="45.0dip"
-            android:layout_marginTop="-1dp"
-            android:background="@drawable/linearlayout_shape_down"
-            android:gravity="center"
-            android:orientation="horizontal" >
-
-            <ImageView
-                android:id="@+id/serv_reader_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20.0dip"
-                android:paddingRight="20.0dip"
-                android:src="@drawable/icon_center_loginout" />
-
-            <TextView
-                android:id="@+id/serv_logout_title"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.0"
-                android:duplicateParentState="true"
-                android:gravity="center_vertical"
-                android:text="@string/serv_logout"
-                android:textSize="16sp" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginRight="20.0dip"
-                android:src="@drawable/eg_arrow" />
-        </LinearLayout>
-
-    
-    </LinearLayout>
-
-  </RelativeLayout>
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="15dp"
+        android:layout_marginRight="15dp"
+        android:padding="10dp"
+        android:src="@drawable/retunsign" />
+</RelativeLayout>

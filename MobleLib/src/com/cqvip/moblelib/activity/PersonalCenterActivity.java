@@ -16,6 +16,7 @@ import com.cqvip.dao.DaoException;
 import com.cqvip.moblelib.R;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.db.MUserDao;
+import com.cqvip.moblelib.view.mylinearlayout;
 import com.cqvip.utils.Tool;
 
 /**
@@ -34,7 +35,7 @@ import com.cqvip.utils.Tool;
  */
 public class PersonalCenterActivity extends BaseActivity {
 private LinearLayout readerinfoLayout;
-private LinearLayout favorLayout;
+//private LinearLayout favorLayout;
 private LinearLayout logoutLayout;
 private LinearLayout downloadLayout;
 private Context context;
@@ -46,13 +47,14 @@ private Context context;
 		context = this;
 		//读者信息
 		readerinfoLayout=(LinearLayout) findViewById(R.id.readerinfoLayout);
-		favorLayout=(LinearLayout) findViewById(R.id.favorLayout);
+		//favorLayout=(LinearLayout) findViewById(R.id.favorLayout);
 		logoutLayout=(LinearLayout) findViewById(R.id.logoutLayout);
 		downloadLayout=(LinearLayout) findViewById(R.id.downloadLayout);
 	
-		TextView title = (TextView)findViewById(R.id.txt_header);
-		title.setText(R.string.main_ebookstore);
-		ImageView back = (ImageView) findViewById(R.id.img_back_header);
+		mylinearlayout myll =  (mylinearlayout) findViewById(R.id.myll);
+		myll.setActivity(this);
+		
+		ImageView back = (ImageView)findViewById(R.id.return_iv);
 		back.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -72,15 +74,15 @@ private Context context;
 			}
 		});
 		
-		favorLayout.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				Intent intent=new Intent(PersonalCenterActivity.this, MyFavorActivity.class);
-				startActivity(intent);
-				//overridePendingTransition(R.anim.slide_left_in, R.anim.slide_right_out);	
-			}
-		});
+//		favorLayout.setOnClickListener(new View.OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				Intent intent=new Intent(PersonalCenterActivity.this, MyFavorActivity.class);
+//				startActivity(intent);
+//				//overridePendingTransition(R.anim.slide_left_in, R.anim.slide_right_out);	
+//			}
+//		});
 		//下載管理
 		downloadLayout.setOnClickListener(new View.OnClickListener() {
 			

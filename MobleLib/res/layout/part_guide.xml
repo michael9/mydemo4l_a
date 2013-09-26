@@ -11,14 +11,13 @@
         android:layout_height="match_parent"
         android:orientation="vertical" >
 
-        <ImageView
+        <com.cqvip.moblelib.view.ScaleImageView
             android:id="@+id/main02_iv"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/main_marginleftright"
             android:layout_marginRight="@dimen/main_marginleftright"
             android:layout_marginTop="@dimen/main_marginleftright"
-            android:scaleType="fitXY"
             android:src="@drawable/main_02" />
 
         <LinearLayout
@@ -40,6 +39,7 @@
                 android:id="@+id/enterguideLayout"
                 android:layout_width="fill_parent"
                 android:layout_height="45.0dip"
+                android:background="@drawable/listitem"
                 android:gravity="center"
                 android:orientation="horizontal" >
 
@@ -79,6 +79,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="45.0dip"
                 android:layout_marginTop="-1dp"
+                android:background="@drawable/listitem"
                 android:gravity="center"
                 android:orientation="horizontal" >
 
@@ -118,6 +119,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="44.0dip"
                 android:layout_marginTop="-1dp"
+                android:background="@drawable/listitem"
                 android:gravity="center"
                 android:orientation="horizontal" >
 
@@ -157,6 +159,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="45.0dip"
                 android:layout_marginTop="-1dp"
+                android:background="@drawable/listitem"
                 android:gravity="center"
                 android:orientation="horizontal" >
 
@@ -196,6 +199,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="45.0dip"
                 android:layout_marginTop="-1dp"
+                android:background="@drawable/listitem"
                 android:gravity="center"
                 android:orientation="horizontal" >
 
@@ -235,6 +239,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="45.0dip"
                 android:layout_marginTop="-1dp"
+                android:background="@drawable/listitem"
                 android:gravity="center"
                 android:orientation="horizontal" >
 
@@ -274,6 +279,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="45.0dip"
                 android:layout_marginTop="-1dp"
+                android:background="@drawable/listitem"
                 android:gravity="center"
                 android:orientation="horizontal" >
 
@@ -313,6 +319,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="45.0dip"
                 android:layout_marginTop="-1dp"
+                android:background="@drawable/listitem"
                 android:gravity="center"
                 android:orientation="horizontal" >
 
@@ -346,18 +353,18 @@
                 android:layout_width="fill_parent"
                 android:layout_height="1dp"
                 android:src="@drawable/lightgray" />
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent" android:gravity="bottom|right">
-
-                <ImageView 
-                    android:id="@+id/return_iv"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:src="@drawable/retunsign" android:layout_marginBottom="10dp" android:layout_marginRight="10dp"/>
-            </LinearLayout>
         </LinearLayout>
     </com.cqvip.moblelib.view.mylinearlayout>
+
+    <ImageView
+        android:id="@+id/return_iv"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="15dp"
+        android:layout_marginRight="15dp"
+        android:padding="10dp"
+        android:src="@drawable/retunsign" />
 
 </RelativeLayout>

@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.cqvip.moblelib.R;
 import com.cqvip.moblelib.scan.CaptureActivity;
+import com.cqvip.moblelib.view.mylinearlayout;
 
 /**
  * <p>
@@ -42,15 +43,13 @@ public class BookSearchActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_book_search1);
 		context = this;
-		View v = findViewById(R.id.seach_title);
-		editText=(EditText) findViewById(R.id.search_et);
-		TextView title = (TextView)v.findViewById(R.id.txt_header);
-		title.setText(R.string.main_search);
-		ImageView back = (ImageView)v.findViewById(R.id.img_back_header);
+		ImageView back = (ImageView)findViewById(R.id.return_iv);
 		ImageView search = (ImageView)findViewById(R.id.search_seach_btn);
 		scan_iv=(ImageButton)findViewById(R.id.scan_iv);
 		
 		hideinputmethod();
+		mylinearlayout myll =  (mylinearlayout) findViewById(R.id.myll);
+		myll.setActivity(this);
 		
 		back.setOnClickListener(new View.OnClickListener() {
 			@Override

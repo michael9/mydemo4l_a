@@ -1,93 +1,82 @@
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-     android:background="@drawable/bg_list"
-  >
-    
+    android:background="@drawable/lightgray" >
 
-  <ImageView   android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:src="@drawable/main_log_img"
-    android:layout_alignParentBottom="true"
-    android:layout_marginBottom="8dp"
-    />
-
-<LinearLayout 
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".BookSearchActivity" >
-
-    <include
-        android:id="@+id/seach_title"
-        layout="@layout/header" />
-
-    <LinearLayout
+    <com.cqvip.moblelib.view.mylinearlayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/myll"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:paddingBottom="9.0dip"
-        android:paddingLeft="9.0dip"
-        android:paddingRight="9.0dip"
-        android:paddingTop="9.0dip" >
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
 
-        <RelativeLayout
-            android:id="@+id/searchbar"
-            android:layout_width="match_parent"
+        <com.cqvip.moblelib.view.MyImageView
+            android:id="@+id/main02_iv"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/search_bar"
-            android:orientation="horizontal" >
+            android:layout_marginLeft="@dimen/main_marginleftright"
+            android:layout_marginRight="@dimen/main_marginleftright"
+            android:layout_marginTop="@dimen/main_marginleftright"
+            android:src="@drawable/main_03" />
 
-            <EditText
-                android:id="@+id/search_et"
-                android:layout_width="fill_parent"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/main_marginleftright"
+            android:layout_marginRight="@dimen/main_marginleftright"
+            android:layout_marginTop="@dimen/main_marginleftright"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:id="@+id/searchbar"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:background="@null"
-                android:ems="10"
-                android:hint="请输入关键词搜索"
-                android:singleLine="true" />
+                android:background="@drawable/search_bar"
+                android:orientation="horizontal" >
 
-           
-            
-            <ImageButton
-                android:layout_alignParentRight="true"
-            android:id="@+id/scan_iv"
-            android:layout_width="33dp"
-            android:layout_height="33dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-             android:layout_centerVertical="true"
-            android:background="@drawable/btn_selector_scan" />
-            
-             <ImageView
-                android:id="@+id/search_seach_btn"
-                android:layout_width="33dp"
-                android:layout_height="33dp"
-                android:layout_toLeftOf="@id/scan_iv"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="5.0dip"
-               
-                android:background="@drawable/eg_search" />
-            
-        </RelativeLayout>
+                <EditText
+                    android:id="@+id/search_et"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:background="@null"
+                    android:ems="10"
+                    android:hint="请输入关键词搜索"
+                    android:singleLine="true" />
 
-        
-        
-    </LinearLayout>
+                <ImageButton
+                    android:id="@+id/scan_iv"
+                    android:layout_width="33dp"
+                    android:layout_height="33dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/btn_selector_scan" />
 
-    <ListView
-        android:id="@+id/choice_check_list"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8.0dip"
-        android:background="@drawable/linearlayout_shape1"
-        android:visibility="gone" >
-    </ListView>
+                <ImageView
+                    android:id="@+id/search_seach_btn"
+                    android:layout_width="33dp"
+                    android:layout_height="33dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="5.0dip"
+                    android:layout_toLeftOf="@id/scan_iv"
+                    android:background="@drawable/eg_search" />
+            </RelativeLayout>
+        </LinearLayout>
 
-</LinearLayout>
+
+    </com.cqvip.moblelib.view.mylinearlayout>
+
+    <ImageView
+        android:id="@+id/return_iv"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="15dp"
+        android:layout_marginRight="15dp"
+        android:padding="10dp"
+        android:src="@drawable/retunsign" />
+
 </RelativeLayout>

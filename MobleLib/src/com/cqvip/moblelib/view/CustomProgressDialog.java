@@ -63,16 +63,20 @@ public class CustomProgressDialog extends Dialog {
     	if (customProgressDialog == null){
     		return;
     	}
+    	imageView = (ImageView) customProgressDialog.findViewById(R.id.loadingImageView);
+        AnimationDrawable localAnimationDrawable = (AnimationDrawable)imageView.getBackground();
+        if (localAnimationDrawable != null)
+        	localAnimationDrawable.start();
     	
-    	Animation operatingAnim = AnimationUtils.loadAnimation(context, R.anim.loadingrotate);
-    	LinearInterpolator lin = new LinearInterpolator();
-    	operatingAnim.setInterpolator(lin);
-    	
-         imageView = (ImageView) customProgressDialog.findViewById(R.id.loadingImageView);
-       // AnimationDrawable animationDrawable = (AnimationDrawable) imageView.getBackground();
-        if (operatingAnim != null) {
-        	imageView.startAnimation(operatingAnim);
-        }
+//    	Animation operatingAnim = AnimationUtils.loadAnimation(context, R.anim.loadingrotate);
+//    	LinearInterpolator lin = new LinearInterpolator();
+//    	operatingAnim.setInterpolator(lin);
+//    	
+//         imageView = (ImageView) customProgressDialog.findViewById(R.id.loadingImageView);
+//       // AnimationDrawable animationDrawable = (AnimationDrawable) imageView.getBackground();
+//        if (operatingAnim != null) {
+//        	imageView.startAnimation(operatingAnim);
+//        }
        // animationDrawable.start();
     }
  

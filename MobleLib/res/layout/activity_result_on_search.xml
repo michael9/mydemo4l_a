@@ -3,11 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_list"
+    android:background="@drawable/lightgray"
     tools:context=".ResultOnSearchActivity" >
-    <include
-        android:id="@+id/head_bar"
-        layout="@layout/header" />
+
     <LinearLayout
         android:id="@+id/searchbar"
         android:layout_width="match_parent"
@@ -23,6 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
             android:layout_weight="1"
             android:background="@null"
             android:ems="10"
@@ -41,31 +40,37 @@
             android:layout_marginTop="1.0dip"
             android:background="@drawable/btn_selector_sreach" />
     </LinearLayout>
-  
+
     <TextView
         android:id="@+id/txt_total_esearch"
-         android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/searchbar"
-            android:text=""
-            android:textSize="12sp"
-            android:textColor="@android:color/black"
-            android:layout_marginLeft="8dp"
-            android:visibility="gone"
-            android:padding="1dp"
-        />
-    
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/searchbar"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="8dp"
+        android:padding="1dp"
+        android:text=""
+        android:textColor="@android:color/black"
+        android:textSize="16dp"
+        android:visibility="gone" />
+
     <com.cqvip.moblelib.view.DropDownListView
         android:id="@+id/search_res_lv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/txt_total_esearch"
-        android:layout_marginBottom="12dp"
-        android:background="@drawable/text_bck"
+        android:layout_marginBottom="@dimen/main_margintop"
+        android:layout_marginLeft="@dimen/main_marginleftright"
+        android:layout_marginRight="@dimen/main_marginleftright"
+        android:layout_marginTop="@dimen/main_marginleftright"
+        android:background="@drawable/linearlayout_shape1"
         android:divider="@color/divider_color"
-        dlistView:isOnBottomStyle="true"
+        android:dividerHeight="0.5dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp" android:listSelector="@android:color/transparent"
         dlistView:isAutoLoadOnBottom="true"
-        android:dividerHeight="0.5dp" />
+        dlistView:isOnBottomStyle="true" />
 
     <RelativeLayout
         android:id="@+id/noresult_rl"
@@ -88,4 +93,16 @@
             android:text="没有找到相关结果\n试试别的关键字吧!"
             android:textColor="@android:color/darker_gray" />
     </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/return_iv"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="15dp"
+        android:layout_marginRight="15dp"
+        android:padding="10dp"
+        android:src="@drawable/retunsign" />
+
 </RelativeLayout>

@@ -84,7 +84,7 @@ public class mylinearlayout extends LinearLayout {
 		}
 
 		private int verticalMinDistance = 50;
-		private int minVelocity = 0;
+		private int minVelocity = 1000;
 
 		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
 				float velocityY) {

@@ -23,6 +23,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.cqvip.moblelib.R;
+import com.cqvip.moblelib.view.mylinearlayout;
 
 /**
  * <p>
@@ -49,10 +50,7 @@ public class EBookActiviy extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_ebook_activiy);
 		editText=(EditText) findViewById(R.id.ebook_edit);
-		View v = findViewById(R.id.ebook_title);
-		TextView title = (TextView) v.findViewById(R.id.txt_header);
-		title.setText(R.string.main_ebook);
-		ImageView back = (ImageView) v.findViewById(R.id.img_back_header);
+		ImageView back = (ImageView)findViewById(R.id.return_iv);
 		back.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -63,6 +61,8 @@ public class EBookActiviy extends BaseActivity {
 		});
 		hideinputmethod();
 		
+		mylinearlayout myll =  (mylinearlayout) findViewById(R.id.myll);
+		myll.setActivity(this);
 		// SearchView sc = (SearchView)findViewById(R.id.search_view);
 		EBOOKTYPE = getResources().getStringArray(R.array.ebooktype);
 
