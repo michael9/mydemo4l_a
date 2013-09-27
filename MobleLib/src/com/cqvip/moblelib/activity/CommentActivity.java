@@ -84,6 +84,8 @@ public class CommentActivity extends BaseActivity implements
 		delFlag = getIntent().getIntExtra("flag", 0);
 		// 书籍id
 		keyid = getLngId(dBook.getCallno(), dBook.getRecordid());
+		if(customProgressDialog!=null)
+		customProgressDialog.show();
 		getHomeComment(typeid, keyid, page, Constant.DEFAULT_COUNT, GETHOMEPAGE);
 		String describe = dBook.getU_abstract();
 		if (TextUtils.isEmpty(describe)) {
@@ -185,7 +187,6 @@ public class CommentActivity extends BaseActivity implements
 		comment_et = (EditText) findViewById(R.id.comment_et);
 		title = (TextView) findViewById(R.id.txt_header);
 		//title.setText(R.string.book_comment);
-		ImageView back = (ImageView) findViewById(R.id.img_back_header);
 		adapter = new CommentItemAdapter(context, null);
 		// 加载数据
 		// getHomeComment(1,Constant.DEFAULT_COUNT);
@@ -194,7 +195,7 @@ public class CommentActivity extends BaseActivity implements
 		delete_com.setOnClickListener(this);
 		
 		//img = (ImageView) upView.findViewById(R.id.book_big_img);
-
+		ImageView back = (ImageView)findViewById(R.id.return_iv);
 		back.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -309,6 +310,8 @@ public class CommentActivity extends BaseActivity implements
 	Listener<String> backlistener_list = new Listener<String>() {
 		@Override
 		public void onResponse(String response) {
+			if(customProgressDialog!=null&&customProgressDialog.isShowing())
+			customProgressDialog.dismiss();
 			List<Comment> lists = null;
 			try {
 				lists = Comment.formList(response);

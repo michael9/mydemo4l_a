@@ -4,19 +4,29 @@
     android:layout_height="match_parent"
     android:background="@drawable/lightgray" >
 
-    <com.cqvip.moblelib.view.ScaleImageView
-        android:id="@+id/main02_iv"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/main_marginleftright"
-        android:layout_marginRight="@dimen/main_marginleftright"
-        android:layout_marginTop="@dimen/main_marginleftright"
-        android:src="@drawable/main_10" />
+    <LinearLayout
+        android:id="@+id/top_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <include
+            android:id="@+id/head_bar"
+            layout="@layout/header" />
+
+        <com.cqvip.moblelib.view.ScaleImageView
+            android:id="@+id/main02_iv"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/main_marginleftright"
+            android:layout_marginRight="@dimen/main_marginleftright"
+            android:layout_marginTop="@dimen/main_marginleftright"
+            android:src="@drawable/main_10" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_below="@id/main02_iv"
+        android:layout_below="@id/top_ll"
         android:layout_marginBottom="@dimen/main_margintop"
         android:layout_marginLeft="@dimen/main_marginleftright"
         android:layout_marginRight="@dimen/main_marginleftright"

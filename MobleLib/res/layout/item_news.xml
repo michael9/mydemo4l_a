@@ -2,7 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:background="@drawable/listitem"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/Search_item_margintopbottom"
+    android:paddingTop="@dimen/Search_item_margintopbottom" >
 
     <TextView
         android:id="@+id/tv_item_topic"

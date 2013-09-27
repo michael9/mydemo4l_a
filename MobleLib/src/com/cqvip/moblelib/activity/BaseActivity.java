@@ -57,15 +57,17 @@ public class BaseActivity extends Activity {
 
 		private int verticalMinDistance = 150;
 		private int horizontalMinDistance = 200;
-		private int minVelocitx = 500;
+    	private int minVelocitx = 500;
+//		private int minVelocity = 5000;
 
 		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
 				float velocityY) {
-			Log.e("onFling", "onFling");
-			if (e2.getX() - e1.getX() > verticalMinDistance
-					&& Math.abs(velocityX) > minVelocitx&&e2.getY() - e1.getY()< horizontalMinDistance) {
+			Log.e("onFling", "velocityY"+velocityY+"--velocityX"+velocityX);
+			if (Math.abs(velocityX) > minVelocitx
+					&& Math.abs(velocityX) > 3 * Math.abs(velocityY) / 2
+					&& e2.getX() - e1.getX() > verticalMinDistance
+					&& e2.getY() - e1.getY() < horizontalMinDistance) {
 				finish();
-				Log.e("onFling", "finish");
 				return true;
 			}
 			return false;

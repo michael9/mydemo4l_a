@@ -2,64 +2,68 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_list" >
+    android:background="@drawable/lightgray" >
 
     <include
         android:id="@+id/head_bar"
         layout="@layout/header" />
 
-     <ScrollView
+    <ScrollView
         android:id="@+id/detail_main_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/ll_action_bar"
         android:layout_below="@id/head_bar"
-        android:layout_marginLeft="5.0dip"
-        android:layout_marginRight="5.0dip" >
+        android:layout_marginBottom="@dimen/main_margintop"
+        android:layout_marginLeft="@dimen/main_marginleftright"
+        android:layout_marginRight="@dimen/main_marginleftright"
+        android:layout_marginTop="@dimen/main_margintop"
+        android:background="@drawable/linearlayout_shape1" >
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-                  <!-- 图书 -->
+            android:layout_height="wrap_content"
+            android:padding="@dimen/bookdetail_padding" >
 
-        <RelativeLayout
-            android:id="@+id/detail_up_rl"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" >
+            <!-- 图书 -->
 
-      <ImageView
-                android:id="@+id/book_big_img"
-                android:layout_width="90dp"
-                android:layout_height="125dp"
-                android:layout_alignParentLeft="true"
-                android:layout_marginTop="5.0dip"
-                android:background="@android:color/transparent"
-                android:saveEnabled="true"
-                android:scaleType="centerCrop" />
+            <RelativeLayout
+                android:id="@+id/detail_up_rl"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
 
-        <TextView
-                android:id="@+id/booktitle_tv"
-                android:layout_marginTop="2.0dip"
-                style="@style/TextTitleBigBlueStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginLeft="5.0dip"
-                android:layout_toRightOf="@id/book_big_img"
-                android:text="title" />
+                <ImageView
+                    android:id="@+id/book_big_img"
+                    android:layout_width="90dp"
+                    android:layout_height="125dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginTop="5.0dip"
+                    android:background="@android:color/transparent"
+                    android:saveEnabled="true"
+                    android:scaleType="centerCrop" />
 
-            <TextView
-                android:id="@+id/textView10"
-                style="@style/TextContentMiddleStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/booktitle_tv"
-                android:layout_marginLeft="2.0dip"
-                android:layout_marginTop="2.0dip"
-                android:layout_toRightOf="@id/book_big_img"
-                android:text="base"
-              />
-        </RelativeLayout>
+                <TextView
+                    android:id="@+id/booktitle_tv"
+                    style="@style/TextTitleBigBlueStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="5.0dip"
+                    android:layout_marginTop="2.0dip"
+                    android:layout_toRightOf="@id/book_big_img"
+                    android:text="title" />
+
+                <TextView
+                    android:id="@+id/textView10"
+                    style="@style/TextContentMiddleStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/booktitle_tv"
+                    android:layout_marginLeft="2.0dip"
+                    android:layout_marginTop="2.0dip"
+                    android:layout_toRightOf="@id/book_big_img"
+                    android:text="base" />
+            </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -74,8 +78,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
                     android:gravity="center"
-                    android:text="简    介"
-                     />
+                    android:text="简    介" />
+
                 <TextView
                     android:id="@+id/textView11"
                     style="@style/TextContentBigStyle"
@@ -83,17 +87,16 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:text=""
-                     />
+                    android:text="" />
 
                 <TextView
                     android:id="@+id/textView9"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:textStyle="bold"
                     android:text="馆藏信息"
-                    android:textSize="16dp" />
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
 
                 <LinearLayout
                     android:id="@+id/loc_list_ll"
@@ -105,8 +108,19 @@
                     android:orientation="vertical"
                     android:showDividers="middle" />
             </LinearLayout>
-         </RelativeLayout>
+        </RelativeLayout>
     </ScrollView>
+
+    <ImageView
+        android:id="@+id/return_iv"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="60dp"
+        android:layout_marginRight="15dp"
+        android:padding="10dp"
+        android:src="@drawable/retunsign" />
 
     <LinearLayout
         android:id="@+id/ll_action_bar"

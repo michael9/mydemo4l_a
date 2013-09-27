@@ -42,9 +42,13 @@ public class DetailAdvancedBookActivity extends BaseActivity {
 		title = (TextView) findViewById(R.id.ad_book_title);
 		type = getIntent().getIntExtra("type", 1);
 		id = getIntent().getStringExtra("id");
+		
 		// bookname=getIntent().getStringExtra("bookname");
 		if (type == Constant.QUESTION) {
+			String question_title=getIntent().getStringExtra("question_title");
 			content.setText(id);
+			if(question_title!=null)
+			title.setText(question_title);
 			setheadbar(getResources().getString(R.string.title_FAQ));
 		} else {
 			customProgressDialog.show();
@@ -82,7 +86,7 @@ public class DetailAdvancedBookActivity extends BaseActivity {
 		}
 
 		bar_title.setText(title);
-		btn_back = headbar.findViewById(R.id.img_back_header);
+		btn_back = (ImageView)findViewById(R.id.return_iv);
 		btn_back.setOnClickListener(new OnClickListener() {
 
 			@Override

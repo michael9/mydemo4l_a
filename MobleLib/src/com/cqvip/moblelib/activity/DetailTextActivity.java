@@ -25,9 +25,8 @@ public class DetailTextActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_detail_text);
-		View v = findViewById(R.id.seach_title);
-		t1 = (TextView) v.findViewById(R.id.txt_header);
-		ImageView back = (ImageView) v.findViewById(R.id.img_back_header);
+		t1 = (TextView)findViewById(R.id.txt_header);
+		ImageView back = (ImageView)findViewById(R.id.return_iv);
 		// ManagerService.allActivity.add(this);
 
 		back.setOnClickListener(new View.OnClickListener() {

@@ -2,159 +2,167 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_list" >
+    android:background="@drawable/lightgray" >
 
     <include
         android:id="@+id/head_bar"
         layout="@layout/header" />
 
     <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/head_bar"
-            android:layout_above="@+id/ll_action_bar"
-             >
-    
-    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
-
-        <!-- 图书 -->
+        android:layout_height="match_parent"
+        android:layout_above="@+id/ll_action_bar"
+        android:layout_below="@id/head_bar"
+        android:layout_marginBottom="@dimen/main_margintop"
+        android:layout_marginLeft="@dimen/main_marginleftright"
+        android:layout_marginRight="@dimen/main_marginleftright"
+        android:layout_marginTop="@dimen/main_margintop"
+        android:background="@drawable/linearlayout_shape1"
+        android:padding="@dimen/bookdetail_padding" >
 
         <RelativeLayout
-            android:id="@+id/detail_up_rl"
-            android:layout_width="fill_parent"
-            android:layout_marginLeft="10.0dip"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" >
 
-            <ImageView
-                android:id="@+id/ebook_icon_img"
-                android:layout_width="82dp"
-                android:layout_height="118dp"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="10.0dip"
-                android:layout_marginTop="5.0dip"
-                android:visibility="gone"
-                android:background="@android:color/transparent" />
-            
-            <TextView
-                android:id="@+id/txt_icon_desc"
-                style="@style/TextContentSmallStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/ebook_icon_img"
-                android:layout_alignLeft="@+id/ebook_icon_img"
-                android:visibility="gone"
-                android:text="(来源期刊图片)" />
+            <!-- 图书 -->
 
-            <LinearLayout
-                android:id="@+id/lyRightLayout"
+            <RelativeLayout
+                android:id="@+id/detail_up_rl"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="2.0dip"
-                android:layout_toRightOf="@+id/ebook_icon_img"
-                android:orientation="vertical" >
+                 >
 
-                <!-- title -->
+                <ImageView
+                    android:id="@+id/ebook_icon_img"
+                    android:layout_width="82dp"
+                    android:layout_height="118dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="10.0dip"
+                    android:layout_marginTop="5.0dip"
+                    android:background="@android:color/transparent"
+                    android:visibility="gone" />
 
                 <TextView
-                    android:id="@+id/ebook_title_txt"
-                    style="@style/TextTitleBigBlueStyle"
-                    android:layout_width="match_parent"
+                    android:id="@+id/txt_icon_desc"
+                    style="@style/TextContentSmallStyle"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="3.0dip"
-                    android:text="编程的艺术"
-                    />
-                <!-- author -->
+                    android:layout_alignLeft="@+id/ebook_icon_img"
+                    android:layout_below="@+id/ebook_icon_img"
+                    android:text="(来源期刊图片)"
+                    android:visibility="gone" />
 
-                <TextView
-                    android:id="@+id/ebook_author_txt"
-                    style="@style/TextContentMiddleStyle"
+                <LinearLayout
+                    android:id="@+id/lyRightLayout"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="2.0dip"
-                    android:text="作者：托马斯"
-                    android:maxLines="2"
-                    />
-                <!-- address -->
+                    android:layout_margin="2.0dip"
+                    android:layout_toRightOf="@+id/ebook_icon_img"
+                    android:orientation="vertical" >
 
-                <TextView
-                    android:id="@+id/ebook_from_txt"
-                     style="@style/TextContentMiddleStyle"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="来源：《电子工业出版社》2012年,第三期"
-                    android:maxLines="2"
-                 />
-                <!-- time -->
+                    <!-- title -->
 
-                <TextView
-                    android:id="@+id/ebook_time_txt"
-                     style="@style/TextContentMiddleStyle"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="出版：电子工业出版社"
-                    android:maxLines="3"
-                    android:visibility="gone"
-                   />
-                <!-- page -->
+                    <TextView
+                        android:id="@+id/ebook_title_txt"
+                        style="@style/TextTitleBigBlueStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3.0dip"
+                        android:text="编程的艺术" />
+                    <!-- author -->
 
-                <TextView
-                    android:id="@+id/ebook_page_txt"
-                    style="@style/TextContentMiddleStyle"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:singleLine="true"
-                    android:text="页数："
-                    android:visibility="gone"
-                     />
-                <!-- size -->
+                    <TextView
+                        android:id="@+id/ebook_author_txt"
+                        style="@style/TextContentMiddleStyle"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2.0dip"
+                        android:maxLines="2"
+                        android:text="作者：托马斯" />
+                    <!-- address -->
 
-                <TextView
-                    android:id="@+id/ebook_type_txt"
-                    style="@style/TextContentMiddleStyle"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="格式：2012-06"
-                    android:singleLine="true"
-                   />
-            </LinearLayout>
-        </RelativeLayout>
+                    <TextView
+                        android:id="@+id/ebook_from_txt"
+                        style="@style/TextContentMiddleStyle"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:maxLines="2"
+                        android:text="来源：《电子工业出版社》2012年,第三期" />
+                    <!-- time -->
 
-         <LinearLayout
+                    <TextView
+                        android:id="@+id/ebook_time_txt"
+                        style="@style/TextContentMiddleStyle"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:maxLines="3"
+                        android:text="出版：电子工业出版社"
+                        android:visibility="gone" />
+                    <!-- page -->
+
+                    <TextView
+                        android:id="@+id/ebook_page_txt"
+                        style="@style/TextContentMiddleStyle"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:text="页数："
+                        android:visibility="gone" />
+                    <!-- size -->
+
+                    <TextView
+                        android:id="@+id/ebook_type_txt"
+                        style="@style/TextContentMiddleStyle"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:text="格式：2012-06" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@id/detail_up_rl"
                 android:orientation="vertical" >
-         <TextView
+
+                <TextView
                     android:id="@+id/txt_abst_tips"
                     style="@style/TextTitleSmallgBlueStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
                     android:gravity="center"
-                    android:text="简    介"/>
-																
-            <TextView
-                android:id="@+id/ebook_content_abst"
-                 style="@style/TextContentBigStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:text=""/>
+                    android:text="简    介" />
+
+                <TextView
+                    android:id="@+id/ebook_content_abst"
+                    style="@style/TextContentBigStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:text="" />
             </LinearLayout>
-       
-    </RelativeLayout>
-	 </ScrollView>
-    
+        </RelativeLayout>
+    </ScrollView>
+
+    <ImageView
+        android:id="@+id/return_iv"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="60dp"
+        android:layout_marginRight="15dp"
+        android:padding="10dp"
+        android:src="@drawable/retunsign" />
+
     <LinearLayout
         android:id="@+id/ll_action_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-       >
+        android:layout_alignParentBottom="true" >
 
         <include
             android:id="@+id/book_action_bar"

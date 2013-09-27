@@ -5,7 +5,9 @@
     <color name="black">#FF000000</color>
     <color name="divider_color">#a9a9a9</color>
     <color name="green_light">#FF7C953C</color>
-    <color name="blue_dark">#FF00CCF5</color>
+    <color name="blue_dark">#33CCFF</color>
+    <color name="blue_dark_title">#ff0AC2FF</color>
+    <color name="blue_dark_transparent">#9933CCFF</color>
     <!-- scan -->
     <color name="transparent">#00000000</color>
     <color name="viewfinder_frame">#ff000000</color>

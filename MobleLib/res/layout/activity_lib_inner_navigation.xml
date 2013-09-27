@@ -1,64 +1,84 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:background="@drawable/lightgray" >
 
     <include
         android:id="@+id/readerserve_title"
         layout="@layout/header" />
 
     <LinearLayout
-        android:id="@+id/ll_floors"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@id/readerserve_title"
-        android:gravity="center"
-        android:orientation="horizontal" >
+        android:layout_marginBottom="@dimen/main_margintop"
+        android:layout_marginLeft="@dimen/main_marginleftright"
+        android:layout_marginRight="@dimen/main_marginleftright"
+        android:layout_marginTop="@dimen/main_margintop"
+        android:background="@drawable/linearlayout_shape1"
+        android:orientation="vertical" >
 
-        <TextView 
-            android:id="@+id/tv_floor_1"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/ll_floors"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:background="@drawable/silvergray"
-            android:padding="2dp"
-            android:text="@string/floor_2"
-            android:textSize="16sp" />
+            android:gravity="center"
+            android:orientation="horizontal" >
 
-        <TextView
-            android:id="@+id/tv_floor_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:background="@drawable/silvergray"
-            android:padding="2dp"
-            android:text="@string/floor_4"
-            android:textSize="16sp" />
+            <TextView
+                android:id="@+id/tv_floor_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/lightgray"
+                android:padding="2dp"
+                android:text="@string/floor_2"
+                android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/tv_floor_3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:background="@drawable/silvergray"
-            android:padding="2dp"
-            android:text="@string/floor_5"
-            android:textSize="16sp" />
-    </LinearLayout>
+            <TextView
+                android:id="@+id/tv_floor_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/lightgray"
+                android:padding="2dp"
+                android:text="@string/floor_4"
+                android:textSize="16sp" />
 
-    <FrameLayout
-        android:id="@+id/fl_navigation"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_below="@id/ll_floors" >
+            <TextView
+                android:id="@+id/tv_floor_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/lightgray"
+                android:padding="2dp"
+                android:text="@string/floor_5"
+                android:textSize="16sp" />
+        </LinearLayout>
 
-        <com.cqvip.moblelib.view.PinchableImageView
-            android:id="@+id/mPinchableImageView"
+        <FrameLayout
+            android:id="@+id/fl_navigation"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            >
-        </com.cqvip.moblelib.view.PinchableImageView>
-    </FrameLayout>
+             >
+
+            <com.cqvip.moblelib.view.PinchableImageView
+                android:id="@+id/mPinchableImageView"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" >
+            </com.cqvip.moblelib.view.PinchableImageView>
+        </FrameLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/return_iv"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="15dp"
+        android:layout_marginRight="15dp"
+        android:padding="10dp"
+        android:src="@drawable/retunsign" />
 
 </RelativeLayout>

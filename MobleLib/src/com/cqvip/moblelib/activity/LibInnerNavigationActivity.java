@@ -55,13 +55,13 @@ public class LibInnerNavigationActivity extends BaseActivity {
 				mapArrays[0]);
 		pinchableImageView.setWH(SCREEN_WIDTH, SCREEN_HEIGHT);
 		pinchableImageView.setImageBitmap(bip);
-		tv_floor1.setBackgroundResource(R.drawable.GreenYellow);
+		tv_floor1.setBackgroundResource(R.color.blue_dark);
 	}
 
 	private void initialView() {
 		title = (TextView) findViewById(R.id.txt_header);
 		title.setText(R.string.guide_navigation);
-		back = (ImageView) findViewById(R.id.img_back_header);
+		back = (ImageView)findViewById(R.id.return_iv);
 		tv_floor1 = (TextView) findViewById(R.id.tv_floor_1);
 		tv_floor2 = (TextView) findViewById(R.id.tv_floor_2);
 		tv_floor3 = (TextView) findViewById(R.id.tv_floor_3);
@@ -79,45 +79,45 @@ public class LibInnerNavigationActivity extends BaseActivity {
 
 			@Override
 			public void onClick(View v) {
-				tv_floor1.setBackgroundResource(R.drawable.GreenYellow);
+				tv_floor1.setBackgroundResource(R.color.blue_dark);
 				pinchableImageView
 						.setLayoutParams(new FrameLayout.LayoutParams(
 								SCREEN_WIDTH, pinchableImageView
 										.getViewHeight()));
 				pinchableImageView.setImageBitmap(BitmapFactory.decodeResource(
 						getResources(), mapArrays[0]));
-				tv_floor2.setBackgroundResource(R.drawable.silvergray);
-				tv_floor3.setBackgroundResource(R.drawable.silvergray);
+				tv_floor2.setBackgroundResource(R.drawable.lightgray);
+				tv_floor3.setBackgroundResource(R.drawable.lightgray);
 			}
 		});
 		tv_floor2.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				tv_floor2.setBackgroundResource(R.drawable.GreenYellow);
+				tv_floor2.setBackgroundResource(R.color.blue_dark);
 				pinchableImageView
 						.setLayoutParams(new FrameLayout.LayoutParams(
 								SCREEN_WIDTH, pinchableImageView
 										.getViewHeight()));
 				pinchableImageView.setImageBitmap(BitmapFactory.decodeResource(
 						getResources(), mapArrays[1]));
-				tv_floor1.setBackgroundResource(R.drawable.silvergray);
-				tv_floor3.setBackgroundResource(R.drawable.silvergray);
+				tv_floor1.setBackgroundResource(R.drawable.lightgray);
+				tv_floor3.setBackgroundResource(R.drawable.lightgray);
 			}
 		});
 		tv_floor3.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				tv_floor3.setBackgroundResource(R.drawable.GreenYellow);
+				tv_floor3.setBackgroundResource(R.color.blue_dark);
 				pinchableImageView
 						.setLayoutParams(new FrameLayout.LayoutParams(
 								SCREEN_WIDTH, pinchableImageView
 										.getViewHeight()));
 				pinchableImageView.setImageBitmap(BitmapFactory.decodeResource(
 						getResources(), mapArrays[2]));
-				tv_floor2.setBackgroundResource(R.drawable.silvergray);
-				tv_floor1.setBackgroundResource(R.drawable.silvergray);
+				tv_floor2.setBackgroundResource(R.drawable.lightgray);
+				tv_floor1.setBackgroundResource(R.drawable.lightgray);
 			}
 		});
 	}

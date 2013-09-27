@@ -44,7 +44,7 @@ public class ReaderinfoActivity extends BaseActivity {
 		setContentView(R.layout.readerinfo);
 		TextView title = (TextView) findViewById(R.id.txt_header);
 		title.setText(R.string.serv_readerinfo);
-		ImageView back = (ImageView) findViewById(R.id.img_back_header);
+		ImageView back = (ImageView)findViewById(R.id.return_iv);
 		back.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

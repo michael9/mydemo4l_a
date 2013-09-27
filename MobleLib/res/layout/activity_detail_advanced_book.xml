@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_list"
+    android:background="@drawable/lightgray"
     tools:context=".DetailAdvancedBookActivity" >
 
     <include
@@ -13,26 +13,45 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/head_bar"
-        android:background="@drawable/text_bck"
-        android:padding="8dp" >
+        android:layout_marginBottom="@dimen/main_margintop"
+        android:layout_marginLeft="@dimen/main_marginleftright"
+        android:layout_marginRight="@dimen/main_marginleftright"
+        android:layout_marginTop="@dimen/main_margintop"
+        android:background="@drawable/linearlayout_shape1" >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin" >
 
             <TextView
                 android:id="@+id/ad_book_title"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textSize="20sp" />
+                android:textColor="@color/blue_dark_title"
+                android:textSize="18sp" />
 
-            <TextView
+            <TextView android:layout_marginTop="15dp"
                 android:id="@+id/ad_book_content"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp" />
         </LinearLayout>
     </ScrollView>
+
+    <ImageView
+        android:id="@+id/return_iv"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="15dp"
+        android:layout_marginRight="15dp"
+        android:padding="10dp"
+        android:src="@drawable/retunsign" />
 
 </RelativeLayout>

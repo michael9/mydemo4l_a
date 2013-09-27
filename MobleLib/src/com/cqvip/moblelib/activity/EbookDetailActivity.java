@@ -243,11 +243,9 @@ public class EbookDetailActivity extends BaseActivity {
 				
 		});
 
-		title_bar = findViewById(R.id.head_bar);
-		TextView title = (TextView) title_bar.findViewById(R.id.txt_header);
+		TextView title = (TextView)findViewById(R.id.txt_header);
 		title.setText(R.string.book_detail);
-		ImageView back = (ImageView) title_bar
-				.findViewById(R.id.img_back_header);
+		ImageView back = (ImageView)findViewById(R.id.return_iv);
         download.setOnClickListener(new View.OnClickListener() {
 			
 			@Override

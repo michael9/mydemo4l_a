@@ -2,7 +2,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="48dp"
-    android:background="@drawable/titlegreen"
+    android:layout_marginLeft="@dimen/main_marginleftright"
+    android:layout_marginRight="@dimen/main_marginleftright"
+    android:layout_marginTop="@dimen/main_marginleftright"
+    android:background="@color/blue_dark"
     android:orientation="horizontal" >
 
     <ImageView
@@ -11,15 +14,17 @@
         android:layout_height="32dp"
         android:layout_centerVertical="true"
         android:layout_marginLeft="9dip"
-        android:background="@drawable/btn_back" />
+        android:background="@drawable/btn_back"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/txt_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:ellipsize="end" 
-        android:singleLine="true" android:maxEms="6"
+        android:ellipsize="end"
+        android:maxEms="6"
+        android:singleLine="true"
         android:text="@string/main_guide"
         android:textColor="@color/txt_black"
         android:textIsSelectable="false"
@@ -28,10 +33,10 @@
     <ImageView
         android:id="@+id/btn_right_header"
         android:layout_width="wrap_content"
+        android:layout_height="32dp"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="9dip"
-        android:layout_height="32dp"
         android:src="@drawable/icon_collection_download"
         android:visibility="gone" />
 

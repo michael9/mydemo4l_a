@@ -1,19 +1,23 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_list"
+     android:background="@drawable/lightgray"
     android:orientation="vertical" >
 
     <include
         android:id="@+id/readerserve_title"
         layout="@layout/header" />
 
-    <FrameLayout
+    <FrameLayout android:layout_below="@id/readerserve_title"
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="10dp" >
+                 android:layout_marginBottom="@dimen/main_margintop"
+        android:layout_marginLeft="@dimen/main_marginleftright"
+        android:layout_marginRight="@dimen/main_marginleftright"
+        android:layout_marginTop="@dimen/main_marginleftright"
+        android:background="@drawable/linearlayout_shape1">
 
         <RelativeLayout
             android:id="@+id/readerinfo_f_lay"
@@ -38,5 +42,14 @@
                 android:persistentDrawingCache="animation|scrolling" />
         </RelativeLayout>
     </FrameLayout>
-
-</LinearLayout>
+    <ImageView
+        android:id="@+id/return_iv"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="15dp"
+        android:layout_marginRight="15dp"
+        android:padding="10dp"
+        android:src="@drawable/retunsign" />
+</RelativeLayout>

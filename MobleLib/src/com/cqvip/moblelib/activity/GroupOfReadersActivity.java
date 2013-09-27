@@ -685,6 +685,8 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 		// LayoutInflater mInflater = LayoutInflater.from(this);
 		initNavigationHSV();
 		
+		TextView title = (TextView) findViewById(R.id.txt_header);
+		title.setText(R.string.mycomments);
 		ImageView back = (ImageView)findViewById(R.id.return_iv);
 		back.setOnClickListener(new View.OnClickListener() {
 			@Override

@@ -147,16 +147,9 @@ public class EntanceGuideActivity extends BaseActivity {
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(context, DetailTextActivity.class);
-				intent.putExtra("enter", 8);
-				//startActivity(intent);
-				//Tool.ShowMessages(EntanceGuideActivity.this, "‘›ŒﬁŒ Ã‚");
-				// overridePendingTransition(R.anim.slide_right_in,
-				// R.anim.slide_left_out);
 				Intent mintent = new Intent(context, AnnouceListActivity.class);
 				mintent.putExtra("type",Constant.QUESTION);
 				startActivity(mintent);
-
 			}
 		});
 	}

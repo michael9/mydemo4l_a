@@ -13,6 +13,7 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.Request.Method;
@@ -86,7 +87,7 @@ public class AdvancedBookActivity extends BaseActivity implements
 		headbar = findViewById(R.id.head_bar);
 		bar_title = (TextView) headbar.findViewById(R.id.txt_header);
 		bar_title.setText(title);
-		btn_back = headbar.findViewById(R.id.img_back_header);
+		btn_back = (ImageView)findViewById(R.id.return_iv);
 		btn_back.setOnClickListener(new OnClickListener() {
 
 			@Override

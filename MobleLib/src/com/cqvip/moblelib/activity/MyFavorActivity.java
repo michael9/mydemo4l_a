@@ -784,7 +784,9 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 		// 另一种方式获取
 		// LayoutInflater mInflater = LayoutInflater.from(this);
 		initNavigationHSV();
-
+		
+		TextView title = (TextView) findViewById(R.id.txt_header);
+		title.setText(R.string.serv_favorite);
 		ImageView topImageView = (ImageView) findViewById(R.id.main02_iv);
 		topImageView.setImageResource(R.drawable.main_08);
 		ImageView back = (ImageView) findViewById(R.id.return_iv);

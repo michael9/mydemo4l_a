@@ -136,7 +136,7 @@ public class PeriodicalClassfyActivity extends BaseFragmentImageActivity {
 		
 		TextView title = (TextView) findViewById(R.id.txt_header);
 		title.setText(R.string.title_section2);
-		ImageView back = (ImageView) findViewById(R.id.img_back_header);
+		ImageView back = (ImageView)findViewById(R.id.return_iv);
 		back.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -179,7 +179,7 @@ public class PeriodicalClassfyActivity extends BaseFragmentImageActivity {
 		iv_nav_right = (ImageView) findViewById(R.id.iv_nav_right);
 		
 		mViewPager = (ViewPager) findViewById(R.id.mViewPager);
-		
+		findViewById(R.id.main02_iv).setVisibility(View.GONE);
 	}
 
 	@Override

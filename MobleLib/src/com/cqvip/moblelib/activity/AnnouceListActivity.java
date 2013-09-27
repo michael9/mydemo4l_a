@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.Request.Method;
@@ -111,7 +112,7 @@ public class AnnouceListActivity extends BaseActivity implements OnItemClickList
 		headbar=findViewById(R.id.head_bar);
 		bar_title=(TextView)headbar.findViewById(R.id.txt_header);
 		bar_title.setText(title);
-		btn_back=headbar.findViewById(R.id.img_back_header);
+		btn_back = (ImageView)findViewById(R.id.return_iv);
 		btn_back.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -313,6 +314,7 @@ public class AnnouceListActivity extends BaseActivity implements OnItemClickList
 			if(book!=null){
 				Intent _intent = new Intent(context,DetailAdvancedBookActivity.class);
 				_intent.putExtra("id", book.getId());
+				_intent.putExtra("question_title", book.getMessage());
 				_intent.putExtra("type", type);
 				startActivity(_intent);
 			}
