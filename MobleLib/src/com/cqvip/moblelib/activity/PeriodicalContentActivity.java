@@ -204,7 +204,7 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 		  View v = findViewById(R.id.head_bar);
 	     TextView tv = (TextView) v.findViewById(R.id.txt_header);
 	     tv.setText(getResources().getString(R.string.main_periodical));
-	     img_back = (ImageView) v.findViewById(R.id.img_back_header);
+	     img_back= (ImageView)findViewById(R.id.return_iv);
 		//ÄÚÈÝ
 		title = (TextView)findViewById(R.id.periodical_title_txt);
 		directordept  = (TextView)findViewById(R.id.periodical_host1_txt);

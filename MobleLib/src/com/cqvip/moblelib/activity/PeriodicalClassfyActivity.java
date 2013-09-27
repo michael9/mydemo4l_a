@@ -70,6 +70,11 @@ public class PeriodicalClassfyActivity extends BaseFragmentImageActivity {
 				if(rg_nav_content!=null && rg_nav_content.getChildCount()>position){
 					((RadioButton)rg_nav_content.getChildAt(position)).performClick();
 				}
+				if(position==0){
+					isLeftFragment=true;
+				}else{
+					isLeftFragment=false;
+				}
 			}
 			
 			@Override

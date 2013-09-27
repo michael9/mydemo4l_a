@@ -133,6 +133,7 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 							((RadioButton) rg_nav_content.getChildAt(position))
 									.performClick();
 						}
+						//右滑退出标识，防止当前不是第一个fragment右滑finish
 						if(position==0){
 							isLeftFragment=true;
 						}else{

@@ -4,9 +4,6 @@
     android:layout_height="match_parent"
     >
 
-    <include
-        android:id="@+id/head_bar"
-        layout="@layout/header" />
 
     <RelativeLayout
         android:id="@+id/rl_img_and_txt"
