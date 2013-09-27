@@ -27,7 +27,6 @@ import com.cqvip.utils.Tool;
  */
 public class EntanceGuideActivity extends BaseActivity {
 	private LinearLayout ll_gpsLayout;
-	private mylinearlayout myll;
 	private LinearLayout l1, l2, l3, l4, l5, l6, l7, l8;
 	private Context context;
 
@@ -164,8 +163,6 @@ public class EntanceGuideActivity extends BaseActivity {
 
 	private void initialView() {
 		ll_gpsLayout = (LinearLayout) findViewById(R.id.gpsLayout);
-		myll =  (mylinearlayout) findViewById(R.id.myll);
-		myll.setActivity(this);
 	}
 
 	private void setOnclickListener() {

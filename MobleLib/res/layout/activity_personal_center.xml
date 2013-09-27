@@ -39,7 +39,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="45.0dip"
                 android:gravity="center"
-                android:orientation="horizontal" >
+                android:orientation="horizontal" android:background="@drawable/listitem">
 
                 <ImageView
                     android:id="@+id/serv_reader_icon"
@@ -79,7 +79,7 @@
                 android:layout_height="45.0dip"
                 android:layout_marginTop="-1dp"
                 android:gravity="center"
-                android:orientation="horizontal" >
+                android:orientation="horizontal" android:background="@drawable/listitem">
 
                 <ImageView
                     android:id="@+id/serv_download_icon"
@@ -118,7 +118,7 @@
                 android:layout_height="45.0dip"
                 android:layout_marginTop="-1dp"
                 android:gravity="center"
-                android:orientation="horizontal" >
+                android:orientation="horizontal" android:background="@drawable/listitem">
 
                 <ImageView
                     android:id="@+id/serv_reader_icon"

@@ -169,6 +169,11 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 							((RadioButton) rg_nav_content.getChildAt(position))
 									.performClick();
 						}
+						if (position == 0) {
+							isLeftFragment = true;
+						} else {
+							isLeftFragment = false;
+						}
 					}
 
 					@Override
@@ -915,9 +920,9 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 		mViewPager = (ViewPager) findViewById(R.id.mViewPager);
 		iv_nav_right.setVisibility(View.GONE);
 
-		TextView title = (TextView) findViewById(R.id.txt_header);
-		title.setText(R.string.serv_download);
-		ImageView back = (ImageView) findViewById(R.id.img_back_header);
+		ImageView topImageView = (ImageView) findViewById(R.id.main02_iv);
+		topImageView.setImageResource(R.drawable.main_08);
+		ImageView back = (ImageView) findViewById(R.id.return_iv);
 		back.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

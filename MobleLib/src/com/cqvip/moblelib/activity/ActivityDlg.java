@@ -239,7 +239,6 @@ public class ActivityDlg extends BaseActivity  {
 						dao.saveInfo(muser);
 						Log.i("database", "´æ´¢³É¹¦");
 					} catch (DaoException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 					// if (dialog.isShowing()) {
@@ -255,7 +254,7 @@ public class ActivityDlg extends BaseActivity  {
 					Tool.ShowMessages(ActivityDlg.this, res.getMessage());
 				}
 			} catch (Exception e) {
-				// TODO: handle exception
+				onError(2);
 				return;
 			}
 		}
@@ -282,7 +281,7 @@ public class ActivityDlg extends BaseActivity  {
 			mQueue.add(mys);
 			mQueue.start();
 		} catch (Exception e) {
-			// TODO: handle exception
+			onError(2);
 		}
 	}
 	

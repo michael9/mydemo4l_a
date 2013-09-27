@@ -61,8 +61,6 @@ public class EBookActiviy extends BaseActivity {
 		});
 		hideinputmethod();
 		
-		mylinearlayout myll =  (mylinearlayout) findViewById(R.id.myll);
-		myll.setActivity(this);
 		// SearchView sc = (SearchView)findViewById(R.id.search_view);
 		EBOOKTYPE = getResources().getStringArray(R.array.ebooktype);
 

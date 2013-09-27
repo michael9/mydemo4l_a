@@ -37,10 +37,7 @@ public class AnnounceActivity extends BaseActivity {
 		requestWindowFeature( Window.FEATURE_NO_TITLE );
 		setContentView(R.layout.activity_announce);
 		context = this;
-		View v = findViewById(R.id.readerserve_title);
-		TextView title = (TextView)v.findViewById(R.id.txt_header);
-		title.setText(R.string.main_notice);
-		ImageView back = (ImageView)v.findViewById(R.id.img_back_header);
+		ImageView back = (ImageView)findViewById(R.id.return_iv);
 		//新闻动态
 		LinearLayout l1 = (LinearLayout) findViewById(R.id.an_out_Layout);
 		//公益讲座

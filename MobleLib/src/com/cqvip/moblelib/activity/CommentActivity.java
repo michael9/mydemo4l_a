@@ -313,7 +313,7 @@ public class CommentActivity extends BaseActivity implements
 			try {
 				lists = Comment.formList(response);
 			} catch (BookException e) {
-				// TODO Auto-generated catch block
+				onError(2);
 				e.printStackTrace();
 			}
 			if (lists != null && !lists.isEmpty()) {
@@ -330,7 +330,7 @@ public class CommentActivity extends BaseActivity implements
 			try {
 				lists = Comment.formList(response);
 			} catch (BookException e) {
-				// TODO Auto-generated catch block
+				onError(2);
 				e.printStackTrace();
 			}
 			moreprocess.setVisibility(View.GONE);

@@ -226,6 +226,7 @@ public class EbookDetailActivity extends BaseActivity {
 						   try {
 							dao.saveInfo(dBook, downloadId, MEbook.TYPE_ON_DOWNLOADING);
 						} catch (DaoException e) {
+							onError(2);
 							e.printStackTrace();
 						}
 						   start_DownLoadManagerActivity();
@@ -301,6 +302,7 @@ public class EbookDetailActivity extends BaseActivity {
 		if(m ==null)
 		return false;
 		} catch (DaoException e) {
+			onError(2);
 			e.printStackTrace();
 			return false;
 		}
@@ -383,7 +385,7 @@ public class EbookDetailActivity extends BaseActivity {
 				}
 				
 			} catch (Exception e) {
-				// TODO: handle exception
+				onError(2);
 			}
 
 		}
@@ -399,6 +401,7 @@ public class EbookDetailActivity extends BaseActivity {
 				Result result = new Result(response);
 				Tool.ShowMessages(EbookDetailActivity.this, result.getMessage());
 			} catch (Exception e) {
+				onError(2);
 				e.printStackTrace();
 			}
 		}

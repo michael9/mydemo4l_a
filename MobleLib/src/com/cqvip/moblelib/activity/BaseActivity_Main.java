@@ -18,35 +18,33 @@ import android.view.MotionEvent;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.widget.Toast;
 
-public class BaseActivity extends Activity {
+public class BaseActivity_Main extends Activity {
 	protected GestureDetector mGestureDetector;
 	protected CustomProgressDialog customProgressDialog;
 	protected RequestQueue mQueue;
 
-	
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mGestureDetector = new GestureDetector(this,
 				new MyGestrueListener(this));
-		mQueue=Volley.newRequestQueue(this);
-		customProgressDialog=CustomProgressDialog.createDialog(this);
+		mQueue = Volley.newRequestQueue(this);
+		customProgressDialog = CustomProgressDialog.createDialog(this);
 	}
-	
+
 	@Override
 	protected void onStart() {
 		// TODO Auto-generated method stub
 		super.onStart();
-		if(customProgressDialog==null)
-		customProgressDialog=CustomProgressDialog.createDialog(this);
+		if (customProgressDialog == null)
+			customProgressDialog = CustomProgressDialog.createDialog(this);
 	}
 
-//	@Override
-//	public boolean onTouchEvent(MotionEvent ev) {
-//		return mGestureDetector.onTouchEvent(ev);
-//
-//	}
+	// @Override
+	// public boolean onTouchEvent(MotionEvent ev) {
+	// return mGestureDetector.onTouchEvent(ev);
+	//
+	// }
 
 	class MyGestrueListener extends SimpleOnGestureListener {
 		private Context mContext;
@@ -64,7 +62,7 @@ public class BaseActivity extends Activity {
 			Log.e("onFling", "onFling");
 			if (e2.getX() - e1.getX() > verticalMinDistance
 					&& Math.abs(velocityX) > minVelocitx&&e2.getY() - e1.getY()< horizontalMinDistance) {
-				finish();
+//				finish();
 				Log.e("onFling", "finish");
 				return true;
 			}
@@ -81,45 +79,28 @@ public class BaseActivity extends Activity {
 			Tool.ShowMessages(this, getResources()
 					.getString(R.string.loginfail));
 		} else if (a == 2) {// ¼ÓÔØÊ§°Ü
-			Tool.ShowMessages(this, getResources()
-					.getString(R.string.loadfail));
+			Tool.ShowMessages(this, getResources().getString(R.string.loadfail));
 		} else if (a == 3) {// Ðø½èÊ§°Ü
 			Tool.ShowMessages(this, getResources()
 					.getString(R.string.renewfail));
 		} else if (a == 4) {// ÐÞ¸ÄÊ§°Ü
-			Tool.ShowMessages(this, getResources()
-					.getString(R.string.modifyfail));
-		}else if (a == 5) {// ÊÕ²ØÊ§°Ü
+			Tool.ShowMessages(this,
+					getResources().getString(R.string.modifyfail));
+		} else if (a == 5) {// ÊÕ²ØÊ§°Ü
 			Tool.ShowMessages(this, getResources()
 					.getString(R.string.favorfail));
 		}
 	}
-	
+
 	@Override
 	protected void onStop() {
 		// TODO Auto-generated method stub
 		super.onStop();
-		if(customProgressDialog!=null){
+		if (customProgressDialog != null) {
 			customProgressDialog.dismiss();
-			customProgressDialog=null;
+			customProgressDialog = null;
 		}
 	}
-	@Override
-	public boolean dispatchTouchEvent(MotionEvent ev) {
-		// TODO Auto-generated method stub
-		if (mGestureDetector.onTouchEvent(ev)) {
-		//Log.e("mylinearlayout", "dispatchTouchEvent_true");
-		return true;
 
-	} else {
-		boolean temp=super.dispatchTouchEvent(ev);
-		//Log.e("mylinearlayout", "dispatchTouchEvent_"+temp);
-		return temp;
-	}
-	}
-//	@Override
-//	public boolean onTouchEvent(MotionEvent event) {
-//		// TODO Auto-generated method stub
-//		return mGestureDetector.onTouchEvent(event);
-//	}
+
 }

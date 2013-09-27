@@ -1,81 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity" android:background="@drawable/bg_list">
-    <include
-        android:id="@+id/readerserve_title"
-        layout="@layout/header" />
-    <RelativeLayout android:layout_below="@id/readerserve_title"
-        android:id="@+id/rl_tab"
+    android:background="@drawable/lightgray" >
+
+    <com.cqvip.moblelib.view.ScaleImageView
+        android:id="@+id/main02_iv"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-         >
+        android:layout_marginLeft="@dimen/main_marginleftright"
+        android:layout_marginRight="@dimen/main_marginleftright"
+        android:layout_marginTop="@dimen/main_marginleftright"
+        android:src="@drawable/main_10" />
 
-        <com.cqvip.moblelib.view.SwipHorizontalScrollView
-            android:id="@+id/mHsv"
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/main02_iv"
+        android:layout_marginBottom="@dimen/main_margintop"
+        android:layout_marginLeft="@dimen/main_marginleftright"
+        android:layout_marginRight="@dimen/main_marginleftright"
+        android:layout_marginTop="@dimen/main_margintop"
+        android:background="@drawable/linearlayout_shape1"
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:id="@+id/rl_tab"
             android:layout_width="fill_parent"
-            android:layout_height="40dip"
-            android:fadingEdge="none"
-            android:scrollbars="none" >
+            android:layout_height="wrap_content"
+            android:layout_below="@id/main02_iv" >
 
-            <RelativeLayout
-                android:id="@+id/rl_nav"
+            <com.cqvip.moblelib.view.SwipHorizontalScrollView
+                android:id="@+id/mHsv"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="top"
-                android:background="#885AB0EB" >
+                android:layout_height="40dip"
+                android:fadingEdge="none"
+                android:scrollbars="none" >
 
-                <RadioGroup
-                    android:id="@+id/rg_nav_content"
+                <RelativeLayout
+                    android:id="@+id/rl_nav"
                     android:layout_width="fill_parent"
-                    android:layout_height="38dip"
-                    android:layout_alignParentTop="true"
-                    android:background="#88F2F2F2"
-                    android:orientation="horizontal" >
-                </RadioGroup>
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:background="#885AB0EB" >
 
-                <ImageView
-                    android:id="@+id/iv_nav_indicator"
-                    android:layout_width="1dip"
-                    android:layout_height="5dip"
-                    android:layout_alignParentBottom="true"
-                    android:background="#5AB0EB"
-                    android:scaleType="matrix" />
-            </RelativeLayout>
-        </com.cqvip.moblelib.view.SwipHorizontalScrollView>
+                    <RadioGroup
+                        android:id="@+id/rg_nav_content"
+                        android:layout_width="fill_parent"
+                        android:layout_height="38dip"
+                        android:layout_alignParentTop="true"
+                        android:background="#88F2F2F2"
+                        android:orientation="horizontal" >
+                    </RadioGroup>
 
-        <ImageView
-            android:id="@+id/iv_nav_left"
+                    <ImageView
+                        android:id="@+id/iv_nav_indicator"
+                        android:layout_width="1dip"
+                        android:layout_height="5dip"
+                        android:layout_alignParentBottom="true"
+                        android:background="#5AB0EB"
+                        android:scaleType="matrix" />
+                </RelativeLayout>
+            </com.cqvip.moblelib.view.SwipHorizontalScrollView>
+
+            <ImageView
+                android:id="@+id/iv_nav_left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:paddingBottom="1dip"
+                android:src="@drawable/icon_navagation_scroll_left"
+                android:visibility="gone" >
+            </ImageView>
+
+            <ImageView
+                android:id="@+id/iv_nav_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:paddingBottom="1dip"
+                android:src="@drawable/icon_navagation_scroll_right"
+                android:visibility="visible" >
+            </ImageView>
+        </RelativeLayout>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/mViewPager"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:paddingBottom="1dip"
-            android:src="@drawable/icon_navagation_scroll_left"
-            android:visibility="gone" >
-        </ImageView>
+            android:layout_alignParentBottom="true"
+            android:layout_below="@id/rl_tab"
+            android:persistentDrawingCache="animation" />
+    </LinearLayout>
 
-        <ImageView
-            android:id="@+id/iv_nav_right"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:paddingBottom="1dip"
-            android:src="@drawable/icon_navagation_scroll_right"
-            android:visibility="visible" >
-        </ImageView>
-    </RelativeLayout>
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/mViewPager"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:id="@+id/return_iv"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true"
-        android:layout_below="@id/rl_tab"
-        android:layout_gravity="center"
-        android:flipInterval="30"
-        android:persistentDrawingCache="animation" />
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="15dp"
+        android:layout_marginRight="15dp"
+        android:padding="10dp"
+        android:src="@drawable/retunsign" />
 
 </RelativeLayout>

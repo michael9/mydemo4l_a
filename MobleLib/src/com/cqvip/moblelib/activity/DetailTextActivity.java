@@ -129,7 +129,7 @@ public class DetailTextActivity extends BaseActivity {
 			mQueue.add(myjson);
 			mQueue.start();
 		} catch (Exception e) {
-
+			onError(2);
 		}
 
 	}

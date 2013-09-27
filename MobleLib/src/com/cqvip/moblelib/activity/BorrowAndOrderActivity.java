@@ -55,10 +55,7 @@ public class BorrowAndOrderActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_borrow_and_order2);
-		View v = findViewById(R.id.borrow_title);
-		TextView title = (TextView)v.findViewById(R.id.txt_header);
-		title.setText(getResources().getString(R.string.main_borrow));
-		ImageView back = (ImageView)v.findViewById(R.id.img_back_header);
+		ImageView back = (ImageView)findViewById(R.id.return_iv);
 		noborrow_rl = (RelativeLayout) findViewById(R.id.noborrow_rl);
 		listview = (ListView)findViewById(R.id.borrow_list);
 		getlist();
@@ -97,7 +94,7 @@ public class BorrowAndOrderActivity extends BaseActivity {
 					listview.setAdapter(adapter);
 				}			
 			} catch (Exception e) {
-				// TODO: handle exception
+				onError(2);
 				return;
 			}
 		}
@@ -124,7 +121,7 @@ public class BorrowAndOrderActivity extends BaseActivity {
 			mQueue.add(mys);
 			mQueue.start();
 		} catch (Exception e) {
-			// TODO: handle exception
+			onError(2);
 		}
 	}
 
@@ -161,6 +158,7 @@ public class BorrowAndOrderActivity extends BaseActivity {
 	    				Tool.ShowMessages(BorrowAndOrderActivity.this, result.getMessage());
 	    			}
 	    			} catch (Exception e) {
+	    				onError(2);
 	    				return;
 	    			}
 

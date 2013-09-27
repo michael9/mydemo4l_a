@@ -42,10 +42,7 @@ public class SuggestedReadingActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_suggested_reading);
 		context = this;
-		View v = findViewById(R.id.suggest_title);
-		TextView title = (TextView)v.findViewById(R.id.txt_header);
-		title.setText(R.string.main_readingguide);
-		ImageView back = (ImageView)v.findViewById(R.id.img_back_header);
+		ImageView back = (ImageView)findViewById(R.id.return_iv);
 		
 		LinearLayout l1 = (LinearLayout) findViewById(R.id.suggestLayout);
 		LinearLayout l2 = (LinearLayout) findViewById(R.id.newbookLayout);

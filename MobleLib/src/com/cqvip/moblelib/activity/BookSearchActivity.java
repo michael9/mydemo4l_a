@@ -48,8 +48,6 @@ public class BookSearchActivity extends BaseActivity {
 		scan_iv=(ImageButton)findViewById(R.id.scan_iv);
 		
 		hideinputmethod();
-		mylinearlayout myll =  (mylinearlayout) findViewById(R.id.myll);
-		myll.setActivity(this);
 		
 		back.setOnClickListener(new View.OnClickListener() {
 			@Override

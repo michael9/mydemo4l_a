@@ -5,11 +5,17 @@ import com.android.volley.toolbox.Volley;
 import com.cqvip.mobelib.imgutils.ImageFetcher;
 import com.cqvip.mobelib.imgutils.ImageCache.ImageCacheParams;
 import com.cqvip.moblelib.R;
+import com.cqvip.moblelib.activity.BaseActivity.MyGestrueListener;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.view.CustomProgressDialog;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
+import android.view.GestureDetector.SimpleOnGestureListener;
 
 
 public class BaseFragmentImageActivity  extends FragmentActivity{
@@ -18,11 +24,15 @@ public class BaseFragmentImageActivity  extends FragmentActivity{
 	protected ImageFetcher mImageFetcher;
 	protected RequestQueue mQueue;
 	protected CustomProgressDialog customProgressDialog;
+	protected GestureDetector mGestureDetector;
+	protected boolean isLeftFragment=true;
 	@Override
 	protected void onCreate(Bundle arg0) {
 		// TODO Auto-generated method stub
 		super.onCreate(arg0);
 		customProgressDialog=CustomProgressDialog.createDialog(this);
+		mGestureDetector = new GestureDetector(this,
+				new MyGestrueListener(this));
 		
 		ImageCacheParams cacheParams = new ImageCacheParams(this, GlobleData.IMAGE_CACHE_DIR);
         cacheParams.setMemCacheSizePercent(0.125f); // Set memory cache to 12.5% of app memory
@@ -73,5 +83,42 @@ public class BaseFragmentImageActivity  extends FragmentActivity{
 		}
 	}
 	
+	class MyGestrueListener extends SimpleOnGestureListener {
+		private Context mContext;
 
+		MyGestrueListener(Context context) {
+			mContext = context;
+		}
+
+		private int verticalMinDistance = 150;
+		private int horizontalMinDistance = 200;
+		private int minVelocitx = 500;
+
+		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
+				float velocityY) {
+			Log.e("onFling", "onFling");
+			if (e2.getX() - e1.getX() > verticalMinDistance
+					&& Math.abs(velocityX) > minVelocitx&&e2.getY() - e1.getY()< horizontalMinDistance&&isLeftFragment) {
+				finish();
+				Log.e("onFling", "finish");
+				return true;
+			}
+			return false;
+		}
+
+	}
+	
+	@Override
+	public boolean dispatchTouchEvent(MotionEvent ev) {
+		// TODO Auto-generated method stub
+		if (mGestureDetector.onTouchEvent(ev)) {
+		//Log.e("mylinearlayout", "dispatchTouchEvent_true");
+		return true;
+
+	} else {
+		boolean temp=super.dispatchTouchEvent(ev);
+		//Log.e("mylinearlayout", "dispatchTouchEvent_"+temp);
+		return temp;
+	}
+	}
 }

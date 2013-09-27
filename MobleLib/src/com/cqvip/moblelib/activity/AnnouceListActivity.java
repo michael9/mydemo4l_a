@@ -193,7 +193,7 @@ public class AnnouceListActivity extends BaseActivity implements OnItemClickList
 			mQueue.add(mys);
 			mQueue.start();
 		} catch (Exception e) {
-			// TODO: handle exception
+			onError(2);
 		}
 	}
 	

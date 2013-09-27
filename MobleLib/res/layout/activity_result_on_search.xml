@@ -67,8 +67,9 @@
         android:background="@drawable/linearlayout_shape1"
         android:divider="@color/divider_color"
         android:dividerHeight="0.5dp"
+        android:listSelector="@android:color/transparent"
         android:paddingLeft="5dp"
-        android:paddingRight="5dp" android:listSelector="@android:color/transparent"
+        android:paddingRight="5dp"
         dlistView:isAutoLoadOnBottom="true"
         dlistView:isOnBottomStyle="true" />
 

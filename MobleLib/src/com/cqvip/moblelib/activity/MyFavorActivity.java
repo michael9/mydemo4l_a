@@ -126,6 +126,11 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 							((RadioButton) rg_nav_content.getChildAt(position))
 									.performClick();
 						}
+						if (position == 0) {
+							isLeftFragment = true;
+						} else {
+							isLeftFragment = false;
+						}
 					}
 
 					@Override
@@ -780,9 +785,9 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 		// LayoutInflater mInflater = LayoutInflater.from(this);
 		initNavigationHSV();
 
-		TextView title = (TextView) findViewById(R.id.txt_header);
-		title.setText(R.string.serv_favorite);
-		ImageView back = (ImageView) findViewById(R.id.img_back_header);
+		ImageView topImageView = (ImageView) findViewById(R.id.main02_iv);
+		topImageView.setImageResource(R.drawable.main_08);
+		ImageView back = (ImageView) findViewById(R.id.return_iv);
 		back.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

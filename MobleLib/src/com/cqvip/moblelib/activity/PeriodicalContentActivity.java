@@ -299,6 +299,7 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 				}
 				
 			} catch (Exception e) {
+				onError(2);
 				e.printStackTrace();
 			}
 
@@ -335,7 +336,7 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 				}
 				}
 			} catch (Exception e) {
-
+				onError(2);
 				e.printStackTrace();
 			}
 
@@ -362,6 +363,7 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 			mQueue.add(mys);
 			mQueue.start();
 		} catch (Exception e) {
+			onError(2);
 			e.printStackTrace();
 		}
 	}

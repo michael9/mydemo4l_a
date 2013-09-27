@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
 
-import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
@@ -20,12 +19,12 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.Toast;
 
 import com.android.volley.Request.Method;
 import com.android.volley.Response.ErrorListener;
@@ -53,7 +52,8 @@ import com.cqvip.utils.Tool;
  * 
  * @author LHP,LJ
  */
-public class MainMenuActivity extends BaseActivity implements OnClickListener {
+public class MainMenuActivity extends BaseActivity_Main implements
+		OnClickListener {
 
 	private SharedPreferences preferences;
 	private Context context;
@@ -66,21 +66,21 @@ public class MainMenuActivity extends BaseActivity implements OnClickListener {
 	private StableGridView gridview;
 	static public boolean cantouch;
 	private MUserDao dao;
-	//private WebView adwebview;
+	// private WebView adwebview;
 	String updata_url;
 	private GridViewImgAdapter adapter;
 	private Timer mtimer;
 	private int mtimern;
-	
-	private ImageView iv_top,iv_EntanceGuide,iv02;
-	
+
+	private ImageView iv_top, iv_EntanceGuide, iv02;
+
 	private final Class[] activities = { EntanceGuideActivity.class,
 			BookSearchActivity.class, EBookActiviy.class,
 			SuggestedReadingActivity.class, PersonalCenterActivity.class,
 			MyFavorActivity.class, AnnounceActivity.class,
 			BorrowAndOrderActivity.class, GroupOfReadersActivity.class };
 	// 抽屉
-	//private SlidingDrawer sd;
+	// private SlidingDrawer sd;
 	// private ImageView iv;
 	Handler handler = new Handler() {
 		public void handleMessage(Message msg) {
@@ -128,9 +128,9 @@ public class MainMenuActivity extends BaseActivity implements OnClickListener {
 		height = display.getHeight();
 		setContentView(R.layout.activity_main);
 		context = this;
-//		adwebview.getSettings().setSupportZoom(true);
-//		adwebview
-//				.loadUrl("http://www.szlglib.com.cn/uploads/Image/2013/06/24/20130624154214468.jpg");
+		// adwebview.getSettings().setSupportZoom(true);
+		// adwebview
+		// .loadUrl("http://www.szlglib.com.cn/uploads/Image/2013/06/24/20130624154214468.jpg");
 		dao = new MUserDao(this);
 		gridview = (StableGridView) findViewById(R.id.grid_main);
 		adapter = new GridViewImgAdapter(this, activities);
@@ -139,14 +139,15 @@ public class MainMenuActivity extends BaseActivity implements OnClickListener {
 		mtimer = new Timer();
 		mtimer.schedule(new time_check_task(), 8 * 1000, 6 * 1000);
 		init();
-		ActivityManager activityManager = (ActivityManager) this.getSystemService("activity");
-        Log.i("MemoryClass","" + activityManager.getMemoryClass());
-        
-        //获取手机信息
-        Phinfo phinfo= new Phinfo();
-        phinfo.fullbaseinfo(this);
-        String info=phinfo.tojson(phinfo);
-        Log.i("phinfo", info);
+		ActivityManager activityManager = (ActivityManager) this
+				.getSystemService("activity");
+		Log.i("MemoryClass", "" + activityManager.getMemoryClass());
+
+		// 获取手机信息
+		Phinfo phinfo = new Phinfo();
+		phinfo.fullbaseinfo(this);
+		String info = phinfo.tojson(phinfo);
+		Log.i("phinfo", info);
 	}
 
 	private void init_login() {
@@ -211,19 +212,19 @@ public class MainMenuActivity extends BaseActivity implements OnClickListener {
 
 	}
 
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		// TODO Auto-generated method stub
-		if (keyCode == 4) {
-			Intent intent = new Intent(MainMenuActivity.this, ActivityDlg.class);
-			intent.putExtra("ACTIONID", 0);
-			intent.putExtra("MSGBODY", "确定退出龙岗图书馆吗？");
-			intent.putExtra("BTN_CANCEL", 1);
-			startActivityForResult(intent, 104);
-
-		}
-		return super.onKeyDown(keyCode, event);
-	}
+	// @Override
+	// public boolean onKeyDown(int keyCode, KeyEvent event) {
+	// // TODO Auto-generated method stub
+	// if (keyCode == 4) {
+	// Intent intent = new Intent(MainMenuActivity.this, ActivityDlg.class);
+	// intent.putExtra("ACTIONID", 0);
+	// intent.putExtra("MSGBODY", "确定退出龙岗图书馆吗？");
+	// intent.putExtra("BTN_CANCEL", 1);
+	// startActivityForResult(intent, 104);
+	//
+	// }
+	// return super.onKeyDown(keyCode, event);
+	// }
 
 	@Override
 	protected void onResume() {
@@ -239,13 +240,13 @@ public class MainMenuActivity extends BaseActivity implements OnClickListener {
 		// this.startService(it);
 		// }
 		// 检查网络是否可用
-//		if (Tool.checkNetWork(context)) {
-//
-//		}
-		iv_EntanceGuide=(ImageView) findViewById(R.id.main02_iv);
-		iv_top=(ImageView) findViewById(R.id.main01_iv);
-//		iv_EntanceGuide.setOnClickListener(this);
-//		iv_top.setOnClickListener(this);
+		// if (Tool.checkNetWork(context)) {
+		//
+		// }
+		iv_EntanceGuide = (ImageView) findViewById(R.id.main02_iv);
+		iv_top = (ImageView) findViewById(R.id.main01_iv);
+		// iv_EntanceGuide.setOnClickListener(this);
+		// iv_top.setOnClickListener(this);
 	}
 
 	private void startCheckUpdate() {
@@ -363,7 +364,7 @@ public class MainMenuActivity extends BaseActivity implements OnClickListener {
 		// context.stopService(new Intent("com.cqvip.moblelib.mainbiz"));
 		// 关闭子线程
 		// ManagerService.isrun = false;
-
+		android.os.Process.killProcess(android.os.Process.myPid());
 	}
 
 	@Override
@@ -386,7 +387,7 @@ public class MainMenuActivity extends BaseActivity implements OnClickListener {
 			intent.setClass(MainMenuActivity.this, activities[3]);
 			startActivity(intent);
 			break;
-		case R.id.main06_iv://个人中心
+		case R.id.main06_iv:// 个人中心
 			if (GlobleData.islogin) {
 				intent.setClass(context, activities[4]);
 				startActivity(intent);
@@ -394,7 +395,7 @@ public class MainMenuActivity extends BaseActivity implements OnClickListener {
 				showLoginDialog(4);
 			}
 			break;
-		case R.id.main07_iv://借阅管理
+		case R.id.main07_iv:// 借阅管理
 			if (GlobleData.islogin) {
 				intent.setClass(context, activities[7]);
 				startActivity(intent);
@@ -402,15 +403,15 @@ public class MainMenuActivity extends BaseActivity implements OnClickListener {
 				showLoginDialog(7);
 			}
 			break;
-		case R.id.main08_iv://参考咨询
+		case R.id.main08_iv:// 参考咨询
 			intent.setClass(MainMenuActivity.this, activities[5]);
 			startActivity(intent);
 			break;
-		case R.id.main09_iv://管内公告
+		case R.id.main09_iv:// 管内公告
 			intent.setClass(MainMenuActivity.this, activities[6]);
 			startActivity(intent);
 			break;
-		case R.id.main10_iv://书友圈
+		case R.id.main10_iv:// 书友圈
 			if (GlobleData.islogin) {
 				intent.setClass(context, activities[8]);
 				startActivity(intent);
@@ -422,36 +423,65 @@ public class MainMenuActivity extends BaseActivity implements OnClickListener {
 			break;
 		}
 	}
-	
+
 	private void showLoginDialog(int id) {
 		MainMenuActivity.cantouch = true;
 		Intent intent = new Intent(context, ActivityDlg.class);
 		intent.putExtra("ACTIONID", id);
 		startActivityForResult(intent, id);
 	}
-//	ImageView imageView;
-//	ViewGroup decor;
-//	@Override
-//	public boolean onTouchEvent(MotionEvent event) {
-//		// TODO Auto-generated method stub
-//		switch (event.getAction()) {
-//		case MotionEvent.ACTION_DOWN:
-//			Log.i("MainMenu", "onTouchEvent");
-//			if(imageView==null){
-//			imageView=new ImageView(context);
-//			imageView.setImageResource(R.drawable.icon_cancle_favor);
-//			}
-//			if(decor==null)
-//			decor = (ViewGroup)getWindow().getDecorView();
-//			decor.addView(imageView);
-//			break;
-//		case MotionEvent.ACTION_UP:
-//			decor.removeView(imageView);
-//
-//		default:
-//			break;
-//		}
-//		return super.onTouchEvent(event);
-//	}
 
+	// 监听两次退出
+	@Override
+	public boolean dispatchTouchEvent(MotionEvent ev) {
+		// TODO Auto-generated method stub
+//		switch (ev.getAction()) {
+//		case MotionEvent.ACTION_UP:
+		Log.e("MainMenuAct", "dispatchTouchEvent"+ev.getAction());
+			if (mGestureDetector.onTouchEvent(ev)) {
+				Log.e("MainMenuAct", "dispatchTouchEvent_true");
+				if(ev.getAction()==MotionEvent.ACTION_UP)
+				exit("再滑一次退出程序");
+				return true;
+			} else {
+				boolean temp = super.dispatchTouchEvent(ev);
+				// Log.e("mylinearlayout", "dispatchTouchEvent_"+temp);
+				return temp;
+			}
+//			default:return super.dispatchTouchEvent(ev);
+//		}
+	}
+
+	private static boolean isExit = false;
+
+	Handler mHandler = new Handler() {
+
+		@Override
+		public void handleMessage(Message msg) {
+			super.handleMessage(msg);
+			isExit = false;
+		}
+	};
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			exit("再按一次退出程序");
+			return false;
+		}
+		return super.onKeyDown(keyCode, event);
+	}
+
+	private void exit(String tips) {
+		if (!isExit) {
+			isExit = true;
+			Toast.makeText(getApplicationContext(), tips, Toast.LENGTH_SHORT)
+					.show();
+			// 利用handler延迟发送更改状态信息
+			mHandler.sendEmptyMessageDelayed(0, 2000);
+		} else {
+			finish();
+			// System.exit(0);
+		}
+	}
 }

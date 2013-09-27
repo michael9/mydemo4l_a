@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<RelativeLayout  
-    android:tag="itemview" 
-    android:layout_width="fill_parent" 
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-  <!--图书-->
+    android:background="@drawable/listitem"
+    android:paddingBottom="@dimen/Search_item_margintopbottom"
+    android:paddingTop="@dimen/Search_item_margintopbottom"
+    android:tag="itemview" >
+
+    <!-- 图书 -->
 
     <ImageView
         android:id="@+id/re_book_img"
@@ -17,58 +20,89 @@
         android:layout_marginTop="5.0dip"
         android:src="@drawable/defaut_book" />
 
-     <LinearLayout android:layout_toRightOf="@+id/re_book_img"  android:orientation="vertical" android:id="@+id/lyRightLayout" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_margin="2.0dip" >
-        <RelativeLayout  android:layout_width="fill_parent" android:layout_height="wrap_content" >
-        	 <!--title-->
-            <TextView 
-				style="@style/TextTitleMiddleBlueStyle"
-                android:singleLine="true"   
-                android:id="@+id/br_title_txt" 
-                android:layout_width="wrap_content" 
-                android:layout_height="wrap_content" 
+    <LinearLayout
+        android:id="@+id/lyRightLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="2.0dip"
+        android:layout_toRightOf="@+id/re_book_img"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <!-- title -->
+
+            <TextView
+                android:id="@+id/br_title_txt"
+                style="@style/TextTitleMiddleBlueStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
                 android:text="编程的艺术" />
-            
         </RelativeLayout>
-        <!--author-->
-        <TextView style="@style/TextContentMiddleStyle" android:id="@+id/br_code_txt" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="2.0dip" android:text="条码号：04400696055125" />
-        <!--author-->
-        <TextView style="@style/TextContentMiddleStyle" android:id="@+id/br_callno_txt" android:layout_width="fill_parent" android:layout_height="wrap_content"  android:text="索书号：I712.8/B219/2012" />
-       <!--address-->
-        <TextView style="@style/TextContentMiddleStyle" android:id="@+id/br_price_txt" android:layout_width="fill_parent" android:layout_height="wrap_content"  android:text="价格：￥54" />
-        <!--time-->
-      
-        <!--time-->
+        <!-- author -->
 
- <RelativeLayout android:id="@+id/re_under_rl"
-           android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/br_code_txt"
+            style="@style/TextContentMiddleStyle"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-             >
-              <TextView style="@style/TextContentMiddleStyle" android:id="@+id/br_brtime_txt" android:layout_width="fill_parent" android:layout_height="wrap_content"  android:text="借书日期：20120504"  />
-		 <TextView 
-		    style="@style/TextContentMiddleStyle"
-            android:id="@+id/br_retime_txt" 
-            android:layout_width="fill_parent" 
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/br_brtime_txt"
-            android:text="还书日期：20120623" />
+            android:layout_marginTop="2.0dip"
+            android:text="条码号：04400696055125" />
+        <!-- author -->
 
-		 <ImageView
-		     android:id="@+id/re_brrenew_txt"
-		     android:layout_width="wrap_content"
-		     android:layout_height="wrap_content"
-		     android:layout_alignParentRight="true"
-		     android:layout_alignBottom="@+id/br_retime_txt"
-		     android:layout_marginLeft="5.0dip"
-		     android:layout_marginRight="5.0dip"
-		     android:focusable="false"
-		     android:src="@drawable/icon_renew_borrow" />
-		 </RelativeLayout>
-      
+        <TextView
+            android:id="@+id/br_callno_txt"
+            style="@style/TextContentMiddleStyle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="索书号：I712.8/B219/2012" />
+        <!-- address -->
+
+        <TextView
+            android:id="@+id/br_price_txt"
+            style="@style/TextContentMiddleStyle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="价格：￥54" />
+        <!-- time -->
+
+
+        <!-- time -->
+
+        <RelativeLayout
+            android:id="@+id/re_under_rl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/br_brtime_txt"
+                style="@style/TextContentMiddleStyle"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="借书日期：20120504" />
+
+            <TextView
+                android:id="@+id/br_retime_txt"
+                style="@style/TextContentMiddleStyle"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/br_brtime_txt"
+                android:text="还书日期：20120623" />
+
+            <ImageView
+                android:id="@+id/re_brrenew_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/br_retime_txt"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="5.0dip"
+                android:layout_marginRight="5.0dip"
+                android:focusable="false"
+                android:src="@drawable/icon_renew_borrow" />
+        </RelativeLayout>
     </LinearLayout>
-     
 
-
-
-     
-     
-</RelativeLayout> 
+</RelativeLayout>

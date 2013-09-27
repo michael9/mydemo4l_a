@@ -44,19 +44,19 @@ public class mylinearlayout extends LinearLayout {
 
 	private boolean istouchleft = false;
 
-	@Override
-	public boolean dispatchTouchEvent(MotionEvent ev) {
-		if (mGestureDetector.onTouchEvent(ev)) {
-			//Log.e("mylinearlayout", "dispatchTouchEvent_true");
-			istouchleft = true;
-			return true;
-
-		} else {
-			boolean temp=super.dispatchTouchEvent(ev);
-			//Log.e("mylinearlayout", "dispatchTouchEvent_"+temp);
-			return temp;
-		}
-	}
+//	@Override
+//	public boolean dispatchTouchEvent(MotionEvent ev) {
+//		if (mGestureDetector.onTouchEvent(ev)) {
+//			//Log.e("mylinearlayout", "dispatchTouchEvent_true");
+//			istouchleft = true;
+//			return true;
+//
+//		} else {
+//			boolean temp=super.dispatchTouchEvent(ev);
+//			//Log.e("mylinearlayout", "dispatchTouchEvent_"+temp);
+//			return temp;
+//		}
+//	}
 
 //	@Override
 //	public boolean onInterceptTouchEvent(MotionEvent ev) {
@@ -65,16 +65,16 @@ public class mylinearlayout extends LinearLayout {
 //		return temp;
 //	}
 	
-	@Override
-	public boolean onTouchEvent(MotionEvent event) {
-		if (istouchleft) {
-			istouchleft = false;
-			Log.e("mylinearlayout", "onTouchEvent_true");
-			return true;			
-		} else
-			Log.e("mylinearlayout", "onTouchEvent_false");
-			return false;
-	}
+//	@Override
+//	public boolean onTouchEvent(MotionEvent event) {
+//		if (istouchleft) {
+//			istouchleft = false;
+//			Log.e("mylinearlayout", "onTouchEvent_true");
+//			return true;			
+//		} else
+//			Log.e("mylinearlayout", "onTouchEvent_false");
+//			return false;
+//	}
 
 	class MyGestrueListener extends SimpleOnGestureListener {
 		private Context mContext;

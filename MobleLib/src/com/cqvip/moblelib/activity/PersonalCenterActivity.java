@@ -51,9 +51,6 @@ private Context context;
 		logoutLayout=(LinearLayout) findViewById(R.id.logoutLayout);
 		downloadLayout=(LinearLayout) findViewById(R.id.downloadLayout);
 	
-		mylinearlayout myll =  (mylinearlayout) findViewById(R.id.myll);
-		myll.setActivity(this);
-		
 		ImageView back = (ImageView)findViewById(R.id.return_iv);
 		back.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -161,6 +158,7 @@ private Context context;
 						dao.delInfo(GlobleData.userid);
 					} catch (DaoException e) {
 						e.printStackTrace();
+						onError(2);
 					}
 					//…Ë÷√µ«¬º±Í ∂
 					GlobleData.islogin = false;
