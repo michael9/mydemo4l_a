@@ -20,43 +20,12 @@
         android:layout_marginRight="@dimen/main_marginleftright"
         android:layout_marginTop="@dimen/main_marginleftright"
         android:orientation="vertical" >
-
-        <RelativeLayout
-            android:id="@+id/searchbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/search_bar"
-            android:orientation="horizontal" >
-
-            <EditText
-                android:id="@+id/search_et"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:background="@null"
-                android:ems="10"
-                android:hint="请输入关键词搜索"
-                android:singleLine="true" />
-
-            <ImageButton
-                android:id="@+id/scan_iv"
-                android:layout_width="33dp"
-                android:layout_height="33dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:background="@drawable/btn_selector_scan" />
-
-            <ImageView
-                android:id="@+id/search_seach_btn"
-                android:layout_width="33dp"
-                android:layout_height="33dp"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="5.0dip"
-                android:layout_toLeftOf="@id/scan_iv"
-                android:background="@drawable/eg_search" />
-        </RelativeLayout>
+        <include 
+              
+        android:id="@+id/searchbar"
+        layout="@layout/searchbar_twobtn" 
+            
+            />
     </LinearLayout>
 
     <ImageView
