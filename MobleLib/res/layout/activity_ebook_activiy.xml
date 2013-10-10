@@ -17,7 +17,7 @@
             android:layout_marginLeft="@dimen/main_marginleftright"
             android:layout_marginRight="@dimen/main_marginleftright"
             android:layout_marginTop="@dimen/main_marginleftright"
-            android:src="@drawable/main_04" />
+            android:src="@drawable/two_04" />
 
         <RelativeLayout
             android:id="@+id/searchbar"

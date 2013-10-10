@@ -1,8 +1,9 @@
 <com.cqvip.moblelib.view.MyScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/myScrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/lightgray" android:id="@+id/myScrollView">
+    android:background="@drawable/lightgray" >
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -37,8 +38,14 @@
                 android:layout_marginRight="@dimen/main_marginleftright"
                 android:layout_marginTop="@dimen/main_margintop"
                 android:onClick="onClick"
-                android:scaleType="fitXY"
                 android:src="@drawable/main_03" />
+
+            <com.cqvip.moblelib.view.ScaleImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/main_marginleftright"
+                android:layout_marginRight="@dimen/main_marginleftright"
+                android:src="@drawable/main_03_low" />
 
             <LinearLayout
                 android:id="@+id/ll01"
@@ -173,7 +180,8 @@
                 android:listSelector="@drawable/transparent"
                 android:numColumns="3"
                 android:stretchMode="columnWidth"
-                android:verticalSpacing="20.0dip" android:visibility="gone"/>
+                android:verticalSpacing="20.0dip"
+                android:visibility="gone" />
         </LinearLayout>
 
         <ImageView

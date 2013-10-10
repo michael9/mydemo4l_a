@@ -11,7 +11,7 @@
         android:layout_marginLeft="@dimen/main_marginleftright"
         android:layout_marginRight="@dimen/main_marginleftright"
         android:layout_marginTop="@dimen/main_marginleftright"
-        android:src="@drawable/main_05" />
+        android:src="@drawable/two_05" />
 
     <LinearLayout
         android:layout_width="fill_parent"
