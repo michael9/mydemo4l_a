@@ -1,6 +1,6 @@
 package com.cqvip.moblelib.view;
 
-import com.cqvip.moblelib.R;
+import com.cqvip.moblelib.nanshan.R;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -56,7 +56,7 @@ public class MyScrollView extends ScrollView
 			}
 //			imageView.setTranslationY((int)event.getY()-prey);
 //			imageView.setTranslationX((int)event.getX()-prex);
-			imageView.setPaddingRelative((int)event.getX()-imageViewhalfwidth, (int)event.getY()-imageViewhalfheight+this.getScrollY(), 0, 0);
+			imageView.setPadding((int)event.getX()-imageViewhalfwidth, (int)event.getY()-imageViewhalfheight+this.getScrollY(), 0, 0);
 				imageView.setVisibility(View.VISIBLE);
 				imageView.invalidate();
 			break;

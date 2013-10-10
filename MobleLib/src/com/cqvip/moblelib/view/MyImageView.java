@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 
-import com.cqvip.moblelib.R;
+import com.cqvip.moblelib.nanshan.R;
 
 public class MyImageView extends ScaleImageView
 {

@@ -43,7 +43,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.util.LruCache;
 import android.util.Log;
 
-import com.cqvip.moblelib.BuildConfig;
+import com.cqvip.moblelib.nanshan.BuildConfig;
 
 /**
  * 处理文件和内存缓存
@@ -309,7 +309,7 @@ public class ImageCache {
             memValue = mMemoryCache.get(data);
         }
 
-        if (com.cqvip.moblelib.BuildConfig.DEBUG && memValue != null) {
+        if (com.cqvip.moblelib.nanshan.BuildConfig.DEBUG && memValue != null) {
             Log.d(TAG, "Memory cache hit");
         }
 

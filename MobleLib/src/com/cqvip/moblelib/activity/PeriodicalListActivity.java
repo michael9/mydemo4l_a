@@ -21,7 +21,7 @@ import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.cqvip.moblelib.R;
+import com.cqvip.moblelib.nanshan.R;
 import com.cqvip.moblelib.adapter.PeriodicalAdapter;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.Constant;
@@ -78,8 +78,7 @@ public class PeriodicalListActivity extends BaseImageActivity implements
 		title_bar = findViewById(R.id.head_bar);
 		TextView title = (TextView) title_bar.findViewById(R.id.txt_header);
 		title.setText(R.string.main_periodical);
-		ImageView back = (ImageView) title_bar
-				.findViewById(R.id.img_back_header);
+		ImageView back = (ImageView)findViewById(R.id.return_iv);
 		
 		classid = getIntent().getStringExtra("classid");
 		
@@ -164,7 +163,7 @@ public class PeriodicalListActivity extends BaseImageActivity implements
 			// TODO Auto-generated method stub
 			if(customProgressDialog!=null&&customProgressDialog.isShowing())
 			customProgressDialog.dismiss();
-
+			onError(2);
 		}
 	};
 

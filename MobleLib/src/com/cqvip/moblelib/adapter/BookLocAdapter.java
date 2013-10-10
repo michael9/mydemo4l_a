@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.cqvip.moblelib.R;
+import com.cqvip.moblelib.nanshan.R;
 import com.cqvip.moblelib.model.BookLoc;
 import com.google.zxing.BarcodeFormat;
 

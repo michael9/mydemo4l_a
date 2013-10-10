@@ -24,7 +24,7 @@ import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.cqvip.moblelib.R;
+import com.cqvip.moblelib.nanshan.R;
 import com.cqvip.moblelib.activity.EbookDetailActivity;
 import com.cqvip.moblelib.activity.PeriodicalClassfyActivity;
 import com.cqvip.moblelib.activity.PeriodicalListActivity;
@@ -34,6 +34,7 @@ import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.fragment.basefragment.BaseAbstractFragment;
 import com.cqvip.moblelib.model.ShortBook;
 import com.cqvip.moblelib.view.CustomProgressDialog;
+import com.cqvip.utils.Tool;
 
 /**
  * 分类列表 ，医药，工程，社会...
@@ -155,6 +156,8 @@ public class PeriodicalTypeFragment extends Fragment {
 			// TODO Auto-generated method stub
 			if(customProgressDialog!=null&&customProgressDialog.isShowing())
 			customProgressDialog.dismiss();
+			Tool.ShowMessages(getActivity(), getResources()
+					.getString(R.string.loadfail));
 		}
 	};
 	private Listener<String> backlistener = new Listener<String>() {

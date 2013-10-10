@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.cqvip.moblelib.R;
+import com.cqvip.moblelib.nanshan.R;
 
 
 public class BranchPeriodicalFragment extends Fragment {

@@ -1,8 +1,8 @@
 package com.cqvip.moblelib.activity;
 
-import com.cqvip.moblelib.R;
-import com.cqvip.moblelib.R.layout;
-import com.cqvip.moblelib.R.menu;
+import com.cqvip.moblelib.nanshan.R;
+import com.cqvip.moblelib.nanshan.R.layout;
+import com.cqvip.moblelib.nanshan.R.menu;
 
 import android.os.Bundle;
 import android.app.Activity;

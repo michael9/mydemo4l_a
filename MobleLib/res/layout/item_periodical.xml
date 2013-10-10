@@ -2,6 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/listitem"
+    android:paddingBottom="@dimen/Search_item_margintopbottom"
+    android:paddingTop="@dimen/Search_item_margintopbottom"
     android:tag="itemview" >
 
     <!-- 图书 -->
@@ -27,8 +30,8 @@
             android:id="@+id/lyRightLayout"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="1.0dip"
             android:layout_marginLeft="2.0dip"
+            android:layout_marginTop="1.0dip"
             android:layout_toRightOf="@+id/re_book_img"
             android:orientation="horizontal" >
 
@@ -47,8 +50,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:singleLine="true"
-                    android:text="环境卫生学杂志"
-                   />
+                    android:text="环境卫生学杂志" />
 
                 <!-- author -->
 
@@ -70,8 +72,8 @@
                     android:singleLine="true"
                     android:text="国内统一刊号：45-1346/O1"
                     android:textColor="@color/txt_black"
-                    android:visibility="gone"
-                    android:textSize="12.0sp" />
+                    android:textSize="12.0sp"
+                    android:visibility="gone" />
 
                 <!-- time -->
 
@@ -81,9 +83,8 @@
                     android:layout_height="wrap_content"
                     android:text="国际标准刊号：1673-6982"
                     android:textColor="@color/txt_black"
-                    android:visibility="gone"
-                    android:textSize="12.0sp" />
-
+                    android:textSize="12.0sp"
+                    android:visibility="gone" />
             </LinearLayout>
 
             <Button
@@ -91,7 +92,9 @@
                 android:layout_width="42dp"
                 android:layout_height="42dp"
                 android:layout_gravity="bottom"
-                android:focusable="false" android:visibility="gone"/>
+                android:focusable="false"
+                android:visibility="gone" />
         </LinearLayout>
     </RelativeLayout>
+
 </RelativeLayout>

@@ -15,7 +15,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
-import com.cqvip.moblelib.R;
+import com.cqvip.moblelib.nanshan.R;
 import com.cqvip.moblelib.model.ShortBook;
 import com.cqvip.moblelib.view.NetworkImageView_rotate;
 
@@ -110,6 +110,7 @@ public class AdvancedBookAdapter extends BaseAdapter {
         	Log.i("AdvancedBookAdapter", rotate_position+"rotate_position+positon"+position);
 	        rotate_position=position>rotate_position?position:rotate_position;  
 	        
+	        //因为每个imageview下载完成时间不定，所以要绑定图片url；在自定义imageview里，和以前的url比较，相同则返回，不同则替换。
 			String url=book.getDate();
 	        if(!TextUtils.isEmpty(url)){
 	        	holder.img.setImageUrl(url, mImageLoader);

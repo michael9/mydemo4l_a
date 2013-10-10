@@ -32,7 +32,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.cqvip.mobelib.imgutils.ImageFetcher;
 import com.cqvip.mobelib.imgutils.RecyclingImageView;
-import com.cqvip.moblelib.R;
+import com.cqvip.moblelib.nanshan.R;
 import com.cqvip.moblelib.activity.PeriodicalClassfyActivity;
 import com.cqvip.moblelib.activity.PeriodicalContentActivity;
 import com.cqvip.moblelib.biz.Task;
@@ -40,6 +40,7 @@ import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.fragment.basefragment.BaseAbstractFragment;
 import com.cqvip.moblelib.model.Periodical;
 import com.cqvip.moblelib.view.CustomProgressDialog;
+import com.cqvip.utils.Tool;
 
 /**
  * ÌØ±ðÍÆ¼ö
@@ -191,7 +192,10 @@ private int mImageThumbSize;
 		@Override
 		public void onErrorResponse(VolleyError arg0) {
 			// TODO Auto-generated method stub
+			if(customProgressDialog!=null&&customProgressDialog.isShowing())
 			customProgressDialog.dismiss();
+			Tool.ShowMessages(getActivity(), getResources()
+					.getString(R.string.loadfail));
 		}
 	};
 

@@ -14,7 +14,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.cqvip.moblelib.R;
+import com.cqvip.moblelib.nanshan.R;
 import com.cqvip.moblelib.scan.CaptureActivity;
 import com.cqvip.moblelib.view.mylinearlayout;
 
@@ -46,7 +46,7 @@ public class BookSearchActivity extends BaseActivity {
 		ImageView back = (ImageView)findViewById(R.id.return_iv);
 		ImageView search = (ImageView)findViewById(R.id.search_seach_btn);
 		scan_iv=(ImageButton)findViewById(R.id.scan_iv);
-		
+		editText = (EditText)findViewById(R.id.search_et);
 		hideinputmethod();
 		
 		back.setOnClickListener(new View.OnClickListener() {
@@ -71,13 +71,13 @@ public class BookSearchActivity extends BaseActivity {
 				startActivityForResult(intent, 100);
 			}
 		});
-		 final EditText et = (EditText)findViewById(R.id.search_et);
-		    et.setOnClickListener(new View.OnClickListener() {
+		
+		editText.setOnClickListener(new View.OnClickListener() {
 				
 				@Override
 				public void onClick(View v) {
 					InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-					imm.hideSoftInputFromWindow(et.getWindowToken(), 0);
+					imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
 					Intent intent = new Intent(context,ResultOnSearchActivity.class) ;
 					startActivity(intent);
 					finish();

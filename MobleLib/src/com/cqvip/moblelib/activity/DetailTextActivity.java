@@ -14,7 +14,7 @@ import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.cqvip.moblelib.R;
+import com.cqvip.moblelib.nanshan.R;
 import com.cqvip.moblelib.constant.GlobleData;
 
 public class DetailTextActivity extends BaseActivity {
@@ -116,6 +116,7 @@ public class DetailTextActivity extends BaseActivity {
 			customProgressDialog.dismiss();
 			content.setText(DetailTextActivity.this.getResources().getString(
 					R.string.loadfail));
+			onError(2);
 		}
 	};
 

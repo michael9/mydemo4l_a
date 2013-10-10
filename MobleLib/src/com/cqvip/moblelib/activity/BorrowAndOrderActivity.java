@@ -19,7 +19,7 @@ import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.cqvip.moblelib.R;
+import com.cqvip.moblelib.nanshan.R;
 import com.cqvip.moblelib.adapter.BorrowBookAdapter;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
@@ -106,6 +106,7 @@ public class BorrowAndOrderActivity extends BaseActivity {
 			// TODO Auto-generated method stub
 			if(customProgressDialog!=null&&customProgressDialog.isShowing())
 			customProgressDialog.dismiss();
+			onError(2);
 		}
 	};
 
@@ -174,6 +175,7 @@ public class BorrowAndOrderActivity extends BaseActivity {
 	        	  if(customProgressDialog!=null&&customProgressDialog.isShowing())
 	        	  customProgressDialog.dismiss();
 	        	  //提示用户异常
+	        	  onError(2);
 	          }
 	      };
 
