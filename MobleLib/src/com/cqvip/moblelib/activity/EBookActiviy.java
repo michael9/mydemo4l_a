@@ -49,7 +49,7 @@ public class EBookActiviy extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_ebook_activiy);
-		editText=(EditText) findViewById(R.id.ebook_edit);
+		editText=(EditText) findViewById(R.id.search_et);
 		ImageView back = (ImageView)findViewById(R.id.return_iv);
 		back.setOnClickListener(new View.OnClickListener() {
 
@@ -94,7 +94,7 @@ public class EBookActiviy extends BaseActivity {
 			}
 		});
 
-		final EditText et = (EditText) findViewById(R.id.ebook_edit);
+		final EditText et = (EditText) findViewById(R.id.search_et);
 		et.setOnClickListener(new View.OnClickListener() {
 
 			@Override

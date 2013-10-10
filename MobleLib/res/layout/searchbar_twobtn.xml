@@ -25,7 +25,7 @@
                 android:paddingLeft="4dp"
                 android:singleLine="true" />
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/scan_iv"
                 android:layout_width="33dp"
                 android:layout_height="33dp"

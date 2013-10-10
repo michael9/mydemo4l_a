@@ -8,7 +8,7 @@
 
      <include 
         android:id="@+id/searchbar"
-        layout="@layout/searchbar_twobtn" 
+        layout="@layout/searchbar_onebtn" 
             />
 
     <TextView

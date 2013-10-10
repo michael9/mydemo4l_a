@@ -35,7 +35,7 @@ import com.cqvip.moblelib.view.mylinearlayout;
 public class BookSearchActivity extends BaseActivity {
 	
 	private Context context;
-	private ImageButton scan_iv;
+	private ImageView scan_iv;
 	private EditText editText;
 	
 	@Override
@@ -45,7 +45,7 @@ public class BookSearchActivity extends BaseActivity {
 		context = this;
 		ImageView back = (ImageView)findViewById(R.id.return_iv);
 		ImageView search = (ImageView)findViewById(R.id.search_seach_btn);
-		scan_iv=(ImageButton)findViewById(R.id.scan_iv);
+		scan_iv=(ImageView)findViewById(R.id.scan_iv);
 		editText = (EditText)findViewById(R.id.search_et);
 		hideinputmethod();
 		

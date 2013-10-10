@@ -20,12 +20,10 @@
         android:layout_marginRight="@dimen/main_marginleftright"
         android:layout_marginTop="@dimen/main_marginleftright"
         android:orientation="vertical" >
-        <include 
-              
-        android:id="@+id/searchbar"
-        layout="@layout/searchbar_twobtn" 
-            
-            />
+
+        <include
+            android:id="@+id/searchbar"
+            layout="@layout/searchbar_twobtn" />
     </LinearLayout>
 
     <ImageView
