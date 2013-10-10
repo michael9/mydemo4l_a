@@ -21,7 +21,7 @@
     
     <dimen name="main_marginleftright">5dp</dimen>
     <dimen name="main_margintop">8dp</dimen>
-    <dimen name="main_marginmiddle">6dp</dimen>
+    <dimen name="main_marginmiddle">3dp</dimen>
 
     <dimen name="Search_item_margintopbottom">10dp</dimen>
     <dimen name="bookdetail_padding">10dp</dimen>

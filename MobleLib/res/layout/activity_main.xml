@@ -60,9 +60,9 @@
                     android:id="@+id/main04_iv"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/main_marginmiddle"
                     android:layout_weight="1"
                     android:onClick="onClick"
-                    android:scaleType="fitXY"
                     android:src="@drawable/main_04" />
 
                 <com.cqvip.moblelib.view.MyImageView
@@ -72,7 +72,6 @@
                     android:layout_marginLeft="@dimen/main_marginmiddle"
                     android:layout_weight="1"
                     android:onClick="onClick"
-                    android:scaleType="fitXY"
                     android:src="@drawable/main_05" />
             </LinearLayout>
 
@@ -84,7 +83,6 @@
                 android:layout_marginRight="@dimen/main_marginleftright"
                 android:layout_marginTop="@dimen/main_margintop"
                 android:onClick="onClick"
-                android:scaleType="fitXY"
                 android:src="@drawable/main_06" />
 
             <LinearLayout
@@ -98,7 +96,8 @@
 
                 <LinearLayout
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_marginRight="@dimen/main_marginmiddle"
                     android:layout_weight="1"
                     android:orientation="vertical" >
 
@@ -107,23 +106,26 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:onClick="onClick"
-                        android:scaleType="fitXY"
                         android:src="@drawable/main_07" />
+
+                    <ImageView
+                        android:layout_width="fill_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:src="@android:color/transparent" />
 
                     <com.cqvip.moblelib.view.MyImageView
                         android:id="@+id/main08_iv"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/main_margintop"
                         android:onClick="onClick"
-                        android:scaleType="fitXY"
                         android:src="@drawable/main_08" />
                 </LinearLayout>
 
                 <com.cqvip.moblelib.view.MyImageView
-                    android:id="@+id/main09_iv"
+                    android:id="@+id/main09_iv" 
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="fill_parent"
                     android:layout_marginLeft="@dimen/main_marginmiddle"
                     android:layout_weight="1"
                     android:onClick="onClick"
@@ -154,6 +156,7 @@
                     android:id="@+id/main11_iv"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/main_marginmiddle"
                     android:layout_weight="1"
                     android:src="@drawable/main_11" />
 

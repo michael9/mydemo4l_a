@@ -72,7 +72,7 @@ public class MainMenuActivity extends BaseActivity_Main implements
 	private Timer mtimer;
 	private int mtimern;
 
-	private ImageView iv_top, iv_EntanceGuide, iv02;
+	private ImageView iv_top, iv_EntanceGuide, iv02,main08_iv,main09_iv;
 
 	private final Class[] activities = { EntanceGuideActivity.class,
 			BookSearchActivity.class, EBookActiviy.class,
@@ -120,8 +120,8 @@ public class MainMenuActivity extends BaseActivity_Main implements
 		super.onCreate(savedInstanceState);
 		// requestWindowFeature(Window.);
 
-		Intent intent = new Intent(MainMenuActivity.this, WelcomeActivity.class);
-		startActivity(intent);
+//		Intent intent = new Intent(MainMenuActivity.this, WelcomeActivity.class);
+//		startActivity(intent);
 
 		Display display = getWindowManager().getDefaultDisplay();
 		width = display.getWidth();
@@ -174,6 +174,15 @@ public class MainMenuActivity extends BaseActivity_Main implements
 
 	}
 
+//	@Override
+//	public void onWindowFocusChanged(boolean hasFocus) {
+//		if (hasFocus) {
+//			int margintop=main09_iv.getHeight()-main08_iv.getHeight()*2;
+//			Log.i("MainMenuAct", "height:"+main09_iv.getHeight()+"--"+main08_iv.getHeight());
+//			//main08_iv.
+//		}
+//	}
+	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
@@ -245,6 +254,8 @@ public class MainMenuActivity extends BaseActivity_Main implements
 		// }
 		iv_EntanceGuide = (ImageView) findViewById(R.id.main02_iv);
 		iv_top = (ImageView) findViewById(R.id.main01_iv);
+		main08_iv=(ImageView) findViewById(R.id.main08_iv);
+		main09_iv=(ImageView) findViewById(R.id.main09_iv);
 		// iv_EntanceGuide.setOnClickListener(this);
 		// iv_top.setOnClickListener(this);
 	}

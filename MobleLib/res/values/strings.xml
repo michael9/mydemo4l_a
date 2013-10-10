@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">龙岗图书馆</string>
+    <string name="app_name">南山图书馆</string>
     <string name="action_settings">Settings</string>
     <string name="zx_phone">咨询电话:     02366879630</string>
     <string name="main_guide">入馆指南</string>
