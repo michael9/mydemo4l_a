@@ -6,13 +6,13 @@ import java.util.Map;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -20,14 +20,16 @@ import com.android.volley.Request.Method;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.StringRequest;
-import com.cqvip.moblelib.nanshan.R;
 import com.cqvip.moblelib.adapter.PeriodicalAdapter;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.Constant;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.Periodical;
+import com.cqvip.moblelib.nanshan.R;
 import com.cqvip.moblelib.view.DropDownListView;
+import com.cqvip.utils.BitmapCache;
 import com.cqvip.utils.Tool;
 
 /**
@@ -115,7 +117,8 @@ public class PeriodicalListActivity extends BaseImageActivity implements
 				if (lists != null && !lists.isEmpty()) {
 					listview.setVisibility(View.VISIBLE);
 					noResult_rl.setVisibility(View.GONE);
-					adapter = new PeriodicalAdapter(context, lists,mImageFetcher);
+					BitmapCache cache = new BitmapCache(Tool.getCachSize());
+					adapter = new PeriodicalAdapter(context, lists,new ImageLoader(mQueue, cache));
 					if(lists.size()<DEFAULT_COUNT){
 						listview.setHasMore(false);
 						listview.setAdapter(adapter);

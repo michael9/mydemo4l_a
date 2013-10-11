@@ -27,7 +27,7 @@ public class PeriodicalAdapter extends BaseAdapter{
 
 	private Context context;
 	private List<Periodical> lists;
-	private ImageFetcher fetch;
+	private ImageLoader mImageLoader;
 	public PeriodicalAdapter(Context context){
 		this.context = context;
 	}
@@ -35,10 +35,10 @@ public class PeriodicalAdapter extends BaseAdapter{
 		this.context = context;
 		this.lists = periodicals;
 	}
-	public PeriodicalAdapter(Context context,List<Periodical> periodicals,ImageFetcher fetch){
+	public PeriodicalAdapter(Context context,List<Periodical> periodicals,ImageLoader mImageLoader){
 		this.context = context;
 		this.lists = periodicals;
-		this.fetch = fetch;
+		this.mImageLoader = mImageLoader;
 	}
 	public List<Periodical> getLists(){
 		return lists;
@@ -76,7 +76,7 @@ public class PeriodicalAdapter extends BaseAdapter{
 	}
 
 	static class ViewHolder{
-		ImageView icon;
+		com.android.volley.toolbox.NetworkImageView icon; 
 		TextView name;
 		TextView ename;
 //		TextView cnno;
@@ -96,7 +96,8 @@ public class PeriodicalAdapter extends BaseAdapter{
 		if(convertView==null||convertView.findViewById(R.id.linemore) != null){
 			convertView=LayoutInflater.from(context).inflate(R.layout.item_periodical, null);
 			holder = new ViewHolder();
-			holder.icon = (ImageView) convertView.findViewById(R.id.re_book_img);
+			holder.icon = (com.android.volley.toolbox.NetworkImageView) convertView.findViewById(R.id.re_book_img);
+			holder.icon.setDefaultImageResId(R.drawable.defaut_book);
 			holder.name = (TextView) convertView.findViewById(R.id.re_name_txt);
 			holder.ename = (TextView) convertView.findViewById(R.id.re_author_txt);
 //			holder.cnno = (TextView) convertView.findViewById(R.id.re_addr_txt);
@@ -108,7 +109,7 @@ public class PeriodicalAdapter extends BaseAdapter{
 		// ͼƬ
 		    Periodical periodical = lists.get(position);
 		    if (!TextUtils.isEmpty(periodical.getImgurl())) {
-		    	fetch.loadImage(periodical.getImgurl(), holder.icon);
+		    	holder.icon.setImageUrl(periodical.getImgurl(), mImageLoader);
 		    } else {
 		    	holder.icon.setImageDrawable(context.getResources().getDrawable(
 		    			R.drawable.defaut_book));
