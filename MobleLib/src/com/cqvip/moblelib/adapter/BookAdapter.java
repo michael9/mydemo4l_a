@@ -128,11 +128,14 @@ public class BookAdapter extends BaseAdapter {
 		holder.u_abstract.setText(describe + book.getU_abstract());
 
 		String url=book.getCover_path();
-        if(!TextUtils.isEmpty(url)){
+		Log.i("BookAdapter", position+":"+url);
+		holder.img.setPosition(position);
+        //if(!TextUtils.isEmpty(url)){
         	holder.img.setImageUrl(url, mImageLoader);
-        } else {
-            holder.img.setImageResource(R.drawable.defaut_book);
-        }
+//        } else {
+//        	Log.i("BookAdapter01", position+":"+url);
+//            //holder.img.setImageResource(R.drawable.defaut_book);
+//        }
 		return convertView;
 	}
 
