@@ -19,23 +19,32 @@
             android:layout_marginTop="@dimen/main_marginleftright"
             android:src="@drawable/two_04" />
 
-                <include
-            android:id="@+id/searchbar"
-            layout="@layout/searchbar_onebtn" />
-        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/main_marginleftright"
+            android:layout_marginRight="@dimen/main_marginleftright"
+            android:layout_marginTop="@dimen/main_marginleftright"
+            android:orientation="vertical" >
+
+            <include
+                android:id="@+id/searchbar"
+                layout="@layout/searchbar_onebtn" />
+        </LinearLayout>
 
         <ListView
             android:id="@+id/ebook_search_list"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-        android:layout_marginBottom="@dimen/main_margintop"
-        android:layout_marginLeft="@dimen/main_marginleftright"
-        android:layout_marginRight="@dimen/main_marginleftright"
-        android:layout_marginTop="@dimen/main_marginleftright"
+            android:layout_marginBottom="@dimen/main_margintop"
+            android:layout_marginLeft="@dimen/main_marginleftright"
+            android:layout_marginRight="@dimen/main_marginleftright"
+            android:layout_marginTop="@dimen/main_marginleftright"
             android:background="@drawable/linearlayout_shape1"
             android:divider="@color/divider_color"
-            android:dividerHeight="1dp" android:paddingLeft="5dp"
-        android:paddingRight="5dp">
+            android:dividerHeight="1dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp" >
         </ListView>
     </com.cqvip.moblelib.view.mylinearlayout>
 
