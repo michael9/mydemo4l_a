@@ -415,8 +415,8 @@ public class MainMenuActivity extends BaseActivity_Main implements
 			}
 			break;
 		case R.id.main08_iv:// 参考咨询
-			intent.setClass(MainMenuActivity.this, activities[5]);
-			startActivity(intent);
+//			intent.setClass(MainMenuActivity.this, activities[5]);
+//			startActivity(intent);
 			break;
 		case R.id.main09_iv:// 管内公告
 			intent.setClass(MainMenuActivity.this, activities[6]);
