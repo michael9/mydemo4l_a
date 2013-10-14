@@ -362,7 +362,7 @@ public class DropDownListView extends ListView implements OnScrollListener {
                 if (!isVerticalScrollBarEnabled()) {
                     setVerticalScrollBarEnabled(true);
                 }
-                Log.i("DropDownListView_ACTION_UP", "ACTION_UP");
+                //Log.i("DropDownListView_ACTION_UP", "ACTION_UP");
                 if(!isaddfoot&&!hasMore){
                 	isaddfoot=true;
                 	this.removeFooterView(footerLayout);
@@ -455,7 +455,7 @@ public class DropDownListView extends ListView implements OnScrollListener {
             if (firstVisibleItem > 0 && totalItemCount > 0 && (firstVisibleItem + visibleItemCount == totalItemCount)) {
                 onBottom();
             }
-            Log.i("DropDownListview_onScroll", "onBottom()");
+           // Log.i("DropDownListview_onScroll", "onBottom()");
         }
         if (onScrollListener != null) {
             onScrollListener.onScroll(view, firstVisibleItem, visibleItemCount, totalItemCount);
