@@ -230,7 +230,12 @@ public class ResultOnSearchActivity extends BaseActivity implements
 				if (lists != null && !lists.isEmpty()&&lists.size()==DEFAULT_COUNT) {
 					adapter.addMoreData(lists);
 					listview.onBottomComplete();
-				} else {
+				} else if(lists != null &&lists.size()>0){
+					adapter.addMoreData(lists);
+					listview.setHasMore(false);
+					listview.onBottomComplete();	
+				}else
+				{
 					listview.setHasMore(false);
 					listview.onBottomComplete();
 				}
