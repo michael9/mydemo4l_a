@@ -920,8 +920,8 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 		mViewPager = (ViewPager) findViewById(R.id.mViewPager);
 		iv_nav_right.setVisibility(View.GONE);
 
-		ImageView topImageView = (ImageView) findViewById(R.id.main02_iv);
-		topImageView.setImageResource(R.drawable.main_08);
+		TextView title = (TextView) findViewById(R.id.txt_header);
+		title.setText(R.string.serv_download);
 		ImageView back = (ImageView) findViewById(R.id.return_iv);
 		back.setOnClickListener(new View.OnClickListener() {
 			@Override

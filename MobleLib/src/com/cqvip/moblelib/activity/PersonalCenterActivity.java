@@ -37,7 +37,7 @@ public class PersonalCenterActivity extends BaseActivity {
 private LinearLayout readerinfoLayout;
 //private LinearLayout favorLayout;
 private LinearLayout logoutLayout;
-private LinearLayout downloadLayout;
+private LinearLayout downloadLayout,myfavorLayout;
 private Context context;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +50,7 @@ private Context context;
 		//favorLayout=(LinearLayout) findViewById(R.id.favorLayout);
 		logoutLayout=(LinearLayout) findViewById(R.id.logoutLayout);
 		downloadLayout=(LinearLayout) findViewById(R.id.downloadLayout);
+		myfavorLayout=(LinearLayout) findViewById(R.id.myfavorLayout);
 	
 		ImageView back = (ImageView)findViewById(R.id.return_iv);
 		back.setOnClickListener(new View.OnClickListener() {
@@ -86,6 +87,16 @@ private Context context;
 			@Override
 			public void onClick(View v) {
 				Intent intent=new Intent(PersonalCenterActivity.this, DownLoadManagerActivity.class);
+				startActivity(intent);
+			}
+		});
+		
+		//Œ“µƒ ’≤ÿ
+		myfavorLayout.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent=new Intent(PersonalCenterActivity.this, MyFavorActivity.class);
 				startActivity(intent);
 			}
 		});

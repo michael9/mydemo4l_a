@@ -7,11 +7,13 @@
     <LinearLayout
         android:id="@+id/top_ll"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
 
         <include
             android:id="@+id/head_bar"
-            layout="@layout/header" />
+            layout="@layout/header"
+             />
 
         <com.cqvip.moblelib.view.ScaleImageView
             android:id="@+id/main02_iv"
@@ -20,7 +22,8 @@
             android:layout_marginLeft="@dimen/main_marginleftright"
             android:layout_marginRight="@dimen/main_marginleftright"
             android:layout_marginTop="@dimen/main_marginleftright"
-            android:src="@drawable/main_10" />
+            android:src="@drawable/two_10"
+            android:visibility="gone" />
     </LinearLayout>
 
     <LinearLayout

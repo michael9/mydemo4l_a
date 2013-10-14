@@ -134,6 +134,7 @@ public class DropDownListView extends ListView implements OnScrollListener {
 
     private void init(Context context) {
         this.context = context;
+        initListViewforHeaderViewListAdapter();
         initDropDownStyle();
         initOnBottomStyle();
 
@@ -141,7 +142,13 @@ public class DropDownListView extends ListView implements OnScrollListener {
         super.setOnScrollListener(this);
     }
 
-    /**
+    private void initListViewforHeaderViewListAdapter() {
+    	View view=new View(context);
+    	addHeaderView(view);
+    	removeHeaderView(view);
+	}
+
+	/**
      * init drop down style, only init once
      */
     private void initDropDownStyle() {

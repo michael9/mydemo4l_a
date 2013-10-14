@@ -84,9 +84,10 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 	 */
 	Context context;
 	private RelativeLayout rl_nav;
+	private View header;
 	private SwipHorizontalScrollView mHsv;
 	private RadioGroup rg_nav_content;
-	private ImageView iv_nav_indicator;
+	private ImageView iv_nav_indicator,headerImage;
 	private ImageView iv_nav_left;
 	private ImageView iv_nav_right;
 	private ViewPager mViewPager;
@@ -661,6 +662,10 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 		tabTitle[0] =getString(R.string.title_section1)+"("+sz_count+")";
 		tabTitle[1] =getString(R.string.title_section2)+"("+zk_count+")";
 		
+		header=findViewById(R.id.head_bar);
+		header.setVisibility(View.GONE);
+		headerImage=(ImageView) findViewById(R.id.main02_iv);
+		headerImage.setVisibility(View.VISIBLE);
 		rl_nav = (RelativeLayout) findViewById(R.id.rl_nav);
 		mHsv = (SwipHorizontalScrollView) findViewById(R.id.mHsv);
 		// ÄÚÈÝ
@@ -686,8 +691,8 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 		// LayoutInflater mInflater = LayoutInflater.from(this);
 		initNavigationHSV();
 		
-		TextView title = (TextView) findViewById(R.id.txt_header);
-		title.setText(R.string.mycomments);
+//		TextView title = (TextView) findViewById(R.id.txt_header);
+//		title.setText(R.string.mycomments);
 		ImageView back = (ImageView)findViewById(R.id.return_iv);
 		back.setOnClickListener(new View.OnClickListener() {
 			@Override
