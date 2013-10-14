@@ -27,7 +27,9 @@ import com.android.volley.Request.Method;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.ImageLoader.ImageListener;
 import com.cqvip.moblelib.R;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
@@ -37,13 +39,15 @@ import com.cqvip.moblelib.model.PeriodicalYear;
 import com.cqvip.moblelib.view.picker.ArrayWheelAdapter;
 import com.cqvip.moblelib.view.picker.OnWheelChangedListener;
 import com.cqvip.moblelib.view.picker.WheelView;
+import com.cqvip.utils.BitmapCache;
+import com.cqvip.utils.Tool;
 
 /**
  * 期刊详细界面
  * @author luojiang
  *
  */
-public class PeriodicalContentActivity extends BaseImageActivity{
+public class PeriodicalContentActivity extends BaseActivity{
 	private String mYear = null;
 	private String mMonth = null;
 	private ListView listview;
@@ -63,6 +67,7 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 	private List<EBook> lists;//目录
 	private boolean isFirstFlag = false;
 	private RelativeLayout rlFromAndDate;
+	private BitmapCache cache;
 	
 	
 	@Override
@@ -176,7 +181,13 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 		price.setText(getResources().getString(R.string.title_cnno)+perio.getCnno());
 		num.setText(getResources().getString(R.string.title_issn)+perio.getIssn());
 		if (!TextUtils.isEmpty(perio.getImgurl())) {
-	    	mImageFetcher.loadImage(perio.getImgurl(), img);
+			
+			ImageLoader mImageLoader = new ImageLoader(mQueue, new BitmapCache(
+					Tool.getCachSize()));
+			ImageListener listener = ImageLoader.getImageListener(img,
+					R.drawable.defaut_book, R.drawable.defaut_book);
+			mImageLoader.get(perio.getImgurl(), listener);
+	    	
 	    } else {
 	    	img.setImageDrawable(context.getResources().getDrawable(
 	    			R.drawable.defaut_book));
