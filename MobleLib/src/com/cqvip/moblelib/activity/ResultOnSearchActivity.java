@@ -28,10 +28,13 @@ import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.StringRequest;
+import com.cqvip.dao.DaoException;
 import com.cqvip.moblelib.nanshan.R;
 import com.cqvip.moblelib.adapter.BookAdapter;
 import com.cqvip.moblelib.constant.Constant;
 import com.cqvip.moblelib.constant.GlobleData;
+import com.cqvip.moblelib.db.SearchHistoryDao;
+import com.cqvip.moblelib.entity.SearchHistory_SZ;
 import com.cqvip.moblelib.model.Book;
 import com.cqvip.moblelib.view.DropDownListView;
 import com.cqvip.utils.BitmapCache;
@@ -116,6 +119,8 @@ public class ResultOnSearchActivity extends BaseActivity implements
 				} else {
 					getHomePage(key, GETFIRSTPAGE, DEFAULT_COUNT, GETFIRSTPAGE,
 							GlobleData.QUERY_ALL);
+					//加入数据库
+					addDatabase(edit.getText().toString().trim());
 				}
 			}
 
@@ -145,6 +150,8 @@ public class ResultOnSearchActivity extends BaseActivity implements
 				} else {
 					getHomePage(key, GETFIRSTPAGE, DEFAULT_COUNT, GETFIRSTPAGE,
 							GlobleData.QUERY_ALL);
+					//加入数据库
+					addDatabase(edit.getText().toString().trim());
 				}
 				return true;
 			}
@@ -164,6 +171,18 @@ public class ResultOnSearchActivity extends BaseActivity implements
 		});
 	}
 
+	private void addDatabase(String key2) {
+		SearchHistory_SZ searchHistory_SZ=new SearchHistory_SZ();
+		searchHistory_SZ.setName(key2);
+		SearchHistoryDao<SearchHistory_SZ> searchHistoryDao=new SearchHistoryDao<SearchHistory_SZ>(this, new SearchHistory_SZ());
+		try {
+			searchHistoryDao.saveInfo(searchHistory_SZ);
+		} catch (DaoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	/**
 	 * 隐藏键盘
 	 */
@@ -294,6 +313,7 @@ public class ResultOnSearchActivity extends BaseActivity implements
 			if(listview.getFooterViewsCount()==0){
 				listview.addfootview();
 			}
+			
 			requestVolley(GlobleData.SERVER_URL
 					+ "/library/bookquery/search.aspx", backlistener,
 					Method.POST);
