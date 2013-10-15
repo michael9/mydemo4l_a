@@ -96,11 +96,15 @@ public class HttpClientNewWork {
 //		    HttpResponse response;
 			response = client.execute(request);
 		    StatusLine status = response.getStatusLine();
+		    
+		    Log.i("mobile","status"+status);
 		if(status.getStatusCode()!=200){
+			
 		   result = readHttpResponse(response);
 		   throw new BookException(result, status.getStatusCode()); 
 		}
-		result = readHttpResponse(response);
+		//result = readHttpResponse(response);
+		result = EntityUtils.toString(response.getEntity());
 		return result;
 		} catch (IOException e) {
 			throw new BookException(e);

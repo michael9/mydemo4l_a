@@ -146,14 +146,11 @@
     <string name="tips_unable_download">该文件暂时不能下载</string>
     <string name="tips_nomore_data">没有更多内容可供加载</string>
     <string name="tips_nomore_page">已经最后一页了</string>
-    
-    
     <string name="title_activity_periodical_classfy">PeriodicalClassfyActivity</string>
     <string name="title_activity_periodical_list">PeriodicalListActivity</string>
     <string name="title_activity_periodical_topic_detail">PeriodicalTopicDetailActivity</string>
     <string name="title_activity_periodical_content">PeriodicalContentActivity</string>
     <string name="title_activity_periodical_center">PeriodicalCenterActivity</string>
-
     <string name="drop_down_list_header_default_text">点击可以刷新&#8230;</string>
     <string name="drop_down_list_header_pull_text">下拉可以刷新</string>
     <string name="drop_down_list_header_release_text">松开进行刷新</string>
@@ -162,8 +159,8 @@
     <string name="drop_down_list_footer_loading_text">加载中&#8230;</string>
     <string name="drop_down_list_footer_no_more_text">没有更多内容可供加载</string>
     <string name="update_at">更新于：</string>
-    
     <string name="lecture_source">龙岗大讲堂：</string>
     <string name="tips_periodical_null">抱歉！该杂志暂未被《中文科技期刊数据库》收录，请直接联系期刊社！期刊社联系电话：010－64294171 64294139</string>
-    
+    <string name="title_activity_zlfbook_detail">ZLFBookDetailActivity</string>
+
 </resources>

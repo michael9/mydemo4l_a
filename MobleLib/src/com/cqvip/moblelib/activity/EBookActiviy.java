@@ -1,26 +1,26 @@
 package com.cqvip.moblelib.activity;
 
 import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
-import android.widget.CheckedTextView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cqvip.moblelib.R;
 
@@ -43,11 +43,14 @@ public class EBookActiviy extends BaseActivity {
 			R.drawable.sign_fangzheng };
 	private  int currentID=-1;
 	private EditText editText;
+	public static Map<Integer, Boolean> isSelected;
+	private Context context;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_ebook_activiy);
+		context = this;
 		editText=(EditText) findViewById(R.id.ebook_edit);
 		View v = findViewById(R.id.ebook_title);
 		TextView title = (TextView) v.findViewById(R.id.txt_header);
@@ -75,12 +78,16 @@ public class EBookActiviy extends BaseActivity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				if(position==0){
-//					adapter.setCurrentID(position);
-//					adapter.notifyDataSetChanged();
-					startActivity(new Intent(EBookActiviy.this,
-					PeriodicalClassfyActivity.class));
+				if(position!=2){//方正暂时不能用
+				View v = parent.getChildAt(position);
+				CheckBox check = (CheckBox) v.findViewById(R.id.checkbox);
+				if(check!=null){
+					unSelectAll();
+				    check.toggle();
+				    isSelected.put(position, check.isChecked());
+				    adapter.notifyDataSetChanged();
 				}
+			}
 			}
 
 		});
@@ -89,10 +96,21 @@ public class EBookActiviy extends BaseActivity {
 		searchbar.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(EBookActiviy.this,
-						EBookSearchActivity.class);
-				startActivity(intent);
-				finish();
+				if(!validateChoosed()){
+					Toast.makeText(context, "请选择一个资源库", 1).show();
+				}else{
+					int searchtype = 1;
+					if(isSelected.get(0)){
+						searchtype = 1;//维普
+					}else if(isSelected.get(1)){
+						searchtype = 2;//智立方
+					}
+					Intent intent = new Intent(EBookActiviy.this,
+							EBookSearchActivity.class);
+					intent.putExtra("type",searchtype);
+					startActivity(intent);
+					finish();
+				}
 			}
 		});
 
@@ -103,12 +121,55 @@ public class EBookActiviy extends BaseActivity {
 			public void onClick(View v) {
 				InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 				imm.hideSoftInputFromWindow(et.getWindowToken(), 0);
-				Intent intent = new Intent(EBookActiviy.this,
-						EBookSearchActivity.class);
-				startActivity(intent);
-				finish();
+				//没有选中库提示
+				if(!validateChoosed()){
+					Toast.makeText(context, "请选择一个资源库", 1).show();
+				}else{
+					int searchtype = 1;
+					if(isSelected.get(0)){
+						searchtype = 1;//维普
+					}else if(isSelected.get(1)){
+						searchtype = 2;//智立方
+					}
+					Intent intent = new Intent(EBookActiviy.this,
+							EBookSearchActivity.class);
+					intent.putExtra("type",searchtype);
+					startActivity(intent);
+					finish();
+				}
+				
 			}
 		});
+	}
+	
+	/**
+	 * 全消
+	 * 
+	 * @param isok
+	 *         
+	 */
+	private void unSelectAll() {
+		if(isSelected==null){
+		isSelected = new HashMap<Integer, Boolean>();
+		}else{
+			isSelected.clear();
+		}
+		for (int i = 0; i < EBOOKTYPE.length; i++) {
+			isSelected.put(i, false);
+		}
+	}
+	
+	/**
+     * 判断是否有选中
+     * @return
+     */
+	private boolean validateChoosed() {
+		for(int i=0;i<EBOOKTYPE.length;i++){
+			if(isSelected.get(i)){
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public class MyAdapter extends BaseAdapter {
@@ -117,10 +178,22 @@ public class EBookActiviy extends BaseActivity {
 		private int[] drawableids;
 		int  currentID=-1;
 
+		
+		private void init() {
+			isSelected = new HashMap<Integer, Boolean>();
+			for (int i = 0; i < eBookTypes.length; i++) {
+				if(i==0){
+					isSelected.put(i, true);
+				}else{
+				isSelected.put(i, false);
+				}
+			}
+		}
 		public MyAdapter(Context context, String[] eBookTypes, int[] drawableids) {
 			this.eBookTypes = eBookTypes;
 			this.context = context;
 			this.drawableids = drawableids;
+			init();
 		}
 
 		public void setCurrentID(int currentID) {
@@ -146,13 +219,13 @@ public class EBookActiviy extends BaseActivity {
 		}
 
 		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
+		public View getView(final int position, View convertView, ViewGroup parent) {
 			LayoutInflater inflater;
 			if (convertView == null) {
 				inflater = LayoutInflater.from(context);
 				convertView = inflater.inflate(R.layout.item_ebooktype, null);
 				CheckBox checkBox=(CheckBox) convertView.findViewById(R.id.checkbox);
-				if(position!=0){
+				if(position==eBookTypes.length-1){
 					checkBox.setEnabled(false);
 				}
 			}
@@ -163,15 +236,44 @@ public class EBookActiviy extends BaseActivity {
 //			CheckedTextView checkedTextView = (CheckedTextView) convertView
 //					.findViewById(android.R.id.text1);
 			CheckBox checkBox=(CheckBox) convertView.findViewById(R.id.checkbox);
-			if(position==0){
-				checkBox.setChecked(true);
-			}
+//			if(position==0){
+//				checkBox.setChecked(true);
+//			}
+			checkBox.setChecked(isSelected.get(position));
 			iv.setImageResource(drawableids[position]);
 			tv.setText(eBookTypes[position]);
 //			  if(position==this.currentID)
 //				  checkBox.setChecked(true);
 //			  else
 //				  checkBox.setChecked(false);
+			tv.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					if(position==0){
+//						adapter.setCurrentID(position);
+//						adapter.notifyDataSetChanged();
+						startActivity(new Intent(EBookActiviy.this,
+						PeriodicalClassfyActivity.class));
+					}
+					
+				}
+			});
+			iv.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					if(position==0){
+//						adapter.setCurrentID(position);
+//						adapter.notifyDataSetChanged();
+						startActivity(new Intent(EBookActiviy.this,
+								PeriodicalClassfyActivity.class));
+					}
+					
+				}
+			});
+			
+			
 			return convertView;
 		}
 	}
