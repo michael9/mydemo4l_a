@@ -85,7 +85,7 @@ public class ResultOnSearchActivity extends BaseActivity implements
 		noResult_rl = (RelativeLayout) findViewById(R.id.noresult_rl);
 		edit.setText(getIntent().getStringExtra("ISBN"));
 		
-		if(getIntent().getBooleanExtra("isfromDetailAdvancedBookActivity", false)){
+		if(getIntent().getBooleanExtra("isfromDetailAdvancedBookActivity", false)){//从推荐阅读或者从搜索记录start的
 			key=getIntent().getStringExtra("bookname");
 			imgsearch.setFocusable(true);
 			customProgressDialog.show();
@@ -230,10 +230,16 @@ public class ResultOnSearchActivity extends BaseActivity implements
 				if (lists != null && !lists.isEmpty()&&lists.size()==DEFAULT_COUNT) {
 					adapter.addMoreData(lists);
 					listview.onBottomComplete();
-				} else {
+				} else if(lists != null &&lists.size()>0){
+					adapter.addMoreData(lists);
+					listview.setHasMore(false);
+					listview.onBottomComplete();	
+				}else
+				{
 					listview.setHasMore(false);
 					listview.onBottomComplete();
 				}
+
 			} catch (Exception e) {
 				onError(2);
 			}

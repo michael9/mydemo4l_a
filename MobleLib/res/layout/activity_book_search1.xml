@@ -13,17 +13,53 @@
         android:src="@drawable/two_03" />
 
     <LinearLayout
+        android:id="@+id/searchbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@id/main02_iv"
         android:layout_marginLeft="@dimen/main_marginleftright"
         android:layout_marginRight="@dimen/main_marginleftright"
         android:layout_marginTop="@dimen/main_marginleftright"
         android:orientation="vertical" >
 
-        <include
-            android:id="@+id/searchbar"
-            layout="@layout/searchbar_twobtn" />
+        <include layout="@layout/searchbar_twobtn" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/searchContent"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/searchbar"
+        android:layout_marginBottom="@dimen/main_margintop"
+        android:layout_marginLeft="@dimen/main_marginleftright"
+        android:layout_marginRight="@dimen/main_marginleftright"
+        android:layout_marginTop="@dimen/main_marginleftright"
+        android:background="@drawable/linearlayout_shape1"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="horizontal" android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="@string/search_history" android:textSize="22sp"/>
+
+            <ImageView android:id="@+id/refresh_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/refresh" android:onClick="onClick"/>
+        </LinearLayout>
+
+        <com.cqvip.moblelib.view.KeywordsView
+            android:id="@+id/word"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:padding="2dip" />
     </LinearLayout>
 
     <ImageView

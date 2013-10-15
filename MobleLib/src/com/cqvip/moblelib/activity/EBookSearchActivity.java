@@ -55,7 +55,7 @@ public class EBookSearchActivity extends BaseActivity implements
 	private View title_bar;
 	private BitmapCache cache;
 	private Map<String, String> gparams;
-	
+
 	public static HashMap<String, Boolean> favors = new HashMap<String, Boolean>();// 保持收藏状态，更新界面
 
 	@Override
@@ -69,11 +69,12 @@ public class EBookSearchActivity extends BaseActivity implements
 		listview = (DropDownListView) findViewById(R.id.search_res_lv);
 		listview.setOnItemClickListener((OnItemClickListener) this);
 		noResult_rl = (RelativeLayout) findViewById(R.id.noresult_rl);
-		//获取更多
+		// 获取更多
 		listview.setOnBottomListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				getHomePage(edit.getText().toString().trim(), page + 1, DEFAULT_COUNT, 1);
+				getHomePage(edit.getText().toString().trim(), page + 1,
+						DEFAULT_COUNT, 1);
 				page = page + 1;
 			}
 		});
@@ -119,10 +120,10 @@ public class EBookSearchActivity extends BaseActivity implements
 
 		});
 
-//		title_bar = findViewById(R.id.head_bar);
-//		TextView title = (TextView) title_bar.findViewById(R.id.txt_header);
-//		title.setText(R.string.main_ebook);
-		ImageView back = (ImageView)findViewById(R.id.return_iv);
+		// title_bar = findViewById(R.id.head_bar);
+		// TextView title = (TextView) title_bar.findViewById(R.id.txt_header);
+		// title.setText(R.string.main_ebook);
+		ImageView back = (ImageView) findViewById(R.id.return_iv);
 		back.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -130,21 +131,21 @@ public class EBookSearchActivity extends BaseActivity implements
 				finish();
 			}
 		});
-		
-//		listview.setOnScrollListener(new OnScrollListener() {
-//			@Override
-//			public void onScrollStateChanged(AbsListView view, int scrollState) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//			
-//			@Override
-//			public void onScroll(AbsListView view, int firstVisibleItem,
-//					int visibleItemCount, int totalItemCount) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//		});
+
+		// listview.setOnScrollListener(new OnScrollListener() {
+		// @Override
+		// public void onScrollStateChanged(AbsListView view, int scrollState) {
+		// // TODO Auto-generated method stub
+		//
+		// }
+		//
+		// @Override
+		// public void onScroll(AbsListView view, int firstVisibleItem,
+		// int visibleItemCount, int totalItemCount) {
+		// // TODO Auto-generated method stub
+		//
+		// }
+		// });
 	}
 
 	/**
@@ -161,16 +162,19 @@ public class EBookSearchActivity extends BaseActivity implements
 		@Override
 		public void onResponse(String response) {
 			// TODO Auto-generated method stub
-			if(customProgressDialog!=null&&customProgressDialog.isShowing())
-			customProgressDialog.dismiss();
+			if (customProgressDialog != null
+					&& customProgressDialog.isShowing())
+				customProgressDialog.dismiss();
 			try {
-				//获取返回记录数
+				// 获取返回记录数
 				int count = EBook.ebookCount(response);
-				if(count>0){
+				if (count > 0) {
 					searchCount.setVisibility(View.VISIBLE);
-					String temp="搜索到与 \"<font face=\"arial\" color=\"red\">"+edit.getText().toString().trim()+"</font>\"  相关内容 "+count+" 个";
+					String temp = "搜索到与 \"<font face=\"arial\" color=\"red\">"
+							+ edit.getText().toString().trim()
+							+ "</font>\"  相关内容 " + count + " 个";
 					searchCount.setText(Html.fromHtml(temp));
-				}else{
+				} else {
 					searchCount.setVisibility(View.GONE);
 				}
 				// JSONObject mj=new JSONObject(response);
@@ -179,12 +183,13 @@ public class EBookSearchActivity extends BaseActivity implements
 					listview.setVisibility(View.VISIBLE);
 					noResult_rl.setVisibility(View.GONE);
 					cache = new BitmapCache(Tool.getCachSize());
-					adapter = new EbookAdapter(context, lists,  new ImageLoader(mQueue, cache));
-					if(lists.size()<DEFAULT_COUNT){
+					adapter = new EbookAdapter(context, lists, new ImageLoader(
+							mQueue, cache));
+					if (lists.size() < DEFAULT_COUNT) {
 						listview.setHasMore(false);
 						listview.setAdapter(adapter);
 						listview.onBottomComplete();
-					}else{
+					} else {
 						listview.setHasMore(true);
 						listview.setAdapter(adapter);
 					}
@@ -206,13 +211,19 @@ public class EBookSearchActivity extends BaseActivity implements
 			try {
 				// JSONObject mj=new JSONObject(response);
 				List<EBook> lists = EBook.formList(response);
-				if (lists != null && !lists.isEmpty()&&lists.size()==DEFAULT_COUNT) {
+				if (lists != null && !lists.isEmpty()
+						&& lists.size() == DEFAULT_COUNT) {
 					adapter.addMoreData(lists);
+					listview.onBottomComplete();
+				} else if (lists != null && lists.size() > 0) {
+					adapter.addMoreData(lists);
+					listview.setHasMore(false);
 					listview.onBottomComplete();
 				} else {
 					listview.setHasMore(false);
 					listview.onBottomComplete();
 				}
+
 			} catch (Exception e) {
 				onError(2);
 			}
@@ -224,8 +235,9 @@ public class EBookSearchActivity extends BaseActivity implements
 		@Override
 		public void onErrorResponse(VolleyError arg0) {
 			// TODO Auto-generated method stub
-			if(customProgressDialog!=null&&customProgressDialog.isShowing())
-			customProgressDialog.dismiss();
+			if (customProgressDialog != null
+					&& customProgressDialog.isShowing())
+				customProgressDialog.dismiss();
 			onError(2);
 		}
 	};
@@ -260,7 +272,7 @@ public class EBookSearchActivity extends BaseActivity implements
 		gparams.put("perpage", "" + count);// 条数
 
 		if (type == 0) {
-			if(listview.getFooterViewsCount()==0){
+			if (listview.getFooterViewsCount() == 0) {
 				listview.addfootview();
 			}
 			requestVolley(GlobleData.SERVER_URL + "/zk/search.aspx",
@@ -273,20 +285,21 @@ public class EBookSearchActivity extends BaseActivity implements
 
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int positon, long id) {
-			EBook book = adapter.getLists().get(positon);
-			if (book != null) {
-				Intent _intent = new Intent(context, EbookDetailActivity.class);
-				Bundle bundle = new Bundle();
-				bundle.putSerializable("book", book);
-				_intent.putExtra("detaiinfo", bundle);
-				startActivity(_intent);
-			}
+		EBook book = adapter.getLists().get(positon);
+		if (book != null) {
+			Intent _intent = new Intent(context, EbookDetailActivity.class);
+			Bundle bundle = new Bundle();
+			bundle.putSerializable("book", book);
+			_intent.putExtra("detaiinfo", bundle);
+			startActivity(_intent);
+		}
 	}
+
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		  if (cache != null) {
-			  cache = null;
-	        }
+		if (cache != null) {
+			cache = null;
+		}
 	}
 }
