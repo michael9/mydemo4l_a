@@ -5,7 +5,7 @@ import java.util.List;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 import com.cqvip.dao.GetterSetter;
-import com.cqvip.moblelib.R;
+import com.cqvip.moblelib.bate1.R;
 import com.cqvip.moblelib.adapter.BookAdapter.ViewHolder;
 import com.cqvip.moblelib.model.Book;
 import com.cqvip.moblelib.model.ZLFBook;

@@ -31,7 +31,7 @@ import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.widget.ImageView;
 
-import com.cqvip.moblelib.BuildConfig;
+import com.cqvip.moblelib.bate1.BuildConfig;
 
 /**
  * This class wraps up completing some arbitrary long running work when loading a bitmap to an

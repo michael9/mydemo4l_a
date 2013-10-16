@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.cqvip.moblelib.R;
+import com.cqvip.moblelib.bate1.R;
 import com.cqvip.moblelib.constant.Constant;
 import com.cqvip.moblelib.view.mylinearlayout;
 import com.cqvip.utils.Tool;

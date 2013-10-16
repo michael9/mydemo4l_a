@@ -30,7 +30,7 @@ import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.StringRequest;
-import com.cqvip.moblelib.R;
+import com.cqvip.moblelib.bate1.R;
 import com.cqvip.moblelib.adapter.EbookAdapter;
 import com.cqvip.moblelib.adapter.ZLFBookAdapter;
 import com.cqvip.moblelib.constant.Constant;

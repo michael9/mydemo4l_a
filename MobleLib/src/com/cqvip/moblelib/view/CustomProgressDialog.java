@@ -15,7 +15,7 @@ package com.cqvip.moblelib.view;
 *       1.0.0           2012-4-27         lxd (rohsuton@gmail.com)        Create
 **************************************************************************************/	
 
-import com.cqvip.moblelib.R;
+import com.cqvip.moblelib.bate1.R;
 
 import android.app.Dialog;
 import android.content.Context;

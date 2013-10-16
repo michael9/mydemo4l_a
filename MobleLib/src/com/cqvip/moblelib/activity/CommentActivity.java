@@ -28,7 +28,7 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.ImageLoader.ImageListener;
 import com.cqvip.mobelib.imgutils.AsyncTask;
-import com.cqvip.moblelib.R;
+import com.cqvip.moblelib.bate1.R;
 import com.cqvip.moblelib.adapter.CommentItemAdapter;
 import com.cqvip.moblelib.constant.Constant;
 import com.cqvip.moblelib.constant.GlobleData;

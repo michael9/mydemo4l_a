@@ -4,7 +4,7 @@ import java.util.Map;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
-import com.cqvip.moblelib.R;
+import com.cqvip.moblelib.bate1.R;
 import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.moblelib.view.mylinearlayout;
 import com.cqvip.utils.Tool;

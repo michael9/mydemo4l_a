@@ -1,8 +1,8 @@
 package com.cqvip.moblelib.activity;
 
-import com.cqvip.moblelib.R;
-import com.cqvip.moblelib.R.layout;
-import com.cqvip.moblelib.R.menu;
+import com.cqvip.moblelib.bate1.R;
+import com.cqvip.moblelib.bate1.R.layout;
+import com.cqvip.moblelib.bate1.R.menu;
 
 import android.os.Bundle;
 import android.app.Activity;

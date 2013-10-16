@@ -10,7 +10,7 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.cqvip.moblelib.R;
+import com.cqvip.moblelib.bate1.R;
 import com.cqvip.moblelib.model.ZLFBook;
 public class ZLFBookDetailActivity extends BaseActivity {
 

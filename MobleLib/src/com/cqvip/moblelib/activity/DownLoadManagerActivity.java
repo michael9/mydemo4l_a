@@ -41,7 +41,7 @@ import android.widget.TextView;
 import com.artifex.mupdfdemo.MuPDFActivity;
 import com.cqvip.dao.DaoException;
 import com.cqvip.mobelib.imgutils.ImageFetcher;
-import com.cqvip.moblelib.R;
+import com.cqvip.moblelib.bate1.R;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.db.MEBookDao;
 import com.cqvip.moblelib.entity.MEbook;

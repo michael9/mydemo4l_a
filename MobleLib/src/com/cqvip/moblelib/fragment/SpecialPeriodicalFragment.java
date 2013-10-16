@@ -32,7 +32,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.cqvip.mobelib.imgutils.ImageFetcher;
 import com.cqvip.mobelib.imgutils.RecyclingImageView;
-import com.cqvip.moblelib.R;
+import com.cqvip.moblelib.bate1.R;
 import com.cqvip.moblelib.activity.PeriodicalClassfyActivity;
 import com.cqvip.moblelib.activity.PeriodicalContentActivity;
 import com.cqvip.moblelib.biz.Task;

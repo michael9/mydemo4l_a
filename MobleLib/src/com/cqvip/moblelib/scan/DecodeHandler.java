@@ -16,7 +16,7 @@
 
 package com.cqvip.moblelib.scan;
 
-import com.cqvip.moblelib.R;
+import com.cqvip.moblelib.bate1.R;
 import com.google.zxing.BinaryBitmap;
 import com.google.zxing.DecodeHintType;
 import com.google.zxing.MultiFormatReader;

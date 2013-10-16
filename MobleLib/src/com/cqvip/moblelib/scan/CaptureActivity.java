@@ -20,7 +20,7 @@ import android.view.SurfaceView;
 import android.view.Window;
 import android.widget.TextView;
 
-import com.cqvip.moblelib.R;
+import com.cqvip.moblelib.bate1.R;
 import com.cqvip.moblelib.activity.ResultOnSearchActivity;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;

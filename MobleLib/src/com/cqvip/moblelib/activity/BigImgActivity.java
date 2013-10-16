@@ -16,7 +16,7 @@ import android.widget.ProgressBar;
 
 import com.cqvip.mobelib.imgutils.ImageCache;
 import com.cqvip.mobelib.imgutils.ImageFetcher;
-import com.cqvip.moblelib.R;
+import com.cqvip.moblelib.bate1.R;
 
 public class BigImgActivity extends Activity implements OnTouchListener {
 
