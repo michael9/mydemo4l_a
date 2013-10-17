@@ -33,9 +33,9 @@ public class Tool {
 		if (mbook != null) {
 			Intent intent = new Intent(Intent.ACTION_SEND);
 			intent.setType("image/*");
-			intent.putExtra(Intent.EXTRA_SUBJECT, "龙岗图书馆友情分享");
+			intent.putExtra(Intent.EXTRA_SUBJECT, "移动图书馆友情分享");
 			intent.putExtra(Intent.EXTRA_TEXT,
-					("龙岗图书馆友情分享:《" + mbook.getTitle_c() +"》"));
+					("移动图书馆友情分享:《" + mbook.getTitle_c() +"》"));
 //			intent.putExtra(Intent.EXTRA_STREAM,
 //					Uri.decode("http://www.szlglib.com.cn/images/logo.jpg")); // 分享图片"http://www.szlglib.com.cn/images/logo.jpg"
 			mcontext.startActivity(Intent.createChooser(intent, "分享到"));
@@ -59,12 +59,12 @@ public class Tool {
 		if (mbook != null) {
 			Intent intent = new Intent(Intent.ACTION_SEND);
 			intent.setType("image/*");
-			intent.putExtra(Intent.EXTRA_SUBJECT, "龙岗图书馆友情分享");
+			intent.putExtra(Intent.EXTRA_SUBJECT, "移动图书馆友情分享");
 			intent.putExtra(Intent.EXTRA_TEXT,
-					("龙岗图书馆友情分享:《" + mbook.getTitle()+"》"));
+					("移动图书馆友情分享:《" + mbook.getTitle()+"》"));
 //			intent.putExtra(Intent.EXTRA_STREAM,
 //					Uri.decode("http://www.szlglib.com.cn/images/logo.jpg")); // 分享图片"http://www.szlglib.com.cn/images/logo.jpg"
-			mcontext.startActivity(Intent.createChooser(intent, "龙岗图书馆友情分享"));
+			mcontext.startActivity(Intent.createChooser(intent, "移动图书馆友情分享"));
 		}
 	}
 

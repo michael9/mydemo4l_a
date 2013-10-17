@@ -350,10 +350,10 @@ public class EBookSearchActivity extends BaseActivity implements
 				if(listview.getFooterViewsCount()==0){
 					listview.addfootview();
 				}
-				requestVolley("http://192.168.20.61/ajax/BookSearchHandler.ashx",
+				requestVolley("http://zlf.cqvip.com/ajax/BookSearchHandler.ashx",
 						backlistener, Method.POST);
 			} else {
-				requestVolley("http://192.168.20.61/ajax/BookSearchHandler.ashx",
+				requestVolley("http://zlf.cqvip.com/ajax/BookSearchHandler.ashx",
 						backlistenermore, Method.POST);
 			}	
 			

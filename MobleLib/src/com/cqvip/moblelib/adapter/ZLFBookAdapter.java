@@ -121,11 +121,12 @@ public class ZLFBookAdapter extends BaseAdapter {
 		holder.u_abstract.setText(describe + book.getRemark_c());
 
 		String url=book.getTscoverimage();
-        if(!TextUtils.isEmpty(url)){
-        	holder.img.setImageUrl(url, mImageLoader);
-        } else {
-            holder.img.setImageResource(R.drawable.defaut_book);
-        }
+//        if(!TextUtils.isEmpty(url)){
+//        	holder.img.setImageUrl(url, mImageLoader);
+//        } else {
+//            holder.img.setImageResource(R.drawable.defaut_book);
+//        }
+		holder.img.setVisibility(View.GONE);
 		return convertView;
 	}
 	
