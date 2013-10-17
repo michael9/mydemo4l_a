@@ -217,7 +217,7 @@ protected void onStart() {
 		if (keyCode == 4) {
 			Intent intent = new Intent(MainMenuActivity.this, ActivityDlg.class);
 			intent.putExtra("ACTIONID", 0);
-			intent.putExtra("MSGBODY", "确定退出龙岗图书馆吗？");
+			intent.putExtra("MSGBODY", "确定退出移动图书馆吗？");
 			intent.putExtra("BTN_CANCEL", 1);
 			startActivityForResult(intent, 104);
 
@@ -285,7 +285,7 @@ protected void onStart() {
 					int versioncode = 0;
 					try {
 						versioncode = MainMenuActivity.this.getPackageManager()
-								.getPackageInfo("com.cqvip.moblelib", 0).versionCode;
+								.getPackageInfo("com.cqvip.moblelib.bate1", 0).versionCode;
 						Log.i("mainmenu", "versioncode=" + versioncode);
 					} catch (NameNotFoundException e) {
 						// TODO Auto-generated catch block
