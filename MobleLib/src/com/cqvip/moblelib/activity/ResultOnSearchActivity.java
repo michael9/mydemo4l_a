@@ -1,5 +1,6 @@
 package com.cqvip.moblelib.activity;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
@@ -174,12 +176,42 @@ public class ResultOnSearchActivity extends BaseActivity implements
 	private void addDatabase(String key2) {
 		SearchHistory_SZ searchHistory_SZ=new SearchHistory_SZ();
 		searchHistory_SZ.setName(key2);
-		SearchHistoryDao<SearchHistory_SZ> searchHistoryDao=new SearchHistoryDao<SearchHistory_SZ>(this, new SearchHistory_SZ());
+		SearchHistoryDao<SearchHistory_SZ> searchHistoryDao=new SearchHistoryDao<SearchHistory_SZ>(this, searchHistory_SZ);
+		SearchHistory_SZ searchHistory_SZ01=null;
+		List<SearchHistory_SZ> list_SearchHistory_SZ=null;
 		try {
-			searchHistoryDao.saveInfo(searchHistory_SZ);
-		} catch (DaoException e) {
+			searchHistory_SZ01=searchHistoryDao.queryInfo(key2);
+			list_SearchHistory_SZ=searchHistoryDao.queryInfobydate();
+		} catch (DaoException e1) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			e1.printStackTrace();
+		}
+		if(searchHistory_SZ01!=null){
+			Log.i("ResultOnSearchAct", "addDatabase01");
+			try {
+				searchHistory_SZ01.setDate(new Date());
+				searchHistoryDao.updateState(searchHistory_SZ01);
+			} catch (DaoException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else if(list_SearchHistory_SZ!=null&&list_SearchHistory_SZ.size()>=Constant.DEFAULT_COUNT_SEARCHHISTORY){
+			Log.i("ResultOnSearchAct", "addDatabase02");
+			
+			try {
+				searchHistoryDao.delete(list_SearchHistory_SZ.get(Constant.DEFAULT_COUNT_SEARCHHISTORY-1));
+				searchHistoryDao.add(searchHistory_SZ);
+			} catch (DaoException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else{
+			try {
+				searchHistoryDao.add(searchHistory_SZ);
+			} catch (DaoException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	
@@ -333,9 +365,9 @@ public class ResultOnSearchActivity extends BaseActivity implements
 
 
 	@Override
-	public void onItemClick(AdapterView<?> arg0, View arg1, int positon, long id) {
-		
-			Book book = adapter.getLists().get(positon);
+	public void onItemClick(AdapterView<?> arg0, View arg1, int position, long id) {
+	 	    Log.i("ResultOnSea", ""+position);
+			Book book = adapter.getLists().get(position);//此地的position要包括listview的header
 			if (book != null) {
 				Intent _intent = new Intent(context, DetailBookActivity.class);
 				Bundle bundle = new Bundle();

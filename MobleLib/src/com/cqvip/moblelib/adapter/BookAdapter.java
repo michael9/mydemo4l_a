@@ -126,7 +126,7 @@ public class BookAdapter extends BaseAdapter {
 		holder.author.setText(author + book.getAuthor());
 		holder.publisher.setText(publish + book.getPublisher()+","+book.getPublishyear());
 		holder.u_abstract.setText(describe + book.getU_abstract());
-
+       // Log.i("BookAdapter", ""+position);
 		String url=book.getCover_path();
      //   if(!TextUtils.isEmpty(url)){
         	holder.img.setImageUrl(url, mImageLoader);

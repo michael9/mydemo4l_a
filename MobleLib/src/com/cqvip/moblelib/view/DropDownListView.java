@@ -141,12 +141,21 @@ public class DropDownListView extends ListView implements OnScrollListener {
         // should set, to run onScroll method and so on
         super.setOnScrollListener(this);
     }
-
+   
     private void initListViewforHeaderViewListAdapter() {
-    	View view=new View(context);
-    	addHeaderView(view);
-    	removeHeaderView(view);
+    	addfootview();
+    	//removeHeaderView(view01);
 	}
+    
+//@Override
+//protected void onFinishInflate() {
+//	// TODO Auto-generated method stub
+//	super.onFinishInflate();
+//	Log.i("DropDownListView", ""+this.getHeaderViewsCount());
+//	if(this.getHeaderViewsCount()>0)
+//	this.removeViewAt(1);
+//	this.getAdapter().
+//}
 
 	/**
      * init drop down style, only init once

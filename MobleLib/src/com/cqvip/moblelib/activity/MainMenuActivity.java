@@ -299,7 +299,7 @@ public class MainMenuActivity extends BaseActivity_Main implements
 					int versioncode = 0;
 					try {
 						versioncode = MainMenuActivity.this.getPackageManager()
-								.getPackageInfo("com.cqvip.moblelib", 0).versionCode;
+								.getPackageInfo("com.cqvip.moblelib.nanshan", 0).versionCode;
 						Log.i("mainmenu", "versioncode=" + versioncode);
 					} catch (NameNotFoundException e) {
 						// TODO Auto-generated catch block
