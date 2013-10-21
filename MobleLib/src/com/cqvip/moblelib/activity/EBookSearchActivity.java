@@ -1,5 +1,6 @@
 package com.cqvip.moblelib.activity;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -28,10 +30,13 @@ import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.StringRequest;
+import com.cqvip.dao.DaoException;
 import com.cqvip.moblelib.nanshan.R;
 import com.cqvip.moblelib.adapter.EbookAdapter;
 import com.cqvip.moblelib.constant.Constant;
 import com.cqvip.moblelib.constant.GlobleData;
+import com.cqvip.moblelib.db.SearchHistoryDao;
+import com.cqvip.moblelib.entity.SearchHistory_ZK;
 import com.cqvip.moblelib.model.EBook;
 import com.cqvip.moblelib.view.DropDownListView;
 import com.cqvip.utils.BitmapCache;
@@ -94,6 +99,8 @@ public class EBookSearchActivity extends BaseActivity implements
 				page = 1;
 				getHomePage(edit.getText().toString().trim(), page,
 						DEFAULT_COUNT, 0);
+				//加入数据库
+				addDatabase(edit.getText().toString().trim());
 			}
 		});
 		edit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -115,6 +122,8 @@ public class EBookSearchActivity extends BaseActivity implements
 				page = 1;
 				getHomePage(edit.getText().toString().trim(), 1, DEFAULT_COUNT,
 						0);
+				//加入数据库
+				addDatabase(edit.getText().toString().trim());
 				return true;
 			}
 
@@ -146,6 +155,48 @@ public class EBookSearchActivity extends BaseActivity implements
 		//
 		// }
 		// });
+	}
+	
+	private void addDatabase(String key2) {
+		SearchHistory_ZK searchHistory_ZK=new SearchHistory_ZK();
+		searchHistory_ZK.setName(key2);
+		SearchHistoryDao<SearchHistory_ZK> searchHistoryDao=new SearchHistoryDao<SearchHistory_ZK>(this, searchHistory_ZK);
+		SearchHistory_ZK SearchHistory_ZK01=null;
+		List<SearchHistory_ZK> list_SearchHistory_ZK=null;
+		try {
+			SearchHistory_ZK01=searchHistoryDao.queryInfo(key2);
+			list_SearchHistory_ZK=searchHistoryDao.queryInfobydate();
+		} catch (DaoException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		if(SearchHistory_ZK01!=null){
+			Log.i("ResultOnSearchAct", "addDatabase01");
+			try {
+				SearchHistory_ZK01.setDate(new Date());
+				searchHistoryDao.updateState(SearchHistory_ZK01);
+			} catch (DaoException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else if(list_SearchHistory_ZK!=null&&list_SearchHistory_ZK.size()>=Constant.DEFAULT_COUNT_SEARCHHISTORY){
+			Log.i("ResultOnSearchAct", "addDatabase02");
+			
+			try {
+				searchHistoryDao.delete(list_SearchHistory_ZK.get(Constant.DEFAULT_COUNT_SEARCHHISTORY-1));
+				searchHistoryDao.add(searchHistory_ZK);
+			} catch (DaoException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else{
+			try {
+				searchHistoryDao.add(searchHistory_ZK);
+			} catch (DaoException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 
 	/**

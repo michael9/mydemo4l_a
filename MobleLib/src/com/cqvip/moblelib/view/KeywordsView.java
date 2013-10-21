@@ -278,13 +278,13 @@ public class KeywordsView extends FrameLayout implements OnGlobalLayoutListener 
 				// }
 				// 根据搜索时间显示颜色，越新越深
 				int color = Color.WHITE;
-				if (i <= size / 5) {
+				if (i <= MAX / 5) {
 					color = 0xfff15a22;
-				} else if (i <= 2 * size / 5) {
+				} else if (i <= 2 * MAX / 5) {
 					color = 0xff8552a1;
-				} else if (i <= 3 * size / 5) {
+				} else if (i <= 3 * MAX / 5) {
 					color = 0xff33a3dc;
-				} else if (i <= 4 * size / 5) {
+				} else if (i <= 4 * MAX / 5) {
 					color = 0xff84bf96;
 				} else {
 					color = 0xffa1a3a6;
@@ -331,6 +331,7 @@ public class KeywordsView extends FrameLayout implements OnGlobalLayoutListener 
 		return false;
 	}
 
+	//从搜索结果页面返回，各个历史记录位置保持不变
 	public void show_restart() {
 		if(listTxtTop_restart!=null){
 		attch2Screen(listTxtTop_restart, xCenter, yCenter, yItem);
@@ -486,6 +487,8 @@ public class KeywordsView extends FrameLayout implements OnGlobalLayoutListener 
 
 	public void rubAllViews() {
 		removeAllViews();
+		listTxtTop_restart=null;
+		listTxtBottom_restart=null;
 	}
 
 	public void setOnClickListener(OnClickListener listener) {

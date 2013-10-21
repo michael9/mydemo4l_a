@@ -1,52 +1,97 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="fill_parent"
     android:background="@drawable/lightgray" >
 
-    <com.cqvip.moblelib.view.mylinearlayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/myll"
+    <ScrollView android:id="@+id/myScrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical" >
+        android:layout_height="wrap_content">
 
-        <com.cqvip.moblelib.view.ScaleImageView
-            android:id="@+id/main02_iv"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/main_marginleftright"
-            android:layout_marginRight="@dimen/main_marginleftright"
-            android:layout_marginTop="@dimen/main_marginleftright"
-            android:src="@drawable/two_04" />
-
-        <LinearLayout
+        <com.cqvip.moblelib.view.mylinearlayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/myll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/main_marginleftright"
-            android:layout_marginRight="@dimen/main_marginleftright"
-            android:layout_marginTop="@dimen/main_marginleftright"
             android:orientation="vertical" >
 
-            <include
-                android:id="@+id/searchbar"
-                layout="@layout/searchbar_onebtn" />
-        </LinearLayout>
+            <com.cqvip.moblelib.view.ScaleImageView
+                android:id="@+id/main02_iv"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/main_marginleftright"
+                android:layout_marginRight="@dimen/main_marginleftright"
+                android:layout_marginTop="@dimen/main_marginleftright"
+                android:src="@drawable/two_04" />
 
-        <ListView
-            android:id="@+id/ebook_search_list"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_marginBottom="@dimen/main_margintop"
-            android:layout_marginLeft="@dimen/main_marginleftright"
-            android:layout_marginRight="@dimen/main_marginleftright"
-            android:layout_marginTop="@dimen/main_marginleftright"
-            android:background="@drawable/linearlayout_shape1"
-            android:divider="@color/divider_color"
-            android:dividerHeight="1dp"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp" >
-        </ListView>
-    </com.cqvip.moblelib.view.mylinearlayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/main_marginleftright"
+                android:layout_marginRight="@dimen/main_marginleftright"
+                android:layout_marginTop="@dimen/main_marginleftright"
+                android:orientation="vertical" >
+
+                <include
+                    android:id="@+id/searchbar"
+                    layout="@layout/searchbar_onebtn" />
+            </LinearLayout>
+
+            <ListView
+                android:id="@+id/ebook_search_list"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/main_marginleftright"
+                android:layout_marginRight="@dimen/main_marginleftright"
+                android:layout_marginTop="@dimen/main_marginleftright"
+                android:background="@drawable/linearlayout_shape1"
+                android:divider="@color/divider_color"
+                android:dividerHeight="1dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp" >
+            </ListView>
+
+            <LinearLayout
+                android:id="@+id/searchContent"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/searchbar"
+                android:layout_marginBottom="@dimen/main_margintop"
+                android:layout_marginLeft="@dimen/main_marginleftright"
+                android:layout_marginRight="@dimen/main_marginleftright"
+                android:layout_marginTop="@dimen/main_marginleftright"
+                android:background="@drawable/linearlayout_shape1"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/search_history"
+                        android:textSize="22sp" />
+
+                    <ImageView
+                        android:id="@+id/delete_iv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="onClick"
+                        android:src="@drawable/icon_del" />
+                </LinearLayout>
+
+                <com.cqvip.moblelib.view.KeywordsView
+                    android:id="@+id/word"
+                    android:layout_width="fill_parent"
+                    android:layout_height="200dp"
+                    android:padding="2dip" />
+            </LinearLayout>
+        </com.cqvip.moblelib.view.mylinearlayout>
+    </ScrollView>
 
     <ImageView
         android:id="@+id/return_iv"

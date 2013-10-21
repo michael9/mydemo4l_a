@@ -49,10 +49,10 @@
                 android:layout_height="wrap_content"
                 android:text="@string/search_history" android:textSize="22sp"/>
 
-            <ImageView android:id="@+id/refresh_iv"
+            <ImageView android:id="@+id/delete_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/refresh" android:onClick="onClick"/>
+                android:src="@drawable/icon_del" android:onClick="onClick"/>
         </LinearLayout>
 
         <com.cqvip.moblelib.view.KeywordsView

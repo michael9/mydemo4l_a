@@ -1,12 +1,15 @@
 package com.cqvip.moblelib.activity;
 
+import java.io.File;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.text.InputType;
@@ -29,6 +32,7 @@ import com.cqvip.moblelib.entity.SearchHistory_SZ;
 import com.cqvip.moblelib.nanshan.R;
 import com.cqvip.moblelib.scan.CaptureActivity;
 import com.cqvip.moblelib.view.KeywordsView;
+import com.cqvip.utils.FileUtils;
 
 /**
  * <p>
@@ -42,7 +46,7 @@ public class BookSearchActivity extends BaseActivity implements
 		View.OnClickListener {
 
 	private Context context;
-	private ImageView scan_iv, refresh_iv;
+	private ImageView scan_iv, delete_iv;
 	private EditText editText;
 
 	private String[] totalKeys = null;
@@ -68,7 +72,7 @@ public class BookSearchActivity extends BaseActivity implements
 
 		//搜索历史
 		searchLayout = (LinearLayout) this.findViewById(R.id.searchContent);
-		refresh_iv = (ImageView) findViewById(R.id.refresh_iv);
+		delete_iv = (ImageView) findViewById(R.id.delete_iv);
 		showKeywords = (KeywordsView) this.findViewById(R.id.word);
 		showKeywords.setDuration(2000l);
 		showKeywords.setOnClickListener(this);
@@ -291,11 +295,12 @@ public class BookSearchActivity extends BaseActivity implements
 		// .show();
 		// }
 		switch (v.getId()) {
-		case R.id.refresh_iv:
-			key_words = getRandomArray();
-			showKeywords.rubKeywords();
-			feedKeywordsFlow(showKeywords, key_words);
-			showKeywords.go2Shwo(KeywordsView.ANIMATION_OUT);
+		case R.id.delete_iv:
+//			key_words = getRandomArray();
+//			showKeywords.rubKeywords();
+//			feedKeywordsFlow(showKeywords, key_words);
+//			showKeywords.go2Shwo(KeywordsView.ANIMATION_OUT);
+			senddel(0);
 			break;
 
 		default:
@@ -311,6 +316,35 @@ public class BookSearchActivity extends BaseActivity implements
 
 	}
 
+	/**
+	 * 删除对话框
+	 */
+	public void senddel(int type) {
+		Intent intent = new Intent();
+		intent.setClass(this, ActivityDlg.class);
+		intent.putExtra("ACTIONID", 0);
+		intent.putExtra("MSGBODY", "确定删除搜索历史？");
+		intent.putExtra("BTN_CANCEL", 1);
+		startActivityForResult(intent, type);
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+		if (resultCode == 0) {
+		showKeywords.rubAllViews();
+		list_SearchHistory_SZ=null;
+		SearchHistoryDao<SearchHistory_SZ> searchHistoryDao=new SearchHistoryDao<SearchHistory_SZ>(this, new SearchHistory_SZ());
+		try {
+			searchHistoryDao.deleteAll();
+		} catch (DaoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		}
+	}
+	
 	private void hideinputmethod() {
 		if (android.os.Build.VERSION.SDK_INT <= 10) {
 			editText.setInputType(InputType.TYPE_NULL);
