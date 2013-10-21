@@ -121,6 +121,19 @@ public class BookSearchActivity extends BaseActivity implements
 		});
 
 	}
+	
+	@Override
+	protected void onRestart() {
+		// TODO Auto-generated method stub
+		super.onRestart();
+		if(showKeywords!=null){
+			showKeywords.removeAllViews();
+			showKeywords.show_restart();
+			if(tv_onclick!=null){
+				tv_onclick.setVisibility(View.VISIBLE);
+			}
+			}
+	}
 
 	List<SearchHistory_SZ> list_SearchHistory_SZ;
 
@@ -259,7 +272,7 @@ public class BookSearchActivity extends BaseActivity implements
 			return false;
 		}
 	}
-
+	TextView tv_onclick;
 	@Override
 	public void onClick(View v) {
 		// System.out.println("V"+v);
@@ -286,10 +299,12 @@ public class BookSearchActivity extends BaseActivity implements
 			break;
 
 		default:
+			tv_onclick=(TextView) v;
 			Intent intent = new Intent(context, ResultOnSearchActivity.class);
 			intent.putExtra("isfromDetailAdvancedBookActivity", true);
 			intent.putExtra("bookname", ((TextView) v).getText().toString());
-			startActivity(intent);
+			showKeywords.disapperByOnclick((TextView)v, intent);
+  		    //startActivity(intent);
 			// finish();
 			break;
 		}

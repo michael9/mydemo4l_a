@@ -7,6 +7,7 @@ import java.util.Vector;
 import com.cqvip.moblelib.constant.Constant;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.text.TextUtils.TruncateAt;
@@ -68,7 +69,7 @@ public class KeywordsView extends FrameLayout implements OnGlobalLayoutListener 
 	 * 本标识的作用是防止在填充keywrods为完成的过程中获取到width和height后提前启动动?? 在show()方法中其被赋值为false.
 	 * 真正能够动画显示的另????要条??width和height不为0.
 	 */
-	private boolean enableShow;
+	public boolean enableShow;
 	private Random random;
 
 	/**
@@ -85,18 +86,23 @@ public class KeywordsView extends FrameLayout implements OnGlobalLayoutListener 
 	/** 动画运行时间 */
 	private long animDuration;
 
+	private Context context;
+
 	public KeywordsView(Context context) {
 		super(context);
+		this.context = context;
 		init();
 	}
 
 	public KeywordsView(Context context, AttributeSet attrs) {
 		super(context, attrs);
+		this.context = context;
 		init();
 	}
 
 	public KeywordsView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
+		this.context = context;
 		init();
 	}
 
@@ -195,16 +201,54 @@ public class KeywordsView extends FrameLayout implements OnGlobalLayoutListener 
 		}
 	}
 
-	private boolean show() {
+	public void disapperByOnclick(TextView tv, Intent intent) {
+		AnimationSet animSet = getAnimationSet_Onclick();
+		tv.startAnimation(animSet);
+		final Intent intent2 = intent;
+		final TextView txt = (TextView)tv;
+		animSet.setAnimationListener(new AnimationListener() {
+
+			public void onAnimationStart(Animation animation) {
+			}
+
+			public void onAnimationRepeat(Animation animation) {
+			}
+
+			public void onAnimationEnd(Animation animation) {
+				txt.setVisibility(View.GONE);
+				context.startActivity(intent2);
+			}
+		});
+	}
+
+	private AnimationSet getAnimationSet_Onclick() {
+		AnimationSet animSet = new AnimationSet(true);
+		animSet.setInterpolator(interpolator);
+		animSet.addAnimation(animAlpha2Transparent);
+		animSet.addAnimation(new ScaleAnimation(1, 3, 1, 3,
+				Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
+				0.5f));
+		animSet.setDuration(500);
+		animSet.setFillBefore(true);
+		//animSet.setFillAfter(true);
+		return animSet;
+	}
+
+	private LinkedList<TextView> listTxtTop_restart,listTxtBottom_restart;
+	private int xItem, yItem, xCenter, yCenter;
+
+	public boolean show() {
 		if (width > 0 && height > 0 && vecKeywords != null
 				&& vecKeywords.size() > 0 && enableShow) {
 			// Log.e("---","show()-width="+width+",height="+height);
 			enableShow = false;
 			lastStartAnimationTime = System.currentTimeMillis();
-			int xCenter = width >> 1, yCenter = height >> 1;
+			xCenter = width >> 1;
+			yCenter = height >> 1;
 			// Log.e("---","show()-xCenter="+xCenter+",yCenter="+yCenter);
 			int size = vecKeywords.size();
-			int xItem = width / size, yItem = height / (size + 1);
+			xItem = width / size;
+			yItem = height / (size + 1);
 			// Log.e("---","show()-xItem="+xItem+",yItem="+yItem);
 			LinkedList<Integer> listX = new LinkedList<Integer>(), listY = new LinkedList<Integer>();
 			for (int i = 0; i < size; i++) {
@@ -214,8 +258,10 @@ public class KeywordsView extends FrameLayout implements OnGlobalLayoutListener 
 			}
 			LinkedList<TextView> listTxtTop = new LinkedList<TextView>();
 			LinkedList<TextView> listTxtBottom = new LinkedList<TextView>();
+			listTxtTop_restart=listTxtTop;
+			listTxtBottom_restart=listTxtBottom;
 			for (int i = 1; i <= size; i++) {
-				String keyword = vecKeywords.get(i-1);
+				String keyword = vecKeywords.get(i - 1);
 				// //随机颜色
 				// int ranColor = random.nextInt(5);
 				// int color = Color.WHITE;
@@ -234,11 +280,11 @@ public class KeywordsView extends FrameLayout implements OnGlobalLayoutListener 
 				int color = Color.WHITE;
 				if (i <= size / 5) {
 					color = 0xfff15a22;
-				} else if (i <= 2*size / 5) {
+				} else if (i <= 2 * size / 5) {
 					color = 0xff8552a1;
-				} else if (i <= 3*size / 5) {
+				} else if (i <= 3 * size / 5) {
 					color = 0xff33a3dc;
-				} else if (i <=4*size / 5) {
+				} else if (i <= 4 * size / 5) {
 					color = 0xff84bf96;
 				} else {
 					color = 0xffa1a3a6;
@@ -254,7 +300,7 @@ public class KeywordsView extends FrameLayout implements OnGlobalLayoutListener 
 				txt.setText(keyword);
 				txt.setTextColor(color);
 				txt.setTextSize(TypedValue.COMPLEX_UNIT_SP, txtSize);
-				//txt.setShadowLayer(2, 2, 2, 0xff696969);
+				// txt.setShadowLayer(2, 2, 2, 0xff696969);
 				txt.setGravity(Gravity.CENTER);
 				txt.setEllipsize(TruncateAt.END);
 				txt.setSingleLine(true);
@@ -283,6 +329,13 @@ public class KeywordsView extends FrameLayout implements OnGlobalLayoutListener 
 			return true;
 		}
 		return false;
+	}
+
+	public void show_restart() {
+		if(listTxtTop_restart!=null){
+		attch2Screen(listTxtTop_restart, xCenter, yCenter, yItem);
+		attch2Screen(listTxtBottom_restart, xCenter, yCenter, xItem);
+		}
 	}
 
 	private void attch2Screen(LinkedList<TextView> listTxt, int xCenter,
