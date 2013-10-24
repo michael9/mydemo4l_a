@@ -6,6 +6,8 @@ import java.util.Map;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.LayoutInflater;
@@ -40,17 +42,24 @@ public class EBookActiviy extends BaseActivity {
 	private String[] EBOOKTYPE;
 	private ViewGroup searchbar;
 	private int[] drawableids = { R.drawable.sign_vip, R.drawable.sign_chaoxing,
-			R.drawable.sign_fangzheng };
+			R.drawable.icon_search_wf,R.drawable.icon_search_wf,R.drawable.icon_search_wf,R.drawable.icon_search_cnki,R.drawable.icon_search_wf };
 	private  int currentID=-1;
 	private EditText editText;
 	public static Map<Integer, Boolean> isSelected;
 	private Context context;
+	
+	private SharedPreferences userChoice;
+	private Editor editor;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_ebook_activiy);
 		context = this;
+		
+		userChoice = getSharedPreferences("mobilelibbate1", MODE_PRIVATE);
+		editor = userChoice.edit();
 		editText=(EditText) findViewById(R.id.ebook_edit);
 		View v = findViewById(R.id.ebook_title);
 		TextView title = (TextView) v.findViewById(R.id.txt_header);
@@ -70,7 +79,8 @@ public class EBookActiviy extends BaseActivity {
 		EBOOKTYPE = getResources().getStringArray(R.array.ebooktype);
 
 		ListView lv = (ListView) findViewById(R.id.ebook_search_list);
-		final MyAdapter  adapter = new MyAdapter(this, EBOOKTYPE, drawableids);
+		int choice = userChoice.getInt("userchoice", 1);
+		final MyAdapter  adapter = new MyAdapter(this, EBOOKTYPE, drawableids,choice);
 		lv.setAdapter(adapter);
 
 		lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -78,7 +88,7 @@ public class EBookActiviy extends BaseActivity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				if(position!=2){//方正暂时不能用
+				
 				View v = parent.getChildAt(position);
 				CheckBox check = (CheckBox) v.findViewById(R.id.checkbox);
 				if(check!=null){
@@ -88,8 +98,6 @@ public class EBookActiviy extends BaseActivity {
 				    adapter.notifyDataSetChanged();
 				}
 			}
-			}
-
 		});
 
 		searchbar = (ViewGroup) findViewById(R.id.searchbar);
@@ -99,17 +107,17 @@ public class EBookActiviy extends BaseActivity {
 				if(!validateChoosed()){
 					Toast.makeText(context, "请选择一个资源库", 1).show();
 				}else{
-					int searchtype = 1;
-					if(isSelected.get(0)){
-						searchtype = 1;//维普
-					}else if(isSelected.get(1)){
-						searchtype = 2;//智立方
+					int searchtype = 0;
+					for(int i=0;i<EBOOKTYPE.length;i++){
+						if(isSelected.get(i)){
+							searchtype = i;
+						}
 					}
 					Intent intent = new Intent(EBookActiviy.this,
 							EBookSearchActivity.class);
 					intent.putExtra("type",searchtype);
 					startActivity(intent);
-					finish();
+					//finish();
 				}
 			}
 		});
@@ -125,17 +133,17 @@ public class EBookActiviy extends BaseActivity {
 				if(!validateChoosed()){
 					Toast.makeText(context, "请选择一个资源库", 1).show();
 				}else{
-					int searchtype = 1;
-					if(isSelected.get(0)){
-						searchtype = 1;//维普
-					}else if(isSelected.get(1)){
-						searchtype = 2;//智立方
+					int searchtype = 0;
+					for(int i=0;i<EBOOKTYPE.length;i++){
+						if(isSelected.get(i)){
+							searchtype = i;
+						}
 					}
 					Intent intent = new Intent(EBookActiviy.this,
 							EBookSearchActivity.class);
 					intent.putExtra("type",searchtype);
 					startActivity(intent);
-					finish();
+					//finish();
 				}
 				
 			}
@@ -179,21 +187,21 @@ public class EBookActiviy extends BaseActivity {
 		int  currentID=-1;
 
 		
-		private void init() {
+		private void init(int choice) {
 			isSelected = new HashMap<Integer, Boolean>();
 			for (int i = 0; i < eBookTypes.length; i++) {
-				if(i==0){
+				if(i==choice){
 					isSelected.put(i, true);
 				}else{
 				isSelected.put(i, false);
 				}
 			}
 		}
-		public MyAdapter(Context context, String[] eBookTypes, int[] drawableids) {
+		public MyAdapter(Context context, String[] eBookTypes, int[] drawableids,int choice) {
 			this.eBookTypes = eBookTypes;
 			this.context = context;
 			this.drawableids = drawableids;
-			init();
+			init(choice);
 		}
 
 		public void setCurrentID(int currentID) {
@@ -225,27 +233,18 @@ public class EBookActiviy extends BaseActivity {
 				inflater = LayoutInflater.from(context);
 				convertView = inflater.inflate(R.layout.item_ebooktype, null);
 				CheckBox checkBox=(CheckBox) convertView.findViewById(R.id.checkbox);
-				if(position==eBookTypes.length-1){
-					checkBox.setEnabled(false);
-				}
+//				if(position==eBookTypes.length-1){
+//					checkBox.setEnabled(false);
+//				}
 			}
 			ImageView iv = (ImageView) convertView
 					.findViewById(R.id.booktype_img);
 			TextView tv=(TextView) convertView
 					.findViewById(android.R.id.text1);
-//			CheckedTextView checkedTextView = (CheckedTextView) convertView
-//					.findViewById(android.R.id.text1);
 			CheckBox checkBox=(CheckBox) convertView.findViewById(R.id.checkbox);
-//			if(position==0){
-//				checkBox.setChecked(true);
-//			}
 			checkBox.setChecked(isSelected.get(position));
 			iv.setImageResource(drawableids[position]);
 			tv.setText(eBookTypes[position]);
-//			  if(position==this.currentID)
-//				  checkBox.setChecked(true);
-//			  else
-//				  checkBox.setChecked(false);
 			tv.setOnClickListener(new View.OnClickListener() {
 				
 				@Override
@@ -256,7 +255,6 @@ public class EBookActiviy extends BaseActivity {
 						startActivity(new Intent(EBookActiviy.this,
 						PeriodicalClassfyActivity.class));
 					}
-					
 				}
 			});
 			iv.setOnClickListener(new View.OnClickListener() {
@@ -272,8 +270,6 @@ public class EBookActiviy extends BaseActivity {
 					
 				}
 			});
-			
-			
 			return convertView;
 		}
 	}
@@ -290,5 +286,20 @@ public class EBookActiviy extends BaseActivity {
 			setSoftInputShownOnFocus.invoke(editText, false);
 			} catch (Exception e) {}
 			}
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		for(int i=0;i<EBOOKTYPE.length;i++){
+			if(isSelected.get(i)){
+				editor.putInt("userchoice", i);
+				editor.commit();
+			}
+		}
+		
+		
+		
 	}	
+	
 }

@@ -10,6 +10,10 @@
     <string-array name="ebooktype">
         <item>维普中刊</item>
         <item>超星图书</item>
-        <item>方正图书</item>
+        <item>万方学位论文</item>
+        <item>万方会议论文</item>
+        <item>万方专利</item>
+        <item>CNKI标准</item>
+        <item>万方科技成果</item>
     </string-array>
 </resources>

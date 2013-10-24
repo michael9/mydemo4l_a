@@ -81,6 +81,15 @@ public class GlobleData {
 	
 	public static final int BIG_PERPAGE = 500;//一次性获取500条记录
 	
+	public static final int ZLF_ACADEMIC = 2;//学位论文
+	public static final int ZLF_CONFERENCE = 3;//会议
+	public static final int ZLF_PATENT = 4;//专利
+	public static final int ZLF_STANDARD= 5;//标准
+	public static final int ZLF_ACHIEVEMENT = 6;//成果
+	public static final int ZLF_BOOK = 7;//书籍
+	
+	
+	
 	
 	
 	

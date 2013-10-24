@@ -10,6 +10,7 @@ import org.json.JSONObject;
 
 import android.util.Log;
 
+import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.net.BookException;
 
 public class ZLFBook implements Serializable{
@@ -35,12 +36,13 @@ public class ZLFBook implements Serializable{
 		private String keyword_c;//中文关键词（分号分隔）:
     	private String subjects;//主题（显示）:需要检索的主题(分号分隔)
     	private String tsprice;//（图书）原书定价
-    	private String type;//文献类型(1：期刊文章,2：学位论文,3：会议,4 专利,5标准,6成果,7专著，8 产品；9:科技报告；10政策法规;99引文)
+    	private int type;//文献类型(1：期刊文章,2：学位论文,3：会议,4 专利,5标准,6成果,7专著，8 产品；9:科技报告；10政策法规;99引文)
     	private String tsseriesname;//（图书）丛书名
     	
     	private String title_c;//中文篇名
     	private String _id;//id 号
     	private String showwriter;//规范前作者（分号分隔）
+    	private String showorgan;//规范前机构
     	private String tscatalog;//（图书）目录
     	private String pagecount;//页数
 
@@ -58,6 +60,7 @@ public class ZLFBook implements Serializable{
     	
     	private String classtypes;//领域（显示）: (分号分隔)
     	private String tsothernotes;//其他附注
+    	private String media_c;//会议名称
     	private String remark_c;//中文摘要
     	private String bycount;//被引次数
     	private String mediaid;//传媒编号(聚类)
@@ -66,25 +69,86 @@ public class ZLFBook implements Serializable{
     	private String years;//年(聚类)
     	private String strreftext;//参考文献文本（参考文献信息）
     	private String tscoverimage;//图片url
-    	private String language;//语言类型(1:中文2：英文….)
+    	private int language;//语言类型(1:中文2：英文….)
     	
+    	private String zlmaintype;//专利类型
+    	private String zlapplicationdata;//专利申请日
+    	private String zlopendata;//专利公开日
+
+    	private String bzmaintype;//行业标准
+    	private String bzstatus;//标准状态
+    	private String bzpubdate;//标准实行日
+    
+    	private String cgcontactunit;//科技成果单位
     	
     	public ZLFBook(JSONObject json)throws BookException{
 			try {
-				_id = json.getString("_id");
-				title_c = json.getString("title_c");
-				showwriter = json.getString("showwriter");
-				tspress = json.getString("tspress");
-				tsisbn = json.getString("tsisbn");
 				
-				tspubdate = json.getString("tspubdate");
-				classid = json.getString("class");
 				
-				pagecount = json.getString("pagecount");
-				remark_c = json.getString("remark_c");
+				if(!json.isNull("_id")){
+					_id = json.getString("_id");
+				}
 				
-				keyword_c = json.getString("keyword_c");
-				tscoverimage = json.getString("tscoverimage");
+				if(!json.isNull("language")){
+					language = json.getInt("language");
+				}
+				
+				title_c = judgeTilte(language,json);//标题
+				showwriter = judgeWirter(language,json);//作者
+				remark_c = judgeRemark(language,json);//介绍
+				if(!json.isNull("years")){
+					years = json.getString("years");
+				}
+				type = json.getInt("type");
+				switch(type){
+				case GlobleData.ZLF_ACADEMIC:
+					showorgan = json.getString("showorgan");
+					break;
+				case GlobleData.ZLF_CONFERENCE:
+					media_c = json.getString("media_c");
+					break;
+				case GlobleData.ZLF_PATENT:
+					    
+					showorgan = json.getString("showorgan");// "沈阳上方电子有限公司;",
+					zlmaintype = json.getString("zlmaintype");   //专利类型
+					zlapplicationdata = json.getString("zlapplicationdata"); //专利申请日  
+					zlopendata = json.getString("zlopendata");   //专利公开日
+					break;
+				case GlobleData.ZLF_STANDARD:
+					 bzmaintype = json.getString("bzmaintype");   //	行业标准				
+					 showorgan = json.getString("showorgan");   //机构				
+					 bzstatus = json.getString("bzstatus");  // "作废"
+					 bzpubdate = json.getString("bzpubdate");//"1999-05-17"
+					break;
+				case GlobleData.ZLF_ACHIEVEMENT:
+				    cgcontactunit = json.getString("cgcontactunit");//科技成果单位
+					break;
+				case GlobleData.ZLF_BOOK:
+						if(!json.isNull("tspress")){
+							tspress = json.getString("tspress");
+							}
+						if(!json.isNull("tsisbn")){
+							tsisbn = json.getString("tsisbn");
+							}
+						if(!json.isNull("tspubdate")){
+							tspubdate = json.getString("tspubdate");
+							}				
+						if(!json.isNull("class")){
+							classid = json.getString("class");
+							}
+						if(!json.isNull("pagecount")){
+							pagecount = json.getString("pagecount");
+							}
+						if(!json.isNull("keyword_c")){
+							keyword_c = json.getString("keyword_c");
+							}				
+						if(!json.isNull("tscoverimage")){
+							tscoverimage = json.getString("tscoverimage");
+							}
+					break;
+					default:
+						break;
+				}
 			} catch (JSONException e) {
 				e.printStackTrace();
 				throw new BookException(e);
@@ -92,8 +156,152 @@ public class ZLFBook implements Serializable{
 }
     	
     	
-    	
-    	public static List<ZLFBook> formList(String result) throws BookException{
+    	public String getShoworgan() {
+			return showorgan;
+		}
+
+
+
+		public String getMedia_c() {
+			return media_c;
+		}
+
+
+
+		public String getZlmaintype() {
+			return zlmaintype;
+		}
+
+
+
+		public String getZlapplicationdata() {
+			return zlapplicationdata;
+		}
+
+
+
+		public String getZlopendata() {
+			return zlopendata;
+		}
+
+
+
+		public String getBzmaintype() {
+			return bzmaintype;
+		}
+
+
+
+		public String getBzstatus() {
+			return bzstatus;
+		}
+
+
+
+		public String getBzpubdate() {
+			return bzpubdate;
+		}
+
+
+
+		public String getCgcontactunit() {
+			return cgcontactunit;
+		}
+
+
+
+		/**
+		 * 根据语言获取介绍
+		 * @param language2
+		 * @param json
+		 * @return
+		 */
+    	private String judgeRemark(int language2, JSONObject json) {
+    		String remark = "";
+			if(language2== 1){
+				if(!json.isNull("remark_c")){
+					try {
+						remark = json.getString("remark_c");
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}
+				}
+				
+			}else if(language2 == 2){
+				if(!json.isNull("remark_e")){
+					try {
+						remark = json.getString("remark_e");
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}				
+								}
+			}
+			return remark;
+		}
+
+
+    	/**
+		 * 根据语言获取标题
+		 * @param language2
+		 * @param json
+		 * @return
+		 */
+		private String judgeWirter(int language2, JSONObject json) {
+			String title = "";
+			if(language2== 1){
+				if(!json.isNull("showwriter")){
+					try {
+						title = json.getString("showwriter");
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}
+				}
+				
+			}else if(language2 == 2){
+				if(!json.isNull("author_e")){
+					try {
+						title = json.getString("author_e");
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}				
+								}
+			}
+			return title;
+		}
+
+
+		/**
+		 * 根据语言获取作者
+		 * @param language2
+		 * @param json
+		 * @return
+		 */
+		private String judgeTilte(int language2, JSONObject json) {
+			String autor = "";
+    		if(language2== 1){
+				if(!json.isNull("title_c")){
+					try {
+						autor = json.getString("title_c");
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}
+				}
+				
+			}else if(language2 == 2){
+				if(!json.isNull("title_e")){
+					try {
+						autor = json.getString("title_e");
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}				
+								}
+			}
+			return autor;
+		}
+
+
+
+		public static List<ZLFBook> formList(String result) throws BookException{
     		
     		Log.i("ZLFBook","=======result=="+result);
 		    List<ZLFBook> books = null;
@@ -153,13 +361,13 @@ public class ZLFBook implements Serializable{
 
 
 
-		public String getType() {
+		public int getType() {
 			return type;
 		}
 
 
 
-		public void setType(String type) {
+		public void setType(int type) {
 			this.type = type;
 		}
 
@@ -453,13 +661,13 @@ public class ZLFBook implements Serializable{
 
 
 
-		public String getLanguage() {
+		public int getLanguage() {
 			return language;
 		}
 
 
 
-		public void setLanguage(String language) {
+		public void setLanguage(int language) {
 			this.language = language;
 		}
 

@@ -55,7 +55,7 @@
                     style="@style/TextContentSmallStyle"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:singleLine="true"
+                    android:maxLines="2"
                     android:text=""
                    />
 
@@ -67,7 +67,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:text=""
-                    android:maxLines="3"
+                    android:maxLines="2"
                     />
 
         </LinearLayout>

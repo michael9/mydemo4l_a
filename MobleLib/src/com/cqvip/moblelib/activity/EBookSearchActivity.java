@@ -76,7 +76,7 @@ public class EBookSearchActivity extends BaseActivity implements
 		listview = (DropDownListView) findViewById(R.id.search_res_lv);
 		listview.setOnItemClickListener((OnItemClickListener) this);
 		noResult_rl = (RelativeLayout) findViewById(R.id.noresult_rl);
-		SEARCHType  = getIntent().getIntExtra("type",1);
+		SEARCHType  = getIntent().getIntExtra("type",0);
 		//获取更多
 		listview.setOnBottomListener(new View.OnClickListener() {
 			@Override
@@ -128,8 +128,9 @@ public class EBookSearchActivity extends BaseActivity implements
 		});
 
 		title_bar = findViewById(R.id.head_bar);
+		String[] EBOOKTYPE = getResources().getStringArray(R.array.ebooktype);
 		TextView title = (TextView) title_bar.findViewById(R.id.txt_header);
-		title.setText(R.string.main_ebook);
+		title.setText(EBOOKTYPE[SEARCHType]);
 		ImageView back = (ImageView) title_bar
 				.findViewById(R.id.img_back_header);
 		back.setOnClickListener(new View.OnClickListener() {
@@ -172,7 +173,7 @@ public class EBookSearchActivity extends BaseActivity implements
 			// TODO Auto-generated method stub
 			if(customProgressDialog!=null&&customProgressDialog.isShowing())
 			customProgressDialog.dismiss();
-			if(SEARCHType == 1){
+			if(SEARCHType == 0){
 			try {
 				//获取返回记录数
 				int count = EBook.ebookCount(response);
@@ -206,7 +207,7 @@ public class EBookSearchActivity extends BaseActivity implements
 				e.printStackTrace();
 			}
 
-		}else if(SEARCHType == 2){
+		}else {
 			try {
 				//获取返回记录数
 				if(!TextUtils.isEmpty(response)){
@@ -215,7 +216,7 @@ public class EBookSearchActivity extends BaseActivity implements
 						listview.setVisibility(View.VISIBLE);
 						noResult_rl.setVisibility(View.GONE);
 						cache = new BitmapCache(Tool.getCachSize());
-						zlfadapter = new ZLFBookAdapter(context, lists,  new ImageLoader(mQueue, cache));
+						zlfadapter = new ZLFBookAdapter(context, lists,  new ImageLoader(mQueue, cache),SEARCHType);
 						if(lists.size()<DEFAULT_COUNT){
 							listview.setHasMore(false);
 							listview.setAdapter(zlfadapter);
@@ -246,7 +247,7 @@ public class EBookSearchActivity extends BaseActivity implements
 		public void onResponse(String response) {
 			try {
 				// JSONObject mj=new JSONObject(response);
-				if(SEARCHType == 1){
+				if(SEARCHType == 0){
 				
 				
 				List<EBook> lists = EBook.formList(response);
@@ -263,7 +264,7 @@ public class EBookSearchActivity extends BaseActivity implements
 					listview.onBottomComplete();
 				}
 		
-				}else if(SEARCHType == 2){
+				}else {
 					List<ZLFBook> lists = ZLFBook.formList(response);
 					if (lists != null && !lists.isEmpty()&&lists.size()==DEFAULT_COUNT) {
 						zlfadapter.addMoreData(lists);
@@ -318,7 +319,7 @@ public class EBookSearchActivity extends BaseActivity implements
 	 * @param count
 	 */
 	private void getHomePage(String key, int page, int count, int type) {
-		if(SEARCHType == 1){
+		if(SEARCHType == 0){
 		gparams = new HashMap<String, String>();
 		gparams.put("title", key);
 		gparams.put("curpage", "" + page);// 当前页数
@@ -334,11 +335,12 @@ public class EBookSearchActivity extends BaseActivity implements
 			requestVolley(GlobleData.SERVER_URL + "/zk/search.aspx",
 					backlistenermore, Method.POST);
 		}
-		}else if(SEARCHType == 2){
+		}else {
 			gparams = new HashMap<String, String>();
 			JSONObject json = new JSONObject();
 			try {
 				json.put("key", key);
+				json.put("type",getType(SEARCHType));
 				json.put("PageSize", "" + count);// 当前页数
 				json.put("PageNumber", "" + page);// 条数
 			} catch (JSONException e) {
@@ -360,9 +362,36 @@ public class EBookSearchActivity extends BaseActivity implements
 		}
 	}
 
+	private String  getType(int type) {
+		int i = GlobleData.ZLF_BOOK;
+		switch(type){
+		case 1:
+			i = GlobleData.ZLF_BOOK;//书籍
+			break;
+		case 2:
+			i = GlobleData.ZLF_ACADEMIC;//学位论文
+			break;
+		case 3:
+			i = GlobleData.ZLF_CONFERENCE;
+			break;
+		case 4:
+			i = GlobleData.ZLF_PATENT;
+			break;
+		case 5:
+			i = GlobleData.ZLF_STANDARD;
+			break;
+		case 6:
+			i = GlobleData.ZLF_ACHIEVEMENT;
+			break;
+			default:
+				break;
+		}
+		return i+"";
+	}
+
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int positon, long id) {
-		if(SEARCHType == 1){
+		if(SEARCHType == 0){
 			EBook book = adapter.getLists().get(positon);
 			if (book != null) {
 				Intent _intent = new Intent(context, EbookDetailActivity.class);
@@ -371,13 +400,14 @@ public class EBookSearchActivity extends BaseActivity implements
 				_intent.putExtra("detaiinfo", bundle);
 				startActivity(_intent);
 			}
-		}else if(SEARCHType == 2){
+		}else {
 			ZLFBook zlfbook = zlfadapter.getLists().get(positon) ;
 			if(zlfbook !=null){
 				Intent _intent = new Intent(context, ZLFBookDetailActivity.class);
 				Bundle bundle = new Bundle();
 				bundle.putSerializable("book", zlfbook);
 				_intent.putExtra("detaiinfo", bundle);
+				_intent.putExtra("type", SEARCHType);
 				startActivity(_intent);
 			}
 		}

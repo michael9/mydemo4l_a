@@ -5,6 +5,7 @@ import java.util.Map;
 import android.app.DownloadManager;
 import android.content.Context;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
@@ -19,7 +20,7 @@ public class ZLFBookDetailActivity extends BaseActivity {
 	private View title_bar, book_action_bar;
 	private ImageView img_book;
 	private Context context;
-	 
+	private int zlftype; 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -30,6 +31,8 @@ public class ZLFBookDetailActivity extends BaseActivity {
 		View v = findViewById(R.id.head_bar);
 		Bundle bundle = getIntent().getBundleExtra("detaiinfo");
 		zlfbook = (ZLFBook) bundle.getSerializable("book");
+		zlftype = getIntent().getIntExtra("type", 1);
+		
 		
 		author = (TextView) findViewById(R.id.ebook_author_txt);
 		from = (TextView) findViewById(R.id.ebook_from_txt);
@@ -45,27 +48,81 @@ public class ZLFBookDetailActivity extends BaseActivity {
 		String author1 = getResources().getString(R.string.item_author);
 		//String from1 = getResources().getString(R.string.ebook_orang);
 		String publish = getResources().getString(R.string.item_publish);
-		String page1 = getResources().getString(R.string.ebook_page);
-		String describe1 = getResources().getString(R.string.ebook_abstrac);
 
 //		ImageLoader mImageLoader = new ImageLoader(mQueue, new BitmapCache(Tool.getCachSize()));
 //		ImageListener listener = ImageLoader.getImageListener(img_book,
 //				R.drawable.defaut_book, R.drawable.defaut_book);
 //		mImageLoader.get(zlfbook.getImgurl(), listener);
+		String ztitle = zlfbook.getTitle_c()==null?"":zlfbook.getTitle_c();
+		String zdesc = zlfbook.getRemark_c()==null?"":zlfbook.getRemark_c();
+		String zauthor = zlfbook.getShowwriter()==null?"":zlfbook.getShowwriter();
+		title.setText(ztitle);//标题
+		content.setText(zdesc);//简介
+		switch (zlftype){
+		case 1:
+			String zpublish = zlfbook.getTspress()==null?"":zlfbook.getTspress();
+			String zyear = zlfbook.getTspubdate()==null?"":zlfbook.getTspubdate();
+			String zisbn = zlfbook.getTsisbn()==null?"":zlfbook.getTsisbn();
+			author.setText(author1 + zauthor);
+			from.setText(publish + zpublish+","+zyear);
+			if(zisbn.equals("")){
+				type.setVisibility(View.GONE);
+			}else{
+			type.setText("ISBN:" +zisbn);
+			}
+			break;
+		case 2://学位论文
+			author.setText(author1 + zauthor);
+			String acadmic = context.getResources().getString(R.string.zlf_acdemic_organ);
+			from.setText(acadmic + zlfbook.getShoworgan()+","+zlfbook.getYears());
+			type.setVisibility(View.GONE);
+			break;
+		case 3://会议论文
+			author.setText(author1 + zauthor);
+			String conference_name = context.getResources().getString(R.string.zlf_conference_name);
+			String conference_date = context.getResources().getString(R.string.zlf_conference_date);
+			from.setText(conference_name + zlfbook.getMedia_c());
+			type.setText(conference_date+zlfbook.getYears());
+			break;
+		case 4://专利
+			String author_patent = context.getResources().getString(R.string.zlf_author_patent);
+			String patent_set = context.getResources().getString(R.string.zlf_author_patent_set);
+			author.setText(author_patent + zauthor);
+			if(!TextUtils.isEmpty(zlfbook.getShoworgan())){
+			from.setText(patent_set+zlfbook.getShoworgan());
+			}else{
+				from.setVisibility(View.GONE);
+			}
+			type.setText("专利类型："+zlfbook.getZlmaintype()+"\n"+"申请日："+zlfbook.getZlapplicationdata()+"\n"+"公开日："+zlfbook.getZlopendata());
+			break;
+		case 5:
+			
+			author.setText("标准类型：" + zlfbook.getBzmaintype());
+			from.setText("标准状态："+zlfbook.getBzstatus());
+			type.setText("起草单位："+zlfbook.getShoworgan()+"\n"+"发布日期："+zlfbook.getBzpubdate());
+			break;
+		case 6:
+			String author_achivement = context.getResources().getString(R.string.zlf_author_achivment);
+			if(!TextUtils.isEmpty(zauthor)){
+				author.setText(author_achivement + zauthor);
+			}else{
+				author.setVisibility(View.GONE);
+			}
+			from.setText("完成单位："+zlfbook.getCgcontactunit());
+			if(!TextUtils.isEmpty(zlfbook.getYears())){
+			type.setText("公布年份："+zlfbook.getYears());
+			}else{
+				type.setVisibility(View.GONE);
+			}
+			break;
+			default:
+				break;
+		}
+		
+		
 
 		
-		String ztitle = zlfbook.getTitle_c()==null?"":zlfbook.getTitle_c();
-		String zauthor = zlfbook.getShowwriter()==null?"":zlfbook.getShowwriter();
-		String zpublish = zlfbook.getTspress()==null?"":zlfbook.getTspress();
-		String zyear = zlfbook.getTspubdate()==null?"":zlfbook.getTspubdate();
-		String zisbn = zlfbook.getTsisbn()==null?"":zlfbook.getTsisbn();
-		String zdesc = zlfbook.getRemark_c()==null?"":zlfbook.getRemark_c();
 		
-		title.setText(ztitle);
-		author.setText(author1 + zauthor);
-		from.setText(publish + zpublish+","+zyear);
-		type.setText("ISBN:" +zisbn);
-		content.setText(zdesc);
 		title_bar = findViewById(R.id.head_bar);
 		TextView title = (TextView) title_bar.findViewById(R.id.txt_header);
 		title.setText(R.string.book_detail);
