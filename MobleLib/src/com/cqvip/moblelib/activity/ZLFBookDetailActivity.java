@@ -119,10 +119,6 @@ public class ZLFBookDetailActivity extends BaseActivity {
 				break;
 		}
 		
-		
-
-		
-		
 		title_bar = findViewById(R.id.head_bar);
 		TextView title = (TextView) title_bar.findViewById(R.id.txt_header);
 		title.setText(R.string.book_detail);
