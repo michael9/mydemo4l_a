@@ -6,7 +6,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.cqvip.moblelib.nanshan.R;
 import com.cqvip.moblelib.view.CustomProgressDialog;
-import com.cqvip.moblelib.view.mylinearlayout;
 import com.cqvip.utils.Tool;
 
 import android.app.Activity;

@@ -3,11 +3,11 @@
     android:layout_height="fill_parent"
     android:background="@drawable/lightgray" >
 
-    <ScrollView android:id="@+id/myScrollView"
+    <com.cqvip.moblelib.view.MyScrollView_SearchHistory android:id="@+id/myScrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.cqvip.moblelib.view.mylinearlayout
+        <LinearLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/myll"
             android:layout_width="match_parent"
@@ -88,10 +88,14 @@
                     android:id="@+id/word"
                     android:layout_width="fill_parent"
                     android:layout_height="200dp"
-                    android:padding="2dip" />
+                    android:padding="2dip" 
+                    android:focusable="true"
+                    android:clickable="true" android:longClickable="true"
+                    
+                    />
             </LinearLayout>
-        </com.cqvip.moblelib.view.mylinearlayout>
-    </ScrollView>
+        </LinearLayout>
+    </com.cqvip.moblelib.view.MyScrollView_SearchHistory>
 
     <ImageView
         android:id="@+id/return_iv"

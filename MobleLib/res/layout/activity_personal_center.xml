@@ -3,8 +3,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/lightgray" >
 
-    <com.cqvip.moblelib.view.mylinearlayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:id="@+id/myll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -191,7 +190,7 @@
                 android:layout_height="1dp"
                 android:src="@drawable/lightgray" />
         </LinearLayout>
-    </com.cqvip.moblelib.view.mylinearlayout>
+    </LinearLayout>
     <ImageView
         android:id="@+id/return_iv"
         android:layout_width="50dp"

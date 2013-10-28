@@ -4,28 +4,30 @@ import java.util.LinkedList;
 import java.util.Random;
 import java.util.Vector;
 
-import com.cqvip.moblelib.constant.Constant;
-
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.text.TextUtils.TruncateAt;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
 import android.view.animation.ScaleAnimation;
 import android.view.animation.TranslateAnimation;
-import android.view.animation.Animation.AnimationListener;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+
+import com.cqvip.moblelib.constant.Constant;
 
 public class KeywordsView extends FrameLayout implements OnGlobalLayoutListener {
 
@@ -493,6 +495,34 @@ public class KeywordsView extends FrameLayout implements OnGlobalLayoutListener 
 
 	public void setOnClickListener(OnClickListener listener) {
 		itemClickListener = listener;
+	}
+
+	// 滑动距离及坐标
+	private float xDistance, yDistance, xLast, yLast;
+	int distance=100;
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+		switch (ev.getAction()) {
+		case MotionEvent.ACTION_DOWN:
+			xDistance = yDistance = 0f;
+			xLast = ev.getX();
+			yLast = ev.getY();
+			break;
+		case MotionEvent.ACTION_MOVE:
+			final float curX = ev.getX();
+			final float curY = ev.getY();
+
+			xDistance += Math.abs(curX - xLast);
+			yDistance += Math.abs(curY - yLast);
+			xLast = curX;
+			yLast = curY;
+
+			if (xDistance >distance|| yDistance>distance) {
+				Log.i("MyScrollView_SearchHistory", "0");
+				return true;
+			}
+		}
+		return super.onInterceptTouchEvent(ev);
 	}
 
 }
