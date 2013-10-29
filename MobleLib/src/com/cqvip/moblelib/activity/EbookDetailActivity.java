@@ -10,6 +10,7 @@ import android.annotation.TargetApi;
 import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -22,6 +23,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import cn.sharesdk.framework.ShareSDK;
+
 import com.android.volley.Request.Method;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
@@ -30,7 +33,7 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.ImageLoader.ImageListener;
 import com.android.volley.toolbox.StringRequest;
 import com.cqvip.dao.DaoException;
-import com.cqvip.moblelib.R;
+import com.cqvip.moblelib.longgang.R;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.db.MEBookDao;
@@ -108,10 +111,12 @@ public class EbookDetailActivity extends BaseActivity {
 		String describe1 = getResources().getString(R.string.ebook_abstrac);
 		String type1 = getResources().getString(R.string.ebook_type);
 
-		ImageLoader mImageLoader = new ImageLoader(mQueue, new BitmapCache(Tool.getCachSize()));
-		ImageListener listener = ImageLoader.getImageListener(img_book,
-				R.drawable.defaut_book, R.drawable.defaut_book);
-		mImageLoader.get(dBook.getImgurl(), listener);
+//		ImageLoader mImageLoader = new ImageLoader(mQueue, new BitmapCache(Tool.getCachSize()));
+//		ImageListener listener = ImageLoader.getImageListener(img_book,
+//				R.drawable.defaut_book, R.drawable.defaut_book);
+//		mImageLoader.get(dBook.getImgurl(), listener);
+		
+		ShareSDK.initSDK(this);
 
 		title.setText(dBook.getTitle_c());
 		author.setText(author1 + dBook.getWriter());
@@ -158,12 +163,13 @@ public class EbookDetailActivity extends BaseActivity {
 				}
 			}
 		});
+		//·ÖÏí
 		btn_ebook_detail_share.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Tool.bookEshare(EbookDetailActivity.this, dBook);
+				Tool.ebookshare_bysharesdk(EbookDetailActivity.this, dBook, null);
 			}
 		});
 		btn_ebook_detail_collect.setOnClickListener(new OnClickListener() {
@@ -266,6 +272,12 @@ public class EbookDetailActivity extends BaseActivity {
 				finish();
 			}
 		});
+	}
+	
+	@Override
+	protected void onDestroy() {
+		ShareSDK.stopSDK(this);
+		super.onDestroy();
 	}
 	
 	private void start_DownLoadManagerActivity(){

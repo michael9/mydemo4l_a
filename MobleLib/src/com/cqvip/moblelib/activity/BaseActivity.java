@@ -1,28 +1,25 @@
 package com.cqvip.moblelib.activity;
 
-import java.util.Map;
-
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.Volley;
-import com.cqvip.moblelib.R;
-import com.cqvip.moblelib.view.CustomProgressDialog;
-import com.cqvip.moblelib.view.mylinearlayout;
-import com.cqvip.utils.Tool;
-
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
-import android.view.MotionEvent;
 import android.view.GestureDetector.SimpleOnGestureListener;
-import android.widget.Toast;
+import android.view.MotionEvent;
+
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
+import com.cqvip.moblelib.longgang.R;
+import com.cqvip.moblelib.view.CustomProgressDialog;
+import com.cqvip.utils.BitmapCache;
+import com.cqvip.utils.Tool;
 
 public class BaseActivity extends Activity {
 	private GestureDetector mGestureDetector;
 	protected CustomProgressDialog customProgressDialog;
 	protected RequestQueue mQueue;
-
+	public static BitmapCache cache;
 	
 	
 	@Override

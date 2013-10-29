@@ -1,33 +1,41 @@
 package com.cqvip.moblelib.activity;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Bitmap.CompressFormat;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
-import android.text.Html;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.onekeyshare.OnekeyShare;
 
 import com.android.volley.Request.Method;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.ImageLoader.ImageContainer;
 import com.android.volley.toolbox.ImageLoader.ImageListener;
 import com.android.volley.toolbox.StringRequest;
-import com.cqvip.moblelib.R;
 import com.cqvip.moblelib.adapter.BookLocAdapter;
 import com.cqvip.moblelib.constant.GlobleData;
+import com.cqvip.moblelib.longgang.R;
 import com.cqvip.moblelib.model.Book;
 import com.cqvip.moblelib.model.BookLoc;
 import com.cqvip.moblelib.model.Result;
@@ -52,6 +60,9 @@ public class DetailBookActivity extends BaseActivity {
 
 	private int fromFlage;// 表示从哪个activity跳转过来，评论过来不显示评论按钮
 
+	//private static final String FILE_NAME = "/pic.jpg";
+	//public static String TEST_IMAGE=null;
+	Bitmap bitmap;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -67,13 +78,21 @@ public class DetailBookActivity extends BaseActivity {
 		textView9 = (TextView) findViewById(R.id.textView9);
 		textView10 = (TextView) findViewById(R.id.textView10);
 		textView11 = (TextView) findViewById(R.id.textView11);
-
-		ImageLoader mImageLoader = new ImageLoader(mQueue, new BitmapCache(
-				Tool.getCachSize()));
+		
+		ImageLoader mImageLoader = new ImageLoader(mQueue, cache);
 		ImageListener listener = ImageLoader.getImageListener(imgview,
 				R.drawable.defaut_book, R.drawable.defaut_book);
-		mImageLoader.get(dBook.getCover_path(), listener);
+      	ImageContainer imageContainer=mImageLoader.get(dBook.getCover_path(), listener);
+      	bitmap=imageContainer.getBitmap();
 
+		//
+		ShareSDK.initSDK(this);
+//		new Thread() {
+//			public void run() {
+//				initImagePath();
+//			}
+//		}.start();
+		
 		imgview.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -180,7 +199,7 @@ public class DetailBookActivity extends BaseActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Tool.bookshare(DetailBookActivity.this, dBook);
+				Tool.bookshare_bysharesdk(DetailBookActivity.this, dBook,bitmap);
 			}
 		});
 
@@ -208,6 +227,38 @@ public class DetailBookActivity extends BaseActivity {
 		btn_item_result_search_download.setVisibility(View.GONE);
 	}
 
+	@Override
+	protected void onDestroy() {
+		ShareSDK.stopSDK(this);
+		super.onDestroy();
+	}
+	
+//	private void initImagePath() {
+//		try {
+//			if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
+//					&& Environment.getExternalStorageDirectory().exists()) {
+//				TEST_IMAGE = Environment.getExternalStorageDirectory().getAbsolutePath() + FILE_NAME;
+//			}
+//			else {
+			//	TEST_IMAGE = getApplication().getFilesDir().getAbsolutePath() + FILE_NAME;
+			//}
+			//Log.i("MainAct", "initImagePath:"+getApplication().getFilesDir().getAbsolutePath());
+			//File file = new File(TEST_IMAGE);
+//			if (file.exists()) {
+//				file.delete();
+//				file.createNewFile();
+//				Bitmap pic = BitmapFactory.decodeResource(getResources(), R.drawable.defaut_book);
+//				FileOutputStream fos = new FileOutputStream(file);
+//				pic.compress(CompressFormat.JPEG, 100, fos);
+//				fos.flush();
+//				fos.close();
+			//}
+//		} catch(Throwable t) {
+//			t.printStackTrace();
+//			TEST_IMAGE = null;
+//		}
+//	}
+	
 	// 显示对话框
 	private void showLoginDialog(int id) {
 		MainMenuActivity.cantouch = true;

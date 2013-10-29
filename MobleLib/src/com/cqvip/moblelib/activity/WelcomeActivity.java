@@ -14,7 +14,7 @@ import android.os.Message;
 import android.view.Window;
 import android.widget.ImageView;
 
-import com.cqvip.moblelib.R;
+import com.cqvip.moblelib.longgang.R;
 
 public class WelcomeActivity extends Activity {
 

@@ -1,8 +1,8 @@
 package com.cqvip.moblelib.activity;
 
-import com.cqvip.moblelib.R;
-import com.cqvip.moblelib.R.layout;
-import com.cqvip.moblelib.R.menu;
+import com.cqvip.moblelib.longgang.R;
+import com.cqvip.moblelib.longgang.R.layout;
+import com.cqvip.moblelib.longgang.R.menu;
 import com.cqvip.moblelib.constant.Constant;
 
 import android.os.Bundle;
