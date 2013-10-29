@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import com.cqvip.moblelib.R;
+import com.cqvip.moblelib.longgang.R;
 import com.cqvip.moblelib.view.ScrollLayout;
 import com.cqvip.moblelib.view.listener.OnViewChangeListener;
 

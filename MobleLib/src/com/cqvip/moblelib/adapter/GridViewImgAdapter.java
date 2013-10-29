@@ -12,7 +12,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.cqvip.moblelib.R;
+import com.cqvip.moblelib.longgang.R;
 import com.cqvip.moblelib.activity.ActivityDlg;
 import com.cqvip.moblelib.activity.MainMenuActivity;
 import com.cqvip.moblelib.constant.GlobleData;

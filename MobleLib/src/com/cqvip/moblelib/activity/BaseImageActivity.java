@@ -2,7 +2,7 @@ package com.cqvip.moblelib.activity;
 
 import com.cqvip.mobelib.imgutils.ImageFetcher;
 import com.cqvip.mobelib.imgutils.ImageCache.ImageCacheParams;
-import com.cqvip.moblelib.R;
+import com.cqvip.moblelib.longgang.R;
 import com.cqvip.moblelib.constant.GlobleData;
 
 import android.os.Bundle;

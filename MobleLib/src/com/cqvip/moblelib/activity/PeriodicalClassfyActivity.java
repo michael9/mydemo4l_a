@@ -22,7 +22,7 @@ import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
 import com.cqvip.mobelib.imgutils.ImageFetcher;
-import com.cqvip.moblelib.R;
+import com.cqvip.moblelib.longgang.R;
 import com.cqvip.moblelib.fragment.PeriodicalTypeFragment;
 import com.cqvip.moblelib.fragment.SpecialPeriodicalFragment;
 import com.cqvip.moblelib.view.CustomProgressDialog;
