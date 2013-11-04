@@ -350,48 +350,46 @@ View.OnClickListener{
 			keyworldFlow.feedKeyword(tmp);
 		}
 	}
-
+	
+	private int minVelocitx = 1000;
+	private int MinDistance = 50;
 	class MyGestrueListener extends SimpleOnGestureListener {
-		private int minVelocitx = 1000;
-		private int MinDistance = 50;
+
 		
 		@Override
 		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
 				float velocityY) {
-			int a=0;
-			if (e2.getX() - e1.getX() > MinDistance&&(Math.abs(velocityX)>minVelocitx||Math.abs(velocityY)>velocityY)) { // ÓÒ»¬
-				key_words = getRandomArray();
-				showKeywords.rubKeywords();
-				feedKeywordsFlow(showKeywords, key_words);
-				showKeywords.go2Shwo(KeywordsView.ANIMATION_OUT);
-				//return true;
-				a++;
-			}
+			if(e1!=null){
+				if (e2.getX() - e1.getX() > MinDistance&&(Math.abs(velocityX)>minVelocitx||Math.abs(velocityY)>velocityY)) { // ÓÒ»¬
+					key_words = getRandomArray();
+					showKeywords.rubKeywords();
+					feedKeywordsFlow(showKeywords, key_words);
+					showKeywords.go2Shwo(KeywordsView.ANIMATION_OUT);
+					return false;
+				}
+
 			if (e2.getX() - e1.getX() < -MinDistance&&(Math.abs(velocityX)>minVelocitx||Math.abs(velocityY)>velocityY)) {// ×ó»¬
 				key_words = getRandomArray();
 				showKeywords.rubKeywords();
 				feedKeywordsFlow(showKeywords, key_words);
 				showKeywords.go2Shwo(KeywordsView.ANIMATION_IN);
-				//return true;
-				a++;
+				return false;
 			}
 			if (e2.getY() - e1.getY() < -MinDistance&&(Math.abs(velocityX)>minVelocitx||Math.abs(velocityY)>velocityY)) {// ÉÏ»¬
 				key_words = getRandomArray();
 				showKeywords.rubKeywords();
 				feedKeywordsFlow(showKeywords, key_words);
 				showKeywords.go2Shwo(KeywordsView.ANIMATION_IN);
-				//return true;
-				a++;
+				return false;
 			}
 			if (e2.getY() - e1.getY() > MinDistance&&(Math.abs(velocityX)>minVelocitx||Math.abs(velocityY)>velocityY)) {// ÏÂ»¬
 				key_words = getRandomArray();
 				showKeywords.rubKeywords();
 				feedKeywordsFlow(showKeywords, key_words);
 				showKeywords.go2Shwo(KeywordsView.ANIMATION_OUT);
-				a++;
-				//return true;
+				return false;
 			}
-			Log.i("EbookAct_onfling","onfling a="+a);
+			}
 			return false;
 		}
 	}
