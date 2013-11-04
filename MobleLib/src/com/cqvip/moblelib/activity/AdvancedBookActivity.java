@@ -111,7 +111,7 @@ public class AdvancedBookActivity extends BaseActivity implements
 					gridview_abook.setAdapter(adapter);
 				}
 			} catch (Exception e) {
-				// TODO: handle exception
+				onError(2);
 				return;
 			}
 		}
@@ -130,7 +130,7 @@ public class AdvancedBookActivity extends BaseActivity implements
 					Tool.ShowMessages(context, "没有更多内容可供加载");
 				}
 			} catch (Exception e) {
-				// TODO: handle exception
+				onError(2);
 			}
 		}
 	};
@@ -156,7 +156,7 @@ public class AdvancedBookActivity extends BaseActivity implements
 			mQueue.add(mys);
 			mQueue.start();
 		} catch (Exception e) {
-			// TODO: handle exception
+			onError(2);
 		}
 	}
 

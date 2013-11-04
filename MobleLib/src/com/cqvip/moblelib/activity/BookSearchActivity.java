@@ -100,7 +100,8 @@ public class BookSearchActivity extends BaseActivity {
 			Method setSoftInputShownOnFocus = cls.getMethod("setSoftInputShownOnFocus", boolean.class);
 			setSoftInputShownOnFocus.setAccessible(true);
 			setSoftInputShownOnFocus.invoke(editText, false);
-			} catch (Exception e) {}
+			} catch (Exception e) {
+			}
 			}
 	}	
 }

@@ -246,6 +246,7 @@ public class EBookSearchActivity extends BaseActivity implements
 			mQueue.start();
 		} catch (Exception e) {
 			e.printStackTrace();
+			onError(2);
 		}
 	}
 

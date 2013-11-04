@@ -214,7 +214,7 @@ public class ReaderinfoActivity extends BaseActivity {
 				mList.setAdapter(new ReaderInfoAdapter(ReaderinfoActivity.this,
 						attrs, values));
 			} catch (Exception e) {
-				// TODO: handle exception
+				onError(2);
 			}
 			applyRotation(0, 0, 90);
 		}
@@ -242,7 +242,7 @@ public class ReaderinfoActivity extends BaseActivity {
 			mQueue.add(mys);
 			mQueue.start();
 		} catch (Exception e) {
-			// TODO: handle exception
+			onError(2);
 		}
 	}
 

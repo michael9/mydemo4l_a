@@ -97,7 +97,7 @@ public class BorrowAndOrderActivity extends BaseActivity {
 					listview.setAdapter(adapter);
 				}			
 			} catch (Exception e) {
-				// TODO: handle exception
+				onError(2);
 				return;
 			}
 		}
@@ -124,7 +124,7 @@ public class BorrowAndOrderActivity extends BaseActivity {
 			mQueue.add(mys);
 			mQueue.start();
 		} catch (Exception e) {
-			// TODO: handle exception
+			onError(2);
 		}
 	}
 
@@ -161,6 +161,7 @@ public class BorrowAndOrderActivity extends BaseActivity {
 	    				Tool.ShowMessages(BorrowAndOrderActivity.this, result.getMessage());
 	    			}
 	    			} catch (Exception e) {
+	    				onError(2);
 	    				return;
 	    			}
 

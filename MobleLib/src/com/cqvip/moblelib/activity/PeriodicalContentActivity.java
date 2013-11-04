@@ -311,6 +311,7 @@ public class PeriodicalContentActivity extends BaseActivity{
 				
 			} catch (Exception e) {
 				e.printStackTrace();
+				onError(2);
 			}
 
 		}
@@ -346,7 +347,7 @@ public class PeriodicalContentActivity extends BaseActivity{
 				}
 				}
 			} catch (Exception e) {
-
+				onError(2);
 				e.printStackTrace();
 			}
 
@@ -374,6 +375,7 @@ public class PeriodicalContentActivity extends BaseActivity{
 			mQueue.start();
 		} catch (Exception e) {
 			e.printStackTrace();
+			onError(2);
 		}
 	}
 	class MyAdapter extends BaseAdapter{

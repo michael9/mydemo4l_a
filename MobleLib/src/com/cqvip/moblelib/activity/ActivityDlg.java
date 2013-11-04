@@ -255,7 +255,7 @@ public class ActivityDlg extends BaseActivity  {
 					Tool.ShowMessages(ActivityDlg.this, res.getMessage());
 				}
 			} catch (Exception e) {
-				// TODO: handle exception
+			   onError(2);
 				return;
 			}
 		}
@@ -267,6 +267,7 @@ public class ActivityDlg extends BaseActivity  {
 			// TODO Auto-generated method stub
 			if(customProgressDialog!=null&&customProgressDialog.isShowing())
 			customProgressDialog.dismiss();
+			onError(2);
 		}
 	};
 
@@ -282,7 +283,7 @@ public class ActivityDlg extends BaseActivity  {
 			mQueue.add(mys);
 			mQueue.start();
 		} catch (Exception e) {
-			// TODO: handle exception
+			onError(2);
 		}
 	}
 	

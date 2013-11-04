@@ -134,7 +134,7 @@ public class PeriodicalListActivity extends BaseActivity implements
 					noResult_rl.setVisibility(View.VISIBLE);
 				}
 			} catch (Exception e) {
-
+				onError(2);
 				e.printStackTrace();
 			}
 
@@ -156,7 +156,7 @@ public class PeriodicalListActivity extends BaseActivity implements
 					listview.onBottomComplete();
 				}
 			} catch (Exception e) {
-				// TODO: handle exception
+				onError(2);
 			}
 
 		}
@@ -184,6 +184,7 @@ public class PeriodicalListActivity extends BaseActivity implements
 			mQueue.start();
 		} catch (Exception e) {
 			e.printStackTrace();
+			onError(2);
 		}
 	}
 

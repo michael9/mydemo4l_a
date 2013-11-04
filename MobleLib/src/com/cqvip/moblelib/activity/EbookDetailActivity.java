@@ -395,7 +395,7 @@ public class EbookDetailActivity extends BaseActivity {
 				}
 				
 			} catch (Exception e) {
-				// TODO: handle exception
+				onError(2);
 			}
 
 		}
@@ -411,7 +411,7 @@ public class EbookDetailActivity extends BaseActivity {
 				Result result = new Result(response);
 				Tool.ShowMessages(EbookDetailActivity.this, result.getMessage());
 			} catch (Exception e) {
-				e.printStackTrace();
+				onError(2);
 			}
 		}
 	};

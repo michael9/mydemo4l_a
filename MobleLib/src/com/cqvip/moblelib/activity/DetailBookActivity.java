@@ -279,7 +279,7 @@ public class DetailBookActivity extends BaseActivity {
 				Result r = new Result(response);
 				Tool.ShowMessagel(DetailBookActivity.this, r.getMessage());
 			} catch (Exception e) {
-				// TODO: handle exception
+				onError(2);
 				return;
 			}
 		}
@@ -304,7 +304,7 @@ public class DetailBookActivity extends BaseActivity {
 				}).start();
 
 			} catch (Exception e) {
-				// TODO: handle exception
+				onError(2);
 				return;
 			}
 		}
@@ -332,7 +332,7 @@ public class DetailBookActivity extends BaseActivity {
 			mQueue.add(mys);
 			mQueue.start();
 		} catch (Exception e) {
-			// TODO: handle exception
+			onError(2);
 		}
 	}
 
