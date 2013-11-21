@@ -54,28 +54,22 @@ public class BookLoc {
 	     }
 	     JSONObject jso = js.getJSONObject("article");
 		 JSONArray ary = jso.getJSONArray("districtlist");
-		 if(ary.length()<=0){
+		 if(ary!=null&&ary.length()<=0){
 			 return null;
 		 }
+		 books = new ArrayList<BookLoc>();
 		 for(int i = 0;i<ary.length();i++){
-			 JSONArray array = ary.getJSONObject(i).getJSONArray("serviceaddrlist");
-			 if(array.length()<=0){
+			 JSONArray array = ary.getJSONObject(i).getJSONArray("articlelist");
+			 int count = array.length();
+			 if(count<=0){
 				 continue;
 			 }else{
-				 String library = array.getJSONObject(0).getString("library");
-				 if(library.equals(GlobleData.SZLG_LIB_ID)){
-					 
-					 JSONArray json = array.getJSONObject(0).getJSONArray("articlelist");
-					 int count = json.length();
 					 if(count <=0){
 						 return null;
 					 }
-					 
-					 books = new ArrayList<BookLoc>(count);
 					 for(int j= 0;j<count;j++){
-						 books.add(new BookLoc(json.getJSONObject(j)));
-					 }
-				 }
+						 books.add(new BookLoc(array.getJSONObject(j)));
+				}
 			 }
 		 }
 		 return books;

@@ -22,7 +22,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.StringRequest;
 import com.cqvip.mobelib.imgutils.AsyncTask;
-import com.cqvip.moblelib.longgang.R;
+import com.cqvip.moblelib.szy.R;
 import com.cqvip.moblelib.adapter.AdvancedBookAdapter;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.Constant;

@@ -14,7 +14,7 @@ public class GlobleData {
 	 */
 	public final static String dbName = "moblelib.db";
 	/**
-	 * 实体类所在包
+	 * 实体类所在包0
 	 */
 	public final static String MODEL_PACKAGE = "com.cqvip.moblelib.entity";
 	/**
@@ -22,11 +22,15 @@ public class GlobleData {
 	 * */
 	public final static   String SERVER_URL = "http://mobile.cqvip.com";
 	/**
-	 * 图书馆id,1代表深圳图书馆
+	 * 服务器地址
 	 * */
-	public final static   String LIBIRY_ID = "1";
+	public final static   String SERVER_URL_ZJY = "http://192.168.20.61:8080";
 	/**
-	 * 龙岗图书馆id 
+	 * 图书馆id,2代表深圳职业技术学院图书馆
+	 * */
+	public final static   String LIBIRY_ID = "2";
+	/**
+	 * 深职院图书馆id 
 	 * */
 	public final static   String SZLG_LIB_ID = "044120";
 	/**

@@ -19,7 +19,7 @@ import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.cqvip.moblelib.longgang.R;
+import com.cqvip.moblelib.szy.R;
 import com.cqvip.moblelib.adapter.BorrowBookAdapter;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
@@ -131,6 +131,7 @@ public class BorrowAndOrderActivity extends BaseActivity {
   private void getlist() {
 	  customProgressDialog.show();
 	  gparams=new HashMap<String, String>();
+	  gparams.put("libid", GlobleData.LIBIRY_ID);	  
 	  gparams.put("userid", GlobleData.readerid);	  
 		requestVolley(GlobleData.SERVER_URL
 				+ "/library/user/borrowlist.aspx", borrowlist_ls,

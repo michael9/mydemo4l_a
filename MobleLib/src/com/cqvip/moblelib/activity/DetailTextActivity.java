@@ -14,7 +14,7 @@ import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.cqvip.moblelib.longgang.R;
+import com.cqvip.moblelib.szy.R;
 import com.cqvip.moblelib.constant.GlobleData;
 
 public class DetailTextActivity extends BaseActivity {

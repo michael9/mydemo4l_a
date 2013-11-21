@@ -33,7 +33,7 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.ImageLoader.ImageListener;
 import com.android.volley.toolbox.StringRequest;
 import com.cqvip.dao.DaoException;
-import com.cqvip.moblelib.longgang.R;
+import com.cqvip.moblelib.szy.R;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.db.MEBookDao;

@@ -16,7 +16,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.ImageLoader.ImageListener;
 import com.cqvip.mobelib.imgutils.ImageFetcher;
-import com.cqvip.moblelib.longgang.R;
+import com.cqvip.moblelib.szy.R;
 import com.cqvip.moblelib.adapter.PeriodicalAdapter.ViewHolder;
 import com.cqvip.moblelib.model.Comment;
 import com.cqvip.moblelib.model.Periodical;

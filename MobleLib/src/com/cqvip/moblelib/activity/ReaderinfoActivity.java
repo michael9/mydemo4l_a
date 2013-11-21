@@ -23,7 +23,7 @@ import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.cqvip.moblelib.longgang.R;
+import com.cqvip.moblelib.szy.R;
 import com.cqvip.moblelib.adapter.ReaderInfoAdapter;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.Reader;
@@ -190,6 +190,7 @@ public class ReaderinfoActivity extends BaseActivity {
 		if (GlobleData.userid != null) {
 			customProgressDialog.show();
 			gparams = new HashMap<String, String>();
+			gparams.put("libid", GlobleData.LIBIRY_ID);
 			gparams.put("userid", GlobleData.userid);
 			requestVolley(GlobleData.SERVER_URL
 					+ "/library/user/readerinfo.aspx", backlistener,

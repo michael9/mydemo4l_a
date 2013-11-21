@@ -10,7 +10,7 @@ import android.view.MotionEvent;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
-import com.cqvip.moblelib.longgang.R;
+import com.cqvip.moblelib.szy.R;
 import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.utils.BitmapCache;
 import com.cqvip.utils.Tool;

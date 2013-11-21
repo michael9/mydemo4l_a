@@ -29,7 +29,7 @@ import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.cqvip.dao.DaoException;
-import com.cqvip.moblelib.longgang.R;
+import com.cqvip.moblelib.szy.R;
 import com.cqvip.moblelib.adapter.GridViewImgAdapter;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
@@ -217,7 +217,7 @@ protected void onStart() {
 		if (keyCode == 4) {
 			Intent intent = new Intent(MainMenuActivity.this, ActivityDlg.class);
 			intent.putExtra("ACTIONID", 0);
-			intent.putExtra("MSGBODY", "确定退出龙岗图书馆吗？");
+			intent.putExtra("MSGBODY", "确定退出深职院图书馆吗？");
 			intent.putExtra("BTN_CANCEL", 1);
 			startActivityForResult(intent, 104);
 
@@ -285,7 +285,7 @@ protected void onStart() {
 					int versioncode = 0;
 					try {
 						versioncode = MainMenuActivity.this.getPackageManager()
-								.getPackageInfo("com.cqvip.moblelib", 0).versionCode;
+								.getPackageInfo(getPackageName(), 0).versionCode;
 						Log.i("mainmenu", "versioncode=" + versioncode);
 					} catch (NameNotFoundException e) {
 						// TODO Auto-generated catch block

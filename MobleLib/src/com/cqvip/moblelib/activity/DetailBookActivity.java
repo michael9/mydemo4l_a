@@ -33,7 +33,7 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.ImageLoader.ImageContainer;
 import com.android.volley.toolbox.ImageLoader.ImageListener;
 import com.android.volley.toolbox.StringRequest;
-import com.cqvip.moblelib.longgang.R;
+import com.cqvip.moblelib.szy.R;
 import com.cqvip.moblelib.adapter.BookLocAdapter;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.Book;
@@ -340,8 +340,7 @@ public class DetailBookActivity extends BaseActivity {
 		customProgressDialog.show();
 		gparams = new HashMap<String, String>();
 		gparams.put("recordid", recordid);
-		gparams.put("tablename", "bibliosm");//  ÈºÆ
-		gparams.put("library", GlobleData.SZLG_LIB_ID);
+		gparams.put("libid", GlobleData.LIBIRY_ID);
 		requestVolley(GlobleData.SERVER_URL + "/library/bookquery/detail.aspx",
 				back_ls, Method.POST);
 	}

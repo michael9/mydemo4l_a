@@ -28,7 +28,7 @@ import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.toolbox.StringRequest;
 import com.cqvip.dao.DaoException;
-import com.cqvip.moblelib.longgang.R;
+import com.cqvip.moblelib.szy.R;
 import com.cqvip.moblelib.base.IBookManagerActivity;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
@@ -116,7 +116,7 @@ public class ActivityDlg extends BaseActivity  {
 				gparams=new HashMap<String, String>();			
 				gparams.put("username", name);
 				gparams.put("password", pwd);
-				gparams.put("libid", "1");
+				gparams.put("libid", GlobleData.LIBIRY_ID);
 				requestVolley(GlobleData.SERVER_URL + "/library/user/login.aspx",
 						back_ls, Method.POST);
 			

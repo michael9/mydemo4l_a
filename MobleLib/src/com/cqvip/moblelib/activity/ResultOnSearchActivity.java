@@ -27,7 +27,7 @@ import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.StringRequest;
-import com.cqvip.moblelib.longgang.R;
+import com.cqvip.moblelib.szy.R;
 import com.cqvip.moblelib.adapter.BookAdapter;
 import com.cqvip.moblelib.constant.Constant;
 import com.cqvip.moblelib.constant.GlobleData;
@@ -283,9 +283,9 @@ public class ResultOnSearchActivity extends BaseActivity implements
 			String field) {
 		gparams = new HashMap<String, String>();
 		gparams.put("keyword", key);
+		gparams.put("libid", GlobleData.LIBIRY_ID);
 		gparams.put("curpage", "" + page);
 		gparams.put("perpage", "" + count);
-		gparams.put("library", GlobleData.SZLG_LIB_ID);
 		gparams.put("field", field);
 
 		if (type == GETFIRSTPAGE) {

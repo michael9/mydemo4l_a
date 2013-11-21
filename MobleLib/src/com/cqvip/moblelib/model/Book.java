@@ -24,23 +24,19 @@ public class Book implements Serializable  {
 	private String publishyear;//出版时间
 	private String title;//书名
 	private String author;//书名	
-	private String callno;//分类号
-	private String classno;
+	private String callno;//索书号
+	private String classno;//分类号
 	private String cover_path;//封面图片
+	private String subject;//关键字
+	private String u_page;//页数
+	private String u_price;//价格
+	private String u_abstract;//简介
+	private boolean isfavorite;
 
 	
 	public String getCover_path() {
 		return cover_path;
 	}
-	private String subject;//关键字
-	private String u_publish;//关键字
-	private String u_cover;//图片
-	private String u_page;//页数
-	private String u_price;//价格
-	private String u_abstract;//简介
-	private String u_title;
-	private String u_isbn;
-	private boolean isfavorite;
 
 	//Favorite转换为Book
 	public Book(String isbn, String publisher, String title, String author,
@@ -90,9 +86,6 @@ public class Book implements Serializable  {
 	public String getSubject() {
 		return subject;
 	}
-	public String getU_isbn() {
-		return u_isbn;
-	}
 	public Book(JSONObject json) throws BookException{
 		try {
 			recordid = json.getString("recordid");
@@ -101,30 +94,20 @@ public class Book implements Serializable  {
 			publishyear = json.getString("publishyear");
 			title = json.getString("title");
 			author = json.getString("author");
-			subject = json.getString("subject");
+			subject = json.getString("keyword");
 			classno = json.getString("classno");
 			callno = json.getString("callno");
-			cover_path = json.getString("cover_path");
-			u_page = json.getString("u_page");
-			u_price = json.getString("u_price");
-			u_abstract = json.getString("u_abstract");
-			u_isbn = json.getString("u_isbn");
-			u_cover = json.getString("u_cover");
-			u_title = json.getString("u_title");
-			u_publish = json.getString("u_publish");
+			cover_path = json.getString("imgsmallurl");
+			u_page = json.getString("pagecount");
+			u_price = json.getString("price");
+			u_abstract = json.getString("remark");
 			isfavorite = json.getBoolean("isfavorite");
 		} catch (JSONException e) {
 			throw new BookException(e);
 		}
 	}
-	public String getU_publish() {
-		return u_publish;
-	}
 	public String getAuthor() {
 		return author;
-	}
-	public String getU_title() {
-		return u_title;
 	}
 	public String getIsbn() {
 		return isbn;
@@ -137,9 +120,6 @@ public class Book implements Serializable  {
 	}
 	public String getTitle() {
 		return title;
-	}
-	public String getU_cover() {
-		return u_cover;
 	}
 	public String getU_page() {
 		return u_page;
@@ -214,10 +194,8 @@ public class Book implements Serializable  {
 				+ publisher + ", publishyear=" + publishyear + ", title="
 				+ title + ", author=" + author + ", callno=" + callno
 				+ ", classno=" + classno + ", subject=" + subject
-				+ ", u_publish=" + u_publish + ", u_cover=" + u_cover
-				+ ", u_page=" + u_page + ", u_price=" + u_price
-				+ ", u_abstract=" + u_abstract + ", u_title=" + u_title
-				+ ", u_isbn=" + u_isbn + ", isfavorite=" + isfavorite + "]";
+				+   ", u_page=" + u_page + ", u_price=" + u_price
+				+ ", u_abstract=" + u_abstract +  ", isfavorite=" + isfavorite + "]";
 	}
 	
 	

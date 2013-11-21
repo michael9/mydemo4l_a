@@ -43,7 +43,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.util.LruCache;
 import android.util.Log;
 
-import com.cqvip.moblelib.longgang.BuildConfig;
+import com.cqvip.moblelib.szy.BuildConfig;
 
 /**
  * 处理文件和内存缓存

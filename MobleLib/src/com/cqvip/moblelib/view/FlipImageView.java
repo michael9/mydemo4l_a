@@ -1,6 +1,6 @@
 package com.cqvip.moblelib.view;
 
-import com.cqvip.moblelib.longgang.R;
+import com.cqvip.moblelib.szy.R;
 
 import android.content.Context;
 import android.graphics.Camera;

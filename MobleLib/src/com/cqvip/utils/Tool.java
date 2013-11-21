@@ -21,7 +21,7 @@ import android.widget.Toast;
 import cn.sharesdk.onekeyshare.OnekeyShare;
 
 import com.cqvip.moblelib.activity.CommentActivity;
-import com.cqvip.moblelib.longgang.R;
+import com.cqvip.moblelib.szy.R;
 import com.cqvip.moblelib.model.Book;
 import com.cqvip.moblelib.model.EBook;
 
@@ -38,9 +38,9 @@ public class Tool {
 //		if (mbook != null) {
 //			Intent intent = new Intent(Intent.ACTION_SEND);
 //			intent.setType("image/*");
-//			intent.putExtra(Intent.EXTRA_SUBJECT, "龙岗图书馆友情分享");
+//			intent.putExtra(Intent.EXTRA_SUBJECT, "深职院图书馆友情分享");
 //			intent.putExtra(Intent.EXTRA_TEXT,
-//					("龙岗图书馆友情分享:《" + mbook.getTitle_c() +"》"));
+//					("深职院图书馆友情分享:《" + mbook.getTitle_c() +"》"));
 ////			intent.putExtra(Intent.EXTRA_STREAM,
 ////					Uri.decode("http://www.szlglib.com.cn/images/logo.jpg")); // 分享图片"http://www.szlglib.com.cn/images/logo.jpg"
 //			mcontext.startActivity(Intent.createChooser(intent, "分享到"));
@@ -64,12 +64,12 @@ public class Tool {
 //		if (mbook != null) {
 //			Intent intent = new Intent(Intent.ACTION_SEND);
 //			intent.setType("image/*");
-//			intent.putExtra(Intent.EXTRA_SUBJECT, "龙岗图书馆友情分享");
+//			intent.putExtra(Intent.EXTRA_SUBJECT, "深职院图书馆友情分享");
 //			intent.putExtra(Intent.EXTRA_TEXT,
-//					("龙岗图书馆友情分享:《" + mbook.getTitle()+"》"));
+//					("深职院图书馆友情分享:《" + mbook.getTitle()+"》"));
 ////			intent.putExtra(Intent.EXTRA_STREAM,
 ////					Uri.decode("http://www.szlglib.com.cn/images/logo.jpg")); // 分享图片"http://www.szlglib.com.cn/images/logo.jpg"
-//			mcontext.startActivity(Intent.createChooser(intent, "龙岗图书馆友情分享"));
+//			mcontext.startActivity(Intent.createChooser(intent, "深职院图书馆友情分享"));
 //		}
 //	}
 	
@@ -81,7 +81,7 @@ public class Tool {
 			oks.setAddress("12345678901");
 			oks.setTitle(mcontext.getResources().getString(R.string.share));
 			oks.setTitleUrl("http://www.cqvip.com/");
-			oks.setText("龙岗图书馆友情分享:《" + mbook.getTitle()+"》");
+			oks.setText("深职院图书馆友情分享:《" + mbook.getTitle()+"》");
 			oks.setImagePath("");
 			String imageurl=mbook.getCover_path();
 			if(!TextUtils.isEmpty(imageurl)){
@@ -113,7 +113,7 @@ public class Tool {
 				oks.setAddress("12345678901");
 				oks.setTitle(mcontext.getResources().getString(R.string.share));
 				oks.setTitleUrl("http://www.cqvip.com/");
-				oks.setText("龙岗图书馆友情分享:《" + mbook.getTitle_c()+"》");
+				oks.setText("深职院图书馆友情分享:《" + mbook.getTitle_c()+"》");
 				oks.setImagePath("");
 				//oks.setImageUrl("");
 				oks.setUrl("http://oldweb.cqvip.com/downloadcenter/soft/MobleLib.apk");
