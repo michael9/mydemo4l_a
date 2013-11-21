@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
@@ -27,11 +28,12 @@ import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.StringRequest;
-import com.cqvip.moblelib.szy.R;
 import com.cqvip.moblelib.adapter.BookAdapter;
 import com.cqvip.moblelib.constant.Constant;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.Book;
+import com.cqvip.moblelib.szy.BuildConfig;
+import com.cqvip.moblelib.szy.R;
 import com.cqvip.moblelib.view.DropDownListView;
 import com.cqvip.utils.BitmapCache;
 import com.cqvip.utils.Tool;
@@ -39,6 +41,7 @@ import com.cqvip.utils.Tool;
 public class ResultOnSearchActivity extends BaseActivity implements
 		 OnItemClickListener {
 
+	private static final String TAG = "ResultOnSearchActivity";
 	public  final int GETFIRSTPAGE = 1;
 	public  final int GETNEXTPAGE = 2;
 
@@ -178,6 +181,7 @@ public class ResultOnSearchActivity extends BaseActivity implements
 		@Override
 		public void onResponse(String response) {
 			// TODO Auto-generated method stub
+			Log.i(TAG,"===================backlistener==================");
 			if(customProgressDialog!=null&&customProgressDialog.isShowing())
 			customProgressDialog.dismiss();
 			try {
@@ -188,6 +192,10 @@ public class ResultOnSearchActivity extends BaseActivity implements
 					searchCount.setText("共计搜索到"+count+"条记录");
 				}else{
 					searchCount.setVisibility(View.GONE);
+				}
+				if(BuildConfig.DEBUG){
+				Log.i(TAG,"count"+count);
+				Log.i(TAG,"response"+response);
 				}
 				// JSONObject mj=new JSONObject(response);
 				List<Book> lists = Book.formList(response);
@@ -284,6 +292,7 @@ public class ResultOnSearchActivity extends BaseActivity implements
 		gparams = new HashMap<String, String>();
 		gparams.put("keyword", key);
 		gparams.put("libid", GlobleData.LIBIRY_ID);
+		gparams.put("tables", GlobleData.QUERY_TABLE);
 		gparams.put("curpage", "" + page);
 		gparams.put("perpage", "" + count);
 		gparams.put("field", field);

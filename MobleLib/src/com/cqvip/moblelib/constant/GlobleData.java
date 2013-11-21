@@ -24,7 +24,7 @@ public class GlobleData {
 	/**
 	 * 服务器地址
 	 * */
-	public final static   String SERVER_URL_ZJY = "http://192.168.20.61:8080";
+	//public final static   String SERVER_URL_ZJY = "http://192.168.20.61:8080";
 	/**
 	 * 图书馆id,2代表深圳职业技术学院图书馆
 	 * */
@@ -47,6 +47,7 @@ public class GlobleData {
 	public final static String QUERY_ISBN = "isbn";
 	//查询类型,任意词
 	public final static String QUERY_ALL = "all";
+//	public final static String QUERY_ALL = "title";
 	//查询类型,标题
 	public final static String QUERY_TITLE = "title";
 	//查询类型,作者 
@@ -57,6 +58,8 @@ public class GlobleData {
 	public final static String QUERY_CALLNO = "callno";
 	//查询类型,出版社
 	public final static String QUERY_PUBLISHER = "publisher";
+	//查询表
+	public final static String QUERY_TABLE = "bibliosm";
 	//
 	public final static String IMAGE_CACHE_DIR = "bookimg";
 	
