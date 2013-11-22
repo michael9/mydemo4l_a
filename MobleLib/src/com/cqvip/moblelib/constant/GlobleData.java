@@ -38,9 +38,10 @@ public class GlobleData {
 	 */
 	public final static int BOOK_ZK_TYPE = 4;
 	/**
-	 * 书籍类型id, 4代表中刊，5代表深圳馆藏图书
+	 * 书籍类型id, 4代表中刊，5代表深圳馆藏图书/6,代表深圳职业技术学院
 	 */	
-	public final static int BOOK_SZ_TYPE = 5;
+	//public final static int BOOK_SZ_TYPE = 5;
+	public final static int BOOK_SZ_TYPE = 6;
 	//查询类型,关键字 
 	public final static String QUERY_KEY = "subject";
 	//查询类型,isbn

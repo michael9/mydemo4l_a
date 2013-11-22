@@ -173,8 +173,8 @@ public class Favorite implements Serializable{
 					return null;
 				}
 				if ((favorite.recordcount=json.getInt("recordcount")) >0) {
-					if(hasObject(json,"zkbooks")){
-					JSONArray ary = json.getJSONArray("zkbooks");
+					if(hasObject(json,"szybooks")){
+					JSONArray ary = json.getJSONArray("szybooks");
 					int count = ary.length();
 					if (count <= 0) {
 						map.put(GlobleData.BOOK_ZK_TYPE, null);
@@ -189,7 +189,7 @@ public class Favorite implements Serializable{
 					}else{
 						map.put(GlobleData.BOOK_ZK_TYPE, null);
 					}
-					if(hasObject(json,"zkbooks")){
+					if(hasObject(json,"szbooks")){
 					JSONArray sz = json.getJSONArray("szbooks");
 					int szcount = sz.length();
 					if (szcount <= 0) {

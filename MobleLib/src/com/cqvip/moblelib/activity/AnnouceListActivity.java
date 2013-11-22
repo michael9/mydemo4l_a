@@ -184,7 +184,8 @@ public class AnnouceListActivity extends BaseActivity implements OnItemClickList
 	
 	private void getHomePage(int page, int defaultCount,int mwhat) {
 		gparams=new HashMap<String, String>();
-		gparams.put("libid", GlobleData.LIBIRY_ID);
+		//gparams.put("libid", GlobleData.LIBIRY_ID);
+		gparams.put("libid","1");
 		gparams.put("curpage", ""+page);
 		gparams.put("perpage",""+ Constant.DEFAULT_TEXT_COUNT);
 		
