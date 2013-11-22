@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -15,16 +14,15 @@ import android.widget.TextView;
 
 import com.android.volley.Request.Method;
 import com.android.volley.Response;
-import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.cqvip.moblelib.szy.R;
 import com.cqvip.moblelib.adapter.BorrowBookAdapter;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.BorrowBook;
 import com.cqvip.moblelib.model.ShortBook;
+import com.cqvip.moblelib.szy.R;
+import com.cqvip.moblelib.utils.HttpUtils;
 import com.cqvip.utils.Tool;
 
 /**
@@ -93,7 +91,7 @@ public class BorrowAndOrderActivity extends BaseActivity {
 				}else {
 					listview.setVisibility(View.VISIBLE);
 					noborrow_rl.setVisibility(View.GONE);
-					adapter = new BorrowBookAdapter(BorrowAndOrderActivity.this,lists,mQueue,cl_renew,el_new);
+					adapter = new BorrowBookAdapter(BorrowAndOrderActivity.this,lists,mQueue,cl_renew,el);
 					listview.setAdapter(adapter);
 				}			
 			} catch (Exception e) {
@@ -103,14 +101,6 @@ public class BorrowAndOrderActivity extends BaseActivity {
 		}
 	};
 	
-	ErrorListener el = new ErrorListener() {
-		@Override
-		public void onErrorResponse(VolleyError arg0) {
-			// TODO Auto-generated method stub
-			if(customProgressDialog!=null&&customProgressDialog.isShowing())
-			customProgressDialog.dismiss();
-		}
-	};
 
 	private void requestVolley(String addr, Listener<String> bl, int method) {
 		try {
@@ -121,7 +111,7 @@ public class BorrowAndOrderActivity extends BaseActivity {
 					return gparams;
 				};
 			};
-			mQueue.add(mys);
+			mys.setRetryPolicy(HttpUtils.setTimeout());mQueue.add(mys);
 			mQueue.start();
 		} catch (Exception e) {
 			onError(2);
@@ -168,18 +158,5 @@ public class BorrowAndOrderActivity extends BaseActivity {
 
 	          }
 	      };
-  	  /**
-  	   * 续借异常
-  	   * @return
-  	   */
-	  private Response.ErrorListener el_new = new Response.ErrorListener() {
-	          @Override
-	          public void onErrorResponse(VolleyError error) {
-	        	  if(customProgressDialog!=null&&customProgressDialog.isShowing())
-	        	  customProgressDialog.dismiss();
-	        	  //提示用户异常
-	          }
-	      };
 
-	
 }

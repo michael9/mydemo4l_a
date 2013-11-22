@@ -1,11 +1,9 @@
 package com.cqvip.moblelib.activity;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
@@ -14,7 +12,6 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,21 +19,17 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.android.volley.VolleyError;
 import com.android.volley.Request.Method;
-import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.toolbox.StringRequest;
 import com.cqvip.dao.DaoException;
-import com.cqvip.moblelib.szy.R;
-import com.cqvip.moblelib.base.IBookManagerActivity;
-import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.db.MUserDao;
 import com.cqvip.moblelib.entity.MUser;
-import com.cqvip.moblelib.model.BookLoc;
 import com.cqvip.moblelib.model.Result;
 import com.cqvip.moblelib.model.User;
+import com.cqvip.moblelib.szy.R;
+import com.cqvip.moblelib.utils.HttpUtils;
 import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.utils.Tool;
 
@@ -261,16 +254,6 @@ public class ActivityDlg extends BaseActivity  {
 		}
 	};
 
-	ErrorListener el = new ErrorListener() {
-		@Override
-		public void onErrorResponse(VolleyError arg0) {
-			// TODO Auto-generated method stub
-			if(customProgressDialog!=null&&customProgressDialog.isShowing())
-			customProgressDialog.dismiss();
-			onError(2);
-		}
-	};
-
 	private void requestVolley(String addr, Listener<String> bl, int method) {
 		try {
 			StringRequest mys = new StringRequest(method, addr, bl, el) {
@@ -280,7 +263,7 @@ public class ActivityDlg extends BaseActivity  {
 					return gparams;
 				};
 			};
-			mQueue.add(mys);
+			mys.setRetryPolicy(HttpUtils.setTimeout());mQueue.add(mys);
 			mQueue.start();
 		} catch (Exception e) {
 			onError(2);

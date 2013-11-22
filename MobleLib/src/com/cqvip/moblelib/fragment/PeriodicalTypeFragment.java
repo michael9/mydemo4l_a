@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,18 +20,16 @@ import com.android.volley.Request.Method;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.cqvip.moblelib.szy.R;
-import com.cqvip.moblelib.activity.EbookDetailActivity;
+import com.cqvip.mobelib.exception.ErrorVolleyThrow;
 import com.cqvip.moblelib.activity.PeriodicalClassfyActivity;
 import com.cqvip.moblelib.activity.PeriodicalListActivity;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.Constant;
 import com.cqvip.moblelib.constant.GlobleData;
-import com.cqvip.moblelib.fragment.basefragment.BaseAbstractFragment;
 import com.cqvip.moblelib.model.ShortBook;
+import com.cqvip.moblelib.szy.R;
+import com.cqvip.moblelib.utils.HttpUtils;
 import com.cqvip.moblelib.view.CustomProgressDialog;
 
 /**
@@ -48,7 +45,7 @@ public class PeriodicalTypeFragment extends Fragment {
 	private MyAdapter adapter;
 	private RequestQueue mQueue;
 	private CustomProgressDialog customProgressDialog;
-	
+	private ErrorListener eListener;
 	
 	public PeriodicalTypeFragment(){
 		
@@ -72,6 +69,7 @@ public class PeriodicalTypeFragment extends Fragment {
 		 if (PeriodicalClassfyActivity.class.isInstance(getActivity())) {
 	            mQueue = ((PeriodicalClassfyActivity) getActivity()).getRequestQueue();
 	            customProgressDialog = ((PeriodicalClassfyActivity) getActivity()).getCustomDialog();
+	            eListener = new ErrorVolleyThrow(getActivity(), customProgressDialog);
 	        }
 	}
 
@@ -138,25 +136,17 @@ public class PeriodicalTypeFragment extends Fragment {
 	private void requestVolley(HashMap<String, String> gparams, String url,
 			Listener<String> listener, int post) {
 		final HashMap<String, String> gparams_t = gparams;
-		StringRequest mys = new StringRequest(post, url, listener, el) {
+		StringRequest mys = new StringRequest(post, url, listener, eListener) {
 			protected Map<String, String> getParams()
 					throws com.android.volley.AuthFailureError {
 				return gparams_t;
 			};
 		};
-		mQueue.add(mys);
+		mys.setRetryPolicy(HttpUtils.setTimeout());mQueue.add(mys);
 		mQueue.start();
 
 	}
 
-	ErrorListener el = new ErrorListener() {
-		@Override
-		public void onErrorResponse(VolleyError arg0) {
-			// TODO Auto-generated method stub
-			if(customProgressDialog!=null&&customProgressDialog.isShowing())
-			customProgressDialog.dismiss();
-		}
-	};
 	private Listener<String> backlistener = new Listener<String>() {
 		@Override
 		public void onResponse(String response) {

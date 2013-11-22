@@ -1,7 +1,5 @@
 package com.cqvip.moblelib.activity;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,20 +18,15 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.android.volley.Request.Method;
-import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.cqvip.mobelib.imgutils.AsyncTask;
-import com.cqvip.moblelib.szy.R;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.Constant;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.ShortBook;
-import com.cqvip.moblelib.view.DownFreshListView;
+import com.cqvip.moblelib.szy.R;
+import com.cqvip.moblelib.utils.HttpUtils;
 import com.cqvip.moblelib.view.DropDownListView;
-import com.cqvip.moblelib.view.DropDownListView.OnDropDownListener;
-import com.cqvip.utils.Tool;
 
 public class AnnouceListActivity extends BaseActivity implements OnItemClickListener{
 
@@ -172,14 +165,6 @@ public class AnnouceListActivity extends BaseActivity implements OnItemClickList
 		}
 	};
 	
-	ErrorListener el = new ErrorListener() {
-		@Override
-		public void onErrorResponse(VolleyError arg0) {
-			// TODO Auto-generated method stub
-			if(customProgressDialog!=null&&customProgressDialog.isShowing())
-			customProgressDialog.dismiss();
-		}
-	};
 
 	private void requestVolley(String addr, Listener<String> bl, int method) {
 		try {
@@ -190,7 +175,7 @@ public class AnnouceListActivity extends BaseActivity implements OnItemClickList
 					return gparams;
 				};
 			};
-			mQueue.add(mys);
+			mys.setRetryPolicy(HttpUtils.setTimeout());mQueue.add(mys);
 			mQueue.start();
 		} catch (Exception e) {
 			onError(2);

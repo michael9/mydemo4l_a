@@ -1,7 +1,5 @@
 package com.cqvip.moblelib.activity;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,13 +7,9 @@ import java.util.Map;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Bitmap.CompressFormat;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -23,23 +17,20 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import cn.sharesdk.framework.ShareSDK;
-import cn.sharesdk.onekeyshare.OnekeyShare;
 
 import com.android.volley.Request.Method;
-import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.ImageLoader.ImageContainer;
 import com.android.volley.toolbox.ImageLoader.ImageListener;
 import com.android.volley.toolbox.StringRequest;
-import com.cqvip.moblelib.szy.R;
 import com.cqvip.moblelib.adapter.BookLocAdapter;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.Book;
 import com.cqvip.moblelib.model.BookLoc;
 import com.cqvip.moblelib.model.Result;
-import com.cqvip.utils.BitmapCache;
+import com.cqvip.moblelib.szy.R;
+import com.cqvip.moblelib.utils.HttpUtils;
 import com.cqvip.utils.Tool;
 
 public class DetailBookActivity extends BaseActivity {
@@ -310,15 +301,6 @@ public class DetailBookActivity extends BaseActivity {
 		}
 	};
 
-	ErrorListener el = new ErrorListener() {
-		@Override
-		public void onErrorResponse(VolleyError arg0) {
-			// TODO Auto-generated method stub
-			if (customProgressDialog != null
-					&& customProgressDialog.isShowing())
-				customProgressDialog.dismiss();
-		}
-	};
 
 	private void requestVolley(String addr, Listener<String> bl, int method) {
 		try {
@@ -329,7 +311,7 @@ public class DetailBookActivity extends BaseActivity {
 					return gparams;
 				};
 			};
-			mQueue.add(mys);
+			mys.setRetryPolicy(HttpUtils.setTimeout());mQueue.add(mys);
 			mQueue.start();
 		} catch (Exception e) {
 			onError(2);

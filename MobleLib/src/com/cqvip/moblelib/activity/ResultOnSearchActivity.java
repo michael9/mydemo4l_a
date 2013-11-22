@@ -21,10 +21,13 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request.Method;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
+import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.StringRequest;
@@ -34,6 +37,7 @@ import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.Book;
 import com.cqvip.moblelib.szy.BuildConfig;
 import com.cqvip.moblelib.szy.R;
+import com.cqvip.moblelib.utils.HttpUtils;
 import com.cqvip.moblelib.view.DropDownListView;
 import com.cqvip.utils.BitmapCache;
 import com.cqvip.utils.Tool;
@@ -42,8 +46,8 @@ public class ResultOnSearchActivity extends BaseActivity implements
 		 OnItemClickListener {
 
 	private static final String TAG = "ResultOnSearchActivity";
-	public  final int GETFIRSTPAGE = 1;
-	public  final int GETNEXTPAGE = 2;
+	private final int GETFIRSTPAGE = 1;
+	private  final int GETNEXTPAGE = 2;
 
 	public static final int DEFAULT_COUNT = Constant.DEFAULT_COUNT;
 	private EditText edit;
@@ -253,16 +257,6 @@ public class ResultOnSearchActivity extends BaseActivity implements
 		}
 	};
 
-	ErrorListener el = new ErrorListener() {
-		@Override
-		public void onErrorResponse(VolleyError arg0) {
-			// TODO Auto-generated method stub
-			if(customProgressDialog!=null&&customProgressDialog.isShowing())
-			customProgressDialog.dismiss();
-
-		}
-	};
-
 	private void requestVolley(String addr, Listener<String> bl, int method) {
 		try {
 			StringRequest mys = new StringRequest(method, addr, bl, el) {
@@ -272,7 +266,11 @@ public class ResultOnSearchActivity extends BaseActivity implements
 					return gparams;
 				};
 			};
-			mQueue.add(mys);
+			if(BuildConfig.DEBUG){
+			Log.i("requestVolley","======addr============="+addr);
+			Log.i("requestVolley","======gparams============="+gparams.toString());
+			}
+			mys.setRetryPolicy(HttpUtils.setTimeout());mys.setRetryPolicy(HttpUtils.setTimeout());mQueue.add(mys);
 			mQueue.start();
 		} catch (Exception e) {
 			e.printStackTrace();

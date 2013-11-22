@@ -5,11 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -17,28 +15,22 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.Request.Method;
-import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.ImageLoader.ImageListener;
 import com.cqvip.mobelib.imgutils.AsyncTask;
-import com.cqvip.moblelib.szy.R;
 import com.cqvip.moblelib.adapter.CommentItemAdapter;
 import com.cqvip.moblelib.constant.Constant;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.Book;
 import com.cqvip.moblelib.model.Comment;
-import com.cqvip.moblelib.model.EBook;
 import com.cqvip.moblelib.model.Result;
 import com.cqvip.moblelib.net.BookException;
+import com.cqvip.moblelib.szy.R;
+import com.cqvip.moblelib.utils.HttpUtils;
 import com.cqvip.moblelib.view.DownFreshListView;
-import com.cqvip.utils.BitmapCache;
 import com.cqvip.utils.Tool;
 
 public class CommentActivity extends BaseActivity implements
@@ -275,7 +267,7 @@ public class CommentActivity extends BaseActivity implements
 				return gparams_t;
 			};
 		};
-		mQueue.add(mys);
+		mys.setRetryPolicy(HttpUtils.setTimeout());mQueue.add(mys);
 		mQueue.start();
 
 	}
@@ -343,16 +335,6 @@ public class CommentActivity extends BaseActivity implements
 		}
 	};
 
-	ErrorListener el = new ErrorListener() {
-		@Override
-		public void onErrorResponse(VolleyError arg0) {
-			// TODO Auto-generated method stub
-			if(customProgressDialog!=null&&customProgressDialog.isShowing())
-			customProgressDialog.dismiss();
-			arg0.printStackTrace();
-			onError(2);
-		}
-	};
 
 	private String getTypeComment(Book dBook2) {
 		if (typeid == GlobleData.BOOK_SZ_TYPE) {

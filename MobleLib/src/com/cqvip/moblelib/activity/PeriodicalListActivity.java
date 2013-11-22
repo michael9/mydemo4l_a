@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,17 +16,16 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.Request.Method;
-import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.StringRequest;
-import com.cqvip.moblelib.szy.R;
 import com.cqvip.moblelib.adapter.PeriodicalAdapter;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.Constant;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.Periodical;
+import com.cqvip.moblelib.szy.R;
+import com.cqvip.moblelib.utils.HttpUtils;
 import com.cqvip.moblelib.view.DropDownListView;
 import com.cqvip.utils.BitmapCache;
 import com.cqvip.utils.Tool;
@@ -162,15 +160,6 @@ public class PeriodicalListActivity extends BaseActivity implements
 		}
 	};
 
-	ErrorListener el = new ErrorListener() {
-		@Override
-		public void onErrorResponse(VolleyError arg0) {
-			// TODO Auto-generated method stub
-			if(customProgressDialog!=null&&customProgressDialog.isShowing())
-			customProgressDialog.dismiss();
-
-		}
-	};
 
 	private void requestVolley(String addr, Listener<String> bl, int method) {
 		try {
@@ -180,7 +169,7 @@ public class PeriodicalListActivity extends BaseActivity implements
 					return gparams;
 				};
 			};
-			mQueue.add(mys);
+			mys.setRetryPolicy(HttpUtils.setTimeout());mQueue.add(mys);
 			mQueue.start();
 		} catch (Exception e) {
 			e.printStackTrace();

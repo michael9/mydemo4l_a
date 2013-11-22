@@ -6,34 +6,23 @@ import java.util.List;
 import java.util.Map;
 
 import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup.LayoutParams;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import cn.sharesdk.framework.ShareSDK;
 
 import com.android.volley.Request.Method;
-import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.ImageLoader.ImageListener;
 import com.android.volley.toolbox.StringRequest;
 import com.cqvip.dao.DaoException;
-import com.cqvip.moblelib.szy.R;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.db.MEBookDao;
@@ -42,7 +31,8 @@ import com.cqvip.moblelib.model.Book;
 import com.cqvip.moblelib.model.EBook;
 import com.cqvip.moblelib.model.Result;
 import com.cqvip.moblelib.model.ShortBook;
-import com.cqvip.utils.BitmapCache;
+import com.cqvip.moblelib.szy.R;
+import com.cqvip.moblelib.utils.HttpUtils;
 import com.cqvip.utils.Tool;
 
 public class EbookDetailActivity extends BaseActivity {
@@ -416,15 +406,6 @@ public class EbookDetailActivity extends BaseActivity {
 		}
 	};
 
-	ErrorListener el = new ErrorListener() {
-		@Override
-		public void onErrorResponse(VolleyError arg0) {
-			// TODO Auto-generated method stub
-			if(customProgressDialog!=null&&customProgressDialog.isShowing())
-			customProgressDialog.dismiss();
-
-		}
-	};
 
 	private void requestVolley(String addr, Listener<String> bl, int method) {
 		try {
@@ -435,7 +416,7 @@ public class EbookDetailActivity extends BaseActivity {
 					return gparams;
 				};
 			};
-			mQueue.add(mys);
+			mys.setRetryPolicy(HttpUtils.setTimeout());mQueue.add(mys);
 			mQueue.start();
 		} catch (Exception e) {
 			e.printStackTrace();

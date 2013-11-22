@@ -19,14 +19,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.Request.Method;
-import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.cqvip.moblelib.szy.R;
 import com.cqvip.moblelib.adapter.ReaderInfoAdapter;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.Reader;
+import com.cqvip.moblelib.szy.R;
+import com.cqvip.moblelib.utils.HttpUtils;
 import com.cqvip.moblelib.utils.Rotate3dAnimation;
 
 public class ReaderinfoActivity extends BaseActivity {
@@ -221,15 +220,6 @@ public class ReaderinfoActivity extends BaseActivity {
 		}
 	};
 
-	ErrorListener el = new ErrorListener() {
-		@Override
-		public void onErrorResponse(VolleyError arg0) {
-			// TODO Auto-generated method stub
-			if(customProgressDialog!=null&&customProgressDialog.isShowing())
-			customProgressDialog.dismiss();
-
-		}
-	};
 
 	private void requestVolley(String addr, Listener<String> bl, int method) {
 		try {
@@ -240,7 +230,7 @@ public class ReaderinfoActivity extends BaseActivity {
 					return gparams;
 				};
 			};
-			mQueue.add(mys);
+			mys.setRetryPolicy(HttpUtils.setTimeout());mQueue.add(mys);
 			mQueue.start();
 		} catch (Exception e) {
 			onError(2);
