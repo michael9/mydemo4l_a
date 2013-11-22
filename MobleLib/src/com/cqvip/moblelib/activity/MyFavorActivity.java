@@ -32,12 +32,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.Request.Method;
-import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.cqvip.mobelib.imgutils.ImageFetcher;
-import com.cqvip.moblelib.szy.R;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.Constant;
 import com.cqvip.moblelib.constant.GlobleData;
@@ -46,6 +43,8 @@ import com.cqvip.moblelib.model.EBook;
 import com.cqvip.moblelib.model.Favorite;
 import com.cqvip.moblelib.model.Result;
 import com.cqvip.moblelib.net.BookException;
+import com.cqvip.moblelib.szy.R;
+import com.cqvip.moblelib.utils.HttpUtils;
 import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.moblelib.view.SwipHorizontalScrollView;
 import com.cqvip.utils.Tool;
@@ -249,7 +248,7 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 				return gparams_t;
 			};
 		};
-		mQueue.add(mys);
+		mys.setRetryPolicy(HttpUtils.setTimeout());mQueue.add(mys);
 		mQueue.start();
 
 	}
@@ -404,17 +403,6 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 		}
 	};
 
-	ErrorListener el = new ErrorListener() {
-		@Override
-		public void onErrorResponse(VolleyError arg0) {
-			// TODO Auto-generated method stub
-			if (customProgressDialog != null
-					&& customProgressDialog.isShowing())
-				customProgressDialog.dismiss();
-			arg0.printStackTrace();
-			onError(2);
-		}
-	};
 
 	/**
 	 * A {@link FragmentPagerAdapter} that returns a fragment corresponding to

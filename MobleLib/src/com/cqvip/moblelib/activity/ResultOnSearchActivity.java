@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
@@ -20,18 +21,23 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request.Method;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
+import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.StringRequest;
-import com.cqvip.moblelib.szy.R;
 import com.cqvip.moblelib.adapter.BookAdapter;
 import com.cqvip.moblelib.constant.Constant;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.Book;
+import com.cqvip.moblelib.szy.BuildConfig;
+import com.cqvip.moblelib.szy.R;
+import com.cqvip.moblelib.utils.HttpUtils;
 import com.cqvip.moblelib.view.DropDownListView;
 import com.cqvip.utils.BitmapCache;
 import com.cqvip.utils.Tool;
@@ -39,8 +45,9 @@ import com.cqvip.utils.Tool;
 public class ResultOnSearchActivity extends BaseActivity implements
 		 OnItemClickListener {
 
-	public  final int GETFIRSTPAGE = 1;
-	public  final int GETNEXTPAGE = 2;
+	private static final String TAG = "ResultOnSearchActivity";
+	private final int GETFIRSTPAGE = 1;
+	private  final int GETNEXTPAGE = 2;
 
 	public static final int DEFAULT_COUNT = Constant.DEFAULT_COUNT;
 	private EditText edit;
@@ -178,6 +185,7 @@ public class ResultOnSearchActivity extends BaseActivity implements
 		@Override
 		public void onResponse(String response) {
 			// TODO Auto-generated method stub
+			Log.i(TAG,"===================backlistener==================");
 			if(customProgressDialog!=null&&customProgressDialog.isShowing())
 			customProgressDialog.dismiss();
 			try {
@@ -188,6 +196,10 @@ public class ResultOnSearchActivity extends BaseActivity implements
 					searchCount.setText("共计搜索到"+count+"条记录");
 				}else{
 					searchCount.setVisibility(View.GONE);
+				}
+				if(BuildConfig.DEBUG){
+				Log.i(TAG,"count"+count);
+				Log.i(TAG,"response"+response);
 				}
 				// JSONObject mj=new JSONObject(response);
 				List<Book> lists = Book.formList(response);
@@ -245,16 +257,6 @@ public class ResultOnSearchActivity extends BaseActivity implements
 		}
 	};
 
-	ErrorListener el = new ErrorListener() {
-		@Override
-		public void onErrorResponse(VolleyError arg0) {
-			// TODO Auto-generated method stub
-			if(customProgressDialog!=null&&customProgressDialog.isShowing())
-			customProgressDialog.dismiss();
-
-		}
-	};
-
 	private void requestVolley(String addr, Listener<String> bl, int method) {
 		try {
 			StringRequest mys = new StringRequest(method, addr, bl, el) {
@@ -264,7 +266,11 @@ public class ResultOnSearchActivity extends BaseActivity implements
 					return gparams;
 				};
 			};
-			mQueue.add(mys);
+			if(BuildConfig.DEBUG){
+			Log.i("requestVolley","======addr============="+addr);
+			Log.i("requestVolley","======gparams============="+gparams.toString());
+			}
+			mys.setRetryPolicy(HttpUtils.setTimeout());mys.setRetryPolicy(HttpUtils.setTimeout());mQueue.add(mys);
 			mQueue.start();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -284,6 +290,7 @@ public class ResultOnSearchActivity extends BaseActivity implements
 		gparams = new HashMap<String, String>();
 		gparams.put("keyword", key);
 		gparams.put("libid", GlobleData.LIBIRY_ID);
+		gparams.put("tables", GlobleData.QUERY_TABLE);
 		gparams.put("curpage", "" + page);
 		gparams.put("perpage", "" + count);
 		gparams.put("field", field);

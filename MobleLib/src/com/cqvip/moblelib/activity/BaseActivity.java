@@ -7,9 +7,13 @@ import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
+import com.android.volley.VolleyError;
+import com.android.volley.Response.ErrorListener;
 import com.android.volley.toolbox.Volley;
+import com.cqvip.mobelib.exception.ErrorVolleyThrow;
 import com.cqvip.moblelib.szy.R;
 import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.utils.BitmapCache;
@@ -20,6 +24,7 @@ public class BaseActivity extends Activity {
 	protected CustomProgressDialog customProgressDialog;
 	protected RequestQueue mQueue;
 	public static BitmapCache cache;
+	protected ErrorListener el;
 	
 	
 	@Override
@@ -29,6 +34,7 @@ public class BaseActivity extends Activity {
 				new MyGestrueListener(this));
 		mQueue=Volley.newRequestQueue(this);
 		customProgressDialog=CustomProgressDialog.createDialog(this);
+		el = new  ErrorVolleyThrow(this, customProgressDialog);
 	}
 	
 	@Override

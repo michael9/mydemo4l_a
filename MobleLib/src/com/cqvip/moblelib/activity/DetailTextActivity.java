@@ -109,16 +109,6 @@ public class DetailTextActivity extends BaseActivity {
 		}
 	};
 
-	ErrorListener el = new ErrorListener() {
-		@Override
-		public void onErrorResponse(VolleyError arg0) {
-			// TODO Auto-generated method stub
-			if(customProgressDialog!=null&&customProgressDialog.isShowing())
-			customProgressDialog.dismiss();
-			content.setText(DetailTextActivity.this.getResources().getString(
-					R.string.loadfail));
-		}
-	};
 
 	private void requestVolley(String addr, Listener<JSONObject> mj,
 			JSONObject js, int method) {

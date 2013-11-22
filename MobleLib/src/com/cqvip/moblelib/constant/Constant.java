@@ -22,5 +22,8 @@ public class Constant {
 	public static final int NATURE = 4;//自然科学
 	public static final int FORESTS = 5;//农林牧鱼
 	
+	public static final int SOCKET_TIMEOUT = 20000;//网络超时设置
+	
+	
 	
 }

@@ -30,6 +30,7 @@ import com.android.volley.Response.Listener;
 import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.cqvip.mobelib.exception.ErrorVolleyThrow;
 import com.cqvip.mobelib.imgutils.ImageFetcher;
 import com.cqvip.mobelib.imgutils.RecyclingImageView;
 import com.cqvip.moblelib.szy.R;
@@ -57,6 +58,7 @@ private int mImageThumbSize;
     private ImageFetcher mImageFetcher;
 	private RequestQueue mQueue;
 	private CustomProgressDialog customProgressDialog;
+	private ErrorListener eListener;
 	public SpecialPeriodicalFragment(){
 		
 	}
@@ -91,6 +93,7 @@ private int mImageThumbSize;
 	     mImageThumbSpacing = getResources().getDimensionPixelSize(R.dimen.image_thumbnail_spacing);
 	     mQueue = ((PeriodicalClassfyActivity) getActivity()).getRequestQueue();
          customProgressDialog = ((PeriodicalClassfyActivity) getActivity()).getCustomDialog();
+         eListener = new ErrorVolleyThrow(getActivity(), customProgressDialog);
          
 	}
 	 @Override
@@ -178,7 +181,7 @@ private int mImageThumbSize;
 			JSONObject js, int method) {
 
 		try {
-			StringRequest myjson = new StringRequest(method, addr,mj, el);
+			StringRequest myjson = new StringRequest(method, addr,mj, eListener);
 			mQueue.add(myjson);
 			mQueue.start();
 		} catch (Exception e) {
@@ -187,13 +190,6 @@ private int mImageThumbSize;
 
 	}
 
-	ErrorListener el = new ErrorListener() {
-		@Override
-		public void onErrorResponse(VolleyError arg0) {
-			// TODO Auto-generated method stub
-			customProgressDialog.dismiss();
-		}
-	};
 
 	private Listener<String> backlistener = new Listener<String>() {
 		@Override

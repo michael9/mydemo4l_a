@@ -1,7 +1,9 @@
 package com.cqvip.moblelib.activity;
 
 import com.android.volley.RequestQueue;
+import com.android.volley.Response.ErrorListener;
 import com.android.volley.toolbox.Volley;
+import com.cqvip.mobelib.exception.ErrorVolleyThrow;
 import com.cqvip.mobelib.imgutils.ImageFetcher;
 import com.cqvip.mobelib.imgutils.ImageCache.ImageCacheParams;
 import com.cqvip.moblelib.szy.R;
@@ -18,6 +20,7 @@ public class BaseFragmentImageActivity  extends FragmentActivity{
 	protected ImageFetcher mImageFetcher;
 	protected RequestQueue mQueue;
 	protected CustomProgressDialog customProgressDialog;
+	protected ErrorListener el;
 	@Override
 	protected void onCreate(Bundle arg0) {
 		// TODO Auto-generated method stub
@@ -33,6 +36,7 @@ public class BaseFragmentImageActivity  extends FragmentActivity{
 	   // mImageFetcher.addImageCache(this, cacheParams);
 	    mImageFetcher.setImageFadeIn(false);
 	    mQueue = Volley.newRequestQueue(this);
+	    el = new ErrorVolleyThrow(this, customProgressDialog);
 	}
 	
 	@Override

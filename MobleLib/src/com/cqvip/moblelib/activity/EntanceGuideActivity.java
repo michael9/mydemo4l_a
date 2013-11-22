@@ -19,8 +19,12 @@ import com.cqvip.utils.Tool;
 
 /**
  * <p>
- * 文件名称: EntanceGuideActivity.java 文件描述: 入馆指南 版权所有: 版权所有(C)2013-2020 公 司:
- * 重庆维普咨询有限公司 内容摘要: 其他说明: 完成日期： 2013年5月10日 修改记录:
+ * 文件名称: EntanceGuideActivity.java 
+ * 文件描述: 入馆指南 版权所有: 版权所有(C)2013-2020 
+ * 公 司:重庆维普咨询有限公司
+ *  内容摘要: 其他说明: 
+ *  完成日期： 2013年5月10日 
+ *  修改记录:
  * </p>
  * 
  * @author LHP,LJ
@@ -51,11 +55,11 @@ public class EntanceGuideActivity extends BaseActivity {
 		});
 
 		LinearLayout l1 = (LinearLayout) findViewById(R.id.enterguideLayout);
-		LinearLayout l2 = (LinearLayout) findViewById(R.id.cardLayout);
+//		LinearLayout l2 = (LinearLayout) findViewById(R.id.cardLayout);
 		LinearLayout l3 = (LinearLayout) findViewById(R.id.timeLayout);
 		LinearLayout l4 = (LinearLayout) findViewById(R.id.readerknowLayout);
 		LinearLayout l5 = (LinearLayout) findViewById(R.id.serverLayout);
-		LinearLayout l6 = (LinearLayout) findViewById(R.id.transportLayout);
+//		LinearLayout l6 = (LinearLayout) findViewById(R.id.transportLayout);
 		// LinearLayout l7 = (LinearLayout)findViewById(R.id.gpsLayout);
 		LinearLayout l8 = (LinearLayout) findViewById(R.id.probLayout);
 
@@ -70,18 +74,18 @@ public class EntanceGuideActivity extends BaseActivity {
 				// R.anim.slide_left_out);
 			}
 		});
-		l2.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(context, DetailTextActivity.class);
-				intent.putExtra("enter", 2);
-				startActivity(intent);
-				// overridePendingTransition(R.anim.slide_right_in,
-				// R.anim.slide_left_out);
-
-			}
-		});
+//		l2.setOnClickListener(new View.OnClickListener() {
+//
+//			@Override
+//			public void onClick(View v) {
+//				Intent intent = new Intent(context, DetailTextActivity.class);
+//				intent.putExtra("enter", 2);
+//				startActivity(intent);
+//				// overridePendingTransition(R.anim.slide_right_in,
+//				// R.anim.slide_left_out);
+//
+//			}
+//		});
 		l3.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -118,19 +122,19 @@ public class EntanceGuideActivity extends BaseActivity {
 
 			}
 		});
-		l6.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-//				Intent intent = new Intent(context, DetailTextActivity.class);
-//				intent.putExtra("enter", 6);
-//				startActivity(intent);
-				// overridePendingTransition(R.anim.slide_right_in,
-				// R.anim.slide_left_out);
-				Intent intent=new Intent(Intent.ACTION_VIEW,Uri.parse("http://j.map.baidu.com/6V_Ii"));
-				startActivity(intent);			
-			}
-		});
+//		l6.setOnClickListener(new View.OnClickListener() {
+//
+//			@Override
+//			public void onClick(View v) {
+////				Intent intent = new Intent(context, DetailTextActivity.class);
+////				intent.putExtra("enter", 6);
+////				startActivity(intent);
+//				// overridePendingTransition(R.anim.slide_right_in,
+//				// R.anim.slide_left_out);
+//				Intent intent=new Intent(Intent.ACTION_VIEW,Uri.parse("http://j.map.baidu.com/6V_Ii"));
+//				startActivity(intent);			
+//			}
+//		});
 		// l7.setOnClickListener(new View.OnClickListener() {
 		//
 		// @Override

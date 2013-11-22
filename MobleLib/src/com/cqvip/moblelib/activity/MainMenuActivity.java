@@ -16,20 +16,15 @@ import android.os.Message;
 import android.util.Log;
 import android.view.Display;
 import android.view.KeyEvent;
-import android.webkit.WebView;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
-import android.widget.SlidingDrawer;
 
 import com.android.volley.Request.Method;
-import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.cqvip.dao.DaoException;
-import com.cqvip.moblelib.szy.R;
 import com.cqvip.moblelib.adapter.GridViewImgAdapter;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
@@ -37,6 +32,8 @@ import com.cqvip.moblelib.db.MUserDao;
 import com.cqvip.moblelib.entity.MUser;
 import com.cqvip.moblelib.model.ShortBook;
 import com.cqvip.moblelib.net.BookException;
+import com.cqvip.moblelib.szy.R;
+import com.cqvip.moblelib.utils.HttpUtils;
 import com.cqvip.moblelib.view.StableGridView;
 import com.cqvip.utils.Phinfo;
 import com.cqvip.utils.Tool;
@@ -262,7 +259,7 @@ protected void onStart() {
 				return gparams_t;
 			};
 		};
-		mQueue.add(mys);
+		mys.setRetryPolicy(HttpUtils.setTimeout());mQueue.add(mys);
 		mQueue.start();
 
 	}
@@ -301,14 +298,6 @@ protected void onStart() {
 					}
 				}
 			}
-		}
-	};
-
-	ErrorListener el = new ErrorListener() {
-		@Override
-		public void onErrorResponse(VolleyError arg0) {
-			// TODO Auto-generated method stub
-			arg0.printStackTrace();
 		}
 	};
 
