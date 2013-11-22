@@ -78,8 +78,6 @@ public class DetailBookActivity extends BaseActivity {
 		}else{
 			bitmap = null;
 		}
-
-		//
 		ShareSDK.initSDK(this);
 //		new Thread() {
 //			public void run() {
