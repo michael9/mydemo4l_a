@@ -36,8 +36,8 @@ public class LibInnerNavigationActivity extends BaseActivity {
 	private TextView tv_floor1, tv_floor2, tv_floor3;
 	private TextView title;
 	private ImageView back;
-	private int[] mapArrays = { R.drawable.l02, R.drawable.l04,
-			R.drawable.l05 };
+	private int[] mapArrays = { R.drawable.l01, R.drawable.l02,
+			R.drawable.l03,R.drawable.l04,R.drawable.l05,R.drawable.l06 };
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
