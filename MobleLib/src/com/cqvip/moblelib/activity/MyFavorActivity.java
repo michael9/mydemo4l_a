@@ -49,6 +49,21 @@ import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.moblelib.view.SwipHorizontalScrollView;
 import com.cqvip.utils.Tool;
 
+/**
+ * <p>
+ * 文件名称: MyFavorActivity.java
+ * 文件描述: 我的收藏
+ * 版权所有: 版权所有(C)2013-2020
+ * 公          司: 重庆维普咨询有限公司
+ * 内容摘要: 
+ * 其他说明:
+ * 完成日期： 201年11月22日
+ * 修改记录: 
+ * </p>
+ * 
+ * @author LHP,LJ
+ */
+
 public class MyFavorActivity extends BaseFragmentImageActivity {
 	public static final int GETFIRSTPAGE_SZ = 1;
 	public static final int GETFIRSTPAGE_ZK = 2;
@@ -278,7 +293,7 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 				isdeleted_sz = false;
 			}
 			if (arrayLists_sz != null && !arrayLists_sz.isEmpty()) {
-				if (arrayLists_sz.get(GlobleData.BOOK_SZ_TYPE).isEmpty()) {
+				if (arrayLists_sz.get(GlobleData.BOOK_SZ_TYPE)==null&&arrayLists_sz.get(GlobleData.BOOK_SZ_TYPE).isEmpty()) {
 					return;
 				}
 				arrayList_sz.addAll(arrayLists_sz.get(GlobleData.BOOK_SZ_TYPE));
@@ -312,7 +327,7 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 				isdeleted_zk = false;
 			}
 			if (arrayLists_zk != null && !arrayLists_zk.isEmpty()) {
-				if (arrayLists_zk.get(GlobleData.BOOK_ZK_TYPE).isEmpty()) {
+				if (arrayLists_zk.get(GlobleData.BOOK_ZK_TYPE)==null&&arrayLists_zk.get(GlobleData.BOOK_ZK_TYPE).isEmpty()) {
 					return;
 				}
 				arrayList_zk.addAll(arrayLists_zk.get(GlobleData.BOOK_ZK_TYPE));

@@ -47,7 +47,7 @@ public class DetailTextActivity extends BaseActivity {
 		case 1:
 			t1.setText(R.string.guide_needknow);
 			requestVolley(GlobleData.SERVER_URL
-					+ "/library/guide/notice.aspx?libid=1", mj, null,
+					+ "/library/guide/notice.aspx?libid=2", mj, null,
 					Method.GET);
 			break;
 		case 2:
@@ -59,18 +59,18 @@ public class DetailTextActivity extends BaseActivity {
 		case 3:
 			t1.setText(R.string.guide_time);
 			requestVolley(GlobleData.SERVER_URL
-					+ "/library/guide/time.aspx?libid=1", mj, null, Method.GET);
+					+ "/library/guide/time.aspx?libid=2", mj, null, Method.GET);
 			break;
 		case 4:
 			t1.setText(R.string.guide_readerknow);
 			requestVolley(GlobleData.SERVER_URL
-					+ "/library/guide/reader.aspx?libid=1", mj, null,
+					+ "/library/guide/reader.aspx?libid=2", mj, null,
 					Method.GET);
 			break;
 		case 5:
 			t1.setText(R.string.guide_server);
 			requestVolley(GlobleData.SERVER_URL
-					+ "/library/guide/service.aspx?libid=1", mj, null,
+					+ "/library/guide/service.aspx?libid=2", mj, null,
 					Method.GET);
 			break;
 		case 6:

@@ -239,14 +239,16 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 				e.printStackTrace();
 				onError(2);
 			}
+		
 
-			if (arrayLists_sz != null && !arrayLists_sz.isEmpty()) {
-				if (arrayLists_sz.get(GlobleData.BOOK_SZ_TYPE).isEmpty()) {
+			if (arrayLists_sz == null || arrayLists_sz.isEmpty()) {
+				return;
+				}else if (arrayLists_sz.get(GlobleData.BOOK_SZ_TYPE)==null||arrayLists_sz.get(GlobleData.BOOK_SZ_TYPE).isEmpty()) {
 					return;
 				}
+				
 				arrayList_sz.addAll(arrayLists_sz.get(GlobleData.BOOK_SZ_TYPE));
 				adapter_sz.notifyDataSetChanged();
-			}
 		}
 	};
 
@@ -268,13 +270,13 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 				onError(2);
 			}
 
-			if (arrayLists_zk != null && !arrayLists_zk.isEmpty()) {
-				if (arrayLists_zk.get(GlobleData.BOOK_ZK_TYPE).isEmpty()) {
+			if (arrayLists_zk == null || arrayLists_zk.isEmpty()) {
+			     	return;
+			}else if (arrayLists_zk.get(GlobleData.BOOK_ZK_TYPE)==null||arrayLists_zk.get(GlobleData.BOOK_ZK_TYPE).isEmpty()) {
 					return;
 				}
 				arrayList_zk.addAll(arrayLists_zk.get(GlobleData.BOOK_ZK_TYPE));
 				adapter_zk.notifyDataSetChanged();
-			}
 		}
 	};
 
