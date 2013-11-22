@@ -7,7 +7,7 @@
     <include
         android:id="@+id/readerserve_title"
         layout="@layout/header" />
-
+<!--  
     <LinearLayout
         android:id="@+id/ll_floors"
         android:layout_width="match_parent"
@@ -76,12 +76,74 @@
             android:text="@string/floor_6"
             android:textSize="16sp" />
     </LinearLayout>
+-->
+        <RelativeLayout
+            android:id="@+id/rl_tab"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/readerserve_title" >
 
+        <HorizontalScrollView
+            android:id="@+id/mHsv"
+            android:layout_width="fill_parent"
+            android:layout_height="40dip"
+            android:fadingEdge="none"
+            android:scrollbars="none" >
+
+            <RelativeLayout
+                android:id="@+id/rl_nav"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:background="#885AB0EB" >
+                <ImageView
+                    android:id="@+id/iv_nav_indicator"
+                    android:layout_width="1dip"
+                    android:layout_height="38dip"
+                    android:layout_alignParentBottom="true"
+                    android:background="#5AB0EB"
+                    android:scaleType="matrix" />
+                <RadioGroup
+                    android:id="@+id/rg_nav_content"
+                    android:layout_width="fill_parent"
+                    android:layout_height="38dip"
+                    android:layout_alignParentTop="true"
+                    android:background="#88F2F2F2"
+                    android:orientation="horizontal" >
+                </RadioGroup>
+
+
+            </RelativeLayout>
+        </HorizontalScrollView>
+
+        <ImageView
+            android:id="@+id/iv_nav_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:paddingBottom="1dip"
+            android:src="@drawable/icon_navagation_scroll_left"
+            android:visibility="gone" >
+        </ImageView>
+
+        <ImageView
+            android:id="@+id/iv_nav_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:paddingBottom="1dip"
+            android:src="@drawable/icon_navagation_scroll_right"
+            android:visibility="gone" >
+        </ImageView>
+    </RelativeLayout>
+    
     <FrameLayout
         android:id="@+id/fl_navigation"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_below="@id/ll_floors" >
+        android:layout_below="@id/rl_tab" >
 
         <com.cqvip.moblelib.view.PinchableImageView
             android:id="@+id/mPinchableImageView"
