@@ -455,13 +455,13 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 				}
 			} else {
 				Favorite favorite = null;
-				int typeflag = 5;
+				int typeflag = 0;
 				if ((Integer) parent.getTag() == GlobleData.BOOK_SZ_TYPE) {
 					favorite = adapter_sz.getLists().get(positon);
-					typeflag = 5;
+					typeflag = GlobleData.BOOK_SZ_TYPE;
 				} else if ((Integer) parent.getTag() == GlobleData.BOOK_ZK_TYPE) {
 					favorite = adapter_zk.getLists().get(positon);
-					typeflag = 4;
+					typeflag = GlobleData.BOOK_ZK_TYPE;
 				}
 				Book book = new Book(favorite.getLngid(), favorite.getOrgan(),
 						favorite.getTitle(), favorite.getWriter(),
