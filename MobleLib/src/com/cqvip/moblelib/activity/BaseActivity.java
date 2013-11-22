@@ -21,7 +21,6 @@ public class BaseActivity extends Activity {
 	protected RequestQueue mQueue;
 	public static BitmapCache cache;
 	
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
