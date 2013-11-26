@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cqvip.moblelib.szy.R;
 import com.cqvip.moblelib.activity.ActivityDlg;
@@ -40,7 +41,7 @@ public class GridViewImgAdapter extends BaseAdapter {
 			R.string.main_ebook,
 			R.string.main_readingguide,
 			R.string.main_ebookstore,// R.string.main_bookcomment
-			R.string.serv_favorite, R.string.main_notice, R.string.main_borrow,
+			R.string.main_messinfo, R.string.main_notice, R.string.main_reference,
 			R.string.main_order
 
 	};
@@ -113,14 +114,10 @@ public class GridViewImgAdapter extends BaseAdapter {
 					case 3:
 						intent.setClass(mContext, activities[tag]);
 						mContext.startActivity(intent);
-						break;					//个人中心	
-					case 4:
-					//我的收藏	
-					case 5:
-					//借阅管理	
-					case 7:
-					//书友圈	
-					case 8:
+						break;					
+					case 4://个人中心,需登录	
+					
+					case 8://书友圈
 						//判断是否登录
 						if (GlobleData.islogin) {
 							intent.setClass(mContext, activities[tag]);
@@ -129,11 +126,15 @@ public class GridViewImgAdapter extends BaseAdapter {
 							showLoginDialog(tag);
 						}
 						break;
-					case 6:
+					case 6://馆内公告
 						intent.setClass(mContext, activities[tag]);
 						mContext.startActivity(intent);
 						break;
 
+					case 5://信息素养，暂不开放
+					case 7://参考咨询，暂不开放
+						Toast.makeText(mContext, "该功能正紧张开发中..", Toast.LENGTH_SHORT).show();
+						break;
 					default:
 						break;
 					}

@@ -37,6 +37,7 @@ private LinearLayout readerinfoLayout;
 private LinearLayout favorLayout;
 private LinearLayout logoutLayout;
 private LinearLayout downloadLayout;
+private LinearLayout borrowLayout;
 private Context context;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +47,10 @@ private Context context;
 		context = this;
 		//读者信息
 		readerinfoLayout=(LinearLayout) findViewById(R.id.readerinfoLayout);
-		favorLayout=(LinearLayout) findViewById(R.id.favorLayout);
+		favorLayout=(LinearLayout) findViewById(R.id.favoriteLayout);
 		logoutLayout=(LinearLayout) findViewById(R.id.logoutLayout);
 		downloadLayout=(LinearLayout) findViewById(R.id.downloadLayout);
+		borrowLayout=(LinearLayout) findViewById(R.id.borrowLayout);
 	
 		TextView title = (TextView)findViewById(R.id.txt_header);
 		title.setText(R.string.main_ebookstore);
@@ -71,7 +73,9 @@ private Context context;
 				//overridePendingTransition(R.anim.slide_left_in, R.anim.slide_right_out);	
 			}
 		});
-		
+		/**
+		 * 我的收藏
+		 */
 		favorLayout.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -81,6 +85,18 @@ private Context context;
 				//overridePendingTransition(R.anim.slide_left_in, R.anim.slide_right_out);	
 			}
 		});
+		/**
+		 * 借阅管理
+		 */
+		borrowLayout.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent=new Intent(PersonalCenterActivity.this, BorrowAndOrderActivity.class);
+				startActivity(intent);
+			}
+		});
+		
 		//下載管理
 		downloadLayout.setOnClickListener(new View.OnClickListener() {
 			
