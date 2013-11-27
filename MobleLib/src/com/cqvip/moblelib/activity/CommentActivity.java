@@ -75,7 +75,8 @@ public class CommentActivity extends BaseActivity implements
 		// 获取是否删除表识
 		delFlag = getIntent().getIntExtra("flag", 0);
 		// 书籍id
-		keyid = getLngId(dBook.getCallno(), dBook.getRecordid());
+		//keyid = getLngId(dBook.getCallno(), dBook.getRecordid());
+		keyid = dBook.getRecordid();
 		getHomeComment(typeid, keyid, page, Constant.DEFAULT_COUNT, GETHOMEPAGE);
 		String describe = dBook.getU_abstract();
 		if (TextUtils.isEmpty(describe)) {
@@ -96,7 +97,7 @@ public class CommentActivity extends BaseActivity implements
 //			ImageListener listener = ImageLoader.getImageListener(img, R.drawable.defaut_book, R.drawable.defaut_book);
 //			mImageLoader.get(dBook.getCover_path(), listener);
 //		} else {
-//			img.setImageDrawable(getResources().getDrawable(
+//			img.setImageDrawable(getResources().getDrawable( 宴  aishopping
 //					R.drawable.defaut_book));
 //		}
 		//}
@@ -244,7 +245,7 @@ public class CommentActivity extends BaseActivity implements
 			map.put("vipuserid", GlobleData.cqvipid);
 			// Log.i("添加评论", GlobleData.cqvipid);
 	//		String keyid = dBook.getCallno();
-			String recordid = getTypeComment(dBook);
+			//String recordid = getTypeComment(dBook);
 			 map.put("keyid", keyid);
 			// Log.i("CommentActivity_keyid", dBook.getCallno());
 			map.put("typeid", "" + typeid);

@@ -33,6 +33,20 @@ import com.cqvip.moblelib.szy.R;
 import com.cqvip.moblelib.utils.HttpUtils;
 import com.cqvip.utils.Tool;
 
+/**
+ * <p>
+ * 文件名称: DetailBookActivity.java
+ * 文件描述: 馆藏图书详细
+ * 版权所有: 版权所有(C)2013-2020
+ * 公          司: 重庆维普咨询有限公司
+ * 内容摘要: 
+ * 其他说明:
+ * 完成日期： 201年11月20日
+ * 修改记录: 修改收藏的方式，图书id，直接取recordid 2013.ll.l6 by lj
+ * </p>
+ * 
+ * @author LHP,LJ
+ */
 public class DetailBookActivity extends BaseActivity {
 	public final int GETBOOKINFO = 1;
 	public final int FAVOR = 2;
@@ -79,11 +93,6 @@ public class DetailBookActivity extends BaseActivity {
 			bitmap = null;
 		}
 		ShareSDK.initSDK(this);
-//		new Thread() {
-//			public void run() {
-//				initImagePath();
-//			}
-//		}.start();
 		
 		imgview.setOnClickListener(new View.OnClickListener() {
 
@@ -169,10 +178,11 @@ public class DetailBookActivity extends BaseActivity {
 							gparams.put("libid", GlobleData.LIBIRY_ID);
 							gparams.put("vipuserid", GlobleData.cqvipid);
 							gparams.put("typeid", "" + GlobleData.BOOK_SZ_TYPE);
-							gparams.put(
-									"keyid",
-									Tool.formSZbookID(dBook.getCallno(),
-											dBook.getRecordid()));
+//							gparams.put(
+//									"keyid",
+//									Tool.formSZbookID(dBook.getCallno(),
+//											dBook.getRecordid()));
+							gparams.put("keyid",dBook.getRecordid());//深职院修改为recordid
 							customProgressDialog.show();
 							requestVolley(GlobleData.SERVER_URL
 									+ "/cloud/favorite.aspx", bookfavorite_ls,
@@ -224,32 +234,6 @@ public class DetailBookActivity extends BaseActivity {
 		ShareSDK.stopSDK(this);
 		super.onDestroy();
 	}
-	
-//	private void initImagePath() {
-//		try {
-//			if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())
-//					&& Environment.getExternalStorageDirectory().exists()) {
-//				TEST_IMAGE = Environment.getExternalStorageDirectory().getAbsolutePath() + FILE_NAME;
-//			}
-//			else {
-			//	TEST_IMAGE = getApplication().getFilesDir().getAbsolutePath() + FILE_NAME;
-			//}
-			//Log.i("MainAct", "initImagePath:"+getApplication().getFilesDir().getAbsolutePath());
-			//File file = new File(TEST_IMAGE);
-//			if (file.exists()) {
-//				file.delete();
-//				file.createNewFile();
-//				Bitmap pic = BitmapFactory.decodeResource(getResources(), R.drawable.defaut_book);
-//				FileOutputStream fos = new FileOutputStream(file);
-//				pic.compress(CompressFormat.JPEG, 100, fos);
-//				fos.flush();
-//				fos.close();
-			//}
-//		} catch(Throwable t) {
-//			t.printStackTrace();
-//			TEST_IMAGE = null;
-//		}
-//	}
 	
 	// 显示对话框
 	private void showLoginDialog(int id) {

@@ -217,7 +217,6 @@
             android:layout_marginTop="-1dp"
             android:background="@drawable/linearlayout_shape_down"
             android:gravity="center"
-            android:visibility="gone"
             android:orientation="horizontal" >
 
             <ImageView
