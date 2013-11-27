@@ -4,22 +4,27 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_list"
     tools:context=".MainMenuActivity" >
-<!--
+
+    <!--
     <SurfaceView
         android:id="@+id/main_anim_background"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />-->
-        <ImageView 
-             android:layout_width="fill_parent"
+        android:layout_height="match_parent" />
+    -->
+
+    <ImageView  android:id="@+id/imageview"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/main_log_img"
-            />
+        android:src="@drawable/main_log_img" />
 
     <com.cqvip.moblelib.view.StableGridView
+        android:layout_below="@id/imageview"
         android:id="@+id/grid_main"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:gravity="center"
         android:horizontalSpacing="10.0dip"
         android:isScrollContainer="false"
@@ -27,8 +32,8 @@
         android:listSelector="@drawable/transparent"
         android:numColumns="3"
         android:stretchMode="columnWidth"
-        android:verticalSpacing="20.0dip" />
-<!--  
+        android:verticalSpacing="10.0dip" />
+    <!--
     <SlidingDrawer
         android:id="@+id/sd"
         android:layout_width="match_parent"
@@ -55,6 +60,7 @@
             android:layout_height="match_parent"
                /> 
        </RelativeLayout>
-    </SlidingDrawer>
--->
+    </SlidingDrawer>
+    -->
+
 </RelativeLayout>
