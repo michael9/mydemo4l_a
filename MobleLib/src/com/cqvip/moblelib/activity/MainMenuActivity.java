@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
 
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
@@ -16,10 +17,14 @@ import android.os.Message;
 import android.util.Log;
 import android.view.Display;
 import android.view.KeyEvent;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.Toast;
 
 import com.android.volley.Request.Method;
 import com.android.volley.Response.Listener;
@@ -57,9 +62,9 @@ public class MainMenuActivity extends BaseActivity {
 	private LinearLayout login_status_ll;
 	private ScrollView login_form_sv;
 	private StableGridView gridview;
-	static public boolean cantouch;
+	static public boolean cantouch;// 防止多次点击
 	private MUserDao dao;
-	//private WebView adwebview;
+	// private WebView adwebview;
 	String updata_url;
 	private GridViewImgAdapter adapter;
 	private Timer mtimer;
@@ -70,7 +75,7 @@ public class MainMenuActivity extends BaseActivity {
 			MessageInfoActivity.class, AnnounceActivity.class,
 			RefServiceActivity.class, GroupOfReadersActivity.class };
 	// 抽屉
-	//private SlidingDrawer sd;
+	// private SlidingDrawer sd;
 	// private ImageView iv;
 	Handler handler = new Handler() {
 		public void handleMessage(Message msg) {
@@ -103,13 +108,13 @@ public class MainMenuActivity extends BaseActivity {
 		}
 	}
 
-	private int width, height;
-	
+	public static int width, height;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		// requestWindowFeature(Window.);
-		//Log.i("MainMenuActivity", "onCreate");
+		// Log.i("MainMenuActivity", "onCreate");
 		Intent intent = new Intent(MainMenuActivity.this, WelcomeActivity.class);
 		startActivity(intent);
 
@@ -118,11 +123,11 @@ public class MainMenuActivity extends BaseActivity {
 		height = display.getHeight();
 		setContentView(R.layout.activity_main);
 		context = this;
-		//sd = (SlidingDrawer) findViewById(R.id.sd);
-//		adwebview = (WebView) findViewById(R.id.adwebview);
-//		adwebview.getSettings().setSupportZoom(true);
-//		adwebview
-//				.loadUrl("http://www.szlglib.com.cn/uploads/Image/2013/06/24/20130624154214468.jpg");
+		// sd = (SlidingDrawer) findViewById(R.id.sd);
+		// adwebview = (WebView) findViewById(R.id.adwebview);
+		// adwebview.getSettings().setSupportZoom(true);
+		// adwebview
+		// .loadUrl("http://www.szlglib.com.cn/uploads/Image/2013/06/24/20130624154214468.jpg");
 		dao = new MUserDao(this);
 		gridview = (StableGridView) findViewById(R.id.grid_main);
 		adapter = new GridViewImgAdapter(this, activities);
@@ -131,21 +136,80 @@ public class MainMenuActivity extends BaseActivity {
 		mtimer = new Timer();
 		mtimer.schedule(new time_check_task(), 8 * 1000, 6 * 1000);
 		init();
-		ActivityManager activityManager = (ActivityManager) this.getSystemService("activity");
-        Log.i("MemoryClass","" + activityManager.getMemoryClass());
-        
-        //获取手机信息
-        Phinfo phinfo= new Phinfo();
-        phinfo.fullbaseinfo(this);
-        String info=phinfo.tojson(phinfo);
-        Log.i("phinfo", info);
+		ActivityManager activityManager = (ActivityManager) this
+				.getSystemService("activity");
+		Log.i("MemoryClass", "" + activityManager.getMemoryClass());
+
+		// 获取手机信息
+		Phinfo phinfo = new Phinfo();
+		phinfo.fullbaseinfo(this);
+		String info = phinfo.tojson(phinfo);
+		Log.i("phinfo", info);
+
+		gridview.setOnItemClickListener(onItemClickListener);
 	}
-@Override
-protected void onStart() {
-	// TODO Auto-generated method stub
-	super.onStart();
-	//Log.i("MainMenuActivity", "onStart");
-}
+
+	OnItemClickListener onItemClickListener = new OnItemClickListener() {
+
+		@Override
+		public void onItemClick(AdapterView<?> parent, View view, int position,
+				long id) {
+			if (!MainMenuActivity.cantouch) {
+				MainMenuActivity.cantouch = false;
+				return;
+			}
+			Intent intent = new Intent();
+			switch (position) {
+			case 0:
+			case 1:
+			case 2:
+			case 3:
+				intent.setClass(MainMenuActivity.this, activities[position]);
+				startActivity(intent);
+				break;
+			case 4:// 个人中心,需登录
+
+			case 8:// 书友圈
+					// 判断是否登录
+				if (GlobleData.islogin) {
+					intent.setClass(MainMenuActivity.this, activities[position]);
+					startActivity(intent);
+				} else {
+					showLoginDialog(position);
+				}
+				break;
+			case 6:// 馆内公告
+				intent.setClass(MainMenuActivity.this, activities[position]);
+				startActivity(intent);
+				break;
+
+			case 5:// 信息素养，暂不开放
+			case 7:// 参考咨询，暂不开放
+				MainMenuActivity.cantouch = true;
+				Toast.makeText(MainMenuActivity.this, "该功能正紧张开发中..",
+						Toast.LENGTH_SHORT).show();
+				break;
+			default:
+				break;
+			}
+		}
+	};
+
+	// 显示对话框
+	private void showLoginDialog(int id) {
+		MainMenuActivity.cantouch = true;
+		Intent intent = new Intent(MainMenuActivity.this, ActivityDlg.class);
+		intent.putExtra("ACTIONID", id);
+		startActivityForResult(intent, id);
+	}
+
+	@Override
+	protected void onStart() {
+		// TODO Auto-generated method stub
+		super.onStart();
+		// Log.i("MainMenuActivity", "onStart");
+	}
+
 	private void init_login() {
 		if (dao == null) {
 			dao = new MUserDao(context);
@@ -226,7 +290,7 @@ protected void onStart() {
 	protected void onResume() {
 		super.onResume();
 		cantouch = true;
-		//Log.i("MainMenuActivity", "onResume");
+		// Log.i("MainMenuActivity", "onResume");
 	}
 
 	public void init() {
@@ -259,7 +323,8 @@ protected void onStart() {
 				return gparams_t;
 			};
 		};
-		mys.setRetryPolicy(HttpUtils.setTimeout());mQueue.add(mys);
+		mys.setRetryPolicy(HttpUtils.setTimeout());
+		mQueue.add(mys);
 		mQueue.start();
 
 	}
@@ -305,15 +370,16 @@ protected void onStart() {
 	protected void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
-		//Log.i("MainMenuActivity", "onPause");
-		//overridePendingTransition(R.anim.slide_fade_in, R.anim.slide_fade_out);
+		// Log.i("MainMenuActivity", "onPause");
+		// overridePendingTransition(R.anim.slide_fade_in,
+		// R.anim.slide_fade_out);
 	}
 
 	@Override
 	protected void onStop() {
 		// TODO Auto-generated method stub
 		super.onStop();
-		//Log.i("MainMenuActivity", "onStop");
+		// Log.i("MainMenuActivity", "onStop");
 	}
 
 	// @Override

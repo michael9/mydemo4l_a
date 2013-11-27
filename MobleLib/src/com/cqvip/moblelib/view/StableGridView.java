@@ -24,21 +24,21 @@ public class StableGridView extends GridView{
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        // TODO Auto-generated method stub
-        if(ev.getAction() == MotionEvent.ACTION_MOVE){
-            return true;//forbid its child(gridview) to scroll
-        }
-        return super.dispatchTouchEvent(ev);
-    }
-	@Override 
-    public void onMeasure(int widthMeasureSpec, int heightMeasureSpec) { 
-
-        int expandSpec = MeasureSpec.makeMeasureSpec( 
-                Integer.MAX_VALUE >> 2, MeasureSpec.AT_MOST); 
-        super.onMeasure(widthMeasureSpec, expandSpec); 
-    } 
+//	@Override
+//    public boolean dispatchTouchEvent(MotionEvent ev) {
+//        // TODO Auto-generated method stub
+//        if(ev.getAction() == MotionEvent.ACTION_MOVE){
+//            return true;//forbid its child(gridview) to scroll
+//        }
+//        return super.dispatchTouchEvent(ev);
+//    }
+//	@Override 
+//    public void onMeasure(int widthMeasureSpec, int heightMeasureSpec) { 
+//
+//        int expandSpec = MeasureSpec.makeMeasureSpec( 
+//                Integer.MAX_VALUE >> 2, MeasureSpec.AT_MOST); 
+//        super.onMeasure(widthMeasureSpec, expandSpec); 
+//    } 
 	
 
 }

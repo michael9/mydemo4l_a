@@ -41,4 +41,6 @@
     <!-- drop down list footer font color -->
     <color name="drop_down_list_footer_font_color">#000000</color>
     
+    <color name="main_img_normal">#55004597</color>
+    <color name="main_img_press">#55e85702</color>
 </resources>
