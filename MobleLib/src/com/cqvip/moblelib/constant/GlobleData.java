@@ -69,6 +69,7 @@ public class GlobleData {
 	public static final int ANNAOUCETYPE_NEWS = 2 ;//新闻动态
 	public static final int ANNAOUCETYPE_FREESPEECH = 1;//公益讲座
 	public static final int FAQ_QUESTION = 5;//公益讲座
+	public static final int PROBLEM_ANNAOUCE = 6;//常见问题深职院
 	
 	public static Map<String, Object> datas = new HashMap<String, Object>();
 	

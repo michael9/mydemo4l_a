@@ -13,6 +13,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -35,6 +36,20 @@ import com.cqvip.moblelib.szy.R;
 import com.cqvip.moblelib.utils.HttpUtils;
 import com.cqvip.utils.Tool;
 
+/**
+ * <p>
+ * 文件名称: EbookDetailActivity.java
+ * 文件描述: 馆藏图书详细
+ * 版权所有: 版权所有(C)2013-2020
+ * 公          司: 重庆维普咨询有限公司
+ * 内容摘要: 
+ * 其他说明:
+ * 完成日期： 201年11月20日
+ * 修改记录:无
+ * </p>
+ * 
+ * @author LHP,LJ
+ */
 public class EbookDetailActivity extends BaseActivity {
 
 	private EBook dBook;
@@ -113,6 +128,8 @@ public class EbookDetailActivity extends BaseActivity {
 		if(dBook.getName_c()==null||dBook.getName_c().equals("不详")||dBook.getNum()==null||dBook.getYears()==null){
 			from.setVisibility(View.GONE);
 		}else{
+//			String strr = from1 + "《"+dBook.getName_c()+"》"+dBook.getYears() + "年," + "第" + dBook.getNum()+ "期";
+//			from.setText(Html.fromHtml("<u>"+strr+"</u"));
 		from.setText(from1 + "《"+dBook.getName_c()+"》"+dBook.getYears() + "年," + "第" + dBook.getNum()
 				+ "期");
 		}

@@ -44,7 +44,7 @@ public class DetailAdvancedBookActivity extends BaseActivity {
 		id = getIntent().getStringExtra("id");
 		// bookname=getIntent().getStringExtra("bookname");
 		if (type == Constant.QUESTION) {
-			content.setText(id);
+			content.setText(Html.fromHtml(id));
 			setheadbar(getResources().getString(R.string.title_FAQ));
 		} else {
 			customProgressDialog.show();

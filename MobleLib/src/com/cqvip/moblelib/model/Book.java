@@ -39,9 +39,9 @@ public class Book implements Serializable  {
 	}
 
 	//Favorite转换为Book
-	public Book(String isbn, String publisher, String title, String author,
+	public Book(String recordid, String publisher, String title, String author,
 			String callno, String subject, String u_price,String u_abstract,String imageurl) {
-		this.isbn = isbn;
+		this.recordid = recordid;
 		this.publisher = publisher;
 		this.title = title;
 		this.author = author;
@@ -52,10 +52,10 @@ public class Book implements Serializable  {
 		this.cover_path=imageurl;
 	}
 	//Favorite转换为Book
-	public Book(String isbn, String publisher, String title, String author,
+	public Book(String recordid, String publisher, String title, String author,
 			String callno,String u_abstract,
 			String imageurl,String pulishyear,String page,String classno,String subject) {
-		this.isbn = isbn;
+		this.recordid = recordid;
 		this.publisher = publisher;//getName_c())
 		this.title = title; //getTitle_c())
 		this.author = author; //getWriter())

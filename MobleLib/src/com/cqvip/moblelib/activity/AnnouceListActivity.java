@@ -185,12 +185,12 @@ public class AnnouceListActivity extends BaseActivity implements OnItemClickList
 	private void getHomePage(int page, int defaultCount,int mwhat) {
 		gparams=new HashMap<String, String>();
 		//gparams.put("libid", GlobleData.LIBIRY_ID);
-		gparams.put("libid","1");
 		gparams.put("curpage", ""+page);
 		gparams.put("perpage",""+ Constant.DEFAULT_TEXT_COUNT);
 		
 		switch(type){
 		case Constant.SPEECH_NEWS://新闻动态
+			gparams.put("libid","1");
 			gparams.put("announcetypeid", ""+2);		
 			if(mwhat == GETHOMEPAGE){
 				requestVolley(GlobleData.SERVER_URL
@@ -203,6 +203,7 @@ public class AnnouceListActivity extends BaseActivity implements OnItemClickList
 			}
 			break;
 		case Constant.SPPECH_FREE://公益讲座
+			gparams.put("libid","1");
 			gparams.put("announcetypeid", ""+1);		
 			if(mwhat == GETHOMEPAGE){
 				requestVolley(GlobleData.SERVER_URL
@@ -215,7 +216,8 @@ public class AnnouceListActivity extends BaseActivity implements OnItemClickList
 			}
 			break;
 		case Constant.QUESTION://常见问题
-			gparams.put("announcetypeid", ""+5);			
+			gparams.put("libid", GlobleData.LIBIRY_ID);
+			gparams.put("announcetypeid", ""+GlobleData.PROBLEM_ANNAOUCE);			
 			if(mwhat == GETHOMEPAGE){
 				requestVolley(GlobleData.SERVER_URL
 						+ "/library/announce/html.aspx", backlistener,
