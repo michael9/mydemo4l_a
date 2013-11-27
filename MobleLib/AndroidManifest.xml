@@ -32,13 +32,13 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppBaseTheme" >
+        android:theme="@style/global_font" >
         <activity
             android:name="com.cqvip.moblelib.activity.MainMenuActivity"
             android:label="@string/app_name"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar"
+            
             android:windowSoftInputMode="adjustNothing" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -50,72 +50,71 @@
             android:name="com.cqvip.moblelib.activity.EntanceGuideActivity"
             android:label="@string/title_activity_entance_guide"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar" />
+             />
         <activity
             android:name="com.cqvip.moblelib.activity.BookSearchActivity"
             android:label="@string/title_activity_book_search"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar"
+            
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name="com.cqvip.moblelib.activity.ReaderServiceActivity"
             android:label="@string/title_activity_reader_service"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar" />
+             />
         <activity
             android:name="com.cqvip.moblelib.activity.EBookActiviy"
             android:label="@string/title_activity_ebook_activiy"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name="com.cqvip.moblelib.activity.ResultForSearchActivity"
             android:label="@string/title_activity_result_for_search"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar" />
+            />
         <activity
             android:name="com.cqvip.moblelib.activity.SuggestedReadingActivity"
             android:label="@string/title_activity_suggested_reading"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar" />
+             />
         <activity
             android:name="com.cqvip.moblelib.activity.RefServiceActivity"
             android:label="@string/title_activity_ref_service"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar" />
+             />
         <activity
             android:name="com.cqvip.moblelib.activity.PersonalCenterActivity"
             android:label="@string/title_activity_personal_center"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar" />
+             />
         <activity
             android:name="com.cqvip.moblelib.activity.AnnounceActivity"
             android:label="@string/title_activity_announce"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar" />
+             />
         <activity
             android:name="com.cqvip.moblelib.activity.BorrowAndOrderActivity"
             android:label="@string/title_activity_borrow_and_order"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar" />
+             />
         <activity
             android:name="com.cqvip.moblelib.activity.GroupOfReadersActivity"
             android:label="@string/title_activity_group_of_readers"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar" />
+             />
         <activity
             android:name="com.cqvip.moblelib.activity.LibInnerNavigationActivity"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar" >
+             >
         </activity>
         <activity
             android:name="com.cqvip.moblelib.activity.DetailTextActivity"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar" />
+             />
         <activity
             android:name="com.cqvip.moblelib.activity.ReaderinfoActivity"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar" />
+             />
         <activity
             android:name="com.cqvip.moblelib.activity.LoginActivity"
             android:label="@string/title_activity_login"
@@ -134,25 +133,25 @@
             android:name="com.cqvip.moblelib.activity.ResultOnSearchActivity"
             android:label="@string/title_activity_result_on_search"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar"
+            
             android:windowSoftInputMode="stateVisible|adjustPan" />
         <activity
             android:name="com.cqvip.moblelib.activity.DetailBookActivity"
             android:label="@string/title_activity_detail_book"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar" />
+             />
         <activity
             android:name="com.cqvip.moblelib.activity.WelcomeActivity"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar" />
+             />
         <activity
             android:name="com.cqvip.moblelib.scan.CaptureActivity"
             android:screenOrientation="landscape"
-            android:theme="@android:style/Theme.Light.NoTitleBar" />
+             />
         <activity
             android:name="com.cqvip.moblelib.activity.MyFavorActivity"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar" />
+             />
         <activity
             android:name="com.cqvip.moblelib.activity.ActivityDlg"
             android:screenOrientation="portrait"
@@ -161,32 +160,31 @@
         <activity
             android:name="com.cqvip.moblelib.activity.EBookSearchActivity"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:windowSoftInputMode="stateVisible|adjustPan" />
         <activity
             android:name="com.cqvip.moblelib.activity.EbookDetailActivity"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+             />
         <activity
             android:name="com.cqvip.moblelib.activity.CommentActivity"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar"
+            
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name="com.cqvip.moblelib.activity.AdvancedBookActivity"
             android:label="@string/title_activity_advanced_book"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar" />
+             />
         <activity
             android:name="com.cqvip.moblelib.activity.DetailAdvancedBookActivity"
             android:label="@string/title_activity_detail_advanced_book"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar" />
+             />
         <activity
             android:name="com.cqvip.moblelib.activity.AnnouceListActivity"
             android:label="@string/title_activity_annouce_list"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar" />
+             />
         <activity
             android:name="com.cqvip.moblelib.activity.BigImgActivity"
             android:label="@string/title_activity_big_img"
@@ -195,11 +193,11 @@
         <activity
             android:name="com.cqvip.moblelib.activity.HelperActivity"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar" />
+             />
         <activity
             android:name="com.cqvip.moblelib.activity.DownLoadManagerActivity"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Light.NoTitleBar" >
+             >
         </activity>
 
         <!-- pdf -->

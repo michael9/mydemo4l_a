@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="48dp"
-    android:background="@drawable/DeepSkyBlue"
+    android:background="@drawable/top"
     android:orientation="horizontal" >
 
     <ImageView
@@ -21,7 +21,7 @@
         android:ellipsize="end" 
         android:singleLine="true" android:maxEms="6"
         android:text="@string/main_guide"
-        android:textColor="@color/txt_black"
+        android:textColor="@color/white"
         android:textIsSelectable="false"
         android:textSize="22sp" />
 

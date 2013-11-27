@@ -2,10 +2,16 @@
 
     <!--
         Base application theme for API 11+. This theme completely replaces
-        AppBaseTheme from res/values/styles.xml on API 11+ devices.
+        AppBaseTheme from res/values/styles.xml on API 11+ devices.
     -->
     <style name="AppBaseTheme" parent="android:Theme.Holo.Light">
         <!-- API 11 theme customizations can go here. -->
+    </style>
+
+    <style name="global_font" parent="AppBaseTheme">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/global_fontcolor</item>
+        <item name="android:windowNoTitle">true</item> 
     </style>
 
 </resources>

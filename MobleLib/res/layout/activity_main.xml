@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_list"
+    android:background="@drawable/bg_main"
     tools:context=".MainMenuActivity" >
 
     <!--
@@ -15,10 +15,9 @@
     <ImageView  android:id="@+id/imageview"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/main_log_img" />
+        android:src="@drawable/main_log_img" android:layout_marginTop="10dp" android:layout_above="@+id/grid_main"/>
 
     <com.cqvip.moblelib.view.StableGridView
-        android:layout_below="@id/imageview"
         android:id="@+id/grid_main"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

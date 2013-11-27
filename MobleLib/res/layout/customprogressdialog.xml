@@ -15,5 +15,6 @@
         android:layout_height="wrap_content"  
         android:layout_gravity="center_vertical"
         android:text="请稍等..."  
+        android:textColor="@color/white"
         android:textSize="20dp"/>  
 </LinearLayout>  

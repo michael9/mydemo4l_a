@@ -3,12 +3,11 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
 
-    <ImageView 
-        android:layout_centerInParent="true"
+    <ImageView
         android:id="@+id/welcome_img"
+        android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_width="fill_parent"   
-        android:background="@drawable/anim_3"    
-        />
+        android:background="@drawable/anim_3"
+        android:scaleType="centerCrop" />
 
 </RelativeLayout>

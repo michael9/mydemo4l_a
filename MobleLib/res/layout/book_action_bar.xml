@@ -4,7 +4,7 @@
     android:layout_height="48.0dip"
      android:gravity="center"
     android:orientation="horizontal" 
-    android:background="#EEE9F6D4">
+    android:background="@color/bookactionbar_bgcolor">
 
         <TextView 
                android:id="@+id/btn_item_great"
