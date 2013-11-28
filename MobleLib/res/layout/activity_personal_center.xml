@@ -77,7 +77,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20.0dip"
                 android:paddingRight="20.0dip"
-                android:src="@drawable/icon_collection_download" />
+                android:src="@drawable/icon_borrow" />
 
             <TextView
                 android:id="@+id/serv_download_txt"
