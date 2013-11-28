@@ -83,15 +83,15 @@ public class DetailBookActivity extends BaseActivity {
 		textView9 = (TextView) findViewById(R.id.textView9);
 		textView10 = (TextView) findViewById(R.id.textView10);
 		textView11 = (TextView) findViewById(R.id.textView11);
-		if(!TextUtils.isEmpty(dBook.getCover_path())){
+		//if(!TextUtils.isEmpty(dBook.getCover_path())){
 		ImageLoader mImageLoader = new ImageLoader(mQueue, cache);
 		ImageListener listener = ImageLoader.getImageListener(imgview,
 				R.drawable.defaut_book, R.drawable.defaut_book);
       	ImageContainer imageContainer=mImageLoader.get(dBook.getCover_path(), listener);
       	bitmap=imageContainer.getBitmap();
-		}else{
-			bitmap = null;
-		}
+//		}else{
+//			bitmap = null;
+//		}
 		ShareSDK.initSDK(this);
 		
 		imgview.setOnClickListener(new View.OnClickListener() {
