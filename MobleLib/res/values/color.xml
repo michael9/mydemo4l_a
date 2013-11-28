@@ -21,6 +21,7 @@
     <drawable name="bb">#ff6666</drawable>
     <drawable name="LightSkyBlue">#7387CEFA</drawable>
     <drawable name="DeepSkyBlue">#7300BFFF</drawable>
+    <drawable name="DeepBlue">#734DA6FF</drawable>
     <drawable name="silvergray">#a9a9a9</drawable>
     <drawable name="GreenYellow">#ADFF2F</drawable>
     <drawable name="titlegreen">#73cfeca0</drawable>
@@ -41,6 +42,9 @@
     <!-- drop down list footer font color -->
     <color name="drop_down_list_footer_font_color">#000000</color>
     
-    <color name="main_img_normal">#55004597</color>
-    <color name="main_img_press">#55e85702</color>
+    <color name="main_img_normal">#66004597</color>
+    <color name="main_img_press">#66e85702</color>
+    
+    <color name="global_fontcolor">#404040</color>
+    <color name="bookactionbar_bgcolor">#99547E92</color>
 </resources>

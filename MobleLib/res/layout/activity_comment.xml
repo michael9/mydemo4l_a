@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/textcolor_hint"
+        android:background="@color/bookactionbar_bgcolor"
         android:gravity="center"
         android:orientation="horizontal" >
 
@@ -55,11 +55,11 @@
 
             <Button
                 android:id="@+id/delete_com"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_marginRight="8.0dip"
                 android:background="@drawable/delete_comments"
-                android:gravity="center" />
+                 />
         </LinearLayout>
 
         <Button

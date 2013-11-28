@@ -18,7 +18,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:textAppearance="?android:attr/textAppearanceListItemSmall" android:text="112233"/>
+        android:textAppearance="?android:attr/textAppearanceListItemSmall"
+        android:text="112233"/>
 
     <CheckBox
         android:id="@+id/checkbox"
