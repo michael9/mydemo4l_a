@@ -57,7 +57,7 @@ public class EntanceGuideActivity extends BaseActivity {
 		LinearLayout l1 = (LinearLayout) findViewById(R.id.enterguideLayout);
 //		LinearLayout l2 = (LinearLayout) findViewById(R.id.cardLayout);
 		LinearLayout l3 = (LinearLayout) findViewById(R.id.timeLayout);
-		LinearLayout l4 = (LinearLayout) findViewById(R.id.readerknowLayout);
+//		LinearLayout l4 = (LinearLayout) findViewById(R.id.readerknowLayout);
 		LinearLayout l5 = (LinearLayout) findViewById(R.id.serverLayout);
 //		LinearLayout l6 = (LinearLayout) findViewById(R.id.transportLayout);
 		// LinearLayout l7 = (LinearLayout)findViewById(R.id.gpsLayout);
@@ -98,18 +98,18 @@ public class EntanceGuideActivity extends BaseActivity {
 				// R.anim.slide_left_out);
 			}
 		});
-		l4.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-
-				Intent intent = new Intent(context, DetailTextActivity.class);
-				intent.putExtra("enter", 4);
-				startActivity(intent);
-				// overridePendingTransition(R.anim.slide_right_in,
-				// R.anim.slide_left_out);
-			}
-		});
+//		l4.setOnClickListener(new View.OnClickListener() {
+//
+//			@Override
+//			public void onClick(View v) {
+//
+//				Intent intent = new Intent(context, DetailTextActivity.class);
+//				intent.putExtra("enter", 4);
+//				startActivity(intent);
+//				// overridePendingTransition(R.anim.slide_right_in,
+//				// R.anim.slide_left_out);
+//			}
+//		});
 		l5.setOnClickListener(new View.OnClickListener() {
 
 			@Override

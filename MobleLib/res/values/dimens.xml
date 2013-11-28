@@ -19,5 +19,7 @@
     <dimen name="drop_down_list_header_padding_bottom">15dp</dimen>
     <dimen name="drop_down_list_header_progress_bar_height">36dp</dimen>
     <dimen name="drop_down_list_footer_progress_bar_height">36dp</dimen>
+    
+    <dimen name="secondpagemargin">9dp</dimen>
      
 </resources>
