@@ -98,10 +98,10 @@ public class DetailBookActivity extends BaseActivity {
 
 			@Override
 			public void onClick(View v) {
-				if (TextUtils.isEmpty(dBook.getCover_path())) {
+				if (TextUtils.isEmpty(dBook.getCover_path_big())) {
 					return;
 				}
-				String bigimg = Tool.getBigImg(dBook.getCover_path());
+				String bigimg = dBook.getCover_path_big();
 				Intent intent = new Intent(context, BigImgActivity.class);
 				intent.putExtra("bigurl", bigimg);
 				startActivity(intent);

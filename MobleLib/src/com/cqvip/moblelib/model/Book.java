@@ -27,6 +27,7 @@ public class Book implements Serializable  {
 	private String callno;//索书号
 	private String classno;//分类号
 	private String cover_path;//封面图片
+	private String cover_path_big;//封面图片
 	private String subject;//关键字
 	private String u_page;//页数
 	private String u_price;//价格
@@ -83,6 +84,13 @@ public class Book implements Serializable  {
 	public String getClassno() {
 		return classno;
 	}
+	public String getCover_path_big() {
+		return cover_path_big;
+	}
+	
+	public void setCover_path_big(String cover_path_big) {
+		this.cover_path_big = cover_path_big;
+	}
 	public String getSubject() {
 		return subject;
 	}
@@ -98,6 +106,7 @@ public class Book implements Serializable  {
 			classno = json.getString("classno");
 			callno = json.getString("callno");
 			cover_path = json.getString("imgsmallurl");
+			cover_path_big = json.getString("imgbigurl");
 			u_page = json.getString("pagecount");
 			u_price = json.getString("price");
 			u_abstract = json.getString("remark");
