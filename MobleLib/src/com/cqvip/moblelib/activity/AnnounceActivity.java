@@ -8,6 +8,7 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cqvip.moblelib.szy.R;
 import com.cqvip.moblelib.constant.Constant;
@@ -50,23 +51,26 @@ public class AnnounceActivity extends BaseActivity {
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(context, AnnouceListActivity.class);
-				intent.putExtra("type",Constant.SPEECH_NEWS);
-				startActivity(intent);
+//				Intent intent = new Intent(context, AnnouceListActivity.class);
+//				intent.putExtra("type",Constant.SPEECH_NEWS);
+//				startActivity(intent);
 				// overridePendingTransition(R.anim.slide_right_in,
 				// R.anim.slide_left_out);
+				Toast.makeText(context, getResources().getString(R.string.disable_onclick), Toast.LENGTH_SHORT).show();
+				return;
 			}
 		});
 		l2.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(context, AnnouceListActivity.class);
-				intent.putExtra("type",Constant.SPPECH_FREE);
-				startActivity(intent);
+//				Intent intent = new Intent(context, AnnouceListActivity.class);
+//				intent.putExtra("type",Constant.SPPECH_FREE);
+//				startActivity(intent);
 				// overridePendingTransition(R.anim.slide_right_in,
 				// R.anim.slide_left_out);
-
+				Toast.makeText(context, getResources().getString(R.string.disable_onclick), Toast.LENGTH_SHORT).show();
+				return;
 			}
 		});
 		back.setOnClickListener(new View.OnClickListener() {

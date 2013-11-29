@@ -16,47 +16,47 @@
 
         <!-- 每一页的布局均以一个RelativeLayout来控制，后面类似，这里一共四个 -->
 
-        <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:background="@drawable/p01" >
-        </RelativeLayout>
+<!--         <RelativeLayout -->
+<!--             android:layout_width="fill_parent" -->
+<!--             android:layout_height="fill_parent" -->
+<!--             android:background="@drawable/p01" > -->
+<!--         </RelativeLayout> -->
 
-        <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:background="@drawable/p02" >
-        </RelativeLayout>
+<!--         <RelativeLayout -->
+<!--             android:layout_width="fill_parent" -->
+<!--             android:layout_height="fill_parent" -->
+<!--             android:background="@drawable/p02" > -->
+<!--         </RelativeLayout> -->
 
-        <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:background="@drawable/p03" >
-        </RelativeLayout>
+<!--         <RelativeLayout -->
+<!--             android:layout_width="fill_parent" -->
+<!--             android:layout_height="fill_parent" -->
+<!--             android:background="@drawable/p03" > -->
+<!--         </RelativeLayout> -->
 
-        <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:background="@drawable/p04" >
+<!--         <RelativeLayout -->
+<!--             android:layout_width="fill_parent" -->
+<!--             android:layout_height="fill_parent" -->
+<!--             android:background="@drawable/p04" > -->
 
-            <!-- 点击该按钮后就进入OtherActivit了 -->
+<!--             点击该按钮后就进入OtherActivit了 -->
 
-            <Button
-                android:id="@+id/startBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="center_vertical"
-                android:layout_marginBottom="36dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:alpha="0.7"
-                android:background="@drawable/eg_button_bg"
-                android:text="开始我的图书馆生活"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp" />
-        </RelativeLayout>
+<!--             <Button -->
+<!--                 android:id="@+id/startBtn" -->
+<!--                 android:layout_width="wrap_content" -->
+<!--                 android:layout_height="wrap_content" -->
+<!--                 android:layout_alignParentBottom="true" -->
+<!--                 android:layout_centerHorizontal="true" -->
+<!--                 android:layout_gravity="center_vertical" -->
+<!--                 android:layout_marginBottom="36dp" -->
+<!--                 android:layout_marginLeft="8dp" -->
+<!--                 android:layout_marginRight="8dp" -->
+<!--                 android:alpha="0.7" -->
+<!--                 android:background="@drawable/eg_button_bg" -->
+<!--                 android:text="开始我的图书馆生活" -->
+<!--                 android:textColor="#FFFFFF" -->
+<!--                 android:textSize="18sp" /> -->
+<!--         </RelativeLayout> -->
     </com.cqvip.moblelib.view.ScrollLayout>
 
     <!-- 这个布局是下面显示的小圆点的布局，其中ImageView的数量要与上面RelativeLayout的数量对应 -->
