@@ -31,7 +31,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/search_bar"
-            android:orientation="horizontal" >
+            android:orientation="horizontal" android:layout_marginTop="7dp" 
+            android:layout_marginBottom="7dp"
+            >
 
             <EditText
                 android:id="@+id/ebook_edit"

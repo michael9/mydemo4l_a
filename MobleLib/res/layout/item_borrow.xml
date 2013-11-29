@@ -2,8 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/Search_item_margintopbottom"
-    android:layout_marginTop="@dimen/Search_item_margintopbottom"
+    android:paddingTop="@dimen/Search_item_margintopbottom"
+    android:paddingBottom="@dimen/Search_item_margintopbottom"
     android:tag="itemview" >
 
     <!-- 图书 -->
