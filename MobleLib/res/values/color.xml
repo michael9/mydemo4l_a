@@ -47,4 +47,6 @@
     
     <color name="global_fontcolor">#404040</color>
     <color name="bookactionbar_bgcolor">#99547E92</color>
+    <color name="serchcount_txtcolor">#323538</color>
+    <color name="serchitemtitle_txtcolor">#527eb0</color>
 </resources>

@@ -12,14 +12,14 @@
     <dimen name="image_thumbnail_heightsize">145dp</dimen>
     <dimen name="image_thumbnail_spacing">3dp</dimen>
     <dimen name="gridview_vertical_spacing">5dp</dimen>
-
-     <dimen name="listview_nullcontent_textsize">16sp</dimen>
-     
-     <dimen name="drop_down_list_header_padding_top">12dp</dimen>
+    <dimen name="listview_nullcontent_textsize">16sp</dimen>
+    <dimen name="drop_down_list_header_padding_top">12dp</dimen>
     <dimen name="drop_down_list_header_padding_bottom">15dp</dimen>
     <dimen name="drop_down_list_header_progress_bar_height">36dp</dimen>
     <dimen name="drop_down_list_footer_progress_bar_height">36dp</dimen>
     
     <dimen name="secondpagemargin">9dp</dimen>
-     
+    <dimen name="Search_item_margintopbottom">10dp</dimen>
+    <dimen name="bookdetail_padding">10dp</dimen>
+
 </resources>

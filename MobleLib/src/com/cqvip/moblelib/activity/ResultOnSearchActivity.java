@@ -19,6 +19,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -52,6 +53,7 @@ public class ResultOnSearchActivity extends BaseActivity implements
 	public static final int DEFAULT_COUNT = Constant.DEFAULT_COUNT;
 	private EditText edit;
 	private TextView searchCount;
+	private LinearLayout ll_total_esearch;
 	private ImageButton imgsearch;
 	private Context context;
 	private DropDownListView listview;
@@ -71,6 +73,7 @@ public class ResultOnSearchActivity extends BaseActivity implements
 		imgsearch = (ImageButton) findViewById(R.id.search_seach_btn);
 		edit = (EditText) findViewById(R.id.search_et);
 		searchCount = (TextView) findViewById(R.id.txt_total_esearch);
+		ll_total_esearch=(LinearLayout) findViewById(R.id.ll_total_esearch);
 		listview = (DropDownListView) findViewById(R.id.search_res_lv);
 		listview.setOnItemClickListener((OnItemClickListener) this);
 		listview.setOnBottomListener(new View.OnClickListener() {
@@ -192,10 +195,10 @@ public class ResultOnSearchActivity extends BaseActivity implements
 				//获取返回记录数
 				int count = Book.bookCount(response);
 				if(count>0){
-					searchCount.setVisibility(View.VISIBLE);
+					ll_total_esearch.setVisibility(View.VISIBLE);
 					searchCount.setText("共计搜索到"+count+"条记录");
 				}else{
-					searchCount.setVisibility(View.GONE);
+					ll_total_esearch.setVisibility(View.GONE);
 				}
 				if(BuildConfig.DEBUG){
 				Log.i(TAG,"count"+count);

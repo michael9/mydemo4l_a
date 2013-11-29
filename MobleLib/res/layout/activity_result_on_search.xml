@@ -5,9 +5,11 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_list"
     tools:context=".ResultOnSearchActivity" >
+
     <include
         android:id="@+id/head_bar"
         layout="@layout/header" />
+
     <LinearLayout
         android:id="@+id/searchbar"
         android:layout_width="match_parent"
@@ -41,31 +43,43 @@
             android:layout_marginTop="1.0dip"
             android:background="@drawable/btn_selector_sreach" />
     </LinearLayout>
-  
-    <TextView
-        android:id="@+id/txt_total_esearch"
-         android:layout_width="match_parent"
+
+    <LinearLayout
+        android:id="@+id/ll_total_esearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/searchbar"
+        android:layout_margin="5dp"
+        android:paddingLeft="5dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" android:visibility="gone">
+
+        <ImageView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/searchbar"
-            android:text=""
-            android:textSize="12sp"
-            android:textColor="@android:color/black"
-            android:layout_marginLeft="8dp"
-            android:visibility="gone"
-            android:padding="1dp"
-        />
-    
+            android:background="@drawable/jiansuo_count" />
+
+        <TextView
+            android:id="@+id/txt_total_esearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:text="11"
+            android:textColor="@color/serchcount_txtcolor"
+            android:textStyle="bold"
+            android:textSize="14sp" />
+    </LinearLayout>
+
     <com.cqvip.moblelib.view.DropDownListView
         android:id="@+id/search_res_lv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/txt_total_esearch"
+        android:layout_below="@+id/ll_total_esearch"
         android:layout_marginBottom="12dp"
         android:background="@drawable/text_bck"
-        android:divider="@color/divider_color"
-        dlistView:isOnBottomStyle="true"
+        android:divider="@drawable/xuxian"
         dlistView:isAutoLoadOnBottom="true"
-        android:dividerHeight="0.5dp" />
+        dlistView:isOnBottomStyle="true" />
 
     <RelativeLayout
         android:id="@+id/noresult_rl"
@@ -88,4 +102,6 @@
             android:text="没有找到相关结果\n试试别的关键字吧!"
             android:textColor="@android:color/darker_gray" />
     </RelativeLayout>
+
+
 </RelativeLayout>
