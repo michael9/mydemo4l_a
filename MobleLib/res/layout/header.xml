@@ -23,7 +23,9 @@
         android:text="@string/main_guide"
         android:textColor="@color/white"
         android:textIsSelectable="false"
-        android:textSize="22sp" />
+        android:textSize="20sp" 
+        android:textStyle="bold"
+        />
 
     <ImageView
         android:id="@+id/btn_right_header"

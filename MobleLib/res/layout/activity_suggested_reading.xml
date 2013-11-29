@@ -182,7 +182,7 @@
             <View
                 android:layout_width="fill_parent"
                 android:layout_height="1dp"
-                android:background="@color/divider_color" />
+                android:background="@drawable/xuxian" />
 
             <LinearLayout
                 android:id="@+id/newbookLayout"
