@@ -36,21 +36,21 @@ public class HelperActivity extends Activity implements OnViewChangeListener {
 		mScrollLayout = (ScrollLayout) findViewById(R.id.ScrollLayout);
 		pointLayout = (LinearLayout) findViewById(R.id.llayout);
 		mainRLayout = (RelativeLayout) findViewById(R.id.main_rl);
-		startBtn = (Button) findViewById(R.id.startBtn);
-		startBtn.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				switch (v.getId()) {
-				case R.id.startBtn:
-					Intent intent = new Intent(HelperActivity.this, MainMenuActivity.class);
-					HelperActivity.this.startActivity(intent);
-					HelperActivity.this.finish();
-					break;
-				}
-
-			}
-		});
+//		startBtn = (Button) findViewById(R.id.startBtn);
+//		startBtn.setOnClickListener(new View.OnClickListener() {
+//
+//			@Override
+//			public void onClick(View v) {
+//				switch (v.getId()) {
+//				case R.id.startBtn:
+//					Intent intent = new Intent(HelperActivity.this, MainMenuActivity.class);
+//					HelperActivity.this.startActivity(intent);
+//					HelperActivity.this.finish();
+//					break;
+//				}
+//
+//			}
+//		});
 		count = mScrollLayout.getChildCount();
 		imgs = new ImageView[count];
 		for (int i = 0; i < count; i++) {

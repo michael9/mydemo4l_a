@@ -39,8 +39,9 @@ public class EBookActiviy extends BaseActivity {
 	// };
 	private String[] EBOOKTYPE;
 	private ViewGroup searchbar;
-	private int[] drawableids = { R.drawable.sign_vip, R.drawable.sign_chaoxing,
-			R.drawable.sign_fangzheng };
+//	private int[] drawableids = { R.drawable.sign_vip, R.drawable.sign_chaoxing,
+//			R.drawable.sign_fangzheng };
+	private int[] drawableids = { R.drawable.sign_vip, R.drawable.sign_chaoxing };
 	private  int currentID=-1;
 	private EditText editText;
 
