@@ -21,5 +21,6 @@
     <dimen name="secondpagemargin">9dp</dimen>
     <dimen name="Search_item_margintopbottom">10dp</dimen>
     <dimen name="bookdetail_padding">10dp</dimen>
+    <dimen name="bookdetail_margin">5dp</dimen>
 
 </resources>
