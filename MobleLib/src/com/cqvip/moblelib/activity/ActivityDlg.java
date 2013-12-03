@@ -48,7 +48,6 @@ public class ActivityDlg extends BaseActivity  {
 	//保存用户名
 	private Editor editor;
 	private SharedPreferences localUsers;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
