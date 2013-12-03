@@ -31,6 +31,7 @@ import com.cqvip.moblelib.model.BookLoc;
 import com.cqvip.moblelib.model.Result;
 import com.cqvip.moblelib.szy.R;
 import com.cqvip.moblelib.utils.HttpUtils;
+import com.cqvip.utils.BitmapCache;
 import com.cqvip.utils.Tool;
 
 /**
@@ -84,6 +85,9 @@ public class DetailBookActivity extends BaseActivity {
 		textView10 = (TextView) findViewById(R.id.textView10);
 		textView11 = (TextView) findViewById(R.id.textView11);
 		//if(!TextUtils.isEmpty(dBook.getCover_path())){
+		if(cache==null){
+			cache = new BitmapCache(Tool.getCachSize());
+		}
 		ImageLoader mImageLoader = new ImageLoader(mQueue, cache);
 		ImageListener listener = ImageLoader.getImageListener(imgview,
 				R.drawable.defaut_book, R.drawable.defaut_book);

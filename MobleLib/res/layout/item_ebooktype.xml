@@ -4,7 +4,11 @@
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
     android:orientation="horizontal"
-    android:padding="2dp" >
+    android:paddingLeft="2dp" 
+    android:paddingRight="2dp"
+    android:paddingTop="4dp"
+    android:paddingBottom="4dp"
+    >
 
     <ImageView
         android:id="@+id/booktype_img"

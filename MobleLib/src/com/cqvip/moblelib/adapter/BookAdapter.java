@@ -3,6 +3,8 @@ package com.cqvip.moblelib.adapter;
 import java.util.List;
 
 import android.content.Context;
+import android.text.Html;
+import android.text.Spanned;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -116,16 +118,16 @@ public class BookAdapter extends BaseAdapter {
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-		String author = context.getResources().getString(R.string.item_author);
+		String author = context.getResources().getString(R.string.author_item);
 		String publish = context.getResources()
-				.getString(R.string.item_publish);
+				.getString(R.string.publish_item);
 		String describe = context.getResources().getString(
-				R.string.item_describe);
+				R.string.describe_item);
 		Book book = lists.get(position);
 		holder.title.setText(book.getTitle());
-		holder.author.setText(author + book.getAuthor());
-		holder.publisher.setText(publish + book.getPublisher()+","+book.getPublishyear());
-		holder.u_abstract.setText(describe + book.getU_abstract());
+		holder.author.setText(Html.fromHtml(author+book.getAuthor()));
+		holder.publisher.setText(Html.fromHtml(publish + book.getPublisher()+","+book.getPublishyear()));
+		holder.u_abstract.setText(Html.fromHtml(describe + book.getU_abstract()));
 
 		String url=book.getCover_path();
 //        if(!TextUtils.isEmpty(url)){

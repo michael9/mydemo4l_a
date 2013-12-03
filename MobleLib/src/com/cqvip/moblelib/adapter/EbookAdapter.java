@@ -3,6 +3,7 @@ package com.cqvip.moblelib.adapter;
 import java.util.List;
 
 import android.content.Context;
+import android.text.Html;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -108,18 +109,18 @@ public class EbookAdapter extends BaseAdapter {
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-		String author = context.getResources().getString(R.string.item_author);
-		String from = context.getResources().getString(R.string.ebook_orang);
+		String author = context.getResources().getString(R.string.ebook_author_item);
+		String from = context.getResources().getString(R.string.ebook_orang_item);
 		String describe = context.getResources().getString(
-				R.string.ebook_abstrac);
+				R.string.ebook_abstrac_item);
 		final EBook book = lists.get(position);
 		holder.title.setText(book.getTitle_c());
-		holder.author.setText(author + book.getWriter());
+		holder.author.setText(Html.fromHtml(author + book.getWriter()));
 		holder.publisher.setSingleLine(false);
 		holder.publisher.setMaxLines(2);
-		holder.publisher.setText(from + "《"+book.getName_c()+"》"+book.getYears() + "年," + "第"
-				+ book.getNum() + "期");
-		holder.u_abstract.setText(describe + book.getRemark_c());
+		holder.publisher.setText(Html.fromHtml(from + "《"+book.getName_c()+"》"+book.getYears() + "年," + "第"
+				+ book.getNum() + "期"));
+		holder.u_abstract.setText(Html.fromHtml(describe + book.getRemark_c()));
 		String url=book.getImgurl();
 		holder.img.setVisibility(View.GONE);
 //        if(!TextUtils.isEmpty(url)){
