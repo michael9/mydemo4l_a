@@ -49,7 +49,7 @@ public class EBookActiviy extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_ebook_activiy);
-		editText=(EditText) findViewById(R.id.ebook_edit);
+		editText=(EditText) findViewById(R.id.et_search);
 		View v = findViewById(R.id.ebook_title);
 		TextView title = (TextView) v.findViewById(R.id.txt_header);
 		title.setText(R.string.main_ebook);
@@ -97,13 +97,13 @@ public class EBookActiviy extends BaseActivity {
 			}
 		});
 
-		final EditText et = (EditText) findViewById(R.id.ebook_edit);
-		et.setOnClickListener(new View.OnClickListener() {
+		
+		editText.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-				imm.hideSoftInputFromWindow(et.getWindowToken(), 0);
+				imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
 				Intent intent = new Intent(EBookActiviy.this,
 						EBookSearchActivity.class);
 				startActivity(intent);

@@ -46,19 +46,19 @@ public class WelcomeActivity extends Activity {
 
 		// 判断程序与第几次运行，如果是第一次运行则跳转到引导页面
 
-		if (count == 0) {
-
-			Editor editor = preferences.edit();
-			// 存入数据
-			editor.putInt("count", ++count);
-			// 提交修改
-			editor.commit();
-
-			Intent intent = new Intent();
-			intent.setClass(WelcomeActivity.this, HelperActivity.class);
-			startActivity(intent);
-			overridePendingTransition(R.anim.welcome_slide_fade_in, R.anim.welcome_slide_fade_out);
-		}
+//		if (count == 0) {
+//
+//			Editor editor = preferences.edit();
+//			// 存入数据
+//			editor.putInt("count", ++count);
+//			// 提交修改
+//			editor.commit();
+//
+//			Intent intent = new Intent();
+//			intent.setClass(WelcomeActivity.this, HelperActivity.class);
+//			startActivity(intent);
+//			overridePendingTransition(R.anim.welcome_slide_fade_in, R.anim.welcome_slide_fade_out);
+//		}
 	}
 
 	class Page_check_task extends java.util.TimerTask {

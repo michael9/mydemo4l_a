@@ -52,7 +52,7 @@ public class ResultOnSearchActivity extends BaseActivity implements
 	public static final int DEFAULT_COUNT = Constant.DEFAULT_COUNT;
 	private EditText edit;
 	private TextView searchCount;
-	private ImageButton imgsearch;
+	private ImageView imgsearch;
 	private Context context;
 	private DropDownListView listview;
 	private String key;
@@ -68,8 +68,8 @@ public class ResultOnSearchActivity extends BaseActivity implements
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_result_on_search);
 		context = this;
-		imgsearch = (ImageButton) findViewById(R.id.search_seach_btn);
-		edit = (EditText) findViewById(R.id.search_et);
+		imgsearch = (ImageView) findViewById(R.id.im_seach_icon);
+		edit = (EditText) findViewById(R.id.et_search);
 		searchCount = (TextView) findViewById(R.id.txt_total_esearch);
 		listview = (DropDownListView) findViewById(R.id.search_res_lv);
 		listview.setOnItemClickListener((OnItemClickListener) this);

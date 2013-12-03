@@ -58,8 +58,8 @@ public class EBookSearchActivity extends BaseActivity implements
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_result_on_search);
 		context = this;
-		imgsearch = (ImageView) findViewById(R.id.search_seach_btn);
-		edit = (EditText) findViewById(R.id.search_et);
+		imgsearch = (ImageView) findViewById(R.id.im_seach_icon);
+		edit = (EditText) findViewById(R.id.et_search);
 		searchCount = (TextView) findViewById(R.id.txt_total_esearch);
 		listview = (DropDownListView) findViewById(R.id.search_res_lv);
 		listview.setOnItemClickListener((OnItemClickListener) this);
