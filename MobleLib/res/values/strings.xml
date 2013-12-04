@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">深职院图书馆</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">通知公告</string>
     <string name="zx_phone">咨询电话:     02366879630</string>
     <string name="main_guide">入馆指南</string>
     <string name="main_search">馆藏查询</string>
@@ -173,5 +173,8 @@
     <string name="title_activity_message_info">MessageInfoActivity</string>
     <string name="disable_onclick">该功能正在紧张开发中&#8230;</string>
     <string name="hint_search">请输入关键词搜索</string>
+    <string name="annouce_annouce">通知公告</string>
+    <string name="announce_subject">专题讲座</string>
+    <string name="announce_professor">专家讲座</string>
 
 </resources>

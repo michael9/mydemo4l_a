@@ -165,7 +165,7 @@ public class AdvancedBookActivity extends BaseActivity implements
 	private void getHomePage(int page, int defaultCount, int mwhat) {
 		gparams = new HashMap<String, String>();
 	//	gparams.put("libid", GlobleData.LIBIRY_ID);
-		gparams.put("libid", "1");
+		gparams.put("libid", ""+GlobleData.LIBIRY_ID);
 		gparams.put("curpage", "" + page);
 		gparams.put("perpage", "" + Constant.DEFAULT_COUNT_SuggestedReading);
 
@@ -174,7 +174,7 @@ public class AdvancedBookActivity extends BaseActivity implements
 			gparams.put("announcetypeid", "" + 3);
 			break;
 		case Constant.NEWBOOK:
-			gparams.put("announcetypeid", "" + 4);
+			gparams.put("announcetypeid", "" + GlobleData.SUG_NEWBOOK);
 			break;
 		}
 		if (mwhat == GETHOMEPAGE) {

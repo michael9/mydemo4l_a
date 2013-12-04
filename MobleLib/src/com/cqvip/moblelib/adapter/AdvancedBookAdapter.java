@@ -110,7 +110,7 @@ public class AdvancedBookAdapter extends BaseAdapter {
         	Log.i("AdvancedBookAdapter", rotate_position+"rotate_position+positon"+position);
 	        rotate_position=position>rotate_position?position:rotate_position;  
 	        
-			String url=book.getDate();
+			String url=book.getSucesss();
 	        if(!TextUtils.isEmpty(url)){
 	        	holder.img.setImageUrl(url, mImageLoader);
 	        } else {

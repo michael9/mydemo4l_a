@@ -50,18 +50,6 @@ public class AnnouceListActivity extends BaseActivity implements OnItemClickList
 		type = getIntent().getIntExtra("type", 1);
 		listview = (DropDownListView) findViewById(R.id.listview_new);
 		listview.setOnItemClickListener(this);
-		  // set drop down listener
-//        listview.setOnDropDownListener(new OnDropDownListener() {
-//
-//            @Override
-//            public void onDropDown() {
-//            	page = 1;//重置page
-//            	isFirstLoad = false;
-//        		getHomePage(page, Constant.DEFAULT_COUNT,GETHOMEPAGE);
-//            }
-//        });
-
-        // set on bottom listener
         listview.setOnBottomListener(new OnClickListener() {
 
             @Override
@@ -80,9 +68,18 @@ public class AnnouceListActivity extends BaseActivity implements OnItemClickList
 			setheadbar(getResources().getString(R.string.announce_out));
 			break;
 			
+		case  Constant.SPEECH_ANNOUNCE:
+			sendtype=Task.TASK_ANNOUNCE_WELFARE;
+			setheadbar(getResources().getString(R.string.annouce_annouce));
+			break;
+		case  Constant.SPEECH_SUBJECT:
+			sendtype=Task.TASK_ANNOUNCE_NEWS;
+			setheadbar(getResources().getString(R.string.announce_subject));
+			break;
+			
 		case  Constant.SPPECH_FREE:
 			sendtype=Task.TASK_ANNOUNCE_WELFARE;
-			setheadbar(getResources().getString(R.string.free_speech));
+			setheadbar(getResources().getString(R.string.announce_professor));
 			break;
 		case  Constant.QUESTION:
 			sendtype=Task.TASK_E_CAUTION;
@@ -184,14 +181,13 @@ public class AnnouceListActivity extends BaseActivity implements OnItemClickList
 	
 	private void getHomePage(int page, int defaultCount,int mwhat) {
 		gparams=new HashMap<String, String>();
-		//gparams.put("libid", GlobleData.LIBIRY_ID);
+		gparams.put("libid", GlobleData.LIBIRY_ID);
 		gparams.put("curpage", ""+page);
 		gparams.put("perpage",""+ Constant.DEFAULT_TEXT_COUNT);
 		
 		switch(type){
 		case Constant.SPEECH_NEWS://新闻动态
-			gparams.put("libid","1");
-			gparams.put("announcetypeid", ""+2);		
+			gparams.put("announcetypeid", ""+GlobleData.ANNO_NEWS);		
 			if(mwhat == GETHOMEPAGE){
 				requestVolley(GlobleData.SERVER_URL
 						+ "/library/announce/list.aspx", backlistener,
@@ -202,9 +198,32 @@ public class AnnouceListActivity extends BaseActivity implements OnItemClickList
 						Method.POST);
 			}
 			break;
-		case Constant.SPPECH_FREE://公益讲座
-			gparams.put("libid","1");
-			gparams.put("announcetypeid", ""+1);		
+		case Constant.SPEECH_ANNOUNCE://通知公告
+			gparams.put("announcetypeid", ""+GlobleData.ANNO_MESS);		
+			if(mwhat == GETHOMEPAGE){
+				requestVolley(GlobleData.SERVER_URL
+						+ "/library/announce/list.aspx", backlistener,
+						Method.POST);
+			}else{
+				requestVolley(GlobleData.SERVER_URL
+						+ "/library/announce/list.aspx", backlistenermore,
+						Method.POST);
+			}
+			break;
+		case Constant.SPEECH_SUBJECT://专题讲座
+			gparams.put("announcetypeid", ""+GlobleData.ANNO_SUBJECT);		
+			if(mwhat == GETHOMEPAGE){
+				requestVolley(GlobleData.SERVER_URL
+						+ "/library/announce/list.aspx", backlistener,
+						Method.POST);
+			}else{
+				requestVolley(GlobleData.SERVER_URL
+						+ "/library/announce/list.aspx", backlistenermore,
+						Method.POST);
+			}
+			break;
+		case Constant.SPPECH_FREE://专家讲座
+			gparams.put("announcetypeid", ""+GlobleData.ANNO_PROFESSOR);		
 			if(mwhat == GETHOMEPAGE){
 				requestVolley(GlobleData.SERVER_URL
 						+ "/library/announce/list.aspx", backlistener,

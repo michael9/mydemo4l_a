@@ -21,6 +21,7 @@ public class GlobleData {
 	 * 服务器地址
 	 * */
 	public final static   String SERVER_URL = "http://mobile.cqvip.com";
+	//public final static   String SERVER_URL = "http://192.168.20.61:8080";
 	/**
 	 * 服务器地址
 	 * */
@@ -78,6 +79,15 @@ public class GlobleData {
 	public static String userid;
 	public static String readerid;
 	public static String cqvipid;
+	
+	
+	//馆内公告，接口
+	public static final int ANNO_NEWS = 7;//新闻动态
+	public static final int ANNO_MESS = 8;//通知公告
+	public static final int ANNO_SUBJECT = 9;//专题讲座
+	public static final int ANNO_PROFESSOR= 10;//专家讲座
+	public static final int SUG_NEWBOOK= 11;//专家讲座
+	
 	
 	//登录标识
 	public static boolean islogin = false;

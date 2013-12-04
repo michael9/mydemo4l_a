@@ -96,7 +96,7 @@ public class DetailAdvancedBookActivity extends BaseActivity {
 	private void getContent(String id2) {
 
 		String serverurl = GlobleData.SERVER_URL
-				+ "/library/announce/detail.aspx?libid=1&announceid=" + id2;
+				+ "/library/announce/detail.aspx?libid=2&announceid=" + id2;
 		JsonObjectRequest myReq = new JsonObjectRequest(Method.GET, serverurl,
 				null, createDetailListener(), createMyReqErrorListener());
 		mQueue.add(myReq);

@@ -13,8 +13,10 @@ public class Constant {
 	public static final int HOTBOOK_MORE = 3;//热门图书
 	public static final int NEWBOOK_MORE = 4;//新书推荐
 	public static final int SPEECH_NEWS = 5;//新闻动态
-	public static final int SPPECH_FREE = 6;//公益讲座
+	public static final int SPPECH_FREE = 6;//专题讲座
 	public static final int QUESTION = 7;//常见问题
+	public static final int SPEECH_ANNOUNCE = 8;//通知公告
+	public static final int SPEECH_SUBJECT = 9;//专题讲座
 	
 	public static final int MEDIAL = 1;//医药卫生
 	public static final int ENGINE = 2;//工程科学
