@@ -15,6 +15,7 @@
     <ImageView  android:id="@+id/imageview"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:src="@drawable/main_log_img" android:layout_marginTop="10dp" android:layout_above="@+id/grid_main"/>
 
     <com.cqvip.moblelib.view.StableGridView
@@ -32,34 +33,5 @@
         android:numColumns="3"
         android:stretchMode="columnWidth"
         android:verticalSpacing="10.0dip" />
-    <!--
-    <SlidingDrawer
-        android:id="@+id/sd"
-        android:layout_width="match_parent"
-        android:layout_height="220dp"
-        android:layout_alignParentBottom="true"
-        android:content="@+id/myContent"
-        android:handle="@+id/iv"
-        android:orientation="vertical" >
-
-        <ImageView
-            android:id="@+id/iv"
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/sh" />
-
-       <RelativeLayout
-  			android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/myContent">
-           <WebView
-               android:id="@+id/adwebview"
-                 android:layout_width="match_parent"
-            android:layout_height="match_parent"
-               /> 
-       </RelativeLayout>
-    </SlidingDrawer>
-    -->
 
 </RelativeLayout>

@@ -7,7 +7,7 @@
         android:id="@+id/welcome_img"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="@drawable/anim_3"
+        android:src="@drawable/anim_3"
         android:scaleType="centerCrop" />
 
 </RelativeLayout>

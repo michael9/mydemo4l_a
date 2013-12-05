@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -41,6 +42,7 @@ public class EBookSearchActivity extends BaseActivity implements
 	public static final int DEFAULT_COUNT = Constant.DEFAULT_COUNT;
 	private EditText edit;
 	private TextView searchCount;
+	private LinearLayout ll_total_esearch;
 	private ImageView imgsearch;
 	private Context context;
 	private DropDownListView listview;
@@ -63,6 +65,7 @@ public class EBookSearchActivity extends BaseActivity implements
 		searchCount = (TextView) findViewById(R.id.txt_total_esearch);
 		listview = (DropDownListView) findViewById(R.id.search_res_lv);
 		listview.setOnItemClickListener((OnItemClickListener) this);
+		ll_total_esearch=(LinearLayout) findViewById(R.id.ll_total_esearch);
 		noResult_rl = (RelativeLayout) findViewById(R.id.noresult_rl);
 		//获取更多
 		listview.setOnBottomListener(new View.OnClickListener() {
@@ -163,10 +166,10 @@ public class EBookSearchActivity extends BaseActivity implements
 				//获取返回记录数
 				int count = EBook.ebookCount(response);
 				if(count>0){
-					searchCount.setVisibility(View.VISIBLE);
+					ll_total_esearch.setVisibility(View.VISIBLE);
 					searchCount.setText("共计搜索到"+count+"条记录");
 				}else{
-					searchCount.setVisibility(View.GONE);
+					ll_total_esearch.setVisibility(View.GONE);
 				}
 				// JSONObject mj=new JSONObject(response);
 				List<EBook> lists = EBook.formList(response);

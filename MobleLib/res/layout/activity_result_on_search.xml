@@ -50,8 +50,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/ll_total_esearch"
-        android:layout_marginBottom="12dp"
-        android:background="@drawable/text_bck"
+        
+        android:background="@drawable/linearlayout_shape1"
         android:divider="@drawable/xuxian"
         dlistView:isAutoLoadOnBottom="true"
         dlistView:isOnBottomStyle="true" />

@@ -76,6 +76,7 @@
         android:layout_below="@id/rl_tab"
         android:layout_gravity="center"
         android:flipInterval="30"
+        android:background="@drawable/linearlayout_shape1"
         android:persistentDrawingCache="animation" />
 
 </RelativeLayout>
