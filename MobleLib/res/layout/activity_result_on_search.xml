@@ -16,17 +16,28 @@
         android:id="@+id/searchbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="3dp"
+        android:layout_marginLeft="@dimen/searchbar_horizontal_margin"
+        android:layout_marginRight="@dimen/searchbar_horizontal_margin"
         android:layout_below="@id/head_bar"
         layout="@layout/search_bar" />
+        <View
+            android:id="@+id/v_xuxian"
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/searchbar"
+                android:background="@drawable/xuxian" />
 
    <LinearLayout
         android:id="@+id/ll_total_esearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/searchbar"
         android:layout_margin="5dp"
         android:paddingLeft="5dp"
         android:gravity="center_vertical"
+        android:layout_below="@id/v_xuxian"
+        android:layout_marginBottom="1dp"
         android:orientation="horizontal" android:visibility="gone">
 
         <ImageView
@@ -50,7 +61,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/ll_total_esearch"
-        
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginLeft="@dimen/searchbar_horizontal_margin"
+        android:layout_marginRight="@dimen/searchbar_horizontal_margin"
         android:background="@drawable/linearlayout_shape1"
         android:divider="@drawable/xuxian"
         dlistView:isAutoLoadOnBottom="true"
