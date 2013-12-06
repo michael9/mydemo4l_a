@@ -30,8 +30,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             android:layout_marginTop="15dp"
             android:gravity="right"
             android:orientation="horizontal" >
@@ -64,6 +64,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:background="@drawable/login_layout_shape"
         android:paddingBottom="20dp"
         android:visibility="gone" >
@@ -92,8 +94,8 @@
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
                 android:layout_marginTop="20dp"
                 android:layout_gravity="center_horizontal"
                 android:orientation="horizontal" >
@@ -104,6 +106,7 @@
                     android:text="@string/login_username"
                     android:textColor="@color/txt_black"
                     android:textStyle="bold"
+                    android:visibility="gone"
                     android:textSize="16sp" />
 
                 <AutoCompleteTextView
@@ -112,15 +115,16 @@
                     android:layout_weight="1"
                     android:layout_height="40dp"
                     android:inputType="number"
+                    android:hint="@string/login_username"
                     android:singleLine="true" android:imeOptions="actionNext"/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="15dp"
                 android:layout_gravity="center_horizontal"
                 android:orientation="horizontal" >
 
@@ -129,6 +133,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/login_password"
                     android:textStyle="bold"
+                    android:visibility="gone"
                     android:textColor="@color/txt_black"
                     android:textSize="16sp" />
 
@@ -137,6 +142,7 @@
                     android:layout_width="0dip"
                     android:layout_weight="1"
                     android:layout_height="40dp"
+                    android:hint="@string/login_password"
                     android:inputType="textPassword"
                     android:singleLine="true" />
             </LinearLayout>
@@ -144,8 +150,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
                 android:layout_marginTop="20dp"
                 android:gravity="right"
                 android:orientation="horizontal" >

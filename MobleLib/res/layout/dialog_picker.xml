@@ -12,8 +12,8 @@
 		android:layout_gravity="center_horizontal|top"
 		android:layout_marginTop="10.0dip"
 		android:gravity="top"
-		android:textSize="20sp"
-		android:text="请选择期刊期数"/>
+		android:textSize="22sp"
+		android:text="@string/dialog_pick_title"/>
 	
 	<LinearLayout
 		android:layout_height="wrap_content"
@@ -46,11 +46,9 @@
 		android:layout_gravity="center_horizontal"
 		android:layout_marginTop="18dp"
 		android:textSize="16sp"
-		android:text="确定" 
+		android:text="@string/dialog_pick_confirm" 
 		android:paddingTop="2.0dip"
 		android:paddingBottom="2.0dip"
-		android:paddingLeft="10.0dip"
-		android:paddingRight="10.0dip"
 		android:layout_marginBottom="5.0dip"
 		/>  
 

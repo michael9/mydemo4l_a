@@ -80,8 +80,8 @@
         android:paddingRight="2dp"
         android:paddingTop="3dp"
         android:paddingBottom="3dp"
-        android:layout_marginLeft="@dimen/searchbar_horizontal_margin"
-        android:layout_marginRight="@dimen/searchbar_horizontal_margin" 
+        android:layout_marginLeft="@dimen/searchbar_horizontal_smallmargin"
+        android:layout_marginRight="@dimen/searchbar_horizontal_smallmargin" 
         android:background="@drawable/linearlayout_shape1"
         android:persistentDrawingCache="animation" />
 

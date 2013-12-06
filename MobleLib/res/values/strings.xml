@@ -182,5 +182,7 @@
     <string name="login_username">借阅卡号：</string>
     <string name="login_password">借阅密码：</string>
     <string name="btn_login">登陆</string>
+    <string name="dialog_pick_confirm">确  定</string>
+    <string name="dialog_pick_title">请选择期刊期数</string>
 
 </resources>
