@@ -45,6 +45,7 @@
     
     <color name="main_img_normal">#66004597</color>
     <color name="main_img_press">#66e85702</color>
+    <color name="main_middle_press">#88f3a137</color>
     
     <color name="global_fontcolor">#404040</color>
     <color name="bookactionbar_bgcolor">#99547E92</color>

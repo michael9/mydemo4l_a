@@ -28,7 +28,6 @@
         android:gravity="center"
         android:horizontalSpacing="10.0dip"
         android:isScrollContainer="false"
-        android:layoutAnimation="@anim/layout_wave_scale"
         android:listSelector="@drawable/transparent"
         android:numColumns="3"
         android:stretchMode="columnWidth"
