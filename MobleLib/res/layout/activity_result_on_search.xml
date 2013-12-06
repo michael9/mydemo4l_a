@@ -22,12 +22,6 @@
         android:layout_marginRight="@dimen/searchbar_horizontal_margin"
         android:layout_below="@id/head_bar"
         layout="@layout/search_bar" />
-        <View
-            android:id="@+id/v_xuxian"
-                android:layout_width="fill_parent"
-                android:layout_height="1dp"
-                android:layout_below="@id/searchbar"
-                android:background="@drawable/xuxian" />
 
    <LinearLayout
         android:id="@+id/ll_total_esearch"
@@ -36,21 +30,18 @@
         android:layout_margin="5dp"
         android:paddingLeft="5dp"
         android:gravity="center_vertical"
-        android:layout_below="@id/v_xuxian"
+        android:layout_below="@id/searchbar"
         android:layout_marginBottom="1dp"
         android:orientation="horizontal" android:visibility="gone">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/jiansuo_count" />
 
         <TextView
             android:id="@+id/txt_total_esearch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="2dp"
-            android:text="11"
+            android:text=""
+            android:drawableLeft="@drawable/jiansuo_count"
+            android:layout_gravity="center_vertical"
             android:textColor="@color/serchcount_txtcolor"
             android:textStyle="bold"
             android:textSize="14sp" />
