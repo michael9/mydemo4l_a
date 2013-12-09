@@ -15,7 +15,6 @@
     <ImageView  android:id="@+id/imageview"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         android:src="@drawable/main_log_img" android:layout_marginTop="10dp" android:layout_above="@+id/grid_main"/>
 
     <com.cqvip.moblelib.view.StableGridView
