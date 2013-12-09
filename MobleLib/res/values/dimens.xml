@@ -17,12 +17,13 @@
     <dimen name="drop_down_list_header_padding_bottom">15dp</dimen>
     <dimen name="drop_down_list_header_progress_bar_height">36dp</dimen>
     <dimen name="drop_down_list_footer_progress_bar_height">36dp</dimen>
+    <dimen name="popwind_width">100dp</dimen>
     
     <dimen name="secondpagemargin">9dp</dimen>
     <dimen name="Search_item_margintopbottom">10dp</dimen>
     <dimen name="bookdetail_padding">10dp</dimen>
     <dimen name="bookdetail_margin">5dp</dimen>
 
-     <dimen name="searchbar_horizontal_margin">8dp</dimen>
+     <dimen name="searchbar_horizontal_margin">2dp</dimen>
      <dimen name="searchbar_horizontal_smallmargin">1dp</dimen>
 </resources>

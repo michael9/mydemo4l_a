@@ -1,4 +1,4 @@
-
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -20,63 +20,52 @@
     android:orientation="vertical"
     tools:context=".BookSearchActivity" >
 
-    <include
-        android:id="@+id/seach_title"
-        layout="@layout/header" />
+   <RelativeLayout 
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:background="@drawable/top"
+    android:orientation="horizontal" >
 
-    <LinearLayout
+    <ImageView
+        android:id="@+id/img_back_header"
+        android:layout_width="66dp"
+        android:layout_height="32dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="9dip"
+        android:background="@drawable/btn_back" />
+
+    <TextView
+        android:id="@+id/txt_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:ellipsize="end" 
+        android:singleLine="true" android:maxEms="6"
+        android:text="@string/main_guide"
+        android:textColor="@color/white"
+        android:textIsSelectable="false"
+        android:textSize="20sp" 
+        android:textStyle="bold"
+        />
+
+    <ImageView
+        android:id="@+id/scan_iv"
+        android:layout_width="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="9dip"
+        android:layout_height="32dp"
+        android:src="@drawable/btn_selector_scan"
+        />
+
+
+</RelativeLayout>
+    <include
+        android:id="@+id/search_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:paddingBottom="9.0dip"
-        android:paddingLeft="9.0dip"
-        android:paddingRight="9.0dip"
-        android:paddingTop="9.0dip" >
-
-        <RelativeLayout
-            android:id="@+id/searchbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/search_bar"
-            android:orientation="horizontal" >
-
-            <EditText
-                android:id="@+id/search_et"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:background="@null"
-                android:ems="10"
-                android:hint="请输入关键词搜索"
-                android:singleLine="true" />
-
-           
-            
-            <ImageButton
-                android:layout_alignParentRight="true"
-            android:id="@+id/scan_iv"
-            android:layout_width="33dp"
-            android:layout_height="33dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-             android:layout_centerVertical="true"
-            android:background="@drawable/btn_selector_scan" />
-            
-             <ImageView
-                android:id="@+id/search_seach_btn"
-                android:layout_width="33dp"
-                android:layout_height="33dp"
-                android:layout_toLeftOf="@id/scan_iv"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="5.0dip"
-               
-                android:background="@drawable/eg_search" />
-            
-        </RelativeLayout>
-
-        
+        android:layout_margin="2dp"
+        layout="@layout/search_bar_layout" />
         
     </LinearLayout>
 
@@ -89,5 +78,4 @@
         android:visibility="gone" >
     </ListView>
 
-</LinearLayout>
 </RelativeLayout>

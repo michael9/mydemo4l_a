@@ -11,4 +11,15 @@
         <item>维普中刊</item>
         <item>超星图书</item>
     </string-array>
+    <string-array name="booksearchtype">
+        <item>关键词</item>
+        <item>题名</item>
+        <item>作者</item>
+        <item>ISBN</item>
+    </string-array>
+    <string-array name="ebooksearchtype">
+        <item>关键词</item>
+        <item>作者</item>
+        <item>刊名</item>
+    </string-array>
 </resources>

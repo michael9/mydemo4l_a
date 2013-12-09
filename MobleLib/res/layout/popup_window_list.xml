@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout 
+    android:orientation="vertical" 
+    android:paddingLeft="0.0sp" 
+    android:paddingRight="0.0sp" 
+    android:layout_width="fill_parent" 
+    android:layout_height="fill_parent" 
+    android:layout_margin="0.0px"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/popwind_bg">
+    
+      <ListView 
+        android:id="@+id/lvGroup" 
+        android:layout_width="fill_parent" 
+        android:layout_height="fill_parent"
+        
+        android:cacheColorHint="#00000000"
+        android:divider="#cacbd1"
+        android:dividerHeight="0.5px"
+        android:fadingEdge="none"
+        android:clickable="false"
+        android:footerDividersEnabled="true"/>
+</LinearLayout>
