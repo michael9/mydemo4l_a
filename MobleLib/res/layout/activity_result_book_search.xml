@@ -27,16 +27,20 @@
         android:layout_marginTop="2dp"
         android:layout_marginLeft="@dimen/searchbar_horizontal_smallmargin"
         android:layout_marginRight="@dimen/searchbar_horizontal_smallmargin"
+        android:layout_gravity="center_vertical"
         layout="@layout/search_bar_layout" />
-    
-    <Button 
+
+    <TextView
         android:id="@+id/btn_search"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="38dp"
-        android:text="搜索"
-        
-        />
+        android:layout_width="45.0dip"
+        android:layout_height="32.0dip"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:background="@drawable/btn_search_bg"
+        android:layout_gravity="center_vertical"
+        android:gravity="center"
+        android:text="搜索" />
+
     </LinearLayout>
    <LinearLayout
         android:id="@+id/ll_total_esearch"

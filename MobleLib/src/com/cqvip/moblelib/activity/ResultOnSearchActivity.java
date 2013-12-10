@@ -71,7 +71,7 @@ public class ResultOnSearchActivity extends BaseActivity implements
 	private ImageView icon_clear;//清除按钮
 	private PopupMenu popup; //弹出框
 	private String[] searchType;//条件
-	private Button btn_search;//搜索按钮
+	private TextView btn_search;//搜索按钮
 	private String search_condition;
 	
 	@Override
@@ -222,7 +222,7 @@ public class ResultOnSearchActivity extends BaseActivity implements
 		icon_search = (ImageView)this.findViewById(R.id.img_search_icon);
 		icon_clear = (ImageView)this.findViewById(R.id.icon_btn_clear);
 		tx_search_condition = (TextView)this.findViewById(R.id.tv_search_condition);
-		btn_search = (Button) findViewById(R.id.btn_search);
+		btn_search = (TextView) findViewById(R.id.btn_search);
 		popup= new PopupMenu(this);
 		popup.setonMyItemOnClickListener(this);
 		popup.setGroups(searchType);
