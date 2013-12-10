@@ -7,29 +7,29 @@ import java.util.Map;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request.Method;
-import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
-import com.android.volley.RetryPolicy;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.StringRequest;
 import com.cqvip.moblelib.adapter.BookAdapter;
@@ -40,11 +40,13 @@ import com.cqvip.moblelib.szy.BuildConfig;
 import com.cqvip.moblelib.szy.R;
 import com.cqvip.moblelib.utils.HttpUtils;
 import com.cqvip.moblelib.view.DropDownListView;
+import com.cqvip.moblelib.view.PopupMenu;
+import com.cqvip.moblelib.view.PopupMenu.onMyItemOnClickListener;
 import com.cqvip.utils.BitmapCache;
 import com.cqvip.utils.Tool;
 
 public class ResultOnSearchActivity extends BaseActivity implements
-		 OnItemClickListener {
+		 OnItemClickListener, OnClickListener, onMyItemOnClickListener {
 
 	private static final String TAG = "ResultOnSearchActivity";
 	private final int GETFIRSTPAGE = 1;
@@ -54,7 +56,6 @@ public class ResultOnSearchActivity extends BaseActivity implements
 	private EditText edit;
 	private TextView searchCount;
 	private LinearLayout ll_total_esearch;
-	private ImageView imgsearch;
 	private Context context;
 	private DropDownListView listview;
 	private String key;
@@ -64,28 +65,39 @@ public class ResultOnSearchActivity extends BaseActivity implements
 	private RelativeLayout noResult_rl;
 	private View title_bar;
 	private Map<String, String> gparams;
-
+	
+	private TextView  tx_search_condition;//显示搜索条件
+	private ImageView icon_search;//搜索按钮
+	private ImageView icon_clear;//清除按钮
+	private PopupMenu popup; //弹出框
+	private String[] searchType;//条件
+	private TextView btn_search;//搜索按钮
+	private String search_condition;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_result_on_search);
+		setContentView(R.layout.activity_result_book_search);
 		context = this;
-		imgsearch = (ImageView) findViewById(R.id.im_seach_icon);
-		edit = (EditText) findViewById(R.id.et_search);
-		searchCount = (TextView) findViewById(R.id.txt_total_esearch);
 		ll_total_esearch=(LinearLayout) findViewById(R.id.ll_total_esearch);
+		searchCount = (TextView) findViewById(R.id.txt_total_esearch);
+		
+		initSearch();
+		
+		
 		listview = (DropDownListView) findViewById(R.id.search_res_lv);
 		listview.setOnItemClickListener((OnItemClickListener) this);
 		listview.setOnBottomListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
+				//判断是否是ISBN
 				if (Tool.isbnMatch(key)) {
 					getHomePage(key, page + 1, DEFAULT_COUNT, GETNEXTPAGE,
 							GlobleData.QUERY_ISBN);
 				} else {
 					getHomePage(key, page + 1, DEFAULT_COUNT, GETNEXTPAGE,
-							GlobleData.QUERY_ALL);
+							search_condition);
 				}
 				page = page + 1;
 			}
@@ -95,14 +107,13 @@ public class ResultOnSearchActivity extends BaseActivity implements
 		
 		if(getIntent().getBooleanExtra("isfromDetailAdvancedBookActivity", false)){
 			key=getIntent().getStringExtra("bookname");
-			imgsearch.setFocusable(true);
 			customProgressDialog.show();
 			getHomePage(key, GETFIRSTPAGE, DEFAULT_COUNT, GETFIRSTPAGE,
 					GlobleData.QUERY_ALL);
 			this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 		}
 
-		imgsearch.setOnClickListener(new View.OnClickListener() {
+		btn_search.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
@@ -112,7 +123,7 @@ public class ResultOnSearchActivity extends BaseActivity implements
 					return;
 				}
 				if (TextUtils.isEmpty(key)) {
-					Tool.ShowMessages(context, "请输入关键字");
+					Tool.ShowMessages(context, getResources().getString(R.string.tips_nosearch_key));
 					return;
 				}
 				// 判断是否是isbn号查询
@@ -123,11 +134,39 @@ public class ResultOnSearchActivity extends BaseActivity implements
 							GlobleData.QUERY_ISBN);
 				} else {
 					getHomePage(key, GETFIRSTPAGE, DEFAULT_COUNT, GETFIRSTPAGE,
-							GlobleData.QUERY_ALL);
+							search_condition);
 				}
 			}
 
 		});
+		
+		edit.addTextChangedListener(new TextWatcher() {
+			
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void afterTextChanged(Editable s) {
+				String str = edit.getText().toString();
+				if(!TextUtils.isEmpty(str)){
+					icon_clear.setVisibility(View.VISIBLE);
+				}else{
+					icon_clear.setVisibility(View.GONE);
+				}
+				
+			}
+		});
+		
 
 		edit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 
@@ -152,7 +191,7 @@ public class ResultOnSearchActivity extends BaseActivity implements
 							GlobleData.QUERY_ISBN);
 				} else {
 					getHomePage(key, GETFIRSTPAGE, DEFAULT_COUNT, GETFIRSTPAGE,
-							GlobleData.QUERY_ALL);
+							search_condition);
 				}
 				return true;
 			}
@@ -175,6 +214,25 @@ public class ResultOnSearchActivity extends BaseActivity implements
 	}
 
 	/**
+	 * 初始化搜索框
+	 */
+	private void initSearch() {
+		searchType = getResources().getStringArray(R.array.booksearchtype);
+		edit = (EditText) findViewById(R.id.et_search_keyword);
+		icon_search = (ImageView)this.findViewById(R.id.img_search_icon);
+		icon_clear = (ImageView)this.findViewById(R.id.icon_btn_clear);
+		tx_search_condition = (TextView)this.findViewById(R.id.tv_search_condition);
+		btn_search = (TextView) findViewById(R.id.btn_search);
+		popup= new PopupMenu(this);
+		popup.setonMyItemOnClickListener(this);
+		popup.setGroups(searchType);
+		icon_search.setOnClickListener(this);
+		tx_search_condition.setOnClickListener(this);
+		icon_clear.setOnClickListener(this);
+		search_condition = GlobleData.QUERY_ALL;
+	}
+
+	/**
 	 * 隐藏键盘
 	 */
 	private void hideKeybord() {
@@ -187,10 +245,9 @@ public class ResultOnSearchActivity extends BaseActivity implements
 	Listener<String> backlistener = new Listener<String>() {
 		@Override
 		public void onResponse(String response) {
-			// TODO Auto-generated method stub
-			Log.i(TAG,"===================backlistener==================");
 			if(customProgressDialog!=null&&customProgressDialog.isShowing())
 			customProgressDialog.dismiss();
+			hideKeybord();
 			try {
 				//获取返回记录数
 				int count = Book.bookCount(response);
@@ -339,6 +396,67 @@ public class ResultOnSearchActivity extends BaseActivity implements
 		  if (cache != null) {
 			  cache = null;
 	        }
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.tv_search_condition:
+		case R.id.img_search_icon:	
+			popup.showWindow(v);
+			break;
+		case R.id.icon_btn_clear:
+			edit.setText("");
+		default:
+			break;
+		}
+		
+	}
+
+	@Override
+	public void onMyItemClick(ListView view, final PopupWindow popupWindow) {
+		view.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> adapterView, View view,
+					int position, long id) {
+					switch(position){
+					case 0:
+						search_condition = GlobleData.QUERY_ALL;
+						tx_search_condition.setVisibility(View.GONE);
+						icon_search.setVisibility(View.VISIBLE);
+						search_condition = getSearchType(position);
+						break;
+					case 1:
+					case 2:
+					case 3:
+						tx_search_condition.setVisibility(View.VISIBLE);
+						icon_search.setVisibility(View.GONE);
+						tx_search_condition.setText(searchType[position]);
+						search_condition = getSearchType(position);
+						break;
+					}
+
+				if (popupWindow != null) {
+					popupWindow.dismiss();
+				}
+			}
+
+			private String getSearchType(int position) {
+				switch (position) {
+				case 0:
+					return GlobleData.QUERY_ALL;
+				case 1:
+					return GlobleData.QUERY_TITLE;
+				case 2:
+					return GlobleData.QUERY_AUTHOR;
+				case 3:
+					return GlobleData.QUERY_ISBN;
+				default:
+					return GlobleData.QUERY_ALL;
+				}
+			}
+		});
 	}
 
 }

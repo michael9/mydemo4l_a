@@ -170,6 +170,7 @@
     <string name="update_at">更新于：</string>
     <string name="lecture_source">深职院大讲堂：</string>
     <string name="tips_periodical_null">抱歉！该杂志暂未被《中文科技期刊数据库》收录，请直接联系期刊社！期刊社联系电话：010－64294171 64294139</string>
+    <string name="tips_nosearch_key">请输入搜索内容</string>
     <string name="title_activity_message_info">MessageInfoActivity</string>
     <string name="disable_onclick">该功能正在紧张开发中&#8230;</string>
     <string name="hint_search">请输入关键词搜索</string>
