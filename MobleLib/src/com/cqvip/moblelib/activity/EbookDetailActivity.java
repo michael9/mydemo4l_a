@@ -155,7 +155,7 @@ public class EbookDetailActivity extends BaseActivity {
 				if (GlobleData.islogin) {
 					Intent _intent = new Intent(EbookDetailActivity.this,
 							CommentActivity.class);
-					Book book = new Book(null, dBook.getName_c(), dBook.getTitle_c(),
+					Book book = new Book(dBook.getLngid(), dBook.getName_c(), dBook.getTitle_c(),
 							dBook.getWriter(), dBook.getLngid(),dBook.getRemark_c(), 
 							dBook.getImgurl(),dBook.getYears(),
 							dBook.getPagecount()+"",dBook.getNum(),dBook.getPdfsize()+"");
