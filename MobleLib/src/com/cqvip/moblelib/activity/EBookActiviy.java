@@ -92,11 +92,9 @@ public class EBookActiviy extends BaseActivity {
 				if(check!=null){
 					unSelectAll();
 				    check.toggle();
-				    Log.i("adsg","=============ok======"+position);
 				    isSelected.put(position, check.isChecked());
 				    adapter.notifyDataSetChanged();
 				}else{
-					Log.i("adsg","=============no======");
 				}
 			}
 		});

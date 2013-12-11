@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:tag="itemview" >
+
+    <!-- 图书 -->
+        <com.android.volley.toolbox.NetworkImageView 
+            android:id="@+id/re_book_img"
+            android:layout_width="72dp"
+            android:layout_height="96dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="2.0dip"
+            android:layout_marginTop="2.0dip"
+            android:background="@android:color/transparent"
+            android:saveEnabled="true"
+            android:scaleType="centerCrop" />
+
+            <LinearLayout
+                android:id="@+id/childLayout"
+                  android:layout_width="fill_parent"
+                 android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/re_book_img"
+                android:layout_marginLeft="2.0dip"
+                android:orientation="vertical" >
+
+                <!-- title -->
+
+                <TextView
+                    android:id="@+id/re_name_txt"
+                    style="@style/TextTitleBlueStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:layout_marginTop="2.0dip"
+                    android:text=""
+                    />
+                <!-- author -->
+
+                <TextView
+                    android:id="@+id/re_author_txt"
+                    style="@style/TextContentSmallStyle"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2.0dip"
+                    android:singleLine="true"
+                    android:text=""
+                     />
+
+                <!-- address -->
+
+                <TextView
+                    android:id="@+id/re_addr_txt"
+                    style="@style/TextContentSmallStyle"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="2"
+                    android:text=""
+                   />
+
+                <!-- time -->
+
+                <TextView
+                    android:id="@+id/txt_abst"
+                    style="@style/TextContentSmallStyle"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:maxLines="2"
+                    />
+
+        </LinearLayout>
+
+         <Button
+             android:id="@+id/favor_cancel"
+             android:layout_width="42dp"
+             android:layout_height="42dp"
+             android:layout_alignParentRight="true"
+             android:layout_centerVertical="true"
+             android:focusable="false" android:visibility="gone"/>
+            
+</RelativeLayout>
