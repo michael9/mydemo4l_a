@@ -19,7 +19,7 @@ import com.cqvip.moblelib.constant.GlobleData;
 
 public class GridViewImgAdapter extends BaseAdapter {
 
-	private  Class[] activities;
+	private Class[] activities;
 	private Context mContext;
 
 	// 定义整型数组 即图片源
@@ -40,7 +40,7 @@ public class GridViewImgAdapter extends BaseAdapter {
 			R.string.main_ebook,
 			R.string.main_readingguide,
 			R.string.main_ebookstore,// R.string.main_bookcomment
-			R.string.serv_favorite, R.string.main_notice, R.string.main_borrow,
+			R.string.branch_lib_face, R.string.main_notice, R.string.main_borrow,
 			R.string.main_order
 
 	};
@@ -48,7 +48,8 @@ public class GridViewImgAdapter extends BaseAdapter {
 	public GridViewImgAdapter(Context c) {
 		mContext = c;
 	}
-	public GridViewImgAdapter(Context c,Class[] activities) {
+
+	public GridViewImgAdapter(Context c, Class[] activities) {
 		mContext = c;
 		this.activities = activities;
 	}
@@ -69,13 +70,14 @@ public class GridViewImgAdapter extends BaseAdapter {
 		return position;
 	}
 
-	//显示对话框
+	// 显示对话框
 	private void showLoginDialog(int id) {
 		MainMenuActivity.cantouch = true;
 		Intent intent = new Intent(mContext, ActivityDlg.class);
 		intent.putExtra("ACTIONID", id);
 		((Activity) mContext).startActivityForResult(intent, id);
 	}
+
 	@SuppressLint("NewApi")
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
@@ -113,15 +115,19 @@ public class GridViewImgAdapter extends BaseAdapter {
 					case 3:
 						intent.setClass(mContext, activities[tag]);
 						mContext.startActivity(intent);
-						break;					//个人中心	
-					case 4:
-					//我的收藏	
+						break;
+					// 分馆面貌
 					case 5:
-					//借阅管理	
+						intent.setClass(mContext, activities[tag]);
+						mContext.startActivity(intent);
+						break;
+					// 个人中心
+					case 4:
+						// 借阅管理
 					case 7:
-					//书友圈	
+						// 书友圈
 					case 8:
-						//判断是否登录
+						// 判断是否登录
 						if (GlobleData.islogin) {
 							intent.setClass(mContext, activities[tag]);
 							mContext.startActivity(intent);
