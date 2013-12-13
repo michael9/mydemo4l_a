@@ -13,6 +13,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
@@ -73,6 +74,7 @@ public class ResultOnSearchActivity extends BaseActivity implements
 	private String[] searchType;//Ìõ¼þ
 	private TextView btn_search;//ËÑË÷°´Å¥
 	private String search_condition;
+	private View search_layout_container;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -221,12 +223,12 @@ public class ResultOnSearchActivity extends BaseActivity implements
 		edit = (EditText) findViewById(R.id.et_search_keyword);
 		icon_search = (ImageView)this.findViewById(R.id.img_search_icon);
 		icon_clear = (ImageView)this.findViewById(R.id.icon_btn_clear);
+		search_layout_container = this.findViewById(R.id.ly_left_contain);
 		tx_search_condition = (TextView)this.findViewById(R.id.tv_search_condition);
 		btn_search = (TextView) findViewById(R.id.btn_search);
-		popup= new PopupMenu(this);
+		popup= new PopupMenu(this,searchType);
 		popup.setonMyItemOnClickListener(this);
-		popup.setGroups(searchType);
-		icon_search.setOnClickListener(this);
+		search_layout_container.setOnClickListener(this);
 		tx_search_condition.setOnClickListener(this);
 		icon_clear.setOnClickListener(this);
 		search_condition = GlobleData.QUERY_ALL;
@@ -287,6 +289,15 @@ public class ResultOnSearchActivity extends BaseActivity implements
 
 		}
 	};
+	
+
+	@Override
+	public boolean dispatchTouchEvent(MotionEvent ev) {
+		if(popup.isShowing()){
+			popup.closeWindow();
+		}
+		return super.dispatchTouchEvent(ev);
+	}
 
 	Listener<String> backlistenermore = new Listener<String>() {
 		@Override
@@ -401,9 +412,14 @@ public class ResultOnSearchActivity extends BaseActivity implements
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.tv_search_condition:
-		case R.id.img_search_icon:	
-			popup.showWindow(v);
+		case R.id.ly_left_contain:
+			if(popup!=null){
+				if(popup.isShowing()){
+					popup.closeWindow();
+				}else{
+					popup.showWindow(v);
+				}
+			}
 			break;
 		case R.id.icon_btn_clear:
 			edit.setText("");
@@ -412,7 +428,6 @@ public class ResultOnSearchActivity extends BaseActivity implements
 		}
 		
 	}
-
 	@Override
 	public void onMyItemClick(ListView view, final PopupWindow popupWindow) {
 		view.setOnItemClickListener(new OnItemClickListener() {
@@ -437,7 +452,7 @@ public class ResultOnSearchActivity extends BaseActivity implements
 						break;
 					}
 
-				if (popupWindow != null) {
+				if (popupWindow != null&&popupWindow.isShowing()) {
 					popupWindow.dismiss();
 				}
 			}
@@ -457,6 +472,19 @@ public class ResultOnSearchActivity extends BaseActivity implements
 				}
 			}
 		});
+	}
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// TODO Auto-generated method stub
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			if(popup!=null){
+			if(popup.isShowing()){
+				popup.closeWindow();
+				return true;
+			}
+		   }
+		}
+		return super.onKeyDown(keyCode, event);
 	}
 
 }

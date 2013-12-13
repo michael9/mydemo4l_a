@@ -80,6 +80,7 @@
         android:layout_marginLeft="@dimen/searchbar_horizontal_margin"
         android:layout_marginRight="@dimen/searchbar_horizontal_margin"
         android:background="@drawable/linearlayout_shape1"
+        android:focusable="true"
         android:divider="@drawable/xuxian"
         dlistView:isAutoLoadOnBottom="true"
         dlistView:isOnBottomStyle="true" />
