@@ -574,7 +574,7 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 							favorite.getYears(), favorite.getNum(),
 							favorite.getTitle(), favorite.getOrgan(),
 							favorite.getRemark(), favorite.getWriter(),
-							favorite.getPagecount(), 0, favorite.getImgurl());
+							favorite.getPagecount(), 0, favorite.getImgurl(),favorite.getWeburl());
 					if (book != null) {
 						Intent _intent = new Intent(context,
 								EbookDetailActivity.class);

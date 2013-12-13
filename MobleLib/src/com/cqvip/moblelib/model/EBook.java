@@ -48,7 +48,7 @@ public class EBook implements Serializable{
 		    
 		    public EBook(String lngid, String years, String num, String title_c,
 					String name_c, String remark_c, String writer,
-					int pagecount, long pdfsize, String imgurl) {
+					int pagecount, long pdfsize, String imgurl,String weburl) {
 				super();
 				this.lngid = lngid;
 				this.years = years;
@@ -60,6 +60,7 @@ public class EBook implements Serializable{
 				this.pagecount = pagecount;
 				this.pdfsize = pdfsize;
 				this.imgurl = imgurl;
+				this.weburl = weburl;
 			}
 
 			public String getImgurl() {
