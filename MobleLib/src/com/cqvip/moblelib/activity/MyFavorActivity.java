@@ -553,9 +553,9 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 			} else {
 				if ((Integer) parent.getTag() == GlobleData.BOOK_SZ_TYPE) {
 					favorite = arrayList_sz.get(positon);
-					String lngid = favorite.getLngid();// J228.5/1:4,863174
-
-					Book book = new Book("", favorite.getOrgan(),
+					String lngid = favorite.getLngid();// 
+					//深职院的书籍直接使用recordid modify by lj 20131212
+					Book book = new Book(favorite.getLngid(), favorite.getOrgan(),
 							favorite.getTitle(), favorite.getWriter(), lngid,
 							favorite.getYears(), favorite.getPrice(),
 							favorite.getRemark(), favorite.getImgurl());
