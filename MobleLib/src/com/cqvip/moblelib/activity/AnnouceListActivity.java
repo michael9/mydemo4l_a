@@ -321,6 +321,7 @@ public class AnnouceListActivity extends BaseActivity implements OnItemClickList
 				Intent _intent = new Intent(context,DetailAdvancedBookActivity.class);
 				_intent.putExtra("id", book.getId());
 				_intent.putExtra("type", type);
+				_intent.putExtra("fromwhere", this.getClass().getName());
 				startActivity(_intent);
 			}
 	}

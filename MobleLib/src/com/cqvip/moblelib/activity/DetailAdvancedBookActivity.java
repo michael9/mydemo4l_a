@@ -42,6 +42,7 @@ public class DetailAdvancedBookActivity extends BaseActivity {
 		title = (TextView) findViewById(R.id.ad_book_title);
 		type = getIntent().getIntExtra("type", 1);
 		id = getIntent().getStringExtra("id");
+		String fromwhere=getIntent().getStringExtra("fromwhere");
 		// bookname=getIntent().getStringExtra("bookname");
 		if (type == Constant.QUESTION) {
 			content.setText(Html.fromHtml(id));
@@ -50,6 +51,9 @@ public class DetailAdvancedBookActivity extends BaseActivity {
 			customProgressDialog.show();
 			getContent(id);
 			setheadbar(getResources().getString(R.string.title_moredetail));
+			if( fromwhere!=null&&fromwhere.equals(AnnouceListActivity.class.getName())){
+				title.setVisibility(View.GONE);
+			}
 		}
 	}
 

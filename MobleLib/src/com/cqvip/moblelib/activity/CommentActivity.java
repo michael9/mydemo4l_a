@@ -293,6 +293,7 @@ public class CommentActivity extends BaseActivity implements
 				// 更新列表
 				getHomeComment(typeid, keyid, 1, Constant.DEFAULT_COUNT,
 						GETHOMEPAGE);
+				comment_et.setText("");
 			} else {
 				Tool.ShowMessages(CommentActivity.this, "添加失败");
 			}
