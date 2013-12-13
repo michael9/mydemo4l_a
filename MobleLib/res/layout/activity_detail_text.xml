@@ -24,9 +24,14 @@
     android:layout_marginRight="5dp"
     android:background="@drawable/input_box"
      >
-	<TextView
+	<LinearLayout 
+	     android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+	    android:orientation="vertical"
+	    >
+	    <TextView
            android:id="@+id/content_txt"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16sp"
         android:textColor="#404040"
@@ -35,5 +40,13 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
          />
+	    <LinearLayout 
+	    android:id="@+id/ll_pic_layout"
+	     android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+	    android:orientation="vertical"
+	    >
+	    </LinearLayout>
+	</LinearLayout>
 </ScrollView>
 </RelativeLayout>

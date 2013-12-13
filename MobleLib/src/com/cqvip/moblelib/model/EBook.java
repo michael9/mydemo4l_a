@@ -41,6 +41,7 @@ public class EBook implements Serializable{
 		    private int pagecount;//页数
 		    private long pdfsize;//大小
 		    private String imgurl;//图片
+			private String weburl;//网站url
 		    private boolean isfavorite;//是否收藏
 		    private boolean allowdown;//是否
 	
@@ -169,6 +170,7 @@ public class EBook implements Serializable{
 		    				pdfsize = getInt("pdfsize",json);
 		    				imgurl = json.getString("imgurl");
 		    				isfavorite = json.getBoolean("isfavorite");
+		    				weburl = json.getString("weburl");
 		    				allowdown = json.getBoolean("allowdown");
 		    			} catch (JSONException e) {
 		    				e.printStackTrace();
@@ -177,6 +179,10 @@ public class EBook implements Serializable{
 		    
 		    	
 		    }
+			public String getWeburl() {
+				return weburl;
+			}
+
 			public static int ebookCount(String result) throws BookException{
 				JSONObject json;
 				try {

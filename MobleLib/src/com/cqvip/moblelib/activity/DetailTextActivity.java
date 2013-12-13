@@ -2,32 +2,48 @@ package com.cqvip.moblelib.activity;
 
 import org.json.JSONObject;
 
+import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.Request.Method;
-import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
-import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.ImageLoader.ImageContainer;
+import com.android.volley.toolbox.ImageLoader.ImageListener;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.cqvip.moblelib.szy.R;
 import com.cqvip.moblelib.constant.GlobleData;
+import com.cqvip.moblelib.szy.R;
+import com.cqvip.utils.BitmapCache;
+import com.cqvip.utils.Tool;
 
 public class DetailTextActivity extends BaseActivity {
 	private int type;
 	private TextView t1, content;
-
+	private LinearLayout piclayouy;
+	private Context context;
+	private ImageLoader mImageLoader;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_detail_text);
+		context = this;
 		View v = findViewById(R.id.seach_title);
 		t1 = (TextView) v.findViewById(R.id.txt_header);
 		ImageView back = (ImageView) v.findViewById(R.id.img_back_header);
+		piclayouy = (LinearLayout) findViewById(R.id.ll_pic_layout);
+		if(cache==null){
+			cache = new BitmapCache(Tool.getCachSize());
+		}
+	    mImageLoader = new ImageLoader(mQueue, cache);
+		
 		// ManagerService.allActivity.add(this);
 
 		back.setOnClickListener(new View.OnClickListener() {
@@ -50,22 +66,10 @@ public class DetailTextActivity extends BaseActivity {
 					+ "/library/guide/notice.aspx?libid=2", mj, null,
 					Method.GET);
 			break;
-		case 2:
-			t1.setText(R.string.guide_cardguide);
-			requestVolley(GlobleData.SERVER_URL
-					+ "/library/guide/cardguide.aspx?libid=1", mj, null,
-					Method.GET);
-			break;
 		case 3:
 			t1.setText(R.string.guide_time);
 			requestVolley(GlobleData.SERVER_URL
 					+ "/library/guide/time.aspx?libid=2", mj, null, Method.GET);
-			break;
-		case 4:
-			t1.setText(R.string.guide_readerknow);
-			requestVolley(GlobleData.SERVER_URL
-					+ "/library/guide/reader.aspx?libid=2", mj, null,
-					Method.GET);
 			break;
 		case 5:
 			t1.setText(R.string.guide_server);
@@ -99,13 +103,38 @@ public class DetailTextActivity extends BaseActivity {
 			try {
 				if (arg0.getString("success").equalsIgnoreCase("true")) {
 					content.setText(Html.fromHtml(arg0.getString("contents")));
+					if(!arg0.isNull("contentImgUrl")){
+					String [] imgs = getImgs(arg0.getString("contentImgUrl"));
+					if(imgs!=null&&imgs.length>0){
+						for(int i=0;i<imgs.length;i++){
+							ImageView img = new ImageView(context);
+							ImageListener listener = ImageLoader.getImageListener(img,
+									R.drawable.defaut_book, R.drawable.defaut_book);
+					      	ImageContainer imageContainer=mImageLoader.get(imgs[i], listener);
+					      	Bitmap bitmap = imageContainer.getBitmap();
+					      	if(bitmap!=null){
+							img.setImageBitmap(imageContainer.getBitmap());
+							piclayouy.addView(img);
+					      	}
+						}
+					  }
+					}
 				}
 			} catch (Exception e) {
-				// TODO: handle exception
+			    e.printStackTrace();
 				content.setText(DetailTextActivity.this.getResources()
 						.getString(R.string.loadfail));
 			}
 
+		}
+
+		private String[] getImgs(String string) {
+			String[] array = null ;
+			if(!TextUtils.isEmpty(string)){
+				array = string.split(";");
+				return array;
+			}
+			return array;
 		}
 	};
 
