@@ -63,8 +63,8 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 	// private int curpage_sz = 1, curpage_zk = 1;
 	// 缓存
 	private HashMap<Long, Boolean> loded;
-	MyGridViewAdapter adapter_sz;
-	MyGridViewAdapter_Loaded adapter_zk;
+	MyGridViewAdapter adapter_sz;//正在下载
+	MyGridViewAdapter_Loaded adapter_zk;//已下载
 	/**
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide
 	 * fragments for each of the sections. We use a
@@ -154,6 +154,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 	public void onWindowFocusChanged(boolean hasFocus) {
 		if (hasFocus && ispressdownbutton) {
 			mViewPager.setCurrentItem(1);
+			ispressdownbutton=false;
 		}
 	}
 
@@ -259,7 +260,11 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 		meBookDao = new MEBookDao(this);
 		try {
 			mebooks_list = (ArrayList<MEbook>) meBookDao.queryall(0);
-			mebooks_listloaded = (ArrayList<MEbook>) meBookDao.queryall(1);
+			ArrayList<MEbook> mebooks_listloaded_temp= (ArrayList<MEbook>) meBookDao.queryall(1);
+			if(mebooks_listloaded_temp!=null){
+				mebooks_listloaded.clear();
+				mebooks_listloaded.addAll(mebooks_listloaded_temp)
+			}
 		} catch (DaoException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -685,6 +690,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
+			Log.i(DownLoadManagerActivity.class.getSimpleName(), ""+position);
 			final ViewHolder holder;
 			if (arrayList == null || arrayList.isEmpty()) {
 				convertView = LayoutInflater.from(myContext).inflate(
@@ -750,11 +756,19 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 				if (downloadstatus == DownloadManager.STATUS_SUCCESSFUL
 						&& !loded.containsKey(book.getDownloadid())) {
 					holder.downloadtip.setText("下载完成，请点击打开");
-					// 放入缓存
+					// 放入缓存--避免重复调用数据库
 					loded.put(book.getDownloadid(), true);
 					// 更新数据库
 					book.setPdfsize((long) int_array[1]);
 					updateDateBase(book);
+					mebooks_list.remove(book);
+					arrayList.remove(position);
+					adapter_sz.notifyDataSetChanged();
+					if(mebooks_listloaded==null){
+						mebooks_listloaded=new ArrayList<MEbook>();
+					}
+					mebooks_listloaded.add(0,book);
+					adapter_zk.notifyDataSetChanged();
 				}
 
 				final String bookname = getfillName(book.getDownloadid());
