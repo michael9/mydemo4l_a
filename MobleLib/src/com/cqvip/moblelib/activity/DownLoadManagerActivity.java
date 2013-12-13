@@ -263,7 +263,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 			ArrayList<MEbook> mebooks_listloaded_temp= (ArrayList<MEbook>) meBookDao.queryall(1);
 			if(mebooks_listloaded_temp!=null){
 				mebooks_listloaded.clear();
-				mebooks_listloaded.addAll(mebooks_listloaded_temp)
+				mebooks_listloaded.addAll(mebooks_listloaded_temp);
 			}
 		} catch (DaoException e) {
 			// TODO Auto-generated catch block
