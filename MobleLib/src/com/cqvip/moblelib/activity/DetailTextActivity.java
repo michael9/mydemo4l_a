@@ -125,7 +125,6 @@ public class DetailTextActivity extends BaseActivity {
 				content.setText(DetailTextActivity.this.getResources()
 						.getString(R.string.loadfail));
 			}
-
 		}
 
 		private String[] getImgs(String string) {
