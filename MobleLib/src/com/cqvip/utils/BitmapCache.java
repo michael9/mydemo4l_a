@@ -1,5 +1,7 @@
 package com.cqvip.utils;
 
+import java.io.Serializable;
+
 import android.graphics.Bitmap;
 import android.support.v4.util.LruCache;
 
@@ -7,7 +9,13 @@ import com.android.volley.toolbox.ImageLoader.ImageCache;
 
 public class BitmapCache  extends LruCache<String, Bitmap> implements ImageCache {
     
-    public BitmapCache(int maxsize) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5561733994786475350L;
+
+
+	public BitmapCache(int maxsize) {
     	super(maxsize);
       
     }

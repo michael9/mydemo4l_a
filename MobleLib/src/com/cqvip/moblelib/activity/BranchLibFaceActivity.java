@@ -43,6 +43,7 @@ public class BranchLibFaceActivity extends BaseActivity {
 		webView.getSettings().setUseWideViewPort(true);
 		 webView.getSettings().setLoadWithOverviewMode(true);
 		 webView.getSettings().setPluginState(WebSettings.PluginState.ON);
+		 webView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
 		webviewState(webView);
 		webView.loadUrl("http://www.szlglib.com.cn/part/");
 	}

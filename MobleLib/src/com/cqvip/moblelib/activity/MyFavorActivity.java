@@ -35,6 +35,8 @@ import com.android.volley.Request.Method;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.NetworkImageView;
 import com.android.volley.toolbox.StringRequest;
 import com.cqvip.mobelib.imgutils.ImageFetcher;
 import com.cqvip.moblelib.longgang.R;
@@ -48,6 +50,7 @@ import com.cqvip.moblelib.model.Result;
 import com.cqvip.moblelib.net.BookException;
 import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.moblelib.view.SwipHorizontalScrollView;
+import com.cqvip.utils.BitmapCache;
 import com.cqvip.utils.Tool;
 
 public class MyFavorActivity extends BaseFragmentImageActivity {
@@ -60,6 +63,7 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 	private Favorite del_favorite;
 	private View moreprocess;
 	private int curpage_sz = 1, curpage_zk = 1;// 第几页
+	public static BitmapCache cache;
 
 	MyGridViewAdapter adapter_zk, adapter_sz;
 	/**
@@ -110,11 +114,23 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 
 		// Set up the ViewPager with the sections adapter.
 		mViewPager.setAdapter(mSectionsPagerAdapter);
+		
+		cache = new BitmapCache(Tool.getCachSize());
+		
 		// 获取数据
 		getfavorlist(curpage, perpage, GlobleData.BOOK_SZ_TYPE, GETFIRSTPAGE_SZ);
 		getfavorlist(curpage, perpage, GlobleData.BOOK_ZK_TYPE, GETFIRSTPAGE_ZK);
 	}
 
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		  if (cache != null) {
+			  cache = null;
+	        }
+	}
+	
 	private void setListener() {
 		mViewPager
 				.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -509,14 +525,14 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 			if (i == 0) {
 				arrayList_temp = arrayList_sz;
 				adapter_sz = new MyGridViewAdapter(getActivity(), arrayList_sz,
-						mImageFetcher);
+						new ImageLoader(mQueue, cache));
 				listView.setAdapter(adapter_sz);
 				listView.setTag(GlobleData.BOOK_SZ_TYPE);
 			} else if (i == 1) {
 				listView.setTag(GlobleData.BOOK_ZK_TYPE);
 				arrayList_temp = arrayList_zk;
 				adapter_zk = new MyGridViewAdapter(getActivity(), arrayList_zk,
-						mImageFetcher);
+						new ImageLoader(mQueue, cache));
 				listView.setAdapter(adapter_zk);
 			}
 
@@ -608,7 +624,7 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 		TextView title;// 书名
 		TextView author;// 作者
 		TextView publisher;// 出版社
-		ImageView img;// 时间图片 不用修改
+		NetworkImageView img;// 时间图片 不用修改
 		TextView isbn;
 		TextView favor_cancel;
 		// Button btn_comment, btn_item_result_search_share, favorite;
@@ -618,7 +634,7 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 	class MyGridViewAdapter extends BaseAdapter {
 		private Context myContext;
 		private List<Favorite> arrayList;
-		private ImageFetcher fetch;
+		private ImageLoader mImageLoader;
 
 		public MyGridViewAdapter(Context context, List<Favorite> list) {
 			this.myContext = context;
@@ -626,10 +642,10 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 		}
 
 		public MyGridViewAdapter(Context context, List<Favorite> list,
-				ImageFetcher fetch) {
+				ImageLoader imageLoader) {
 			this.myContext = context;
 			this.arrayList = list;
-			this.fetch = fetch;
+			this.mImageLoader = imageLoader;
 		}
 
 		public List<Favorite> getList() {
@@ -697,8 +713,10 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 						.findViewById(R.id.re_author_txt);
 				// holder.publisher = (TextView) convertView
 				// .findViewById(R.id.re_addr_txt);
-				holder.img = (ImageView) convertView
+				holder.img = (NetworkImageView) convertView
 						.findViewById(R.id.re_book_img);
+				holder.img.setDefaultImageResId(R.drawable.defaut_book);
+				holder.img.setErrorImageResId(R.drawable.defaut_book);
 				// holder.u_abstract = (TextView)
 				// convertView.findViewById(R.id.re_hot_txt);
 				holder.isbn = (TextView) convertView
@@ -740,12 +758,13 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 				holder.img.setVisibility(View.GONE);
 			} else {
 				// 图片
-				if (!TextUtils.isEmpty(favorite.getImgurl())) {
-					fetch.loadImage(favorite.getImgurl(), holder.img);
-				} else {
-					holder.img.setImageDrawable(getResources().getDrawable(
-							R.drawable.defaut_book));
-				}
+//				if (!TextUtils.isEmpty(favorite.getImgurl())) {
+//					fetch.loadImage(favorite.getImgurl(), holder.img);
+//				} else {
+//					holder.img.setImageDrawable(getResources().getDrawable(
+//							R.drawable.defaut_book));
+//				}
+				holder.img.setImageUrl(favorite.getImgurl(), mImageLoader);
 			}
 			return convertView;
 		}

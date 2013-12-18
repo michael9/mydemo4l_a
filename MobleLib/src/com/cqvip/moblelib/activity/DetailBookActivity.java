@@ -74,16 +74,25 @@ public class DetailBookActivity extends BaseActivity {
 		dBook = (Book) bundle.getSerializable("book");
 		fromFlage = getIntent().getIntExtra("from", 0);
 		ismyfavor = getIntent().getBooleanExtra("ismyfavor", false);
+		if(cache==null){
+		cache=MyFavorActivity.cache;
+		}
 		booktitle_tv = (TextView) findViewById(R.id.booktitle_tv);
 		textView9 = (TextView) findViewById(R.id.textView9);
 		textView10 = (TextView) findViewById(R.id.textView10);
 		textView11 = (TextView) findViewById(R.id.textView11);
-		
-		ImageLoader mImageLoader = new ImageLoader(mQueue, cache);
-		ImageListener listener = ImageLoader.getImageListener(imgview,
-				R.drawable.defaut_book, R.drawable.defaut_book);
-      	ImageContainer imageContainer=mImageLoader.get(dBook.getCover_path(), listener);
-      	bitmap=imageContainer.getBitmap();
+		if(!TextUtils.isEmpty(dBook.getCover_path())){
+			if(cache==null){
+			cache = new BitmapCache(Tool.getCachSize());
+			}
+			ImageLoader mImageLoader = new ImageLoader(mQueue, cache);
+			ImageListener listener = ImageLoader.getImageListener(imgview,
+					R.drawable.defaut_book, R.drawable.defaut_book);
+	      	ImageContainer imageContainer=mImageLoader.get(dBook.getCover_path(), listener);
+	      	bitmap=imageContainer.getBitmap();
+		}else{
+			imgview.setImageResource(R.drawable.defaut_book);
+		}
 
 		//
 		ShareSDK.initSDK(this);
