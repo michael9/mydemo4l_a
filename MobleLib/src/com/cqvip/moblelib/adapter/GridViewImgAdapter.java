@@ -98,7 +98,7 @@ public class GridViewImgAdapter extends BaseAdapter {
 		// TextView tx = (TextView) convertView.findViewById(R.id.txt_main);
 		// tx.setText(mContext.getResources().getString(mTitle[position]));
 		if(position==4){
-			img.setBackground(mContext.getResources().getDrawable(R.color.main_middle_press));
+			img.setBackgroundResource(R.color.main_middle_press);
 		}
 		img.setImageResource(mImageIds[position]);
 		// img.setTag(position);
