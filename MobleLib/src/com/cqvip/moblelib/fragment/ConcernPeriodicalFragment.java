@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.cqvip.moblelib.bate1.R;
+import com.cqvip.moblelib.xxu.R;
 
 public class ConcernPeriodicalFragment extends Fragment {
 

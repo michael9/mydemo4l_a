@@ -4,7 +4,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.cqvip.mobelib.imgutils.ImageFetcher;
 import com.cqvip.mobelib.imgutils.ImageCache.ImageCacheParams;
-import com.cqvip.moblelib.bate1.R;
+import com.cqvip.moblelib.xxu.R;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.view.CustomProgressDialog;
 

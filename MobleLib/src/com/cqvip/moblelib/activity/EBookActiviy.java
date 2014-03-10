@@ -24,7 +24,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.cqvip.moblelib.bate1.R;
+import com.cqvip.moblelib.xxu.R;
 
 /**
  * <p>

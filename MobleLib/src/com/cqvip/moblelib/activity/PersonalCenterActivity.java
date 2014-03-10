@@ -13,7 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.cqvip.dao.DaoException;
-import com.cqvip.moblelib.bate1.R;
+import com.cqvip.moblelib.xxu.R;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.db.MUserDao;
 import com.cqvip.utils.Tool;

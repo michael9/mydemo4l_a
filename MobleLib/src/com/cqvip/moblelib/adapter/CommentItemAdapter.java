@@ -10,7 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.cqvip.moblelib.bate1.R;
+import com.cqvip.moblelib.xxu.R;
 import com.cqvip.moblelib.model.Comment;
 import com.cqvip.utils.Tool;
 

@@ -16,7 +16,7 @@
 
 package com.cqvip.moblelib.scan;
 
-import com.cqvip.moblelib.bate1.R;
+import com.cqvip.moblelib.xxu.R;
 import com.google.zxing.ResultPoint;
 
 import android.content.Context;

@@ -1,6 +1,6 @@
 package com.cqvip.moblelib.view;
 
-import com.cqvip.moblelib.bate1.R;
+import com.cqvip.moblelib.xxu.R;
 
 import android.content.Context;
 import android.graphics.Camera;

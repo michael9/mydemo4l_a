@@ -3,7 +3,7 @@ package com.cqvip.moblelib.view;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import com.cqvip.moblelib.bate1.R;
+import com.cqvip.moblelib.xxu.R;
 
 
 import android.content.Context;

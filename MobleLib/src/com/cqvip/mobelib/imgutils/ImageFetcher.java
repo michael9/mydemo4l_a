@@ -34,8 +34,8 @@ import android.os.Build;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.cqvip.moblelib.bate1.BuildConfig;
-import com.cqvip.moblelib.bate1.R;
+import com.cqvip.moblelib.xxu.BuildConfig;
+import com.cqvip.moblelib.xxu.R;
 
 /**
  * A simple subclass of {@link ImageResizer} that fetches and resizes images fetched from a URL.
