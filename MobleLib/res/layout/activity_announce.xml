@@ -84,7 +84,7 @@
                 android:layout_weight="1.0"
                 android:duplicateParentState="true"
                 android:gravity="center_vertical"
-                android:text="@string/announce_out"
+                android:text="@string/announce_news"
                 android:textSize="16sp" />
 
             <ImageView
@@ -95,13 +95,14 @@
                 android:src="@drawable/eg_arrow" />
         </LinearLayout>
 
+        
 
         <LinearLayout
             android:id="@+id/an_speechLayout"
             android:layout_width="fill_parent"
             android:layout_height="45.0dip"
             android:layout_marginTop="-1dp"
-            android:background="@drawable/linearlayout_shape_down"
+            android:background="@drawable/linearlayout_shape2"
             android:gravity="center"
             android:orientation="horizontal" >
 
@@ -111,7 +112,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20.0dip"
                 android:paddingRight="20.0dip"
-                android:src="@drawable/icon_speech_free" />
+                android:src="@drawable/icon_news" />
 
             <TextView
                 android:id="@+id/anno_speech_title"
@@ -120,7 +121,7 @@
                 android:layout_weight="1.0"
                 android:duplicateParentState="true"
                 android:gravity="center_vertical"
-                android:text="@string/free_speech"
+                android:text="@string/announce_innernews"
                 android:textSize="16sp" />
 
             <ImageView
@@ -130,6 +131,40 @@
                 android:layout_marginRight="20.0dip"
                 android:src="@drawable/eg_arrow" />
         </LinearLayout>
+        
+          <LinearLayout
+            android:id="@+id/an_play_Layout"
+            android:layout_width="fill_parent"
+            android:layout_height="45.0dip"
+            android:layout_marginTop="-1dp"
+            android:background="@drawable/linearlayout_shape_down" 
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20.0dip"
+                android:paddingRight="20.0dip"
+                android:src="@drawable/icon_content_paste" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:duplicateParentState="true"
+                android:gravity="center_vertical"
+                android:text="@string/announce_play"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="20.0dip"
+                android:src="@drawable/eg_arrow" />
+        </LinearLayout>
+        
     </LinearLayout>
 
 </RelativeLayout>

@@ -47,30 +47,30 @@ public class DetailTextActivity extends BaseActivity {
 		case 1:
 			t1.setText(R.string.guide_needknow);
 			requestVolley(GlobleData.SERVER_URL
-					+ "/library/guide/notice.aspx?libid=1", mj, null,
+					+ "/library/guide/notice.aspx?libid="+GlobleData.LIBIRY_ID, mj, null,
 					Method.GET);
 			break;
 		case 2:
 			t1.setText(R.string.guide_cardguide);
 			requestVolley(GlobleData.SERVER_URL
-					+ "/library/guide/cardguide.aspx?libid=1", mj, null,
+					+ "/library/guide/cardguide.aspx?libid="+GlobleData.LIBIRY_ID, mj, null,
 					Method.GET);
 			break;
 		case 3:
 			t1.setText(R.string.guide_time);
 			requestVolley(GlobleData.SERVER_URL
-					+ "/library/guide/time.aspx?libid=1", mj, null, Method.GET);
+					+ "/library/guide/time.aspx?libid="+GlobleData.LIBIRY_ID, mj, null, Method.GET);
 			break;
 		case 4:
 			t1.setText(R.string.guide_readerknow);
 			requestVolley(GlobleData.SERVER_URL
-					+ "/library/guide/reader.aspx?libid=1", mj, null,
+					+ "/library/guide/reader.aspx?libid="+GlobleData.LIBIRY_ID, mj, null,
 					Method.GET);
 			break;
 		case 5:
 			t1.setText(R.string.guide_server);
 			requestVolley(GlobleData.SERVER_URL
-					+ "/library/guide/service.aspx?libid=1", mj, null,
+					+ "/library/guide/service.aspx?libid="+GlobleData.LIBIRY_ID, mj, null,
 					Method.GET);
 			break;
 		case 6:
@@ -84,6 +84,18 @@ public class DetailTextActivity extends BaseActivity {
 		case 8:
 			t1.setText(R.string.guide_problem);
 			content.setText("");
+			break;
+		case 9:
+			t1.setText(R.string.guide_info);
+			requestVolley(GlobleData.SERVER_URL
+					+ "/library/guide/info.aspx?libid="+GlobleData.LIBIRY_ID, mj, null,
+					Method.GET);
+			break;
+		case 10:
+			t1.setText(R.string.guide_organ);
+			requestVolley(GlobleData.SERVER_URL
+					+ "/library/guide/organ.aspx?libid="+GlobleData.LIBIRY_ID, mj, null,
+					Method.GET);
 			break;
 
 		}

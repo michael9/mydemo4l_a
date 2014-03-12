@@ -14,6 +14,7 @@ public class Constant {
 	public static final int NEWBOOK_MORE = 4;//新书推荐
 	public static final int SPEECH_NEWS = 5;//新闻动态
 	public static final int SPPECH_FREE = 6;//公益讲座
+	public static final int INNERPAY = 7;//新闻动态
 	public static final int QUESTION = 7;//常见问题
 	
 	public static final int MEDIAL = 1;//医药卫生

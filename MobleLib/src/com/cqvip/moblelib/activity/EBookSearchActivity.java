@@ -340,7 +340,10 @@ public class EBookSearchActivity extends BaseActivity implements
 			JSONObject json = new JSONObject();
 			try {
 				json.put("key", key);
+				
 				json.put("type",getType(SEARCHType));
+			
+				
 				json.put("PageSize", "" + count);// 当前页数
 				json.put("PageNumber", "" + page);// 条数
 			} catch (JSONException e) {
@@ -363,26 +366,40 @@ public class EBookSearchActivity extends BaseActivity implements
 	}
 
 	private String  getType(int type) {
-		int i = GlobleData.ZLF_BOOK;
+		int i = GlobleData.ZLF_ACADEMIC;
+//		switch(type){
+//		case 1:
+//			i = GlobleData.ZLF_BOOK;//书籍
+//			break;
+//		case 2:
+//			i = GlobleData.ZLF_ACADEMIC;//学位论文
+//			break;
+//		case 3:
+//			i = GlobleData.ZLF_CONFERENCE;
+//			break;
+//		case 4:
+//			i = GlobleData.ZLF_PATENT;
+//			break;
+//		case 5:
+//			i = GlobleData.ZLF_STANDARD;
+//			break;
+//		case 6:
+//			i = GlobleData.ZLF_ACHIEVEMENT;
+//			break;
+//			default:
+//				break;
+//		}
 		switch(type){
 		case 1:
-			i = GlobleData.ZLF_BOOK;//书籍
+			i = GlobleData.ZLF_ACADEMIC;
 			break;
 		case 2:
-			i = GlobleData.ZLF_ACADEMIC;//学位论文
-			break;
-		case 3:
 			i = GlobleData.ZLF_CONFERENCE;
 			break;
-		case 4:
-			i = GlobleData.ZLF_PATENT;
-			break;
-		case 5:
+		case 3:
 			i = GlobleData.ZLF_STANDARD;
 			break;
-		case 6:
-			i = GlobleData.ZLF_ACHIEVEMENT;
-			break;
+	
 			default:
 				break;
 		}

@@ -84,16 +84,16 @@ public class AnnouceListActivity extends BaseActivity implements OnItemClickList
 		switch (type) {
 		case  Constant.SPEECH_NEWS:
 			sendtype=Task.TASK_ANNOUNCE_NEWS;
-			setheadbar(getResources().getString(R.string.announce_out));
+			setheadbar(getResources().getString(R.string.announce_news));
 			break;
 			
 		case  Constant.SPPECH_FREE:
 			sendtype=Task.TASK_ANNOUNCE_WELFARE;
-			setheadbar(getResources().getString(R.string.free_speech));
+			setheadbar(getResources().getString(R.string.announce_innernews));
 			break;
-		case  Constant.QUESTION:
+		case  Constant.INNERPAY:
 			sendtype=Task.TASK_E_CAUTION;
-			setheadbar(getResources().getString(R.string.guide_problem));
+			setheadbar(getResources().getString(R.string.announce_play));
 			break;
 			
 		default:
@@ -111,6 +111,7 @@ public class AnnouceListActivity extends BaseActivity implements OnItemClickList
 		headbar=findViewById(R.id.head_bar);
 		bar_title=(TextView)headbar.findViewById(R.id.txt_header);
 		bar_title.setText(title);
+		
 		btn_back=headbar.findViewById(R.id.img_back_header);
 		btn_back.setOnClickListener(new OnClickListener() {
 			
@@ -205,7 +206,7 @@ public class AnnouceListActivity extends BaseActivity implements OnItemClickList
 		
 		switch(type){
 		case Constant.SPEECH_NEWS://新闻动态
-			gparams.put("announcetypeid", ""+2);		
+			gparams.put("announcetypeid", ""+12);		
 			if(mwhat == GETHOMEPAGE){
 				requestVolley(GlobleData.SERVER_URL
 						+ "/library/announce/list.aspx", backlistener,
@@ -217,7 +218,7 @@ public class AnnouceListActivity extends BaseActivity implements OnItemClickList
 			}
 			break;
 		case Constant.SPPECH_FREE://公益讲座
-			gparams.put("announcetypeid", ""+1);		
+			gparams.put("announcetypeid", ""+13);		
 			if(mwhat == GETHOMEPAGE){
 				requestVolley(GlobleData.SERVER_URL
 						+ "/library/announce/list.aspx", backlistener,
@@ -228,8 +229,8 @@ public class AnnouceListActivity extends BaseActivity implements OnItemClickList
 						Method.POST);
 			}
 			break;
-		case Constant.QUESTION://常见问题
-			gparams.put("announcetypeid", ""+5);			
+		case Constant.INNERPAY://常见问题
+			gparams.put("announcetypeid", ""+14);			
 			if(mwhat == GETHOMEPAGE){
 				requestVolley(GlobleData.SERVER_URL
 						+ "/library/announce/html.aspx", backlistener,

@@ -28,7 +28,7 @@ import com.cqvip.utils.Tool;
 public class EntanceGuideActivity extends BaseActivity {
 	private LinearLayout ll_gpsLayout;
 	private mylinearlayout myll;
-	private LinearLayout l1, l2, l3, l4, l5, l6, l7, l8;
+	private LinearLayout l1, l2, l3, l4, l5, l6, l7, l8,l9,l10;
 	private Context context;
 
 	@Override
@@ -58,6 +58,8 @@ public class EntanceGuideActivity extends BaseActivity {
 		LinearLayout l6 = (LinearLayout) findViewById(R.id.transportLayout);
 		// LinearLayout l7 = (LinearLayout)findViewById(R.id.gpsLayout);
 		LinearLayout l8 = (LinearLayout) findViewById(R.id.probLayout);
+		LinearLayout l9=(LinearLayout)findViewById(R.id.infoLayout);
+		LinearLayout l10=(LinearLayout)findViewById(R.id.organLayout);
 
 		l1.setOnClickListener(new View.OnClickListener() {
 
@@ -156,6 +158,26 @@ public class EntanceGuideActivity extends BaseActivity {
 				Intent mintent = new Intent(context, AnnouceListActivity.class);
 				mintent.putExtra("type",Constant.QUESTION);
 				startActivity(mintent);
+
+			}
+		});
+		l9.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(context, DetailTextActivity.class);
+				intent.putExtra("enter", 9);
+				startActivity(intent);
+
+			}
+		});
+		l10.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(context, DetailTextActivity.class);
+				intent.putExtra("enter", 10);
+				startActivity(intent);
 
 			}
 		});

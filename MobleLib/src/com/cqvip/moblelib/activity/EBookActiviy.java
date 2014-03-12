@@ -41,8 +41,10 @@ public class EBookActiviy extends BaseActivity {
 	// };
 	private String[] EBOOKTYPE;
 	private ViewGroup searchbar;
-	private int[] drawableids = { R.drawable.sign_vip, R.drawable.sign_chaoxing,
-			R.drawable.icon_search_wf,R.drawable.icon_search_wf,R.drawable.icon_search_wf,R.drawable.icon_search_cnki,R.drawable.icon_search_wf };
+//	private int[] drawableids = { R.drawable.sign_vip, R.drawable.sign_chaoxing,
+//			R.drawable.icon_search_wf,R.drawable.icon_search_wf,R.drawable.icon_search_wf,R.drawable.icon_search_cnki,R.drawable.icon_search_wf };
+	private int[] drawableids = { R.drawable.sign_vip, 
+			R.drawable.icon_search_wf,R.drawable.icon_search_wf,R.drawable.icon_search_cnki };
 	private  int currentID=-1;
 	private EditText editText;
 	public static Map<Integer, Boolean> isSelected;

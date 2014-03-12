@@ -45,6 +45,7 @@ public class AnnounceActivity extends BaseActivity {
 		LinearLayout l1 = (LinearLayout) findViewById(R.id.an_out_Layout);
 		//¹«Òæ½²×ù
 		LinearLayout l2 = (LinearLayout) findViewById(R.id.an_speechLayout);
+		LinearLayout l3 = (LinearLayout) findViewById(R.id.an_play_Layout);
 		
 		l1.setOnClickListener(new View.OnClickListener() {
 
@@ -63,6 +64,18 @@ public class AnnounceActivity extends BaseActivity {
 			public void onClick(View v) {
 				Intent intent = new Intent(context, AnnouceListActivity.class);
 				intent.putExtra("type",Constant.SPPECH_FREE);
+				startActivity(intent);
+				// overridePendingTransition(R.anim.slide_right_in,
+				// R.anim.slide_left_out);
+
+			}
+		});
+		l3.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(context, AnnouceListActivity.class);
+				intent.putExtra("type",Constant.INNERPAY);
 				startActivity(intent);
 				// overridePendingTransition(R.anim.slide_right_in,
 				// R.anim.slide_left_out);
