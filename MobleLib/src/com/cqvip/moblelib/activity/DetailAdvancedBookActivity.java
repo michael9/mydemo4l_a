@@ -43,14 +43,32 @@ public class DetailAdvancedBookActivity extends BaseActivity {
 		type = getIntent().getIntExtra("type", 1);
 		id = getIntent().getStringExtra("id");
 		// bookname=getIntent().getStringExtra("bookname");
-		if (type == Constant.QUESTION) {
+		
+		switch (type) {
+		case  Constant.QUESTION:
 			content.setText(id);
 			setheadbar(getResources().getString(R.string.title_FAQ));
-		} else {
+			break;
+			
+		case  Constant.INNERPAY:
+			content.setText(Html.fromHtml(id));
+			setheadbar(getResources().getString(R.string.title_moredetail));
+			break;
+
+		default:
 			customProgressDialog.show();
 			getContent(id);
 			setheadbar(getResources().getString(R.string.title_moredetail));
+			break;
 		}
+//		if (type == Constant.QUESTION) {
+//			content.setText(id);
+//			setheadbar(getResources().getString(R.string.title_FAQ));
+//		} else {
+//			customProgressDialog.show();
+//			getContent(id);
+//			setheadbar(getResources().getString(R.string.title_moredetail));
+//		}
 	}
 
 	private void setheadbar(String title) {
@@ -116,7 +134,7 @@ public class DetailAdvancedBookActivity extends BaseActivity {
 					if (json.getString("success").equalsIgnoreCase("true")) {
 						content.setText(Html.fromHtml(json
 								.getString("contents")));
-						title.setText(bookname = json.getString("title"));
+//						title.setText(bookname = json.getString("title"));
 					}
 				} catch (Exception e) {
 					content.setText(getResources().getString(R.string.loadfail));

@@ -19,11 +19,12 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:ellipsize="end" 
-        android:singleLine="true" android:maxEms="6"
+        android:singleLine="true" 
         android:text="@string/main_guide"
         android:textColor="@color/txt_black"
         android:textIsSelectable="false"
         android:textSize="22sp" />
+<!-- android:maxEms="6" -->
 
     <ImageView
         android:id="@+id/btn_right_header"

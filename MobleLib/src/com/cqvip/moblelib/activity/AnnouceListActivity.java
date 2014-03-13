@@ -299,11 +299,12 @@ public class AnnouceListActivity extends BaseActivity implements OnItemClickList
 				convertView = LayoutInflater.from(context).inflate(R.layout.item_news, null);
 			}
 			TextView tx = (TextView)convertView.findViewById(R.id.tv_item_topic);
-			if(type==Constant.SPPECH_FREE){
-				tx.setText(getResources().getString(R.string.lecture_source)+mlists.get(position).getMessage());
-			}else{
 			tx.setText(mlists.get(position).getMessage());
-			}
+//			if(type==Constant.SPPECH_FREE){
+//				tx.setText(getResources().getString(R.string.lecture_source)+mlists.get(position).getMessage());
+//			}else{
+//			tx.setText(mlists.get(position).getMessage());
+//			}
 			return convertView;
 		}
 		

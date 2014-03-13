@@ -22,6 +22,8 @@
     <include
         android:id="@+id/guide_title"
         layout="@layout/header" />
+    
+      
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -33,12 +35,113 @@
         android:paddingLeft="9.0dip"
         android:paddingRight="9.0dip"
         android:paddingTop="9.0dip" >
+        
+            <LinearLayout
+            android:id="@+id/infoLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="45.0dip"
+            android:layout_marginTop="-1dp"
+            android:background="@drawable/linearlayout_shape_top"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20.0dip"
+                android:paddingRight="20.0dip"
+                android:src="@drawable/icon_lib_announce" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:duplicateParentState="true"
+                android:gravity="center_vertical"
+                android:text="@string/guide_info"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingRight="20.0dip"
+                android:src="@drawable/eg_arrow" />
+        </LinearLayout>
+        
+            <LinearLayout
+            android:id="@+id/organLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="45.0dip"
+            android:layout_marginTop="-1dp"
+            android:background="@drawable/linearlayout_shape2"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20.0dip"
+                android:paddingRight="20.0dip"
+                android:src="@drawable/icon_action_search" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:duplicateParentState="true"
+                android:gravity="center_vertical"
+                android:text="@string/guide_organ"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingRight="20.0dip"
+                android:src="@drawable/eg_arrow" />
+        </LinearLayout>
+        
+            <LinearLayout
+            android:id="@+id/timeLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="44.0dip"
+            android:layout_marginTop="-1dp"
+            android:background="@drawable/linearlayout_shape2"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:id="@+id/guide_time_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20.0dip"
+                android:paddingRight="20.0dip"
+                android:src="@drawable/icon_device_access_time" />
+
+            <TextView
+                android:id="@+id/guide_time_title"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:duplicateParentState="true"
+                android:gravity="center_vertical"
+                android:text="@string/guide_time"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingRight="20.0dip"
+                android:src="@drawable/eg_arrow" />
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/enterguideLayout"
             android:layout_width="fill_parent"
             android:layout_height="45.0dip"
-            android:background="@drawable/linearlayout_shape_top"
+            android:background="@drawable/linearlayout_shape2"
             android:gravity="center"
             android:orientation="horizontal" >
 
@@ -103,47 +206,14 @@
                 android:src="@drawable/eg_arrow" />
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/timeLayout"
-            android:layout_width="fill_parent"
-            android:layout_height="44.0dip"
-            android:layout_marginTop="-1dp"
-            android:background="@drawable/linearlayout_shape2"
-            android:gravity="center"
-            android:orientation="horizontal" >
-
-            <ImageView
-                android:id="@+id/guide_time_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20.0dip"
-                android:paddingRight="20.0dip"
-                android:src="@drawable/icon_device_access_time" />
-
-            <TextView
-                android:id="@+id/guide_time_title"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.0"
-                android:duplicateParentState="true"
-                android:gravity="center_vertical"
-                android:text="@string/guide_time"
-                android:textSize="16sp" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:paddingRight="20.0dip"
-                android:src="@drawable/eg_arrow" />
-        </LinearLayout>
+        
 
         <LinearLayout
             android:id="@+id/readerknowLayout"
             android:layout_width="fill_parent"
             android:layout_height="45.0dip"
             android:layout_marginTop="-1dp"
-            android:background="@drawable/linearlayout_shape2"
+            android:background="@drawable/linearlayout_shape_down"
             android:gravity="center"
             android:orientation="horizontal" >
 
@@ -317,71 +387,9 @@
                 android:src="@drawable/eg_arrow" />
         </LinearLayout>
         
-           <LinearLayout
-            android:id="@+id/infoLayout"
-            android:layout_width="fill_parent"
-            android:layout_height="45.0dip"
-            android:layout_marginTop="-1dp"
-            android:background="@drawable/linearlayout_shape2"
-            android:gravity="center"
-            android:orientation="horizontal" >
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20.0dip"
-                android:paddingRight="20.0dip"
-                android:src="@drawable/icon_problem" />
-
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.0"
-                android:duplicateParentState="true"
-                android:gravity="center_vertical"
-                android:text="@string/guide_info"
-                android:textSize="16sp" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:paddingRight="20.0dip"
-                android:src="@drawable/eg_arrow" />
-        </LinearLayout>
+     
         
-            <LinearLayout
-            android:id="@+id/organLayout"
-            android:layout_width="fill_parent"
-            android:layout_height="45.0dip"
-            android:layout_marginTop="-1dp"
-            android:background="@drawable/linearlayout_shape_down"
-            android:gravity="center"
-            android:orientation="horizontal" >
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20.0dip"
-                android:paddingRight="20.0dip"
-                android:src="@drawable/icon_center_info" />
-
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.0"
-                android:duplicateParentState="true"
-                android:gravity="center_vertical"
-                android:text="@string/guide_organ"
-                android:textSize="16sp" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:paddingRight="20.0dip"
-                android:src="@drawable/eg_arrow" />
-        </LinearLayout>
+            
     </LinearLayout>
 
 </com.cqvip.moblelib.view.mylinearlayout>
