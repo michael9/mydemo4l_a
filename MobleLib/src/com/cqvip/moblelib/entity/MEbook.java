@@ -22,6 +22,7 @@ public class MEbook extends Model{
 	private String beginpage;//开始页
 	private String endpage;//结束
 	private Long downloadid;//下载id
+	
 	private Integer isdownload;//0 下载中，1是下载完成
 
 	public MEbook() {
