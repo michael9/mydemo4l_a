@@ -24,7 +24,7 @@ import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.cqvip.moblelib.nanshan.R;
+import com.cqvip.moblelib.sychild.R;
 import com.cqvip.moblelib.activity.EbookDetailActivity;
 import com.cqvip.moblelib.activity.PeriodicalClassfyActivity;
 import com.cqvip.moblelib.activity.PeriodicalListActivity;
@@ -37,15 +37,15 @@ import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.utils.Tool;
 
 /**
- * ·ÖÀàÁÐ±í £¬Ò½Ò©£¬¹¤³Ì£¬Éç»á...
+ * ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ ï¿½ï¿½Ò½Ò©ï¿½ï¿½ï¿½ï¿½ï¿½Ì£ï¿½ï¿½ï¿½ï¿½...
  * @author luojiang
  *
  */
 public class PeriodicalTypeFragment extends Fragment {
 
 	private ListView listview;
-	private int sendtype;// ÀàÐÍ
-	private HashMap<String, String> gparams; // ²ÎÊý
+	private int sendtype;// ï¿½ï¿½ï¿½ï¿½
+	private HashMap<String, String> gparams; // ï¿½ï¿½ï¿½ï¿½
 	private MyAdapter adapter;
 	private RequestQueue mQueue;
 	private CustomProgressDialog customProgressDialog;
@@ -86,10 +86,10 @@ public class PeriodicalTypeFragment extends Fragment {
 		int type = bundle.getInt("type");
 		// TextView tv = (TextView) rootView.findViewById(R.id.txt_periodical);
 		// tv.setText(title);
-		// ÅÐ¶ÏÊÇÄÄ¸ö½çÃæ
+		// ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½Ä¸ï¿½ï¿½ï¿½ï¿½ï¿½
 		listview = (ListView) rootView.findViewById(R.id.lv_periodical_type);
 		getHomePage(type);
-		// »ñÈ¡Êý¾Ý
+		// ï¿½ï¿½È¡ï¿½ï¿½ï¿½
 		listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 			@Override
@@ -110,7 +110,7 @@ public class PeriodicalTypeFragment extends Fragment {
 	private void getHomePage(int type) {
 		gparams = new HashMap<String, String>();
 		switch (type) {
-		// Ò½Ò©ÎÀÉú
+		// Ò½Ò©ï¿½ï¿½ï¿½ï¿½
 		case Constant.MEDIAL:
 			gparams.put("classid", GlobleData.MEDIAL_TYPEID + "");
 			// requestVolley

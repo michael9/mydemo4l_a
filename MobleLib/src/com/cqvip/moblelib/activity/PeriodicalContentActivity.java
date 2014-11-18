@@ -35,7 +35,7 @@ import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.EBook;
 import com.cqvip.moblelib.model.Periodical;
 import com.cqvip.moblelib.model.PeriodicalYear;
-import com.cqvip.moblelib.nanshan.R;
+import com.cqvip.moblelib.sychild.R;
 import com.cqvip.moblelib.view.picker.ArrayWheelAdapter;
 import com.cqvip.moblelib.view.picker.OnWheelChangedListener;
 import com.cqvip.moblelib.view.picker.WheelView;
@@ -43,7 +43,7 @@ import com.cqvip.utils.BitmapCache;
 import com.cqvip.utils.Tool;
 
 /**
- * ÆÚ¿¯ÏêÏ¸½çÃæ
+ * ï¿½Ú¿ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½ï¿½
  * @author luojiang
  *
  */
@@ -59,7 +59,7 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 	private String gch;
 	private Map<String, String> gparams;
 	private ArrayList<PeriodicalYear> yearlist;
-	private String year,month;//¼ÇÂ¼ÈÕÆÚÊÇ·ñ·¢Éú±ä»¯
+	private String year,month;//ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ä»¯
 	private int yaer_record,month_record;
 	private MyAdapter adapter;
 	private Periodical perio;
@@ -94,10 +94,10 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 				}
 				final Dialog dialog = new Dialog(v.getContext(), R.style.dialog_fullscreen);
 				dialog.setContentView(R.layout.dialog_picker);
-				//¼ÇÂ¼ÏÂÎ»ÖÃ
+				//ï¿½ï¿½Â¼ï¿½ï¿½Î»ï¿½ï¿½
 				final int ty = yaer_record;
 				final int tm = month_record;
-				//ÅÐ¶ÏÈÕÆÚÊÇ·ñ·¢Éú±ä»¯
+				//ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ä»¯
 				 WheelView country = (WheelView) dialog.findViewById(R.id.country);
 			        final int length = yearlist.size() ;
 			        final String[] count = new String[length];
@@ -105,25 +105,25 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 			        	count[i]=yearlist.get(i).getYear();
 			        }
 			        country.setVisibleItems(5);
-			        country.setLabel("Äê");
+			        country.setLabel("ï¿½ï¿½");
 			        country.setAdapter(new ArrayWheelAdapter<String>(count));
 			        final WheelView city = (WheelView) dialog.findViewById(R.id.city);
 			        final Button confirm = (Button) dialog.findViewById(R.id.btn_date_confirm);
 			        city.setAdapter(new ArrayWheelAdapter<String>(yearlist.get(0).getNum()));
 			        city.setVisibleItems(5);
-			        city.setLabel("ÆÚ");
+			        city.setLabel("ï¿½ï¿½");
 			        city.setCyclic(true);
 			        country.addChangingListener(new OnWheelChangedListener() {
 						public void onChanged(WheelView wheel, int oldValue, int newValue) {
 							String[] mNum = yearlist.get(newValue).getNum();
 							city.setAdapter(new ArrayWheelAdapter<String>(mNum));
-							//ÆÚÊýÐ¡ÓÚoldvalue
+							//ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½oldvalue
 							if( yearlist.get(newValue).getNum().length< yearlist.get(oldValue).getNum().length){
 							city.setCurrentItem(yearlist.get(newValue).getNum().length / 2);
 							}
 							mYear = yearlist.get(newValue).getYear();
-							//confirm.setText(mYear+"ÄêµÚ"+mMonth+"ÆÚ");
-							//¼ÇÂ¼ÏÂÎ»ÖÃ
+							//confirm.setText(mYear+"ï¿½ï¿½ï¿½"+mMonth+"ï¿½ï¿½");
+							//ï¿½ï¿½Â¼ï¿½ï¿½Î»ï¿½ï¿½
 							yaer_record = newValue;
 						}
 					});
@@ -131,8 +131,8 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 						public void onChanged(WheelView wheel, int oldValue, int newValue) {
 							//mMonth =  newValue+1+"";
 							mMonth =  yearlist.get(yaer_record).getNum()[newValue];
-							//confirm.setText(mYear+"ÄêµÚ"+mMonth+"ÆÚ");
-							//¼ÇÂ¼ÏÂÎ»ÖÃ
+							//confirm.setText(mYear+"ï¿½ï¿½ï¿½"+mMonth+"ï¿½ï¿½");
+							//ï¿½ï¿½Â¼ï¿½ï¿½Î»ï¿½ï¿½
 							month_record = newValue;
 						}
 					});
@@ -142,22 +142,22 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 			        city.setCurrentItem(month_record);
 			        mYear =  yearlist.get(yaer_record).getYear();
 			        mMonth = arr[month_record];
-				//confirm.setText(mYear+"ÄêµÚ"+mMonth+"ÆÚ");
+				//confirm.setText(mYear+"ï¿½ï¿½ï¿½"+mMonth+"ï¿½ï¿½");
 				
 			        confirm.setOnClickListener(new View.OnClickListener() {
 
 					@Override
 					public void onClick(View v) {
 						dialog.dismiss();
-						//ÆÚÊýÊÇ·ñ·¢Éú±ä»¯
+						//ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ä»¯
 						if(ty!=yaer_record||tm!=month_record){
-							//·¢Éú±ä»¯£¬ÇëÇóÍøÂç
+							//ï¿½ï¿½ï¿½ï¿½ä»¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 							gparams = new HashMap<String, String>();
 							gparams.put("gch", gch);
 							gparams.put("years",mYear);
 							gparams.put("num", mMonth);
 							gparams.put("perpage",GlobleData.BIG_PERPAGE+"");
-							//·ÇµÚÒ»´ÎÇëÇó
+							//ï¿½Çµï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 							if(lists!=null&&adapter!=null){
 								isFirstFlag = false;
 							}
@@ -165,8 +165,8 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 									backlistener_content, Method.POST);
 							progress.setVisibility(View.VISIBLE);
 						}
-						txt_date.setText(mYear+"ÄêµÚ"+mMonth+"ÆÚ£ºÄ¿Â¼");
-						//ÅÐ¶ÏÊÇ·ñÈÕÆÚ·¢Éú±ä»¯£¬±ä»¯ÔòÖØÐÂ¼ÓÔØ
+						txt_date.setText(mYear+"ï¿½ï¿½ï¿½"+mMonth+"ï¿½Ú£ï¿½Ä¿Â¼");
+						//ï¿½Ð¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½Ú·ï¿½ï¿½ï¿½ä»¯ï¿½ï¿½ï¿½ä»¯ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½
 					}
 				});
 				dialog.setCancelable(false);
@@ -193,7 +193,7 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 		
 	}
 	/**
-	 * ·¢ËÍÇëÇó»ñÈ¡Êý¾Ý
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½
 	 */
 	private void initdate() {
 		gch = perio.getGch();
@@ -208,12 +208,12 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 		upView = LayoutInflater.from(this).inflate(R.layout.activity_periodical_content_up, null);
 		listview.addHeaderView(upView);
 		progress = findViewById(R.id.footer_progress);
-		//±êÌâ
+		//ï¿½ï¿½ï¿½ï¿½
 		  View v = findViewById(R.id.head_bar);
 	     TextView tv = (TextView) v.findViewById(R.id.txt_header);
 	     tv.setText(getResources().getString(R.string.main_periodical));
 	     img_back= (ImageView)findViewById(R.id.return_iv);
-		//ÄÚÈÝ
+		//ï¿½ï¿½ï¿½ï¿½
 		title = (TextView)findViewById(R.id.periodical_title_txt);
 		directordept  = (TextView)findViewById(R.id.periodical_host1_txt);
 		publisher  = (TextView)findViewById(R.id.periodical_host2_txt);
@@ -224,7 +224,7 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 		remark = (TextView)findViewById(R.id.periodical_content_abst);
 		tips =  (TextView)findViewById(R.id.txt_null_tips);
 		rlFromAndDate = (RelativeLayout)findViewById(R.id.rlFromAndDate);
-		//ÆÚ¿¯ÈÕÆÚ
+		//ï¿½Ú¿ï¿½ï¿½ï¿½ï¿½ï¿½
 		txt_date = (TextView) findViewById(R.id.txt_year_month);
 		//Í¼Æ¬
 		img = (ImageView) findViewById(R.id.periodical_icon_img);
@@ -268,7 +268,7 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 		pubcycle.setText(getResources().getString(R.string.title_perio_type)+periodical.getPubcycle()+","+periodical.getSize());
 		remark.setText(getResources().getString(R.string.title_perio_remark)+periodical.getRemark());
 		
-		//³õÊ¼»¯ÆÚ¿¯ÈÕÆÚ
+		//ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ï¿½ï¿½
 		if(yearlist==null){
 			txt_date.setVisibility(View.GONE);
 			rlFromAndDate.setVisibility(View.GONE);
@@ -279,7 +279,7 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 		year = yearlist.get(0).getYear();
 		String[] arr = yearlist.get(0).getNum();
 		month = arr[arr.length-1];
-		txt_date.setText(year+"ÄêµÚ"+month+"ÆÚ£ºÄ¿Â¼");
+		txt_date.setText(year+"ï¿½ï¿½ï¿½"+month+"ï¿½Ú£ï¿½Ä¿Â¼");
 		yaer_record = 0;
 		month_record = arr.length-1;
 		}
@@ -291,7 +291,7 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 			customProgressDialog.dismiss();
 			progress.setVisibility(View.GONE);
 			try {
-				//µÚÒ»´ÎsetAdapter
+				//ï¿½ï¿½Ò»ï¿½ï¿½setAdapter
 				if(isFirstFlag){
 				lists = EBook.formList(response);
 				if(lists!=null&&!lists.isEmpty()){
@@ -299,7 +299,7 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 				listview.setAdapter(adapter);
 				}
 				}else{
-				//µÚ¶þ´Î¸Ä±ä
+				//ï¿½Ú¶ï¿½ï¿½Î¸Ä±ï¿½
 				lists.clear();
 				List<EBook> mlists = EBook.formList(response);
 				lists.addAll(mlists);
@@ -322,13 +322,13 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 				Periodical periodical =Periodical.formObject(response,Task.TASK_PERIODICAL_DETAIL);	
 				if(periodical!=null){
 				yearlist = periodical.getYearsnumlist();
-				//Íê³ÉviewµÄ³õÊ¼»¯;
+				//ï¿½ï¿½ï¿½viewï¿½Ä³ï¿½Ê¼ï¿½ï¿½;
 				System.out.println(yearlist);
 				
 				
 				
 				initView(periodical);
-				//»ñÈ¡×îÐÂÆÚ¿¯Ä¿Â¼Êé¼®
+				//ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Ú¿ï¿½Ä¿Â¼ï¿½é¼®
 				if(yearlist!=null){
 				String[] tmpary = yearlist.get(0).getNum();
 				gparams = new HashMap<String, String>();
@@ -336,7 +336,7 @@ public class PeriodicalContentActivity extends BaseImageActivity{
 				gparams.put("years", yearlist.get(0).getYear());
 				gparams.put("num",  tmpary[tmpary.length-1]);
 				gparams.put("perpage",GlobleData.BIG_PERPAGE+"");
-				//µÚÒ»´ÎÇëÇó
+				//ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				isFirstFlag = true;
 				requestVolley(GlobleData.SERVER_URL + "/zk/search.aspx",
 						backlistener_content, Method.POST);

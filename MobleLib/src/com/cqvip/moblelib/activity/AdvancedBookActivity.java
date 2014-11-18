@@ -23,7 +23,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.StringRequest;
 import com.cqvip.mobelib.imgutils.AsyncTask;
-import com.cqvip.moblelib.nanshan.R;
+import com.cqvip.moblelib.sychild.R;
 import com.cqvip.moblelib.adapter.AdvancedBookAdapter;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.Constant;
@@ -58,12 +58,12 @@ public class AdvancedBookActivity extends BaseActivity implements
 		switch (type) {
 		case Constant.HOTBOOK:
 			sendtype = Task.TASK_SUGGEST_HOTBOOK;
-			setheadbar("ÈÈÃÅÍ¼Êé");
+			setheadbar("ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½");
 			break;
 
 		case Constant.NEWBOOK:
 			sendtype = Task.TASK_SUGGEST_NEWBOOK;
-			setheadbar("ÐÂÊéÍÆ¼ö");
+			setheadbar("ï¿½ï¿½ï¿½ï¿½ï¿½Æ¼ï¿½");
 			break;
 
 		default:
@@ -75,7 +75,7 @@ public class AdvancedBookActivity extends BaseActivity implements
 		// listview.setOnRefreshListener(this);
 		adapter = new AdvancedBookAdapter(context, null);
 
-		// »ñÈ¡ÁÐ±í
+		// ï¿½ï¿½È¡ï¿½Ð±ï¿½
 		customProgressDialog.show();
 		getHomePage(page, Constant.DEFAULT_COUNT, GETHOMEPAGE);
 
@@ -128,7 +128,7 @@ public class AdvancedBookActivity extends BaseActivity implements
 				if (lists != null && !lists.isEmpty()) {
 					adapter.addMoreData(lists);
 				} else {
-					Tool.ShowMessages(context, "Ã»ÓÐ¸ü¶àÄÚÈÝ¿É¹©¼ÓÔØ");
+					Tool.ShowMessages(context, "Ã»ï¿½Ð¸ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿É¹ï¿½ï¿½ï¿½ï¿½ï¿½");
 				}
 			} catch (Exception e) {
 				onError(2);
@@ -165,7 +165,7 @@ public class AdvancedBookActivity extends BaseActivity implements
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int position,
 			long id) {
-		// ¿É»¬¶¯µÄlistviewÐèÒª position-1
+		// ï¿½É»ï¿½ï¿½ï¿½ï¿½ï¿½listviewï¿½ï¿½Òª position-1
 		ShortBook book = adapter.getLists().get(position);
 		if (book != null) {
 			Intent _intent = new Intent(context,
@@ -216,7 +216,7 @@ public class AdvancedBookActivity extends BaseActivity implements
 	// }
 	// return null;
 	// }
-	// //Ë¢ÐÂÍê³É
+	// //Ë¢ï¿½ï¿½ï¿½ï¿½ï¿½
 	// @Override
 	// protected void onPostExecute(Void result) {
 	//

@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
-import com.cqvip.moblelib.nanshan.R;
+import com.cqvip.moblelib.sychild.R;
 import com.cqvip.moblelib.model.EBook;
 
 public class EbookAdapter extends BaseAdapter {
@@ -64,22 +64,22 @@ public class EbookAdapter extends BaseAdapter {
 	}
 
 	/**
-	 * Ôö¼Ó¸ü¶àÊý¾Ý
+	 * ï¿½ï¿½ï¿½Ó¸ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * 
 	 * @param moreStatus
 	 */
 	public void addMoreData(List<EBook> moreStatus) {
-		this.lists.addAll(moreStatus);// °ÑÐÂÊý¾ÝÔö¼Óµ½Ô­ÓÐ¼¯ºÏ
+		this.lists.addAll(moreStatus);// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½Ô­ï¿½Ð¼ï¿½ï¿½ï¿½
 		this.notifyDataSetChanged();
 	}
 
 	static class ViewHolder {
 
-		TextView title;// ÊéÃû
-		TextView author;// ×÷Õß
-		TextView publisher;// À´Ô´
-		TextView u_abstract;// ¼ò½é
-		NetworkImageView  img;// Ê±¼äÍ¼Æ¬ ²»ÓÃÐÞ¸Ä
+		TextView title;// ï¿½ï¿½ï¿½ï¿½
+		TextView author;// ï¿½ï¿½ï¿½ï¿½
+		TextView publisher;// ï¿½ï¿½Ô´
+		TextView u_abstract;// ï¿½ï¿½ï¿½
+		NetworkImageView  img;// Ê±ï¿½ï¿½Í¼Æ¬ ï¿½ï¿½ï¿½ï¿½ï¿½Þ¸ï¿½
 		// Button btn_comment,btn_item_result_search_share,favorite;
 	}
 
@@ -117,8 +117,8 @@ public class EbookAdapter extends BaseAdapter {
 		holder.author.setText(author + book.getWriter());
 		holder.publisher.setSingleLine(false);
 		holder.publisher.setMaxLines(2);
-		holder.publisher.setText(from + "¡¶"+book.getName_c()+"¡·"+book.getYears() + "Äê," + "µÚ"
-				+ book.getNum() + "ÆÚ");
+		holder.publisher.setText(from + "ï¿½ï¿½"+book.getName_c()+"ï¿½ï¿½"+book.getYears() + "ï¿½ï¿½," + "ï¿½ï¿½"
+				+ book.getNum() + "ï¿½ï¿½");
 		holder.u_abstract.setText(describe + book.getRemark_c());
 		String url=book.getImgurl();
 		holder.img.setVisibility(View.GONE);

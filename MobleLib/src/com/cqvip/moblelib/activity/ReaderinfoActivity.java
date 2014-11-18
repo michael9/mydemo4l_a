@@ -23,7 +23,7 @@ import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.cqvip.moblelib.nanshan.R;
+import com.cqvip.moblelib.sychild.R;
 import com.cqvip.moblelib.adapter.ReaderInfoAdapter;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.Reader;
@@ -185,7 +185,7 @@ public class ReaderinfoActivity extends BaseActivity {
 		}
 	}
 
-	// »ñÈ¡¶ÁÕßÐÅÏ¢
+	// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
 	private void getuser() {
 		if (GlobleData.userid != null) {
 			customProgressDialog.show();
@@ -209,8 +209,8 @@ public class ReaderinfoActivity extends BaseActivity {
 						reader.getUsername(), reader.getCardbegdate(),
 						reader.getCardenddate(), reader.getStatus(),
 						reader.getPhone(), reader.getAddress() };
-				String[] attrs = { "ÐÕÃû£º", "×¢²áÈÕÆÚ£º", "Ö¤ºÅ£º", "ÆôÓÃÈÕÆÚ£º", "ÖÕÖ¹ÈÕÆÚ£º",
-						"Ö¤×´Ì¬£º", "µç»°£º", "µØÖ·£º" };
+				String[] attrs = { "ï¿½ï¿½ï¿½ï¿½", "×¢ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½", "Ö¤ï¿½Å£ï¿½", "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½", "ï¿½ï¿½Ö¹ï¿½ï¿½ï¿½Ú£ï¿½",
+						"Ö¤×´Ì¬ï¿½ï¿½", "ï¿½ç»°ï¿½ï¿½", "ï¿½ï¿½Ö·ï¿½ï¿½" };
 				mList.setAdapter(new ReaderInfoAdapter(ReaderinfoActivity.this,
 						attrs, values));
 			} catch (Exception e) {

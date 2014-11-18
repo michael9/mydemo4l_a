@@ -32,7 +32,7 @@ import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.cqvip.dao.DaoException;
-import com.cqvip.moblelib.nanshan.R;
+import com.cqvip.moblelib.sychild.R;
 import com.cqvip.moblelib.adapter.GridViewImgAdapter;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
@@ -46,8 +46,8 @@ import com.cqvip.utils.Tool;
 
 /**
  * <p>
- * ÎÄ¼þÃû³Æ: MainMenuActivity.java ÎÄ¼þÃèÊö: Ö÷²Ëµ¥£¬Ö÷½çÃæ °æÈ¨ËùÓÐ: °æÈ¨ËùÓÐ(C)2013-2020 ¹« Ë¾:
- * ÖØÇìÎ¬ÆÕ×ÉÑ¯ÓÐÏÞ¹«Ë¾ ÄÚÈÝÕªÒª: ÆäËûËµÃ÷: Íê³ÉÈÕÆÚ£º 201Äê5ÔÂ10ÈÕ ÐÞ¸Ä¼ÇÂ¼:
+ * ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½: MainMenuActivity.java ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½: ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¨ï¿½ï¿½ï¿½ï¿½: ï¿½ï¿½È¨ï¿½ï¿½ï¿½ï¿½(C)2013-2020 ï¿½ï¿½ Ë¾:
+ * ï¿½ï¿½ï¿½ï¿½Î¬ï¿½ï¿½ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½Þ¹ï¿½Ë¾ ï¿½ï¿½ï¿½ï¿½ÕªÒª: ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½: ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 201ï¿½ï¿½5ï¿½ï¿½10ï¿½ï¿½ ï¿½Þ¸Ä¼ï¿½Â¼:
  * </p>
  * 
  * @author LHP,LJ
@@ -72,14 +72,14 @@ public class MainMenuActivity extends BaseActivity_Main implements
 	private Timer mtimer;
 	private int mtimern;
 
-	private ImageView iv_top, iv_EntanceGuide, iv02,main08_iv,main09_iv;
+	private ImageView iv_top, iv_EntanceGuide, iv02,main08_iv;
 
 	private final Class[] activities = { EntanceGuideActivity.class,
 			BookSearchActivity.class, EBookActiviy.class,
 			SuggestedReadingActivity.class, PersonalCenterActivity.class,
 			MyFavorActivity.class, AnnounceActivity.class,
 			BorrowAndOrderActivity.class, GroupOfReadersActivity.class };
-	// ³éÌë
+	// ï¿½ï¿½ï¿½ï¿½
 	// private SlidingDrawer sd;
 	// private ImageView iv;
 	Handler handler = new Handler() {
@@ -95,7 +95,7 @@ public class MainMenuActivity extends BaseActivity_Main implements
 				break;
 			case 1:
 				// sd.close();
-				// ¼ì²é¸üÐÂ
+				// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 				mtimer.cancel();
 				break;
@@ -143,7 +143,7 @@ public class MainMenuActivity extends BaseActivity_Main implements
 				.getSystemService("activity");
 		Log.i("MemoryClass", "" + activityManager.getMemoryClass());
 
-		// »ñÈ¡ÊÖ»úÐÅÏ¢
+		// ï¿½ï¿½È¡ï¿½Ö»ï¿½ï¿½ï¿½Ï¢
 		Phinfo phinfo = new Phinfo();
 		phinfo.fullbaseinfo(this);
 		String info = phinfo.tojson(phinfo);
@@ -157,10 +157,10 @@ public class MainMenuActivity extends BaseActivity_Main implements
 		try {
 			MUser user = dao.queryInfo();
 			if (user != null) {
-				// ÓÃ»§ÒÑ¾­µÇÂ½
-				// ºóÌ¨×Ô¶¯µÇÂ½
+				// ï¿½Ã»ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½Â½
+				// ï¿½ï¿½Ì¨ï¿½Ô¶ï¿½ï¿½ï¿½Â½
 				Log.i("database",
-						"Êý¾Ý¿â»ñÈ¡Êé¼®³É¹¦" + user.getCardno() + user.getReaderno());
+						"ï¿½ï¿½Ý¿ï¿½ï¿½È¡ï¿½é¼®ï¿½É¹ï¿½" + user.getCardno() + user.getReaderno());
 				GlobleData.userid = user.getCardno();
 				GlobleData.readerid = user.getReaderno();
 				GlobleData.cqvipid = user.getCqvipid();
@@ -227,7 +227,7 @@ public class MainMenuActivity extends BaseActivity_Main implements
 	// if (keyCode == 4) {
 	// Intent intent = new Intent(MainMenuActivity.this, ActivityDlg.class);
 	// intent.putExtra("ACTIONID", 0);
-	// intent.putExtra("MSGBODY", "È·¶¨ÍË³öÁú¸ÚÍ¼Êé¹ÝÂð£¿");
+	// intent.putExtra("MSGBODY", "È·ï¿½ï¿½ï¿½Ë³ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½");
 	// intent.putExtra("BTN_CANCEL", 1);
 	// startActivityForResult(intent, 104);
 	//
@@ -242,20 +242,19 @@ public class MainMenuActivity extends BaseActivity_Main implements
 	}
 
 	public void init() {
-		// ³õÊ¼»¯ service
+		// ï¿½ï¿½Ê¼ï¿½ï¿½ service
 		// if (!ManagerService.isrun) {
 		// ManagerService.isrun = true;
 		// Intent it = new Intent(this, ManagerService.class);
 		// this.startService(it);
 		// }
-		// ¼ì²éÍøÂçÊÇ·ñ¿ÉÓÃ
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½
 		// if (Tool.checkNetWork(context)) {
 		//
 		// }
 		iv_EntanceGuide = (ImageView) findViewById(R.id.main02_iv);
 		iv_top = (ImageView) findViewById(R.id.main01_iv);
 		main08_iv=(ImageView) findViewById(R.id.main08_iv);
-		main09_iv=(ImageView) findViewById(R.id.main09_iv);
 		// iv_EntanceGuide.setOnClickListener(this);
 		// iv_top.setOnClickListener(this);
 	}
@@ -295,11 +294,11 @@ public class MainMenuActivity extends BaseActivity_Main implements
 				if (shortBook.getSucesss().equals("true")) {
 					int remoteversion = Integer.parseInt(shortBook.getId());
 					updata_url = shortBook.getDate();
-					// ±È½Ï°æ±¾ºÅÏÂÔØ¸üÐÂ
+					// ï¿½È½Ï°æ±¾ï¿½ï¿½ï¿½ï¿½ï¿½Ø¸ï¿½ï¿½ï¿½
 					int versioncode = 0;
 					try {
 						versioncode = MainMenuActivity.this.getPackageManager()
-								.getPackageInfo("com.cqvip.moblelib.nanshan", 0).versionCode;
+								.getPackageInfo("com.cqvip.moblelib.sychild", 0).versionCode;
 						Log.i("mainmenu", "versioncode=" + versioncode);
 					} catch (NameNotFoundException e) {
 						// TODO Auto-generated catch block
@@ -309,7 +308,7 @@ public class MainMenuActivity extends BaseActivity_Main implements
 						Intent intent = new Intent(MainMenuActivity.this,
 								ActivityDlg.class);
 						intent.putExtra("ACTIONID", 0);
-						intent.putExtra("MSGBODY", "ÓÐ¸üÐÂ°æ±¾£¬È·¶¨ÊÇ·ñ¸üÐÂ£¿");
+						intent.putExtra("MSGBODY", "ï¿½Ð¸ï¿½ï¿½Â°æ±¾ï¿½ï¿½È·ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½Â£ï¿½");
 						intent.putExtra("BTN_CANCEL", 1);
 						startActivityForResult(intent, 105);
 					}
@@ -346,7 +345,7 @@ public class MainMenuActivity extends BaseActivity_Main implements
 	// if (shortBook.getSucesss().equals("true")) {
 	// int remoteversion = Integer.parseInt(shortBook.getId());
 	// updata_url = shortBook.getDate();
-	// // ±È½Ï°æ±¾ºÅÏÂÔØ¸üÐÂ
+	// // ï¿½È½Ï°æ±¾ï¿½ï¿½ï¿½ï¿½ï¿½Ø¸ï¿½ï¿½ï¿½
 	// int versioncode = 0;
 	// try {
 	// versioncode = this.getPackageManager().getPackageInfo(
@@ -360,7 +359,7 @@ public class MainMenuActivity extends BaseActivity_Main implements
 	// Intent intent = new Intent(MainMenuActivity.this,
 	// ActivityDlg.class);
 	// intent.putExtra("ACTIONID", 0);
-	// intent.putExtra("MSGBODY", "ÓÐ¸üÐÂ°æ±¾£¬È·¶¨ÊÇ·ñ¸üÐÂ£¿");
+	// intent.putExtra("MSGBODY", "ï¿½Ð¸ï¿½ï¿½Â°æ±¾ï¿½ï¿½È·ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½Â£ï¿½");
 	// intent.putExtra("BTN_CANCEL", 1);
 	// startActivityForResult(intent, 105);
 	// }
@@ -370,10 +369,10 @@ public class MainMenuActivity extends BaseActivity_Main implements
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		// Í£Ö¹·þÎñ
-		// ÍË³öService
+		// Í£Ö¹ï¿½ï¿½ï¿½ï¿½
+		// ï¿½Ë³ï¿½Service
 		// context.stopService(new Intent("com.cqvip.moblelib.mainbiz"));
-		// ¹Ø±Õ×ÓÏß³Ì
+		// ï¿½Ø±ï¿½ï¿½ï¿½ï¿½ß³ï¿½
 		// ManagerService.isrun = false;
 		android.os.Process.killProcess(android.os.Process.myPid());
 	}
@@ -398,7 +397,7 @@ public class MainMenuActivity extends BaseActivity_Main implements
 			intent.setClass(MainMenuActivity.this, activities[3]);
 			startActivity(intent);
 			break;
-		case R.id.main06_iv:// ¸öÈËÖÐÐÄ
+		case R.id.main06_iv:// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			if (GlobleData.islogin) {
 				intent.setClass(context, activities[4]);
 				startActivity(intent);
@@ -406,7 +405,7 @@ public class MainMenuActivity extends BaseActivity_Main implements
 				showLoginDialog(4);
 			}
 			break;
-		case R.id.main07_iv:// ½èÔÄ¹ÜÀí
+		case R.id.main07_iv:// ï¿½ï¿½ï¿½Ä¹ï¿½ï¿½ï¿½
 			if (GlobleData.islogin) {
 				intent.setClass(context, activities[7]);
 				startActivity(intent);
@@ -414,21 +413,9 @@ public class MainMenuActivity extends BaseActivity_Main implements
 				showLoginDialog(7);
 			}
 			break;
-		case R.id.main08_iv:// ²Î¿¼×ÉÑ¯
+		case R.id.main08_iv:// ï¿½Î¿ï¿½ï¿½ï¿½Ñ¯
 //			intent.setClass(MainMenuActivity.this, activities[5]);
 //			startActivity(intent);
-			break;
-		case R.id.main09_iv:// ¹ÜÄÚ¹«¸æ
-			intent.setClass(MainMenuActivity.this, activities[6]);
-			startActivity(intent);
-			break;
-		case R.id.main10_iv:// ÊéÓÑÈ¦
-			if (GlobleData.islogin) {
-				intent.setClass(context, activities[8]);
-				startActivity(intent);
-			} else {
-				showLoginDialog(8);
-			}
 			break;
 		default:
 			break;
@@ -442,7 +429,7 @@ public class MainMenuActivity extends BaseActivity_Main implements
 		startActivityForResult(intent, id);
 	}
 
-	// ¼àÌýÁ½´ÎÍË³ö
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë³ï¿½
 	@Override
 	public boolean dispatchTouchEvent(MotionEvent ev) {
 		// TODO Auto-generated method stub
@@ -452,7 +439,7 @@ public class MainMenuActivity extends BaseActivity_Main implements
 			if (mGestureDetector.onTouchEvent(ev)) {
 				Log.e("MainMenuAct", "dispatchTouchEvent_true");
 				if(ev.getAction()==MotionEvent.ACTION_UP)
-				exit("ÔÙ»¬Ò»´ÎÍË³ö³ÌÐò");
+				exit(getString(R.string.exit_swipe_tips));
 				return true;
 			} else {
 				boolean temp = super.dispatchTouchEvent(ev);
@@ -477,7 +464,7 @@ public class MainMenuActivity extends BaseActivity_Main implements
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
-			exit("ÔÙ°´Ò»´ÎÍË³ö³ÌÐò");
+			exit(getString(R.string.exit_tips));
 			return false;
 		}
 		return super.onKeyDown(keyCode, event);
@@ -488,7 +475,7 @@ public class MainMenuActivity extends BaseActivity_Main implements
 			isExit = true;
 			Toast.makeText(getApplicationContext(), tips, Toast.LENGTH_SHORT)
 					.show();
-			// ÀûÓÃhandlerÑÓ³Ù·¢ËÍ¸ü¸Ä×´Ì¬ÐÅÏ¢
+			// ï¿½ï¿½ï¿½ï¿½handlerï¿½Ó³Ù·ï¿½ï¿½Í¸ï¿½ï¿½×´Ì¬ï¿½ï¿½Ï¢
 			mHandler.sendEmptyMessageDelayed(0, 2000);
 		} else {
 			finish();

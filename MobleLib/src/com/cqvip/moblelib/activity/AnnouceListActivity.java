@@ -26,7 +26,7 @@ import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.cqvip.mobelib.imgutils.AsyncTask;
-import com.cqvip.moblelib.nanshan.R;
+import com.cqvip.moblelib.sychild.R;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.Constant;
 import com.cqvip.moblelib.constant.GlobleData;
@@ -63,7 +63,7 @@ public class AnnouceListActivity extends BaseActivity implements OnItemClickList
 //
 //            @Override
 //            public void onDropDown() {
-//            	page = 1;//ÖØÖÃpage
+//            	page = 1;//ï¿½ï¿½ï¿½ï¿½page
 //            	isFirstLoad = false;
 //        		getHomePage(page, Constant.DEFAULT_COUNT,GETHOMEPAGE);
 //            }
@@ -206,7 +206,7 @@ public class AnnouceListActivity extends BaseActivity implements OnItemClickList
 		gparams.put("perpage",""+ Constant.DEFAULT_TEXT_COUNT);
 		
 		switch(type){
-		case Constant.SPEECH_NEWS://ÐÂÎÅ¶¯Ì¬
+		case Constant.SPEECH_NEWS://ï¿½ï¿½ï¿½Å¶ï¿½Ì¬
 			gparams.put("announcetypeid", ""+2);		
 			if(mwhat == GETHOMEPAGE){
 				requestVolley(GlobleData.SERVER_URL
@@ -218,7 +218,7 @@ public class AnnouceListActivity extends BaseActivity implements OnItemClickList
 						Method.POST);
 			}
 			break;
-		case Constant.SPPECH_FREE://¹«Òæ½²×ù
+		case Constant.SPPECH_FREE://ï¿½ï¿½ï¿½æ½²ï¿½ï¿½
 			gparams.put("announcetypeid", ""+1);		
 			if(mwhat == GETHOMEPAGE){
 				requestVolley(GlobleData.SERVER_URL
@@ -230,7 +230,7 @@ public class AnnouceListActivity extends BaseActivity implements OnItemClickList
 						Method.POST);
 			}
 			break;
-		case Constant.QUESTION://³£¼ûÎÊÌâ
+		case Constant.QUESTION://ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			gparams.put("announcetypeid", ""+5);			
 			if(mwhat == GETHOMEPAGE){
 				requestVolley(GlobleData.SERVER_URL
@@ -265,7 +265,7 @@ public class AnnouceListActivity extends BaseActivity implements OnItemClickList
 	
 		public void addMoreData(List<ShortBook> moreStatus)
 		{
-			this.mlists.addAll(moreStatus);//°ÑÐÂÊý¾ÝÔö¼Óµ½Ô­ÓÐ¼¯ºÏ
+			this.mlists.addAll(moreStatus);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½Ô­ï¿½Ð¼ï¿½ï¿½ï¿½
 			this.notifyDataSetChanged();
 		}
 		@Override

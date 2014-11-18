@@ -28,7 +28,7 @@ import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.toolbox.StringRequest;
 import com.cqvip.dao.DaoException;
-import com.cqvip.moblelib.nanshan.R;
+import com.cqvip.moblelib.sychild.R;
 import com.cqvip.moblelib.base.IBookManagerActivity;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
@@ -52,7 +52,7 @@ public class ActivityDlg extends BaseActivity  {
 	private TextView msg_box_txt;
 	private Context context;
 	private Map<String, String> gparams;
-	//±£´æÓÃ»§Ãû
+	//ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½
 	private Editor editor;
 	private SharedPreferences localUsers;
 
@@ -68,7 +68,7 @@ public class ActivityDlg extends BaseActivity  {
 		msg_box_layout.setVisibility(View.GONE);
 		login_layout.setVisibility(View.GONE);
 		customProgressDialog = CustomProgressDialog.createDialog(this);
-		//customProgressDialog.setMessage("ÕýÔÚ¼ÓÔØÖÐ...");
+		//customProgressDialog.setMessage("ï¿½ï¿½ï¿½Ú¼ï¿½ï¿½ï¿½ï¿½ï¿½...");
 //		login_status_ll.setVisibility(View.GONE);
 	
 		switch (getIntent().getIntExtra("ACTIONID", 0)) {
@@ -180,8 +180,8 @@ public class ActivityDlg extends BaseActivity  {
 //						"0441200001098", "0440061012345" });
 //		log_in_username.setThreshold(0);
 //		log_in_username.setAdapter(adapter);
-//		// ³õÊ¼»¯ service
-//		// ¼ì²éÍøÂçÊÇ·ñ¿ÉÓÃ
+//		// ï¿½ï¿½Ê¼ï¿½ï¿½ service
+//		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½
 //		if (Tool.checkNetWork(this)) {
 //			if (!ManagerService.isrun) {
 //				ManagerService.isrun = true;
@@ -237,20 +237,20 @@ public class ActivityDlg extends BaseActivity  {
 					try {
 						// dao.delInfo(muser.getCardno());
 						dao.saveInfo(muser);
-						Log.i("database", "´æ´¢³É¹¦");
+						Log.i("database", "ï¿½æ´¢ï¿½É¹ï¿½");
 					} catch (DaoException e) {
 						e.printStackTrace();
 					}
 					// if (dialog.isShowing()) {
 					// dialog.dismiss();
 					// }
-					// ÌáÊ¾µÇÂ½³É¹¦
-//					Tool.ShowMessages(this, "µÇÂ½³É¹¦");
+					// ï¿½ï¿½Ê¾ï¿½ï¿½Â½ï¿½É¹ï¿½
+//					Tool.ShowMessages(this, "ï¿½ï¿½Â½ï¿½É¹ï¿½");
 					winexit(0);
 				} else {
 					GlobleData.islogin = false;
 					// dialog.dismiss();
-					// ÌáÊ¾µÇÂ½Ê§°Ü
+					// ï¿½ï¿½Ê¾ï¿½ï¿½Â½Ê§ï¿½ï¿½
 					Tool.ShowMessages(ActivityDlg.this, res.getMessage());
 				}
 			} catch (Exception e) {

@@ -31,7 +31,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.StringRequest;
 import com.cqvip.dao.DaoException;
-import com.cqvip.moblelib.nanshan.R;
+import com.cqvip.moblelib.sychild.R;
 import com.cqvip.moblelib.adapter.BookAdapter;
 import com.cqvip.moblelib.constant.Constant;
 import com.cqvip.moblelib.constant.GlobleData;
@@ -90,7 +90,7 @@ public class ResultOnSearchActivity extends BaseActivity implements
 		noResult_rl = (RelativeLayout) findViewById(R.id.noresult_rl);
 		edit.setText(getIntent().getStringExtra("ISBN"));
 		
-		if(getIntent().getBooleanExtra("isfromDetailAdvancedBookActivity", false)){//´ÓÍÆ¼öÔÄ¶Á»òÕß´ÓËÑË÷¼ÇÂ¼startµÄ
+		if(getIntent().getBooleanExtra("isfromDetailAdvancedBookActivity", false)){//ï¿½ï¿½ï¿½Æ¼ï¿½ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ß´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼startï¿½ï¿½
 			key=getIntent().getStringExtra("bookname");
 			imgsearch.setFocusable(true);
 			customProgressDialog.show();
@@ -109,10 +109,10 @@ public class ResultOnSearchActivity extends BaseActivity implements
 					return;
 				}
 				if (TextUtils.isEmpty(key)) {
-					Tool.ShowMessages(context, "ÇëÊäÈë¹Ø¼ü×Ö");
+					Tool.ShowMessages(context, "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½");
 					return;
 				}
-				// ÅÐ¶ÏÊÇ·ñÊÇisbnºÅ²éÑ¯
+				// ï¿½Ð¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½isbnï¿½Å²ï¿½Ñ¯
 				customProgressDialog.show();
 				page = 1;
 				if (Tool.isbnMatch(key)) {
@@ -121,7 +121,7 @@ public class ResultOnSearchActivity extends BaseActivity implements
 				} else {
 					getHomePage(key, GETFIRSTPAGE, DEFAULT_COUNT, GETFIRSTPAGE,
 							GlobleData.QUERY_ALL);
-					//¼ÓÈëÊý¾Ý¿â
+					//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½
 					addDatabase(edit.getText().toString().trim());
 				}
 			}
@@ -137,13 +137,13 @@ public class ResultOnSearchActivity extends BaseActivity implements
 					return true;
 				}
 				key = edit.getText().toString().trim();
-				// Òþ²Ø¼üÅÌ
+				// ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½
 				hideKeybord();
-				// ¼ì²é0ÍøÂç
+				// ï¿½ï¿½ï¿½0ï¿½ï¿½ï¿½ï¿½
 				if (!Tool.checkNetWork(context)) {
 					return false;
 				}
-				// ÍøÂç·ÃÎÊ,»ñÈ¡Ê×Ò³
+				// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½È¡ï¿½ï¿½Ò³
 				customProgressDialog.show();
 				page = 1;
 				if (Tool.isbnMatch(key)) {
@@ -152,7 +152,7 @@ public class ResultOnSearchActivity extends BaseActivity implements
 				} else {
 					getHomePage(key, GETFIRSTPAGE, DEFAULT_COUNT, GETFIRSTPAGE,
 							GlobleData.QUERY_ALL);
-					//¼ÓÈëÊý¾Ý¿â
+					//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½
 					addDatabase(edit.getText().toString().trim());
 				}
 				return true;
@@ -216,7 +216,7 @@ public class ResultOnSearchActivity extends BaseActivity implements
 	}
 	
 	/**
-	 * Òþ²Ø¼üÅÌ
+	 * ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½
 	 */
 	private void hideKeybord() {
 		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -232,11 +232,11 @@ public class ResultOnSearchActivity extends BaseActivity implements
 			if(customProgressDialog!=null&&customProgressDialog.isShowing())
 			customProgressDialog.dismiss();
 			try {
-				//»ñÈ¡·µ»Ø¼ÇÂ¼Êý
+				//ï¿½ï¿½È¡ï¿½ï¿½ï¿½Ø¼ï¿½Â¼ï¿½ï¿½
 				int count = Book.bookCount(response);
 				if(count>0){
 					searchCount.setVisibility(View.VISIBLE);
-					String temp="ËÑË÷µ½Óë \"<font face=\"arial\" color=\"red\">"+key+"</font>\"  Ïà¹ØÄÚÈÝ "+count+" ¸ö";
+					String temp="ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ \"<font face=\"arial\" color=\"red\">"+key+"</font>\"  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ "+count+" ï¿½ï¿½";
 					searchCount.setText(Html.fromHtml(temp));
 				}else{
 					searchCount.setVisibility(View.GONE);
@@ -326,7 +326,7 @@ public class ResultOnSearchActivity extends BaseActivity implements
 	}
 
 	/**
-	 * ÇëÇóÍøÂç£¬»ñÈ¡Êý¾Ý
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ç£¬ï¿½ï¿½È¡ï¿½ï¿½ï¿½
 	 * 
 	 * @param key
 	 * @param page
@@ -367,7 +367,7 @@ public class ResultOnSearchActivity extends BaseActivity implements
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int position, long id) {
 	 	    Log.i("ResultOnSea", ""+position);
-			Book book = adapter.getLists().get(position);//´ËµØµÄpositionÒª°üÀ¨listviewµÄheader
+			Book book = adapter.getLists().get(position);//ï¿½ËµØµï¿½positionÒªï¿½ï¿½ï¿½ï¿½listviewï¿½ï¿½header
 			if (book != null) {
 				Intent _intent = new Intent(context, DetailBookActivity.class);
 				Bundle bundle = new Bundle();

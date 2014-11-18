@@ -30,7 +30,7 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.ImageLoader.ImageListener;
 import com.android.volley.toolbox.StringRequest;
 import com.cqvip.dao.DaoException;
-import com.cqvip.moblelib.nanshan.R;
+import com.cqvip.moblelib.sychild.R;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.db.MEBookDao;
@@ -54,19 +54,19 @@ public class EbookDetailActivity extends BaseActivity {
 	private ImageView img_book;
 	// private ImageFetcher mImageFetcher;
 	private Map<String, String> gparams;
-	//ÏÂÔØ
+	//ï¿½ï¿½ï¿½ï¿½
 	private Context context;
 	 public static final String     DOWNLOAD_FOLDER_NAME = "downloadmoblib";
 	 private long                   downloadId           = 0;
 	 private DownloadManager        downloadManager;
-	 private int fromFlage;//±íÊ¾´ÓÄÄ¸öactivityÌø×ª¹ýÀ´£¬ÆÀÂÛ¹ýÀ´²»ÏÔÊ¾ÆÀÂÛ°´Å¥
+	 private int fromFlage;//ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½Ä¸ï¿½activityï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Û¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½Û°ï¿½Å¥
 	 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_ebook_detail);
 		context = this;
-		//ÉèÖÃ±êÌâ£¬ÏÔÊ¾ÏÂÔØ°´Å¥
+		//ï¿½ï¿½ï¿½Ã±ï¿½ï¿½â£¬ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½Ø°ï¿½Å¥
 		View v = findViewById(R.id.head_bar);
 		ImageView download = (ImageView)v.findViewById(R.id.btn_right_header);
 		download.setVisibility(View.VISIBLE);
@@ -115,21 +115,21 @@ public class EbookDetailActivity extends BaseActivity {
 
 		title.setText(dBook.getTitle_c());
 		author.setText(author1 + dBook.getWriter());
-		if(dBook.getName_c()==null||dBook.getName_c().equals("²»Ïê")||dBook.getNum()==null||dBook.getYears()==null){
+		if(dBook.getName_c()==null||dBook.getName_c().equals("ï¿½ï¿½ï¿½ï¿½")||dBook.getNum()==null||dBook.getYears()==null){
 			from.setVisibility(View.GONE);
 		}else{
-		from.setText(from1 + "¡¶"+dBook.getName_c()+"¡·"+dBook.getYears() + "Äê," + "µÚ" + dBook.getNum()
-				+ "ÆÚ");
+		from.setText(from1 + "ï¿½ï¿½"+dBook.getName_c()+"ï¿½ï¿½"+dBook.getYears() + "ï¿½ï¿½," + "ï¿½ï¿½" + dBook.getNum()
+				+ "ï¿½ï¿½");
 		}
 		//time.setText(publish + dBook.getOrgan());
 		//page.setText(page1 + dBook.getPagecount());
 		if (dBook.getPdfsize() != 0) {
-			type.setText(type1 + "PDF,¹²" +dBook.getPagecount()+"Ò³,´óÐ¡"+ dBook.getPdfsize() / 1024 + "KB");
+			type.setText(type1 + "PDF,ï¿½ï¿½" +dBook.getPagecount()+"Ò³,ï¿½ï¿½Ð¡"+ dBook.getPdfsize() / 1024 + "KB");
 		} else {
 			type.setVisibility(View.GONE);
 		}
 		content.setText("        "+dBook.getRemark_c());
-		// //ÅÐ¶ÏÊÇ·ñÒÑ¾­ÊÕ²Ø
+		// //ï¿½Ð¶ï¿½ï¿½Ç·ï¿½ï¿½Ñ¾ï¿½ï¿½Õ²ï¿½
 		// btn_ebook_detail_collect.setText(isFavorite(dBook.isIsfavorite()));
 		if(fromFlage == 1){
 			btn_ebook_detail_buzz.setVisibility(View.GONE);
@@ -153,7 +153,7 @@ public class EbookDetailActivity extends BaseActivity {
 					_intent.putExtra("type", GlobleData.BOOK_ZK_TYPE);
 					startActivity(_intent);
 				} else {
-					// Ö»ÊÇµÇÂ½¶øÒÑ
+					// Ö»ï¿½Çµï¿½Â½ï¿½ï¿½ï¿½ï¿½
 					showLoginDialog(4);
 				}
 			}
@@ -186,12 +186,12 @@ public class EbookDetailActivity extends BaseActivity {
 								add_forvorite_ls, Method.POST);
 					}
 				} else {
-					// Ö»ÊÇµÇÂ½¶øÒÑ
+					// Ö»ï¿½Çµï¿½Â½ï¿½ï¿½ï¿½ï¿½
 					showLoginDialog(4);
 				}
 			}
 		});
-		// ÏÂÔØ
+		// ï¿½ï¿½ï¿½ï¿½
 		btn_ebook_detail_download.setOnClickListener(new OnClickListener() {
 
 			@SuppressLint("NewApi")
@@ -199,30 +199,30 @@ public class EbookDetailActivity extends BaseActivity {
 			public void onClick(View v) {
 				if (GlobleData.islogin) {
 				if (download_url != null) {
-					// µ¯³ö¶Ô»°¿ò
+					// ï¿½ï¿½ï¿½ï¿½ï¿½Ô»ï¿½ï¿½ï¿½
 //					Intent intent = new Intent(Intent.ACTION_VIEW, Uri
 //							.parse(download_url));
 //					startActivity(intent);
-					//1¡¢ÅÐ¶ÏÊÇ·ñÓÐsd¿¨
+					//1ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½sdï¿½ï¿½
 					 if(!Tool.hasSDcard(context)){
 							return;
 						}
-					//´´½¨ÏÂÔØÂ·¾¶£¬ÏÂÔØÃû³Æ
+					//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 					 File folder = new File(DOWNLOAD_FOLDER_NAME);
 					   if (!folder.exists() || !folder.isDirectory()) {
 						   folder.mkdirs();
 					   }
 					   MEBookDao dao = new MEBookDao(context);
-					  //1²é¿´ÊÇ·ñÏÂÔØ¹ý
+					  //1ï¿½é¿´ï¿½Ç·ï¿½ï¿½ï¿½ï¿½Ø¹ï¿½
 					   if(isAlreadyDownload(dao,dBook.getLngid())){
 						   Intent _intent = new Intent(context,ActivityDlg.class);
-						   _intent.putExtra("MSGBODY", "ÄúÒÑ¾­ÏÂÔØ¸ÃÎÄ¼þ£¬ÊÇ·ñÖØÐÂÏÂÔØ?");
+						   _intent.putExtra("MSGBODY", "ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½Ø¸ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½?");
 						   _intent.putExtra("BTN_CANCEL", 1);
 						   startActivityForResult(_intent,0);
 					   }else{
-						   //¼ÓÈëÏÂÔØÁÐ¶Ó
+						   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½
 						   andToqueue();
-						   //²åÈëÊý¾Ý¿â±£´æ,ÕýÔÚÏÂÔØ
+						   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿â±£ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 						   try {
 							dao.saveInfo(dBook, downloadId, MEbook.TYPE_ON_DOWNLOADING);
 						} catch (DaoException e) {
@@ -236,7 +236,7 @@ public class EbookDetailActivity extends BaseActivity {
 					
 				}
 			}else{
-				// ½øÈëÏÂÔØ½çÃæ
+				// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø½ï¿½ï¿½ï¿½
 				showLoginDialog(4);
 				}
 			}
@@ -253,7 +253,7 @@ public class EbookDetailActivity extends BaseActivity {
 				if (GlobleData.islogin) {
 				startActivity(new Intent(context,DownLoadManagerActivity.class));
 				}else {
-					// Ö»ÊÇµÇÂ½¶øÒÑ
+					// Ö»ï¿½Çµï¿½Â½ï¿½ï¿½ï¿½ï¿½
 					showLoginDialog(4);
 				}
 			}
@@ -276,11 +276,11 @@ public class EbookDetailActivity extends BaseActivity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		//´ÓÐÂÏÂÔØ
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		if(requestCode ==0&&resultCode == 0){
 			 MEBookDao dao = new MEBookDao(context);
 			 andToqueue();
-			   //²åÈëÊý¾Ý¿â±£´æ,ÕýÔÚÏÂÔØ
+			   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿â±£ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			   try {
 				dao.saveInfo(dBook, downloadId, MEbook.TYPE_ON_DOWNLOADING);
 			} catch (DaoException e) {
@@ -290,8 +290,8 @@ public class EbookDetailActivity extends BaseActivity {
 		}
 	}
 	/**
-	 * ÅÐ¶ÏÊÇ·ñÏÂÔØ¹ý¸ÃÎÄ¼þ
-	 * @param id µç×ÓÊéÎ¨Ò»id
+	 * ï¿½Ð¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½Ø¹ï¿½ï¿½ï¿½Ä¼ï¿½
+	 * @param id ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î¨Ò»id
 	 * @return
 	 */
 	private boolean isAlreadyDownload(MEBookDao dao,String id) {
@@ -307,7 +307,7 @@ public class EbookDetailActivity extends BaseActivity {
 		return true;
 	}
 	/**
-	 * ¼ÓÈëÏÂÔØÁÐ¶Ó£¬ÏÂÔØ
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶Ó£ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * 
 	 */
 	@SuppressLint("NewApi")
@@ -315,7 +315,7 @@ public class EbookDetailActivity extends BaseActivity {
 		DownloadManager.Request request = new DownloadManager.Request(Uri.parse(download_url));
 		request.setDestinationInExternalPublicDir(DOWNLOAD_FOLDER_NAME, getFullname(dBook.getTitle_c()));
 		request.setTitle(dBook.getTitle_c());
-		request.setDescription("¸ñÊ½£ºpdf,"+dBook.getPdfsize());
+		request.setDescription("ï¿½ï¿½Ê½ï¿½ï¿½pdf,"+dBook.getPdfsize());
 		if(Build.VERSION.SDK_INT>=11)
 		request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
 		request.setVisibleInDownloadsUi(false);
@@ -331,14 +331,14 @@ public class EbookDetailActivity extends BaseActivity {
 		Tool.ShowMessages(context, getString(R.string.tips_begin_download));
 	}
 	/**
-	 * ÏÂÔØÎÄ¼þÃû³Æ
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½
 	 * @param title_c
 	 * @return
 	 */
 	private String getFullname(String title_c) {
 		return title_c+".pdf";
 	}
-	// ÏÔÊ¾¶Ô»°¿ò
+	// ï¿½ï¿½Ê¾ï¿½Ô»ï¿½ï¿½ï¿½
 	private void showLoginDialog(int id) {
 		MainMenuActivity.cantouch = true;
 		Intent intent = new Intent(EbookDetailActivity.this, ActivityDlg.class);
@@ -346,7 +346,7 @@ public class EbookDetailActivity extends BaseActivity {
 		startActivityForResult(intent, id);
 	}
 
-	// //ÅÐ¶ÏÊÇ·ñÊÕ²Ø
+	// //ï¿½Ð¶ï¿½ï¿½Ç·ï¿½ï¿½Õ²ï¿½
 	// private String isFavorite(boolean isfavorite) {
 	// if(isfavorite||EBookSearchActivity.favors.containsKey(dBook.getLngid())){
 	// return getResources().getString(R.string.already_favoriate);

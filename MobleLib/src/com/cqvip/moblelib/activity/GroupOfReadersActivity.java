@@ -39,7 +39,7 @@ import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.cqvip.mobelib.imgutils.ImageFetcher;
-import com.cqvip.moblelib.nanshan.R;
+import com.cqvip.moblelib.sychild.R;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.Constant;
 import com.cqvip.moblelib.constant.GlobleData;
@@ -52,8 +52,8 @@ import com.cqvip.utils.Tool;
 
 /**
  * <p>
- * ÎÄ¼þÃû³Æ: GroupOfReadersActivity.java ÎÄ¼þÃèÊö: ÊéÓÑÈ¦ °æÈ¨ËùÓÐ: °æÈ¨ËùÓÐ(C)2013-2020 ¹« Ë¾:
- * ÖØÇìÎ¬ÆÕ×ÉÑ¯ÓÐÏÞ¹«Ë¾ ÄÚÈÝÕªÒª: ÆäËûËµÃ÷: Íê³ÉÈÕÆÚ£º 201Äê5ÔÂ10ÈÕ ÐÞ¸Ä¼ÇÂ¼:
+ * ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½: GroupOfReadersActivity.java ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½: ï¿½ï¿½ï¿½ï¿½È¦ ï¿½ï¿½È¨ï¿½ï¿½ï¿½ï¿½: ï¿½ï¿½È¨ï¿½ï¿½ï¿½ï¿½(C)2013-2020 ï¿½ï¿½ Ë¾:
+ * ï¿½ï¿½ï¿½ï¿½Î¬ï¿½ï¿½ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½Þ¹ï¿½Ë¾ ï¿½ï¿½ï¿½ï¿½ÕªÒª: ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½: ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 201ï¿½ï¿½5ï¿½ï¿½10ï¿½ï¿½ ï¿½Þ¸Ä¼ï¿½Â¼:
  * </p>
  * 
  * @author LHP,LJ
@@ -63,8 +63,8 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 	public static final int GETFIRSTPAGE_ZK = 2;
 	public static final int GETNEXT = 3;
 
-	private int curpage = 1;// µÚ¼¸Ò³
-	private int perpage = Constant.DEFAULT_COUNT;// Ã¿Ò³ÏÔÊ¾ÌõÊý
+	private int curpage = 1;// ï¿½Ú¼ï¿½Ò³
+	private int perpage = Constant.DEFAULT_COUNT;// Ã¿Ò³ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½
 	private View moreprocess;
 	private int curpage_sz = 1, curpage_zk = 1;
 
@@ -94,7 +94,7 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 	private int indicatorWidth;
 	private LayoutInflater mInflater;
 	private int currentIndicatorLeft = 0;
-	public  String[] tabTitle=new String[2]; // ±êÌâ
+	public  String[] tabTitle=new String[2]; // ï¿½ï¿½ï¿½ï¿½
 	
 	protected CustomProgressDialog customProgressDialog;
 	Map<Integer, List<Favorite>> arrayLists_sz, arrayLists_zk;
@@ -102,7 +102,7 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 	ArrayList<Favorite> arrayList_sz = new ArrayList<Favorite>();
 	private int listviewpagetag = GlobleData.BOOK_SZ_TYPE;
 	
-	private int sz_count,zk_count; //ÌõÊý
+	private int sz_count,zk_count; //ï¿½ï¿½ï¿½ï¿½
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -118,7 +118,7 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 
 		// Set up the ViewPager with the sections adapter.
 		mViewPager.setAdapter(mSectionsPagerAdapter);
-		// »ñÈ¡Êý¾Ý
+		// ï¿½ï¿½È¡ï¿½ï¿½ï¿½
 		getfavorlist(curpage, perpage, GlobleData.BOOK_SZ_TYPE, GETFIRSTPAGE_SZ);
 		getfavorlist(curpage, perpage, GlobleData.BOOK_ZK_TYPE, GETFIRSTPAGE_ZK);
 	}
@@ -128,13 +128,13 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 				.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 					@Override
 					public void onPageSelected(int position) {
-						// RadioButtonµã»÷ performClick()
+						// RadioButtonï¿½ï¿½ï¿½ performClick()
 						if (rg_nav_content != null
 								&& rg_nav_content.getChildCount() > position) {
 							((RadioButton) rg_nav_content.getChildAt(position))
 									.performClick();
 						}
-						//ÓÒ»¬ÍË³ö±êÊ¶£¬·ÀÖ¹µ±Ç°²»ÊÇµÚÒ»¸öfragmentÓÒ»¬finish
+						//ï¿½Ò»ï¿½ï¿½Ë³ï¿½ï¿½ï¿½Ê¶ï¿½ï¿½ï¿½ï¿½Ö¹ï¿½ï¿½Ç°ï¿½ï¿½ï¿½Çµï¿½Ò»ï¿½ï¿½fragmentï¿½Ò»ï¿½finish
 						if(position==0){
 							isLeftFragment=true;
 						}else{
@@ -158,7 +158,7 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 					@Override
 					public void onCheckedChanged(RadioGroup group, int checkedId) {
 						if (rg_nav_content.getChildAt(checkedId) != null) {
-							// »¬¶¯¶¯»­
+							// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 							TranslateAnimation animation = new TranslateAnimation(
 									currentIndicatorLeft,
 									((RadioButton) rg_nav_content
@@ -167,11 +167,11 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 							animation.setInterpolator(new LinearInterpolator());
 							animation.setDuration(100);
 							animation.setFillAfter(true);
-							// »¬¿éÖ´ÐÐÎ»ÒÆ¶¯»­
+							// ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ï¿½Î»ï¿½Æ¶ï¿½ï¿½ï¿½
 							iv_nav_indicator.startAnimation(animation);
 							mViewPager.setCurrentItem(checkedId); // ViewPager
-																	// ¸úËæÒ»Æð ÇÐ»»
-							// ¼ÇÂ¼µ±Ç° ÏÂ±êµÄ¾à×î×ó²àµÄ ¾àÀë
+																	// ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ ï¿½Ð»ï¿½
+							// ï¿½ï¿½Â¼ï¿½ï¿½Ç° ï¿½Â±ï¿½Ä¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 							currentIndicatorLeft = ((RadioButton) rg_nav_content
 									.getChildAt(checkedId)).getLeft();
 							// Log.i("PeriodicalClassfyActivity", ""+((checkedId
@@ -302,7 +302,7 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 				onError(2);
 			}
             if(arrayLists_sz==null||arrayLists_sz.isEmpty()){
-				Tool.ShowMessages(context, "Ã»ÓÐ¸ü¶àÄÚÈÝ¿É¹©¼ÓÔØ");
+				Tool.ShowMessages(context, "Ã»ï¿½Ð¸ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿É¹ï¿½ï¿½ï¿½ï¿½ï¿½");
 				moreprocess.setVisibility(View.GONE);
 				return;
             }
@@ -316,7 +316,7 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 					// mSectionsPagerAdapter.notifyDataSetChanged();
 					adapter_sz.notifyDataSetChanged();
 				} else {
-					Tool.ShowMessages(context, "Ã»ÓÐ¸ü¶àÄÚÈÝ¿É¹©¼ÓÔØ");
+					Tool.ShowMessages(context, "Ã»ï¿½Ð¸ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿É¹ï¿½ï¿½ï¿½ï¿½ï¿½");
 					moreprocess.setVisibility(View.GONE);
 				}
 			} else {
@@ -328,7 +328,7 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 							.get(GlobleData.BOOK_ZK_TYPE));
 					adapter_zk.notifyDataSetChanged();
 				} else {
-					Tool.ShowMessages(context, "Ã»ÓÐ¸ü¶àÄÚÈÝ¿É¹©¼ÓÔØ");
+					Tool.ShowMessages(context, "Ã»ï¿½Ð¸ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿É¹ï¿½ï¿½ï¿½ï¿½ï¿½");
 					moreprocess.setVisibility(View.GONE);
 				}
 			}
@@ -370,7 +370,7 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 		}
 
 		/**
-		 * ÖØÐ´´Ë·½·¨ÎªÁËÊ¹notifyDataSetChangedÓÐÐ§ Called when the host view is
+		 * ï¿½ï¿½Ð´ï¿½Ë·ï¿½ï¿½ï¿½Îªï¿½ï¿½Ê¹notifyDataSetChangedï¿½ï¿½Ð§ Called when the host view is
 		 * attempting to determine if an item's position has changed. Returns
 		 * POSITION_UNCHANGED if the position of the given item has not changed
 		 * or POSITION_NONE if the item is no longer present in the adapter. The
@@ -455,15 +455,15 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int positon,
 				long id) {
-			if (id == -2) { // ¸ü¶à
+			if (id == -2) { // ï¿½ï¿½ï¿½
 				if (parent.getAdapter().getCount() == 1) {
 					return;
 				}
-				// ½ø¶ÈÌõ
+				// ï¿½ï¿½ï¿½ï¿½ï¿½
 				moreprocess = view.findViewById(R.id.footer_progress);
 				moreprocess.setVisibility(View.VISIBLE);
 				// Log.i("parent.getTag()", "" + parent.getTag());
-				// ÇëÇóÍøÂç¸ü¶à
+				// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				listviewpagetag = (Integer) parent.getTag();
 				if (listviewpagetag == GlobleData.BOOK_SZ_TYPE) {
 					getfavorlist(curpage_sz + 1, perpage,
@@ -517,7 +517,7 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 		// HashMap<String, String> map = new HashMap<String, String>();
 		// map.put("libid", GlobleData.LIBIRY_ID);
 		// map.put("vipuserid", GlobleData.cqvipid);
-		// Log.i("É¾³ýÊÕ²Ø", GlobleData.cqvipid);
+		// Log.i("É¾ï¿½ï¿½ï¿½Õ²ï¿½", GlobleData.cqvipid);
 		// map.put("keyid", favorite.getFavoritekeyid());
 		// Log.i("keyid", favorite.getFavoritekeyid());
 		// map.put("typeid", "" + favorite.getTypeid());
@@ -530,12 +530,12 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 	}
 
 	static class ViewHolder {
-		TextView title;// ÊéÃû
-		TextView author;// ×÷Õß
-		TextView publisher;// ³ö°æÉç
-		TextView commentcount;// ÆÀÂÛÊý
-		// TextView abst_tv;// ¼ò½é
-		ImageView img;// Ê±¼äÍ¼Æ¬ ²»ÓÃÐÞ¸Ä
+		TextView title;// ï¿½ï¿½ï¿½ï¿½
+		TextView author;// ï¿½ï¿½ï¿½ï¿½
+		TextView publisher;// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		TextView commentcount;// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		// TextView abst_tv;// ï¿½ï¿½ï¿½
+		ImageView img;// Ê±ï¿½ï¿½Í¼Æ¬ ï¿½ï¿½ï¿½ï¿½ï¿½Þ¸ï¿½
 	}
 
 	class MyGridViewAdapter extends BaseAdapter {
@@ -591,12 +591,12 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 				convertView.setClickable(false);
 				TextView tv = (TextView) convertView
 						.findViewById(R.id.footer_txt);
-				tv.setText("Ç×£¬ÄúËùÔÚ·ÖÀàÃ»ÓÐÆÀÂÛÅ¶");
+				tv.setText("ï¿½×£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú·ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å¶");
 				tv.setTextAppearance(myContext, R.style.TextStyle_nullcontent);
 				tv.setClickable(false);
 				return convertView;
 			}
-			// ¸ü¶à
+			// ï¿½ï¿½ï¿½
 			if (position == this.getCount() - 1) {
 				convertView = LayoutInflater.from(myContext).inflate(
 						R.layout.moreitemsview, null);
@@ -668,7 +668,7 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 		headerImage.setVisibility(View.VISIBLE);
 		rl_nav = (RelativeLayout) findViewById(R.id.rl_nav);
 		mHsv = (SwipHorizontalScrollView) findViewById(R.id.mHsv);
-		// ÄÚÈÝ
+		// ï¿½ï¿½ï¿½ï¿½
 		rg_nav_content = (RadioGroup) findViewById(R.id.rg_nav_content);
 		iv_nav_indicator = (ImageView) findViewById(R.id.iv_nav_indicator);
 		iv_nav_left = (ImageView) findViewById(R.id.iv_nav_left);
@@ -679,15 +679,15 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 		DisplayMetrics dm = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(dm);
 		indicatorWidth = dm.widthPixels / tabTitle.length;
-		// TODO step0 ³õÊ¼»¯»¬¶¯ÏÂ±êµÄ¿í ¸ù¾ÝÆÁÄ»¿í¶ÈºÍ¿É¼ûÊýÁ¿ À´ÉèÖÃRadioButtonµÄ¿í¶È)
+		// TODO step0 ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â±ï¿½Ä¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ä»ï¿½ï¿½ÈºÍ¿É¼ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½RadioButtonï¿½Ä¿ï¿½ï¿½)
 		LayoutParams cursor_Params = iv_nav_indicator.getLayoutParams();
-		cursor_Params.width = indicatorWidth;// ³õÊ¼»¯»¬¶¯ÏÂ±êµÄ¿í
+		cursor_Params.width = indicatorWidth;// ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â±ï¿½Ä¿ï¿½
 		iv_nav_indicator.setLayoutParams(cursor_Params);
 		mHsv.setSomeParam(rl_nav, iv_nav_left, iv_nav_right, this);
-		// »ñÈ¡²¼¾ÖÌî³äÆ÷
+		// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		mInflater = (LayoutInflater) this
 				.getSystemService(LAYOUT_INFLATER_SERVICE);
-		// ÁíÒ»ÖÖ·½Ê½»ñÈ¡
+		// ï¿½ï¿½Ò»ï¿½Ö·ï¿½Ê½ï¿½ï¿½È¡
 		// LayoutInflater mInflater = LayoutInflater.from(this);
 		initNavigationHSV();
 		
@@ -735,7 +735,7 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 	// //
 	// (arrayLists.get(GlobleData.BOOK_SZ_TYPE)==null||arrayLists.get(GlobleData.BOOK_SZ_TYPE).isEmpty()))
 	// // {
-	// // Tool.ShowMessages(context, "Ã»ÓÐ¸ü¶àÄÚÈÝ¿É¹©¼ÓÔØ");
+	// // Tool.ShowMessages(context, "Ã»ï¿½Ð¸ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿É¹ï¿½ï¿½ï¿½ï¿½ï¿½");
 	// // moreprocess.setVisibility(View.GONE);
 	// // return;
 	// // }
@@ -754,7 +754,7 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 	// adapter_zk.notifyDataSetChanged();
 	// }
 	// } else if (curpage_sz > 1 || curpage_zk > 1) {
-	// Tool.ShowMessages(context, "Ã»ÓÐ¸ü¶àÄÚÈÝ¿É¹©¼ÓÔØ");
+	// Tool.ShowMessages(context, "Ã»ï¿½Ð¸ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿É¹ï¿½ï¿½ï¿½ï¿½ï¿½");
 	// if (moreprocess != null)
 	// moreprocess.setVisibility(View.GONE);
 	// }
@@ -765,7 +765,7 @@ public class GroupOfReadersActivity extends BaseFragmentImageActivity {
 		if (customProgressDialog != null && customProgressDialog.isShowing()) {
 			customProgressDialog.dismiss();
 		}
-		if (a == 2) {// ¼ÓÔØÊ§°Ü
+		if (a == 2) {// ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½
 			Tool.ShowMessages(this, getResources().getString(R.string.loadfail));
 		} else if (a == 6) {
 			Tool.ShowMessages(this,

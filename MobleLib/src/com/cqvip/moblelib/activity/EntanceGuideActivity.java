@@ -10,12 +10,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.cqvip.moblelib.constant.Constant;
-import com.cqvip.moblelib.nanshan.R;
+import com.cqvip.moblelib.sychild.R;
 
 /**
  * <p>
- * нд╪ЧцШЁф: EntanceGuideActivity.java нд╪ЧцХйЖ: хК╧щж╦до ╟Фх╗кЫсп: ╟Фх╗кЫсп(C)2013-2020 ╧╚ к╬:
- * жьгЛн╛фувия╞споч╧╚к╬ дзхщу╙р╙: фДкШк╣цВ: мЙЁихуфзё╨ 2013дЙ5тб10ху пч╦д╪гб╪:
+ * О©╫д╪О©╫О©╫О©╫О©╫: EntanceGuideActivity.java О©╫д╪О©╫О©╫О©╫О©╫О©╫: О©╫О©╫О©╫ж╦О©╫О©╫ О©╫О©╫х╗О©╫О©╫О©╫О©╫: О©╫О©╫х╗О©╫О©╫О©╫О©╫(C)2013-2020 О©╫О©╫ к╬:
+ * О©╫О©╫О©╫О©╫н╛О©╫О©╫О©╫О©╫я╞О©╫О©╫О©╫ч╧О©╫к╬ О©╫О©╫О©╫О©╫у╙р╙: О©╫О©╫О©╫О©╫к╣О©╫О©╫: О©╫О©╫О©╫О©╫О©╫О©╫зёО©╫ 2013О©╫О©╫5О©╫О©╫10О©╫О©╫ О©╫ч╦д╪О©╫б╪:
  * </p>
  * 
  * @author LHP,LJ

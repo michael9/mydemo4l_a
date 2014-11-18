@@ -8,19 +8,19 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.cqvip.moblelib.nanshan.R;
+import com.cqvip.moblelib.sychild.R;
 import com.cqvip.moblelib.adapter.BookAdapter;
 
 /**
  * <p>
- * ╬─╝■├√│╞: ResultForSearchActivity.java
- * ╬─╝■├ш╩Ў: ▓щ╤п╜с╣√
- * ░ц╚и╦∙╙╨: ░ц╚и╦∙╙╨(C)2013-2020
- * ╣л          ╦╛: ╓╪╟ь╬м╞╒╫╔╤п╙╨╧▐╣л╦╛
- * ─┌╚▌╒к╥к: 
- * ╞ф╦√╦╡├ў:
- * ═ъ│╔╚╒╞┌г║ 201─ъ5╘┬10╚╒
- * ╨▐╕─╝╟┬╝: 
+ * я┐╜─╝я┐╜я┐╜я┐╜я┐╜: ResultForSearchActivity.java
+ * я┐╜─╝я┐╜я┐╜я┐╜я┐╜я┐╜: я┐╜я┐╜╤пя┐╜я┐╜я┐╜
+ * я┐╜я┐╜╚ия┐╜я┐╜я┐╜я┐╜: я┐╜я┐╜╚ия┐╜я┐╜я┐╜я┐╜(C)2013-2020
+ * я┐╜я┐╜          ╦╛: я┐╜я┐╜я┐╜я┐╜╬мя┐╜я┐╜я┐╜я┐╜╤пя┐╜я┐╜я┐╜▐╣я┐╜╦╛
+ * я┐╜я┐╜я┐╜я┐╜╒к╥к: 
+ * я┐╜я┐╜я┐╜я┐╜╦╡я┐╜я┐╜:
+ * я┐╜я┐╜я┐╜я┐╜я┐╜я┐╜┌гя┐╜ 201я┐╜я┐╜5я┐╜я┐╜10я┐╜я┐╜
+ * я┐╜▐╕─╝я┐╜┬╝: 
  * </p>
  * 
  * @author LHP,LJ

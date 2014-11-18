@@ -4,7 +4,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.cqvip.mobelib.imgutils.ImageFetcher;
 import com.cqvip.mobelib.imgutils.ImageCache.ImageCacheParams;
-import com.cqvip.moblelib.nanshan.R;
+import com.cqvip.moblelib.sychild.R;
 import com.cqvip.moblelib.activity.BaseActivity.MyGestrueListener;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.view.CustomProgressDialog;
@@ -99,7 +99,7 @@ public class BaseFragmentImageActivity  extends FragmentActivity{
 			Log.e("onFling", "onFling");
 			if (isLeftFragment&&Math.abs(velocityX) > minVelocitx
 					&& Math.abs(velocityX) > 1.5* Math.abs(velocityY) 
-					&& Math.abs(e2.getY() - e1.getY())/Math.abs(e2.getX() - e1.getX()) <0.36//½Ç¶È<20¶È
+					&& Math.abs(e2.getY() - e1.getY())/Math.abs(e2.getX() - e1.getX()) <0.36//ï¿½Ç¶ï¿½<20ï¿½ï¿½
 					&&velocityX>0
 					) {
 				finish();

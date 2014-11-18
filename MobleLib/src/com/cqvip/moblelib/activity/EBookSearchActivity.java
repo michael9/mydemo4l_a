@@ -31,7 +31,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.StringRequest;
 import com.cqvip.dao.DaoException;
-import com.cqvip.moblelib.nanshan.R;
+import com.cqvip.moblelib.sychild.R;
 import com.cqvip.moblelib.adapter.EbookAdapter;
 import com.cqvip.moblelib.constant.Constant;
 import com.cqvip.moblelib.constant.GlobleData;
@@ -61,7 +61,7 @@ public class EBookSearchActivity extends BaseActivity implements
 	private BitmapCache cache;
 	private Map<String, String> gparams;
 
-	public static HashMap<String, Boolean> favors = new HashMap<String, Boolean>();// ±£³ÖÊÕ²Ø×´Ì¬£¬¸üÐÂ½çÃæ
+	public static HashMap<String, Boolean> favors = new HashMap<String, Boolean>();// ï¿½ï¿½ï¿½ï¿½ï¿½Õ²ï¿½×´Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½Â½ï¿½ï¿½ï¿½
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +74,7 @@ public class EBookSearchActivity extends BaseActivity implements
 		listview = (DropDownListView) findViewById(R.id.search_res_lv);
 		listview.setOnItemClickListener((OnItemClickListener) this);
 		noResult_rl = (RelativeLayout) findViewById(R.id.noresult_rl);
-		// »ñÈ¡¸ü¶à
+		// ï¿½ï¿½È¡ï¿½ï¿½ï¿½
 		listview.setOnBottomListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -89,7 +89,7 @@ public class EBookSearchActivity extends BaseActivity implements
 			public void onClick(View v) {
 				hideKeybord();
 				if (TextUtils.isEmpty(edit.getText().toString().trim())) {
-					Tool.ShowMessages(context, "ÇëÊäÈë¹Ø¼ü×Ö");
+					Tool.ShowMessages(context, "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½");
 					return;
 				}
 				if (!Tool.checkNetWork(context)) {
@@ -99,7 +99,7 @@ public class EBookSearchActivity extends BaseActivity implements
 				page = 1;
 				getHomePage(edit.getText().toString().trim(), page,
 						DEFAULT_COUNT, 0);
-				//¼ÓÈëÊý¾Ý¿â
+				//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½
 				addDatabase(edit.getText().toString().trim());
 			}
 		});
@@ -111,18 +111,18 @@ public class EBookSearchActivity extends BaseActivity implements
 				if (TextUtils.isEmpty(edit.getText().toString())) {
 					return true;
 				}
-				// Òþ²Ø¼üÅÌ
+				// ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½
 				hideKeybord();
-				// ¼ì²éÍøÂç
+				// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				if (!Tool.checkNetWork(context)) {
 					return false;
 				}
-				// ÍøÂç·ÃÎÊ,»ñÈ¡Ê×Ò³
+				// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½È¡ï¿½ï¿½Ò³
 				customProgressDialog.show();
 				page = 1;
 				getHomePage(edit.getText().toString().trim(), 1, DEFAULT_COUNT,
 						0);
-				//¼ÓÈëÊý¾Ý¿â
+				//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½
 				addDatabase(edit.getText().toString().trim());
 				return true;
 			}
@@ -200,7 +200,7 @@ public class EBookSearchActivity extends BaseActivity implements
 	}
 
 	/**
-	 * Òþ²Ø¼üÅÌ
+	 * ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½
 	 */
 	private void hideKeybord() {
 		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -217,13 +217,13 @@ public class EBookSearchActivity extends BaseActivity implements
 					&& customProgressDialog.isShowing())
 				customProgressDialog.dismiss();
 			try {
-				// »ñÈ¡·µ»Ø¼ÇÂ¼Êý
+				// ï¿½ï¿½È¡ï¿½ï¿½ï¿½Ø¼ï¿½Â¼ï¿½ï¿½
 				int count = EBook.ebookCount(response);
 				if (count > 0) {
 					searchCount.setVisibility(View.VISIBLE);
-					String temp = "ËÑË÷µ½Óë \"<font face=\"arial\" color=\"red\">"
+					String temp = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ \"<font face=\"arial\" color=\"red\">"
 							+ edit.getText().toString().trim()
-							+ "</font>\"  Ïà¹ØÄÚÈÝ " + count + " ¸ö";
+							+ "</font>\"  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ " + count + " ï¿½ï¿½";
 					searchCount.setText(Html.fromHtml(temp));
 				} else {
 					searchCount.setVisibility(View.GONE);
@@ -310,7 +310,7 @@ public class EBookSearchActivity extends BaseActivity implements
 	}
 
 	/**
-	 * ÇëÇóÍøÂç£¬»ñÈ¡Êý¾Ý
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ç£¬ï¿½ï¿½È¡ï¿½ï¿½ï¿½
 	 * 
 	 * @param key
 	 * @param page
@@ -319,8 +319,8 @@ public class EBookSearchActivity extends BaseActivity implements
 	private void getHomePage(String key, int page, int count, int type) {
 		gparams = new HashMap<String, String>();
 		gparams.put("title", key);
-		gparams.put("curpage", "" + page);// µ±Ç°Ò³Êý
-		gparams.put("perpage", "" + count);// ÌõÊý
+		gparams.put("curpage", "" + page);// ï¿½ï¿½Ç°Ò³ï¿½ï¿½
+		gparams.put("perpage", "" + count);// ï¿½ï¿½ï¿½ï¿½
 
 		if (type == 0) {
 			if (listview.getFooterViewsCount() == 0) {

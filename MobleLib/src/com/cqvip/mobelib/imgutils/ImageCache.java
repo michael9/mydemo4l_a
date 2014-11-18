@@ -43,10 +43,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.util.LruCache;
 import android.util.Log;
 
-import com.cqvip.moblelib.nanshan.BuildConfig;
+import com.cqvip.moblelib.sychild.BuildConfig;
 
 /**
- * ´¦ÀíÎÄ¼þºÍÄÚ´æ»º´æ
+ * ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½Ú´æ»ºï¿½ï¿½
  * This class handles disk and memory caching of bitmaps in conjunction with the
  * {@link ImageWorker} class and its subclasses. Use
  * {@link ImageCache#getInstance(FragmentManager, ImageCacheParams)} to get an instance of this
@@ -56,27 +56,27 @@ import com.cqvip.moblelib.nanshan.BuildConfig;
 public class ImageCache {
     private static final String TAG = "ImageCache";
 
-    // Default memory cache size in kilobytes ÄÚ´æ»º´æ 5M
+    // Default memory cache size in kilobytes ï¿½Ú´æ»ºï¿½ï¿½ 5M
     private static final int DEFAULT_MEM_CACHE_SIZE = 1024 * 5; // 5MB
 
-    // Default disk cache size in bytes ÎÄ¼þ»º´æ10M
+    // Default disk cache size in bytes ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½10M
     private static final int DEFAULT_DISK_CACHE_SIZE = 1024 * 1024 * 10; // 10MB
 
-    // Compression settings when writing images to disk cache Ñ¹Ëõ¸ñÊ½JPEG
+    // Compression settings when writing images to disk cache Ñ¹ï¿½ï¿½ï¿½ï¿½Ê½JPEG
     private static final CompressFormat DEFAULT_COMPRESS_FORMAT = CompressFormat.JPEG;
-    private static final int DEFAULT_COMPRESS_QUALITY = 70; //Ñ¹ËõÖÊÁ¿ 70
+    private static final int DEFAULT_COMPRESS_QUALITY = 70; //Ñ¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 70
     private static final int DISK_CACHE_INDEX = 0;
 
     // Constants to easily toggle various caches
-    private static final boolean DEFAULT_MEM_CACHE_ENABLED = true; //ÄÚ´æ
-    private static final boolean DEFAULT_DISK_CACHE_ENABLED = true; //ÎÄ¼þ´æ´¢
+    private static final boolean DEFAULT_MEM_CACHE_ENABLED = true; //ï¿½Ú´ï¿½
+    private static final boolean DEFAULT_DISK_CACHE_ENABLED = true; //ï¿½Ä¼ï¿½ï¿½æ´¢
     private static final boolean DEFAULT_INIT_DISK_CACHE_ON_CREATE = false; 
 
     private DiskLruCache mDiskLruCache;  
-    private LruCache<String, BitmapDrawable> mMemoryCache; //Î»Í¼»º´æ£¬Ìæ´úsoftreference
-    private ImageCacheParams mCacheParams;//holer ±£´æ£¬»º´æ²ÎÊý
-    private final Object mDiskCacheLock = new Object(); //Ëø
-    private boolean mDiskCacheStarting = true;//»º´æ¿ªÊ¼±êÊ¶
+    private LruCache<String, BitmapDrawable> mMemoryCache; //Î»Í¼ï¿½ï¿½ï¿½æ£¬ï¿½ï¿½ï¿½softreference
+    private ImageCacheParams mCacheParams;//holer ï¿½ï¿½ï¿½æ£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    private final Object mDiskCacheLock = new Object(); //ï¿½ï¿½
+    private boolean mDiskCacheStarting = true;//ï¿½ï¿½ï¿½æ¿ªÊ¼ï¿½ï¿½Ê¶
 
     private HashSet<SoftReference<Bitmap>> mReusableBitmaps;
 
@@ -92,7 +92,7 @@ public class ImageCache {
         init(cacheParams);
     }
     /**
-     * ·µ»ØÍ¼Æ¬»º´æÊµÀý
+     * ï¿½ï¿½ï¿½ï¿½Í¼Æ¬ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½
      * @param cacheParams
      * @return
      */
@@ -309,7 +309,7 @@ public class ImageCache {
             memValue = mMemoryCache.get(data);
         }
 
-        if (com.cqvip.moblelib.nanshan.BuildConfig.DEBUG && memValue != null) {
+        if (com.cqvip.moblelib.sychild.BuildConfig.DEBUG && memValue != null) {
             Log.d(TAG, "Memory cache hit");
         }
 

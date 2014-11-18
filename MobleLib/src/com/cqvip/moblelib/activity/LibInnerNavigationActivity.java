@@ -12,19 +12,19 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.cqvip.moblelib.nanshan.R;
+import com.cqvip.moblelib.sychild.R;
 import com.cqvip.moblelib.view.PinchableImageView;
 
 /**
  * <p>
- * ÎÄ¼şÃû³Æ: LibInnerNavigationActivity.java
- * ÎÄ¼şÃèÊö: ¹İÄÚµ¼º½
- * °æÈ¨ËùÓĞ: °æÈ¨ËùÓĞ(C)2013-2020
- * ¹«          Ë¾: ÖØÇìÎ¬ÆÕ×ÉÑ¯ÓĞÏŞ¹«Ë¾
- * ÄÚÈİÕªÒª: 
- * ÆäËûËµÃ÷:
- * Íê³ÉÈÕÆÚ£º 201Äê5ÔÂ15ÈÕ
- * ĞŞ¸Ä¼ÇÂ¼: 
+ * ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½: LibInnerNavigationActivity.java
+ * ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½: ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½
+ * ï¿½ï¿½È¨ï¿½ï¿½ï¿½ï¿½: ï¿½ï¿½È¨ï¿½ï¿½ï¿½ï¿½(C)2013-2020
+ * ï¿½ï¿½          Ë¾: ï¿½ï¿½ï¿½ï¿½Î¬ï¿½ï¿½ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½Ş¹ï¿½Ë¾
+ * ï¿½ï¿½ï¿½ï¿½ÕªÒª: 
+ * ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½:
+ * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 201ï¿½ï¿½5ï¿½ï¿½15ï¿½ï¿½
+ * ï¿½Ş¸Ä¼ï¿½Â¼: 
  * </p>
  * 
  * @author LHP,LJ

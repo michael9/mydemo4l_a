@@ -18,7 +18,7 @@ import com.android.volley.Request.Method;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.StringRequest;
-import com.cqvip.moblelib.nanshan.R;
+import com.cqvip.moblelib.sychild.R;
 import com.cqvip.moblelib.activity.ActivityDlg;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.BorrowBook;
@@ -47,7 +47,7 @@ public class BorrowBookAdapter extends BaseAdapter{
 		this.createMyReqErrorListener = createMyReqErrorListener;
 	}
 	/**
-	 * µ×²¿¸ü¶à°´Å¥£¬·µ»Ø+1
+	 * ï¿½×²ï¿½ï¿½ï¿½à°´Å¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½+1
 	 */
 	@Override
 	public int getCount() {
@@ -62,7 +62,7 @@ public class BorrowBookAdapter extends BaseAdapter{
 		return lists.get(position);
 	}
 	/**
-	 * Èç¹ûµã»÷µ½×îµ×²¿µÄ¸ü¶à°´Å¥£¬·µ»Ø-2
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×²ï¿½ï¿½Ä¸ï¿½à°´Å¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½-2
 	 */
 	@Override
 	public long getItemId(int position) {
@@ -70,25 +70,25 @@ public class BorrowBookAdapter extends BaseAdapter{
 			return position;
 	}
 	/**
-	 * Ôö¼Ó¸ü¶àÊý¾Ý
+	 * ï¿½ï¿½ï¿½Ó¸ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @param moreStatus
 	 */
 	public void addMoreData(List<BorrowBook> moreStatus)
 	{
-		this.lists.addAll(moreStatus);//°ÑÐÂÊý¾ÝÔö¼Óµ½Ô­ÓÐ¼¯ºÏ
+		this.lists.addAll(moreStatus);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½Ô­ï¿½Ð¼ï¿½ï¿½ï¿½
 		this.notifyDataSetChanged();
 	}
 	  static class ViewHolder{
 			
 		
-			TextView title;//ÊéÃû
-			TextView barcode;//ÌõÂëºÅ
-			TextView callno;//Ë÷ÊéºÅ
-			TextView borrowtime;//½èÊéÊ±¼ä
-			TextView returntime;//»¹ÊéÊ±¼ä
-//			TextView renew;//Ðø½è
-			ImageView renew;//Ðø½è
-			TextView price;//¼Û¸ñ
+			TextView title;//ï¿½ï¿½ï¿½ï¿½
+			TextView barcode;//ï¿½ï¿½ï¿½ï¿½ï¿½
+			TextView callno;//ï¿½ï¿½ï¿½ï¿½ï¿½
+			TextView borrowtime;//ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
+			TextView returntime;//ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
+//			TextView renew;//ï¿½ï¿½ï¿½
+			ImageView renew;//ï¿½ï¿½ï¿½
+			TextView price;//ï¿½Û¸ï¿½
 			
 			}
 	
@@ -125,7 +125,7 @@ public class BorrowBookAdapter extends BaseAdapter{
 	        holder.price.setText(price+"CNY"+book.getPrice());
 	        holder.borrowtime.setText(borrowtime+book.getLoandate());
 	        holder.renew.setTag(position);
-	        //ÅÐ¶ÏÊÇ·ñÐø½è¹ý
+	        //ï¿½Ð¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½
 	        if(book.getRenew()!=0){
 	        holder.returntime.setText(returntime+book.getReturndate()+context.getResources().getString(R.string.alreadyrenew));
 	        holder.renew.setVisibility(View.GONE);
@@ -139,10 +139,10 @@ public class BorrowBookAdapter extends BaseAdapter{
 						
 						@Override
 						public void onClick(View v) {
-							//·¢ËÍÐø½èÇëÇó
+							//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 							int p=(Integer)v.getTag();
 							if(lists.get(p).getRenew()==0){								
-						   //Ðø½è
+						   //ï¿½ï¿½ï¿½
 						    StringRequest myReq = new StringRequest(Method.POST,GlobleData.SERVER_URL+"/library/user/renew.aspx",
                                          createRenewSuccessListener,
                                          createMyReqErrorListener) {
@@ -162,7 +162,7 @@ public class BorrowBookAdapter extends BaseAdapter{
 							{
 								Intent intent=new Intent(context, ActivityDlg.class);
 								intent.putExtra("ACTIONID", 0);
-								intent.putExtra("MSGBODY", "¸Ã±¾Í¼ÊéÒÑ¾­Ðø½è¹ýÁË¡£\r\nÇë×¢Òâµ½ÆÚ¹é»¹¡£\r\nÐ»Ð»£¡");
+								intent.putExtra("MSGBODY", "ï¿½Ã±ï¿½Í¼ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë¡ï¿½\r\nï¿½ï¿½×¢ï¿½âµ½ï¿½Ú¹é»¹ï¿½ï¿½\r\nÐ»Ð»ï¿½ï¿½");
 								intent.putExtra("BTN_CANCEL", 0);
 								context.startActivity(intent);
 							}

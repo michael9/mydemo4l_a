@@ -19,7 +19,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.cqvip.moblelib.nanshan.R;
+import com.cqvip.moblelib.sychild.R;
 
 /**
  * <strong> Listview whick can do something when drop down or scroll to bottom. for example, drop down to refresh and

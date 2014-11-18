@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">南山图书馆</string>
+    <string name="app_name">少儿图书馆</string>
     <string name="action_settings">Settings</string>
     <string name="zx_phone">咨询电话:     02366879630</string>
     <string name="main_guide">入馆指南</string>
@@ -167,4 +167,6 @@
     <string name="tips_periodical_null">抱歉！该杂志暂未被《中文科技期刊数据库》收录，请直接联系期刊社！期刊社联系电话：010－64294171 64294139</string>
     
     <string name="search_history">搜索历史：</string>
+    <string name="exit_tips">再按一次退出程序</string>
+    <string name="exit_swipe_tips">再划一次退出程序</string>
 </resources>

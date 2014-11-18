@@ -1,6 +1,6 @@
 package com.cqvip.moblelib.view;
 
-import com.cqvip.moblelib.nanshan.R;
+import com.cqvip.moblelib.sychild.R;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -74,7 +74,7 @@ public class MyScrollView extends ScrollView
 		return super.dispatchTouchEvent(event);
 	}
 //	@Override
-//	public boolean onInterceptTouchEvent(MotionEvent event)   //Õâ¸ö·½·¨Èç¹û·µ»Ø true µÄ»° Á½¸öÊÖÖ¸ÒÆ¶¯£¬Æô¶¯Ò»¸ö°´ÏÂµÄÊÖÖ¸µÄÒÆ¶¯²»ÄÜ±»´«²¥³öÈ¥¡£
+//	public boolean onInterceptTouchEvent(MotionEvent event)   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ true ï¿½Ä»ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Âµï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½Ü±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¥ï¿½ï¿½
 //	{
 //		super.onInterceptTouchEvent(event);
 //		switch (event.getAction()) {
@@ -108,7 +108,7 @@ public class MyScrollView extends ScrollView
 	int prex,prey;
 	int imageViewhalfwidth,imageViewhalfheight;
 //	@Override
-//	public boolean onTouchEvent(MotionEvent event)//Õâ¸ö·½·¨Èç¹û true ÔòÕû¸öActivity µÄ onTouchEvent() ²»»á±»ÏµÍ³»Øµ÷
+//	public boolean onTouchEvent(MotionEvent event)//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ true ï¿½ï¿½ï¿½ï¿½ï¿½Activity ï¿½ï¿½ onTouchEvent() ï¿½ï¿½ï¿½á±»ÏµÍ³ï¿½Øµï¿½
 //	{
 //		switch (event.getAction()) {
 //		case MotionEvent.ACTION_DOWN:

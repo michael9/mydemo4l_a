@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.ImageLoader.ImageListener;
 import com.android.volley.toolbox.NetworkImageView;
-import com.cqvip.moblelib.nanshan.R;
+import com.cqvip.moblelib.sychild.R;
 import com.cqvip.moblelib.model.Book;
 import com.cqvip.utils.BitmapCache;
 
@@ -74,21 +74,21 @@ public class BookAdapter extends BaseAdapter {
 	}
 
 	/**
-	 * Ôö¼Ó¸ü¶àÊý¾Ý
+	 * ï¿½ï¿½ï¿½Ó¸ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * 
 	 * @param moreStatus
 	 */
 	public void addMoreData(List<Book> moreStatus) {
-		this.lists.addAll(moreStatus);// °ÑÐÂÊý¾ÝÔö¼Óµ½Ô­ÓÐ¼¯ºÏ
+		this.lists.addAll(moreStatus);// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½Ô­ï¿½Ð¼ï¿½ï¿½ï¿½
 		this.notifyDataSetChanged();
 	}
 
 	static class ViewHolder {
-		TextView title;// ÊéÃû
-		TextView author;// ×÷Õß
-		TextView publisher;// ³ö°æÉç
-		NetworkImageView img;// Ê±¼äÍ¼Æ¬ ²»ÓÃÐÞ¸Ä
-		TextView u_abstract;// ¼ò½é
+		TextView title;// ï¿½ï¿½ï¿½ï¿½
+		TextView author;// ï¿½ï¿½ï¿½ï¿½
+		TextView publisher;// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		NetworkImageView img;// Ê±ï¿½ï¿½Í¼Æ¬ ï¿½ï¿½ï¿½ï¿½ï¿½Þ¸ï¿½
+		TextView u_abstract;// ï¿½ï¿½ï¿½
 		// Button btn_comment,btn_item_result_search_share,favorite;
 	}
 

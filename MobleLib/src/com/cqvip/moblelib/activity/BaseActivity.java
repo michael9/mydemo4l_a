@@ -4,7 +4,7 @@ import java.util.Map;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
-import com.cqvip.moblelib.nanshan.R;
+import com.cqvip.moblelib.sychild.R;
 import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.utils.Tool;
 
@@ -64,7 +64,7 @@ public class BaseActivity extends Activity {
 			Log.e("onFling", "velocityY"+velocityY+"--velocityX"+velocityX+"  y/x"+(e2.getY() - e1.getY())/(e2.getX() - e1.getX()));
 			if (Math.abs(velocityX) > minVelocitx
 					&& Math.abs(velocityX) > 1.5* Math.abs(velocityY) 
-					&& Math.abs(e2.getY() - e1.getY())/Math.abs(e2.getX() - e1.getX()) <0.36//½Ç¶È<20¶È
+					&& Math.abs(e2.getY() - e1.getY())/Math.abs(e2.getX() - e1.getX()) <0.36//ï¿½Ç¶ï¿½<20ï¿½ï¿½
 					&&velocityX>0
 					) {
 				finish();
@@ -79,19 +79,19 @@ public class BaseActivity extends Activity {
 		if (customProgressDialog != null && customProgressDialog.isShowing()) {
 			customProgressDialog.dismiss();
 		}
-		if (a == 1) {// µÇÂ¼Ê§°Ü
+		if (a == 1) {// ï¿½ï¿½Â¼Ê§ï¿½ï¿½
 			Tool.ShowMessages(this, getResources()
 					.getString(R.string.loginfail));
-		} else if (a == 2) {// ¼ÓÔØÊ§°Ü
+		} else if (a == 2) {// ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½
 			Tool.ShowMessages(this, getResources()
 					.getString(R.string.loadfail));
-		} else if (a == 3) {// Ðø½èÊ§°Ü
+		} else if (a == 3) {// ï¿½ï¿½ï¿½Ê§ï¿½ï¿½
 			Tool.ShowMessages(this, getResources()
 					.getString(R.string.renewfail));
-		} else if (a == 4) {// ÐÞ¸ÄÊ§°Ü
+		} else if (a == 4) {// ï¿½Þ¸ï¿½Ê§ï¿½ï¿½
 			Tool.ShowMessages(this, getResources()
 					.getString(R.string.modifyfail));
-		}else if (a == 5) {// ÊÕ²ØÊ§°Ü
+		}else if (a == 5) {// ï¿½Õ²ï¿½Ê§ï¿½ï¿½
 			Tool.ShowMessages(this, getResources()
 					.getString(R.string.favorfail));
 		}

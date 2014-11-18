@@ -26,7 +26,7 @@ import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.util.Log;
 
-import com.cqvip.moblelib.nanshan.BuildConfig;
+import com.cqvip.moblelib.sychild.BuildConfig;
 
 /**
  * A simple subclass of {@link ImageWorker} that resizes images from resources given a target width

@@ -10,7 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.cqvip.moblelib.nanshan.R;
+import com.cqvip.moblelib.sychild.R;
 import com.cqvip.moblelib.model.Comment;
 import com.cqvip.utils.Tool;
 
@@ -29,7 +29,7 @@ public class CommentItemAdapter extends BaseAdapter{
 		return lists;
 	}
 	/**
-	 * µ×²¿¸ü¶à°´Å¥£¬·µ»Ø+1
+	 * ï¿½×²ï¿½ï¿½ï¿½à°´Å¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½+1
 	 */
 	@Override
 	public int getCount() {
@@ -45,7 +45,7 @@ public class CommentItemAdapter extends BaseAdapter{
 		return lists.get(position);
 	}
 	/**
-	 * Èç¹ûµã»÷µ½×îµ×²¿µÄ¸ü¶à°´Å¥£¬·µ»Ø-2
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×²ï¿½ï¿½Ä¸ï¿½à°´Å¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½-2
 	 */
 	@Override
 	public long getItemId(int position) {
@@ -56,12 +56,12 @@ public class CommentItemAdapter extends BaseAdapter{
 		}
 	}
 	/**
-	 * Ôö¼Ó¸ü¶àÊý¾Ý
+	 * ï¿½ï¿½ï¿½Ó¸ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @param moreStatus
 	 */
 	public void addMoreData(List<Comment> moreStatus)
 	{
-		this.lists.addAll(moreStatus);//°ÑÐÂÊý¾ÝÔö¼Óµ½Ô­ÓÐ¼¯ºÏ
+		this.lists.addAll(moreStatus);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½Ô­ï¿½Ð¼ï¿½ï¿½ï¿½
 		this.notifyDataSetChanged();
 	}
 
@@ -76,7 +76,7 @@ public class CommentItemAdapter extends BaseAdapter{
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder = null;
-		//¸ü¶à
+		//ï¿½ï¿½ï¿½
 		if (position == this.getCount() - 1) {
 			convertView = LayoutInflater.from(context).inflate(R.layout.moreitemsview, null);
 			return convertView;
@@ -97,7 +97,7 @@ public class CommentItemAdapter extends BaseAdapter{
 	        holder.content.setText(comment.getContents());
 	        holder.icon.setBackgroundResource(R.drawable.portrait);
 	        holder.date.setText(Tool.GetTime(comment.getCommenttime()));
-	        //·ÖÏí
+	        //ï¿½ï¿½ï¿½ï¿½
 		return convertView;
 	}
 }

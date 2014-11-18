@@ -36,13 +36,13 @@ import com.cqvip.dao.DaoException;
 import com.cqvip.moblelib.activity.BaseActivity.MyGestrueListener;
 import com.cqvip.moblelib.db.SearchHistoryDao;
 import com.cqvip.moblelib.entity.SearchHistory_ZK;
-import com.cqvip.moblelib.nanshan.R;
+import com.cqvip.moblelib.sychild.R;
 import com.cqvip.moblelib.view.KeywordsView;
 
 /**
  * <p>
- * ÎÄ¼þÃû³Æ: EBookActiviy.java ÎÄ¼þÃèÊö: µç×ÓÊé °æÈ¨ËùÓÐ: °æÈ¨ËùÓÐ(C)2013-2020 ¹« Ë¾: ÖØÇìÎ¬ÆÕ×ÉÑ¯ÓÐÏÞ¹«Ë¾
- * ÄÚÈÝÕªÒª: ÆäËûËµÃ÷: Íê³ÉÈÕÆÚ£º 201Äê5ÔÂ10ÈÕ ÐÞ¸Ä¼ÇÂ¼:
+ * ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½: EBookActiviy.java ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½: ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¨ï¿½ï¿½ï¿½ï¿½: ï¿½ï¿½È¨ï¿½ï¿½ï¿½ï¿½(C)2013-2020 ï¿½ï¿½ Ë¾: ï¿½ï¿½ï¿½ï¿½Î¬ï¿½ï¿½ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½Þ¹ï¿½Ë¾
+ * ï¿½ï¿½ï¿½ï¿½ÕªÒª: ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½: ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 201ï¿½ï¿½5ï¿½ï¿½10ï¿½ï¿½ ï¿½Þ¸Ä¼ï¿½Â¼:
  * </p>
  * 
  * @author LHP,LJ
@@ -51,7 +51,7 @@ public class EBookActiviy extends BaseActivity implements
 View.OnClickListener{
 
 	// private static final String[] EBOOKTYPE = new String[] {
-	// "¹Ý²ØÊéÄ¿", "Î¬ÆÕÆÚ¿¯", "Íò·½ÆÚ¿¯","³¬ÐÇÍ¼Êé","ÄÚÖÃÍ¼Êé"
+	// "ï¿½Ý²ï¿½ï¿½ï¿½Ä¿", "Î¬ï¿½ï¿½ï¿½Ú¿ï¿½", "ï¿½ï¿½ï¿½Ú¿ï¿½","ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½","ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½"
 	// };
 	private Context context;
 	private String[] EBOOKTYPE;
@@ -68,7 +68,7 @@ View.OnClickListener{
 	private LinearLayout searchLayout = null;
 	private GestureDetector mggd;
 	/**
-	 * ÅÐ¶ÏÊÇÔÚÍâÒ³Ãæ»¹ÊÇÄÚÒ³Ãæ
+	 * ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò³ï¿½æ»¹ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½
 	 */
 	private boolean isOutter;
 	private ImageView delete_iv;
@@ -90,7 +90,7 @@ View.OnClickListener{
 		});
 		hideinputmethod();
 		
-		//ËÑË÷ÀúÊ·
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê·
 		searchLayout = (LinearLayout) this.findViewById(R.id.searchContent);
 		delete_iv = (ImageView) findViewById(R.id.delete_iv);
 		showKeywords = (KeywordsView) this.findViewById(R.id.word);
@@ -103,7 +103,7 @@ View.OnClickListener{
 			public boolean onTouch(View v, MotionEvent event) {
 				boolean a= mggd.onTouchEvent(event);
 				Log.i("EBookAct", "onTouch_return:"+a);
-				return a; // ×¢²áµã»÷ÊÂ¼þ
+				return a; // ×¢ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
 				
 			}
 		});
@@ -160,7 +160,7 @@ View.OnClickListener{
 	}
 	
 	private void setListViewHeightBasedOnChildren(ListView listView) {
-		//»ñÈ¡ListView¶ÔÓ¦µÄAdapter
+		//ï¿½ï¿½È¡ListViewï¿½ï¿½Ó¦ï¿½ï¿½Adapter
 		ListAdapter listAdapter = listView.getAdapter(); 
 		if (listAdapter == null) {
 		// pre-condition
@@ -168,16 +168,16 @@ View.OnClickListener{
 		}
 
 		int totalHeight = 0;
-		for (int i = 0, len = listAdapter.getCount(); i < len; i++) { //listAdapter.getCount()·µ»ØÊý¾ÝÏîµÄÊýÄ¿
+		for (int i = 0, len = listAdapter.getCount(); i < len; i++) { //listAdapter.getCount()ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿
 		View listItem = listAdapter.getView(i, null, listView);
-		listItem.measure(0, 0); //¼ÆËã×ÓÏîView µÄ¿í¸ß
-		totalHeight += listItem.getMeasuredHeight(); //Í³¼ÆËùÓÐ×ÓÏîµÄ×Ü¸ß¶È
+		listItem.measure(0, 0); //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½View ï¿½Ä¿ï¿½ï¿½
+		totalHeight += listItem.getMeasuredHeight(); //Í³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü¸ß¶ï¿½
 		}
 
 		ViewGroup.LayoutParams params = listView.getLayoutParams();
 		params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
-		//listView.getDividerHeight()»ñÈ¡×ÓÏî¼ä·Ö¸ô·ûÕ¼ÓÃµÄ¸ß¶È
-		//params.height×îºóµÃµ½Õû¸öListViewÍêÕûÏÔÊ¾ÐèÒªµÄ¸ß¶È
+		//listView.getDividerHeight()ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½Õ¼ï¿½ÃµÄ¸ß¶ï¿½
+		//params.heightï¿½ï¿½ï¿½Ãµï¿½ï¿½ï¿½ï¿½ListViewï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½Òªï¿½Ä¸ß¶ï¿½
 		listView.setLayoutParams(params);
 		}
 
@@ -360,7 +360,7 @@ View.OnClickListener{
 		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
 				float velocityY) {
 			if(e1!=null){
-				if (e2.getX() - e1.getX() > MinDistance&&(Math.abs(velocityX)>minVelocitx||Math.abs(velocityY)>velocityY)) { // ÓÒ»¬
+				if (e2.getX() - e1.getX() > MinDistance&&(Math.abs(velocityX)>minVelocitx||Math.abs(velocityY)>velocityY)) { // ï¿½Ò»ï¿½
 					key_words = getRandomArray();
 					showKeywords.rubKeywords();
 					feedKeywordsFlow(showKeywords, key_words);
@@ -368,21 +368,21 @@ View.OnClickListener{
 					return false;
 				}
 
-			if (e2.getX() - e1.getX() < -MinDistance&&(Math.abs(velocityX)>minVelocitx||Math.abs(velocityY)>velocityY)) {// ×ó»¬
+			if (e2.getX() - e1.getX() < -MinDistance&&(Math.abs(velocityX)>minVelocitx||Math.abs(velocityY)>velocityY)) {// ï¿½ï¿½
 				key_words = getRandomArray();
 				showKeywords.rubKeywords();
 				feedKeywordsFlow(showKeywords, key_words);
 				showKeywords.go2Shwo(KeywordsView.ANIMATION_IN);
 				return false;
 			}
-			if (e2.getY() - e1.getY() < -MinDistance&&(Math.abs(velocityX)>minVelocitx||Math.abs(velocityY)>velocityY)) {// ÉÏ»¬
+			if (e2.getY() - e1.getY() < -MinDistance&&(Math.abs(velocityX)>minVelocitx||Math.abs(velocityY)>velocityY)) {// ï¿½Ï»ï¿½
 				key_words = getRandomArray();
 				showKeywords.rubKeywords();
 				feedKeywordsFlow(showKeywords, key_words);
 				showKeywords.go2Shwo(KeywordsView.ANIMATION_IN);
 				return false;
 			}
-			if (e2.getY() - e1.getY() > MinDistance&&(Math.abs(velocityX)>minVelocitx||Math.abs(velocityY)>velocityY)) {// ÏÂ»¬
+			if (e2.getY() - e1.getY() > MinDistance&&(Math.abs(velocityX)>minVelocitx||Math.abs(velocityY)>velocityY)) {// ï¿½Â»ï¿½
 				key_words = getRandomArray();
 				showKeywords.rubKeywords();
 				feedKeywordsFlow(showKeywords, key_words);
@@ -407,7 +407,7 @@ View.OnClickListener{
 		// searchLayout.removeAllViews();
 		//
 		// }
-		// Toast.makeText(this, "Ñ¡ÖÐµÄÄÚÈÝÊÇ£º" + ((TextView) v).getText().toString(),
+		// Toast.makeText(this, "Ñ¡ï¿½Ðµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç£ï¿½" + ((TextView) v).getText().toString(),
 		// 1)
 		// .show();
 		// }
@@ -434,13 +434,13 @@ View.OnClickListener{
 	}
 
 	/**
-	 * É¾³ý¶Ô»°¿ò
+	 * É¾ï¿½ï¿½Ô»ï¿½ï¿½ï¿½
 	 */
 	public void senddel(int type) {
 		Intent intent = new Intent();
 		intent.setClass(this, ActivityDlg.class);
 		intent.putExtra("ACTIONID", 0);
-		intent.putExtra("MSGBODY", "È·¶¨É¾³ýËÑË÷ÀúÊ·£¿");
+		intent.putExtra("MSGBODY", "È·ï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê·ï¿½ï¿½");
 		intent.putExtra("BTN_CANCEL", 1);
 		startActivityForResult(intent, type);
 	}
@@ -468,7 +468,7 @@ View.OnClickListener{
 //		if(event.getAction()==MotionEvent.ACTION_MOVE){
 //			
 //
-//			//¿ÉÒÔ¼àÌýµ½ScrollViewµÄ¹ö¶¯ÊÂ¼þ
+//			//ï¿½ï¿½ï¿½Ô¼ï¿½ï¿½ï¿½ScrollViewï¿½Ä¹ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
 //
 //			
 //

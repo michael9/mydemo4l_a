@@ -16,7 +16,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.ImageLoader.ImageListener;
 import com.cqvip.mobelib.imgutils.ImageFetcher;
-import com.cqvip.moblelib.nanshan.R;
+import com.cqvip.moblelib.sychild.R;
 import com.cqvip.moblelib.adapter.PeriodicalAdapter.ViewHolder;
 import com.cqvip.moblelib.model.Comment;
 import com.cqvip.moblelib.model.Periodical;
@@ -66,12 +66,12 @@ public class PeriodicalAdapter extends BaseAdapter{
 		}
 	}
 	/**
-	 * Ôö¼Ó¸ü¶àÊý¾Ý
+	 * ï¿½ï¿½ï¿½Ó¸ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @param moreStatus
 	 */
 	public void addMoreData(List<Periodical> moreStatus)
 	{
-		this.lists.addAll(moreStatus);//°ÑÐÂÊý¾ÝÔö¼Óµ½Ô­ÓÐ¼¯ºÏ
+		this.lists.addAll(moreStatus);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½Ô­ï¿½Ð¼ï¿½ï¿½ï¿½
 		this.notifyDataSetChanged();
 	}
 
@@ -88,7 +88,7 @@ public class PeriodicalAdapter extends BaseAdapter{
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder = null;
-		//¸ü¶à
+		//ï¿½ï¿½ï¿½
 //		if (position == this.getCount() - 1) {
 //			convertView = LayoutInflater.from(context).inflate(R.layout.moreitemsview, null);
 //			return convertView;
@@ -118,7 +118,7 @@ public class PeriodicalAdapter extends BaseAdapter{
 	        holder.ename.setText(periodical.getEname());
 //	        holder.cnno.setText(context.getResources().getString(R.string.title_cnno)+periodical.getCnno());
 //	        holder.issn.setText(context.getResources().getString(R.string.title_issn)+periodical.getIssn());
-	        //·ÖÏí
+	        //ï¿½ï¿½ï¿½ï¿½
 		return convertView;
 	}
 }

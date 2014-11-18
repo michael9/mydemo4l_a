@@ -3,7 +3,7 @@ package com.cqvip.moblelib.view;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import com.cqvip.moblelib.nanshan.R;
+import com.cqvip.moblelib.sychild.R;
 
 
 import android.content.Context;
@@ -26,16 +26,16 @@ import android.widget.TextView;
 
 /**
  * <p>
- * [¸Å Òª] ´øÐ§¹ûµÄlistview
+ * [ï¿½ï¿½ Òª] ï¿½ï¿½Ð§ï¿½ï¿½ï¿½listview
  * </p>
  * <p>
- * [Ïê Ï¸] ÏÂ»¬Ð§¹ûlistview£¬OnRefreshListener£¬onRefreshCompleteÊµÏÖ
+ * [ï¿½ï¿½ Ï¸] ï¿½Â»ï¿½Ð§ï¿½ï¿½listviewï¿½ï¿½OnRefreshListenerï¿½ï¿½onRefreshCompleteÊµï¿½ï¿½
  * </p>
  * <p>
- * [±¸ ¿¼]
+ * [ï¿½ï¿½ ï¿½ï¿½]
  * </p>
  * <p>
- * [»· ¾³] J2SE 1.6
+ * [ï¿½ï¿½ ï¿½ï¿½] J2SE 1.6
  * </p>
  * *
  * 
@@ -47,29 +47,29 @@ implements OnScrollListener,android.widget.AdapterView.OnItemLongClickListener{
 	  
     private static final String TAG = "DownFreshListView";  
   
-    private final static int RELEASE_To_REFRESH = 0;  //ÊÍ·ÅË¢ÐÂ
-    private final static int PULL_To_REFRESH = 1;  //ÏÂÀ­
-    private final static int REFRESHING = 2;  //Ë¢ÐÂÖÐ
-    private final static int DONE = 3;  //Ë¢ÐÂÍê³É
-    private final static int LOADING = 4;  //¼ÓÔØ
+    private final static int RELEASE_To_REFRESH = 0;  //ï¿½Í·ï¿½Ë¢ï¿½ï¿½
+    private final static int PULL_To_REFRESH = 1;  //ï¿½ï¿½ï¿½ï¿½
+    private final static int REFRESHING = 2;  //Ë¢ï¿½ï¿½ï¿½ï¿½
+    private final static int DONE = 3;  //Ë¢ï¿½ï¿½ï¿½ï¿½ï¿½
+    private final static int LOADING = 4;  //ï¿½ï¿½ï¿½ï¿½
   
-    // Êµ¼ÊµÄpaddingµÄ¾àÀëÓë½çÃæÉÏÆ«ÒÆ¾àÀëµÄ±ÈÀý  
+    // Êµï¿½Êµï¿½paddingï¿½Ä¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ«ï¿½Æ¾ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½  
     private final static int RATIO = 3;  
   
     private LayoutInflater inflater;  
   
     private LinearLayout headView;  
   
-    private TextView tipsTextview;   //ÌáÊ¾
-    private TextView lastUpdatedTextView;  //×îºó¸üÐÂ
-   // private ImageView arrowImageView;  //Í¼±ê
+    private TextView tipsTextview;   //ï¿½ï¿½Ê¾
+    private TextView lastUpdatedTextView;  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+   // private ImageView arrowImageView;  //Í¼ï¿½ï¿½
     private ProgressBar progressBar;  //È¦È¦
   
   
-    private RotateAnimation animation;   //Ðý×ª¶¯»­
+    private RotateAnimation animation;   //ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½
     private RotateAnimation reverseAnimation;   
   
-    // ÓÃÓÚ±£Ö¤startYµÄÖµÔÚÒ»¸öÍêÕûµÄtouchÊÂ¼þÖÐÖ»±»¼ÇÂ¼Ò»´Î  
+    // ï¿½ï¿½ï¿½Ú±ï¿½Ö¤startYï¿½ï¿½Öµï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½touchï¿½Â¼ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½Â¼Ò»ï¿½ï¿½  
     private boolean isRecored;  
   
     private int headContentWidth;  
@@ -167,7 +167,7 @@ implements OnScrollListener,android.widget.AdapterView.OnItemLongClickListener{
                 if (firstItemIndex == 0 && !isRecored) {  
                     isRecored = true;  
                     startY = (int) event.getY();  
-//                    Log.v(TAG, "ÔÚdownÊ±ºò¼ÇÂ¼µ±Ç°Î»ÖÃ¡®");  
+//                    Log.v(TAG, "ï¿½ï¿½downÊ±ï¿½ï¿½ï¿½Â¼ï¿½ï¿½Ç°Î»ï¿½Ã¡ï¿½");  
                 }  
                 break;  
   
@@ -175,20 +175,20 @@ implements OnScrollListener,android.widget.AdapterView.OnItemLongClickListener{
   
                 if (state != REFRESHING && state != LOADING) {  
                     if (state == DONE) {  
-                        // Ê²Ã´¶¼²»×ö  
+                        // Ê²Ã´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  
                     }  
                     if (state == PULL_To_REFRESH) {  
                         state = DONE;  
                         changeHeaderViewByState();  
   
-//                        Log.v(TAG, "ÓÉÏÂÀ­Ë¢ÐÂ×´Ì¬£¬µ½done×´Ì¬");  
+//                        Log.v(TAG, "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë¢ï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½ï¿½done×´Ì¬");  
                     }  
                     if (state == RELEASE_To_REFRESH) {  
                         state = REFRESHING;  
                         changeHeaderViewByState();  
                         onRefresh();  
   
-//                        Log.v(TAG, "ÓÉËÉ¿ªË¢ÐÂ×´Ì¬£¬µ½done×´Ì¬");  
+//                        Log.v(TAG, "ï¿½ï¿½ï¿½É¿ï¿½Ë¢ï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½ï¿½done×´Ì¬");  
                     }  
                 }  
   
@@ -201,63 +201,63 @@ implements OnScrollListener,android.widget.AdapterView.OnItemLongClickListener{
                 int tempY = (int) event.getY();  
   
                 if (!isRecored && firstItemIndex == 0) {  
-//                    Log.v(TAG, "ÔÚmoveÊ±ºò¼ÇÂ¼ÏÂÎ»ÖÃ");  
+//                    Log.v(TAG, "ï¿½ï¿½moveÊ±ï¿½ï¿½ï¿½Â¼ï¿½ï¿½Î»ï¿½ï¿½");  
                     isRecored = true;  
                     startY = tempY;  
                 }  
   
                 if (state != REFRESHING && isRecored && state != LOADING) {  
   
-                    // ±£Ö¤ÔÚÉèÖÃpaddingµÄ¹ý³ÌÖÐ£¬µ±Ç°µÄÎ»ÖÃÒ»Ö±ÊÇÔÚhead£¬·ñÔòÈç¹ûµ±ÁÐ±í³¬³öÆÁÄ»µÄ»°£¬µ±ÔÚÉÏÍÆµÄÊ±ºò£¬ÁÐ±í»áÍ¬Ê±½øÐÐ¹ö¶¯  
+                    // ï¿½ï¿½Ö¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½paddingï¿½Ä¹ï¿½ï¿½ï¿½Ð£ï¿½ï¿½ï¿½Ç°ï¿½ï¿½Î»ï¿½ï¿½Ò»Ö±ï¿½ï¿½ï¿½ï¿½headï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±?ï¿½ï¿½ï¿½ï¿½Ä»ï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æµï¿½Ê±ï¿½ï¿½ï¿½Ð±ï¿½ï¿½Í¬Ê±ï¿½ï¿½ï¿½Ð¹ï¿½ï¿½ï¿½  
   
-                    // ¿ÉÒÔËÉÊÖÈ¥Ë¢ÐÂÁË  
+                    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¥Ë¢ï¿½ï¿½ï¿½ï¿½  
                     if (state == RELEASE_To_REFRESH) {  
   
                         setSelection(0);  
   
-                        // ÍùÉÏÍÆÁË£¬ÍÆµ½ÁËÆÁÄ»×ã¹»ÑÚ¸ÇheadµÄ³Ì¶È£¬µ«ÊÇ»¹Ã»ÓÐÍÆµ½È«²¿ÑÚ¸ÇµÄµØ²½  
+                        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë£ï¿½ï¿½Æµï¿½ï¿½ï¿½ï¿½ï¿½Ä»ï¿½ã¹»ï¿½Ú¸ï¿½headï¿½Ä³Ì¶È£ï¿½ï¿½ï¿½ï¿½Ç»ï¿½Ã»ï¿½ï¿½ï¿½Æµï¿½È«ï¿½ï¿½ï¿½Ú¸ÇµÄµØ²ï¿½  
                         if (((tempY - startY) / RATIO < headContentHeight)  
                                 && (tempY - startY) > 0) {  
                             state = PULL_To_REFRESH;  
                             changeHeaderViewByState();  
   
-//                            Log.v(TAG, "ÓÉËÉ¿ªË¢ÐÂ×´Ì¬×ª±äµ½ÏÂÀ­Ë¢ÐÂ×´Ì¬");  
+//                            Log.v(TAG, "ï¿½ï¿½ï¿½É¿ï¿½Ë¢ï¿½ï¿½×´Ì¬×ªï¿½äµ½ï¿½ï¿½ï¿½ï¿½Ë¢ï¿½ï¿½×´Ì¬");  
                         }  
-                        // Ò»ÏÂ×ÓÍÆµ½¶¥ÁË  
+                        // Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Æµï¿½ï¿½ï¿½ï¿½ï¿½  
                         else if (tempY - startY <= 0) {  
                             state = DONE;  
                             changeHeaderViewByState();  
   
-//                            Log.v(TAG, "ÓÉËÉ¿ªË¢ÐÂ×´Ì¬×ª±äµ½done×´Ì¬");  
+//                            Log.v(TAG, "ï¿½ï¿½ï¿½É¿ï¿½Ë¢ï¿½ï¿½×´Ì¬×ªï¿½äµ½done×´Ì¬");  
                         }  
-                        // ÍùÏÂÀ­ÁË£¬»òÕß»¹Ã»ÓÐÉÏÍÆµ½ÆÁÄ»¶¥²¿ÑÚ¸ÇheadµÄµØ²½  
+                        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë£ï¿½ï¿½ï¿½ï¿½ß»ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½Æµï¿½ï¿½ï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½Ú¸ï¿½headï¿½ÄµØ²ï¿½  
                         else {  
-                            // ²»ÓÃ½øÐÐÌØ±ðµÄ²Ù×÷£¬Ö»ÓÃ¸üÐÂpaddingTopµÄÖµ¾ÍÐÐÁË  
+                            // ï¿½ï¿½ï¿½Ã½ï¿½ï¿½ï¿½ï¿½Ø±ï¿½Ä²ï¿½ï¿½ï¿½ï¿½ï¿½Ö»ï¿½Ã¸ï¿½ï¿½ï¿½paddingTopï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  
                         }  
                     }  
-                    // »¹Ã»ÓÐµ½´ïÏÔÊ¾ËÉ¿ªË¢ÐÂµÄÊ±ºò,DONE»òÕßÊÇPULL_To_REFRESH×´Ì¬  
+                    // ï¿½ï¿½Ã»ï¿½Ðµï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½É¿ï¿½Ë¢ï¿½Âµï¿½Ê±ï¿½ï¿½,DONEï¿½ï¿½ï¿½ï¿½ï¿½ï¿½PULL_To_REFRESH×´Ì¬  
                     if (state == PULL_To_REFRESH) {  
   
                         setSelection(0);  
   
-                        // ÏÂÀ­µ½¿ÉÒÔ½øÈëRELEASE_TO_REFRESHµÄ×´Ì¬  
+                        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô½ï¿½ï¿½ï¿½RELEASE_TO_REFRESHï¿½ï¿½×´Ì¬  
                         if ((tempY - startY) / RATIO >= headContentHeight) {  
                             state = RELEASE_To_REFRESH;  
                             isBack = true;  
                             changeHeaderViewByState();  
   
-//                            Log.v(TAG, "ÓÉdone»òÕßÏÂÀ­Ë¢ÐÂ×´Ì¬×ª±äµ½ËÉ¿ªË¢ÐÂ");  
+//                            Log.v(TAG, "ï¿½ï¿½doneï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë¢ï¿½ï¿½×´Ì¬×ªï¿½äµ½ï¿½É¿ï¿½Ë¢ï¿½ï¿½");  
                         }  
-                        // ÉÏÍÆµ½¶¥ÁË  
+                        // ï¿½ï¿½ï¿½Æµï¿½ï¿½ï¿½ï¿½ï¿½  
                         else if (tempY - startY <= 0) {  
                             state = DONE;  
                             changeHeaderViewByState();  
   
-//                            Log.v(TAG, "ÓÉDOne»òÕßÏÂÀ­Ë¢ÐÂ×´Ì¬×ª±äµ½done×´Ì¬");  
+//                            Log.v(TAG, "ï¿½ï¿½DOneï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë¢ï¿½ï¿½×´Ì¬×ªï¿½äµ½done×´Ì¬");  
                         }  
                     }  
   
-                    // done×´Ì¬ÏÂ  
+                    // done×´Ì¬ï¿½ï¿½  
                     if (state == DONE) {  
                         if (tempY - startY > 0) {  
                             state = PULL_To_REFRESH;  
@@ -265,14 +265,14 @@ implements OnScrollListener,android.widget.AdapterView.OnItemLongClickListener{
                         }  
                     }  
   
-                    // ¸üÐÂheadViewµÄsize  
+                    // ï¿½ï¿½ï¿½ï¿½headViewï¿½ï¿½size  
                     if (state == PULL_To_REFRESH) {  
                         headView.setPadding(0, -1 * headContentHeight  
                                 + (tempY - startY) / RATIO, 0, 0);  
   
                     }  
   
-                    // ¸üÐÂheadViewµÄpaddingTop  
+                    // ï¿½ï¿½ï¿½ï¿½headViewï¿½ï¿½paddingTop  
                     if (state == RELEASE_To_REFRESH) {  
                         headView.setPadding(0, (tempY - startY) / RATIO  
                                 - headContentHeight, 0, 0);  
@@ -287,7 +287,7 @@ implements OnScrollListener,android.widget.AdapterView.OnItemLongClickListener{
         return super.onTouchEvent(event);  
     }  
   
-    // µ±×´Ì¬¸Ä±äÊ±ºò£¬µ÷ÓÃ¸Ã·½·¨£¬ÒÔ¸üÐÂ½çÃæ  
+    // ï¿½ï¿½×´Ì¬ï¿½Ä±ï¿½Ê±ï¿½ò£¬µï¿½ï¿½Ã¸Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¸ï¿½ï¿½Â½ï¿½ï¿½ï¿½  
     private void changeHeaderViewByState() {  
         try{
         switch (state) {  
@@ -300,9 +300,9 @@ implements OnScrollListener,android.widget.AdapterView.OnItemLongClickListener{
            // arrowImageView.clearAnimation();  
            // arrowImageView.startAnimation(animation);  
   
-            tipsTextview.setText("ËÉ¿ª½øÐÐË¢ÐÂ");  
+            tipsTextview.setText("ï¿½É¿ï¿½ï¿½ï¿½ï¿½ï¿½Ë¢ï¿½ï¿½");  
   
-//            Log.v(TAG, "µ±Ç°×´Ì¬£¬ËÉ¿ªË¢ÐÂ");  
+//            Log.v(TAG, "ï¿½ï¿½Ç°×´Ì¬ï¿½ï¿½ï¿½É¿ï¿½Ë¢ï¿½ï¿½");  
             break;  
         case PULL_To_REFRESH:  
             progressBar.setVisibility(View.GONE);  
@@ -310,17 +310,17 @@ implements OnScrollListener,android.widget.AdapterView.OnItemLongClickListener{
             lastUpdatedTextView.setVisibility(View.VISIBLE);  
             //arrowImageView.clearAnimation();  
            // arrowImageView.setVisibility(View.VISIBLE);  
-            // ÊÇÓÉRELEASE_To_REFRESH×´Ì¬×ª±äÀ´µÄ  
+            // ï¿½ï¿½ï¿½ï¿½RELEASE_To_REFRESH×´Ì¬×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  
             if (isBack) {  
                 isBack = false;  
               //  arrowImageView.clearAnimation();  
                // arrowImageView.startAnimation(reverseAnimation);  
   
-                tipsTextview.setText("ÏòÏÂÍÏ¶¯½øÐÐË¢ÐÂ");  
+                tipsTextview.setText("ï¿½ï¿½ï¿½ï¿½ï¿½Ï¶ï¿½ï¿½ï¿½ï¿½ï¿½Ë¢ï¿½ï¿½");  
             } else {  
-                tipsTextview.setText("ÏòÏÂÍÏ¶¯½øÐÐË¢ÐÂ");  
+                tipsTextview.setText("ï¿½ï¿½ï¿½ï¿½ï¿½Ï¶ï¿½ï¿½ï¿½ï¿½ï¿½Ë¢ï¿½ï¿½");  
             }  
-//            Log.v(TAG, "µ±Ç°×´Ì¬£¬ÏÂÀ­Ë¢ÐÂ");  
+//            Log.v(TAG, "ï¿½ï¿½Ç°×´Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë¢ï¿½ï¿½");  
             break;  
   
         case REFRESHING:  
@@ -330,10 +330,10 @@ implements OnScrollListener,android.widget.AdapterView.OnItemLongClickListener{
             progressBar.setVisibility(View.VISIBLE);  
             //arrowImageView.clearAnimation();  
            // arrowImageView.setVisibility(View.GONE);  
-            tipsTextview.setText("ÕýÔÚË¢ÐÂ...");  
+            tipsTextview.setText("ï¿½ï¿½ï¿½ï¿½Ë¢ï¿½ï¿½...");  
             lastUpdatedTextView.setVisibility(View.VISIBLE);  
   
-//            Log.v(TAG, "µ±Ç°×´Ì¬,ÕýÔÚË¢ÐÂ...");  
+//            Log.v(TAG, "ï¿½ï¿½Ç°×´Ì¬,ï¿½ï¿½ï¿½ï¿½Ë¢ï¿½ï¿½...");  
             break;  
         case DONE:  
             headView.setPadding(0, -1 * headContentHeight, 0, 0);  
@@ -341,10 +341,10 @@ implements OnScrollListener,android.widget.AdapterView.OnItemLongClickListener{
             progressBar.setVisibility(View.GONE);  
            // arrowImageView.clearAnimation();  
            // arrowImageView.setImageResource(R.drawable.ic_pulltorefresh_arrow);  
-            tipsTextview.setText("ËÉ¿ª½øÐÐË¢ÐÂ");  
+            tipsTextview.setText("ï¿½É¿ï¿½ï¿½ï¿½ï¿½ï¿½Ë¢ï¿½ï¿½");  
             lastUpdatedTextView.setVisibility(View.VISIBLE);  
   
-//            Log.v(TAG, "µ±Ç°×´Ì¬£¬done");  
+//            Log.v(TAG, "ï¿½ï¿½Ç°×´Ì¬ï¿½ï¿½done");  
             break;  
         }  
         }catch (Exception e) {
@@ -364,9 +364,9 @@ implements OnScrollListener,android.widget.AdapterView.OnItemLongClickListener{
   
     public void onRefreshComplete() {  
         state = DONE;  
-        SimpleDateFormat format=new SimpleDateFormat("yyyyÄêMMÔÂddÈÕ  HH:mm");  
+        SimpleDateFormat format=new SimpleDateFormat("yyyyï¿½ï¿½MMï¿½ï¿½ddï¿½ï¿½  HH:mm");  
         String date=format.format(new Date());  
-        lastUpdatedTextView.setText("ÉÏ´ÎË¢ÐÂ £º" + date);  
+        lastUpdatedTextView.setText("ï¿½Ï´ï¿½Ë¢ï¿½ï¿½ ï¿½ï¿½" + date);  
         changeHeaderViewByState();  
     }  
   
@@ -376,7 +376,7 @@ implements OnScrollListener,android.widget.AdapterView.OnItemLongClickListener{
         }  
     }  
   
-    // ´Ë·½·¨Ö±½ÓÕÕ°á×ÔÍøÂçÉÏµÄÒ»¸öÏÂÀ­Ë¢ÐÂµÄdemo£¬´Ë´¦ÊÇ¡°¹À¼Æ¡±headViewµÄwidthÒÔ¼°height  
+    // ï¿½Ë·ï¿½ï¿½ï¿½Ö±ï¿½ï¿½ï¿½Õ°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë¢ï¿½Âµï¿½demoï¿½ï¿½ï¿½Ë´ï¿½ï¿½Ç¡ï¿½ï¿½ï¿½ï¿½Æ¡ï¿½headViewï¿½ï¿½widthï¿½Ô¼ï¿½height  
     private void measureView(View child) {  
          ViewGroup.LayoutParams p = child.getLayoutParams();  
             if (p == null) {  
@@ -398,9 +398,9 @@ implements OnScrollListener,android.widget.AdapterView.OnItemLongClickListener{
     }  
 
     public void setAdapter(BaseAdapter adapter) {  
-        SimpleDateFormat format=new SimpleDateFormat("yyyyÄêMMÔÂddÈÕ  HH:mm");  
+        SimpleDateFormat format=new SimpleDateFormat("yyyyï¿½ï¿½MMï¿½ï¿½ddï¿½ï¿½  HH:mm");  
         String date=format.format(new Date());  
-        lastUpdatedTextView.setText("ÉÏ´ÎË¢ÐÂ £º" + date);  
+        lastUpdatedTextView.setText("ï¿½Ï´ï¿½Ë¢ï¿½ï¿½ ï¿½ï¿½" + date);  
         super.setAdapter(adapter);  
     }
 

@@ -11,19 +11,19 @@ import android.widget.LinearLayout;
 import com.cqvip.dao.DaoException;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.db.MUserDao;
-import com.cqvip.moblelib.nanshan.R;
+import com.cqvip.moblelib.sychild.R;
 import com.cqvip.utils.Tool;
 
 /**
  * <p>
- * ÎÄ¼þÃû³Æ: PersonalCenterActivity.java
- * ÎÄ¼þÃèÊö: ¸öÈËÖÐÐÄ
- * °æÈ¨ËùÓÐ: °æÈ¨ËùÓÐ(C)2013-2020
- * ¹«          Ë¾: ÖØÇìÎ¬ÆÕ×ÉÑ¯ÓÐÏÞ¹«Ë¾
- * ÄÚÈÝÕªÒª: 
- * ÆäËûËµÃ÷:
- * Íê³ÉÈÕÆÚ£º 201Äê5ÔÂ10ÈÕ
- * ÐÞ¸Ä¼ÇÂ¼: 
+ * ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½: PersonalCenterActivity.java
+ * ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½: ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ * ï¿½ï¿½È¨ï¿½ï¿½ï¿½ï¿½: ï¿½ï¿½È¨ï¿½ï¿½ï¿½ï¿½(C)2013-2020
+ * ï¿½ï¿½          Ë¾: ï¿½ï¿½ï¿½ï¿½Î¬ï¿½ï¿½ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½Þ¹ï¿½Ë¾
+ * ï¿½ï¿½ï¿½ï¿½ÕªÒª: 
+ * ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½:
+ * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 201ï¿½ï¿½5ï¿½ï¿½10ï¿½ï¿½
+ * ï¿½Þ¸Ä¼ï¿½Â¼: 
  * </p>
  * 
  * @author LHP,LJ
@@ -40,7 +40,7 @@ private Context context;
 		requestWindowFeature( Window.FEATURE_NO_TITLE );
 		setContentView(R.layout.activity_personal_center);
 		context = this;
-		//¶ÁÕßÐÅÏ¢
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
 		readerinfoLayout=(LinearLayout) findViewById(R.id.readerinfoLayout);
 		//favorLayout=(LinearLayout) findViewById(R.id.favorLayout);
 		logoutLayout=(LinearLayout) findViewById(R.id.logoutLayout);
@@ -76,7 +76,7 @@ private Context context;
 //				//overridePendingTransition(R.anim.slide_left_in, R.anim.slide_right_out);	
 //			}
 //		});
-		//ÏÂÝd¹ÜÀí
+		//ï¿½ï¿½ï¿½dï¿½ï¿½ï¿½ï¿½
 		downloadLayout.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -86,7 +86,7 @@ private Context context;
 			}
 		});
 		
-		//ÎÒµÄÊÕ²Ø
+		//ï¿½Òµï¿½ï¿½Õ²ï¿½
 		myfavorLayout.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -106,7 +106,7 @@ private Context context;
 				intent.putExtra("MSGBODY", getResources().getString(R.string.confirm_quit));
 				intent.putExtra("BTN_CANCEL", 1);
 				startActivityForResult(intent, 1);
-				//µ¯³ö¶Ô»°¿ò£¬È·ÈÏÊÇ·ñÍË³ö
+				//ï¿½ï¿½ï¿½ï¿½ï¿½Ô»ï¿½ï¿½ï¿½È·ï¿½ï¿½ï¿½Ç·ï¿½ï¿½Ë³ï¿½
 				//overridePendingTransition(R.anim.slide_left_in, R.anim.slide_right_out);	
 //				AlertDialog.Builder builder = new AlertDialog.Builder(context)
 //				.setTitle(R.string.title_tips)
@@ -115,20 +115,20 @@ private Context context;
 //					
 //					@Override
 //					public void onClick(DialogInterface dialog, int which) {
-//						// Çå³þÊý¾Ý¿â£¬ÕËºÅÐÅÏ¢
+//						// ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿â£¬ï¿½Ëºï¿½ï¿½ï¿½Ï¢
 //						MUserDao dao = new MUserDao(context);
 //						try {
 //							dao.delInfo(GlobleData.userid);
 //						} catch (DaoException e) {
-//							Log.i("PersonalCenterActivity","===×¢ÏúÊ§°Ü=");
+//							Log.i("PersonalCenterActivity","===×¢ï¿½ï¿½Ê§ï¿½ï¿½=");
 //							e.printStackTrace();
 //						}
-//						//ÉèÖÃµÇÂ¼±êÊ¶
+//						//ï¿½ï¿½ï¿½Ãµï¿½Â¼ï¿½ï¿½Ê¶
 //						MainMenuActivity.islogin = false;
-//						//·µ»ØµÇÂ¼½çÃæ
+//						//ï¿½ï¿½ï¿½Øµï¿½Â¼ï¿½ï¿½ï¿½ï¿½
 //						finish();
-//						//ÌáÊ¾×¢Ïú³É¹¦
-//						Tool.ShowMessages(context, "×¢Ïú³É¹¦");
+//						//ï¿½ï¿½Ê¾×¢ï¿½ï¿½É¹ï¿½
+//						Tool.ShowMessages(context, "×¢ï¿½ï¿½É¹ï¿½");
 //						
 //					}
 //				}).setNegativeButton(getString(R.string.confirm_cancel),null);
@@ -166,12 +166,12 @@ private Context context;
 						e.printStackTrace();
 						onError(2);
 					}
-					//ÉèÖÃµÇÂ¼±êÊ¶
+					//ï¿½ï¿½ï¿½Ãµï¿½Â¼ï¿½ï¿½Ê¶
 					GlobleData.islogin = false;
-					//·µ»ØµÇÂ¼½çÃæ
+					//ï¿½ï¿½ï¿½Øµï¿½Â¼ï¿½ï¿½ï¿½ï¿½
 					finish();
-					//ÌáÊ¾×¢Ïú³É¹¦
-					Tool.ShowMessages(context, "×¢ÏúµÇÂ¼³É¹¦");
+					//ï¿½ï¿½Ê¾×¢ï¿½ï¿½É¹ï¿½
+					Tool.ShowMessages(context, "×¢ï¿½ï¿½ï¿½Â¼ï¿½É¹ï¿½");
 					
 				}else{
 					

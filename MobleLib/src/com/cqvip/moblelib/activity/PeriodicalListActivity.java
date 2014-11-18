@@ -27,13 +27,13 @@ import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.Constant;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.Periodical;
-import com.cqvip.moblelib.nanshan.R;
+import com.cqvip.moblelib.sychild.R;
 import com.cqvip.moblelib.view.DropDownListView;
 import com.cqvip.utils.BitmapCache;
 import com.cqvip.utils.Tool;
 
 /**
- * Ä£ÄâÆÚ¿¯ÁÐ±íÏÔÊ¾
+ * Ä£ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½Ð±ï¿½ï¿½ï¿½Ê¾
  * @author luojiang
  *
  */
@@ -56,7 +56,7 @@ public class PeriodicalListActivity extends BaseImageActivity implements
 	private Map<String, String> gparams;
 	private String classid;
 	
-	public static HashMap<String, Boolean> favors = new HashMap<String, Boolean>();// ±£³ÖÊÕ²Ø×´Ì¬£¬¸üÐÂ½çÃæ
+	public static HashMap<String, Boolean> favors = new HashMap<String, Boolean>();// ï¿½ï¿½ï¿½ï¿½ï¿½Õ²ï¿½×´Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½Â½ï¿½ï¿½ï¿½
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +68,7 @@ public class PeriodicalListActivity extends BaseImageActivity implements
 		listview = (DropDownListView) findViewById(R.id.search_res_lv);
 		listview.setOnItemClickListener((OnItemClickListener) this);
 		noResult_rl = (RelativeLayout) findViewById(R.id.noresult_rl);
-		//»ñÈ¡¸ü¶à
+		//ï¿½ï¿½È¡ï¿½ï¿½ï¿½
 		listview.setOnBottomListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -103,11 +103,11 @@ public class PeriodicalListActivity extends BaseImageActivity implements
 			if(customProgressDialog!=null&&customProgressDialog.isShowing())
 			customProgressDialog.dismiss();
 			try {
-				// »ñÈ¡·µ»Ø¼ÇÂ¼Êý
+				// ï¿½ï¿½È¡ï¿½ï¿½ï¿½Ø¼ï¿½Â¼ï¿½ï¿½
 				int count = Periodical.getCount(response);
 				if (count > 0) {
 					searchCount.setVisibility(View.VISIBLE);
-					searchCount.setText("¹²¼ÆËÑË÷µ½" + count + "Ìõ¼ÇÂ¼");
+					searchCount.setText("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" + count + "ï¿½ï¿½ï¿½ï¿½Â¼");
 				} else {
 					searchCount.setVisibility(View.GONE);
 				}
@@ -187,7 +187,7 @@ public class PeriodicalListActivity extends BaseImageActivity implements
 	}
 
 	/**
-	 * ÇëÇóÍøÂç£¬»ñÈ¡Êý¾Ý
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ç£¬ï¿½ï¿½È¡ï¿½ï¿½ï¿½
 	 * 
 	 * @param key
 	 * @param page

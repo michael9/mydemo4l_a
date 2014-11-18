@@ -19,7 +19,7 @@ import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.cqvip.moblelib.nanshan.R;
+import com.cqvip.moblelib.sychild.R;
 import com.cqvip.moblelib.adapter.BorrowBookAdapter;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
@@ -29,14 +29,14 @@ import com.cqvip.utils.Tool;
 
 /**
  * <p>
- * ÎÄ¼þÃû³Æ: BorrowAndOrderActivity.java
- * ÎÄ¼þÃèÊö: ½èÔÄ¹ÜÀí
- * °æÈ¨ËùÓÐ: °æÈ¨ËùÓÐ(C)2013-2020
- * ¹«          Ë¾: ÖØÇìÎ¬ÆÕ×ÉÑ¯ÓÐÏÞ¹«Ë¾
- * ÄÚÈÝÕªÒª: 
- * ÆäËûËµÃ÷:
- * Íê³ÉÈÕÆÚ£º 201Äê5ÔÂ10ÈÕ
- * ÐÞ¸Ä¼ÇÂ¼: 
+ * ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½: BorrowAndOrderActivity.java
+ * ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½: ï¿½ï¿½ï¿½Ä¹ï¿½ï¿½ï¿½
+ * ï¿½ï¿½È¨ï¿½ï¿½ï¿½ï¿½: ï¿½ï¿½È¨ï¿½ï¿½ï¿½ï¿½(C)2013-2020
+ * ï¿½ï¿½          Ë¾: ï¿½ï¿½ï¿½ï¿½Î¬ï¿½ï¿½ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½Þ¹ï¿½Ë¾
+ * ï¿½ï¿½ï¿½ï¿½ÕªÒª: 
+ * ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½:
+ * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 201ï¿½ï¿½5ï¿½ï¿½10ï¿½ï¿½
+ * ï¿½Þ¸Ä¼ï¿½Â¼: 
  * </p>
  * 
  * @author LHP,LJ
@@ -135,7 +135,7 @@ public class BorrowAndOrderActivity extends BaseActivity {
 				Method.POST);
 }
 	  /**
-	   * Ðø½è³É¹¦»Øµ÷
+	   * ï¿½ï¿½ï¿½É¹ï¿½ï¿½Øµï¿½
 	   * @return
 	   */
   	  private Response.Listener<String> cl_renew = new Response.Listener<String>() {
@@ -166,7 +166,7 @@ public class BorrowAndOrderActivity extends BaseActivity {
 	          }
 	      };
   	  /**
-  	   * Ðø½èÒì³£
+  	   * ï¿½ï¿½ï¿½ï¿½ì³£
   	   * @return
   	   */
 	  private Response.ErrorListener el_new = new Response.ErrorListener() {
@@ -174,7 +174,7 @@ public class BorrowAndOrderActivity extends BaseActivity {
 	          public void onErrorResponse(VolleyError error) {
 	        	  if(customProgressDialog!=null&&customProgressDialog.isShowing())
 	        	  customProgressDialog.dismiss();
-	        	  //ÌáÊ¾ÓÃ»§Òì³£
+	        	  //ï¿½ï¿½Ê¾ï¿½Ã»ï¿½ï¿½ì³£
 	        	  onError(2);
 	          }
 	      };

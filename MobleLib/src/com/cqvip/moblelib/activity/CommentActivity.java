@@ -28,7 +28,7 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.ImageLoader.ImageListener;
 import com.cqvip.mobelib.imgutils.AsyncTask;
-import com.cqvip.moblelib.nanshan.R;
+import com.cqvip.moblelib.sychild.R;
 import com.cqvip.moblelib.adapter.CommentItemAdapter;
 import com.cqvip.moblelib.constant.Constant;
 import com.cqvip.moblelib.constant.GlobleData;
@@ -49,7 +49,7 @@ public class CommentActivity extends BaseActivity implements
 	private static final int GETHOMEPAGE = 0;
 
 	//private TextView baseinfo_tv, intro_tv;
-	private TextView title;//±êÌâ
+	private TextView title;//ï¿½ï¿½ï¿½ï¿½
 	private EditText comment_et;
 	private Button commit_btn,delete_com;
 	private Book dBook;
@@ -60,12 +60,12 @@ public class CommentActivity extends BaseActivity implements
 	private int page = 1;
 	private Context context;
 	private View moreprocess;
-	private String keyid;// Êé¼®Î¨Ò»id
+	private String keyid;// ï¿½é¼®Î¨Ò»id
  	//private ImageView img;
 	private View upView;
 	//private RelativeLayout rl_baseinfo;
 	public final static String TAG="CommentActivity";
-	private int fromActivity; //1±íÊ¾´ÓGroupActivityÆÀÂÛÈë¿Ú½øÀ´µÄ
+	private int fromActivity; //1ï¿½ï¿½Ê¾ï¿½ï¿½GroupActivityï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -74,22 +74,22 @@ public class CommentActivity extends BaseActivity implements
 		context = this;
 		init();
 
-		// »ñÈ¡Êé¼®ÏêÏ¸¶ÔÏó
+		// ï¿½ï¿½È¡ï¿½é¼®ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½ï¿½
 		Bundle bundle = getIntent().getBundleExtra("detaiinfo");
 		dBook = (Book) bundle.getSerializable("book");
-		// »ñÈ¡Êé¼®ÁÐÏ¯
+		// ï¿½ï¿½È¡ï¿½é¼®ï¿½ï¿½Ï¯
 		typeid = getIntent().getIntExtra("type", GlobleData.BOOK_SZ_TYPE);
 		fromActivity = getIntent().getIntExtra("from", 0);
-		// »ñÈ¡ÊÇ·ñÉ¾³ý±íÊ¶
+		// ï¿½ï¿½È¡ï¿½Ç·ï¿½É¾ï¿½ï¿½ï¿½Ê¶
 		delFlag = getIntent().getIntExtra("flag", 0);
-		// Êé¼®id
+		// ï¿½é¼®id
 		keyid = getLngId(dBook.getCallno(), dBook.getRecordid());
 		if(customProgressDialog!=null)
 		customProgressDialog.show();
 		getHomeComment(typeid, keyid, page, Constant.DEFAULT_COUNT, GETHOMEPAGE);
 		String describe = dBook.getU_abstract();
 		if (TextUtils.isEmpty(describe)) {
-			describe = "ÎÞ";
+			describe = "ï¿½ï¿½";
 		}
 		title.setText(dBook.getTitle());
 		//baseinfo_tv.setText(dBook.getTitle());
@@ -115,7 +115,7 @@ public class CommentActivity extends BaseActivity implements
 //			
 //			@Override
 //			public void onClick(View v) {
-//				//Ìøµ½ÏêÏ¸½çÃæ
+//				//ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½ï¿½
 //				if(typeid == GlobleData.BOOK_SZ_TYPE){
 //					if(fromActivity ==1){
 //						if (dBook != null) {
@@ -133,7 +133,7 @@ public class CommentActivity extends BaseActivity implements
 //					Bundle bundle = new Bundle();
 //					bundle.putSerializable("book", dBook);
 //					intent.putExtra("detaiinfo", bundle);
-//					intent.putExtra("from", 1);//±íÊ¾´ÓcommentActivityÌø¹ýÈ¥µÄ£¬²»ÏÔÊ¾ÆÀÂÛ°´Å¥
+//					intent.putExtra("from", 1);//ï¿½ï¿½Ê¾ï¿½ï¿½commentActivityï¿½ï¿½ï¿½È¥ï¿½Ä£ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½Û°ï¿½Å¥
 //					context.startActivity(intent);
 //					}
 //				}else if(typeid == GlobleData.BOOK_ZK_TYPE){
@@ -159,7 +159,7 @@ public class CommentActivity extends BaseActivity implements
 //					Bundle bundle = new Bundle();
 //					bundle.putSerializable("book", mmebook);
 //					intent.putExtra("detaiinfo", bundle);
-//					intent.putExtra("from", 1);//±íÊ¾´ÓcommentActivityÌø¹ýÈ¥µÄ£¬²»ÏÔÊ¾ÆÀÂÛ°´Å¥
+//					intent.putExtra("from", 1);//ï¿½ï¿½Ê¾ï¿½ï¿½commentActivityï¿½ï¿½ï¿½È¥ï¿½Ä£ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½Û°ï¿½Å¥
 //					startActivity(intent);
 //					}
 //				}
@@ -188,7 +188,7 @@ public class CommentActivity extends BaseActivity implements
 		title = (TextView) findViewById(R.id.txt_header);
 		//title.setText(R.string.book_comment);
 		adapter = new CommentItemAdapter(context, null);
-		// ¼ÓÔØÊý¾Ý
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		// getHomeComment(1,Constant.DEFAULT_COUNT);
 		
 		commit_btn.setOnClickListener(this);
@@ -229,7 +229,7 @@ public class CommentActivity extends BaseActivity implements
 				return callno;
 			}
 			return callno + "," + recordid;
-		} else {// ÖÐ¿¯·µ»Ølngid
+		} else {// ï¿½Ð¿ï¿½ï¿½ï¿½ï¿½ï¿½lngid
 			return callno;
 		}
 	}
@@ -243,7 +243,7 @@ public class CommentActivity extends BaseActivity implements
 		
 		String info = comment_et.getText().toString();
 		if (TextUtils.isEmpty(info)||info.trim().isEmpty()) {
-			Tool.ShowMessages(this, "ÆÀÂÛÄÚÈÝ²»ÄÜ¿Õ");
+			Tool.ShowMessages(this, "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý²ï¿½ï¿½Ü¿ï¿½");
 			return;
 		}
 
@@ -251,7 +251,7 @@ public class CommentActivity extends BaseActivity implements
 			HashMap<String, String> map = new HashMap<String, String>();
 			map.put("libid", GlobleData.LIBIRY_ID);
 			map.put("vipuserid", GlobleData.cqvipid);
-			// Log.i("Ìí¼ÓÆÀÂÛ", GlobleData.cqvipid);
+			// Log.i("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", GlobleData.cqvipid);
 	//		String keyid = dBook.getCallno();
 			String recordid = getTypeComment(dBook);
 			 map.put("keyid", keyid);
@@ -296,13 +296,13 @@ public class CommentActivity extends BaseActivity implements
 				onError(2);
 			}
 			if (res.getSuccess()) {
-				// ÌáÊ¾
-				Tool.ShowMessages(CommentActivity.this, "Ìí¼Ó³É¹¦");
-				// ¸üÐÂÁÐ±í
+				// ï¿½ï¿½Ê¾
+				Tool.ShowMessages(CommentActivity.this, "ï¿½ï¿½Ó³É¹ï¿½");
+				// ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
 				getHomeComment(typeid, keyid, 1, Constant.DEFAULT_COUNT,
 						GETHOMEPAGE);
 			} else {
-				Tool.ShowMessages(CommentActivity.this, "Ìí¼ÓÊ§°Ü");
+				Tool.ShowMessages(CommentActivity.this, "ï¿½ï¿½ï¿½Ê§ï¿½ï¿½");
 			}
 		}
 	};
@@ -341,7 +341,7 @@ public class CommentActivity extends BaseActivity implements
 				adapter.addMoreData(lists);
 				page++;
 			} else {
-				Tool.ShowMessages(context, "Ã»ÓÐ¸ü¶àÄÚÈÝ¿É¹©¼ÓÔØ");
+				Tool.ShowMessages(context, "Ã»ï¿½Ð¸ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿É¹ï¿½ï¿½ï¿½ï¿½ï¿½");
 			}
 		}
 	};
@@ -373,13 +373,13 @@ public class CommentActivity extends BaseActivity implements
 //		case Task.TASK_ADD_COMMENT:
 //			Result res = (Result) obj[1];
 //			if (res.getSuccess()) {
-//				// ÌáÊ¾
-//				Tool.ShowMessages(this, "Ìí¼Ó³É¹¦");
-//				// ¸üÐÂÁÐ±í
+//				// ï¿½ï¿½Ê¾
+//				Tool.ShowMessages(this, "ï¿½ï¿½Ó³É¹ï¿½");
+//				// ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
 //				getHomeComment(typeid, keyid, 1, Constant.DEFAULT_COUNT,
 //						GETHOMEPAGE);
 //			} else {
-//				Tool.ShowMessages(this, "Ìí¼ÓÊ§°Ü");
+//				Tool.ShowMessages(this, "ï¿½ï¿½ï¿½Ê§ï¿½ï¿½");
 //			}
 //			break;
 //		case Task.TASK_COMMENT_LIST:
@@ -396,7 +396,7 @@ public class CommentActivity extends BaseActivity implements
 //			if (lists1 != null && !lists1.isEmpty()) {
 //				adapter.addMoreData(lists1);
 //			} else {
-//				Tool.ShowMessages(context, "Ã»ÓÐ¸ü¶àÄÚÈÝ¿É¹©¼ÓÔØ");
+//				Tool.ShowMessages(context, "Ã»ï¿½Ð¸ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿É¹ï¿½ï¿½ï¿½ï¿½ï¿½");
 //			}
 //			break;
 //		}
@@ -406,12 +406,12 @@ public class CommentActivity extends BaseActivity implements
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int position,
 			long id) {
-		if (id == -2) // ¸ü¶à
+		if (id == -2) // ï¿½ï¿½ï¿½
 		{
-			// ½ø¶ÈÌõ
+			// ï¿½ï¿½ï¿½ï¿½ï¿½
 			moreprocess = arg1.findViewById(R.id.footer_progress);
 			moreprocess.setVisibility(View.VISIBLE);
-			// ÇëÇóÍøÂç¸ü¶à
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			Log.i(TAG, typeid+"--"+keyid);
 			getHomeComment(typeid, keyid, page + 1, Constant.DEFAULT_COUNT,
 					GETMORE);
@@ -434,7 +434,7 @@ public class CommentActivity extends BaseActivity implements
 				return null;
 			}
 
-			// Ë¢ÐÂÍê³É
+			// Ë¢ï¿½ï¿½ï¿½ï¿½ï¿½
 			@Override
 			protected void onPostExecute(Void result) {
 

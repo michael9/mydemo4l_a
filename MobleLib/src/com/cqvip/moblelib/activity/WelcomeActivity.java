@@ -14,7 +14,7 @@ import android.os.Message;
 import android.view.Window;
 import android.widget.ImageView;
 
-import com.cqvip.moblelib.nanshan.R;
+import com.cqvip.moblelib.sychild.R;
 
 public class WelcomeActivity extends Activity {
 
@@ -37,21 +37,21 @@ public class WelcomeActivity extends Activity {
     };
     
 	void startHelperActivity() {
-		// ¶ÁÈ¡SharedPreferencesÖÐÐèÒªµÄÊý¾Ý
+		// ï¿½ï¿½È¡SharedPreferencesï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½
 
 		SharedPreferences preferences = getSharedPreferences("count",
 				MODE_PRIVATE);
 
 		int count = preferences.getInt("count", 0);
 
-		// ÅÐ¶Ï³ÌÐòÓëµÚ¼¸´ÎÔËÐÐ£¬Èç¹ûÊÇµÚÒ»´ÎÔËÐÐÔòÌø×ªµ½Òýµ¼Ò³Ãæ
+		// ï¿½Ð¶Ï³ï¿½ï¿½ï¿½ï¿½ï¿½Ú¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð£ï¿½ï¿½ï¿½ï¿½ï¿½Çµï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½
 
 		if (count == 0) {
 
 			Editor editor = preferences.edit();
-			// ´æÈëÊý¾Ý
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			editor.putInt("count", ++count);
-			// Ìá½»ÐÞ¸Ä
+			// ï¿½á½»ï¿½Þ¸ï¿½
 			editor.commit();
 
 			Intent intent = new Intent();

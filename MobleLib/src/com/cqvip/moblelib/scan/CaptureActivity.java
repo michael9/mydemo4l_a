@@ -20,7 +20,7 @@ import android.view.SurfaceView;
 import android.view.Window;
 import android.widget.TextView;
 
-import com.cqvip.moblelib.nanshan.R;
+import com.cqvip.moblelib.sychild.R;
 import com.cqvip.moblelib.activity.ResultOnSearchActivity;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
@@ -46,11 +46,11 @@ public class CaptureActivity extends Activity implements Callback {
 		super.onCreate(savedInstanceState);
 		
 		setContentView(R.layout.scan);
-		//³õÊ¼»¯ CameraManager
+		//ï¿½ï¿½Ê¼ï¿½ï¿½ CameraManager
 		CameraManager.init(getApplication());
 		viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);
 		txtResult = (TextView) findViewById(R.id.txtResult);
-		//»ñÈ¡×´Ì¬À¸¸ß¶È
+		//ï¿½ï¿½È¡×´Ì¬ï¿½ï¿½ï¿½ß¶ï¿½
 		txtResult.post(new Runnable() {
             public void run() {
                     init_statusheight();
@@ -65,11 +65,11 @@ public class CaptureActivity extends Activity implements Callback {
          Rect rect = new Rect();
          Window window = getWindow();
          txtResult.getWindowVisibleDisplayFrame(rect);
-         // ×´Ì¬À¸µÄ¸ß¶È
+         // ×´Ì¬ï¿½ï¿½ï¿½Ä¸ß¶ï¿½
         statusBarHeight = rect.top;
-//         // ±êÌâÀ¸¸ú×´Ì¬À¸µÄ×ÜÌå¸ß¶È
+//         // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß¶ï¿½
 //         int contentViewTop = window.findViewById(Window.ID_ANDROID_CONTENT).getTop();
-//         // ±êÌâÀ¸µÄ¸ß¶È£ºÓÃÉÏÃæµÄÖµ¼õÈ¥×´Ì¬À¸µÄ¸ß¶È¼°Îª±êÌâÀ¸¸ß¶È
+//         // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¸ß¶È£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½È¥×´Ì¬ï¿½ï¿½ï¿½Ä¸ß¶È¼ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß¶ï¿½
 //         int titleBarHeight = contentViewTop - statusBarHeight;
 //         System.out.println(statusBarHeight+"..."+contentViewTop+"..."+titleBarHeight);
  }

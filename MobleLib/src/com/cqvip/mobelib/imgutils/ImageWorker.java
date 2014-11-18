@@ -31,7 +31,7 @@ import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.widget.ImageView;
 
-import com.cqvip.moblelib.nanshan.BuildConfig;
+import com.cqvip.moblelib.sychild.BuildConfig;
 
 /**
  * This class wraps up completing some arbitrary long running work when loading a bitmap to an
@@ -117,7 +117,7 @@ public abstract class ImageWorker {
         mLoadingBitmap = BitmapFactory.decodeResource(mResources, resId);
     }
     /**
-     * imagecaheÊµÀý´¦Àí»º´æ
+     * imagecaheÊµï¿½ï¿½ï¿½?ï¿½ï¿½
      * @param cacheParams
      */
     public void addImageCache(ImageCache.ImageCacheParams cacheParams) {

@@ -12,7 +12,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.cqvip.moblelib.nanshan.R;
+import com.cqvip.moblelib.sychild.R;
 import com.cqvip.moblelib.activity.ActivityDlg;
 import com.cqvip.moblelib.activity.MainMenuActivity;
 import com.cqvip.moblelib.constant.GlobleData;
@@ -22,7 +22,7 @@ public class GridViewImgAdapter extends BaseAdapter {
 	private  Class[] activities;
 	private Context mContext;
 
-	// ¶¨ÒåÕûÐÍÊý×é ¼´Í¼Æ¬Ô´
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Í¼Æ¬Ô´
 
 	private Integer[] mImageIds = { R.drawable.sy_anniu_03,
 			R.drawable.sy_anniu_05, R.drawable.sy_anniu_07,
@@ -63,13 +63,13 @@ public class GridViewImgAdapter extends BaseAdapter {
 		return position;
 	}
 
-	// »ñÈ¡Í¼Æ¬ID
+	// ï¿½ï¿½È¡Í¼Æ¬ID
 	@Override
 	public long getItemId(int position) {
 		return position;
 	}
 
-	//ÏÔÊ¾¶Ô»°¿ò
+	//ï¿½ï¿½Ê¾ï¿½Ô»ï¿½ï¿½ï¿½
 	private void showLoginDialog(int id) {
 		MainMenuActivity.cantouch = true;
 		Intent intent = new Intent(mContext, ActivityDlg.class);
@@ -113,15 +113,15 @@ public class GridViewImgAdapter extends BaseAdapter {
 					case 3:
 						intent.setClass(mContext, activities[tag]);
 						mContext.startActivity(intent);
-						break;					//¸öÈËÖÐÐÄ	
+						break;					//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½	
 					case 4:
-					//ÎÒµÄÊÕ²Ø	
+					//ï¿½Òµï¿½ï¿½Õ²ï¿½	
 					case 5:
-					//½èÔÄ¹ÜÀí	
+					//ï¿½ï¿½ï¿½Ä¹ï¿½ï¿½ï¿½	
 					case 7:
-					//ÊéÓÑÈ¦	
+					//ï¿½ï¿½ï¿½ï¿½È¦	
 					case 8:
-						//ÅÐ¶ÏÊÇ·ñµÇÂ¼
+						//ï¿½Ð¶ï¿½ï¿½Ç·ï¿½ï¿½Â¼
 						if (GlobleData.islogin) {
 							intent.setClass(mContext, activities[tag]);
 							mContext.startActivity(intent);

@@ -2,7 +2,7 @@ package com.cqvip.moblelib.activity;
 
 import com.cqvip.mobelib.imgutils.ImageFetcher;
 import com.cqvip.mobelib.imgutils.ImageCache.ImageCacheParams;
-import com.cqvip.moblelib.nanshan.R;
+import com.cqvip.moblelib.sychild.R;
 import com.cqvip.moblelib.constant.GlobleData;
 
 import android.os.Bundle;
@@ -14,7 +14,7 @@ public class BaseImageActivity extends BaseActivity{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//内存占用整个app1/8
+		//锟节达拷占锟斤拷锟斤拷锟絘pp1/8
 		ImageCacheParams cacheParams = new ImageCacheParams(this, GlobleData.IMAGE_CACHE_DIR);
         cacheParams.setMemCacheSizePercent(0.125f); // Set memory cache to 12.5% of app memory
 		mImageFetcher = new ImageFetcher(this, getResources().getDimensionPixelSize(R.dimen.bookicon_width),

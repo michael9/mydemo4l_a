@@ -16,7 +16,7 @@ import android.widget.ProgressBar;
 
 import com.cqvip.mobelib.imgutils.ImageCache;
 import com.cqvip.mobelib.imgutils.ImageFetcher;
-import com.cqvip.moblelib.nanshan.R;
+import com.cqvip.moblelib.sychild.R;
 
 public class BigImgActivity extends Activity implements OnTouchListener {
 
@@ -28,7 +28,7 @@ public class BigImgActivity extends Activity implements OnTouchListener {
 	private ProgressBar progress;
 		/** Called when the activity is first created. */
 
-		// ·Å´óËõĞ¡
+		// ï¿½Å´ï¿½ï¿½ï¿½Ğ¡
 		Matrix matrix = new Matrix();
 		Matrix savedMatrix = new Matrix();
 
@@ -87,7 +87,7 @@ public class BigImgActivity extends Activity implements OnTouchListener {
 		public boolean onTouch(View v, MotionEvent event) {
 			ImageView myImageView = (ImageView) v;
 			switch (event.getAction() & MotionEvent.ACTION_MASK) {
-			// ÉèÖÃÍÏÀ­Ä£Ê½
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£Ê½
 			case MotionEvent.ACTION_DOWN:
 				matrix.set(myImageView.getImageMatrix());
 				savedMatrix.set(matrix);
@@ -99,7 +99,7 @@ public class BigImgActivity extends Activity implements OnTouchListener {
 				mode = NONE;
 				break;
 
-			// ÉèÖÃ¶àµã´¥ÃşÄ£Ê½
+			// ï¿½ï¿½ï¿½Ã¶ï¿½ã´¥ï¿½ï¿½Ä£Ê½
 			case MotionEvent.ACTION_POINTER_DOWN:
 				oldDist = spacing(event);
 				if (oldDist > 10f) {
@@ -108,19 +108,19 @@ public class BigImgActivity extends Activity implements OnTouchListener {
 					mode = ZOOM;
 				}
 				break;
-			// ÈôÎªDRAGÄ£Ê½£¬Ôòµã»÷ÒÆ¶¯Í¼Æ¬
+			// ï¿½ï¿½ÎªDRAGÄ£Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½Í¼Æ¬
 			case MotionEvent.ACTION_MOVE:
 				if (mode == DRAG) {
 					matrix.set(savedMatrix);
 					matrix.postTranslate(event.getX() - start.x, event.getY() - start.y);
 				}
-				// ÈôÎªZOOMÄ£Ê½£¬Ôòµã»÷´¥ÃşËõ·Å
+				// ï¿½ï¿½ÎªZOOMÄ£Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				else if (mode == ZOOM) {
 					float newDist = spacing(event);
 					if (newDist > 10f) {
 						matrix.set(savedMatrix);
 						float scale = newDist / oldDist;
-						// ÉèÖÃË¶·Å±ÈÀıºÍÍ¼Æ¬µÄÖĞµãÎ»ÖÃ
+						// ï¿½ï¿½ï¿½ï¿½Ë¶ï¿½Å±ï¿½ï¿½ï¿½ï¿½Í¼Æ¬ï¿½ï¿½ï¿½Ğµï¿½Î»ï¿½ï¿½
 						matrix.postScale(scale, scale, mid.x, mid.y);
 					}
 				}
@@ -130,14 +130,14 @@ public class BigImgActivity extends Activity implements OnTouchListener {
 			return true;
 		}
 
-		// ¼ÆËãÒÆ¶¯¾àÀë
+		// ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½
 		private float spacing(MotionEvent event) {
 			float x = event.getX(0) - event.getX(1);
 			float y = event.getY(0) - event.getY(1);
 			return FloatMath.sqrt(x * x + y * y);
 		}
 
-		// ¼ÆËãÖĞµãÎ»ÖÃ
+		// ï¿½ï¿½ï¿½ï¿½ï¿½Ğµï¿½Î»ï¿½ï¿½
 		private void midPoint(PointF point, MotionEvent event) {
 			float x = event.getX(0) + event.getX(1);
 			float y = event.getY(0) + event.getY(1);

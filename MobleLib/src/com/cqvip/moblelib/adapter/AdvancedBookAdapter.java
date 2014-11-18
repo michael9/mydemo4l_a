@@ -15,7 +15,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
-import com.cqvip.moblelib.nanshan.R;
+import com.cqvip.moblelib.sychild.R;
 import com.cqvip.moblelib.model.ShortBook;
 import com.cqvip.moblelib.view.NetworkImageView_rotate;
 
@@ -44,7 +44,7 @@ public class AdvancedBookAdapter extends BaseAdapter {
 		return lists;
 	}
 	/**
-	 * µ×²¿¸ü¶à°´Å¥£¬·µ»Ø+1
+	 * ï¿½×²ï¿½ï¿½ï¿½à°´Å¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½+1
 	 */
 	@Override
 	public int getCount() {
@@ -59,26 +59,26 @@ public class AdvancedBookAdapter extends BaseAdapter {
 		return lists.get(position);
 	}
 	/**
-	 * Èç¹ûµã»÷µ½×îµ×²¿µÄ¸ü¶à°´Å¥£¬·µ»Ø-2
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×²ï¿½ï¿½Ä¸ï¿½à°´Å¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½-2
 	 */
 	@Override
 	public long getItemId(int position) {
       return position;
 	}
 	/**
-	 * Ôö¼Ó¸ü¶àÊý¾Ý
+	 * ï¿½ï¿½ï¿½Ó¸ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @param moreStatus
 	 */
 	public void addMoreData(List<ShortBook> moreStatus)
 	{
-		this.lists.addAll(moreStatus);//°ÑÐÂÊý¾ÝÔö¼Óµ½Ô­ÓÐ¼¯ºÏ
+		this.lists.addAll(moreStatus);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½Ô­ï¿½Ð¼ï¿½ï¿½ï¿½
 		this.notifyDataSetChanged();
 	}
 	  static class ViewHolder{
 			
 		
-			TextView title;//ÊéÃû
-			NetworkImageView_rotate img;//Ê±¼äÍ¼Æ¬ ²»ÓÃÐÞ¸Ä
+			TextView title;//ï¿½ï¿½ï¿½ï¿½
+			NetworkImageView_rotate img;//Ê±ï¿½ï¿½Í¼Æ¬ ï¿½ï¿½ï¿½ï¿½ï¿½Þ¸ï¿½
 			
 			}
 	  private int rotate_position=-1;
@@ -110,7 +110,7 @@ public class AdvancedBookAdapter extends BaseAdapter {
         	Log.i("AdvancedBookAdapter", rotate_position+"rotate_position+positon"+position);
 	        rotate_position=position>rotate_position?position:rotate_position;  
 	        
-	        //ÒòÎªÃ¿¸öimageviewÏÂÔØÍê³ÉÊ±¼ä²»¶¨£¬ËùÒÔÒª°ó¶¨Í¼Æ¬url£»ÔÚ×Ô¶¨ÒåimageviewÀï£¬ºÍÒÔÇ°µÄurl±È½Ï£¬ÏàÍ¬Ôò·µ»Ø£¬²»Í¬ÔòÌæ»»¡£
+	        //ï¿½ï¿½ÎªÃ¿ï¿½ï¿½imageviewï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ä²»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½Í¼Æ¬urlï¿½ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½imageviewï¿½ï£¬ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½urlï¿½È½Ï£ï¿½ï¿½ï¿½Í¬ï¿½ò·µ»Ø£ï¿½ï¿½ï¿½Í¬ï¿½ï¿½ï¿½æ»»ï¿½ï¿½
 			String url=book.getDate();
 	        if(!TextUtils.isEmpty(url)){
 	        	holder.img.setImageUrl(url, mImageLoader);

@@ -41,7 +41,7 @@ import android.widget.TextView;
 import com.artifex.mupdfdemo.MuPDFActivity;
 import com.cqvip.dao.DaoException;
 import com.cqvip.mobelib.imgutils.ImageFetcher;
-import com.cqvip.moblelib.nanshan.R;
+import com.cqvip.moblelib.sychild.R;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.db.MEBookDao;
 import com.cqvip.moblelib.entity.MEbook;
@@ -57,11 +57,11 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 	// public static final int GETFIRSTPAGE_ZK = 2;
 	// public static final int GETNEXT = 3;
 
-	// private int curpage = 1;// µÚ¼¸Ò³
-	// private int perpage = 10;// Ã¿Ò³ÏÔÊ¾ÌõÊý
+	// private int curpage = 1;// ï¿½Ú¼ï¿½Ò³
+	// private int perpage = 10;// Ã¿Ò³ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½
 	// private View moreprocess;
 	// private int curpage_sz = 1, curpage_zk = 1;
-	// »º´æ
+	// ï¿½ï¿½ï¿½ï¿½
 	private HashMap<Long, Boolean> loded;
 	MyGridViewAdapter adapter_sz;
 	MyGridViewAdapter_Loaded adapter_zk;
@@ -87,7 +87,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 	private ImageView iv_nav_right;
 	private ViewPager mViewPager;
 	private int indicatorWidth;
-	public static String[] tabTitle = { "ÒÑÏÂÔØ", "ÏÂÔØÖÐ" }; // ±êÌâ
+	public static String[] tabTitle = { "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" }; // ï¿½ï¿½ï¿½ï¿½
 	private LayoutInflater mInflater;
 	private int currentIndicatorLeft = 0;
 	// protected CustomProgressDialog customProgressDialog;
@@ -100,11 +100,11 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 	private DownloadManagerPro downloadManagerPro;
 	private DownloadManager downloadManager;
 
-	private ArrayList<MEbook> mebooks_list = new ArrayList<MEbook>();// »ñÈ¡downloadid,ÏÂÔØÖÐ
-	private ArrayList<MEbook> mebooks_listloaded = new ArrayList<MEbook>();// ÒÑÏÂÔØ
-	private ArrayList<int[]> _lists = new ArrayList<int[]>();// »ñÈ¡ÏÂÔØ×´Ì¬
+	private ArrayList<MEbook> mebooks_list = new ArrayList<MEbook>();// ï¿½ï¿½È¡downloadid,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	private ArrayList<MEbook> mebooks_listloaded = new ArrayList<MEbook>();// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	private ArrayList<int[]> _lists = new ArrayList<int[]>();// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½×´Ì¬
 
-	// private ArrayList<int[]> _listsloaded= new ArrayList<int[]>();//ÒÑÏÂÔØid
+	// private ArrayList<int[]> _listsloaded= new ArrayList<int[]>();//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½id
 	final static String TAG = "DownLoadManagerActivity";
 	private boolean ispressdownbutton;
 
@@ -126,7 +126,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 				getSupportFragmentManager());
 		// Set up the ViewPager with the sections adapter.
 		mViewPager.setAdapter(mSectionsPagerAdapter);
-		// »ñÈ¡Êý¾Ý
+		// ï¿½ï¿½È¡ï¿½ï¿½ï¿½
 		// getfavorlist(curpage, perpage, GlobleData.BOOK_SZ_TYPE,
 		// GETFIRSTPAGE_SZ);
 		// getfavorlist(curpage, perpage, GlobleData.BOOK_ZK_TYPE,
@@ -163,7 +163,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 
 					@Override
 					public void onPageSelected(int position) {
-						// RadioButtonµã»÷ performClick()
+						// RadioButtonï¿½ï¿½ï¿½ performClick()
 						if (rg_nav_content != null
 								&& rg_nav_content.getChildCount() > position) {
 							((RadioButton) rg_nav_content.getChildAt(position))
@@ -195,7 +195,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 					@Override
 					public void onCheckedChanged(RadioGroup group, int checkedId) {
 						if (rg_nav_content.getChildAt(checkedId) != null) {
-							// »¬¶¯¶¯»­
+							// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 							Log.i(TAG,
 									"currentIndicatorLeft:"
 											+ currentIndicatorLeft
@@ -213,13 +213,13 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 							animation.setInterpolator(new LinearInterpolator());
 							animation.setDuration(100);
 							animation.setFillAfter(true);
-							// »¬¿éÖ´ÐÐÎ»ÒÆ¶¯»­
+							// ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ï¿½Î»ï¿½Æ¶ï¿½ï¿½ï¿½
 							iv_nav_indicator.startAnimation(animation);
 
 							mViewPager.setCurrentItem(checkedId); // ViewPager
-																	// ¸úËæÒ»Æð ÇÐ»»
+																	// ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ ï¿½Ð»ï¿½
 
-							// ¼ÇÂ¼µ±Ç° ÏÂ±êµÄ¾à×î×ó²àµÄ ¾àÀë
+							// ï¿½ï¿½Â¼ï¿½ï¿½Ç° ï¿½Â±ï¿½Ä¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 							currentIndicatorLeft = ((RadioButton) rg_nav_content
 									.getChildAt(checkedId)).getLeft();
 							// Log.i("PeriodicalClassfyActivity", ""+((checkedId
@@ -244,15 +244,15 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 		DisplayMetrics dm = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(dm);
 		indicatorWidth = dm.widthPixels / tabTitle.length;
-		// TODO step0 ³õÊ¼»¯»¬¶¯ÏÂ±êµÄ¿í ¸ù¾ÝÆÁÄ»¿í¶ÈºÍ¿É¼ûÊýÁ¿ À´ÉèÖÃRadioButtonµÄ¿í¶È)
+		// TODO step0 ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â±ï¿½Ä¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ä»ï¿½ï¿½ÈºÍ¿É¼ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½RadioButtonï¿½Ä¿ï¿½ï¿½)
 		LayoutParams cursor_Params = iv_nav_indicator.getLayoutParams();
-		cursor_Params.width = indicatorWidth;// ³õÊ¼»¯»¬¶¯ÏÂ±êµÄ¿í
+		cursor_Params.width = indicatorWidth;// ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â±ï¿½Ä¿ï¿½
 		iv_nav_indicator.setLayoutParams(cursor_Params);
 		mHsv.setSomeParam(rl_nav, iv_nav_left, iv_nav_right, this);
-		// »ñÈ¡²¼¾ÖÌî³äÆ÷
+		// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		mInflater = (LayoutInflater) this
 				.getSystemService(LAYOUT_INFLATER_SERVICE);
-		// ÁíÒ»ÖÖ·½Ê½»ñÈ¡
+		// ï¿½ï¿½Ò»ï¿½Ö·ï¿½Ê½ï¿½ï¿½È¡
 		// LayoutInflater mInflater = LayoutInflater.from(this);
 		initNavigationHSV();
 
@@ -268,7 +268,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 		} catch (DaoException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}// ÏÂÔØÖÐ
+		}// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 		getDownloadStatus();
 	}
@@ -354,7 +354,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 		}
 
 		// /**
-		// * ÖØÐ´´Ë·½·¨ÎªÁËÊ¹notifyDataSetChangedÓÐÐ§ Called when the host view is
+		// * ï¿½ï¿½Ð´ï¿½Ë·ï¿½ï¿½ï¿½Îªï¿½ï¿½Ê¹notifyDataSetChangedï¿½ï¿½Ð§ Called when the host view is
 		// * attempting to determine if an item's position has changed. Returns
 		// * POSITION_UNCHANGED if the position of the given item has not
 		// changed
@@ -381,9 +381,9 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 		//
 		// switch (position) {
 		// case 0:
-		// return "ÒÑÏÂÔØ".toUpperCase(l);
+		// return "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½".toUpperCase(l);
 		// case 1:
-		// return "ÏÂÔØÖÐ".toUpperCase(l);
+		// return "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½".toUpperCase(l);
 		// }
 		// return null;
 		// }
@@ -434,15 +434,15 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int positon,
 				long id) {
-			if (id == -2) { // ¸ü¶à
+			if (id == -2) { // ï¿½ï¿½ï¿½
 				// if (parent.getAdapter().getCount() == 1) {
 				// return;
 				// }
-				// // ½ø¶ÈÌõ
+				// // ï¿½ï¿½ï¿½ï¿½ï¿½
 				// moreprocess = view.findViewById(R.id.footer_progress);
 				// moreprocess.setVisibility(View.VISIBLE);
 				// // Log.i("parent.getTag()", "" + parent.getTag());
-				// // ÇëÇóÍøÂç¸ü¶à
+				// // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				// listviewpagetag = (Integer) parent.getTag();
 				// if (listviewpagetag == GlobleData.BOOK_SZ_TYPE) {
 				// getfavorlist(curpage_sz + 1, perpage,
@@ -480,7 +480,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 						intent.setData(uri);
 						startActivity(intent);
 					} else {
-						Tool.ShowMessagel(context, "ÎÄ¼þ" + filename + "²»´æÔÚ");
+						Tool.ShowMessagel(context, "ï¿½Ä¼ï¿½" + filename + "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 					}
 				}
 			}
@@ -494,7 +494,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 		// HashMap<String, String> map = new HashMap<String, String>();
 		// map.put("libid", GlobleData.LIBIRY_ID);
 		// map.put("vipuserid", GlobleData.cqvipid);
-		// Log.i("É¾³ýÊÕ²Ø", GlobleData.cqvipid);
+		// Log.i("É¾ï¿½ï¿½ï¿½Õ²ï¿½", GlobleData.cqvipid);
 		// map.put("keyid", favorite.getFavoritekeyid());
 		// Log.i("keyid", favorite.getFavoritekeyid());
 		// map.put("typeid", "" + favorite.getTypeid());
@@ -565,12 +565,12 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 				convertView.setClickable(false);
 				TextView tv = (TextView) convertView
 						.findViewById(R.id.footer_txt);
-				tv.setText("Ç×£¬Ã»ÓÐÒÑÏÂÔØµÄµç×ÓÊé");
+				tv.setText("ï¿½×£ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ØµÄµï¿½ï¿½ï¿½ï¿½ï¿½");
 				tv.setTextAppearance(myContext, R.style.TextStyle_nullcontent);
 				tv.setClickable(false);
 				return convertView;
 			}
-			// ¸ü¶à
+			// ï¿½ï¿½ï¿½
 			// if (position == this.getCount() - 1) {
 			// convertView = LayoutInflater.from(myContext).inflate(
 			// R.layout.moreitemsview, null);
@@ -698,12 +698,12 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 				TextView tv = (TextView) convertView
 						.findViewById(R.id.footer_txt);
 				tv.setTextSize(R.dimen.listview_nullcontent_textsize);
-				tv.setText("Ç×£¬Ã»ÓÐÏÂÔØÖÐµÄµç×ÓÊé");
+				tv.setText("ï¿½×£ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÐµÄµï¿½ï¿½ï¿½ï¿½ï¿½");
 				tv.setTextAppearance(myContext, R.style.TextStyle_nullcontent);
 				tv.setClickable(false);
 				return convertView;
 			}
-			// ¸ü¶à
+			// ï¿½ï¿½ï¿½
 			// if (position == this.getCount() - 1) {
 			// convertView = LayoutInflater.from(myContext).inflate(
 			// R.layout.moreitemsview, null);
@@ -754,10 +754,10 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 				downloadstatus = int_array[2];
 				if (downloadstatus == DownloadManager.STATUS_SUCCESSFUL
 						&& !loded.containsKey(book.getDownloadid())) {
-					holder.downloadtip.setText("ÏÂÔØÍê³É£¬Çëµã»÷´ò¿ª");
-					// ·ÅÈë»º´æ
+					holder.downloadtip.setText("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+					// ï¿½ï¿½ï¿½ë»ºï¿½ï¿½
 					loded.put(book.getDownloadid(), true);
-					// ¸üÐÂÊý¾Ý¿â
+					// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½
 					book.setPdfsize((long) int_array[1]);
 					updateDateBase(book);
 				}
@@ -797,19 +797,19 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 	}
 
 	/**
-	 * É¾³ý¶Ô»°¿ò
+	 * É¾ï¿½ï¿½Ô»ï¿½ï¿½ï¿½
 	 */
 	public void senddel(int type) {
 		Intent intent = new Intent();
 		intent.setClass(this, ActivityDlg.class);
 		intent.putExtra("ACTIONID", 0);
-		intent.putExtra("MSGBODY", "È·¶¨É¾³ý¸Ã¼ÇÂ¼£¿");
+		intent.putExtra("MSGBODY", "È·ï¿½ï¿½É¾ï¿½ï¿½Ã¼ï¿½Â¼ï¿½ï¿½");
 		intent.putExtra("BTN_CANCEL", 1);
 		startActivityForResult(intent, type);
 	}
 
 	/**
-	 * É¾³ý¸üÐÂ£¬ÔÝ´æ
+	 * É¾ï¿½ï¿½ï¿½ï¿½Â£ï¿½ï¿½Ý´ï¿½
 	 * 
 	 * @param bookname
 	 * @param downloadstatus
@@ -912,7 +912,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 	public void init() {
 		rl_nav = (RelativeLayout) findViewById(R.id.rl_nav);
 		mHsv = (SwipHorizontalScrollView) findViewById(R.id.mHsv);
-		// ÄÚÈÝ
+		// ï¿½ï¿½ï¿½ï¿½
 		rg_nav_content = (RadioGroup) findViewById(R.id.rg_nav_content);
 		iv_nav_indicator = (ImageView) findViewById(R.id.iv_nav_indicator);
 		iv_nav_left = (ImageView) findViewById(R.id.iv_nav_left);

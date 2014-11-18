@@ -22,14 +22,14 @@ import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
 import com.cqvip.mobelib.imgutils.ImageFetcher;
-import com.cqvip.moblelib.nanshan.R;
+import com.cqvip.moblelib.sychild.R;
 import com.cqvip.moblelib.fragment.PeriodicalTypeFragment;
 import com.cqvip.moblelib.fragment.SpecialPeriodicalFragment;
 import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.moblelib.view.SwipHorizontalScrollView;
 
 /**
- * ÆÚ¿¯´óÈ«·ÖÀà½çÃæ£¬¿É»¬¶¯listview,Ìá¹©·ÖÀàÌí¼Ó¹¦ÄÜ
+ * ï¿½Ú¿ï¿½ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ£¬ï¿½É»ï¿½ï¿½ï¿½listview,ï¿½á¹©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¹ï¿½ï¿½ï¿½
  * @author luojiang
  *
  */
@@ -43,7 +43,7 @@ public class PeriodicalClassfyActivity extends BaseFragmentImageActivity {
 	private ImageView iv_nav_right;
 	private ViewPager mViewPager;
 	private int indicatorWidth;
-	public static String[] tabTitle = { "ÌØ±ðÍÆ¼ö","Ò½Ò©ÎÀÉú","¹¤³Ì¼¼Êõ","ÈËÎÄÉç¿Æ","×ÔÈ»¿ÆÑ§","Å©ÁÖÄÁÓã"};	//±êÌâ
+	public static String[] tabTitle = { "ï¿½Ø±ï¿½ï¿½Æ¼ï¿½","Ò½Ò©ï¿½ï¿½ï¿½ï¿½","ï¿½ï¿½ï¿½Ì¼ï¿½ï¿½ï¿½","ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½","ï¿½ï¿½È»ï¿½ï¿½Ñ§","Å©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"};	//ï¿½ï¿½ï¿½ï¿½
 	private LayoutInflater mInflater;
 	private TabFragmentPagerAdapter mAdapter;
 	private int currentIndicatorLeft = 0;
@@ -66,7 +66,7 @@ public class PeriodicalClassfyActivity extends BaseFragmentImageActivity {
 			
 			@Override
 			public void onPageSelected(int position) {
-				//RadioButtonµã»÷  performClick()
+				//RadioButtonï¿½ï¿½ï¿½  performClick()
 				if(rg_nav_content!=null && rg_nav_content.getChildCount()>position){
 					((RadioButton)rg_nav_content.getChildAt(position)).performClick();
 				}
@@ -95,7 +95,7 @@ public class PeriodicalClassfyActivity extends BaseFragmentImageActivity {
 			@Override
 			public void onCheckedChanged(RadioGroup group, int checkedId) {
 				if(rg_nav_content.getChildAt(checkedId)!=null){
-					//»¬¶¯¶¯»­
+					//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 					TranslateAnimation animation = new TranslateAnimation(
 							currentIndicatorLeft ,
 							((RadioButton) rg_nav_content.getChildAt(checkedId)).getLeft(), 0f, 0f);
@@ -103,12 +103,12 @@ public class PeriodicalClassfyActivity extends BaseFragmentImageActivity {
 					animation.setDuration(100);
 					animation.setFillAfter(true);
 					
-					//»¬¿éÖ´ÐÐÎ»ÒÆ¶¯»­
+					//ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ï¿½Î»ï¿½Æ¶ï¿½ï¿½ï¿½
 					iv_nav_indicator.startAnimation(animation);
 					
-					mViewPager.setCurrentItem(checkedId);	//ViewPager ¸úËæÒ»Æð ÇÐ»»
+					mViewPager.setCurrentItem(checkedId);	//ViewPager ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ ï¿½Ð»ï¿½
 					
-					//¼ÇÂ¼µ±Ç° ÏÂ±êµÄ¾à×î×ó²àµÄ ¾àÀë
+					//ï¿½ï¿½Â¼ï¿½ï¿½Ç° ï¿½Â±ï¿½Ä¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 					currentIndicatorLeft = ((RadioButton) rg_nav_content.getChildAt(checkedId)).getLeft();
 					Log.i("PeriodicalClassfyActivity", ""+((checkedId > 1 ? ((RadioButton) rg_nav_content.getChildAt(checkedId)).getLeft() : 0) - ((RadioButton) rg_nav_content.getChildAt(2)).getLeft()));
 					mHsv.smoothScrollTo(
@@ -124,17 +124,17 @@ public class PeriodicalClassfyActivity extends BaseFragmentImageActivity {
 		getWindowManager().getDefaultDisplay().getMetrics(dm);
 		
 		indicatorWidth = dm.widthPixels / 4;
-		//TODO step0 ³õÊ¼»¯»¬¶¯ÏÂ±êµÄ¿í    ¸ù¾ÝÆÁÄ»¿í¶ÈºÍ¿É¼ûÊýÁ¿ À´ÉèÖÃRadioButtonµÄ¿í¶È)
+		//TODO step0 ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â±ï¿½Ä¿ï¿½    ï¿½ï¿½ï¿½ï¿½ï¿½Ä»ï¿½ï¿½ÈºÍ¿É¼ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½RadioButtonï¿½Ä¿ï¿½ï¿½)
 		LayoutParams cursor_Params = iv_nav_indicator.getLayoutParams();
-		cursor_Params.width = indicatorWidth;// ³õÊ¼»¯»¬¶¯ÏÂ±êµÄ¿í
+		cursor_Params.width = indicatorWidth;// ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â±ï¿½Ä¿ï¿½
 		iv_nav_indicator.setLayoutParams(cursor_Params);
 		
 		mHsv.setSomeParam(rl_nav, iv_nav_left, iv_nav_right, this);
 		
-		//»ñÈ¡²¼¾ÖÌî³äÆ÷
+		//ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		mInflater = (LayoutInflater)this.getSystemService(LAYOUT_INFLATER_SERVICE);
 
-		//ÁíÒ»ÖÖ·½Ê½»ñÈ¡
+		//ï¿½ï¿½Ò»ï¿½Ö·ï¿½Ê½ï¿½ï¿½È¡
 //		LayoutInflater mInflater = LayoutInflater.from(this);  
 		
 		initNavigationHSV();
@@ -176,7 +176,7 @@ public class PeriodicalClassfyActivity extends BaseFragmentImageActivity {
 	rl_nav = (RelativeLayout) findViewById(R.id.rl_nav);
 		
 		mHsv = (SwipHorizontalScrollView) findViewById(R.id.mHsv);
-		//ÄÚÈÝ
+		//ï¿½ï¿½ï¿½ï¿½
 		rg_nav_content = (RadioGroup) findViewById(R.id.rg_nav_content);
 		
 		iv_nav_indicator = (ImageView) findViewById(R.id.iv_nav_indicator);

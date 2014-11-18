@@ -1,8 +1,8 @@
 package com.cqvip.moblelib.activity;
 
-import com.cqvip.moblelib.nanshan.R;
-import com.cqvip.moblelib.nanshan.R.layout;
-import com.cqvip.moblelib.nanshan.R.menu;
+import com.cqvip.moblelib.sychild.R;
+import com.cqvip.moblelib.sychild.R.layout;
+import com.cqvip.moblelib.sychild.R.menu;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -15,14 +15,14 @@ import android.widget.TextView;
 
 /**
  * <p>
- * ÎÄ¼þÃû³Æ: RefServiceActivity.java
- * ÎÄ¼þÃèÊö: ²Î¿¼×ÉÑ¯
- * °æÈ¨ËùÓÐ: °æÈ¨ËùÓÐ(C)2013-2020
- * ¹«          Ë¾: ÖØÇìÎ¬ÆÕ×ÉÑ¯ÓÐÏÞ¹«Ë¾
- * ÄÚÈÝÕªÒª: 
- * ÆäËûËµÃ÷:
- * Íê³ÉÈÕÆÚ£º 201Äê5ÔÂ10ÈÕ
- * ÐÞ¸Ä¼ÇÂ¼: 
+ * ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½: RefServiceActivity.java
+ * ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½: ï¿½Î¿ï¿½ï¿½ï¿½Ñ¯
+ * ï¿½ï¿½È¨ï¿½ï¿½ï¿½ï¿½: ï¿½ï¿½È¨ï¿½ï¿½ï¿½ï¿½(C)2013-2020
+ * ï¿½ï¿½          Ë¾: ï¿½ï¿½ï¿½ï¿½Î¬ï¿½ï¿½ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½Þ¹ï¿½Ë¾
+ * ï¿½ï¿½ï¿½ï¿½ÕªÒª: 
+ * ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½:
+ * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 201ï¿½ï¿½5ï¿½ï¿½10ï¿½ï¿½
+ * ï¿½Þ¸Ä¼ï¿½Â¼: 
  * </p>
  * 
  * @author LHP,LJ

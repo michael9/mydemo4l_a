@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 
-import com.cqvip.moblelib.nanshan.R;
+import com.cqvip.moblelib.sychild.R;
 
 public class MyImageView extends ScaleImageView
 {
@@ -71,7 +71,7 @@ public class MyImageView extends ScaleImageView
 	}
 	int x,y;
 	@Override
-	public boolean onTouchEvent(MotionEvent event)//这个方法如果 true 则整个Activity 的 onTouchEvent() 不会被系统回调
+	public boolean onTouchEvent(MotionEvent event)//锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷 true 锟斤拷锟斤拷锟紸ctivity 锟斤拷 onTouchEvent() 锟斤拷锟结被系统锟截碉拷
 	{
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:

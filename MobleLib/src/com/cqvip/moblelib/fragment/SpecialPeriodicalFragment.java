@@ -32,7 +32,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.cqvip.mobelib.imgutils.ImageFetcher;
 import com.cqvip.mobelib.imgutils.RecyclingImageView;
-import com.cqvip.moblelib.nanshan.R;
+import com.cqvip.moblelib.sychild.R;
 import com.cqvip.moblelib.activity.PeriodicalClassfyActivity;
 import com.cqvip.moblelib.activity.PeriodicalContentActivity;
 import com.cqvip.moblelib.biz.Task;
@@ -43,7 +43,7 @@ import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.utils.Tool;
 
 /**
- * ÌØ±ðÍÆ¼ö
+ * ï¿½Ø±ï¿½ï¿½Æ¼ï¿½
  * @author luojiang
  *
  */
@@ -53,7 +53,7 @@ private int mImageThumbSize;
 	private int mImageThumbSpacing;
 	private ImageAdapter mAdapter;
 	private GridView gridView;
-	private HashMap<String, String> gparams; // ²ÎÊý
+	private HashMap<String, String> gparams; // ï¿½ï¿½ï¿½ï¿½
 	private List<Periodical> lists = null;
     private ImageFetcher mImageFetcher;
 	private RequestQueue mQueue;
@@ -128,7 +128,7 @@ private int mImageThumbSize;
 //		    			 Method.GET);
 //	    	 }
 //	     }else{
-	    	 //·¢ËÍÇëÇó»ñÈ¡Í¼Æ¬»úurl
+	    	 //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡Í¼Æ¬ï¿½ï¿½url
 	    	 mAdapter = new ImageAdapter(getActivity(),null);
 	    	 customProgressDialog.show();
 	    	 requestVolley(GlobleData.SERVER_URL

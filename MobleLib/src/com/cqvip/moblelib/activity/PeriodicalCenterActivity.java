@@ -9,13 +9,13 @@ import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
 
-import com.cqvip.moblelib.nanshan.R;
+import com.cqvip.moblelib.sychild.R;
 import com.cqvip.moblelib.fragment.BranchPeriodicalFragment;
 import com.cqvip.moblelib.fragment.ConcernPeriodicalFragment;
 
 /**
- * µç×ÓÆÚ¿¯ÖÐÐÄ£¬Ö÷Ò³Ãæ
- * Ìá¹©¹Ø×¢·ÖÀà£¬ºÍ¹Ø×¢ÆÚ¿¯ ¹¦ÄÜ
+ * ï¿½ï¿½ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½ï¿½Ò³ï¿½ï¿½
+ * ï¿½á¹©ï¿½ï¿½×¢ï¿½ï¿½ï¿½à£¬ï¿½Í¹ï¿½×¢ï¿½Ú¿ï¿½ ï¿½ï¿½ï¿½ï¿½
  * @author luojiang
  *
  */
@@ -46,9 +46,9 @@ public class PeriodicalCenterActivity extends FragmentActivity {
 	        mTabHost = (FragmentTabHost)findViewById(android.R.id.tabhost);
 	        mTabHost.setup(this, getSupportFragmentManager(), R.id.realtabcontent);
 
-	        mTabHost.addTab(mTabHost.newTabSpec("¹Ø×¢·ÖÀà").setIndicator("¹Ø×¢·ÖÀà"),
+	        mTabHost.addTab(mTabHost.newTabSpec("ï¿½ï¿½×¢ï¿½ï¿½ï¿½ï¿½").setIndicator("ï¿½ï¿½×¢ï¿½ï¿½ï¿½ï¿½"),
 	        		BranchPeriodicalFragment.class, null);
-	        mTabHost.addTab(mTabHost.newTabSpec("¹Ø×¢ÆÚ¿¯").setIndicator("¹Ø×¢ÆÚ¿¯"),
+	        mTabHost.addTab(mTabHost.newTabSpec("ï¿½ï¿½×¢ï¿½Ú¿ï¿½").setIndicator("ï¿½ï¿½×¢ï¿½Ú¿ï¿½"),
 	        		ConcernPeriodicalFragment.class, null);
 	    }
 

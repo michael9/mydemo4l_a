@@ -25,7 +25,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.ImageLoader.ImageListener;
 import com.android.volley.toolbox.StringRequest;
-import com.cqvip.moblelib.nanshan.R;
+import com.cqvip.moblelib.sychild.R;
 import com.cqvip.moblelib.adapter.BookLocAdapter;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.Book;
@@ -50,7 +50,7 @@ public class DetailBookActivity extends BaseActivity {
 			btn_item_result_search_share, btn_item_result_search_buzz,
 			btn_item_result_search_download;
 
-	private int fromFlage;// ±íÊ¾´ÓÄÄ¸öactivityÌø×ª¹ýÀ´£¬ÆÀÂÛ¹ýÀ´²»ÏÔÊ¾ÆÀÂÛ°´Å¥
+	private int fromFlage;// ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½Ä¸ï¿½activityï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Û¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½Û°ï¿½Å¥
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -88,19 +88,19 @@ public class DetailBookActivity extends BaseActivity {
 			}
 		});
 		booktitle_tv.setText(dBook.getTitle());
-		// ´ÓÎÒµÄÊÕ²Ø´«¹ýÀ´µÄisbn¶¼ÊÇ¿Õ×Ö·û´®£¬
+		// ï¿½ï¿½ï¿½Òµï¿½ï¿½Õ²Ø´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½isbnï¿½ï¿½ï¿½Ç¿ï¿½ï¿½Ö·ï¿½
 		String isbn = "";
 		if (!TextUtils.isEmpty(dBook.getIsbn())) {
 			isbn = "ISBN:" + dBook.getIsbn() + "\n";
 		}
-		// ´ÓÎÒµÄÊÕ²Ø´«¹ýÀ´µÄÊÇ³ö°æÊ±¼ä¶ø·ÇÖ÷Ìâ
+		// ï¿½ï¿½ï¿½Òµï¿½ï¿½Õ²Ø´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç³ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		String timeortheme = "";
 		if (ismyfavor) {
 			timeortheme = getString(R.string.item_time) + dBook.getSubject();
 		} else {
 			timeortheme = getString(R.string.item_subject) + dBook.getSubject();
 		}
-		// ´ÓÎÒµÄÊÕ²Ø´«¹ýÀ´µÄrecordid´æ´¢ÔÚBookµÄcallno
+		// ï¿½ï¿½ï¿½Òµï¿½ï¿½Õ²Ø´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½recordidï¿½æ´¢ï¿½ï¿½Bookï¿½ï¿½callno
 		String recordid = "";
 		if (ismyfavor) {
 			recordid = dBook.getCallno();
@@ -144,7 +144,7 @@ public class DetailBookActivity extends BaseActivity {
 			}
 		});
 		book_action_bar = findViewById(R.id.book_action_bar);
-		// ÊÕ²Ø
+		// ï¿½Õ²ï¿½
 		btn_item_result_search_collect = (TextView) book_action_bar
 				.findViewById(R.id.btn_item_collect);
 		btn_item_result_search_collect
@@ -166,12 +166,12 @@ public class DetailBookActivity extends BaseActivity {
 									+ "/cloud/favorite.aspx", bookfavorite_ls,
 									Method.POST);
 						} else {
-							// Ö»ÊÇµÇÂ½¶øÒÑ
+							// Ö»ï¿½Çµï¿½Â½ï¿½ï¿½ï¿½ï¿½
 							showLoginDialog(4);
 						}
 					}
 				});
-		// ·ÖÏí
+		// ï¿½ï¿½ï¿½ï¿½
 		btn_item_result_search_share = (TextView) book_action_bar
 				.findViewById(R.id.btn_item_share);
 		btn_item_result_search_share.setOnClickListener(new OnClickListener() {
@@ -183,7 +183,7 @@ public class DetailBookActivity extends BaseActivity {
 			}
 		});
 
-		// ÆÀÂÛ
+		// ï¿½ï¿½ï¿½ï¿½
 		btn_item_result_search_buzz = (TextView) book_action_bar
 				.findViewById(R.id.btn_item_buzz);
 		if (fromFlage == 1) {
@@ -196,7 +196,7 @@ public class DetailBookActivity extends BaseActivity {
 				if (GlobleData.islogin) {
 					Tool.bookbuzz(DetailBookActivity.this, dBook);
 				} else {
-					// Ö»ÊÇµÇÂ½¶øÒÑ
+					// Ö»ï¿½Çµï¿½Â½ï¿½ï¿½ï¿½ï¿½
 					showLoginDialog(4);
 				}
 			}
@@ -207,7 +207,7 @@ public class DetailBookActivity extends BaseActivity {
 		btn_item_result_search_download.setVisibility(View.GONE);
 	}
 
-	// ÏÔÊ¾¶Ô»°¿ò
+	// ï¿½ï¿½Ê¾ï¿½Ô»ï¿½ï¿½ï¿½
 	private void showLoginDialog(int id) {
 		MainMenuActivity.cantouch = true;
 		Intent intent = new Intent(context, ActivityDlg.class);
@@ -289,7 +289,7 @@ public class DetailBookActivity extends BaseActivity {
 		customProgressDialog.show();
 		gparams = new HashMap<String, String>();
 		gparams.put("recordid", recordid);
-		gparams.put("tablename", "bibliosm");// Êé¼®
+		gparams.put("tablename", "bibliosm");// ï¿½é¼®
 		gparams.put("library", GlobleData.SZLG_LIB_ID);
 		requestVolley(GlobleData.SERVER_URL + "/library/bookquery/detail.aspx",
 				back_ls, Method.POST);

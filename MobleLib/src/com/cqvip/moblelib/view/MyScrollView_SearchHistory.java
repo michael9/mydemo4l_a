@@ -1,6 +1,6 @@
 package com.cqvip.moblelib.view;
 
-import com.cqvip.moblelib.nanshan.R;
+import com.cqvip.moblelib.sychild.R;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -36,7 +36,7 @@ public class MyScrollView_SearchHistory extends ScrollView {
 		this.context = context;
 	}
 
-	// »¬¶¯¾àÀë¼°×ø±ê
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë¼°ï¿½ï¿½ï¿½
 	private float xDistance, yDistance, xLast, yLast;
 
 	@Override

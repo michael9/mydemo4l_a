@@ -29,15 +29,15 @@ import android.widget.TextView;
 import com.cqvip.dao.DaoException;
 import com.cqvip.moblelib.db.SearchHistoryDao;
 import com.cqvip.moblelib.entity.SearchHistory_SZ;
-import com.cqvip.moblelib.nanshan.R;
+import com.cqvip.moblelib.sychild.R;
 import com.cqvip.moblelib.scan.CaptureActivity;
 import com.cqvip.moblelib.view.KeywordsView;
 import com.cqvip.utils.FileUtils;
 
 /**
  * <p>
- * ÎÄ¼þÃû³Æ: BookSearchActivity.java ÎÄ¼þÃèÊö: ¹Ý²Ø²éÑ¯ °æÈ¨ËùÓÐ: °æÈ¨ËùÓÐ(C)2013-2020 ¹« Ë¾:
- * ÖØÇìÎ¬ÆÕ×ÉÑ¯ÓÐÏÞ¹«Ë¾ ÄÚÈÝÕªÒª: °üº¬Ìõ¼þËÑË÷£¬·ÖÀà²éÑ¯ ÆäËûËµÃ÷: Íê³ÉÈÕÆÚ£º 201Äê5ÔÂ10ÈÕ ÐÞ¸Ä¼ÇÂ¼:
+ * ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½: BookSearchActivity.java ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½: ï¿½Ý²Ø²ï¿½Ñ¯ ï¿½ï¿½È¨ï¿½ï¿½ï¿½ï¿½: ï¿½ï¿½È¨ï¿½ï¿½ï¿½ï¿½(C)2013-2020 ï¿½ï¿½ Ë¾:
+ * ï¿½ï¿½ï¿½ï¿½Î¬ï¿½ï¿½ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½Þ¹ï¿½Ë¾ ï¿½ï¿½ï¿½ï¿½ÕªÒª: ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¯ ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½: ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ 201ï¿½ï¿½5ï¿½ï¿½10ï¿½ï¿½ ï¿½Þ¸Ä¼ï¿½Â¼:
  * </p>
  * 
  * @author LHP,LJ
@@ -55,7 +55,7 @@ public class BookSearchActivity extends BaseActivity implements
 	private LinearLayout searchLayout = null;
 	private GestureDetector mggd;
 	/**
-	 * ÅÐ¶ÏÊÇÔÚÍâÒ³Ãæ»¹ÊÇÄÚÒ³Ãæ
+	 * ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò³ï¿½æ»¹ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½
 	 */
 	private boolean isOutter;
 
@@ -70,7 +70,7 @@ public class BookSearchActivity extends BaseActivity implements
 		editText = (EditText) findViewById(R.id.search_et);
 		hideinputmethod();
 
-		//ËÑË÷ÀúÊ·
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê·
 		searchLayout = (LinearLayout) this.findViewById(R.id.searchContent);
 		delete_iv = (ImageView) findViewById(R.id.delete_iv);
 		showKeywords = (KeywordsView) this.findViewById(R.id.word);
@@ -80,7 +80,7 @@ public class BookSearchActivity extends BaseActivity implements
 		showKeywords.setOnTouchListener(new OnTouchListener() {
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
-				return mggd.onTouchEvent(event); // ×¢²áµã»÷ÊÂ¼þ
+				return mggd.onTouchEvent(event); // ×¢ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
 			}
 		});
 		isOutter = true;
@@ -245,28 +245,28 @@ public class BookSearchActivity extends BaseActivity implements
 		@Override
 		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
 				float velocityY) {
-			if (e2.getX() - e1.getX() > 100) { // ÓÒ»¬
+			if (e2.getX() - e1.getX() > 100) { // ï¿½Ò»ï¿½
 				key_words = getRandomArray();
 				showKeywords.rubKeywords();
 				feedKeywordsFlow(showKeywords, key_words);
 				showKeywords.go2Shwo(KeywordsView.ANIMATION_OUT);
 				return true;
 			}
-			if (e2.getX() - e1.getX() < -100) {// ×ó»¬
+			if (e2.getX() - e1.getX() < -100) {// ï¿½ï¿½
 				key_words = getRandomArray();
 				showKeywords.rubKeywords();
 				feedKeywordsFlow(showKeywords, key_words);
 				showKeywords.go2Shwo(KeywordsView.ANIMATION_IN);
 				return true;
 			}
-			if (e2.getY() - e1.getY() < -100) {// ÉÏ»¬
+			if (e2.getY() - e1.getY() < -100) {// ï¿½Ï»ï¿½
 				key_words = getRandomArray();
 				showKeywords.rubKeywords();
 				feedKeywordsFlow(showKeywords, key_words);
 				showKeywords.go2Shwo(KeywordsView.ANIMATION_IN);
 				return true;
 			}
-			if (e2.getY() - e1.getY() > 100) {// ÏÂ»¬
+			if (e2.getY() - e1.getY() > 100) {// ï¿½Â»ï¿½
 				key_words = getRandomArray();
 				showKeywords.rubKeywords();
 				feedKeywordsFlow(showKeywords, key_words);
@@ -290,7 +290,7 @@ public class BookSearchActivity extends BaseActivity implements
 		// searchLayout.removeAllViews();
 		//
 		// }
-		// Toast.makeText(this, "Ñ¡ÖÐµÄÄÚÈÝÊÇ£º" + ((TextView) v).getText().toString(),
+		// Toast.makeText(this, "Ñ¡ï¿½Ðµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç£ï¿½" + ((TextView) v).getText().toString(),
 		// 1)
 		// .show();
 		// }
@@ -317,13 +317,13 @@ public class BookSearchActivity extends BaseActivity implements
 	}
 
 	/**
-	 * É¾³ý¶Ô»°¿ò
+	 * É¾ï¿½ï¿½Ô»ï¿½ï¿½ï¿½
 	 */
 	public void senddel(int type) {
 		Intent intent = new Intent();
 		intent.setClass(this, ActivityDlg.class);
 		intent.putExtra("ACTIONID", 0);
-		intent.putExtra("MSGBODY", "È·¶¨É¾³ýËÑË÷ÀúÊ·£¿");
+		intent.putExtra("MSGBODY", "È·ï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê·ï¿½ï¿½");
 		intent.putExtra("BTN_CANCEL", 1);
 		startActivityForResult(intent, type);
 	}

@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.cqvip.moblelib.nanshan.R;
+import com.cqvip.moblelib.sychild.R;
 import com.cqvip.moblelib.model.Reader;
 
 public class ReaderInfoAdapter extends BaseAdapter{
@@ -46,7 +46,7 @@ public class ReaderInfoAdapter extends BaseAdapter{
 		TextView tv2=(TextView) convertView.findViewById(R.id.tv2);
 		String temp=values[position];
 		if(temp.equals("null")||temp.equals("")){
-			temp="нч";
+			temp="О©╫О©╫";
 		}
 		tv1.setText(attrs[position]);
 		tv2.setText(temp);

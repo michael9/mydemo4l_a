@@ -15,7 +15,7 @@ package com.cqvip.moblelib.view;
 *       1.0.0           2012-4-27         lxd (rohsuton@gmail.com)        Create
 **************************************************************************************/	
 
-import com.cqvip.moblelib.nanshan.R;
+import com.cqvip.moblelib.sychild.R;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -31,9 +31,9 @@ import android.widget.TextView;
 
 /********************************************************************
  * [Summary]
- *       TODO ÇëÔÚ´Ë´¦¼òÒªÃèÊö´ËÀàËùÊµÏÖµÄ¹¦ÄÜ¡£ÒòÎªÕâÏî×¢ÊÍÖ÷ÒªÊÇÎªÁËÔÚIDE»·¾³ÖĞÉú³Étip°ïÖú£¬Îñ±Ø¼òÃ÷¶óÒª
+ *       TODO ï¿½ï¿½ï¿½Ú´Ë´ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ÖµÄ¹ï¿½ï¿½Ü¡ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½×¢ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½IDEï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½tipï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½ï¿½ï¿½Òª
  * [Remarks]
- *       TODO ÇëÔÚ´Ë´¦ÏêÏ¸ÃèÊöÀàµÄ¹¦ÄÜ¡¢µ÷ÓÃ·½·¨¡¢×¢ÒâÊÂÏî¡¢ÒÔ¼°ÓëÆäËüÀàµÄ¹ØÏµ.
+ *       TODO ï¿½ï¿½ï¿½Ú´Ë´ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¹ï¿½ï¿½Ü¡ï¿½ï¿½ï¿½ï¿½Ã·ï¿½ï¿½ï¿½ï¿½ï¿½×¢ï¿½ï¿½ï¿½ï¿½ï¿½î¡¢ï¿½Ô¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¹ï¿½Ïµ.
  *******************************************************************/
 
 public class CustomProgressDialog extends Dialog {
@@ -89,7 +89,7 @@ public class CustomProgressDialog extends Dialog {
     /**
      * 
      * [Summary]
-     *       setTitile ±êÌâ
+     *       setTitile ï¿½ï¿½ï¿½ï¿½
      * @param strTitle
      * @return
      *
@@ -101,7 +101,7 @@ public class CustomProgressDialog extends Dialog {
     /**
      * 
      * [Summary]
-     *       setMessage ÌáÊ¾ÄÚÈİ
+     *       setMessage ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½
      * @param strMessage
      * @return
      *
