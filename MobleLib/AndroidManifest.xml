@@ -173,7 +173,10 @@
             android:name="com.cqvip.moblelib.activity.DownLoadManagerActivity"
             android:screenOrientation="portrait" >
         </activity>
-
+        <activity
+            android:name="com.cqvip.moblelib.activity.WebViewAnnouceActivity"
+            android:screenOrientation="portrait" >
+        </activity>
         <!-- pdf -->
         <activity
             android:name="com.artifex.mupdfdemo.MuPDFActivity"
