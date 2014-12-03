@@ -81,7 +81,7 @@ public class Tool {
 			oks.setAddress("12345678901");
 			oks.setTitle(mcontext.getResources().getString(R.string.share));
 			oks.setTitleUrl("http://www.cqvip.com/");
-			oks.setText("深职院图书馆友情分享:《" + mbook.getTitle()+"》");
+			oks.setText(mcontext.getString(R.string.app_name)+"友情分享:《" + mbook.getTitle()+"》");
 			oks.setImagePath("");
 			String imageurl=mbook.getCover_path();
 			if(!TextUtils.isEmpty(imageurl)){
@@ -117,7 +117,7 @@ public class Tool {
 				if(!TextUtils.isEmpty(mbook.getWeburl())){
 					wUrl = mbook.getWeburl();
 				}
-				oks.setText("深职院图书馆友情分享:《" + mbook.getTitle_c()+"》"+"："+wUrl);
+				oks.setText(mcontext.getString(R.string.app_name)+"友情分享:《" + mbook.getTitle_c()+"》"+"："+wUrl);
 				oks.setImagePath("");
 				//oks.setImageUrl("");
 				oks.setUrl("http://oldweb.cqvip.com/downloadcenter/soft/MobleLib.apk");

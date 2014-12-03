@@ -35,6 +35,7 @@ public class BaseActivity extends Activity {
 		mQueue=Volley.newRequestQueue(this);
 		customProgressDialog=CustomProgressDialog.createDialog(this);
 		el = new  ErrorVolleyThrow(this, customProgressDialog);
+		Log.i("BaseActivity", getClass().getSimpleName());
 	}
 	
 	@Override
@@ -79,19 +80,19 @@ public class BaseActivity extends Activity {
 		if (customProgressDialog != null && customProgressDialog.isShowing()) {
 			customProgressDialog.dismiss();
 		}
-		if (a == 1) {// µÇÂ¼Ê§°Ü
+		if (a == 1) {// ï¿½ï¿½Â¼Ê§ï¿½ï¿½
 			Tool.ShowMessages(this, getResources()
 					.getString(R.string.loginfail));
-		} else if (a == 2) {// ¼ÓÔØÊ§°Ü
+		} else if (a == 2) {// ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½
 			Tool.ShowMessages(this, getResources()
 					.getString(R.string.loadfail));
-		} else if (a == 3) {// Ðø½èÊ§°Ü
+		} else if (a == 3) {// ï¿½ï¿½ï¿½Ê§ï¿½ï¿½
 			Tool.ShowMessages(this, getResources()
 					.getString(R.string.renewfail));
-		} else if (a == 4) {// ÐÞ¸ÄÊ§°Ü
+		} else if (a == 4) {// ï¿½Þ¸ï¿½Ê§ï¿½ï¿½
 			Tool.ShowMessages(this, getResources()
 					.getString(R.string.modifyfail));
-		}else if (a == 5) {// ÊÕ²ØÊ§°Ü
+		}else if (a == 5) {// ï¿½Õ²ï¿½Ê§ï¿½ï¿½
 			Tool.ShowMessages(this, getResources()
 					.getString(R.string.favorfail));
 		}
