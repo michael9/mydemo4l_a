@@ -278,7 +278,7 @@ public class MainMenuActivity extends BaseActivity {
 		if (keyCode == 4) {
 			Intent intent = new Intent(MainMenuActivity.this, ActivityDlg.class);
 			intent.putExtra("ACTIONID", 0);
-			intent.putExtra("MSGBODY", "确定退出深职院图书馆吗？");
+			intent.putExtra("MSGBODY", "确定退出"+getString(R.string.app_name)+"吗？");
 			intent.putExtra("BTN_CANCEL", 1);
 			startActivityForResult(intent, 104);
 
