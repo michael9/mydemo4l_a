@@ -72,7 +72,7 @@ public class MainMenuActivity extends BaseActivity {
 	private final Class[] activities = { EntanceGuideActivity.class,
 			BookSearchActivity.class, EBookActiviy.class,
 			SuggestedReadingActivity.class, PersonalCenterActivity.class,
-			MessageInfoActivity.class, AnnounceActivity.class,
+			MessageInfoActivity.class, WebViewAnnouceActivity.class,
 			RefServiceActivity.class, GroupOfReadersActivity.class };
 	// ³éÌë
 	// private SlidingDrawer sd;
