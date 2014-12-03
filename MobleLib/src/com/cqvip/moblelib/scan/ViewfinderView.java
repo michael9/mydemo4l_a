@@ -16,8 +16,8 @@
 
 package com.cqvip.moblelib.scan;
 
-import com.cqvip.moblelib.szy.R;
-import com.google.zxing.ResultPoint;
+import java.util.Collection;
+import java.util.HashSet;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -28,8 +28,8 @@ import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.View;
 
-import java.util.Collection;
-import java.util.HashSet;
+import com.cqvip.moblelib.ahcm.R;
+import com.google.zxing.ResultPoint;
 
 /**
  * This view is overlaid on top of the camera preview. It adds the viewfinder rectangle and partial

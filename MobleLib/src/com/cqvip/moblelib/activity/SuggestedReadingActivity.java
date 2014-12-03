@@ -1,21 +1,15 @@
 package com.cqvip.moblelib.activity;
 
-import com.cqvip.moblelib.szy.R;
-import com.cqvip.moblelib.szy.R.layout;
-import com.cqvip.moblelib.szy.R.menu;
-import com.cqvip.moblelib.constant.Constant;
-
-import android.os.Bundle;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.view.Menu;
+import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.cqvip.moblelib.ahcm.R;
+import com.cqvip.moblelib.constant.Constant;
 
 /**
  * <p>

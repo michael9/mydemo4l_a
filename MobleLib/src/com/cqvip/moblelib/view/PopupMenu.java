@@ -1,15 +1,13 @@
 package com.cqvip.moblelib.view;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ListView;
 import android.widget.PopupWindow;
-import android.widget.PopupWindow.OnDismissListener;
 
-import com.cqvip.moblelib.szy.R;
+import com.cqvip.moblelib.ahcm.R;
 
 public class PopupMenu  {
 	
@@ -38,7 +36,6 @@ public class PopupMenu  {
 			 lv_group = (ListView) view.findViewById(R.id.lvGroup);
 			 groupAdapter = new PoupWindowAdapter(context, items);
 			lv_group.setAdapter(groupAdapter);
-			// 閸掓稑缂撴稉锟介嚋PopuWidow鐎电钖�
 			pw = new PopupWindow(view,context.getResources().getDimensionPixelSize(R.dimen.popwind_width), WindowManager.LayoutParams.WRAP_CONTENT);
 			return pw;
 	}
@@ -78,8 +75,7 @@ public class PopupMenu  {
 
 
 	/**
-	 * 閺勫墽銇�
-	 * 
+	 * 闁哄嫬澧介妵锟�	 * 
 	 * @param parent
 	 */
 	public void showWindow(View parent) {

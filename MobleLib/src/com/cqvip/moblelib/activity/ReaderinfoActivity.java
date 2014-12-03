@@ -22,9 +22,9 @@ import com.android.volley.Request.Method;
 import com.android.volley.Response.Listener;
 import com.android.volley.toolbox.StringRequest;
 import com.cqvip.moblelib.adapter.ReaderInfoAdapter;
+import com.cqvip.moblelib.ahcm.R;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.Reader;
-import com.cqvip.moblelib.szy.R;
 import com.cqvip.moblelib.utils.HttpUtils;
 import com.cqvip.moblelib.utils.Rotate3dAnimation;
 

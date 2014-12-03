@@ -2,14 +2,13 @@ package com.cqvip.moblelib.activity;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.cqvip.moblelib.ahcm.R;
 import com.cqvip.moblelib.model.ZLFBook;
-import com.cqvip.moblelib.szy.R;
 
 public class ZLFBookDetailActivity  extends BaseActivity {
 

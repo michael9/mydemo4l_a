@@ -23,7 +23,7 @@ import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.Constant;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.ShortBook;
-import com.cqvip.moblelib.szy.R;
+import com.cqvip.moblelib.ahcm.R;
 import com.cqvip.moblelib.utils.HttpUtils;
 import com.cqvip.utils.BitmapCache;
 import com.cqvip.utils.Tool;

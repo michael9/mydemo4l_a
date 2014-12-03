@@ -16,9 +16,8 @@
 
 package com.cqvip.moblelib.scan;
 
-import com.cqvip.moblelib.szy.R;
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.Result;
+import java.util.Vector;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -28,7 +27,9 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
-import java.util.Vector;
+import com.cqvip.moblelib.ahcm.R;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.Result;
 
 /**
  * This class handles all the messaging which comprises the state machine for capture.

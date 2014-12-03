@@ -1,6 +1,5 @@
 package com.cqvip.moblelib.adapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
@@ -9,19 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.ImageLoader.ImageListener;
-import com.cqvip.mobelib.imgutils.ImageFetcher;
-import com.cqvip.moblelib.szy.R;
-import com.cqvip.moblelib.adapter.PeriodicalAdapter.ViewHolder;
-import com.cqvip.moblelib.model.Comment;
+import com.cqvip.moblelib.ahcm.R;
 import com.cqvip.moblelib.model.Periodical;
-import com.cqvip.utils.BitmapCache;
-import com.cqvip.utils.Tool;
 
 public class PeriodicalAdapter extends BaseAdapter{
 

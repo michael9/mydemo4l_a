@@ -22,9 +22,6 @@ package com.cqvip.moblelib.view.picker;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.cqvip.moblelib.szy.R;
-
-
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -45,6 +42,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Interpolator;
 import android.widget.Scroller;
+
+import com.cqvip.moblelib.ahcm.R;
 
 /**
  * Numeric wheel view.

@@ -15,11 +15,8 @@ package com.cqvip.moblelib.view;
 *       1.0.0           2012-4-27         lxd (rohsuton@gmail.com)        Create
 **************************************************************************************/	
 
-import com.cqvip.moblelib.szy.R;
-
 import android.app.Dialog;
 import android.content.Context;
-import android.graphics.drawable.AnimationDrawable;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.animation.Animation;
@@ -27,6 +24,8 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.cqvip.moblelib.ahcm.R;
 
 
 /********************************************************************

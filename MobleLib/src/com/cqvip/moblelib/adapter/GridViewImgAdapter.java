@@ -1,22 +1,18 @@
 package com.cqvip.moblelib.adapter;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.BaseAdapter;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.cqvip.moblelib.activity.ActivityDlg;
 import com.cqvip.moblelib.activity.MainMenuActivity;
-import com.cqvip.moblelib.szy.R;
+import com.cqvip.moblelib.ahcm.R;
 
 public class GridViewImgAdapter extends BaseAdapter {
 

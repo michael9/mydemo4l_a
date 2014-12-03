@@ -2,14 +2,11 @@ package com.cqvip.moblelib.activity;
 
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.cqvip.moblelib.szy.R;
-import com.cqvip.moblelib.adapter.BookAdapter;
+import com.cqvip.moblelib.ahcm.R;
 
 /**
  * <p>

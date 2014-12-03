@@ -19,8 +19,8 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.ImageLoader.ImageContainer;
 import com.android.volley.toolbox.ImageLoader.ImageListener;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.cqvip.moblelib.ahcm.R;
 import com.cqvip.moblelib.constant.GlobleData;
-import com.cqvip.moblelib.szy.R;
 import com.cqvip.utils.BitmapCache;
 import com.cqvip.utils.Tool;
 

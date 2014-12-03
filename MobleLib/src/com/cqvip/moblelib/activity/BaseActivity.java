@@ -7,14 +7,12 @@ import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
-import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
-import com.android.volley.VolleyError;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.toolbox.Volley;
 import com.cqvip.mobelib.exception.ErrorVolleyThrow;
-import com.cqvip.moblelib.szy.R;
+import com.cqvip.moblelib.ahcm.R;
 import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.utils.BitmapCache;
 import com.cqvip.utils.Tool;
@@ -80,19 +78,19 @@ public class BaseActivity extends Activity {
 		if (customProgressDialog != null && customProgressDialog.isShowing()) {
 			customProgressDialog.dismiss();
 		}
-		if (a == 1) {// ��¼ʧ��
+		if (a == 1) {// 
 			Tool.ShowMessages(this, getResources()
 					.getString(R.string.loginfail));
-		} else if (a == 2) {// ����ʧ��
+		} else if (a == 2) {// 
 			Tool.ShowMessages(this, getResources()
 					.getString(R.string.loadfail));
-		} else if (a == 3) {// ���ʧ��
+		} else if (a == 3) {// 
 			Tool.ShowMessages(this, getResources()
 					.getString(R.string.renewfail));
-		} else if (a == 4) {// �޸�ʧ��
+		} else if (a == 4) {// 
 			Tool.ShowMessages(this, getResources()
 					.getString(R.string.modifyfail));
-		}else if (a == 5) {// �ղ�ʧ��
+		}else if (a == 5) {// 
 			Tool.ShowMessages(this, getResources()
 					.getString(R.string.favorfail));
 		}

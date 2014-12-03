@@ -3,7 +3,6 @@ package com.cqvip.moblelib.adapter;
 import java.util.List;
 
 import android.content.Context;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +11,8 @@ import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
+import com.cqvip.moblelib.ahcm.R;
 import com.cqvip.moblelib.model.ZLFBook;
-import com.cqvip.moblelib.szy.R;
 
 public class ZLFBookAdapter extends BaseAdapter {
 	private Context context;

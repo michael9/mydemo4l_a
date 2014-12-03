@@ -1,6 +1,5 @@
 package com.cqvip.moblelib.activity;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -8,7 +7,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import com.cqvip.moblelib.szy.R;
+import com.cqvip.moblelib.ahcm.R;
 
 
 public class WebViewAnnouceActivity extends BaseActivity{

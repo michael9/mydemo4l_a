@@ -1,16 +1,14 @@
 package com.cqvip.moblelib.activity;
 
-import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
-import android.view.Window;
 import android.view.ViewGroup.LayoutParams;
+import android.view.Window;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.TranslateAnimation;
 import android.widget.FrameLayout;
@@ -19,7 +17,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.cqvip.moblelib.szy.R;
+import com.cqvip.moblelib.ahcm.R;
 import com.cqvip.moblelib.view.PinchableImageView;
 
 /**

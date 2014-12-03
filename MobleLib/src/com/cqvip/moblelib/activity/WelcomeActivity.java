@@ -3,18 +3,12 @@ package com.cqvip.moblelib.activity;
 import java.util.Timer;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
-import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Message;
-import android.view.Window;
-import android.widget.ImageView;
 
-import com.cqvip.moblelib.szy.R;
+import com.cqvip.moblelib.ahcm.R;
 
 public class WelcomeActivity extends Activity {
 

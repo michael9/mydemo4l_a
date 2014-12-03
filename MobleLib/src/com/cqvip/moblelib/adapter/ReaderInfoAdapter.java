@@ -7,8 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.cqvip.moblelib.szy.R;
-import com.cqvip.moblelib.model.Reader;
+import com.cqvip.moblelib.ahcm.R;
 
 public class ReaderInfoAdapter extends BaseAdapter{
 	private Context context;

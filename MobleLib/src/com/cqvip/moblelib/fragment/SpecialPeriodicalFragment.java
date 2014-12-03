@@ -1,6 +1,5 @@
 package com.cqvip.moblelib.fragment;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 
@@ -11,7 +10,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,20 +23,18 @@ import android.widget.GridView;
 import android.widget.ImageView;
 
 import com.android.volley.Request.Method;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
-import com.android.volley.RequestQueue;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.cqvip.mobelib.exception.ErrorVolleyThrow;
 import com.cqvip.mobelib.imgutils.ImageFetcher;
 import com.cqvip.mobelib.imgutils.RecyclingImageView;
-import com.cqvip.moblelib.szy.R;
 import com.cqvip.moblelib.activity.PeriodicalClassfyActivity;
 import com.cqvip.moblelib.activity.PeriodicalContentActivity;
+import com.cqvip.moblelib.ahcm.R;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
-import com.cqvip.moblelib.fragment.basefragment.BaseAbstractFragment;
 import com.cqvip.moblelib.model.Periodical;
 import com.cqvip.moblelib.view.CustomProgressDialog;
 

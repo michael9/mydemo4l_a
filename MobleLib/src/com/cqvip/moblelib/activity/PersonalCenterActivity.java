@@ -1,11 +1,8 @@
 package com.cqvip.moblelib.activity;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
@@ -13,7 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.cqvip.dao.DaoException;
-import com.cqvip.moblelib.szy.R;
+import com.cqvip.moblelib.ahcm.R;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.db.MUserDao;
 import com.cqvip.utils.Tool;

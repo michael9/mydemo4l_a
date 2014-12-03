@@ -30,7 +30,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.ImageLoader.ImageContainer;
 import com.android.volley.toolbox.ImageLoader.ImageListener;
-import com.cqvip.moblelib.szy.R;
+import com.cqvip.moblelib.ahcm.R;
 import com.cqvip.moblelib.utils.Rotate3dAnimation;
 
 /**

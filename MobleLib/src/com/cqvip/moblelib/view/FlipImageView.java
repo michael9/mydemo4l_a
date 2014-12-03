@@ -1,7 +1,5 @@
 package com.cqvip.moblelib.view;
 
-import com.cqvip.moblelib.szy.R;
-
 import android.content.Context;
 import android.graphics.Camera;
 import android.graphics.Matrix;

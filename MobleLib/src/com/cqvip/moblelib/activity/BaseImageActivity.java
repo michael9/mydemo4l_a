@@ -1,12 +1,11 @@
 package com.cqvip.moblelib.activity;
 
-import com.cqvip.mobelib.imgutils.ImageFetcher;
-import com.cqvip.mobelib.imgutils.ImageCache.ImageCacheParams;
-import com.cqvip.moblelib.szy.R;
-import com.cqvip.moblelib.constant.GlobleData;
-
 import android.os.Bundle;
-import android.widget.ImageView;
+
+import com.cqvip.mobelib.imgutils.ImageCache.ImageCacheParams;
+import com.cqvip.mobelib.imgutils.ImageFetcher;
+import com.cqvip.moblelib.ahcm.R;
+import com.cqvip.moblelib.constant.GlobleData;
 
 public class BaseImageActivity extends BaseActivity{
 

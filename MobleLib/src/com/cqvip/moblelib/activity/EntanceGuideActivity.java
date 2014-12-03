@@ -1,21 +1,17 @@
 package com.cqvip.moblelib.activity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.cqvip.moblelib.szy.R;
+import com.cqvip.moblelib.ahcm.R;
 import com.cqvip.moblelib.constant.Constant;
 import com.cqvip.moblelib.view.mylinearlayout;
-import com.cqvip.utils.Tool;
 
 /**
  * <p>

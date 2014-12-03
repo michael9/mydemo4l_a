@@ -1,12 +1,10 @@
 package com.cqvip.moblelib.activity;
 
-import com.cqvip.moblelib.szy.R;
-import com.cqvip.moblelib.szy.R.layout;
-import com.cqvip.moblelib.szy.R.menu;
-
-import android.os.Bundle;
 import android.app.Activity;
+import android.os.Bundle;
 import android.view.Menu;
+
+import com.cqvip.moblelib.ahcm.R;
 
 public class MessageInfoActivity extends Activity {
 

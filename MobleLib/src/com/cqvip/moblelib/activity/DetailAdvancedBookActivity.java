@@ -17,19 +17,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.Request.Method;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.android.volley.toolbox.ImageLoader.ImageContainer;
 import com.android.volley.toolbox.ImageLoader.ImageListener;
-import com.cqvip.moblelib.szy.R;
-import com.cqvip.moblelib.base.IBookManagerActivity;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.cqvip.moblelib.ahcm.R;
 import com.cqvip.moblelib.constant.Constant;
 import com.cqvip.moblelib.constant.GlobleData;
-import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.utils.BitmapCache;
 import com.cqvip.utils.Tool;
 

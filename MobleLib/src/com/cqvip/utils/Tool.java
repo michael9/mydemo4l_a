@@ -12,16 +12,14 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.TextUtils;
 import android.widget.Toast;
-
 import cn.sharesdk.onekeyshare.OnekeyShare;
 
 import com.cqvip.moblelib.activity.CommentActivity;
-import com.cqvip.moblelib.szy.R;
+import com.cqvip.moblelib.ahcm.R;
 import com.cqvip.moblelib.model.Book;
 import com.cqvip.moblelib.model.EBook;
 

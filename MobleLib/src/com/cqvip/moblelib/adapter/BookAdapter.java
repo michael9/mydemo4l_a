@@ -4,9 +4,6 @@ import java.util.List;
 
 import android.content.Context;
 import android.text.Html;
-import android.text.Spanned;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,11 +11,9 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.ImageLoader.ImageListener;
 import com.android.volley.toolbox.NetworkImageView;
-import com.cqvip.moblelib.szy.R;
+import com.cqvip.moblelib.ahcm.R;
 import com.cqvip.moblelib.model.Book;
-import com.cqvip.utils.BitmapCache;
 
 /**
  * 

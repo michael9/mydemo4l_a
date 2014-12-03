@@ -1,17 +1,12 @@
 package com.cqvip.moblelib.activity;
 
-import com.cqvip.moblelib.szy.R;
-import com.cqvip.moblelib.szy.R.layout;
-import com.cqvip.moblelib.szy.R.menu;
-
 import android.os.Bundle;
-import android.app.Activity;
-import android.view.Menu;
 import android.view.View;
 import android.view.Window;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.cqvip.moblelib.ahcm.R;
 
 /**
  * <p>

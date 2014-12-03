@@ -3,9 +3,6 @@ package com.cqvip.moblelib.view;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import com.cqvip.moblelib.szy.R;
-
-
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -18,11 +15,12 @@ import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.cqvip.moblelib.ahcm.R;
 
 /**
  * <p>

@@ -8,14 +8,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.view.animation.LinearInterpolator;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
-import com.cqvip.moblelib.szy.R;
+import com.cqvip.moblelib.ahcm.R;
 import com.cqvip.moblelib.model.ShortBook;
 import com.cqvip.moblelib.view.NetworkImageView_rotate;
 
