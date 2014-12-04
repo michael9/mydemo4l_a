@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import cn.sharesdk.framework.ShareSDK;
 
 import com.android.volley.Request.Method;
@@ -25,6 +26,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.cqvip.dao.DaoException;
 import com.cqvip.moblelib.ahcm.R;
 import com.cqvip.moblelib.biz.Task;
+import com.cqvip.moblelib.constant.Constant;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.db.MEBookDao;
 import com.cqvip.moblelib.entity.MEbook;
@@ -149,8 +151,10 @@ public class EbookDetailActivity extends BaseActivity {
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				// Tool.bookEbuzz(EbookDetailActivity.this, dBook);
+				if(Constant.isUserDisable){
+				Toast.makeText(EbookDetailActivity.this, getString(R.string.tips_undo),
+						Toast.LENGTH_SHORT).show();
+				}else{
 				if (GlobleData.islogin) {
 					Intent _intent = new Intent(EbookDetailActivity.this,
 							CommentActivity.class);
@@ -167,6 +171,7 @@ public class EbookDetailActivity extends BaseActivity {
 					// 只是登陆而已
 					showLoginDialog(4);
 				}
+				}
 			}
 		});
 		//分享
@@ -182,10 +187,11 @@ public class EbookDetailActivity extends BaseActivity {
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
+				if(Constant.isUserDisable){
+					Toast.makeText(EbookDetailActivity.this, getString(R.string.tips_undo),
+							Toast.LENGTH_SHORT).show();
+				}else{
 				if (GlobleData.islogin) {
-					// Tool.bookEfavorite(EbookDetailActivity.this, dBook);
-
 					if (dBook != null) {
 						customProgressDialog.show();
 						gparams = new HashMap<String, String>();
@@ -201,6 +207,7 @@ public class EbookDetailActivity extends BaseActivity {
 					// 只是登陆而已
 					showLoginDialog(4);
 				}
+				}
 			}
 		});
 		// 下载
@@ -209,6 +216,10 @@ public class EbookDetailActivity extends BaseActivity {
 			@SuppressLint("NewApi")
 			@Override
 			public void onClick(View v) {
+				if(Constant.isUserDisable){
+					Toast.makeText(EbookDetailActivity.this, getString(R.string.tips_undo),
+							Toast.LENGTH_SHORT).show();
+				}else{
 				if (GlobleData.islogin) {
 				if (download_url != null) {
 					// 弹出对话框
@@ -251,6 +262,7 @@ public class EbookDetailActivity extends BaseActivity {
 				showLoginDialog(4);
 				}
 			}
+			}
 				
 		});
 
@@ -263,11 +275,16 @@ public class EbookDetailActivity extends BaseActivity {
 			
 			@Override
 			public void onClick(View v) {
+				if(Constant.isUserDisable){
+					Toast.makeText(EbookDetailActivity.this, getString(R.string.tips_undo),
+							Toast.LENGTH_SHORT).show();
+				}else{
 				if (GlobleData.islogin) {
 				startActivity(new Intent(context,DownLoadManagerActivity.class));
 				}else {
 					// 只是登陆而已
 					showLoginDialog(4);
+				}
 				}
 			}
 		});
