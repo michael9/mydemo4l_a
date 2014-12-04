@@ -37,7 +37,7 @@ public class EntanceGuideActivity extends BaseActivity {
 		setContentView(R.layout.part_guide);
 		context = this;
 		initialView();
-		setOnclickListener();
+		//setOnclickListener();
 		View v = findViewById(R.id.guide_title);
 		TextView title = (TextView) v.findViewById(R.id.txt_header);
 		title.setText(R.string.main_guide);
@@ -54,7 +54,7 @@ public class EntanceGuideActivity extends BaseActivity {
 //		LinearLayout l2 = (LinearLayout) findViewById(R.id.cardLayout);
 		LinearLayout l3 = (LinearLayout) findViewById(R.id.timeLayout);
 //		LinearLayout l4 = (LinearLayout) findViewById(R.id.readerknowLayout);
-		LinearLayout l5 = (LinearLayout) findViewById(R.id.serverLayout);
+//		LinearLayout l5 = (LinearLayout) findViewById(R.id.serverLayout);
 //		LinearLayout l6 = (LinearLayout) findViewById(R.id.transportLayout);
 		// LinearLayout l7 = (LinearLayout)findViewById(R.id.gpsLayout);
 		LinearLayout l8 = (LinearLayout) findViewById(R.id.probLayout);
@@ -106,18 +106,18 @@ public class EntanceGuideActivity extends BaseActivity {
 //				// R.anim.slide_left_out);
 //			}
 //		});
-		l5.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(context, DetailTextActivity.class);
-				intent.putExtra("enter", 5);
-				startActivity(intent);
-				// overridePendingTransition(R.anim.slide_right_in,
-				// R.anim.slide_left_out);
-
-			}
-		});
+//		l5.setOnClickListener(new View.OnClickListener() {
+//
+//			@Override
+//			public void onClick(View v) {
+//				Intent intent = new Intent(context, DetailTextActivity.class);
+//				intent.putExtra("enter", 5);
+//				startActivity(intent);
+//				// overridePendingTransition(R.anim.slide_right_in,
+//				// R.anim.slide_left_out);
+//
+//			}
+//		});
 //		l6.setOnClickListener(new View.OnClickListener() {
 //
 //			@Override
@@ -153,16 +153,16 @@ public class EntanceGuideActivity extends BaseActivity {
 				//Tool.ShowMessages(EntanceGuideActivity.this, "‘›ŒﬁŒ Ã‚");
 				// overridePendingTransition(R.anim.slide_right_in,
 				// R.anim.slide_left_out);
-				Intent mintent = new Intent(context, AnnouceListActivity.class);
-				mintent.putExtra("type",Constant.QUESTION);
-				startActivity(mintent);
+//				Intent mintent = new Intent(context, AnnouceListActivity.class);
+//				mintent.putExtra("type",Constant.QUESTION);
+				startActivity(intent);
 
 			}
 		});
 	}
 
 	private void initialView() {
-		ll_gpsLayout = (LinearLayout) findViewById(R.id.gpsLayout);
+		//ll_gpsLayout = (LinearLayout) findViewById(R.id.gpsLayout);
 		myll =  (mylinearlayout) findViewById(R.id.myll);
 		myll.setActivity(this);
 	}

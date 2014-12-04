@@ -114,8 +114,8 @@ public class MainMenuActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		// requestWindowFeature(Window.);
 		// Log.i("MainMenuActivity", "onCreate");
-		Intent intent = new Intent(MainMenuActivity.this, WelcomeActivity.class);
-		startActivity(intent);
+//		Intent intent = new Intent(MainMenuActivity.this, WelcomeActivity.class);
+//		startActivity(intent);
 
 		Display display = getWindowManager().getDefaultDisplay();
 		width = display.getWidth();

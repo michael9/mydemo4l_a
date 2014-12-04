@@ -43,7 +43,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20.0dip"
                     android:paddingRight="20.0dip"
-                    android:src="@drawable/icon_lib_announce" />
+                    android:src="@drawable/icon_book_icon" />
 
                 <TextView
                     android:id="@+id/guide_enter_title"
@@ -146,7 +146,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="1dp"
                 android:background="@drawable/xuxian" />
--->
+
             <LinearLayout
                 android:id="@+id/serverLayout"
                 android:layout_width="fill_parent"
@@ -224,7 +224,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="1dp"
                 android:background="@drawable/xuxian" />
-
+-->
             <LinearLayout
                 android:id="@+id/probLayout"
                 android:layout_width="fill_parent"
@@ -239,7 +239,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20.0dip"
                     android:paddingRight="20.0dip"
-                    android:src="@drawable/icon_problem" />
+                    android:src="@drawable/icon_borrow" />
 
                 <TextView
                     android:id="@+id/guide_problem_title"
