@@ -170,12 +170,15 @@ public class MainMenuActivity extends BaseActivity {
 
 			case 8:// 书友圈
 					// 判断是否登录
-				if (GlobleData.islogin) {
-					intent.setClass(MainMenuActivity.this, activities[position]);
-					startActivity(intent);
-				} else {
-					showLoginDialog(position);
-				}
+//				if (GlobleData.islogin) {
+//					intent.setClass(MainMenuActivity.this, activities[position]);
+//					startActivity(intent);
+//				} else {
+//					showLoginDialog(position);
+//				}
+				MainMenuActivity.cantouch = true;
+				Toast.makeText(MainMenuActivity.this, getString(R.string.tips_undo),
+						Toast.LENGTH_SHORT).show();
 				break;
 			case 6:// 馆内公告
 				intent.setClass(MainMenuActivity.this, activities[position]);

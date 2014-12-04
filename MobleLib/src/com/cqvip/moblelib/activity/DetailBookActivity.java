@@ -16,6 +16,7 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import cn.sharesdk.framework.ShareSDK;
 
 import com.android.volley.Request.Method;
@@ -26,6 +27,7 @@ import com.android.volley.toolbox.ImageLoader.ImageListener;
 import com.android.volley.toolbox.StringRequest;
 import com.cqvip.moblelib.adapter.BookLocAdapter;
 import com.cqvip.moblelib.ahcm.R;
+import com.cqvip.moblelib.constant.Constant;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.Book;
 import com.cqvip.moblelib.model.BookLoc;
@@ -177,6 +179,10 @@ public class DetailBookActivity extends BaseActivity {
 
 					@Override
 					public void onClick(View v) {
+						if(Constant.isUserDisable){
+							Toast.makeText(DetailBookActivity.this, getString(R.string.tips_undo),
+									Toast.LENGTH_SHORT).show();
+						}else{
 						if (GlobleData.islogin) {
 							gparams = new HashMap<String, String>();
 							gparams.put("libid", GlobleData.LIBIRY_ID);
@@ -194,6 +200,7 @@ public class DetailBookActivity extends BaseActivity {
 						} else {
 							// 只是登陆而已
 							showLoginDialog(4);
+						}
 						}
 					}
 				});
@@ -219,11 +226,16 @@ public class DetailBookActivity extends BaseActivity {
 
 			@Override
 			public void onClick(View v) {
+				if(Constant.isUserDisable){
+				Toast.makeText(DetailBookActivity.this, getString(R.string.tips_undo),
+						Toast.LENGTH_SHORT).show();
+				}else{
 				if (GlobleData.islogin) {
 					Tool.bookbuzz(DetailBookActivity.this, dBook);
 				} else {
 					// 只是登陆而已
 					showLoginDialog(4);
+				}
 				}
 			}
 		});

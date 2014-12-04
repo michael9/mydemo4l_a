@@ -173,6 +173,7 @@
     <string name="tips_nosearch_key">请输入搜索内容</string>
     <string name="title_activity_message_info">MessageInfoActivity</string>
     <string name="disable_onclick">该功能正在紧张开发中&#8230;</string>
+    <string name="tips_undo">该功能将在近期开发，敬请期待&#8230;</string>
     <string name="hint_search">请输入关键词搜索</string>
     <string name="annouce_annouce">通知公告</string>
     <string name="announce_subject">专题讲座</string>

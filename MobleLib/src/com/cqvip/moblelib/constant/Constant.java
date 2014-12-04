@@ -26,6 +26,6 @@ public class Constant {
 	
 	public static final int SOCKET_TIMEOUT = 20000;//ÍøÂç³¬Ê±ÉèÖÃ
 	
-	
+	public static final boolean isUserDisable = true;
 	
 }
