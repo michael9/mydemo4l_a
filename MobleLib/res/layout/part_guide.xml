@@ -43,7 +43,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20.0dip"
                     android:paddingRight="20.0dip"
-                    android:src="@drawable/icon_book_icon" />
+                    android:src="@drawable/ic_action_map" />
 
                 <TextView
                     android:id="@+id/guide_enter_title"
@@ -239,7 +239,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20.0dip"
                     android:paddingRight="20.0dip"
-                    android:src="@drawable/icon_borrow" />
+                    android:src="@drawable/ic_action_phone_start" />
 
                 <TextView
                     android:id="@+id/guide_problem_title"
@@ -248,7 +248,7 @@
                     android:layout_weight="1.0"
                     android:duplicateParentState="true"
                     android:gravity="center_vertical"
-                    android:text="@string/guide_problem"
+                    android:text="@string/guide_server"
                     android:textSize="16sp" />
 
                 <ImageView

@@ -1,0 +1,14 @@
+﻿<div>　　一、图书馆的网址：</div>
+<div>　 &nbsp;网址：http://www.ahsdxy.ah.edu.cn/Colleges/tsg/</div>
+<div>　 &nbsp;电子资源校外远程访问地址：http://218.23.105.23</div>
+<div>　 &nbsp;电子资源校内访问地址： http://192.168.100.23</div>
+<div>　　二、服务咨询电话：</div>
+<div>&nbsp; &nbsp; 信息资源建设部：67316956</div>
+<div>&nbsp; &nbsp; 计算机室：　　　67316983</div>
+<div>&nbsp; &nbsp; 期 刊 阅览室：　　67316986</div>
+<div>&nbsp; &nbsp; 综合资料阅览室：67316985</div>
+<div>&nbsp; &nbsp; 第一电子阅览室：67316987</div>
+<div>&nbsp; &nbsp; 第二电子阅览室：67316862</div>
+<div>&nbsp; &nbsp; 文献借阅部（总书库）：67316989</div>
+<div>&nbsp; &nbsp; 语言文学书库：67316972</div>
+<div>　　三、服务监督电话：67316806、67316896</div>

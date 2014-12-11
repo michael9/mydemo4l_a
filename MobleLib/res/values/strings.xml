@@ -17,11 +17,11 @@
     <string name="main_notice">馆内公告</string>
     <string name="main_borrow">借阅管理</string>
     <string name="main_order">书友圈</string>
-    <string name="guide_needknow">馆史介绍</string>
+    <string name="guide_needknow">馆内布局</string>
     <string name="guide_cardguide">办证指南</string>
     <string name="guide_time">开馆时间</string>
     <string name="guide_readerknow">读者须知</string>
-    <string name="guide_server">服务介绍</string>
+    <string name="guide_server">联系方式</string>
     <string name="guide_transport">交通指南</string>
     <string name="guide_navigation">馆内导航</string>
     <string name="guide_problem">馆藏介绍</string>
