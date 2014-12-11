@@ -51,4 +51,7 @@
     <color name="bookactionbar_bgcolor">#99547E92</color>
     <color name="serchcount_txtcolor">#323538</color>
     <color name="serchitemtitle_txtcolor">#527eb0</color>
+    
+        <color name="umeng_fb_color_btn_normal">#333333</color>
+    <color name="umeng_fb_color_btn_pressed">#1495F7</color>
 </resources>

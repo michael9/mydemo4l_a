@@ -292,6 +292,24 @@
             android:name="com.cqvip.moblelib.activity.ZLFBookDetailActivity"
             android:label="@string/title_activity_zlfbook_detail" >
         </activity>
+        
+                <!-- UMENG -->
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="547fd5bcfd98c50005000db5" >
+        </meta-data>
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="umeng" />
+        <service
+            android:name="com.umeng.update.net.DownloadingService"
+            android:process=":DownloadingService" >
+        </service>
+
+        <activity
+            android:name="com.umeng.update.UpdateDialogActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+        </activity>
     </application>
 
     <supports-screens

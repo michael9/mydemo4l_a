@@ -16,6 +16,7 @@ import com.cqvip.moblelib.ahcm.R;
 import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.utils.BitmapCache;
 import com.cqvip.utils.Tool;
+import com.umeng.analytics.MobclickAgent;
 
 public class BaseActivity extends Activity {
 	private GestureDetector mGestureDetector;
@@ -94,6 +95,19 @@ public class BaseActivity extends Activity {
 			Tool.ShowMessages(this, getResources()
 					.getString(R.string.favorfail));
 		}
+	}
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		MobclickAgent.onResume(this);
+	}
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		MobclickAgent.onPause(this);
 	}
 	
 	@Override

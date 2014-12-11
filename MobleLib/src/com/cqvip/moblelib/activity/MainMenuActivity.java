@@ -41,6 +41,8 @@ import com.cqvip.moblelib.utils.HttpUtils;
 import com.cqvip.moblelib.view.StableGridView;
 import com.cqvip.utils.Phinfo;
 import com.cqvip.utils.Tool;
+import com.umeng.analytics.MobclickAgent;
+import com.umeng.update.UmengUpdateAgent;
 
 /**
  * <p>
@@ -114,8 +116,8 @@ public class MainMenuActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		// requestWindowFeature(Window.);
 		// Log.i("MainMenuActivity", "onCreate");
-//		Intent intent = new Intent(MainMenuActivity.this, WelcomeActivity.class);
-//		startActivity(intent);
+		Intent intent = new Intent(MainMenuActivity.this, WelcomeActivity.class);
+		startActivity(intent);
 
 		Display display = getWindowManager().getDefaultDisplay();
 		width = display.getWidth();
@@ -146,6 +148,18 @@ public class MainMenuActivity extends BaseActivity {
 		Log.i("phinfo", info);
 
 		gridview.setOnItemClickListener(onItemClickListener);
+		
+		umeng();
+	}
+	
+	private void umeng() {
+		// 更新
+			UmengUpdateAgent.setUpdateCheckConfig(false);
+			UmengUpdateAgent.update(this);
+		// 统计
+		// MobclickAgent.setDebugMode(true);//打开调试模式（debug）后，数据实时发送，不受发送策略控制
+		MobclickAgent.updateOnlineConfig(this);// 发送策略定义了用户由统计分析SDK产生的数据发送回友盟服务器的频率。在没有取到在线配置的发送策略的情况下，会使用默认的发送策略：启动时发送。
+												// 你可以在友盟后台“设置->发送策略”页面自定义数据发送的频率。
 	}
 
 	OnItemClickListener onItemClickListener = new OnItemClickListener() {
