@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import com.cqvip.mobelib.imgutils.ImageCache.ImageCacheParams;
 import com.cqvip.mobelib.imgutils.ImageFetcher;
-import com.cqvip.moblelib.ahcm.R;
+import com.cqvip.moblelib.ahslsd.R;
 import com.cqvip.moblelib.constant.GlobleData;
 
 public class BaseImageActivity extends BaseActivity{

@@ -24,7 +24,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.cqvip.mobelib.exception.ErrorVolleyThrow;
 import com.cqvip.moblelib.activity.PeriodicalClassfyActivity;
 import com.cqvip.moblelib.activity.PeriodicalListActivity;
-import com.cqvip.moblelib.ahcm.R;
+import com.cqvip.moblelib.ahslsd.R;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.Constant;
 import com.cqvip.moblelib.constant.GlobleData;

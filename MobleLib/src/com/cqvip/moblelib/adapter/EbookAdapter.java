@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
-import com.cqvip.moblelib.ahcm.R;
+import com.cqvip.moblelib.ahslsd.R;
 import com.cqvip.moblelib.model.EBook;
 
 public class EbookAdapter extends BaseAdapter {

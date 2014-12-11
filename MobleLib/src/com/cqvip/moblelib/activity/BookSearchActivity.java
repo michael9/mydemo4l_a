@@ -14,7 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.cqvip.moblelib.ahcm.R;
+import com.cqvip.moblelib.ahslsd.R;
 import com.cqvip.moblelib.scan.CaptureActivity;
 
 /**

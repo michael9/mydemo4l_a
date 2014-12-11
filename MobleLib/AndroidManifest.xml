@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.cqvip.moblelib.ahcm"
+    package="com.cqvip.moblelib.ahslsd"
     android:installLocation="auto"
     android:versionCode="1"
     android:versionName="1.0" >
@@ -296,7 +296,7 @@
                 <!-- UMENG -->
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="547fd5bcfd98c50005000db5" >
+            android:value="548942defd98c56e4e000c8c" >
         </meta-data>
         <meta-data
             android:name="UMENG_CHANNEL"
