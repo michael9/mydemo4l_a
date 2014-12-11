@@ -28,7 +28,7 @@ import com.cqvip.moblelib.db.MUserDao;
 import com.cqvip.moblelib.entity.MUser;
 import com.cqvip.moblelib.model.Result;
 import com.cqvip.moblelib.model.User;
-import com.cqvip.moblelib.ahcm.R;
+import com.cqvip.moblelib.ahslsd.R;
 import com.cqvip.moblelib.utils.HttpUtils;
 import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.utils.Tool;

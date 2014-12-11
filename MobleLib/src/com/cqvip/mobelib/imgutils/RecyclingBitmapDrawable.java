@@ -21,7 +21,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.util.Log;
 
-import com.cqvip.moblelib.ahcm.BuildConfig;
+import com.cqvip.moblelib.ahslsd.BuildConfig;
 
 /**
  * A BitmapDrawable that keeps track of whether it is being displayed or cached.

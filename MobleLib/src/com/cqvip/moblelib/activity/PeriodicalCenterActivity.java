@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
 
-import com.cqvip.moblelib.ahcm.R;
+import com.cqvip.moblelib.ahslsd.R;
 import com.cqvip.moblelib.fragment.BranchPeriodicalFragment;
 import com.cqvip.moblelib.fragment.ConcernPeriodicalFragment;
 

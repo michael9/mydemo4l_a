@@ -7,7 +7,7 @@ import android.widget.Toast;
 
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.VolleyError;
-import com.cqvip.moblelib.ahcm.BuildConfig;
+import com.cqvip.moblelib.ahslsd.BuildConfig;
 
 public class ErrorVolleyThrow implements ErrorListener{
 

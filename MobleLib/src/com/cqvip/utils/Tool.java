@@ -19,7 +19,7 @@ import android.widget.Toast;
 import cn.sharesdk.onekeyshare.OnekeyShare;
 
 import com.cqvip.moblelib.activity.CommentActivity;
-import com.cqvip.moblelib.ahcm.R;
+import com.cqvip.moblelib.ahslsd.R;
 import com.cqvip.moblelib.model.Book;
 import com.cqvip.moblelib.model.EBook;
 
