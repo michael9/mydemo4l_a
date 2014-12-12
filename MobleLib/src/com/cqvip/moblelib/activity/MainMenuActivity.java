@@ -134,9 +134,9 @@ public class MainMenuActivity extends BaseActivity {
 		adapter = new GridViewImgAdapter(this, activities);
 		gridview.setAdapter(adapter);
 		init_login();
-		mtimer = new Timer();
-		mtimer.schedule(new time_check_task(), 8 * 1000, 6 * 1000);
-		init();
+//		mtimer = new Timer();
+//		mtimer.schedule(new time_check_task(), 8 * 1000, 6 * 1000);
+//		init();
 		ActivityManager activityManager = (ActivityManager) this
 				.getSystemService("activity");
 		Log.i("MemoryClass", "" + activityManager.getMemoryClass());
