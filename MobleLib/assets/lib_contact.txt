@@ -1,5 +1,5 @@
 ﻿<div>　　一、图书馆的网址：</div>
-<div>　 &nbsp;网址：http://www.ahsdxy.ah.edu.cn/Colleges/tsg/</div>
+<div><span>　 &nbsp;网址：http://www.ahsdxy.ah.edu.cn/Colleges/tsg/</span></div>
 <div>　 &nbsp;电子资源校外远程访问地址：http://218.23.105.23</div>
 <div>　 &nbsp;电子资源校内访问地址： http://192.168.100.23</div>
 <div>　　二、服务咨询电话：</div>

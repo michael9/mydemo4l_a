@@ -95,7 +95,7 @@ public class DetailTextActivity extends BaseActivity {
 		//
 		// break;
 		case 8:
-			t1.setText(R.string.guide_problem);
+			t1.setText(R.string.guide_server);
 			String temp8 = FileUtils.getFromAssets(context,"lib_contact.txt");
 			content.setText(Html.fromHtml(temp8));
 			break;
