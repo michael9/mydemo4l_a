@@ -14,7 +14,7 @@ public class WebViewAnnouceActivity extends BaseActivity{
 	
 	 private WebView myWebView;  
 	 private ProgressDialog dialog;
-	private static final String targenUrl = "http://webcld.duapp.com/tmp/ahcm_newslist.html";
+	private static final String targenUrl = "http://webcld.duapp.com/tmp/ahsdsl_newslist.html";
    @Override
    protected void onCreate(Bundle savedInstanceState) {
        super.onCreate(savedInstanceState);
