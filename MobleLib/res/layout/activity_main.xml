@@ -92,12 +92,13 @@
                 android:layout_marginTop="@dimen/main_margintop"
                 android:orientation="horizontal" >
 
-                <com.cqvip.moblelib.view.ScaleImageView
+                <com.cqvip.moblelib.view.MyImageView
                     android:id="@+id/main06_iv"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/main_marginmiddle"
                     android:layout_weight="1"
+                    android:onClick="onClick"
                     android:src="@drawable/main_06" />
 
                 <com.cqvip.moblelib.view.MyImageView

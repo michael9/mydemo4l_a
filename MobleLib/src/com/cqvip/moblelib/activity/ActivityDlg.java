@@ -116,7 +116,7 @@ public class ActivityDlg extends BaseActivity  {
 				gparams=new HashMap<String, String>();			
 				gparams.put("username", name);
 				gparams.put("password", pwd);
-				gparams.put("libid", "1");
+				gparams.put("libid", "2");
 				requestVolley(GlobleData.SERVER_URL + "/library/user/login.aspx",
 						back_ls, Method.POST);
 			

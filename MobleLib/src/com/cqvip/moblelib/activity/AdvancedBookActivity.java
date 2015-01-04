@@ -58,12 +58,12 @@ public class AdvancedBookActivity extends BaseActivity implements
 		switch (type) {
 		case Constant.HOTBOOK:
 			sendtype = Task.TASK_SUGGEST_HOTBOOK;
-			setheadbar("����ͼ��");
+			setheadbar(getString(R.string.suggestread_hotbook));
 			break;
 
 		case Constant.NEWBOOK:
 			sendtype = Task.TASK_SUGGEST_NEWBOOK;
-			setheadbar("�����Ƽ�");
+			setheadbar(getString(R.string.suggestread_newbook));
 			break;
 
 		default:

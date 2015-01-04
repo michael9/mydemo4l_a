@@ -43,6 +43,7 @@ public class BaseFragmentImageActivity  extends FragmentActivity{
 	    mImageFetcher.addImageCache(this, cacheParams);
 	    mImageFetcher.setImageFadeIn(false);
 	    mQueue = Volley.newRequestQueue(this);
+	    Log.i("BaseActivity", getClass().getSimpleName());
 	}
 	
 	@Override

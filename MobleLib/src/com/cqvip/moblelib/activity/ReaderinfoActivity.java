@@ -5,6 +5,7 @@ import java.util.Map;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -187,10 +188,12 @@ public class ReaderinfoActivity extends BaseActivity {
 
 	// ��ȡ������Ϣ
 	private void getuser() {
-		if (GlobleData.userid != null) {
+		String readercardid=getSharedPreferences("mobliereader", MODE_PRIVATE).getString("readercardid", "");
+		if (!TextUtils.isEmpty(readercardid)) {
 			customProgressDialog.show();
 			gparams = new HashMap<String, String>();
-			gparams.put("userid", GlobleData.userid);
+			gparams.put("libid", "2");
+			gparams.put("userid", readercardid);
 			requestVolley(GlobleData.SERVER_URL
 					+ "/library/user/readerinfo.aspx", backlistener,
 					Method.POST);
@@ -214,6 +217,7 @@ public class ReaderinfoActivity extends BaseActivity {
 				mList.setAdapter(new ReaderInfoAdapter(ReaderinfoActivity.this,
 						attrs, values));
 			} catch (Exception e) {
+				e.printStackTrace();
 				onError(2);
 			}
 			applyRotation(0, 0, 90);

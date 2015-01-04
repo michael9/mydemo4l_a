@@ -390,32 +390,37 @@ public class MainMenuActivity extends BaseActivity_Main implements
 			startActivity(intent);
 			break;
 		case R.id.main04_iv:
-			intent.setClass(MainMenuActivity.this, activities[2]);
-			startActivity(intent);
-			break;
-		case R.id.main05_iv:
 			intent.setClass(MainMenuActivity.this, activities[3]);
 			startActivity(intent);
 			break;
-		case R.id.main06_iv:// ��������
+		case R.id.main05_iv:
 			if (GlobleData.islogin) {
-				intent.setClass(context, activities[4]);
+				intent.setClass(MainMenuActivity.this, activities[4]);
 				startActivity(intent);
 			} else {
-				showLoginDialog(4);
+				showLoginDialog(5);
 			}
+			break;
+		case R.id.main06_iv:// ��������
+			Log.i("mainmenu_onclick", "main06_iv");
+				intent.setClass(context, activities[6]);
+				startActivity(intent);
 			break;
 		case R.id.main07_iv:// ���Ĺ���
 			if (GlobleData.islogin) {
-				intent.setClass(context, activities[7]);
+				intent.setClass(context, activities[8]);
+				startActivity(intent);
+			} else {
+				showLoginDialog(8);
+			}
+			break;
+		case R.id.main08_iv:// �ο���ѯ
+			if (GlobleData.islogin) {
+				intent.setClass(MainMenuActivity.this, activities[7]);
 				startActivity(intent);
 			} else {
 				showLoginDialog(7);
 			}
-			break;
-		case R.id.main08_iv:// �ο���ѯ
-//			intent.setClass(MainMenuActivity.this, activities[5]);
-//			startActivity(intent);
 			break;
 		default:
 			break;

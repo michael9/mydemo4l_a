@@ -10,28 +10,28 @@ import org.json.JSONObject;
 import com.cqvip.moblelib.net.BookException;
 
 /**
- * ¶ÁÕßÀà
+ * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  * @author luojiang
  *
  */
 public class Reader{
-	private String username;//¿¨ºÅ
-	private String question;//ÃÜ±£ÎÊÌâ
-	private String answer;//ÃÜ±£´ğ°¸
-	private String recordno;//Ïëµ±Óëreaderno
-	private int cardtypeid;//ÀàĞÍ
+	private String username;//ï¿½ï¿½ï¿½ï¿½
+	private String question;//ï¿½Ü±ï¿½ï¿½ï¿½ï¿½ï¿½
+	private String answer;//ï¿½Ü±ï¿½ï¿½ï¿½
+	private String recordno;//ï¿½ëµ±ï¿½ï¿½readerno
+	private int cardtypeid;//ï¿½ï¿½ï¿½ï¿½
 	private String cardtype;//
 	private String status;//Ö¤×´Ì¬
 	private String gender;//
 	private String cardno;//
-	private String regdate;//×¢²áÈÕÆÚ
-	private String name;//ĞÕÃû
+	private String regdate;//×¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	private String name;//ï¿½ï¿½ï¿½ï¿½
 	private String notes;//
 	private String idno;//
 	private String birth;//
 	private String library;//
-	private String cardbegdate;//ÆôÓÃÈÕÆÚ
-	private String cardenddate;//ÖÕÖ¹ÈÕÆÚ
+	private String cardbegdate;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	private String cardenddate;//ï¿½ï¿½Ö¹ï¿½ï¿½ï¿½ï¿½
 	private String address;//
 	private String workunit;//
 	private String phone;//

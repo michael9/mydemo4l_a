@@ -14,6 +14,7 @@ public class BookException  extends Exception {
 
     public BookException(Exception cause) {
         super(cause);
+        cause.printStackTrace();
     }
 
     public BookException(String msg, int statusCode) {
