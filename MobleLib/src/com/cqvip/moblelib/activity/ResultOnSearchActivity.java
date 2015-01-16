@@ -188,6 +188,7 @@ public class ResultOnSearchActivity extends BaseActivity implements
 					searchCount.setText("共计搜索到"+count+"条记录");
 				}else{
 					searchCount.setVisibility(View.GONE);
+					Tool.ShowMessages(context, "无记录");
 				}
 				// JSONObject mj=new JSONObject(response);
 				List<Book> lists = Book.formList(response);

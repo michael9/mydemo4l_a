@@ -28,6 +28,7 @@ public class BaseActivity extends Activity {
 				new MyGestrueListener(this));
 		mQueue=Volley.newRequestQueue(this);
 		customProgressDialog=CustomProgressDialog.createDialog(this);
+		Log.i("BaseActivity", getClass().getSimpleName());
 	}
 	
 	@Override
