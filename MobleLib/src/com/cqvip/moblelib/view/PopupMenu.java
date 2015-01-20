@@ -7,7 +7,7 @@ import android.view.WindowManager;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 
-import com.cqvip.moblelib.ahslsd.R;
+import com.cqvip.moblelib.sm.R;
 
 public class PopupMenu  {
 	

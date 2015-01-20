@@ -11,7 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.cqvip.moblelib.ahslsd.R;
+import com.cqvip.moblelib.sm.R;
 import com.cqvip.moblelib.constant.Constant;
 
 /**

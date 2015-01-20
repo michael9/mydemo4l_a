@@ -20,7 +20,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.cqvip.moblelib.ahslsd.R;
+import com.cqvip.moblelib.sm.R;
 
 /**
  * <p>

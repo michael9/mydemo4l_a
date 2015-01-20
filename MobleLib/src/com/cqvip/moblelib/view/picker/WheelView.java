@@ -43,7 +43,7 @@ import android.view.View;
 import android.view.animation.Interpolator;
 import android.widget.Scroller;
 
-import com.cqvip.moblelib.ahslsd.R;
+import com.cqvip.moblelib.sm.R;
 
 /**
  * Numeric wheel view.

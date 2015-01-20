@@ -9,7 +9,7 @@ import com.android.volley.toolbox.Volley;
 import com.cqvip.mobelib.exception.ErrorVolleyThrow;
 import com.cqvip.mobelib.imgutils.ImageCache.ImageCacheParams;
 import com.cqvip.mobelib.imgutils.ImageFetcher;
-import com.cqvip.moblelib.ahslsd.R;
+import com.cqvip.moblelib.sm.R;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.view.CustomProgressDialog;
 
