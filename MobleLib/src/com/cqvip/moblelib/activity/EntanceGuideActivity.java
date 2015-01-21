@@ -50,14 +50,13 @@ public class EntanceGuideActivity extends BaseActivity {
 			}
 		});
 
-		LinearLayout l1 = (LinearLayout) findViewById(R.id.enterguideLayout);
-//		LinearLayout l2 = (LinearLayout) findViewById(R.id.cardLayout);
-		LinearLayout l3 = (LinearLayout) findViewById(R.id.timeLayout);
-//		LinearLayout l4 = (LinearLayout) findViewById(R.id.readerknowLayout);
-//		LinearLayout l5 = (LinearLayout) findViewById(R.id.serverLayout);
-//		LinearLayout l6 = (LinearLayout) findViewById(R.id.transportLayout);
-		// LinearLayout l7 = (LinearLayout)findViewById(R.id.gpsLayout);
-		LinearLayout l8 = (LinearLayout) findViewById(R.id.probLayout);
+		LinearLayout l1 = (LinearLayout) findViewById(R.id.enterguideLayout1);
+		LinearLayout l2 = (LinearLayout) findViewById(R.id.enterguideLayout2);
+		LinearLayout l3 = (LinearLayout) findViewById(R.id.enterguideLayout3);
+		LinearLayout l4 = (LinearLayout) findViewById(R.id.enterguideLayout4);
+		LinearLayout l5 = (LinearLayout) findViewById(R.id.enterguideLayout5);
+		LinearLayout l6 = (LinearLayout) findViewById(R.id.enterguideLayout6);
+	
 
 		l1.setOnClickListener(new View.OnClickListener() {
 
@@ -70,18 +69,18 @@ public class EntanceGuideActivity extends BaseActivity {
 				// R.anim.slide_left_out);
 			}
 		});
-//		l2.setOnClickListener(new View.OnClickListener() {
-//
-//			@Override
-//			public void onClick(View v) {
-//				Intent intent = new Intent(context, DetailTextActivity.class);
-//				intent.putExtra("enter", 2);
-//				startActivity(intent);
-//				// overridePendingTransition(R.anim.slide_right_in,
-//				// R.anim.slide_left_out);
-//
-//			}
-//		});
+		l2.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(context, TableTextActivity.class);
+				intent.putExtra("enter", 2);
+				startActivity(intent);
+				// overridePendingTransition(R.anim.slide_right_in,
+				// R.anim.slide_left_out);
+
+			}
+		});
 		l3.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -94,71 +93,42 @@ public class EntanceGuideActivity extends BaseActivity {
 				// R.anim.slide_left_out);
 			}
 		});
-//		l4.setOnClickListener(new View.OnClickListener() {
-//
-//			@Override
-//			public void onClick(View v) {
-//
-//				Intent intent = new Intent(context, DetailTextActivity.class);
-//				intent.putExtra("enter", 4);
-//				startActivity(intent);
-//				// overridePendingTransition(R.anim.slide_right_in,
-//				// R.anim.slide_left_out);
-//			}
-//		});
-//		l5.setOnClickListener(new View.OnClickListener() {
-//
-//			@Override
-//			public void onClick(View v) {
-//				Intent intent = new Intent(context, DetailTextActivity.class);
-//				intent.putExtra("enter", 5);
-//				startActivity(intent);
-//				// overridePendingTransition(R.anim.slide_right_in,
-//				// R.anim.slide_left_out);
-//
-//			}
-//		});
-//		l6.setOnClickListener(new View.OnClickListener() {
-//
-//			@Override
-//			public void onClick(View v) {
-////				Intent intent = new Intent(context, DetailTextActivity.class);
-////				intent.putExtra("enter", 6);
-////				startActivity(intent);
-//				// overridePendingTransition(R.anim.slide_right_in,
-//				// R.anim.slide_left_out);
-//				Intent intent=new Intent(Intent.ACTION_VIEW,Uri.parse("http://j.map.baidu.com/6V_Ii"));
-//				startActivity(intent);			
-//			}
-//		});
-		// l7.setOnClickListener(new View.OnClickListener() {
-		//
-		// @Override
-		// public void onClick(View v) {
-		//
-		// Intent intent = new Intent(context,DetailTextActivity.class);
-		// intent.putExtra("enter", 7);
-		// startActivity(intent);
-		// overridePendingTransition(R.anim.slide_right_in,
-		// R.anim.slide_left_out);
-		// }
-		// });
-		l8.setOnClickListener(new View.OnClickListener() {
+		l4.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+
+				Intent intent = new Intent(context, DetailTextActivity.class);
+				intent.putExtra("enter", 4);
+				startActivity(intent);
+				// overridePendingTransition(R.anim.slide_right_in,
+				// R.anim.slide_left_out);
+			}
+		});
+		l5.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(context, TableTextActivity.class);
+				intent.putExtra("enter", 5);
+				startActivity(intent);
+				// overridePendingTransition(R.anim.slide_right_in,
+				// R.anim.slide_left_out);
+
+			}
+		});
+		l6.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(context, DetailTextActivity.class);
-				intent.putExtra("enter", 8);
-				//startActivity(intent);
-				//Tool.ShowMessages(EntanceGuideActivity.this, "‘›ŒﬁŒ Ã‚");
-				// overridePendingTransition(R.anim.slide_right_in,
-				// R.anim.slide_left_out);
-//				Intent mintent = new Intent(context, AnnouceListActivity.class);
-//				mintent.putExtra("type",Constant.QUESTION);
+				intent.putExtra("enter", 6);
 				startActivity(intent);
-
+				// overridePendingTransition(R.anim.slide_right_in,
+				// R.anim.slide_left_out);		
 			}
 		});
+		
 	}
 
 	private void initialView() {
