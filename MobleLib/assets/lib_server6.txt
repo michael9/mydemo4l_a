@@ -1,0 +1,10 @@
+﻿<div align="left">
+<div>1）本校学生凭“校园一卡通（校园卡）”入馆办理借阅手续，教职员工凭借书证办理借阅手续。</div>
+<div align="left">2）入馆请穿戴整洁，不得赤膊或只穿背心、短裤、拖鞋入馆。</div>
+<div align="left">3)请不要携带易燃易爆物、腐蚀性化学物品入馆。</div>
+<div align="left">4)贵重物品随身携带，包等大件物品请到指定地点寄存。</div>
+<div align="left">5)请注重礼仪，文明用语。</div>
+<div align="left">6)请保持馆内整洁，不要在馆内吃东西、抽烟。</div>
+<div align="left">7)请保持图书馆安静，不要大声喧哗。</div>
+<div align="left">8)请爱护图书馆设施，损坏公物照价赔偿。</div>
+<div align="left">9)请遵守图书馆规章制度，主动配合图书馆工作人员的管理。</div></div>

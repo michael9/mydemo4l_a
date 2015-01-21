@@ -35,6 +35,7 @@
     <color name="grid_state_focused">#777dbcd3</color>
     
     <color name="blue_title">#FF0099CC</color>
+     <color name="tablerow_color1">#dedcd2</color>
     
         <!-- drop down list header font color -->
     <color name="drop_down_list_header_font_color">#000000</color>

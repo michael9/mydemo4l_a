@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    xmlns:tools="http://schemas.android.com/tools" 
+    android:layout_width="fill_parent" 
+    android:layout_height="fill_parent"
+    android:id="@+id/ll_student" 
+    android:background="@drawable/bg_list"
+    android:orientation="vertical" > 
+    <include
+        android:id="@+id/seach_title"
+          android:layout_width="match_parent"
+   		 android:layout_height="wrap_content"
+        layout="@layout/header" />
+        <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/input_box" >
+        <LinearLayout 
+            android:layout_width="fill_parent" 
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+            >
+    
+  <TextView
+        android:id="@+id/tx_student"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:text="一、学生借阅权限和时限：" />
+    
+    <TableLayout 
+        android:id="@+id/tablelayout" 
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:background="@android:color/white" 
+        android:stretchColumns="*" > 
+ 
+    </TableLayout>
+     <TextView
+        android:id="@+id/tx_teacher"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:text="一、教师借阅权限和时限" />
+  <TableLayout 
+        android:id="@+id/tablelayout2" 
+        android:visibility="gone"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:background="@android:color/white" 
+        android:stretchColumns="*" > 
+ 
+    </TableLayout>
+   
+    <TextView
+        android:id="@+id/tx_teacher_bak"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:text="三、备注" />
+    <TextView
+        android:id="@+id/tx_teacher_content"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:text="" />
+    </LinearLayout>
+    </ScrollView>
+</LinearLayout> 

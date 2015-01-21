@@ -17,7 +17,12 @@
     <string name="main_notice">馆内公告</string>
     <string name="main_borrow">借阅管理</string>
     <string name="main_order">书友圈</string>
-    <string name="guide_needknow">馆内布局</string>
+    <string name="guide_needknow1">报刊阅览室管理规则</string>
+    <string name="guide_needknow2">借阅权限和时限</string>
+    <string name="guide_needknow3">特藏文献借阅规则</string>
+    <string name="guide_needknow4">纸质文献借阅规则</string>
+    <string name="guide_needknow5">图书馆、阅览室开放时间</string>
+    <string name="guide_needknow6">入 馆 须 知</string>
     <string name="guide_cardguide">办证指南</string>
     <string name="guide_time">开馆时间</string>
     <string name="guide_readerknow">读者须知</string>
