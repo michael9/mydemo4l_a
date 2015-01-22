@@ -27,6 +27,7 @@ public class BaseActivity extends Activity {
 		mGestureDetector = new GestureDetector(this,
 				new MyGestrueListener(this));
 		customProgressDialog=CustomProgressDialog.createDialog(this);
+		Log.i("BaseActivity", getClass().getSimpleName());
 	}
 
 //	@Override
