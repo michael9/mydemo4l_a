@@ -300,7 +300,7 @@
                 <!-- UMENG -->
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="548942defd98c56e4e000c8c" >
+            android:value="54bf50d3fd98c5d742000453" >
         </meta-data>
         <meta-data
             android:name="UMENG_CHANNEL"

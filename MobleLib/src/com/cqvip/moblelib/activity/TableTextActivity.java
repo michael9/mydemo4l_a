@@ -113,10 +113,11 @@ public class TableTextActivity extends BaseActivity {
 	                     testview.setText(arrray[i][j]); 
 	                     testview.setBackgroundResource(R.drawable.shape);
 	                     testview.setGravity(Gravity.CENTER);
-	                     tablerow.addView(testview); 
+	                     tablerow.addView(testview, new TableRow.LayoutParams( 
+	     	                    LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)); 
 	            } 
 	            table.addView(tablerow, new TableLayout.LayoutParams( 
-	                    LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)); 
+	                    LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)); 
 	        } 
 	    } 
 	  private void addWegit2(String[][] arrray) { 
