@@ -4,19 +4,19 @@ import com.cqvip.dao.Model;
 import com.cqvip.dao.PrimaryKey;
 
 /**
- * ÓÃ»§ÊµÌåÀà
+ * ç”¨æˆ·å®ä½“ç±»
  * @author luojiang
  *
  */
 public class MUser extends Model{
 
-	private Integer id;//×ÔÔöid
-	private String cardno;//ÓÃ»§id
-	private String pwd;//ÃÜÂë
-	private String readerno;//¶ÁÕßid
-	private String cqvipid;//¶ÁÕßvipid
+	private Integer id;//è‡ªå¢id
+	private String cardno;//ç”¨æˆ·id
+	private String pwd;//å¯†ç 
+	private String readerno;//è¯»è€…id
+	private String cqvipid;//è¯»è€…vipid
 
-	private String name;//ÓÃ»§Ãû
+	private String name;//ç”¨æˆ·å
 	
 	public MUser() {
 		super(new PrimaryKey("id",true));

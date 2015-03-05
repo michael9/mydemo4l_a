@@ -2,26 +2,25 @@ package com.cqvip.moblelib.constant;
 
 public class Constant {
 
-	public static final int GETFIRSTPAGE = 1;//»ñÈ¡Ê×Ò³
-	public static final int GETNEXTPAGE = 2; //»ñÈ¡ÏÂÒ»Ò³
-	public static final int DEFAULT_COUNT = 20;//Ä¬ÈÏ20Ìõ
-	public static final int DEFAULT_TEXT_COUNT = 20;//Ä¬ÈÏ20Ìõ
-	public static final int DEFAULT_COUNT_SuggestedReading = 100;//Ä¬ÈÏ20Ìõ
-	public static final int DEFAULT_COUNT_SEARCHHISTORY = 10;//ËÑË÷ÀúÊ·
+	public static final int GETFIRSTPAGE = 1;//è·å–é¦–é¡µ
+	public static final int GETNEXTPAGE = 2; //è·å–ä¸‹ä¸€é¡µ
+	public static final int DEFAULT_COUNT = 20;//é»˜è®¤20æ¡
+	public static final int DEFAULT_TEXT_COUNT = 20;//é»˜è®¤20æ¡
+	public static final int DEFAULT_COUNT_SuggestedReading = 100;//é»˜è®¤20æ¡
+	public static final int DEFAULT_COUNT_SEARCHHISTORY = 10;//æœç´¢å†å²
 	
-	public static final int HOTBOOK = 1;//ÈÈÃÅÍ¼Êé
-	public static final int NEWBOOK = 2;//ĞÂÊéÍÆ¼ö
-	public static final int HOTBOOK_MORE = 3;//ÈÈÃÅÍ¼Êé
-	public static final int NEWBOOK_MORE = 4;//ĞÂÊéÍÆ¼ö
-	public static final int SPEECH_NEWS = 5;//ĞÂÎÅ¶¯Ì¬
-	public static final int SPPECH_FREE = 6;//¹«Òæ½²×ù
-	public static final int QUESTION = 7;//³£¼ûÎÊÌâ
+	public static final int HOTBOOK = 1;//çƒ­é—¨å›¾ä¹¦
+	public static final int NEWBOOK = 2;//æ–°ä¹¦æ¨è
+	public static final int HOTBOOK_MORE = 3;//çƒ­é—¨å›¾ä¹¦
+	public static final int NEWBOOK_MORE = 4;//æ–°ä¹¦æ¨è
+	public static final int SPEECH_NEWS = 5;//æ–°é—»åŠ¨æ€
+	public static final int SPPECH_FREE = 6;//å…¬ç›Šè®²åº§
+	public static final int QUESTION = 7;//å¸¸è§é—®é¢˜
 	
-	public static final int MEDIAL = 1;//Ò½Ò©ÎÀÉú
-	public static final int ENGINE = 2;//¹¤³Ì¿ÆÑ§
-	public static final int SOCIAL = 3;//ÈËÎÄÉç»á
-	public static final int NATURE = 4;//×ÔÈ»¿ÆÑ§
-	public static final int FORESTS = 5;//Å©ÁÖÄÁÓã
-	
+	public static final int MEDIAL = 1;//åŒ»è¯å«ç”Ÿ
+	public static final int ENGINE = 2;//å·¥ç¨‹ç§‘å­¦
+	public static final int SOCIAL = 3;//äººæ–‡ç¤¾ä¼š
+	public static final int NATURE = 4;//è‡ªç„¶ç§‘å­¦
+	public static final int FORESTS = 5;//å†œæ—ç‰§é±¼
 	
 }

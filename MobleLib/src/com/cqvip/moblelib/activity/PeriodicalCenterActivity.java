@@ -14,8 +14,8 @@ import com.cqvip.moblelib.fragment.BranchPeriodicalFragment;
 import com.cqvip.moblelib.fragment.ConcernPeriodicalFragment;
 
 /**
- * �����ڿ����ģ���ҳ��
- * �ṩ��ע���࣬�͹�ע�ڿ� ����
+ * 电子期刊中心，主页面
+ * 提供关注分类，和关注期刊 功能
  * @author luojiang
  *
  */
@@ -46,9 +46,9 @@ public class PeriodicalCenterActivity extends FragmentActivity {
 	        mTabHost = (FragmentTabHost)findViewById(android.R.id.tabhost);
 	        mTabHost.setup(this, getSupportFragmentManager(), R.id.realtabcontent);
 
-	        mTabHost.addTab(mTabHost.newTabSpec("��ע����").setIndicator("��ע����"),
+	        mTabHost.addTab(mTabHost.newTabSpec("关注分类").setIndicator("关注分类"),
 	        		BranchPeriodicalFragment.class, null);
-	        mTabHost.addTab(mTabHost.newTabSpec("��ע�ڿ�").setIndicator("��ע�ڿ�"),
+	        mTabHost.addTab(mTabHost.newTabSpec("关注期刊").setIndicator("关注期刊"),
 	        		ConcernPeriodicalFragment.class, null);
 	    }
 

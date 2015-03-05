@@ -57,11 +57,11 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 	// public static final int GETFIRSTPAGE_ZK = 2;
 	// public static final int GETNEXT = 3;
 
-	// private int curpage = 1;// �ڼ�ҳ
-	// private int perpage = 10;// ÿҳ��ʾ����
+	// private int curpage = 1;// 第几页
+	// private int perpage = 10;// 每页显示条数
 	// private View moreprocess;
 	// private int curpage_sz = 1, curpage_zk = 1;
-	// ����
+	// 缓存
 	private HashMap<Long, Boolean> loded;
 	MyGridViewAdapter adapter_sz;
 	MyGridViewAdapter_Loaded adapter_zk;
@@ -87,7 +87,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 	private ImageView iv_nav_right;
 	private ViewPager mViewPager;
 	private int indicatorWidth;
-	public static String[] tabTitle = { "������", "������" }; // ����
+	public static String[] tabTitle = { "已下载", "下载中" }; // 标题
 	private LayoutInflater mInflater;
 	private int currentIndicatorLeft = 0;
 	// protected CustomProgressDialog customProgressDialog;
@@ -100,11 +100,11 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 	private DownloadManagerPro downloadManagerPro;
 	private DownloadManager downloadManager;
 
-	private ArrayList<MEbook> mebooks_list = new ArrayList<MEbook>();// ��ȡdownloadid,������
-	private ArrayList<MEbook> mebooks_listloaded = new ArrayList<MEbook>();// ������
-	private ArrayList<int[]> _lists = new ArrayList<int[]>();// ��ȡ����״̬
+	private ArrayList<MEbook> mebooks_list = new ArrayList<MEbook>();// 获取downloadid,下载中
+	private ArrayList<MEbook> mebooks_listloaded = new ArrayList<MEbook>();// 已下载
+	private ArrayList<int[]> _lists = new ArrayList<int[]>();//获取下载状态״̬
 
-	// private ArrayList<int[]> _listsloaded= new ArrayList<int[]>();//������id
+	// private ArrayList<int[]> _listsloaded= new ArrayList<int[]>();//已下载id
 	final static String TAG = "DownLoadManagerActivity";
 	private boolean ispressdownbutton;
 
@@ -126,7 +126,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 				getSupportFragmentManager());
 		// Set up the ViewPager with the sections adapter.
 		mViewPager.setAdapter(mSectionsPagerAdapter);
-		// ��ȡ���
+		// 获取数据
 		// getfavorlist(curpage, perpage, GlobleData.BOOK_SZ_TYPE,
 		// GETFIRSTPAGE_SZ);
 		// getfavorlist(curpage, perpage, GlobleData.BOOK_ZK_TYPE,
@@ -163,7 +163,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 
 					@Override
 					public void onPageSelected(int position) {
-						// RadioButton��� performClick()
+						// RadioButton点击 performClick()
 						if (rg_nav_content != null
 								&& rg_nav_content.getChildCount() > position) {
 							((RadioButton) rg_nav_content.getChildAt(position))
@@ -195,7 +195,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 					@Override
 					public void onCheckedChanged(RadioGroup group, int checkedId) {
 						if (rg_nav_content.getChildAt(checkedId) != null) {
-							// ��������
+							// 滑动动画
 							Log.i(TAG,
 									"currentIndicatorLeft:"
 											+ currentIndicatorLeft
@@ -213,13 +213,13 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 							animation.setInterpolator(new LinearInterpolator());
 							animation.setDuration(100);
 							animation.setFillAfter(true);
-							// ����ִ��λ�ƶ���
+							// 滑块执行位移动画
 							iv_nav_indicator.startAnimation(animation);
 
 							mViewPager.setCurrentItem(checkedId); // ViewPager
-																	// ����һ�� �л�
+																	// 跟随一起 切换
 
-							// ��¼��ǰ �±�ľ������� ����
+							// 记录当前 下标的距最左侧的 距离
 							currentIndicatorLeft = ((RadioButton) rg_nav_content
 									.getChildAt(checkedId)).getLeft();
 							// Log.i("PeriodicalClassfyActivity", ""+((checkedId
@@ -244,15 +244,15 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 		DisplayMetrics dm = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(dm);
 		indicatorWidth = dm.widthPixels / tabTitle.length;
-		// TODO step0 ��ʼ�������±�Ŀ� �����Ļ��ȺͿɼ����� ������RadioButton�Ŀ��)
+		// TODO step0 初始化滑动下标的宽 根据屏幕宽度和可见数量 来设置RadioButton的宽度)
 		LayoutParams cursor_Params = iv_nav_indicator.getLayoutParams();
-		cursor_Params.width = indicatorWidth;// ��ʼ�������±�Ŀ�
+		cursor_Params.width = indicatorWidth;// 初始化滑动下标的宽
 		iv_nav_indicator.setLayoutParams(cursor_Params);
 		mHsv.setSomeParam(rl_nav, iv_nav_left, iv_nav_right, this);
-		// ��ȡ���������
+		// 获取布局填充器
 		mInflater = (LayoutInflater) this
 				.getSystemService(LAYOUT_INFLATER_SERVICE);
-		// ��һ�ַ�ʽ��ȡ
+		// 另一种方式获取
 		// LayoutInflater mInflater = LayoutInflater.from(this);
 		initNavigationHSV();
 
@@ -268,7 +268,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 		} catch (DaoException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}// ������
+		}// 下载中
 
 		getDownloadStatus();
 	}
@@ -354,7 +354,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 		}
 
 		// /**
-		// * ��д�˷���Ϊ��ʹnotifyDataSetChanged��Ч Called when the host view is
+		// * 重写此方法为了使notifyDataSetChanged有效 Called when the host view is
 		// * attempting to determine if an item's position has changed. Returns
 		// * POSITION_UNCHANGED if the position of the given item has not
 		// changed
@@ -375,18 +375,6 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 			return tabTitle.length;
 		}
 
-		// @Override
-		// public CharSequence getPageTitle(int position) {
-		// Locale l = Locale.getDefault();
-		//
-		// switch (position) {
-		// case 0:
-		// return "������".toUpperCase(l);
-		// case 1:
-		// return "������".toUpperCase(l);
-		// }
-		// return null;
-		// }
 	}
 
 	/**
@@ -434,15 +422,15 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int positon,
 				long id) {
-			if (id == -2) { // ���
+			if (id == -2) { // 更多
 				// if (parent.getAdapter().getCount() == 1) {
 				// return;
 				// }
-				// // �����
+				// // 进度条
 				// moreprocess = view.findViewById(R.id.footer_progress);
 				// moreprocess.setVisibility(View.VISIBLE);
 				// // Log.i("parent.getTag()", "" + parent.getTag());
-				// // ����������
+				// // 请求网络更多
 				// listviewpagetag = (Integer) parent.getTag();
 				// if (listviewpagetag == GlobleData.BOOK_SZ_TYPE) {
 				// getfavorlist(curpage_sz + 1, perpage,
@@ -480,7 +468,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 						intent.setData(uri);
 						startActivity(intent);
 					} else {
-						Tool.ShowMessagel(context, "�ļ�" + filename + "������");
+						Tool.ShowMessagel(context, "文件" + filename + "不存在");
 					}
 				}
 			}
@@ -494,7 +482,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 		// HashMap<String, String> map = new HashMap<String, String>();
 		// map.put("libid", GlobleData.LIBIRY_ID);
 		// map.put("vipuserid", GlobleData.cqvipid);
-		// Log.i("ɾ���ղ�", GlobleData.cqvipid);
+		// Log.i("删除收藏", GlobleData.cqvipid);
 		// map.put("keyid", favorite.getFavoritekeyid());
 		// Log.i("keyid", favorite.getFavoritekeyid());
 		// map.put("typeid", "" + favorite.getTypeid());
@@ -565,12 +553,12 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 				convertView.setClickable(false);
 				TextView tv = (TextView) convertView
 						.findViewById(R.id.footer_txt);
-				tv.setText("�ף�û�������صĵ�����");
+				tv.setText("亲，没有已下载的电子书");
 				tv.setTextAppearance(myContext, R.style.TextStyle_nullcontent);
 				tv.setClickable(false);
 				return convertView;
 			}
-			// ���
+			// 更多
 			// if (position == this.getCount() - 1) {
 			// convertView = LayoutInflater.from(myContext).inflate(
 			// R.layout.moreitemsview, null);
@@ -609,7 +597,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 				holder.download_size.setText(getResources().getString(
 						R.string.item_size)
 						+ getAppSize(book.getPdfsize()));
-				// ͼƬ
+				// 图片
 				if (!TextUtils.isEmpty(book.getImgurl())) {
 					fetch.loadImage(book.getImgurl(), holder.download_image);
 				} else {
@@ -627,7 +615,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 							}
 						});
 			}
-			// ͼƬ
+			// 图片
 			// if (!TextUtils.isEmpty(favorite.getImgurl())) {
 			// fetch.loadImage(favorite.getImgurl(), holder.img);
 			// } else {
@@ -698,12 +686,12 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 				TextView tv = (TextView) convertView
 						.findViewById(R.id.footer_txt);
 				tv.setTextSize(R.dimen.listview_nullcontent_textsize);
-				tv.setText("�ף�û�������еĵ�����");
+				tv.setText("亲，没有下载中的电子书");
 				tv.setTextAppearance(myContext, R.style.TextStyle_nullcontent);
 				tv.setClickable(false);
 				return convertView;
 			}
-			// ���
+			// 更多
 			// if (position == this.getCount() - 1) {
 			// convertView = LayoutInflater.from(myContext).inflate(
 			// R.layout.moreitemsview, null);
@@ -736,7 +724,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 			final int downloadstatus;
 			if (!arrayList.isEmpty()) {
 				int[] int_array = arrayList.get(position);
-				// ͼƬ
+				// 图片
 				if (!TextUtils.isEmpty(book.getImgurl())) {
 					fetch.loadImage(book.getImgurl(), holder.download_image);
 				} else {
@@ -754,10 +742,10 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 				downloadstatus = int_array[2];
 				if (downloadstatus == DownloadManager.STATUS_SUCCESSFUL
 						&& !loded.containsKey(book.getDownloadid())) {
-					holder.downloadtip.setText("������ɣ�������");
-					// ���뻺��
+					holder.downloadtip.setText("下载完成，请点击打开");
+					// 放入缓存
 					loded.put(book.getDownloadid(), true);
-					// ������ݿ�
+					// 更新数据库
 					book.setPdfsize((long) int_array[1]);
 					updateDateBase(book);
 				}
@@ -775,7 +763,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 							});
 				}
 			}
-			// ͼƬ
+			// 图片
 			// if (!TextUtils.isEmpty(favorite.getImgurl())) {
 			// fetch.loadImage(favorite.getImgurl(), holder.img);
 			// } else {
@@ -797,19 +785,19 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 	}
 
 	/**
-	 * ɾ��Ի���
+	 * 删除对话框
 	 */
 	public void senddel(int type) {
 		Intent intent = new Intent();
 		intent.setClass(this, ActivityDlg.class);
 		intent.putExtra("ACTIONID", 0);
-		intent.putExtra("MSGBODY", "ȷ��ɾ��ü�¼��");
+		intent.putExtra("MSGBODY", "确定删除该记录？");
 		intent.putExtra("BTN_CANCEL", 1);
 		startActivityForResult(intent, type);
 	}
 
 	/**
-	 * ɾ����£��ݴ�
+	 * 删除更新，暂存
 	 * 
 	 * @param bookname
 	 * @param downloadstatus
@@ -912,7 +900,7 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 	public void init() {
 		rl_nav = (RelativeLayout) findViewById(R.id.rl_nav);
 		mHsv = (SwipHorizontalScrollView) findViewById(R.id.mHsv);
-		// ����
+		// 内容
 		rg_nav_content = (RadioGroup) findViewById(R.id.rg_nav_content);
 		iv_nav_indicator = (ImageView) findViewById(R.id.iv_nav_indicator);
 		iv_nav_left = (ImageView) findViewById(R.id.iv_nav_left);

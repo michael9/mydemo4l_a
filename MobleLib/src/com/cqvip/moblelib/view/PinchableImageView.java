@@ -17,27 +17,27 @@ import android.widget.ImageView;
 
 public class PinchableImageView extends ImageView {
 	static final int NONE = 0;
-	// ÍÏ¶¯ÖĞ
+	// æ‹–åŠ¨ä¸­
 	static final int DRAG = 1;
-	// Ëõ·ÅÖĞ
+	// ç¼©æ”¾ä¸­
 	static final int ZOOM = 2;
-	// ·Å´óing
+	// æ”¾å¤§ing
 	static final int BIGGER = 3;
-	// ËõĞ¡ing
+	// ç¼©å°ing
 	static final int SMALLER = 4;
-	// ¹Ø±ÕËõ·Å¶¯»­
+	// å…³é—­ç¼©æ”¾åŠ¨ç”»
 	static final int OPENSCALE = 1;
-	// ¹Ø±ÕÒÆ¶¯¶¯»­
+	// å…³é—­ç§»åŠ¨åŠ¨ç”»
 	static final int OPENTRANS = 2;
-	// µ±Ç°µÄÊÂ¼ş
+	// å½“å‰çš„äº‹ä»¶
 	private int mode = NONE;
-	// Á½´¥µã¾àÀë
+	// ä¸¤è§¦ç‚¹è·ç¦»
 	private float beforeLenght;
-	// Á½´¥µã¾àÀë
+	// ä¸¤è§¦ç‚¹è·ç¦»
 	private float afterLenght;
-	// Ëõ·ÅµÄ±ÈÀı X Y·½Ïò¶¼ÊÇÕâ¸öÖµ Ô½´óËõ·ÅµÄÔ½¿ì
+	// ç¼©æ”¾çš„æ¯”ä¾‹ X Yæ–¹å‘éƒ½æ˜¯è¿™ä¸ªå€¼ è¶Šå¤§ç¼©æ”¾çš„è¶Šå¿«
 	private float scale = 0.06f;
-	/* ´¦ÀíÍÏ¶¯ ±äÁ¿ */
+	/* å¤„ç†æ‹–åŠ¨ å˜é‡ */
 	private int screenW;
 	private int screenH;
 	private int start_x;
@@ -45,18 +45,18 @@ public class PinchableImageView extends ImageView {
 	private int stop_x;
 	private int stop_y;
 	private TranslateAnimation trans;
-	/* BitmapµÄ¿í¸ß */
+	/* Bitmapçš„å®½é«˜ */
 	private int bmWidth;
 	private int bmHeight;
-	// ´¦Àí³¬³ö±ß½çµÄ¶¯»­
+	// å¤„ç†è¶…å‡ºè¾¹ç•Œçš„åŠ¨ç”»
 	private Bitmap bitmap;
 	private float maxScale = 2.0f;
 	private float minScale = 1.0f;
-	// ¼ÇÂ¼³õÊ¼¿í¶È£¬ÓÃÓÚËõ·Å»Øµ¯
+	// è®°å½•åˆå§‹å®½åº¦ï¼Œç”¨äºç¼©æ”¾å›å¼¹
 	private int startWidth = 0;
 	private float piovtX = 0.5f;
 	private float piovtY = 0.5f;
-	// Ä¬ÈÏ¿ªÆôËùÓĞ¶¯»­
+	// é»˜è®¤å¼€å¯æ‰€æœ‰åŠ¨ç”»
 	private int AnimSwitch = OPENSCALE | OPENTRANS;
 	
 	private int ViewHeight;
@@ -66,14 +66,14 @@ public class PinchableImageView extends ImageView {
 	}
 
 	/**
-	 * ¹¹Ôìº¯Êı
+	 * æ„é€ å‡½æ•°
 	 * 
 	 * @param context
-	 *            Ïà¹ØÉÏÏÂÎÄ
+	 *            ç›¸å…³ä¸Šä¸‹æ–‡
 	 * @param w
-	 *            ÈİÆ÷µÄ¿í
+	 *            å®¹å™¨çš„å®½
 	 * @param h
-	 *            ÈİÆ÷µÄ¸ß
+	 *            å®¹å™¨çš„é«˜
 	 */
 	public PinchableImageView(Context context) {
 		super(context);
@@ -96,7 +96,7 @@ public class PinchableImageView extends ImageView {
 	public void setImageBitmap(Bitmap bm) {
 		super.setImageBitmap(bm);
 		if(bm!=null){
-		// ÖØÖÃstartWidth
+		// é‡ç½®startWidth
 		startWidth = 0;
 		bmWidth = bm.getWidth();
 		bmHeight = bm.getHeight();
@@ -107,7 +107,7 @@ public class PinchableImageView extends ImageView {
 	}
 
 	/**
-	 * ÊÍ·ÅImageViewµÄBitmap
+	 * é‡Šæ”¾ImageViewçš„Bitmap
 	 */
 	public void recycle() {
 		setImageBitmap(null);
@@ -116,7 +116,7 @@ public class PinchableImageView extends ImageView {
 	}
 
 	/**
-	 * ¼ÆËãÁ½µã¼äµÄ¾àÀë
+	 * è®¡ç®—ä¸¤ç‚¹é—´çš„è·ç¦»
 	 */
 	private float spacing(MotionEvent event) {
 		float x = event.getX(0) - event.getX(1);
@@ -127,7 +127,7 @@ public class PinchableImageView extends ImageView {
 	private float[] center;
 
 	/**
-	 * ¼ÆËãÁ½µã¼äµÄÖĞĞÄµã
+	 * è®¡ç®—ä¸¤ç‚¹é—´çš„ä¸­å¿ƒç‚¹
 	 */
 	private float[] centerPostion(MotionEvent event) {
 		float[] center = new float[2];
@@ -135,7 +135,7 @@ public class PinchableImageView extends ImageView {
 		float y = event.getY(0);
 		float x1 = event.getX(1);
 		float y1 = event.getY(1);
-		/* x,y·Ö±ğµÄ¾àÀë */
+		/* x,yåˆ†åˆ«çš„è·ç¦» */
 		center[0] = Math.abs((x1 - x) / 2);
 		center[1] = Math.abs((y1 - y) / 2);
 		center[0] = Math.max(x, x1) - center[0];
@@ -144,7 +144,7 @@ public class PinchableImageView extends ImageView {
 	}
 
 	/**
-	 * ÉèÖÃImageView´óĞ¡µÈÓÚÏÔÊ¾µÄÄÚÈİ´óĞ¡
+	 * è®¾ç½®ImageViewå¤§å°ç­‰äºæ˜¾ç¤ºçš„å†…å®¹å¤§å°
 	 */
 	public void setRect() {
 		float scale = Math.min((float) getWidth() / (float) bmWidth,
@@ -160,12 +160,12 @@ public class PinchableImageView extends ImageView {
 	}
 
 	/**
-	 * ´¦Àí¸÷ÖÖÒÆ¶¯»Øµ¯
+	 * å¤„ç†å„ç§ç§»åŠ¨å›å¼¹
 	 * 
 	 * @param disX
-	 *            XµÄÆ«ÒÆ
+	 *            Xçš„åç§»
 	 * @param disY
-	 *            YµÄÆ«ÒÆ
+	 *            Yçš„åç§»
 	 */
 	public void Rebound(int disX, int disY) {
 		this.layout(getLeft() + disX, getTop() + disY, getLeft() + disX
@@ -179,7 +179,7 @@ public class PinchableImageView extends ImageView {
 	}
 
 	/**
-	 * ´¦Àí¸÷ÖÖËõ·Å»Øµ¯
+	 * å¤„ç†å„ç§ç¼©æ”¾å›å¼¹
 	 */
 	public boolean ReScale() {
 		float scaleX = 1f;
@@ -249,10 +249,10 @@ public class PinchableImageView extends ImageView {
 	}
 
 	/**
-	 * ´¦Àí³¬·¶Î§»Øµ¯
+	 * å¤„ç†è¶…èŒƒå›´å›å¼¹
 	 */
 	private void onRebound() {
-		/* ÅĞ¶ÏÊÇ·ñ³¬³ö·¶Î§ ²¢´¦Àí */
+		/* åˆ¤æ–­æ˜¯å¦è¶…å‡ºèŒƒå›´ å¹¶å¤„ç† */
 		int disX = 0, disY = 0;
 		if (getHeight() < screenH) {
 			disY = (screenH - getHeight()) / 2 - getTop();
@@ -272,7 +272,7 @@ public class PinchableImageView extends ImageView {
 			if (getRight() < screenW)
 				disX = screenW - getRight();
 		}
-		// ¿ªÊ¼»Øµ¯
+		// å¼€å§‹å›å¼¹
 		Rebound(disX, disY);
 	}
 
@@ -296,7 +296,7 @@ public class PinchableImageView extends ImageView {
 	}
 
 	/**
-	 * ´¦Àí´¥Åö..
+	 * å¤„ç†è§¦ç¢°..
 	 */
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
@@ -311,7 +311,7 @@ public class PinchableImageView extends ImageView {
 				beforeLenght = spacing(event);
 			break;
 		case MotionEvent.ACTION_POINTER_DOWN:
-			/** ÏÂÃæÈı¾äÓÃÓÚ¼ÆËãËõ·ÅÖĞĞÄµãÎ»ÖÃ **/
+			/** ä¸‹é¢ä¸‰å¥ç”¨äºè®¡ç®—ç¼©æ”¾ä¸­å¿ƒç‚¹ä½ç½® **/
 			center = centerPostion(event);
 			piovtX = center[0] / getWidth();
 			piovtY = center[1] / getHeight();
@@ -326,7 +326,7 @@ public class PinchableImageView extends ImageView {
 		case MotionEvent.ACTION_UP:
 			mode = NONE;
 			setRect();
-			/* ÅĞ¶ÏÊÇ·ñ³¬¹ıËõ·Å½çÏŞ */
+			/* åˆ¤æ–­æ˜¯å¦è¶…è¿‡ç¼©æ”¾ç•Œé™ */
 			if (!ReScale())
 				onRebound();
 			break;
@@ -334,7 +334,7 @@ public class PinchableImageView extends ImageView {
 			mode = NONE;
 			break;
 		case MotionEvent.ACTION_MOVE:
-			/* ´¦ÀíÍÏ¶¯ */
+			/* å¤„ç†æ‹–åŠ¨ */
 			if (mode == DRAG) {
 				this.setPosition(stop_x - start_x, stop_y - start_y, stop_x
 						+ this.getWidth() - start_x,
@@ -342,7 +342,7 @@ public class PinchableImageView extends ImageView {
 				stop_x = (int) event.getRawX();
 				stop_y = (int) event.getRawY();
 			}
-			/* ´¦ÀíËõ·Å */
+			/* å¤„ç†ç¼©æ”¾ */
 			else if (mode == ZOOM) {
 				if (spacing(event) > 10f) {
 					afterLenght = spacing(event);
@@ -365,7 +365,7 @@ public class PinchableImageView extends ImageView {
 	}
 
 	/**
-	 * ÊµÏÖ´¦ÀíËõ·Å
+	 * å®ç°å¤„ç†ç¼©æ”¾
 	 */
 	private void setScale(float temp, int flag) {
 		int l = 0, t = 0, r = 0, b = 0;
@@ -386,7 +386,7 @@ public class PinchableImageView extends ImageView {
 	}
 
 	/**
-	 * ÊµÏÖ´¦ÀíÍÏ¶¯
+	 * å®ç°å¤„ç†æ‹–åŠ¨
 	 */
 	private void setPosition(int left, int top, int right, int bottom) {
 		this.layout(left, top, right, bottom);

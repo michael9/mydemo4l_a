@@ -64,22 +64,22 @@ public class EbookAdapter extends BaseAdapter {
 	}
 
 	/**
-	 * ���Ӹ�����
+	 * 增加更多数据
 	 * 
 	 * @param moreStatus
 	 */
 	public void addMoreData(List<EBook> moreStatus) {
-		this.lists.addAll(moreStatus);// ����������ӵ�ԭ�м���
+		this.lists.addAll(moreStatus);// 把新数据增加到原有集合
 		this.notifyDataSetChanged();
 	}
 
 	static class ViewHolder {
 
-		TextView title;// ����
-		TextView author;// ����
-		TextView publisher;// ��Դ
-		TextView u_abstract;// ���
-		NetworkImageView  img;// ʱ��ͼƬ �����޸�
+		TextView title;// 书名
+		TextView author;// 作者
+		TextView publisher;// 来源
+		TextView u_abstract;// 简介
+		NetworkImageView  img;// 时间图片 不用修改
 		// Button btn_comment,btn_item_result_search_share,favorite;
 	}
 
@@ -117,8 +117,8 @@ public class EbookAdapter extends BaseAdapter {
 		holder.author.setText(author + book.getWriter());
 		holder.publisher.setSingleLine(false);
 		holder.publisher.setMaxLines(2);
-		holder.publisher.setText(from + "��"+book.getName_c()+"��"+book.getYears() + "��," + "��"
-				+ book.getNum() + "��");
+		holder.publisher.setText(from + "《"+book.getName_c()+"》"+book.getYears() + "年," + "第"
+				+ book.getNum() + "期");
 		holder.u_abstract.setText(describe + book.getRemark_c());
 		String url=book.getImgurl();
 		holder.img.setVisibility(View.GONE);

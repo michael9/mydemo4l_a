@@ -43,9 +43,6 @@ public class AdvancedBookAdapter extends BaseAdapter {
 	public List<ShortBook> getLists(){
 		return lists;
 	}
-	/**
-	 * �ײ���ఴť������+1
-	 */
 	@Override
 	public int getCount() {
       if(lists!=null){
@@ -58,27 +55,23 @@ public class AdvancedBookAdapter extends BaseAdapter {
 	public Object getItem(int position) {
 		return lists.get(position);
 	}
-	/**
-	 * ���������ײ��ĸ�ఴť������-2
-	 */
 	@Override
 	public long getItemId(int position) {
       return position;
 	}
 	/**
-	 * ���Ӹ�����
 	 * @param moreStatus
 	 */
 	public void addMoreData(List<ShortBook> moreStatus)
 	{
-		this.lists.addAll(moreStatus);//����������ӵ�ԭ�м���
+		this.lists.addAll(moreStatus);
 		this.notifyDataSetChanged();
 	}
 	  static class ViewHolder{
 			
 		
-			TextView title;//����
-			NetworkImageView_rotate img;//ʱ��ͼƬ �����޸�
+			TextView title;
+			NetworkImageView_rotate img;
 			
 			}
 	  private int rotate_position=-1;
@@ -110,7 +103,6 @@ public class AdvancedBookAdapter extends BaseAdapter {
         	Log.i("AdvancedBookAdapter", rotate_position+"rotate_position+positon"+position);
 	        rotate_position=position>rotate_position?position:rotate_position;  
 	        
-	        //��Ϊÿ��imageview�������ʱ�䲻��������Ҫ��ͼƬurl�����Զ���imageview�����ǰ��url�Ƚϣ���ͬ�򷵻أ���ͬ���滻��
 			String url=book.getDate();
 	        if(!TextUtils.isEmpty(url)){
 	        	holder.img.setImageUrl(url, mImageLoader);

@@ -11,17 +11,17 @@ import com.cqvip.moblelib.net.BookException;
 
 public class BorrowBook{
 
-    private String recordno;//¼ÇÂ¼±àºÅ
+    private String recordno;//è®°å½•ç¼–å·
 	public void setReturndate(String returndate) {
 		this.returndate = returndate;
 	}
 
 	private String barcode;
-	private String title;//±êÌâ
-	private String callno;//È¡ÊéºÅ
+	private String title;//æ ‡é¢˜
+	private String callno;//å–ä¹¦å·
 	private String volumeno;
-	private String loandate;//½èÔÄÈÕÆÚ
-	private String returndate;//¹é»¹
+	private String loandate;//å€Ÿé˜…æ—¥æœŸ
+	private String returndate;//å½’è¿˜
 	//private int loannum;
 
 	private int renew;
@@ -29,8 +29,8 @@ public class BorrowBook{
 		return renew;
 	}
 
-	private String local;//µØÖ·
-	private String cirtype;//Í¼Êé¹İ·ÖÀà
+	private String local;//åœ°å€
+	private String cirtype;//å›¾ä¹¦é¦†åˆ†ç±»
 	private String price;
 	private String servicetype;
 	

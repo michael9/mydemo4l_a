@@ -16,14 +16,14 @@ import com.cqvip.utils.Tool;
 
 /**
  * <p>
- * �ļ����: PersonalCenterActivity.java
- * �ļ�����: ��������
- * ��Ȩ����: ��Ȩ����(C)2013-2020
- * ��          ˾: ����ά����ѯ���޹�˾
- * ����ժҪ: 
- * ����˵��:
- * ������ڣ� 201��5��10��
- * �޸ļ�¼: 
+ * 文件名称: PersonalCenterActivity.java
+ * 文件描述: 个人中心
+ * 版权所有: 版权所有(C)2013-2020
+ * 公          司: 重庆维普咨询有限公司
+ * 内容摘要: 
+ * 其他说明:
+ * 完成日期： 201年5月10日
+ * 修改记录: 
  * </p>
  * 
  * @author LHP,LJ
@@ -40,7 +40,7 @@ private Context context;
 		requestWindowFeature( Window.FEATURE_NO_TITLE );
 		setContentView(R.layout.activity_personal_center);
 		context = this;
-		//������Ϣ
+		//读者信息
 		readerinfoLayout=(LinearLayout) findViewById(R.id.readerinfoLayout);
 		//favorLayout=(LinearLayout) findViewById(R.id.favorLayout);
 		logoutLayout=(LinearLayout) findViewById(R.id.logoutLayout);
@@ -76,7 +76,7 @@ private Context context;
 //				//overridePendingTransition(R.anim.slide_left_in, R.anim.slide_right_out);	
 //			}
 //		});
-		//���d����
+		//下載管理
 		downloadLayout.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -86,7 +86,7 @@ private Context context;
 			}
 		});
 		
-		//�ҵ��ղ�
+		//我的收藏
 		myfavorLayout.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -106,7 +106,7 @@ private Context context;
 				intent.putExtra("MSGBODY", getResources().getString(R.string.confirm_quit));
 				intent.putExtra("BTN_CANCEL", 1);
 				startActivityForResult(intent, 1);
-				//�����Ի���ȷ���Ƿ��˳�
+				//弹出对话框，确认是否退出
 				//overridePendingTransition(R.anim.slide_left_in, R.anim.slide_right_out);	
 //				AlertDialog.Builder builder = new AlertDialog.Builder(context)
 //				.setTitle(R.string.title_tips)
@@ -115,20 +115,20 @@ private Context context;
 //					
 //					@Override
 //					public void onClick(DialogInterface dialog, int which) {
-//						// �����ݿ⣬�˺���Ϣ
+//						// 清楚数据库，账号信息
 //						MUserDao dao = new MUserDao(context);
 //						try {
 //							dao.delInfo(GlobleData.userid);
 //						} catch (DaoException e) {
-//							Log.i("PersonalCenterActivity","===ע��ʧ��=");
+//							Log.i("PersonalCenterActivity","===注销失败=");
 //							e.printStackTrace();
 //						}
-//						//���õ�¼��ʶ
+//						//设置登录标识
 //						MainMenuActivity.islogin = false;
-//						//���ص�¼����
+//						//返回登录界面
 //						finish();
-//						//��ʾע��ɹ�
-//						Tool.ShowMessages(context, "ע��ɹ�");
+//						//提示注销成功
+//						Tool.ShowMessages(context, "注销成功");
 //						
 //					}
 //				}).setNegativeButton(getString(R.string.confirm_cancel),null);
@@ -166,12 +166,12 @@ private Context context;
 						e.printStackTrace();
 						onError(2);
 					}
-					//���õ�¼��ʶ
+					//设置登录标识
 					GlobleData.islogin = false;
-					//���ص�¼����
+					//返回登录界面
 					finish();
-					//��ʾע��ɹ�
-					Tool.ShowMessages(context, "ע���¼�ɹ�");
+					//提示注销成功
+					Tool.ShowMessages(context, "注销登录成功");
 					
 				}else{
 					

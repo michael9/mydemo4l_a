@@ -13,7 +13,7 @@ import org.json.JSONObject;
 import com.cqvip.moblelib.net.BookException;
 
 /**
- * 评论
+ * 璇勮
  * @author luojiang
  *
  */
@@ -21,12 +21,12 @@ public class Comment {
 
 
 private String recordid;//id
-private String typeid;//类型
-private String keyid;//书籍id
-private String userid;//用户id
-private String nickname;//名字
-private String contents;//内容
-private Date commenttime;//评论时间
+private String typeid;//绫诲瀷
+private String keyid;//涔︾睄id
+private String userid;//鐢ㄦ埛id
+private String nickname;//鍚嶅瓧
+private String contents;//鍐呭
+private Date commenttime;//璇勮鏃堕棿
 	
 public Comment(JSONObject json) throws BookException{
 	try {

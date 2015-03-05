@@ -54,19 +54,19 @@ public class EbookDetailActivity extends BaseActivity {
 	private ImageView img_book;
 	// private ImageFetcher mImageFetcher;
 	private Map<String, String> gparams;
-	//����
+	//下载
 	private Context context;
 	 public static final String     DOWNLOAD_FOLDER_NAME = "downloadmoblib";
 	 private long                   downloadId           = 0;
 	 private DownloadManager        downloadManager;
-	 private int fromFlage;//��ʾ���ĸ�activity��ת���������۹�������ʾ���۰�ť
+	 private int fromFlage;//表示从哪个activity跳转过来，评论过来不显示评论按钮
 	 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_ebook_detail);
 		context = this;
-		//���ñ��⣬��ʾ���ذ�ť
+		//设置标题，显示下载按钮
 		View v = findViewById(R.id.head_bar);
 		ImageView download = (ImageView)v.findViewById(R.id.btn_right_header);
 		download.setVisibility(View.VISIBLE);
@@ -115,21 +115,21 @@ public class EbookDetailActivity extends BaseActivity {
 
 		title.setText(dBook.getTitle_c());
 		author.setText(author1 + dBook.getWriter());
-		if(dBook.getName_c()==null||dBook.getName_c().equals("����")||dBook.getNum()==null||dBook.getYears()==null){
+		if(dBook.getName_c()==null||dBook.getName_c().equals("不详")||dBook.getNum()==null||dBook.getYears()==null){
 			from.setVisibility(View.GONE);
 		}else{
-		from.setText(from1 + "��"+dBook.getName_c()+"��"+dBook.getYears() + "��," + "��" + dBook.getNum()
-				+ "��");
+		from.setText(from1 + "《"+dBook.getName_c()+"》"+dBook.getYears() + "年," + "第" + dBook.getNum()
+				+ "期");
 		}
 		//time.setText(publish + dBook.getOrgan());
 		//page.setText(page1 + dBook.getPagecount());
 		if (dBook.getPdfsize() != 0) {
-			type.setText(type1 + "PDF,��" +dBook.getPagecount()+"ҳ,��С"+ dBook.getPdfsize() / 1024 + "KB");
+			type.setText(type1 + "PDF,共" +dBook.getPagecount()+"页,大小"+ dBook.getPdfsize() / 1024 + "KB");
 		} else {
 			type.setVisibility(View.GONE);
 		}
 		content.setText("        "+dBook.getRemark_c());
-		// //�ж��Ƿ��Ѿ��ղ�
+		// //判断是否已经收藏
 		// btn_ebook_detail_collect.setText(isFavorite(dBook.isIsfavorite()));
 		if(fromFlage == 1){
 			btn_ebook_detail_buzz.setVisibility(View.GONE);
@@ -153,7 +153,7 @@ public class EbookDetailActivity extends BaseActivity {
 					_intent.putExtra("type", GlobleData.BOOK_ZK_TYPE);
 					startActivity(_intent);
 				} else {
-					// ֻ�ǵ�½����
+					// 只是登陆而已
 					showLoginDialog(4);
 				}
 			}
@@ -186,12 +186,12 @@ public class EbookDetailActivity extends BaseActivity {
 								add_forvorite_ls, Method.POST);
 					}
 				} else {
-					// ֻ�ǵ�½����
+					// 只是登陆而已
 					showLoginDialog(4);
 				}
 			}
 		});
-		// ����
+		// 下载
 		btn_ebook_detail_download.setOnClickListener(new OnClickListener() {
 
 			@SuppressLint("NewApi")
@@ -199,30 +199,30 @@ public class EbookDetailActivity extends BaseActivity {
 			public void onClick(View v) {
 				if (GlobleData.islogin) {
 				if (download_url != null) {
-					// �����Ի���
+					// 弹出对话框
 //					Intent intent = new Intent(Intent.ACTION_VIEW, Uri
 //							.parse(download_url));
 //					startActivity(intent);
-					//1���ж��Ƿ���sd��
+					//1、判断是否有sd卡
 					 if(!Tool.hasSDcard(context)){
 							return;
 						}
-					//��������·�����������
+					//创建下载路径，下载名称
 					 File folder = new File(DOWNLOAD_FOLDER_NAME);
 					   if (!folder.exists() || !folder.isDirectory()) {
 						   folder.mkdirs();
 					   }
 					   MEBookDao dao = new MEBookDao(context);
-					  //1�鿴�Ƿ����ع�
+					  //1查看是否下载过
 					   if(isAlreadyDownload(dao,dBook.getLngid())){
 						   Intent _intent = new Intent(context,ActivityDlg.class);
-						   _intent.putExtra("MSGBODY", "���Ѿ����ظ��ļ����Ƿ���������?");
+						   _intent.putExtra("MSGBODY", "您已经下载该文件，是否重新下载?");
 						   _intent.putExtra("BTN_CANCEL", 1);
 						   startActivityForResult(_intent,0);
 					   }else{
-						   //���������ж�
+						   //加入下载列队
 						   andToqueue();
-						   //������ݿⱣ��,��������
+						   //插入数据库保存,正在下载
 						   try {
 							dao.saveInfo(dBook, downloadId, MEbook.TYPE_ON_DOWNLOADING);
 						} catch (DaoException e) {
@@ -236,7 +236,7 @@ public class EbookDetailActivity extends BaseActivity {
 					
 				}
 			}else{
-				// �������ؽ���
+				// 进入下载界面
 				showLoginDialog(4);
 				}
 			}
@@ -253,7 +253,7 @@ public class EbookDetailActivity extends BaseActivity {
 				if (GlobleData.islogin) {
 				startActivity(new Intent(context,DownLoadManagerActivity.class));
 				}else {
-					// ֻ�ǵ�½����
+					// 只是登陆而已
 					showLoginDialog(4);
 				}
 			}
@@ -276,11 +276,11 @@ public class EbookDetailActivity extends BaseActivity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		//��������
+		//从新下载
 		if(requestCode ==0&&resultCode == 0){
 			 MEBookDao dao = new MEBookDao(context);
 			 andToqueue();
-			   //������ݿⱣ��,��������
+			   //插入数据库保存,正在下载
 			   try {
 				dao.saveInfo(dBook, downloadId, MEbook.TYPE_ON_DOWNLOADING);
 			} catch (DaoException e) {
@@ -290,8 +290,8 @@ public class EbookDetailActivity extends BaseActivity {
 		}
 	}
 	/**
-	 * �ж��Ƿ����ع���ļ�
-	 * @param id ������Ψһid
+	 * 判断是否下载过该文件
+	 * @param id 电子书唯一id
 	 * @return
 	 */
 	private boolean isAlreadyDownload(MEBookDao dao,String id) {
@@ -307,7 +307,7 @@ public class EbookDetailActivity extends BaseActivity {
 		return true;
 	}
 	/**
-	 * ���������жӣ�����
+	 * 加入下载列队，下载
 	 * 
 	 */
 	@SuppressLint("NewApi")
@@ -315,7 +315,7 @@ public class EbookDetailActivity extends BaseActivity {
 		DownloadManager.Request request = new DownloadManager.Request(Uri.parse(download_url));
 		request.setDestinationInExternalPublicDir(DOWNLOAD_FOLDER_NAME, getFullname(dBook.getTitle_c()));
 		request.setTitle(dBook.getTitle_c());
-		request.setDescription("��ʽ��pdf,"+dBook.getPdfsize());
+		request.setDescription("格式：pdf,"+dBook.getPdfsize());
 		if(Build.VERSION.SDK_INT>=11)
 		request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
 		request.setVisibleInDownloadsUi(false);
@@ -331,14 +331,14 @@ public class EbookDetailActivity extends BaseActivity {
 		Tool.ShowMessages(context, getString(R.string.tips_begin_download));
 	}
 	/**
-	 * �����ļ����
+	 * 下载文件名称
 	 * @param title_c
 	 * @return
 	 */
 	private String getFullname(String title_c) {
 		return title_c+".pdf";
 	}
-	// ��ʾ�Ի���
+	// 显示对话框
 	private void showLoginDialog(int id) {
 		MainMenuActivity.cantouch = true;
 		Intent intent = new Intent(EbookDetailActivity.this, ActivityDlg.class);
@@ -346,7 +346,7 @@ public class EbookDetailActivity extends BaseActivity {
 		startActivityForResult(intent, id);
 	}
 
-	// //�ж��Ƿ��ղ�
+	// //判断是否收藏
 	// private String isFavorite(boolean isfavorite) {
 	// if(isfavorite||EBookSearchActivity.favors.containsKey(dBook.getLngid())){
 	// return getResources().getString(R.string.already_favoriate);

@@ -17,7 +17,7 @@ public class SearchHistoryDao<T extends Model> extends Dao {
 	}
 
 	/**
-	 * Çå¿ÕËùÓĞÁĞ±í
+	 * æ¸…ç©ºæ‰€æœ‰åˆ—è¡¨
 	 * 
 	 * @throws DaoException
 	 */
@@ -35,7 +35,7 @@ public class SearchHistoryDao<T extends Model> extends Dao {
 	}
 
 	/**
-	 * ±£´æÓÃ»§ĞÅÏ¢
+	 * ä¿å­˜ç”¨æˆ·ä¿¡æ¯
 	 * 
 	 * @param user
 	 * @throws DaoException
@@ -49,7 +49,7 @@ public class SearchHistoryDao<T extends Model> extends Dao {
 	}
 
 	/**
-	 * ²éÑ¯ËùÓĞ¼ÇÂ¼
+	 * æŸ¥è¯¢æ‰€æœ‰è®°å½•
 	 * 
 	 * @param id
 	 * @return
@@ -70,7 +70,7 @@ public class SearchHistoryDao<T extends Model> extends Dao {
 	}
 
 	/**
-	 * ¸ù¾İname²éÑ¯¼ÇÂ¼
+	 * æ ¹æ®nameæŸ¥è¯¢è®°å½•
 	 * 
 	 * @param id
 	 * @return
@@ -93,7 +93,7 @@ public class SearchHistoryDao<T extends Model> extends Dao {
 	}
 
 	/**
-	 * ¸ù¾İdate½µĞò²éÑ¯¼ÇÂ¼
+	 * æ ¹æ®dateé™åºæŸ¥è¯¢è®°å½•
 	 * 
 	 * @param id
 	 * @return
@@ -114,7 +114,7 @@ public class SearchHistoryDao<T extends Model> extends Dao {
 	}
 
 	/**
-	 * ¸üĞÂ
+	 * æ›´æ–°
 	 * 
 	 * @param book
 	 * @throws DaoException

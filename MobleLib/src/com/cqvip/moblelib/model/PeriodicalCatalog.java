@@ -13,7 +13,7 @@ import org.json.JSONObject;
 import com.cqvip.moblelib.net.BookException;
 
 /**
- * 1.12.4	»ñÈ¡ÕÂ½ÚÄ¿Â¼ÁĞ±í
+ * 1.12.4	è·å–ç« èŠ‚ç›®å½•åˆ—è¡¨
  * 
  * @author luojiang
  * 
@@ -24,27 +24,27 @@ public class PeriodicalCatalog{
 	 * 
 	 */
 	public String express; // gch+year+num
-	public String recordcount; //Ä¿Â¼Êı
+	public String recordcount; //ç›®å½•æ•°
 	
 	private String lngid; // 
 	private String gch; // 
-	private String years;// Äê
+	private String years;// å¹´
 	private String num;// 
-	private String vol;// ¾í
-	private String title_c; // ±êÌâ
+	private String vol;// å·
+	private String title_c; // æ ‡é¢˜
 	private String title_e;//
-	private String keyword_c;// ¹Ø¼ü´Ê
+	private String keyword_c;// å…³é”®è¯
 	private String keyword_e; // 
 	private String name_c;// 
 	private String name_e; // 
-	private String remark_c;// ÕªÒª
+	private String remark_c;// æ‘˜è¦
 	private String remark_e;// 
 	private String classtype;// 
-	private String writer;//×÷Õß
-	private String organ;// ³ö°æÉç
-	private String beginpage; // ¿ªÊ¼Ò³
-	private String endpage;// ½áÊøÒ³
-	private String pagecount;// Ò³Êı
+	private String writer;//ä½œè€…
+	private String organ;// å‡ºç‰ˆç¤¾
+	private String beginpage; // å¼€å§‹é¡µ
+	private String endpage;// ç»“æŸé¡µ
+	private String pagecount;// é¡µæ•°
 	private String pdfsize;// 
 	private String imgurl;// 
 	private String isfavorite;// 

@@ -6,34 +6,34 @@ import java.util.Date;
 import java.util.Hashtable;
 
 /**
- * ÊµÌåÀà£¬¹©ÊµÌå¼Ì³Ğ
+ * å®ä½“ç±»ï¼Œä¾›å®ä½“ç»§æ‰¿
  * @author luojiang
  *
  */
 public class Model {
 	 /** 
-     * ´æ·Åget·½·¨ 
+     * å­˜æ”¾getæ–¹æ³• 
      */  
     protected Hashtable<String, Method> getMethods_ = null;  
     /** 
-     * ´æ·Åset·½·¨ 
+     * å­˜æ”¾setæ–¹æ³• 
      */  
     protected Hashtable<String, Method> setMethods_ = null;
     
     /**
-     * getÓësetº¯Êı³õÊ¼×´Ì¬(0:Î´³õÊ¼»¯, 1:³õÊ¼»¯³É¹¦, 2:³õÊ¼»¯Ê§°Ü)
+     * getä¸setå‡½æ•°åˆå§‹çŠ¶æ€(0:æœªåˆå§‹åŒ–, 1:åˆå§‹åŒ–æˆåŠŸ, 2:åˆå§‹åŒ–å¤±è´¥)
      */
     protected int initMethodState_ = Operator.METHOD_UNINIT;
     
 	/**
-	 * Ö÷¼ü¶ÔÏó
+	 * ä¸»é”®å¯¹è±¡
 	 */
 	protected PrimaryKey primaryKey_ = null;
 	
 	/**
-	 * ¹¹Ôìº¯Êı
+	 * æ„é€ å‡½æ•°
 	 * @param key
-	 * 		Ö÷¼ü¶ÔÏó
+	 * 		ä¸»é”®å¯¹è±¡
 	 * @return
 	 */
 	public Model(PrimaryKey primaryKey){
@@ -41,43 +41,43 @@ public class Model {
 	}
 		
 	/**
-	 * ²Ù×÷Àà
+	 * æ“ä½œç±»
 	 * @author luojiang
 	 *
 	 */
 	public abstract static class Operator {
 		/**
-		 * getÓëset·½·¨³õÊ¼»¯×´Ì¬£¨Î´³õÊ¼»¯£©
+		 * getä¸setæ–¹æ³•åˆå§‹åŒ–çŠ¶æ€ï¼ˆæœªåˆå§‹åŒ–ï¼‰
 		 */
 		public final static int METHOD_UNINIT = 0;
 		/**
-		 * getÓëset·½·¨³õÊ¼»¯×´Ì¬£¨³õÊ¼»¯³É¹¦£©
+		 * getä¸setæ–¹æ³•åˆå§‹åŒ–çŠ¶æ€ï¼ˆåˆå§‹åŒ–æˆåŠŸï¼‰
 		 */
 		public final static int METHOD_INIT_OK = 1;
 		/**
-		 * getÓëset·½·¨³õÊ¼»¯×´Ì¬£¨³õÊ¼»¯Ê§°Ü£©
+		 * getä¸setæ–¹æ³•åˆå§‹åŒ–çŠ¶æ€ï¼ˆåˆå§‹åŒ–å¤±è´¥ï¼‰
 		 */
 		public final static int METHOD_INIT_FAILED = 2;
 		
 		/**
-		 * »ñÈ¡Ö÷¼ü
+		 * è·å–ä¸»é”®
 		 * 
 		 * @param model
-		 *       ÊµÌå¶ÔÏó
+		 *       å®ä½“å¯¹è±¡
 		 *
-		 * @return Ö÷¼ü¶ÔÏó
+		 * @return ä¸»é”®å¯¹è±¡
 		 */
 		protected PrimaryKey getPrimaryKey(Model model) {
 			return model.primaryKey_;
 		}
 		
 		/**
-		 * »ñÈ¡×Ö¶ÎµÄÖµ
+		 * è·å–å­—æ®µçš„å€¼
 		 * @param model
-		 * 		ÊµÌå¶ÔÏó
+		 * 		å®ä½“å¯¹è±¡
 		 * @param fieldName
-		 * 		×Ö¶ÎÃû
-		 * @return ×Ö¶ÎÖµ
+		 * 		å­—æ®µå
+		 * @return å­—æ®µå€¼
 		 */
 		protected Object getFieldValue(Model model, String fieldName){
 			Method method = model.getMethods_.get(fieldName);  
@@ -90,11 +90,11 @@ public class Model {
 		}
 		
 		/**
-		 * ÉèÖÃ×Ö¶ÎµÄÖµ
+		 * è®¾ç½®å­—æ®µçš„å€¼
 		 * @param model
-		 * 		ÊµÌå¶ÔÏó
+		 * 		å®ä½“å¯¹è±¡
 		 * @param fieldName
-		 * 		×Ö¶ÎÃû
+		 * 		å­—æ®µå
 		 * @return	
 		 */
 		protected void setFieldValue(Model model, String fieldName, Object value){
@@ -107,7 +107,7 @@ public class Model {
 		}
 		
 		/**
-		 * »ñÈ¡×Ö¶ÎÀàĞÍ
+		 * è·å–å­—æ®µç±»å‹
 		 * @param fieldName
 		 * @return
 		 * @throws NoSuchFieldException
@@ -126,10 +126,10 @@ public class Model {
 		}
 		
 		/**
-		 * ³õÊ¼»¯×Ö¶ÎµÄgetÓësetº¯Êı
+		 * åˆå§‹åŒ–å­—æ®µçš„getä¸setå‡½æ•°
 		 * @param 
 		 * 		
-		 * @return ³õÊ¼»¯×´Ì¬
+		 * @return åˆå§‹åŒ–çŠ¶æ€
 		 */
 		protected int initMethods(Model model) {
 			if(0 != model.initMethodState_) {
@@ -140,7 +140,7 @@ public class Model {
 			Class<?> modelClass = model.getClass();
 			
 			model.initMethodState_ = METHOD_INIT_OK;
-			//×Ö¶Î
+			//å­—æ®µ
 			Field fields[] = modelClass.getDeclaredFields();
 			for(int i = 0; i < fields.length; i++) {
 				Class<?> type = fields[i].getType();

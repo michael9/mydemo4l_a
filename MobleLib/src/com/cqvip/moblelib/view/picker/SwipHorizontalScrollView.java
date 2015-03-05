@@ -56,17 +56,17 @@ public class SwipHorizontalScrollView extends HorizontalScrollView {
 		windowWitdh = dm.widthPixels;
 	}
 //	/**
-//	 * shep4 ÏÔÊ¾ºÍÒş²Ø×óÓÒÁ½±ßµÄ¼ıÍ·
+//	 * shep4 æ˜¾ç¤ºå’Œéšè—å·¦å³ä¸¤è¾¹çš„ç®­å¤´
 //	 */
 //		public void showAndHideArrow() {
 //			if (!mContext.isFinishing() && view != null) {
 //				this.measure(0, 0);
-//				//Èç¹û´°¿ÚµÄ¿í¶È´óÓÚµÈÓÚSyncHorizontalScrollViewµÄ¿í¶È  ËµÃ÷¹»ÈİÄÉ  ²»ĞèÒª»¬¶¯
+//				//å¦‚æœçª—å£çš„å®½åº¦å¤§äºç­‰äºSyncHorizontalScrollViewçš„å®½åº¦  è¯´æ˜å¤Ÿå®¹çº³  ä¸éœ€è¦æ»‘åŠ¨
 //				if (windowWitdh >= this.getMeasuredWidth()) {
 //					leftImage.setVisibility(View.GONE);
 //					rightImage.setVisibility(View.GONE);
 //				} else {
-//					if (this.getLeft() == 0) {//Èç¹ûSyncHorizontalScrollView×ó±ßµ±Ç°ºÍ´°¿Ú¶ÔÆä
+//					if (this.getLeft() == 0) {//å¦‚æœSyncHorizontalScrollViewå·¦è¾¹å½“å‰å’Œçª—å£å¯¹å…¶
 //						leftImage.setVisibility(View.GONE);
 //						rightImage.setVisibility(View.VISIBLE);
 //					} else if (this.getRight() == this.getMeasuredWidth()

@@ -128,7 +128,7 @@ public class AdvancedBookActivity extends BaseActivity implements
 				if (lists != null && !lists.isEmpty()) {
 					adapter.addMoreData(lists);
 				} else {
-					Tool.ShowMessages(context, "û�и�����ݿɹ�����");
+					Tool.ShowMessages(context, getResources().getString(R.string.tips_nomore_data));
 				}
 			} catch (Exception e) {
 				onError(2);
@@ -165,7 +165,6 @@ public class AdvancedBookActivity extends BaseActivity implements
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int position,
 			long id) {
-		// �ɻ�����listview��Ҫ position-1
 		ShortBook book = adapter.getLists().get(position);
 		if (book != null) {
 			Intent _intent = new Intent(context,
@@ -216,7 +215,6 @@ public class AdvancedBookActivity extends BaseActivity implements
 	// }
 	// return null;
 	// }
-	// //ˢ�����
 	// @Override
 	// protected void onPostExecute(Void result) {
 	//

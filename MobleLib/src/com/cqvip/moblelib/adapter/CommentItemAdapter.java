@@ -29,7 +29,7 @@ public class CommentItemAdapter extends BaseAdapter{
 		return lists;
 	}
 	/**
-	 * �ײ���ఴť������+1
+	 * 底部更多按钮，返回+1
 	 */
 	@Override
 	public int getCount() {
@@ -45,7 +45,7 @@ public class CommentItemAdapter extends BaseAdapter{
 		return lists.get(position);
 	}
 	/**
-	 * ���������ײ��ĸ�ఴť������-2
+	 * 如果点击到最底部的更多按钮，返回-2
 	 */
 	@Override
 	public long getItemId(int position) {
@@ -56,12 +56,12 @@ public class CommentItemAdapter extends BaseAdapter{
 		}
 	}
 	/**
-	 * ���Ӹ�����
+	 * 增加更多数据
 	 * @param moreStatus
 	 */
 	public void addMoreData(List<Comment> moreStatus)
 	{
-		this.lists.addAll(moreStatus);//����������ӵ�ԭ�м���
+		this.lists.addAll(moreStatus);//把新数据增加到原有集合
 		this.notifyDataSetChanged();
 	}
 
@@ -76,7 +76,7 @@ public class CommentItemAdapter extends BaseAdapter{
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder = null;
-		//���
+		//更多
 		if (position == this.getCount() - 1) {
 			convertView = LayoutInflater.from(context).inflate(R.layout.moreitemsview, null);
 			return convertView;
@@ -97,7 +97,7 @@ public class CommentItemAdapter extends BaseAdapter{
 	        holder.content.setText(comment.getContents());
 	        holder.icon.setBackgroundResource(R.drawable.portrait);
 	        holder.date.setText(Tool.GetTime(comment.getCommenttime()));
-	        //����
+	        //分享
 		return convertView;
 	}
 }

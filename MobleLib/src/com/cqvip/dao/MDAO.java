@@ -17,33 +17,33 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 /**
- * dao,Ìá¹©ÔöÉ¾¸Ä²é
+ * dao,æä¾›å¢åˆ æ”¹æŸ¥
  * @author luojiang
  *
  */
 public abstract  class MDAO extends SQLiteOpenHelper{
 	/**
-	 * Ä¬ÈÏÊı¾İ¿â°æ±¾
+	 * é»˜è®¤æ•°æ®åº“ç‰ˆæœ¬
 	 */
 	public final static int    DB_VERSION = 1;
 	/**
-	 * ModelµÄ²Ù×÷
+	 * Modelçš„æ“ä½œ
 	 */
 	private Model.Operator modelOperator = new Model.Operator() {};
 	/**
-	 * ÈÕÆÚ¸ñÊ½
+	 * æ—¥æœŸæ ¼å¼
 	 */
 	protected SimpleDateFormat dateFormat =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 	/**
-	 * ×îºó´íÎó¼«
+	 * æœ€åé”™è¯¯æ
 	 */
 	/**
-	 * ¹¹Ôìº¯Êı
+	 * æ„é€ å‡½æ•°
 	 * @param context
-	 * 		Context¶ÔÏó
+	 * 		Contextå¯¹è±¡
 	 * @param name
-	 * 		Êı¾İ¿âÃû³Æ
+	 * 		æ•°æ®åº“åç§°
 	 * @return	
 	 */
 	public MDAO(Context context, String name) {
@@ -51,13 +51,13 @@ public abstract  class MDAO extends SQLiteOpenHelper{
 		// TODO Auto-generated constructor stub
 	}
 	/**
-	 * ¹¹Ôìº¯Êı
+	 * æ„é€ å‡½æ•°
 	 * @param context
-	 * 		Context¶ÔÏó
+	 * 		Contextå¯¹è±¡
 	 * @param name
-	 * 		Êı¾İ¿âÃû³Æ
+	 * 		æ•°æ®åº“åç§°
 	 * @param version
-	 * 		Êı¾İ¿â°æ±¾
+	 * 		æ•°æ®åº“ç‰ˆæœ¬
 	 * @return	
 	 */
 	public MDAO(Context context, String name, int version) {
@@ -86,12 +86,12 @@ public abstract  class MDAO extends SQLiteOpenHelper{
 	}
 	
 	/**
-	 * ²éÑ¯
+	 * æŸ¥è¯¢
 	 * @param where
-	 * 		SQL²éÑ¯Ìõ¼ş
+	 * 		SQLæŸ¥è¯¢æ¡ä»¶
 	 * @param modelClass
-	 * 		ÊµÌåÀà
-	 * @return	ÊµÌåÁĞ±í
+	 * 		å®ä½“ç±»
+	 * @return	å®ä½“åˆ—è¡¨
 	 */
 	@SuppressWarnings("unchecked")
 	public <T extends Model> List<T> query(String where, 
@@ -105,17 +105,17 @@ public abstract  class MDAO extends SQLiteOpenHelper{
 		
 		for(cur.moveToFirst(); !cur.isAfterLast(); cur.moveToNext()) {
 
-			// ´´½¨ÊµÌåÀà
+			// åˆ›å»ºå®ä½“ç±»
 			Model newObj;
 			try {
-				newObj = (Model) modelClass.getConstructor(new Class[] {}) // ¹¹Ôìº¯ÊıÖĞµÄ²ÎÊıÖµ
-						.newInstance(new Object[] {});// ´´½¨³öÊµÀı£¬ÄÚº¬²ÎÊı
+				newObj = (Model) modelClass.getConstructor(new Class[] {}) // æ„é€ å‡½æ•°ä¸­çš„å‚æ•°å€¼
+						.newInstance(new Object[] {});// åˆ›å»ºå‡ºå®ä¾‹ï¼Œå†…å«å‚æ•°
 			} catch (Exception e) {
 				e.printStackTrace();
 				throw new DaoException(ErrorType.CANNOT_INSTANCE_MODEL);
 			} 
 
-			// ³õÊ¼»¯ÊµÀıº¯Êı
+			// åˆå§‹åŒ–å®ä¾‹å‡½æ•°
 			if(Model.Operator.METHOD_INIT_FAILED == modelOperator.initMethods(newObj)) {
 				throw new DaoException(ErrorType.INVALID_MODEL_METHOD);
 			}
@@ -155,12 +155,12 @@ public abstract  class MDAO extends SQLiteOpenHelper{
 	}
 	
 	/**
-	 * ¸ù¾İa desc²éÑ¯
+	 * æ ¹æ®a descæŸ¥è¯¢
 	 * @param where
-	 * 		SQL²éÑ¯Ìõ¼ş
+	 * 		SQLæŸ¥è¯¢æ¡ä»¶
 	 * @param modelClass
-	 * 		ÊµÌåÀà
-	 * @return	ÊµÌåÁĞ±í
+	 * 		å®ä½“ç±»
+	 * @return	å®ä½“åˆ—è¡¨
 	 */
 	@SuppressWarnings("unchecked")
 	public <T extends Model> List<T> query(String where, 
@@ -174,17 +174,17 @@ public abstract  class MDAO extends SQLiteOpenHelper{
 		
 		for(cur.moveToFirst(); !cur.isAfterLast(); cur.moveToNext()) {
 
-			// ´´½¨ÊµÌåÀà
+			// åˆ›å»ºå®ä½“ç±»
 			Model newObj;
 			try {
-				newObj = (Model) modelClass.getConstructor(new Class[] {}) // ¹¹Ôìº¯ÊıÖĞµÄ²ÎÊıÖµ
-						.newInstance(new Object[] {});// ´´½¨³öÊµÀı£¬ÄÚº¬²ÎÊı
+				newObj = (Model) modelClass.getConstructor(new Class[] {}) // æ„é€ å‡½æ•°ä¸­çš„å‚æ•°å€¼
+						.newInstance(new Object[] {});// åˆ›å»ºå‡ºå®ä¾‹ï¼Œå†…å«å‚æ•°
 			} catch (Exception e) {
 				e.printStackTrace();
 				throw new DaoException(ErrorType.CANNOT_INSTANCE_MODEL);
 			} 
 
-			// ³õÊ¼»¯ÊµÀıº¯Êı
+			// åˆå§‹åŒ–å®ä¾‹å‡½æ•°
 			if(Model.Operator.METHOD_INIT_FAILED == modelOperator.initMethods(newObj)) {
 				throw new DaoException(ErrorType.INVALID_MODEL_METHOD);
 			}
@@ -224,12 +224,12 @@ public abstract  class MDAO extends SQLiteOpenHelper{
 	}
 	
 	/**
-	 * ·ÖÒ³²éÑ¯
+	 * åˆ†é¡µæŸ¥è¯¢
 	 * @param where
-	 * 		SQL²éÑ¯Ìõ¼ş
+	 * 		SQLæŸ¥è¯¢æ¡ä»¶
 	 * @param modelClass
-	 * 		ÊµÌåÀà
-	 * @return	ÊµÌåÁĞ±í
+	 * 		å®ä½“ç±»
+	 * @return	å®ä½“åˆ—è¡¨
 	 */
 	@SuppressWarnings("unchecked")
 	public <T extends Model> List<T> query(String where,String limit, 
@@ -243,17 +243,17 @@ public abstract  class MDAO extends SQLiteOpenHelper{
 		
 		for(cur.moveToFirst(); !cur.isAfterLast(); cur.moveToNext()) {
 			
-			// ´´½¨ÊµÌåÀà
+			// åˆ›å»ºå®ä½“ç±»
 			Model newObj;
 			try {
-				newObj = (Model) modelClass.getConstructor(new Class[] {}) // ¹¹Ôìº¯ÊıÖĞµÄ²ÎÊıÖµ
-						.newInstance(new Object[] {});// ´´½¨³öÊµÀı£¬ÄÚº¬²ÎÊı
+				newObj = (Model) modelClass.getConstructor(new Class[] {}) // æ„é€ å‡½æ•°ä¸­çš„å‚æ•°å€¼
+						.newInstance(new Object[] {});// åˆ›å»ºå‡ºå®ä¾‹ï¼Œå†…å«å‚æ•°
 			} catch (Exception e) {
 				e.printStackTrace();
 				throw new DaoException(ErrorType.CANNOT_INSTANCE_MODEL);
 			} 
 			
-			// ³õÊ¼»¯ÊµÀıº¯Êı
+			// åˆå§‹åŒ–å®ä¾‹å‡½æ•°
 			if(Model.Operator.METHOD_INIT_FAILED == modelOperator.initMethods(newObj)) {
 				throw new DaoException(ErrorType.INVALID_MODEL_METHOD);
 			}
@@ -293,23 +293,23 @@ public abstract  class MDAO extends SQLiteOpenHelper{
 	}
 	
 	/**
-	 * Í¨¹ıÖ÷¼ü²éÑ¯
+	 * é€šè¿‡ä¸»é”®æŸ¥è¯¢
 	 * @param model
-	 * 		ÊµÌå¶ÔÏó
-	 * @return	²éÑ¯µ½µÄÊµÌå£¬ÈôÃ»ÓĞÔò·µ»Ø¿Õ
+	 * 		å®ä½“å¯¹è±¡
+	 * @return	æŸ¥è¯¢åˆ°çš„å®ä½“ï¼Œè‹¥æ²¡æœ‰åˆ™è¿”å›ç©º
 	 */
 	public <T extends Model> T queryByKey(T model) throws DaoException {
 		String[] keyNames = modelOperator.getPrimaryKey(model).getKeyNames();
-		// ³õÊ¼»¯ÊµÀıº¯Êı
+		// åˆå§‹åŒ–å®ä¾‹å‡½æ•°
 		if(Model.Operator.METHOD_INIT_FAILED == modelOperator.initMethods(model)) {
 			throw new DaoException(ErrorType.INVALID_MODEL_METHOD);
 		}
-		// ¼ì²éÖ÷¼ü
+		// æ£€æŸ¥ä¸»é”®
 		if(null == keyNames || keyNames.length == 0) {
 			throw new DaoException(ErrorType.INVALID_PRIMARY_KEY);
 		}
 		
-		// ÉèÖÃ²éÑ¯Ìõ¼ş
+		// è®¾ç½®æŸ¥è¯¢æ¡ä»¶
 		StringBuilder sbWhere = new StringBuilder("");
 		for(int i = 0; i < keyNames.length; i++) {
 			if(i > 0) {
@@ -322,7 +322,7 @@ public abstract  class MDAO extends SQLiteOpenHelper{
 				sbWhere.append(modelOperator.getFieldValue(model,keyNames[i]));
 			}
 		}
-		// ²éÑ¯Êı¾İ
+		// æŸ¥è¯¢æ•°æ®
 		List<T> list = query(sbWhere.toString(), model.getClass());
 		
 		if(list.size() > 0)
@@ -332,18 +332,18 @@ public abstract  class MDAO extends SQLiteOpenHelper{
 	}
 	
 	/**
-	 * ¸üĞÂ
+	 * æ›´æ–°
 	 * @param model
-	 * 		ÊµÌå¶ÔÏó
-	 * @return	³É¹¦·µ»Øtrue, ·ñÔò·µ»Øfalse
+	 * 		å®ä½“å¯¹è±¡
+	 * @return	æˆåŠŸè¿”å›true, å¦åˆ™è¿”å›false
 	 */
 	public boolean update(Model model) throws DaoException {
 		String[] keyNames = modelOperator.getPrimaryKey(model).getKeyNames();
-		// ³õÊ¼»¯ÊµÀıº¯Êı
+		// åˆå§‹åŒ–å®ä¾‹å‡½æ•°
 		if(Model.Operator.METHOD_INIT_FAILED == modelOperator.initMethods(model)) {
 			throw new DaoException(ErrorType.INVALID_MODEL_METHOD);
 		}
-		// ¼ì²éÖ÷¼ü
+		// æ£€æŸ¥ä¸»é”®
 		if(null == keyNames || keyNames.length == 0) {
 			throw new DaoException(ErrorType.INVALID_PRIMARY_KEY);
 		}
@@ -353,12 +353,12 @@ public abstract  class MDAO extends SQLiteOpenHelper{
 		Field fields[] = objClassType.getDeclaredFields();
 		
 		ContentValues values = new ContentValues();
-		// ÉèÖÃ¸üĞÂ×Ö¶Î
+		// è®¾ç½®æ›´æ–°å­—æ®µ
 		for(int i = 0; i < fields.length; i++){
 			Class<?> type = fields[i].getType();
 			String fieldName = fields[i].getName();
 			
-			//Ìí¼ÓÖµ
+			//æ·»åŠ å€¼
 			if(Integer.class == type){
 				values.put(fieldName, (Integer)modelOperator.getFieldValue(model, fieldName));
 			} else if(Long.class == type) {
@@ -376,7 +376,7 @@ public abstract  class MDAO extends SQLiteOpenHelper{
 			}
 		}
 		
-		// ÉèÖÃÌõ¼ş
+		// è®¾ç½®æ¡ä»¶
 		StringBuilder sbWhere = new StringBuilder("");
 		for(int i = 0; i < keyNames.length; i++) {
 			if(i > 0) {
@@ -389,7 +389,7 @@ public abstract  class MDAO extends SQLiteOpenHelper{
 				sbWhere.append(modelOperator.getFieldValue(model,keyNames[i]));
 			}
 		}
-		// Ö´ĞĞ¸üĞÂ²Ù×÷
+		// æ‰§è¡Œæ›´æ–°æ“ä½œ
 		boolean ret = (db.update(model.getClass().getSimpleName(), values, sbWhere.toString(), null) == 1);
 		db.close();
 		
@@ -397,24 +397,24 @@ public abstract  class MDAO extends SQLiteOpenHelper{
 	}
 	
 	/**
-	 * É¾³ı
+	 * åˆ é™¤
 	 * @param model
-	 * 		ÊµÌå¶ÔÏó
-	 * @return	³É¹¦·µ»Øtrue, ·ñÔò·µ»Øfalse
+	 * 		å®ä½“å¯¹è±¡
+	 * @return	æˆåŠŸè¿”å›true, å¦åˆ™è¿”å›false
 	 */
 	public boolean delete(Model model) throws DaoException {
 		String[] keyNames = modelOperator.getPrimaryKey(model).getKeyNames();
-		// ³õÊ¼»¯ÊµÀıº¯Êı
+		// åˆå§‹åŒ–å®ä¾‹å‡½æ•°
 		if(Model.Operator.METHOD_INIT_FAILED == modelOperator.initMethods(model)) {
 			throw new DaoException(ErrorType.INVALID_MODEL_METHOD);
 		}
-		// ¼ì²éÖ÷¼ü
+		// æ£€æŸ¥ä¸»é”®
 		if(null == keyNames || keyNames.length == 0) {
 			throw new DaoException(ErrorType.INVALID_PRIMARY_KEY);
 		}
 		SQLiteDatabase db = getWritableDatabase();
 		
-		// ÉèÖÃÌõ¼ş
+		// è®¾ç½®æ¡ä»¶
 		StringBuilder sbWhere = new StringBuilder("");
 		for(int i = 0; i < keyNames.length; i++) {
 			if(i > 0) {
@@ -436,13 +436,13 @@ public abstract  class MDAO extends SQLiteOpenHelper{
 	}
 	
 	/**
-	 * Ìí¼Ó
+	 * æ·»åŠ 
 	 * @param model
-	 * 		ÊµÌå¶ÔÏó
-	 * @return	³É¹¦·µ»Øtrue, ·ñÔò·µ»Øfalse
+	 * 		å®ä½“å¯¹è±¡
+	 * @return	æˆåŠŸè¿”å›true, å¦åˆ™è¿”å›false
 	 */
 	public boolean add(Model model) throws DaoException{
-		// ³õÊ¼»¯ÊµÀıº¯Êı
+		// åˆå§‹åŒ–å®ä¾‹å‡½æ•°
 		if(Model.Operator.METHOD_INIT_FAILED == modelOperator.initMethods(model)) {
 			throw new DaoException(ErrorType.INVALID_MODEL_METHOD);
 		}
@@ -453,7 +453,7 @@ public abstract  class MDAO extends SQLiteOpenHelper{
 		PrimaryKey primaryKey = modelOperator.getPrimaryKey(model);
 		String[] keyNames = primaryKey.getKeyNames();
 
-		// ¼ì²éÖ÷¼ü
+		// æ£€æŸ¥ä¸»é”®
 		if(primaryKey.isAutoInc() && 1 != keyNames.length) {
 			throw new DaoException(ErrorType.INVALID_PRIMARY_KEY);
 		}
@@ -463,12 +463,12 @@ public abstract  class MDAO extends SQLiteOpenHelper{
 			Class<?> type = fields[i].getType();
 			String fieldName = fields[i].getName();
 
-			// ºöÂÔ×ÔÔö×Ö¶Î
+			// å¿½ç•¥è‡ªå¢å­—æ®µ
 			if(primaryKey.isAutoInc() && fieldName.equals(keyNames[0])) {
 				continue;
 			}
 
-			//Ìí¼ÓÖµ
+			//æ·»åŠ å€¼
 			if(Integer.class == type){
 				values.put(fieldName, (Integer)modelOperator.getFieldValue(model, fieldName));
 			} else if(Long.class == type) {
@@ -494,16 +494,16 @@ public abstract  class MDAO extends SQLiteOpenHelper{
 	}
 	
 	/**
-	 * Í¨¹ıÊı¾İÊµÌåÀà´´½¨±í
+	 * é€šè¿‡æ•°æ®å®ä½“ç±»åˆ›å»ºè¡¨
 	 * @param db
-	 * 		Êı¾İ¿â²Ù×÷¶ÔÏó
+	 * 		æ•°æ®åº“æ“ä½œå¯¹è±¡
 	 * @param modelClass
-	 * 		ÊµÌåÀà
-	 * @return ³É¹¦·µ»Øtrue, ·ñÔò·µ»Øfalse
+	 * 		å®ä½“ç±»
+	 * @return æˆåŠŸè¿”å›true, å¦åˆ™è¿”å›false
 	 */
 	public void createTableFromModel(SQLiteDatabase db, 
 			Class<? extends Model> modelClass) throws DaoException {
-		//ÊµÌå¶ÔÏó
+		//å®ä½“å¯¹è±¡
 		Model model = null;
 		try {
 			model = modelClass.newInstance();
@@ -515,32 +515,32 @@ public abstract  class MDAO extends SQLiteOpenHelper{
 			throw new DaoException(ErrorType.CANNOT_INSTANCE_MODEL);
 		}
 		
-		// ³õÊ¼»¯ÊµÀıº¯Êı
+		// åˆå§‹åŒ–å®ä¾‹å‡½æ•°
 		if(Model.Operator.METHOD_INIT_FAILED == modelOperator.initMethods(model)) {
 			throw new DaoException(ErrorType.INVALID_MODEL_METHOD);
 		}
 
-		//×Ö¶Î
+		//å­—æ®µ
 		Field fields[] = modelClass.getDeclaredFields();
-		//Ö÷¼ü
+		//ä¸»é”®
 		PrimaryKey primaryKey = modelOperator.getPrimaryKey(model);
-		//Ö÷¼üÊı×é
+		//ä¸»é”®æ•°ç»„
 		String[] keyNames = primaryKey.getKeyNames();
-		//SQLÓï¾ä
+		//SQLè¯­å¥
 		StringBuilder sbSQL = new StringBuilder();
-		//×Ö¶ÎÇ°×º
+		//å­—æ®µå‰ç¼€
 		String   prefix = "";
-		//×Ö¶Îºó×º
+		//å­—æ®µåç¼€
 		String   suffix = "";
 		
-		//±ØĞëÒªÓĞÖ÷¼ü
+		//å¿…é¡»è¦æœ‰ä¸»é”®
 		if(null == keyNames || 0 == keyNames.length) {
 			throw new DaoException(ErrorType.INVALID_PRIMARY_KEY);
 		}
 		
 		sbSQL.append("create table if not exists ").append(modelClass.getSimpleName());
 		sbSQL.append("(");
-		// ÑéÖ¤Ôö¼Ó×ÔÔöÖ÷¼ü
+		// éªŒè¯å¢åŠ è‡ªå¢ä¸»é”®
 		if(primaryKey.isAutoInc()) {
 			if (1 != keyNames.length) {
 				throw new DaoException(ErrorType.INVALID_PRIMARY_KEY);
@@ -550,7 +550,7 @@ public abstract  class MDAO extends SQLiteOpenHelper{
 				throw new DaoException(ErrorType.INVALID_PRIMARY_KEY);
 			}
 			
-			//Ö÷¼ü
+			//ä¸»é”®
 			sbSQL.append(keyNames[0]).append(" integer primary key autoincrement");
 			prefix = ",";
 		} else {
@@ -558,7 +558,7 @@ public abstract  class MDAO extends SQLiteOpenHelper{
 		}
 		
 		for(int i = 0; i < fields.length; i++) {
-			//ºöÂÔ×ÔÔöÖ÷¼ü
+			//å¿½ç•¥è‡ªå¢ä¸»é”®
 			if(primaryKey.isAutoInc() && fields[i].getName().equals(keyNames[0])) {
 				continue;
 			}
@@ -579,9 +579,9 @@ public abstract  class MDAO extends SQLiteOpenHelper{
 			}
 		} 
 
-		// ÉèÖÃÖ÷¼ü
+		// è®¾ç½®ä¸»é”®
 		if (!primaryKey.isAutoInc()) {
-			// ×é×°Ö÷¼ü
+			// ç»„è£…ä¸»é”®
 			sbSQL.append(" primary key(");
 			for(int i = 0; i < keyNames.length; i++) {
 				sbSQL.append(keyNames[i]);

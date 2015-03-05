@@ -4,26 +4,26 @@ import com.cqvip.dao.Model;
 import com.cqvip.dao.PrimaryKey;
 
 public class MEbook extends Model{
-	// ÕıÔÚÏÂÔØ
+	// æ­£åœ¨ä¸‹è½½
 	public final static int TYPE_ON_DOWNLOADING = 0;
-	// ÏÂÔØÍê³É
+	// ä¸‹è½½å®Œæˆ
 	public final static int TYPE_DOWNLOADED = 1;
-	private Integer id;//×ÔÔöid
-	private String lngid;//µç×ÓÊéid
-	private String years;//Äê
-	private String num;//µÚ¼¸ÆÚ
-	private String title_c;//±êÌâ
-	private String name_c;//À´Ô´Êé¼®
-	private String remark_c;//¼òÊö
-	private String writer;//ÓÃ»§
-	private int pagecount;//Ò³Êı
-	private Long pdfsize;//´óĞ¡
-	private String imgurl;//Í¼Æ¬
-	private String beginpage;//¿ªÊ¼Ò³
-	private String endpage;//½áÊø
-	private Long downloadid;//ÏÂÔØid
+	private Integer id;//è‡ªå¢id
+	private String lngid;//ç”µå­ä¹¦id
+	private String years;//å¹´
+	private String num;//ç¬¬å‡ æœŸ
+	private String title_c;//æ ‡é¢˜
+	private String name_c;//æ¥æºä¹¦ç±
+	private String remark_c;//ç®€è¿°
+	private String writer;//ç”¨æˆ·
+	private int pagecount;//é¡µæ•°
+	private Long pdfsize;//å¤§å°
+	private String imgurl;//å›¾ç‰‡
+	private String beginpage;//å¼€å§‹é¡µ
+	private String endpage;//ç»“æŸ
+	private Long downloadid;//ä¸‹è½½id
 	
-	private Integer isdownload;//0 ÏÂÔØÖĞ£¬1ÊÇÏÂÔØÍê³É
+	private Integer isdownload;//0 ä¸‹è½½ä¸­ï¼Œ1æ˜¯ä¸‹è½½å®Œæˆ
 
 	public MEbook() {
 		super(new PrimaryKey("id",true));

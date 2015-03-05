@@ -14,7 +14,6 @@ public class BaseImageActivity extends BaseActivity{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//�ڴ�ռ�����app1/8
 		ImageCacheParams cacheParams = new ImageCacheParams(this, GlobleData.IMAGE_CACHE_DIR);
         cacheParams.setMemCacheSizePercent(0.125f); // Set memory cache to 12.5% of app memory
 		mImageFetcher = new ImageFetcher(this, getResources().getDimensionPixelSize(R.dimen.bookicon_width),

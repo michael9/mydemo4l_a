@@ -74,7 +74,7 @@ public class MyScrollView extends ScrollView
 		return super.dispatchTouchEvent(event);
 	}
 //	@Override
-//	public boolean onInterceptTouchEvent(MotionEvent event)   //����������� true �Ļ� ������ָ�ƶ�������һ�����µ���ָ���ƶ����ܱ�������ȥ��
+//	public boolean onInterceptTouchEvent(MotionEvent event)   //这个方法如果返回 true 的话 两个手指移动，启动一个按下的手指的移动不能被传播出去。
 //	{
 //		super.onInterceptTouchEvent(event);
 //		switch (event.getAction()) {
@@ -108,7 +108,7 @@ public class MyScrollView extends ScrollView
 	int prex,prey;
 	int imageViewhalfwidth,imageViewhalfheight;
 //	@Override
-//	public boolean onTouchEvent(MotionEvent event)//���������� true �����Activity �� onTouchEvent() ���ᱻϵͳ�ص�
+//	public boolean onTouchEvent(MotionEvent event)//这个方法如果 true 则整个Activity 的 onTouchEvent() 不会被系统回调
 //	{
 //		switch (event.getAction()) {
 //		case MotionEvent.ACTION_DOWN:

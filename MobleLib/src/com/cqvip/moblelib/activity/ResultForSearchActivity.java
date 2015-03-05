@@ -13,14 +13,14 @@ import com.cqvip.moblelib.adapter.BookAdapter;
 
 /**
  * <p>
- * �ļ����: ResultForSearchActivity.java
- * �ļ�����: ��ѯ���
- * ��Ȩ����: ��Ȩ����(C)2013-2020
- * ��          ˾: ����ά����ѯ���޹�˾
- * ����ժҪ: 
- * ����˵��:
- * ������ڣ� 201��5��10��
- * �޸ļ�¼: 
+ * 文件名称: ResultForSearchActivity.java
+ * 文件描述: 查询结果
+ * 版权所有: 版权所有(C)2013-2020
+ * 公          司: 重庆维普咨询有限公司
+ * 内容摘要: 
+ * 其他说明:
+ * 完成日期： 201年5月10日
+ * 修改记录: 
  * </p>
  * 
  * @author LHP,LJ

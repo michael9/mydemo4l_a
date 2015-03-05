@@ -29,7 +29,7 @@ import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.moblelib.view.SwipHorizontalScrollView;
 
 /**
- * �ڿ���ȫ������棬�ɻ���listview,�ṩ������ӹ���
+ * 期刊大全分类界面，可滑动listview,提供分类添加功能
  * @author luojiang
  *
  */
@@ -43,7 +43,7 @@ public class PeriodicalClassfyActivity extends BaseFragmentImageActivity {
 	private ImageView iv_nav_right;
 	private ViewPager mViewPager;
 	private int indicatorWidth;
-	public static String[] tabTitle = { "�ر��Ƽ�","ҽҩ����","���̼���","�������","��Ȼ��ѧ","ũ������"};	//����
+	public static String[] tabTitle = { "特别推荐","医药卫生","工程技术","人文社科","自然科学","农林牧鱼"};	//标题
 	private LayoutInflater mInflater;
 	private TabFragmentPagerAdapter mAdapter;
 	private int currentIndicatorLeft = 0;
@@ -66,7 +66,7 @@ public class PeriodicalClassfyActivity extends BaseFragmentImageActivity {
 			
 			@Override
 			public void onPageSelected(int position) {
-				//RadioButton���  performClick()
+				//RadioButton点击  performClick()
 				if(rg_nav_content!=null && rg_nav_content.getChildCount()>position){
 					((RadioButton)rg_nav_content.getChildAt(position)).performClick();
 				}
@@ -95,7 +95,7 @@ public class PeriodicalClassfyActivity extends BaseFragmentImageActivity {
 			@Override
 			public void onCheckedChanged(RadioGroup group, int checkedId) {
 				if(rg_nav_content.getChildAt(checkedId)!=null){
-					//��������
+					//滑动动画
 					TranslateAnimation animation = new TranslateAnimation(
 							currentIndicatorLeft ,
 							((RadioButton) rg_nav_content.getChildAt(checkedId)).getLeft(), 0f, 0f);
@@ -103,12 +103,12 @@ public class PeriodicalClassfyActivity extends BaseFragmentImageActivity {
 					animation.setDuration(100);
 					animation.setFillAfter(true);
 					
-					//����ִ��λ�ƶ���
+					//滑块执行位移动画
 					iv_nav_indicator.startAnimation(animation);
 					
-					mViewPager.setCurrentItem(checkedId);	//ViewPager ����һ�� �л�
+					mViewPager.setCurrentItem(checkedId);	//ViewPager 跟随一起 切换
 					
-					//��¼��ǰ �±�ľ������� ����
+					//记录当前 下标的距最左侧的 距离
 					currentIndicatorLeft = ((RadioButton) rg_nav_content.getChildAt(checkedId)).getLeft();
 					Log.i("PeriodicalClassfyActivity", ""+((checkedId > 1 ? ((RadioButton) rg_nav_content.getChildAt(checkedId)).getLeft() : 0) - ((RadioButton) rg_nav_content.getChildAt(2)).getLeft()));
 					mHsv.smoothScrollTo(
@@ -124,17 +124,17 @@ public class PeriodicalClassfyActivity extends BaseFragmentImageActivity {
 		getWindowManager().getDefaultDisplay().getMetrics(dm);
 		
 		indicatorWidth = dm.widthPixels / 4;
-		//TODO step0 ��ʼ�������±�Ŀ�    �����Ļ��ȺͿɼ����� ������RadioButton�Ŀ��)
+		//TODO step0 初始化滑动下标的宽    根据屏幕宽度和可见数量 来设置RadioButton的宽度)
 		LayoutParams cursor_Params = iv_nav_indicator.getLayoutParams();
-		cursor_Params.width = indicatorWidth;// ��ʼ�������±�Ŀ�
+		cursor_Params.width = indicatorWidth;// 初始化滑动下标的宽
 		iv_nav_indicator.setLayoutParams(cursor_Params);
 		
 		mHsv.setSomeParam(rl_nav, iv_nav_left, iv_nav_right, this);
 		
-		//��ȡ���������
+		//获取布局填充器
 		mInflater = (LayoutInflater)this.getSystemService(LAYOUT_INFLATER_SERVICE);
 
-		//��һ�ַ�ʽ��ȡ
+		//另一种方式获取
 //		LayoutInflater mInflater = LayoutInflater.from(this);  
 		
 		initNavigationHSV();
@@ -176,7 +176,7 @@ public class PeriodicalClassfyActivity extends BaseFragmentImageActivity {
 	rl_nav = (RelativeLayout) findViewById(R.id.rl_nav);
 		
 		mHsv = (SwipHorizontalScrollView) findViewById(R.id.mHsv);
-		//����
+		//内容
 		rg_nav_content = (RadioGroup) findViewById(R.id.rg_nav_content);
 		
 		iv_nav_indicator = (ImageView) findViewById(R.id.iv_nav_indicator);

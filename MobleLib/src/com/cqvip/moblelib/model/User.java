@@ -6,24 +6,24 @@ import org.json.JSONObject;
 import com.cqvip.moblelib.net.BookException;
 
 /**
- * ÓÃ»§Àà£¬µÇÂ½
+ * ç”¨æˆ·ç±»ï¼Œç™»é™†
  * @author luojiang
  *
  */
 public class User extends Result{
 	
-	private String cardno;//¿¨ºÅ
-	private String name;//ĞÕÃû
-	private String dept;//²¿ÃÅ
-	private String cardtype;//¿¨ÀàĞÍ
-	private String email;//ÓÊ¼şµØÖ·
-	private String username;//¿¨ºÅ
-	private String userid;//ÓÃ»§id
-	private String readerno;//¶ÁÕßid
-	private String phone;//µç»°
-	private String mobile;//ÊÖ»ú
-	private String updatedate;//¸üĞÂÈÕÆÚ
-	private int vipuserid;//¸üĞÂÈÕÆÚ
+	private String cardno;//å¡å·
+	private String name;//å§“å
+	private String dept;//éƒ¨é—¨
+	private String cardtype;//å¡ç±»å‹
+	private String email;//é‚®ä»¶åœ°å€
+	private String username;//å¡å·
+	private String userid;//ç”¨æˆ·id
+	private String readerno;//è¯»è€…id
+	private String phone;//ç”µè¯
+	private String mobile;//æ‰‹æœº
+	private String updatedate;//æ›´æ–°æ—¥æœŸ
+	private int vipuserid;//æ›´æ–°æ—¥æœŸ
 	
 	
 	

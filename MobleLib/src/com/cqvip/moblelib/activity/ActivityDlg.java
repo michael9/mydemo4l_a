@@ -52,7 +52,6 @@ public class ActivityDlg extends BaseActivity  {
 	private TextView msg_box_txt;
 	private Context context;
 	private Map<String, String> gparams;
-	//�����û���
 	private Editor editor;
 	private SharedPreferences localUsers;
 
@@ -68,7 +67,6 @@ public class ActivityDlg extends BaseActivity  {
 		msg_box_layout.setVisibility(View.GONE);
 		login_layout.setVisibility(View.GONE);
 		customProgressDialog = CustomProgressDialog.createDialog(this);
-		//customProgressDialog.setMessage("���ڼ�����...");
 //		login_status_ll.setVisibility(View.GONE);
 	
 		switch (getIntent().getIntExtra("ACTIONID", 0)) {
@@ -180,8 +178,6 @@ public class ActivityDlg extends BaseActivity  {
 //						"0441200001098", "0440061012345" });
 //		log_in_username.setThreshold(0);
 //		log_in_username.setAdapter(adapter);
-//		// ��ʼ�� service
-//		// ��������Ƿ����
 //		if (Tool.checkNetWork(this)) {
 //			if (!ManagerService.isrun) {
 //				ManagerService.isrun = true;

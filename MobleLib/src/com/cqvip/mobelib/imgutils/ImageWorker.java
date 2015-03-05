@@ -117,7 +117,7 @@ public abstract class ImageWorker {
         mLoadingBitmap = BitmapFactory.decodeResource(mResources, resId);
     }
     /**
-     * imagecaheʵ���?��
+     * 
      * @param cacheParams
      */
     public void addImageCache(ImageCache.ImageCacheParams cacheParams) {

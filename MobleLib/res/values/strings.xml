@@ -146,6 +146,11 @@
     <string name="tips_unable_download">该文件暂时不能下载</string>
     <string name="tips_nomore_data">没有更多内容可供加载</string>
     <string name="tips_nomore_page">已经最后一页了</string>
+    <string name="tips_addfailed">添加失败</string>
+    <string name="tips_addsucess">添加成功</string>
+    <string name="tips_commentnotnull">评论内容不能空</string>
+    <string name="tips_share">分享到</string>
+    <string name="tips_share_local">沈阳少儿图书馆友情分享</string>
     
     
     <string name="title_activity_periodical_classfy">PeriodicalClassfyActivity</string>

@@ -36,7 +36,7 @@ public class MyScrollView_SearchHistory extends ScrollView {
 		this.context = context;
 	}
 
-	// �������뼰���
+	// 滑动距离及坐标
 	private float xDistance, yDistance, xLast, yLast;
 
 	@Override

@@ -13,19 +13,19 @@ import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.net.BookException;
 
 /**
- * Êé¼®¹İ²ØĞÅÏ¢
+ * ä¹¦ç±é¦†è—ä¿¡æ¯
  * @author luojiang
  *
  */
 public class BookLoc {
 
 	
-	private String barcode;//ÌõÂëºÅ
-	private String callno;//Ë÷ÊéºÅ
-	private String local;//Î»ÖÃ
-	private String status;//×´Ì¬
-	private String volume;//ÆÚ¾í
-	private String cirtype;//ÀàĞÍ
+	private String barcode;//æ¡ç å·
+	private String callno;//ç´¢ä¹¦å·
+	private String local;//ä½ç½®
+	private String status;//çŠ¶æ€
+	private String volume;//æœŸå·
+	private String cirtype;//ç±»å‹
 	
 	public BookLoc(JSONObject json) throws BookException{
 		try {

@@ -3,64 +3,65 @@ package com.cqvip.moblelib.constant;
 import java.util.HashMap;
 import java.util.Map;
 
+
 public class GlobleData {
 
 	/**
-	 * Ä¬ÈÏÊı¾İ¿â°æ±¾
+	 * é»˜è®¤æ•°æ®åº“ç‰ˆæœ¬
 	 */
 	public final static int    defaultDBVersion = 1;
 	/**
-	 * Ä¬ÈÏÊı¾İ¿âÃû³Æ
+	 * é»˜è®¤æ•°æ®åº“åç§°
 	 */
 	public final static String dbName = "moblelib.db";
 	/**
-	 * ÊµÌåÀàËùÔÚ°ü
+	 * å®ä½“ç±»æ‰€åœ¨åŒ…
 	 */
 	public final static String MODEL_PACKAGE = "com.cqvip.moblelib.entity";
 	/**
-	 * ·şÎñÆ÷µØÖ·
+	 * æœåŠ¡å™¨åœ°å€
 	 * */
 	public final static   String SERVER_URL = "http://mobile.cqvip.com";
 	/**
-	 * Í¼Êé¹İid,1´ú±íÉîÛÚÍ¼Êé¹İ
+	 * å›¾ä¹¦é¦†id,1ä»£è¡¨æ·±åœ³å›¾ä¹¦é¦†
 	 * */
 	public final static   String LIBIRY_ID = "1";
 	/**
-	 * Áú¸ÚÍ¼Êé¹İid 
+	 * é¾™å²—å›¾ä¹¦é¦†id 
 	 * */
 	public final static   String SZLG_LIB_ID = "044120";
 	/**
-	 * Êé¼®ÀàĞÍid, 4´ú±íÖĞ¿¯£¬5´ú±íÉîÛÚ¹İ²ØÍ¼Êé
+	 * ä¹¦ç±ç±»å‹id, 4ä»£è¡¨ä¸­åˆŠï¼Œ5ä»£è¡¨æ·±åœ³é¦†è—å›¾ä¹¦
 	 */
 	public final static int BOOK_ZK_TYPE = 4;
 	/**
-	 * Êé¼®ÀàĞÍid, 4´ú±íÖĞ¿¯£¬5´ú±íÉîÛÚ¹İ²ØÍ¼Êé
+	 * ä¹¦ç±ç±»å‹id, 4ä»£è¡¨ä¸­åˆŠï¼Œ5ä»£è¡¨æ·±åœ³é¦†è—å›¾ä¹¦
 	 */	
 	public final static int BOOK_SZ_TYPE = 5;
-	//²éÑ¯ÀàĞÍ,¹Ø¼ü×Ö 
+	//æŸ¥è¯¢ç±»å‹,å…³é”®å­— 
 	public final static String QUERY_KEY = "subject";
-	//²éÑ¯ÀàĞÍ,isbn
+	//æŸ¥è¯¢ç±»å‹,isbn
 	public final static String QUERY_ISBN = "isbn";
-	//²éÑ¯ÀàĞÍ,ÈÎÒâ´Ê
+	//æŸ¥è¯¢ç±»å‹,ä»»æ„è¯
 	public final static String QUERY_ALL = "all";
-	//²éÑ¯ÀàĞÍ,±êÌâ
+	//æŸ¥è¯¢ç±»å‹,æ ‡é¢˜
 	public final static String QUERY_TITLE = "title";
-	//²éÑ¯ÀàĞÍ,×÷Õß 
+	//æŸ¥è¯¢ç±»å‹,ä½œè€… 
 	public final static String QUERY_AUTHOR = "author";
-	//²éÑ¯ÀàĞÍ,·ÖÀàºÅ
+	//æŸ¥è¯¢ç±»å‹,åˆ†ç±»å·
 	public final static String QUERY_CALSSNO = "classno";
-	//²éÑ¯ÀàĞÍ,Ë÷ÊéºÅ
+	//æŸ¥è¯¢ç±»å‹,ç´¢ä¹¦å·
 	public final static String QUERY_CALLNO = "callno";
-	//²éÑ¯ÀàĞÍ,³ö°æÉç
+	//æŸ¥è¯¢ç±»å‹,å‡ºç‰ˆç¤¾
 	public final static String QUERY_PUBLISHER = "publisher";
 	//
 	public final static String IMAGE_CACHE_DIR = "bookimg";
 	
-	public static final int ANNAOUCETYPE_HOTBOOK = 3;//ĞÂÊéÍÆ¼ö
-	public static final int ANNAOUCETYPE_NEWBOOK = 4;//ĞÂÊéÍÆ¼ö
-	public static final int ANNAOUCETYPE_NEWS = 2 ;//ĞÂÎÅ¶¯Ì¬
-	public static final int ANNAOUCETYPE_FREESPEECH = 1;//¹«Òæ½²×ù
-	public static final int FAQ_QUESTION = 5;//¹«Òæ½²×ù
+	public static final int ANNAOUCETYPE_HOTBOOK = 3;//æ–°ä¹¦æ¨è
+	public static final int ANNAOUCETYPE_NEWBOOK = 4;//æ–°ä¹¦æ¨è
+	public static final int ANNAOUCETYPE_NEWS = 2 ;//æ–°é—»åŠ¨æ€
+	public static final int ANNAOUCETYPE_FREESPEECH = 1;//å…¬ç›Šè®²åº§
+	public static final int FAQ_QUESTION = 5;//å…¬ç›Šè®²åº§
 	
 	public static Map<String, Object> datas = new HashMap<String, Object>();
 	
@@ -70,16 +71,16 @@ public class GlobleData {
 	public static String readerid;
 	public static String cqvipid;
 	
-	//µÇÂ¼±êÊ¶
+	//ç™»å½•æ ‡è¯†
 	public static boolean islogin = false;
-	//¸ù¾İhttp://mobile.cqvip.com/qk/classlist.aspx?classid=0»ñÈ¡
-	public static final int MEDIAL_TYPEID = 1;//Ò½Ò©ÎÀÉú
-	public static final int ENGINE_TYPEID = 63;//¹¤³Ì¿ÆÑ§
-	public static final int SOCIAL_TYPEID = 67;//ÈËÎÄÉç»á
-	public static final int NATURE_TYPEID = 64;//×ÔÈ»¿ÆÑ§
-	public static final int FORESTS_TYPEID = 66;//Å©ÁÖÄÁÓã
+	//æ ¹æ®http://mobile.cqvip.com/qk/classlist.aspx?classid=0è·å–
+	public static final int MEDIAL_TYPEID = 1;//åŒ»è¯å«ç”Ÿ
+	public static final int ENGINE_TYPEID = 63;//å·¥ç¨‹ç§‘å­¦
+	public static final int SOCIAL_TYPEID = 67;//äººæ–‡ç¤¾ä¼š
+	public static final int NATURE_TYPEID = 64;//è‡ªç„¶ç§‘å­¦
+	public static final int FORESTS_TYPEID = 66;//å†œæ—ç‰§é±¼
 	
-	public static final int BIG_PERPAGE = 500;//Ò»´ÎĞÔ»ñÈ¡500Ìõ¼ÇÂ¼
+	public static final int BIG_PERPAGE = 500;//ä¸€æ¬¡æ€§è·å–500æ¡è®°å½•
 	
 	
 	

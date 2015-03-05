@@ -12,16 +12,17 @@ import android.widget.TextView;
 import com.cqvip.moblelib.sychild.R;
 import com.cqvip.moblelib.constant.Constant;
 
+
 /**
  * <p>
- * �ļ����: AnnounceActivity.java
- * �ļ�����: ���ڹ���
- * ��Ȩ����: ��Ȩ����(C)2013-2020
- * ��          ˾: ����ά����ѯ���޹�˾
- * ����ժҪ: 
- * ����˵��:
- * ������ڣ� 201��5��10��
- * �޸ļ�¼: 
+ * 文件名称: AnnounceActivity.java
+ * 文件描述: 馆内公告
+ * 版权所有: 版权所有(C)2013-2020
+ * 公          司: 重庆维普咨询有限公司
+ * 内容摘要: 
+ * 其他说明:
+ * 完成日期： 201年5月10日
+ * 修改记录: 
  * </p>
  * 
  * @author LHP,LJ
@@ -38,9 +39,9 @@ public class AnnounceActivity extends BaseActivity {
 		setContentView(R.layout.activity_announce);
 		context = this;
 		ImageView back = (ImageView)findViewById(R.id.return_iv);
-		//���Ŷ�̬
+		//新闻动态
 		LinearLayout l1 = (LinearLayout) findViewById(R.id.an_out_Layout);
-		//���潲��
+		//公益讲座
 		LinearLayout l2 = (LinearLayout) findViewById(R.id.an_speechLayout);
 		
 		l1.setOnClickListener(new View.OnClickListener() {

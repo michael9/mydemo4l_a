@@ -5,16 +5,16 @@ import java.util.ArrayList;
 import android.text.TextUtils;
 
 public class BookParameters {
-    //¼¯ºÏ´æ·Å ²ÎÊıÃû"name"
+    //é›†åˆå­˜æ”¾ å‚æ•°å"name"
 	private ArrayList<String> mKeys = new ArrayList<String>();
-	//¼¯ºÏ´æ·Å ²ÎÊıÖµ"zhang"
+	//é›†åˆå­˜æ”¾ å‚æ•°å€¼"zhang"
 	private ArrayList<String> mValues=new ArrayList<String>();
 	
 	public BookParameters(){
 		
 	}
 	/**
-	 * Ìí¼ÓkeyºÍvalue
+	 * æ·»åŠ keyå’Œvalue
 	 * @param key
 	 * @param value
 	 */
@@ -25,14 +25,14 @@ public class BookParameters {
 	    }
 	}
 	/**
-	 * ¼¯ºÏµÄ´óĞ¡
+	 * é›†åˆçš„å¤§å°
 	 * @return
 	 */
 	public  int size(){
 		return mKeys.size();
 	}
 	/**
-	 * ¸ü¾ßĞòºÅ»ñÈ¡key
+	 * æ›´å…·åºå·è·å–key
 	 * @param size
 	 * @return
 	 */
@@ -44,7 +44,7 @@ public class BookParameters {
 		}
 	}
 	/**
-	 * ¸ü¾ßkey£¬»ñÈ¡valueµÄÖµ
+	 * æ›´å…·keyï¼Œè·å–valueçš„å€¼
 	 * @param key
 	 * @return
 	 */
@@ -72,7 +72,7 @@ public class BookParameters {
 	}
 	/**
 	 * 
-	 * ·µ»Økey¶ÔÓ¦µÄĞòºÅ
+	 * è¿”å›keyå¯¹åº”çš„åºå·
 	 * @param key
 	 * @return
 	 */

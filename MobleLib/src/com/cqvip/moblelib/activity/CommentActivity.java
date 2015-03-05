@@ -49,7 +49,7 @@ public class CommentActivity extends BaseActivity implements
 	private static final int GETHOMEPAGE = 0;
 
 	//private TextView baseinfo_tv, intro_tv;
-	private TextView title;//����
+	private TextView title;
 	private EditText comment_et;
 	private Button commit_btn,delete_com;
 	private Book dBook;
@@ -65,7 +65,7 @@ public class CommentActivity extends BaseActivity implements
 	private View upView;
 	//private RelativeLayout rl_baseinfo;
 	public final static String TAG="CommentActivity";
-	private int fromActivity; //1��ʾ��GroupActivity������ڽ�����
+	private int fromActivity; //
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -74,15 +74,11 @@ public class CommentActivity extends BaseActivity implements
 		context = this;
 		init();
 
-		// ��ȡ�鼮��ϸ����
 		Bundle bundle = getIntent().getBundleExtra("detaiinfo");
 		dBook = (Book) bundle.getSerializable("book");
-		// ��ȡ�鼮��ϯ
 		typeid = getIntent().getIntExtra("type", GlobleData.BOOK_SZ_TYPE);
 		fromActivity = getIntent().getIntExtra("from", 0);
-		// ��ȡ�Ƿ�ɾ���ʶ
 		delFlag = getIntent().getIntExtra("flag", 0);
-		// �鼮id
 		keyid = getLngId(dBook.getCallno(), dBook.getRecordid());
 		if(customProgressDialog!=null)
 		customProgressDialog.show();
@@ -115,7 +111,6 @@ public class CommentActivity extends BaseActivity implements
 //			
 //			@Override
 //			public void onClick(View v) {
-//				//����ϸ����
 //				if(typeid == GlobleData.BOOK_SZ_TYPE){
 //					if(fromActivity ==1){
 //						if (dBook != null) {
@@ -133,7 +128,6 @@ public class CommentActivity extends BaseActivity implements
 //					Bundle bundle = new Bundle();
 //					bundle.putSerializable("book", dBook);
 //					intent.putExtra("detaiinfo", bundle);
-//					intent.putExtra("from", 1);//��ʾ��commentActivity���ȥ�ģ�����ʾ���۰�ť
 //					context.startActivity(intent);
 //					}
 //				}else if(typeid == GlobleData.BOOK_ZK_TYPE){
@@ -159,7 +153,7 @@ public class CommentActivity extends BaseActivity implements
 //					Bundle bundle = new Bundle();
 //					bundle.putSerializable("book", mmebook);
 //					intent.putExtra("detaiinfo", bundle);
-//					intent.putExtra("from", 1);//��ʾ��commentActivity���ȥ�ģ�����ʾ���۰�ť
+//					intent.putExtra("from", 1);
 //					startActivity(intent);
 //					}
 //				}
@@ -188,7 +182,6 @@ public class CommentActivity extends BaseActivity implements
 		title = (TextView) findViewById(R.id.txt_header);
 		//title.setText(R.string.book_comment);
 		adapter = new CommentItemAdapter(context, null);
-		// �������
 		// getHomeComment(1,Constant.DEFAULT_COUNT);
 		
 		commit_btn.setOnClickListener(this);
@@ -229,7 +222,7 @@ public class CommentActivity extends BaseActivity implements
 				return callno;
 			}
 			return callno + "," + recordid;
-		} else {// �п�����lngid
+		} else {
 			return callno;
 		}
 	}
@@ -243,7 +236,7 @@ public class CommentActivity extends BaseActivity implements
 		
 		String info = comment_et.getText().toString();
 		if (TextUtils.isEmpty(info)||info.trim().isEmpty()) {
-			Tool.ShowMessages(this, "�������ݲ��ܿ�");
+			Tool.ShowMessages(this, getResources().getString(R.string.tips_commentnotnull));
 			return;
 		}
 
@@ -251,7 +244,6 @@ public class CommentActivity extends BaseActivity implements
 			HashMap<String, String> map = new HashMap<String, String>();
 			map.put("libid", GlobleData.LIBIRY_ID);
 			map.put("vipuserid", GlobleData.cqvipid);
-			// Log.i("�������", GlobleData.cqvipid);
 	//		String keyid = dBook.getCallno();
 			String recordid = getTypeComment(dBook);
 			 map.put("keyid", keyid);
@@ -296,13 +288,11 @@ public class CommentActivity extends BaseActivity implements
 				onError(2);
 			}
 			if (res.getSuccess()) {
-				// ��ʾ
-				Tool.ShowMessages(CommentActivity.this, "��ӳɹ�");
-				// �����б�
+				Tool.ShowMessages(CommentActivity.this, getResources().getString(R.string.tips_addsucess));
 				getHomeComment(typeid, keyid, 1, Constant.DEFAULT_COUNT,
 						GETHOMEPAGE);
 			} else {
-				Tool.ShowMessages(CommentActivity.this, "���ʧ��");
+				Tool.ShowMessages(CommentActivity.this, getResources().getString(R.string.tips_addfailed));
 			}
 		}
 	};
@@ -341,7 +331,7 @@ public class CommentActivity extends BaseActivity implements
 				adapter.addMoreData(lists);
 				page++;
 			} else {
-				Tool.ShowMessages(context, "û�и�����ݿɹ�����");
+				Tool.ShowMessages(context, getResources().getString(R.string.tips_nomore_data));
 			}
 		}
 	};
@@ -365,53 +355,13 @@ public class CommentActivity extends BaseActivity implements
 		}
 	}
 
-//	@Override
-//	public void refresh(Object... obj) {
-//		customProgressDialog.dismiss();
-//		int type = (Integer) obj[0];
-//		switch (type) {
-//		case Task.TASK_ADD_COMMENT:
-//			Result res = (Result) obj[1];
-//			if (res.getSuccess()) {
-//				// ��ʾ
-//				Tool.ShowMessages(this, "��ӳɹ�");
-//				// �����б�
-//				getHomeComment(typeid, keyid, 1, Constant.DEFAULT_COUNT,
-//						GETHOMEPAGE);
-//			} else {
-//				Tool.ShowMessages(this, "���ʧ��");
-//			}
-//			break;
-//		case Task.TASK_COMMENT_LIST:
-//			List<Comment> lists = (List<Comment>) obj[1];
-//			if (lists != null && !lists.isEmpty()) {
-//				adapter = new CommentItemAdapter(context, lists);
-//				listview.setAdapter(adapter);
-//			}
-//			// TODO
-//			break;
-//		case Task.TASK_COMMENT_LIST_MORE:
-//			List<Comment> lists1 = (List<Comment>) obj[1];
-//			moreprocess.setVisibility(View.GONE);
-//			if (lists1 != null && !lists1.isEmpty()) {
-//				adapter.addMoreData(lists1);
-//			} else {
-//				Tool.ShowMessages(context, "û�и�����ݿɹ�����");
-//			}
-//			break;
-//		}
-//
-//	}
-
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int position,
 			long id) {
-		if (id == -2) // ���
+		if (id == -2) // 
 		{
-			// �����
 			moreprocess = arg1.findViewById(R.id.footer_progress);
 			moreprocess.setVisibility(View.VISIBLE);
-			// ����������
 			Log.i(TAG, typeid+"--"+keyid);
 			getHomeComment(typeid, keyid, page + 1, Constant.DEFAULT_COUNT,
 					GETMORE);
@@ -434,7 +384,6 @@ public class CommentActivity extends BaseActivity implements
 				return null;
 			}
 
-			// ˢ�����
 			@Override
 			protected void onPostExecute(Void result) {
 

@@ -30,7 +30,7 @@ import org.apache.http.util.EntityUtils;
 import android.util.Log;
 
 /**
- * ·ÃÎÊÍøÂç
+ * è®¿é—®ç½‘ç»œ
  * @author luojiang
  *
  */
@@ -48,12 +48,12 @@ public class HttpClientNewWork {
 	private static final int CONNECTION_TIMEOUT = 2000;
 	private static final int SOCKET_TIMEOUT = 3 * 1000;
 	/**
-	 * ÍøÂçÇëÇó
-	 * @param url ·şÎñÆ÷url
-	 * @param method GET »òÕß  POST
-	 * @param params ÇëÇó²ÎÊı
-	 * @param file  ÎÄ¼şÂ·¾¶
-	 * @return ÏìÓ¦½á¹û
+	 * ç½‘ç»œè¯·æ±‚
+	 * @param url æœåŠ¡å™¨url
+	 * @param method GET æˆ–è€…  POST
+	 * @param params è¯·æ±‚å‚æ•°
+	 * @param file  æ–‡ä»¶è·¯å¾„
+	 * @return å“åº”ç»“æœ
 	 * @throws BookException 
 	 */
 	public String requestUrl(String url, String method, BookParameters params) throws BookException{
@@ -80,7 +80,7 @@ public class HttpClientNewWork {
 			byte[] data = null;
 			bos = new ByteArrayOutputStream();
 //			if(!TextUtils.isEmpty(file)){
-//			//ÉÏ´«Í¼Æ¬
+//			//ä¸Šä¼ å›¾ç‰‡
 //				
 //			}
 			post.setHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -113,13 +113,13 @@ public class HttpClientNewWork {
 
 
 	/**
-	 * ÉèÖÃ³¬Ê±
+	 * è®¾ç½®è¶…æ—¶
 	 * @return
 	 */
 	private static synchronized void  getHttpclient() {
 		if(client == null){
 		HttpParams params = new BasicHttpParams();
-		//ÉèÖÃÁ¬½ÓºÍÏìÓ¦³¬Ê±
+		//è®¾ç½®è¿æ¥å’Œå“åº”è¶…æ—¶
 		ConnManagerParams.setTimeout(params, CONNECTION_TIMEOUT);
 		HttpConnectionParams.setConnectionTimeout(params, CONNECTION_TIMEOUT);
 		HttpConnectionParams.setSoTimeout(params, SOCKET_TIMEOUT);
@@ -127,9 +127,9 @@ public class HttpClientNewWork {
 		HttpProtocolParams.setContentCharset(params, HTTP.UTF_8);
 
 		SchemeRegistry registry = new SchemeRegistry();
-		//Ö§³Öhttp
+		//æ”¯æŒhttp
 		registry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
-		//Ö§³Öhttps
+		//æ”¯æŒhttps
 //		registry.register(new Scheme("https", sf, 443));
 		ClientConnectionManager ccm = new ThreadSafeClientConnManager(params, registry);
 		 client = new DefaultHttpClient(ccm, params);
@@ -142,7 +142,7 @@ public class HttpClientNewWork {
 	
 	
 	/**
-	 * ¶ÁÈ¡HttpResponseÊı¾İ
+	 * è¯»å–HttpResponseæ•°æ®
 	 * 
 	 * @param response
 	 * @return

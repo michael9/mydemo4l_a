@@ -3,52 +3,52 @@ package com.cqvip.moblelib.biz;
 import java.util.Map;
 
 public class Task {
-	private int taskID;// ÈÎÎñ±àºÅ
-	private Map taskParam;// ÈÎÎñ²ÎÊı
+	private int taskID;// ä»»åŠ¡ç¼–å·
+	private Map taskParam;// ä»»åŠ¡å‚æ•°
 	public static final int TASK_LOGIN = 1;
-	public static final int TASK_GET_READERINFO = 2;//»ñÈ¡¶ÁÕßĞÅÏ¢
-	public static final int TASK_QUERY_BOOK = 3;//²éÑ¯Ê×Ò³
-	public static final int TASK_QUERY_MORE= 4;//²éÑ¯¸ü¶à
-	public static final int TASK_BORROW_LIST= 5;//½èÔÄ
-	public static final int TASK_E_NOTICE= 6;//¹İÄÚ¹«¸æ
-	public static final int TASK_E_CARDGUID= 7;//°ìÖ¤Ö¸ÄÏ
-	public static final int TASK_E_TIME= 8;//¿ª¹ÜÊ±¼ä
-	public static final int TASK_E_READER= 9;//¶ÁÕßĞëÖª
-	public static final int TASK_E_SERVICE= 10;//·şÎñ½éÉÜ
-	public static final int TASK_BOOK_INFO= 11;//»ñÈ¡ÊéµÄÏêÏ¸ĞÅÏ¢
-	public static final int TASK_BOOK_RENEW= 12;//Ğø½è
-	public static final int TASK_USER_PWD= 13;//ĞŞ¸ÄÃÜÂë
-	public static final int TASK_QUERY_EBOOK= 14;//²éÑ¯µç×ÓÊé
-	public static final int TASK_QUERY_EBOOK_MORE= 15;//²éÑ¯¸ü¶àµç×ÓÊé
-	public static final int TASK_QUERY_EBOOK_DETAIL= 16;//µç×ÓÊéÏêÏ¸
-	public static final int TASK_EBOOK_DOWN= 17;//²éÑ¯ÏÂÔØµØÖ·
-	public static final int TASK_REFRESH= 18;//¸üĞÂ
-	public static final int TASK_GET_FAVOR= 19;//»ñÈ¡ÊÕ²ØÁĞ±í
-	public static final int TASK_LIB_FAVOR= 20;//¹İ²ØÍ¼ÊéÊÕ²Ø
-	public static final int TASK_CANCEL_FAVOR= 21;//È¡ÏûÊÕ²Ø
-	public static final int TASK_EBOOK_FAVOR= 22;//µç×ÓÍ¼ÊéÊÕ²Ø
-    public static final int TASK_ADD_COMMENT= 23;//Ìí¼ÓÆÀÂÛ
-	public static final int TASK_COMMENT_BOOKLIST= 24;//»ñÈ¡ÓÃ»§ÆÀÂÛ¹ıµÃÊé¼®ÁĞ±í
-	public static final int TASK_COMMENT_LIST= 25;//»ñÈ¡Î§ÈÆÊé¼®µÄÆÀÂÛÁĞ±í
-	public static final int TASK_ANNOUNCE_SPEACH= 26;//½²×ù°²ÅÅ
-	public static final int TASK_ANNOUNCE_WELFARE= 28;//¹«Òæ½²×ù
-	public static final int TASK_ANNOUNCE_WELFARE_MORE= 29;//¹«Òæ½²×ù
-	public static final int TASK_ANNOUNCE_NEWS = 30;//ĞÂÎÅ¶¯Ì¬
-	public static final int TASK_ANNOUNCE_NEWS_MORE = 31;//ĞÂÎÅ¶¯Ì¬
-	public static final int TASK_ANNOUNCE_DETAIL = 32;//¹«¸æÏêÏ¸
-	public static final int TASK_E_CAUTION = 33;//³£¼ûÎÊÌâ
-	public static final int TASK_SUGGEST_HOTBOOK = 34; //»ñÈ¡ÈÈÃÅÊé¼®
-	public static final int TASK_SUGGEST_NEWBOOK = 35;//»ñÈ¡ĞÂÊéÍÆ¼ö
-	public static final int TASK_SUGGEST_HOTBOOK_MORE = 36; //»ñÈ¡ÈÈÃÅÊé¼®
-	public static final int TASK_SUGGEST_NEWBOOK_MORE = 37;//»ñÈ¡ĞÂÊéÍÆ¼ö
-	public static final int TASK_SUGGEST_DETAIL = 38;//ÍÆ¼öÊé¼®ÏêÏ¸
-	public static final int TAST_CENTER_QUESTION= 39;//ÔÚÏßÎÊ´ğ
-	public static final int TASK_COMMENT_LIST_MORE= 40;//»ñÈ¡¸ü¶àÆÀÂÛ
-	public static final int TASK_E_CAUTION_MORE = 41;//³£¼ûÎÊÌâ¸ü¶à
-	public static final int TASK_PERIODICAL_TYPE= 42;//»ñÈ¡ÆÚ¿¯·ÖÀàÁĞ±í
-	public static final int TASK_PERIODICAL_SUBTYPE= 43;//»ñÈ¡ÆÚ¿¯·ÖÀàÏÂµÄÆÚ¿¯ÁĞ±í
-	public static final int TASK_PERIODICAL_DETAIL= 44;//»ñÈ¡ÆÚÆÚ¿¯ÏêÏ¸
-	public static final int TASK_PERIODICAL_SPECIAL= 45;//»ñÈ¡ÌØ±ğÍÆ¼ö
+	public static final int TASK_GET_READERINFO = 2;//è·å–è¯»è€…ä¿¡æ¯
+	public static final int TASK_QUERY_BOOK = 3;//æŸ¥è¯¢é¦–é¡µ
+	public static final int TASK_QUERY_MORE= 4;//æŸ¥è¯¢æ›´å¤š
+	public static final int TASK_BORROW_LIST= 5;//å€Ÿé˜…
+	public static final int TASK_E_NOTICE= 6;//é¦†å†…å…¬å‘Š
+	public static final int TASK_E_CARDGUID= 7;//åŠè¯æŒ‡å—
+	public static final int TASK_E_TIME= 8;//å¼€ç®¡æ—¶é—´
+	public static final int TASK_E_READER= 9;//è¯»è€…é¡»çŸ¥
+	public static final int TASK_E_SERVICE= 10;//æœåŠ¡ä»‹ç»
+	public static final int TASK_BOOK_INFO= 11;//è·å–ä¹¦çš„è¯¦ç»†ä¿¡æ¯
+	public static final int TASK_BOOK_RENEW= 12;//ç»­å€Ÿ
+	public static final int TASK_USER_PWD= 13;//ä¿®æ”¹å¯†ç 
+	public static final int TASK_QUERY_EBOOK= 14;//æŸ¥è¯¢ç”µå­ä¹¦
+	public static final int TASK_QUERY_EBOOK_MORE= 15;//æŸ¥è¯¢æ›´å¤šç”µå­ä¹¦
+	public static final int TASK_QUERY_EBOOK_DETAIL= 16;//ç”µå­ä¹¦è¯¦ç»†
+	public static final int TASK_EBOOK_DOWN= 17;//æŸ¥è¯¢ä¸‹è½½åœ°å€
+	public static final int TASK_REFRESH= 18;//æ›´æ–°
+	public static final int TASK_GET_FAVOR= 19;//è·å–æ”¶è—åˆ—è¡¨
+	public static final int TASK_LIB_FAVOR= 20;//é¦†è—å›¾ä¹¦æ”¶è—
+	public static final int TASK_CANCEL_FAVOR= 21;//å–æ¶ˆæ”¶è—
+	public static final int TASK_EBOOK_FAVOR= 22;//ç”µå­å›¾ä¹¦æ”¶è—
+    public static final int TASK_ADD_COMMENT= 23;//æ·»åŠ è¯„è®º
+	public static final int TASK_COMMENT_BOOKLIST= 24;//è·å–ç”¨æˆ·è¯„è®ºè¿‡å¾—ä¹¦ç±åˆ—è¡¨
+	public static final int TASK_COMMENT_LIST= 25;//è·å–å›´ç»•ä¹¦ç±çš„è¯„è®ºåˆ—è¡¨
+	public static final int TASK_ANNOUNCE_SPEACH= 26;//è®²åº§å®‰æ’
+	public static final int TASK_ANNOUNCE_WELFARE= 28;//å…¬ç›Šè®²åº§
+	public static final int TASK_ANNOUNCE_WELFARE_MORE= 29;//å…¬ç›Šè®²åº§
+	public static final int TASK_ANNOUNCE_NEWS = 30;//æ–°é—»åŠ¨æ€
+	public static final int TASK_ANNOUNCE_NEWS_MORE = 31;//æ–°é—»åŠ¨æ€
+	public static final int TASK_ANNOUNCE_DETAIL = 32;//å…¬å‘Šè¯¦ç»†
+	public static final int TASK_E_CAUTION = 33;//å¸¸è§é—®é¢˜
+	public static final int TASK_SUGGEST_HOTBOOK = 34; //è·å–çƒ­é—¨ä¹¦ç±
+	public static final int TASK_SUGGEST_NEWBOOK = 35;//è·å–æ–°ä¹¦æ¨è
+	public static final int TASK_SUGGEST_HOTBOOK_MORE = 36; //è·å–çƒ­é—¨ä¹¦ç±
+	public static final int TASK_SUGGEST_NEWBOOK_MORE = 37;//è·å–æ–°ä¹¦æ¨è
+	public static final int TASK_SUGGEST_DETAIL = 38;//æ¨èä¹¦ç±è¯¦ç»†
+	public static final int TAST_CENTER_QUESTION= 39;//åœ¨çº¿é—®ç­”
+	public static final int TASK_COMMENT_LIST_MORE= 40;//è·å–æ›´å¤šè¯„è®º
+	public static final int TASK_E_CAUTION_MORE = 41;//å¸¸è§é—®é¢˜æ›´å¤š
+	public static final int TASK_PERIODICAL_TYPE= 42;//è·å–æœŸåˆŠåˆ†ç±»åˆ—è¡¨
+	public static final int TASK_PERIODICAL_SUBTYPE= 43;//è·å–æœŸåˆŠåˆ†ç±»ä¸‹çš„æœŸåˆŠåˆ—è¡¨
+	public static final int TASK_PERIODICAL_DETAIL= 44;//è·å–æœŸæœŸåˆŠè¯¦ç»†
+	public static final int TASK_PERIODICAL_SPECIAL= 45;//è·å–ç‰¹åˆ«æ¨è
 	
 	
 	

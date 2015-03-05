@@ -22,10 +22,10 @@ public class Favorite implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -3219034814224955778L;
-	private String lngid;//Îª5Ê±£¬ÊÇisbnºÅ
+	private String lngid;//ä¸º5æ—¶ï¼Œæ˜¯isbnå·
 	private String title;
 	private String writer;
-	private String organ;// ³ö°æÉç
+	private String organ;// å‡ºç‰ˆç¤¾
 	private String keyword;
 	private String remark;
 	private String years;
@@ -36,11 +36,11 @@ public class Favorite implements Serializable{
 	private int commentcount;
 	private String imgurl;
 	private String weburl;
-	private String favoritekeyid;// Ë÷ÊéºÅ
-	private String typeid;// ÊéÀàĞÍ
-	private String favoritetime;// ÊÕ²ØÊ±¼ä
+	private String favoritekeyid;// ç´¢ä¹¦å·
+	private String typeid;// ä¹¦ç±»å‹
+	private String favoritetime;// æ”¶è—æ—¶é—´
 	
-	public int recordcount;//ÌõÊı
+	public int recordcount;//æ¡æ•°
 	public Map<Integer, List<Favorite>> map;
 	public String getTypeid() {
 		return typeid;

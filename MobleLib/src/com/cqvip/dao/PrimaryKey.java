@@ -1,17 +1,17 @@
 package com.cqvip.dao;
 
 /**
- * 主键
+ * 涓婚敭
  * @author luojiang
  *
  */
 public class PrimaryKey {
 	/**
-	 * 主键数组
+	 * 涓婚敭鏁扮粍
 	 */
 	private String[] keyNames = null;
 	/**
-	 * 主键是否自动增长
+	 * 涓婚敭鏄惁鑷姩澧為暱
 	 */
 	private boolean  autoInc  = false;
 

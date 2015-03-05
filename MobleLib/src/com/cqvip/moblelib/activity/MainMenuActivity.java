@@ -46,8 +46,8 @@ import com.cqvip.utils.Tool;
 
 /**
  * <p>
- * �ļ����: MainMenuActivity.java �ļ�����: ���˵��������� ��Ȩ����: ��Ȩ����(C)2013-2020 �� ˾:
- * ����ά����ѯ���޹�˾ ����ժҪ: ����˵��: ������ڣ� 201��5��10�� �޸ļ�¼:
+ * 文件名称: MainMenuActivity.java 文件描述: 主菜单，主界面 版权所有: 版权所有(C)2013-2020 公 司:
+ * 重庆维普咨询有限公司 内容摘要: 其他说明: 完成日期： 201年5月10日 修改记录:
  * </p>
  * 
  * @author LHP,LJ
@@ -79,7 +79,7 @@ public class MainMenuActivity extends BaseActivity_Main implements
 			SuggestedReadingActivity.class, PersonalCenterActivity.class,
 			MyFavorActivity.class, AnnounceActivity.class,
 			BorrowAndOrderActivity.class, GroupOfReadersActivity.class };
-	// ����
+	// 抽屉
 	// private SlidingDrawer sd;
 	// private ImageView iv;
 	Handler handler = new Handler() {
@@ -95,7 +95,7 @@ public class MainMenuActivity extends BaseActivity_Main implements
 				break;
 			case 1:
 				// sd.close();
-				// ������
+				// 检查更新
 
 				mtimer.cancel();
 				break;
@@ -143,7 +143,7 @@ public class MainMenuActivity extends BaseActivity_Main implements
 				.getSystemService("activity");
 		Log.i("MemoryClass", "" + activityManager.getMemoryClass());
 
-		// ��ȡ�ֻ���Ϣ
+		// 获取手机信息
 		Phinfo phinfo = new Phinfo();
 		phinfo.fullbaseinfo(this);
 		String info = phinfo.tojson(phinfo);
@@ -157,10 +157,10 @@ public class MainMenuActivity extends BaseActivity_Main implements
 		try {
 			MUser user = dao.queryInfo();
 			if (user != null) {
-				// �û��Ѿ���½
-				// ��̨�Զ���½
+				// 用户已经登陆
+				// 后台自动登陆
 				Log.i("database",
-						"��ݿ��ȡ�鼮�ɹ�" + user.getCardno() + user.getReaderno());
+						"数据库获取书籍成功" + user.getCardno() + user.getReaderno());
 				GlobleData.userid = user.getCardno();
 				GlobleData.readerid = user.getReaderno();
 				GlobleData.cqvipid = user.getCqvipid();
@@ -227,7 +227,7 @@ public class MainMenuActivity extends BaseActivity_Main implements
 	// if (keyCode == 4) {
 	// Intent intent = new Intent(MainMenuActivity.this, ActivityDlg.class);
 	// intent.putExtra("ACTIONID", 0);
-	// intent.putExtra("MSGBODY", "ȷ���˳����ͼ�����");
+	// intent.putExtra("MSGBODY", "确定退出龙岗图书馆吗？");
 	// intent.putExtra("BTN_CANCEL", 1);
 	// startActivityForResult(intent, 104);
 	//
@@ -242,13 +242,13 @@ public class MainMenuActivity extends BaseActivity_Main implements
 	}
 
 	public void init() {
-		// ��ʼ�� service
+		// 初始化 service
 		// if (!ManagerService.isrun) {
 		// ManagerService.isrun = true;
 		// Intent it = new Intent(this, ManagerService.class);
 		// this.startService(it);
 		// }
-		// ��������Ƿ����
+		// 检查网络是否可用
 		// if (Tool.checkNetWork(context)) {
 		//
 		// }
@@ -294,7 +294,7 @@ public class MainMenuActivity extends BaseActivity_Main implements
 				if (shortBook.getSucesss().equals("true")) {
 					int remoteversion = Integer.parseInt(shortBook.getId());
 					updata_url = shortBook.getDate();
-					// �Ƚϰ汾�����ظ���
+					// 比较版本号下载更新
 					int versioncode = 0;
 					try {
 						versioncode = MainMenuActivity.this.getPackageManager()
@@ -308,7 +308,7 @@ public class MainMenuActivity extends BaseActivity_Main implements
 						Intent intent = new Intent(MainMenuActivity.this,
 								ActivityDlg.class);
 						intent.putExtra("ACTIONID", 0);
-						intent.putExtra("MSGBODY", "�и��°汾��ȷ���Ƿ���£�");
+						intent.putExtra("MSGBODY", "有更新版本，确定是否更新？");
 						intent.putExtra("BTN_CANCEL", 1);
 						startActivityForResult(intent, 105);
 					}
@@ -345,7 +345,7 @@ public class MainMenuActivity extends BaseActivity_Main implements
 	// if (shortBook.getSucesss().equals("true")) {
 	// int remoteversion = Integer.parseInt(shortBook.getId());
 	// updata_url = shortBook.getDate();
-	// // �Ƚϰ汾�����ظ���
+	// // 比较版本号下载更新
 	// int versioncode = 0;
 	// try {
 	// versioncode = this.getPackageManager().getPackageInfo(
@@ -359,7 +359,7 @@ public class MainMenuActivity extends BaseActivity_Main implements
 	// Intent intent = new Intent(MainMenuActivity.this,
 	// ActivityDlg.class);
 	// intent.putExtra("ACTIONID", 0);
-	// intent.putExtra("MSGBODY", "�и��°汾��ȷ���Ƿ���£�");
+	// intent.putExtra("MSGBODY", "有更新版本，确定是否更新？");
 	// intent.putExtra("BTN_CANCEL", 1);
 	// startActivityForResult(intent, 105);
 	// }
@@ -369,10 +369,10 @@ public class MainMenuActivity extends BaseActivity_Main implements
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		// ֹͣ����
-		// �˳�Service
+		// 停止服务
+		// 退出Service
 		// context.stopService(new Intent("com.cqvip.moblelib.mainbiz"));
-		// �ر����߳�
+		// 关闭子线程
 		// ManagerService.isrun = false;
 		android.os.Process.killProcess(android.os.Process.myPid());
 	}
@@ -401,12 +401,13 @@ public class MainMenuActivity extends BaseActivity_Main implements
 				showLoginDialog(5);
 			}
 			break;
-		case R.id.main06_iv:// ��������
-			Log.i("mainmenu_onclick", "main06_iv");
-				intent.setClass(context, activities[6]);
+		case R.id.main06_iv:// 个人中心
+			if (GlobleData.islogin) {
+				intent.setClass(context, activities[4]);
 				startActivity(intent);
+			}
 			break;
-		case R.id.main07_iv:// ���Ĺ���
+		case R.id.main07_iv:// 借阅管理
 			if (GlobleData.islogin) {
 				intent.setClass(context, activities[8]);
 				startActivity(intent);
@@ -414,7 +415,7 @@ public class MainMenuActivity extends BaseActivity_Main implements
 				showLoginDialog(8);
 			}
 			break;
-		case R.id.main08_iv:// �ο���ѯ
+		case R.id.main08_iv:// 
 			if (GlobleData.islogin) {
 				intent.setClass(MainMenuActivity.this, activities[7]);
 				startActivity(intent);
@@ -434,7 +435,7 @@ public class MainMenuActivity extends BaseActivity_Main implements
 		startActivityForResult(intent, id);
 	}
 
-	// ���������˳�
+	// 监听两次退出
 	@Override
 	public boolean dispatchTouchEvent(MotionEvent ev) {
 		// TODO Auto-generated method stub
@@ -480,7 +481,7 @@ public class MainMenuActivity extends BaseActivity_Main implements
 			isExit = true;
 			Toast.makeText(getApplicationContext(), tips, Toast.LENGTH_SHORT)
 					.show();
-			// ����handler�ӳٷ��͸��״̬��Ϣ
+			// 利用handler延迟发送更改状态信息
 			mHandler.sendEmptyMessageDelayed(0, 2000);
 		} else {
 			finish();

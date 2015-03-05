@@ -9,7 +9,7 @@ import com.cqvip.dao.DaoException;
 import com.cqvip.moblelib.entity.MUser;
 
 /**
- * 用户信息，dao
+ * 鐢ㄦ埛淇℃伅锛宒ao
  * @author luojiang
  *
  */
@@ -22,7 +22,7 @@ public class MUserDao extends Dao{
 	}
 
 	/**
-	 * 保存用户信息
+	 * 淇濆瓨鐢ㄦ埛淇℃伅
 	 * @param user
 	 * @throws DaoException
 	 */
@@ -35,7 +35,7 @@ public class MUserDao extends Dao{
 	}
 	
 	/**
-	 * 删除用户信息
+	 * 鍒犻櫎鐢ㄦ埛淇℃伅
 	 * @param id
 	 * @throws DaoException 
 	 */
@@ -52,7 +52,7 @@ public class MUserDao extends Dao{
 		
 	}
 	/**
-	 * 查询用户信息
+	 * 鏌ヨ鐢ㄦ埛淇℃伅
 	 * @param id
 	 * @return
 	 * @throws DaoException
@@ -72,7 +72,7 @@ public class MUserDao extends Dao{
 		return result.get(0);
 	}
 	/**
-	 * 查询用户信息
+	 * 鏌ヨ鐢ㄦ埛淇℃伅
 	 * @param id
 	 * @return
 	 * @throws DaoException

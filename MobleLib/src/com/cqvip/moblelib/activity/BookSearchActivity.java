@@ -36,8 +36,8 @@ import com.cqvip.utils.FileUtils;
 
 /**
  * <p>
- * �ļ����: BookSearchActivity.java �ļ�����: �ݲز�ѯ ��Ȩ����: ��Ȩ����(C)2013-2020 �� ˾:
- * ����ά����ѯ���޹�˾ ����ժҪ: �����������������ѯ ����˵��: ������ڣ� 201��5��10�� �޸ļ�¼:
+ * 文件名称: BookSearchActivity.java 文件描述: 馆藏查询 版权所有: 版权所有(C)2013-2020 公 司:
+ * 重庆维普咨询有限公司 内容摘要: 包含条件搜索，分类查询 其他说明: 完成日期： 201年5月10日 修改记录:
  * </p>
  * 
  * @author LHP,LJ
@@ -55,7 +55,7 @@ public class BookSearchActivity extends BaseActivity implements
 	private LinearLayout searchLayout = null;
 	private GestureDetector mggd;
 	/**
-	 * �ж�������ҳ�滹����ҳ��
+	 * 判断是在外页面还是内页面
 	 */
 	private boolean isOutter;
 
@@ -70,7 +70,7 @@ public class BookSearchActivity extends BaseActivity implements
 		editText = (EditText) findViewById(R.id.search_et);
 		hideinputmethod();
 
-		//������ʷ
+		//搜索历史
 		searchLayout = (LinearLayout) this.findViewById(R.id.searchContent);
 		delete_iv = (ImageView) findViewById(R.id.delete_iv);
 		showKeywords = (KeywordsView) this.findViewById(R.id.word);
@@ -80,7 +80,7 @@ public class BookSearchActivity extends BaseActivity implements
 		showKeywords.setOnTouchListener(new OnTouchListener() {
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
-				return mggd.onTouchEvent(event); // ע�����¼�
+				return mggd.onTouchEvent(event); // 注册点击事件
 			}
 		});
 		isOutter = true;
@@ -245,28 +245,28 @@ public class BookSearchActivity extends BaseActivity implements
 		@Override
 		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
 				float velocityY) {
-			if (e2.getX() - e1.getX() > 100) { // �һ�
+			if (e2.getX() - e1.getX() > 100) { // 右滑
 				key_words = getRandomArray();
 				showKeywords.rubKeywords();
 				feedKeywordsFlow(showKeywords, key_words);
 				showKeywords.go2Shwo(KeywordsView.ANIMATION_OUT);
 				return true;
 			}
-			if (e2.getX() - e1.getX() < -100) {// ��
+			if (e2.getX() - e1.getX() < -100) {// 左滑
 				key_words = getRandomArray();
 				showKeywords.rubKeywords();
 				feedKeywordsFlow(showKeywords, key_words);
 				showKeywords.go2Shwo(KeywordsView.ANIMATION_IN);
 				return true;
 			}
-			if (e2.getY() - e1.getY() < -100) {// �ϻ�
+			if (e2.getY() - e1.getY() < -100) {// 上滑
 				key_words = getRandomArray();
 				showKeywords.rubKeywords();
 				feedKeywordsFlow(showKeywords, key_words);
 				showKeywords.go2Shwo(KeywordsView.ANIMATION_IN);
 				return true;
 			}
-			if (e2.getY() - e1.getY() > 100) {// �»�
+			if (e2.getY() - e1.getY() > 100) {// 下滑
 				key_words = getRandomArray();
 				showKeywords.rubKeywords();
 				feedKeywordsFlow(showKeywords, key_words);
@@ -290,7 +290,7 @@ public class BookSearchActivity extends BaseActivity implements
 		// searchLayout.removeAllViews();
 		//
 		// }
-		// Toast.makeText(this, "ѡ�е������ǣ�" + ((TextView) v).getText().toString(),
+		// Toast.makeText(this, "选中的内容是：" + ((TextView) v).getText().toString(),
 		// 1)
 		// .show();
 		// }
@@ -317,13 +317,13 @@ public class BookSearchActivity extends BaseActivity implements
 	}
 
 	/**
-	 * ɾ��Ի���
+	 * 删除对话框
 	 */
 	public void senddel(int type) {
 		Intent intent = new Intent();
 		intent.setClass(this, ActivityDlg.class);
 		intent.putExtra("ACTIONID", 0);
-		intent.putExtra("MSGBODY", "ȷ��ɾ��������ʷ��");
+		intent.putExtra("MSGBODY", "确定删除搜索历史？");
 		intent.putExtra("BTN_CANCEL", 1);
 		startActivityForResult(intent, type);
 	}

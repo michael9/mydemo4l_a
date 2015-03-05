@@ -18,31 +18,31 @@ public class Book implements Serializable  {
 	 * 
 	 */
 	private static final long serialVersionUID = 6159142206069737907L;
-	private String recordid;//Í¼Êéid
-	private String isbn;//isbnºÅ
-	private String publisher;//³ö°æÉç
-	private String publishyear;//³ö°æÊ±¼ä
-	private String title;//ÊéÃû
-	private String author;//ÊéÃû	
-	private String callno;//·ÖÀàºÅ
+	private String recordid;//å›¾ä¹¦id
+	private String isbn;//isbnå·
+	private String publisher;//å‡ºç‰ˆç¤¾
+	private String publishyear;//å‡ºç‰ˆæ—¶é—´
+	private String title;//ä¹¦å
+	private String author;//ä¹¦å	
+	private String callno;//åˆ†ç±»å·
 	private String classno;
-	private String cover_path;//·âÃæÍ¼Æ¬
+	private String cover_path;//å°é¢å›¾ç‰‡
 
 	
 	public String getCover_path() {
 		return cover_path;
 	}
-	private String subject;//¹Ø¼ü×Ö
-	private String u_publish;//¹Ø¼ü×Ö
-	private String u_cover;//Í¼Æ¬
-	private String u_page;//Ò³Êı
-	private String u_price;//¼Û¸ñ
-	private String u_abstract;//¼ò½é
+	private String subject;//å…³é”®å­—
+	private String u_publish;//å…³é”®å­—
+	private String u_cover;//å›¾ç‰‡
+	private String u_page;//é¡µæ•°
+	private String u_price;//ä»·æ ¼
+	private String u_abstract;//ç®€ä»‹
 	private String u_title;
 	private String u_isbn;
 	private boolean isfavorite;
 
-	//Favorite×ª»»ÎªBook
+	//Favoriteè½¬æ¢ä¸ºBook
 	public Book(String isbn, String publisher, String title, String author,
 			String callno, String subject, String u_price,String u_abstract,String imageurl) {
 		this.isbn = isbn;
@@ -55,7 +55,7 @@ public class Book implements Serializable  {
 		this.u_abstract=u_abstract;
 		this.cover_path=imageurl;
 	}
-	//Favorite×ª»»ÎªBook
+	//Favoriteè½¬æ¢ä¸ºBook
 	public Book(String isbn, String publisher, String title, String author,
 			String callno,String u_abstract,
 			String imageurl,String pulishyear,String page,String classno,String subject) {
@@ -151,7 +151,7 @@ public class Book implements Serializable  {
 		return u_abstract;
 	}
 	/**
-	 * ËÑË÷·µ»Ø¼ÇÂ¼Êı
+	 * æœç´¢è¿”å›è®°å½•æ•°
 	 * @param result
 	 * @return
 	 * @throws BookException

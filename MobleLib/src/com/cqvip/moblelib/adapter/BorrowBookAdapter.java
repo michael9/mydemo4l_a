@@ -47,7 +47,7 @@ public class BorrowBookAdapter extends BaseAdapter{
 		this.createMyReqErrorListener = createMyReqErrorListener;
 	}
 	/**
-	 * �ײ���ఴť������+1
+	 * 底部更多按钮，返回+1
 	 */
 	@Override
 	public int getCount() {
@@ -62,7 +62,7 @@ public class BorrowBookAdapter extends BaseAdapter{
 		return lists.get(position);
 	}
 	/**
-	 * ���������ײ��ĸ�ఴť������-2
+	 * 如果点击到最底部的更多按钮，返回-2
 	 */
 	@Override
 	public long getItemId(int position) {
@@ -70,25 +70,25 @@ public class BorrowBookAdapter extends BaseAdapter{
 			return position;
 	}
 	/**
-	 * ���Ӹ�����
+	 * 增加更多数据
 	 * @param moreStatus
 	 */
 	public void addMoreData(List<BorrowBook> moreStatus)
 	{
-		this.lists.addAll(moreStatus);//����������ӵ�ԭ�м���
+		this.lists.addAll(moreStatus);//把新数据增加到原有集合
 		this.notifyDataSetChanged();
 	}
 	  static class ViewHolder{
 			
 		
-			TextView title;//����
-			TextView barcode;//�����
-			TextView callno;//�����
-			TextView borrowtime;//����ʱ��
-			TextView returntime;//����ʱ��
-//			TextView renew;//���
-			ImageView renew;//���
-			TextView price;//�۸�
+			TextView title;//书名
+			TextView barcode;//条码号
+			TextView callno;//索书号
+			TextView borrowtime;//借书时间
+			TextView returntime;//还书时间
+//			TextView renew;//续借
+			ImageView renew;//续借
+			TextView price;//价格
 			
 			}
 	
@@ -125,7 +125,7 @@ public class BorrowBookAdapter extends BaseAdapter{
 	        holder.price.setText(price+"CNY"+book.getPrice());
 	        holder.borrowtime.setText(borrowtime+book.getLoandate());
 	        holder.renew.setTag(position);
-	        //�ж��Ƿ�����
+	        //判断是否续借过
 	        if(book.getRenew()!=0){
 	        holder.returntime.setText(returntime+book.getReturndate()+context.getResources().getString(R.string.alreadyrenew));
 	        holder.renew.setVisibility(View.GONE);
@@ -139,10 +139,10 @@ public class BorrowBookAdapter extends BaseAdapter{
 						
 						@Override
 						public void onClick(View v) {
-							//�����������
+							//发送续借请求
 							int p=(Integer)v.getTag();
 							if(lists.get(p).getRenew()==0){								
-						   //���
+						   //续借
 						    StringRequest myReq = new StringRequest(Method.POST,GlobleData.SERVER_URL+"/library/user/renew.aspx",
                                          createRenewSuccessListener,
                                          createMyReqErrorListener) {
@@ -162,7 +162,7 @@ public class BorrowBookAdapter extends BaseAdapter{
 							{
 								Intent intent=new Intent(context, ActivityDlg.class);
 								intent.putExtra("ACTIONID", 0);
-								intent.putExtra("MSGBODY", "�ñ�ͼ���Ѿ������ˡ�\r\n��ע�⵽�ڹ黹��\r\nлл��");
+								intent.putExtra("MSGBODY", "该本图书已经续借过了。\r\n请注意到期归还。\r\n谢谢！");
 								intent.putExtra("BTN_CANCEL", 0);
 								context.startActivity(intent);
 							}
@@ -170,7 +170,5 @@ public class BorrowBookAdapter extends BaseAdapter{
 					});
 		return convertView;
 	}
-
-
 
 }

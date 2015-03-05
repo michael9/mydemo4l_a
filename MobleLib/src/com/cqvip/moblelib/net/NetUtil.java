@@ -9,7 +9,7 @@ import android.util.Log;
 public class NetUtil {
 
 	/**
-	 * get请求url
+	 * get璇锋眰url
 	 * @param param
 	 * @return
 	 */
@@ -41,7 +41,7 @@ public class NetUtil {
 	}
 	
 	/**
-	 * post请求参数
+	 * post璇锋眰鍙傛暟
 	 * @param param
 	 * @return
 	 */

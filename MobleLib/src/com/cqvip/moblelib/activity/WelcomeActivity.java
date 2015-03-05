@@ -37,21 +37,21 @@ public class WelcomeActivity extends Activity {
     };
     
 	void startHelperActivity() {
-		// ��ȡSharedPreferences����Ҫ�����
+		// 读取SharedPreferences中需要的数据
 
 		SharedPreferences preferences = getSharedPreferences("count",
 				MODE_PRIVATE);
 
 		int count = preferences.getInt("count", 0);
 
-		// �жϳ�����ڼ������У�����ǵ�һ����������ת����ҳ��
+		// 判断程序与第几次运行，如果是第一次运行则跳转到引导页面
 
 		if (count == 0) {
 
 			Editor editor = preferences.edit();
-			// �������
+			// 存入数据
 			editor.putInt("count", ++count);
-			// �ύ�޸�
+			// 提交修改
 			editor.commit();
 
 			Intent intent = new Intent();

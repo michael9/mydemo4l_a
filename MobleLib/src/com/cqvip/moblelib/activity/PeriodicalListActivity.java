@@ -33,7 +33,7 @@ import com.cqvip.utils.BitmapCache;
 import com.cqvip.utils.Tool;
 
 /**
- * ģ���ڿ��б���ʾ
+ * 模拟期刊列表显示
  * @author luojiang
  *
  */
@@ -56,7 +56,7 @@ public class PeriodicalListActivity extends BaseImageActivity implements
 	private Map<String, String> gparams;
 	private String classid;
 	
-	public static HashMap<String, Boolean> favors = new HashMap<String, Boolean>();// �����ղ�״̬�����½���
+	public static HashMap<String, Boolean> favors = new HashMap<String, Boolean>();// 保持收藏状态，更新界面
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +68,7 @@ public class PeriodicalListActivity extends BaseImageActivity implements
 		listview = (DropDownListView) findViewById(R.id.search_res_lv);
 		listview.setOnItemClickListener((OnItemClickListener) this);
 		noResult_rl = (RelativeLayout) findViewById(R.id.noresult_rl);
-		//��ȡ���
+		//获取更多
 		listview.setOnBottomListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -103,11 +103,11 @@ public class PeriodicalListActivity extends BaseImageActivity implements
 			if(customProgressDialog!=null&&customProgressDialog.isShowing())
 			customProgressDialog.dismiss();
 			try {
-				// ��ȡ���ؼ�¼��
+				// 获取返回记录数
 				int count = Periodical.getCount(response);
 				if (count > 0) {
 					searchCount.setVisibility(View.VISIBLE);
-					searchCount.setText("����������" + count + "����¼");
+					searchCount.setText("共计搜索到" + count + "条记录");
 				} else {
 					searchCount.setVisibility(View.GONE);
 				}
@@ -187,7 +187,7 @@ public class PeriodicalListActivity extends BaseImageActivity implements
 	}
 
 	/**
-	 * �������磬��ȡ���
+	 * 请求网络，获取数据
 	 * 
 	 * @param key
 	 * @param page

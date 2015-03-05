@@ -3,50 +3,50 @@ package com.cqvip.dao;
 import android.util.Log;
 
 /**
- * Êı¾İ¿â´íÎó
+ * æ•°æ®åº“é”™è¯¯
  * @author luojiang
  *
  */
 public class DaoException extends Exception {
 	/**
-	 * ĞòÁĞ»¯
+	 * uid
 	 */
 	private static final long serialVersionUID = 1L;
 	/**
-	 * Òì³£ÀàĞÍ
+	 * é”™è¯¯ç±»å‹
 	 */
 	public enum ErrorType {
 		/**
-		 * Î´Öª´íÎó
+		 * æœªçŸ¥é”™è¯¯
 		 */
 		UNKOWN_ERROR,
 		/**
-		 * ´´½¨ÊµÌå´íÎó
+		 * ä¸èƒ½å®ä¾‹åŒ–
 		 */
 		CANNOT_INSTANCE_MODEL,
 		/**
-		 * ÊµÌåµÄget»òset·½·¨²»ÕıÈ·
+		 * æ— æ•ˆå®ä¾‹æ–¹æ³•
 		 */
 		INVALID_MODEL_METHOD,
 		/**
-		 * Ö÷¼üÉèÖÃ²»ÕıÈ·
+		 * æ— æ•ˆä¸»é”®
 		 */
 		INVALID_PRIMARY_KEY,
 		/**
-		 * Êı¾İ¿âÖ´ĞĞ´íÎó
+		 * æ•°æ®åº“é”™è¯¯
 		 */
 		DB_EXCEPTION
 	}
 		
 	/**
-	 * Òì³£ÀàĞÍ
+	 * é”™è¯¯è£‚éš™
 	 */
 	private ErrorType type;
 	
 	/**
-	 * ¹¹Ôìº¯Êı
+	 * é”™è¯¯
 	 * @param type
-	 * 		Òì³£ÀàĞÍ
+	 * 		
 	 */
 	public DaoException(ErrorType type) {
 		super(getMessageFromType(type));
@@ -54,29 +54,29 @@ public class DaoException extends Exception {
 	}
 	
 	/**
-	 * »ñÈ¡Òì³£ÀàĞÍ
-	 * @return Òì³£ÀàĞÍ
+	 * 
+	 * @return é”™è¯¯ç±»å‹
 	 */
 	public ErrorType getType() {
 		return this.type;
 	}
 	
 	/**
-	 * »ñÈ¡Òì³£ÀàĞÍµÄÃèÊö
+	 * è·å–å¼‚å¸¸ç±»å‹çš„æè¿°
 	 * @param type
 	 * @return
 	 */
 	public static String getMessageFromType(ErrorType type) {
 		if(ErrorType.UNKOWN_ERROR == type) {
-			return "Î´Öª´íÎó";
+			return "æœªçŸ¥é”™è¯¯";
 		} else if(ErrorType.CANNOT_INSTANCE_MODEL == type) {
-			return "´´½¨ÊµÌå´íÎó";
+			return "åˆ›å»ºå®ä½“é”™è¯¯";
 		} else if(ErrorType.INVALID_MODEL_METHOD == type) {
-			return "ÊµÌåµÄget»òset·½·¨²»ÕıÈ·";
+			return "å®ä½“çš„getæˆ–setæ–¹æ³•ä¸æ­£ç¡®";
 		} else if(ErrorType.INVALID_PRIMARY_KEY == type) {
-			return "Ö÷¼üÉèÖÃ²»ÕıÈ·";
+			return "ä¸»é”®è®¾ç½®ä¸æ­£ç¡®";
 		} else if(ErrorType.DB_EXCEPTION == type) {
-			return "Êı¾İ¿âÖ´ĞĞ´íÎó";
+			return "æ•°æ®åº“æ‰§è¡Œé”™è¯¯";
 		}
 		
 		return "";

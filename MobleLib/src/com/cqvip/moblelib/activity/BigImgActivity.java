@@ -28,7 +28,6 @@ public class BigImgActivity extends Activity implements OnTouchListener {
 	private ProgressBar progress;
 		/** Called when the activity is first created. */
 
-		// �Ŵ���С
 		Matrix matrix = new Matrix();
 		Matrix savedMatrix = new Matrix();
 
@@ -87,7 +86,6 @@ public class BigImgActivity extends Activity implements OnTouchListener {
 		public boolean onTouch(View v, MotionEvent event) {
 			ImageView myImageView = (ImageView) v;
 			switch (event.getAction() & MotionEvent.ACTION_MASK) {
-			// ��������ģʽ
 			case MotionEvent.ACTION_DOWN:
 				matrix.set(myImageView.getImageMatrix());
 				savedMatrix.set(matrix);
@@ -99,7 +97,6 @@ public class BigImgActivity extends Activity implements OnTouchListener {
 				mode = NONE;
 				break;
 
-			// ���ö�㴥��ģʽ
 			case MotionEvent.ACTION_POINTER_DOWN:
 				oldDist = spacing(event);
 				if (oldDist > 10f) {
@@ -108,19 +105,16 @@ public class BigImgActivity extends Activity implements OnTouchListener {
 					mode = ZOOM;
 				}
 				break;
-			// ��ΪDRAGģʽ�������ƶ�ͼƬ
 			case MotionEvent.ACTION_MOVE:
 				if (mode == DRAG) {
 					matrix.set(savedMatrix);
 					matrix.postTranslate(event.getX() - start.x, event.getY() - start.y);
 				}
-				// ��ΪZOOMģʽ��������������
 				else if (mode == ZOOM) {
 					float newDist = spacing(event);
 					if (newDist > 10f) {
 						matrix.set(savedMatrix);
 						float scale = newDist / oldDist;
-						// ����˶�ű����ͼƬ���е�λ��
 						matrix.postScale(scale, scale, mid.x, mid.y);
 					}
 				}
@@ -130,14 +124,12 @@ public class BigImgActivity extends Activity implements OnTouchListener {
 			return true;
 		}
 
-		// �����ƶ�����
 		private float spacing(MotionEvent event) {
 			float x = event.getX(0) - event.getX(1);
 			float y = event.getY(0) - event.getY(1);
 			return FloatMath.sqrt(x * x + y * y);
 		}
 
-		// �����е�λ��
 		private void midPoint(PointF point, MotionEvent event) {
 			float x = event.getX(0) + event.getX(1);
 			float y = event.getY(0) + event.getY(1);

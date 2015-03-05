@@ -13,7 +13,7 @@ import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.utils.PackageUtils;
 
 /**
- * dao£¬Ìá¹©Êı¾İ¿âÔöÉ¾¸Ä²é
+ * daoï¼Œæä¾›æ•°æ®åº“å¢åˆ æ”¹æŸ¥
  * @author luojiang
  *
  */
@@ -31,7 +31,7 @@ public class Dao extends MDAO{
 	}
 	
 	/**
-	 * ²éÕÒËùÓĞÊµÌåÀà£¬²¢ÔÚÊı¾İ¿âÖĞ´´½¨ÏàÓ¦µÄ±í
+	 * æŸ¥æ‰¾æ‰€æœ‰å®ä½“ç±»ï¼Œå¹¶åœ¨æ•°æ®åº“ä¸­åˆ›å»ºç›¸åº”çš„è¡¨
 	 * 
 	 * @param 
 	 *       
@@ -40,7 +40,7 @@ public class Dao extends MDAO{
 	private void createTablesFromModels(SQLiteDatabase db) {
 		List<Class<?>> classes = PackageUtils.getPackageClasses(context, GlobleData.MODEL_PACKAGE, Model.class);
 		
-    	//´´½¨±í
+    	//åˆ›å»ºè¡¨
     	for (int i = 0; i < classes.size(); i++) {
    			@SuppressWarnings("unchecked")
 			Class<? extends Model> modelClass = (Class<? extends Model>)classes.get(i);

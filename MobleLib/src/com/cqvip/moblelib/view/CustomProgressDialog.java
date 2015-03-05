@@ -31,9 +31,9 @@ import android.widget.TextView;
 
 /********************************************************************
  * [Summary]
- *       TODO ���ڴ˴���Ҫ����������ʵ�ֵĹ��ܡ���Ϊ����ע����Ҫ��Ϊ����IDE���������tip������ؼ�����Ҫ
+ *       TODO 请在此处简要描述此类所实现的功能。因为这项注释主要是为了在IDE环境中生成tip帮助，务必简明扼要
  * [Remarks]
- *       TODO ���ڴ˴���ϸ������Ĺ��ܡ����÷�����ע������Լ���������Ĺ�ϵ.
+ *       TODO 请在此处详细描述类的功能、调用方法、注意事项、以及与其它类的关系.
  *******************************************************************/
 
 public class CustomProgressDialog extends Dialog {
@@ -89,7 +89,7 @@ public class CustomProgressDialog extends Dialog {
     /**
      * 
      * [Summary]
-     *       setTitile ����
+     *       setTitile 标题
      * @param strTitle
      * @return
      *
@@ -101,7 +101,7 @@ public class CustomProgressDialog extends Dialog {
     /**
      * 
      * [Summary]
-     *       setMessage ��ʾ����
+     *       setMessage 提示内容
      * @param strMessage
      * @return
      *

@@ -15,13 +15,13 @@ public class MEBookDao extends Dao{
 		// TODO Auto-generated constructor stub
 	}
 	/**
-	 * Çå¿ÕËùÓĞÁĞ±í
+	 * æ¸…ç©ºæ‰€æœ‰åˆ—è¡¨
 	 */
 	public void deleteAll(){
 		getWritableDatabase().delete("MEbook", null, null);
 	}
 	/**
-	 * Çå¿ÕËùÓĞÒÑÏÂÔØÁĞ±í
+	 * æ¸…ç©ºæ‰€æœ‰å·²ä¸‹è½½åˆ—è¡¨
 	 * @throws DaoException 
 	 */
 	public void deleteAll(int isdown) throws DaoException{
@@ -36,7 +36,7 @@ public class MEBookDao extends Dao{
 		
 	}
 	/**
-	 * É¾³ıÏÂÔØÊé¼®
+	 * åˆ é™¤ä¸‹è½½ä¹¦ç±
 	 * @param id
 	 * @throws DaoException 
 	 */
@@ -52,7 +52,7 @@ public class MEBookDao extends Dao{
 		}
 	}
 	/**
-	 * É¾³ı£¬È¡ÏûÏÂÔØ
+	 * åˆ é™¤ï¼Œå–æ¶ˆä¸‹è½½
 	 * @param id
 	 * @throws DaoException 
 	 */
@@ -68,7 +68,7 @@ public class MEBookDao extends Dao{
 		}
 	}
 	/**
-	 * ±£´æÓÃ»§ĞÅÏ¢
+	 * ä¿å­˜ç”¨æˆ·ä¿¡æ¯
 	 * @param user
 	 * @throws DaoException
 	 */
@@ -81,7 +81,7 @@ public class MEBookDao extends Dao{
 		}
 	}
 	/**
-	 * ±£´æÓÃ»§ĞÅÏ¢
+	 * ä¿å­˜ç”¨æˆ·ä¿¡æ¯
 	 * @param user
 	 * @throws DaoException
 	 */
@@ -95,7 +95,7 @@ public class MEBookDao extends Dao{
 		}
 	}
 	/**
-	 * ±£´æÓÃ»§ĞÅÏ¢
+	 * ä¿å­˜ç”¨æˆ·ä¿¡æ¯
 	 * @param user
 	 * @throws DaoException
 	 */
@@ -110,7 +110,7 @@ public class MEBookDao extends Dao{
 
 
 	/**
-	 * ¸ù¾İid²éÑ¯¼ÇÂ¼
+	 * æ ¹æ®idæŸ¥è¯¢è®°å½•
 	 * @param id
 	 * @return
 	 * @throws DaoException
@@ -131,7 +131,7 @@ public class MEBookDao extends Dao{
 		return result.get(0);
 	}
 	/**
-	 * ¸ù¾İid²éÑ¯¼ÇÂ¼
+	 * æ ¹æ®idæŸ¥è¯¢è®°å½•
 	 * @param id
 	 * @return
 	 * @throws DaoException
@@ -152,7 +152,7 @@ public class MEBookDao extends Dao{
 		return result.get(0);
 	}
 	/**
-	 * ²éÑ¯ËùÓĞ¼ÇÂ¼
+	 * æŸ¥è¯¢æ‰€æœ‰è®°å½•
 	 * @param id
 	 * @return
 	 * @throws DaoException
@@ -173,7 +173,7 @@ public class MEBookDao extends Dao{
 		return result;
 	}
 	/**
-	 * ¸üĞÂ
+	 * æ›´æ–°
 	 * @param book
 	 * @throws DaoException
 	 */
@@ -185,7 +185,7 @@ public class MEBookDao extends Dao{
 		}
 	}
 	/**
-	 * ·ÖÒ³²éÑ¯ËùÓĞ¼ÇÂ¼
+	 * åˆ†é¡µæŸ¥è¯¢æ‰€æœ‰è®°å½•
 	 * @param id
 	 * @return
 	 * @throws DaoException

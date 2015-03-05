@@ -90,7 +90,7 @@ public class ResultOnSearchActivity extends BaseActivity implements
 		noResult_rl = (RelativeLayout) findViewById(R.id.noresult_rl);
 		edit.setText(getIntent().getStringExtra("ISBN"));
 		
-		if(getIntent().getBooleanExtra("isfromDetailAdvancedBookActivity", false)){//���Ƽ��Ķ����ߴ�������¼start��
+		if(getIntent().getBooleanExtra("isfromDetailAdvancedBookActivity", false)){//从推荐阅读或者从搜索记录start的
 			key=getIntent().getStringExtra("bookname");
 			imgsearch.setFocusable(true);
 			customProgressDialog.show();
@@ -109,10 +109,10 @@ public class ResultOnSearchActivity extends BaseActivity implements
 					return;
 				}
 				if (TextUtils.isEmpty(key)) {
-					Tool.ShowMessages(context, "������ؼ���");
+					Tool.ShowMessages(context, "请输入关键字");
 					return;
 				}
-				// �ж��Ƿ���isbn�Ų�ѯ
+				// 判断是否是isbn号查询
 				customProgressDialog.show();
 				page = 1;
 				if (Tool.isbnMatch(key)) {
@@ -121,7 +121,7 @@ public class ResultOnSearchActivity extends BaseActivity implements
 				} else {
 					getHomePage(key, GETFIRSTPAGE, DEFAULT_COUNT, GETFIRSTPAGE,
 							GlobleData.QUERY_ALL);
-					//������ݿ�
+					//加入数据库
 					addDatabase(edit.getText().toString().trim());
 				}
 			}
@@ -137,13 +137,13 @@ public class ResultOnSearchActivity extends BaseActivity implements
 					return true;
 				}
 				key = edit.getText().toString().trim();
-				// ���ؼ���
+				// 隐藏键盘
 				hideKeybord();
-				// ���0����
+				// 检查0网络
 				if (!Tool.checkNetWork(context)) {
 					return false;
 				}
-				// �������,��ȡ��ҳ
+				// 网络访问,获取首页
 				customProgressDialog.show();
 				page = 1;
 				if (Tool.isbnMatch(key)) {
@@ -152,7 +152,7 @@ public class ResultOnSearchActivity extends BaseActivity implements
 				} else {
 					getHomePage(key, GETFIRSTPAGE, DEFAULT_COUNT, GETFIRSTPAGE,
 							GlobleData.QUERY_ALL);
-					//������ݿ�
+					//加入数据库
 					addDatabase(edit.getText().toString().trim());
 				}
 				return true;
@@ -216,7 +216,7 @@ public class ResultOnSearchActivity extends BaseActivity implements
 	}
 	
 	/**
-	 * ���ؼ���
+	 * 隐藏键盘
 	 */
 	private void hideKeybord() {
 		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -232,11 +232,11 @@ public class ResultOnSearchActivity extends BaseActivity implements
 			if(customProgressDialog!=null&&customProgressDialog.isShowing())
 			customProgressDialog.dismiss();
 			try {
-				//��ȡ���ؼ�¼��
+				//获取返回记录数
 				int count = Book.bookCount(response);
 				if(count>0){
 					searchCount.setVisibility(View.VISIBLE);
-					String temp="�������� \"<font face=\"arial\" color=\"red\">"+key+"</font>\"  ������� "+count+" ��";
+					String temp="搜索到与 \"<font face=\"arial\" color=\"red\">"+key+"</font>\"  相关内容 "+count+" 个";
 					searchCount.setText(Html.fromHtml(temp));
 				}else{
 					searchCount.setVisibility(View.GONE);
@@ -326,7 +326,7 @@ public class ResultOnSearchActivity extends BaseActivity implements
 	}
 
 	/**
-	 * �������磬��ȡ���
+	 * 请求网络，获取数据
 	 * 
 	 * @param key
 	 * @param page
@@ -367,7 +367,7 @@ public class ResultOnSearchActivity extends BaseActivity implements
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View arg1, int position, long id) {
 	 	    Log.i("ResultOnSea", ""+position);
-			Book book = adapter.getLists().get(position);//�˵ص�positionҪ����listview��header
+			Book book = adapter.getLists().get(position);//此地的position要包括listview的header
 			if (book != null) {
 				Intent _intent = new Intent(context, DetailBookActivity.class);
 				Bundle bundle = new Bundle();

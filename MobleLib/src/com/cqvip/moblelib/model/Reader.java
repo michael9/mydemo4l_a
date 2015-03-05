@@ -10,28 +10,28 @@ import org.json.JSONObject;
 import com.cqvip.moblelib.net.BookException;
 
 /**
- * ������
+ * 读者类
  * @author luojiang
  *
  */
 public class Reader{
-	private String username;//����
-	private String question;//�ܱ�����
-	private String answer;//�ܱ���
-	private String recordno;//�뵱��readerno
-	private int cardtypeid;//����
+	private String username;//卡号
+	private String question;//密保问题
+	private String answer;//密保答案
+	private String recordno;//想当与readerno
+	private int cardtypeid;//类型
 	private String cardtype;//
-	private String status;//֤״̬
+	private String status;//证状态
 	private String gender;//
 	private String cardno;//
-	private String regdate;//ע������
-	private String name;//����
+	private String regdate;//注册日期
+	private String name;//姓名
 	private String notes;//
 	private String idno;//
 	private String birth;//
 	private String library;//
-	private String cardbegdate;//��������
-	private String cardenddate;//��ֹ����
+	private String cardbegdate;//启用日期
+	private String cardenddate;//终止日期
 	private String address;//
 	private String workunit;//
 	private String phone;//

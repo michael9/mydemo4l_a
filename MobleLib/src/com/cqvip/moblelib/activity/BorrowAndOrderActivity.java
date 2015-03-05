@@ -29,14 +29,14 @@ import com.cqvip.utils.Tool;
 
 /**
  * <p>
- * �ļ����: BorrowAndOrderActivity.java
- * �ļ�����: ���Ĺ���
- * ��Ȩ����: ��Ȩ����(C)2013-2020
- * ��          ˾: ����ά����ѯ���޹�˾
- * ����ժҪ: 
- * ����˵��:
- * ������ڣ� 201��5��10��
- * �޸ļ�¼: 
+ * 文件名称: BorrowAndOrderActivity.java
+ * 文件描述: 借阅管理
+ * 版权所有: 版权所有(C)2013-2020
+ * 公          司: 重庆维普咨询有限公司
+ * 内容摘要: 
+ * 其他说明:
+ * 完成日期： 201年5月10日
+ * 修改记录: 
  * </p>
  * 
  * @author LHP,LJ
@@ -135,7 +135,7 @@ public class BorrowAndOrderActivity extends BaseActivity {
 				Method.POST);
 }
 	  /**
-	   * ���ɹ��ص�
+	   * 续借成功回调
 	   * @return
 	   */
   	  private Response.Listener<String> cl_renew = new Response.Listener<String>() {
@@ -166,7 +166,7 @@ public class BorrowAndOrderActivity extends BaseActivity {
 	          }
 	      };
   	  /**
-  	   * ����쳣
+  	   * 续借异常
   	   * @return
   	   */
 	  private Response.ErrorListener el_new = new Response.ErrorListener() {
@@ -174,7 +174,7 @@ public class BorrowAndOrderActivity extends BaseActivity {
 	          public void onErrorResponse(VolleyError error) {
 	        	  if(customProgressDialog!=null&&customProgressDialog.isShowing())
 	        	  customProgressDialog.dismiss();
-	        	  //��ʾ�û��쳣
+	        	  //提示用户异常
 	        	  onError(2);
 	          }
 	      };

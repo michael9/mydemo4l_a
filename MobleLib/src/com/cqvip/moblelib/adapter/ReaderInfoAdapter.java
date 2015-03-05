@@ -46,7 +46,7 @@ public class ReaderInfoAdapter extends BaseAdapter{
 		TextView tv2=(TextView) convertView.findViewById(R.id.tv2);
 		String temp=values[position];
 		if(temp.equals("null")||temp.equals("")){
-			temp="��";
+			temp="无";
 		}
 		tv1.setText(attrs[position]);
 		tv2.setText(temp);

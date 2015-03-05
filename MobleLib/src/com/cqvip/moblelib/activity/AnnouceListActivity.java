@@ -63,7 +63,6 @@ public class AnnouceListActivity extends BaseActivity implements OnItemClickList
 //
 //            @Override
 //            public void onDropDown() {
-//            	page = 1;//����page
 //            	isFirstLoad = false;
 //        		getHomePage(page, Constant.DEFAULT_COUNT,GETHOMEPAGE);
 //            }
@@ -206,7 +205,7 @@ public class AnnouceListActivity extends BaseActivity implements OnItemClickList
 		gparams.put("perpage",""+ Constant.DEFAULT_TEXT_COUNT);
 		
 		switch(type){
-		case Constant.SPEECH_NEWS://���Ŷ�̬
+		case Constant.SPEECH_NEWS:
 			gparams.put("announcetypeid", ""+2);		
 			if(mwhat == GETHOMEPAGE){
 				requestVolley(GlobleData.SERVER_URL
@@ -218,7 +217,7 @@ public class AnnouceListActivity extends BaseActivity implements OnItemClickList
 						Method.POST);
 			}
 			break;
-		case Constant.SPPECH_FREE://���潲��
+		case Constant.SPPECH_FREE:
 			gparams.put("announcetypeid", ""+1);		
 			if(mwhat == GETHOMEPAGE){
 				requestVolley(GlobleData.SERVER_URL
@@ -230,7 +229,7 @@ public class AnnouceListActivity extends BaseActivity implements OnItemClickList
 						Method.POST);
 			}
 			break;
-		case Constant.QUESTION://��������
+		case Constant.QUESTION:
 			gparams.put("announcetypeid", ""+5);			
 			if(mwhat == GETHOMEPAGE){
 				requestVolley(GlobleData.SERVER_URL
@@ -265,7 +264,7 @@ public class AnnouceListActivity extends BaseActivity implements OnItemClickList
 	
 		public void addMoreData(List<ShortBook> moreStatus)
 		{
-			this.mlists.addAll(moreStatus);//����������ӵ�ԭ�м���
+			this.mlists.addAll(moreStatus);
 			this.notifyDataSetChanged();
 		}
 		@Override

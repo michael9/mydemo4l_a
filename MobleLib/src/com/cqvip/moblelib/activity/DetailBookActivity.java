@@ -50,7 +50,7 @@ public class DetailBookActivity extends BaseActivity {
 			btn_item_result_search_share, btn_item_result_search_buzz,
 			btn_item_result_search_download;
 
-	private int fromFlage;// ��ʾ���ĸ�activity��ת���������۹�������ʾ���۰�ť
+	private int fromFlage;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -88,19 +88,19 @@ public class DetailBookActivity extends BaseActivity {
 			}
 		});
 		booktitle_tv.setText(dBook.getTitle());
-		// ���ҵ��ղش�������isbn���ǿ��ַ�
+	
 		String isbn = "";
 		if (!TextUtils.isEmpty(dBook.getIsbn())) {
 			isbn = "ISBN:" + dBook.getIsbn() + "\n";
 		}
-		// ���ҵ��ղش��������ǳ���ʱ��������
+	
 		String timeortheme = "";
 		if (ismyfavor) {
 			timeortheme = getString(R.string.item_time) + dBook.getSubject();
 		} else {
 			timeortheme = getString(R.string.item_subject) + dBook.getSubject();
 		}
-		// ���ҵ��ղش�������recordid�洢��Book��callno
+		
 		String recordid = "";
 		if (ismyfavor) {
 			recordid = dBook.getCallno();
@@ -144,7 +144,7 @@ public class DetailBookActivity extends BaseActivity {
 			}
 		});
 		book_action_bar = findViewById(R.id.book_action_bar);
-		// �ղ�
+
 		btn_item_result_search_collect = (TextView) book_action_bar
 				.findViewById(R.id.btn_item_collect);
 		btn_item_result_search_collect
@@ -166,12 +166,12 @@ public class DetailBookActivity extends BaseActivity {
 									+ "/cloud/favorite.aspx", bookfavorite_ls,
 									Method.POST);
 						} else {
-							// ֻ�ǵ�½����
+							
 							showLoginDialog(4);
 						}
 					}
 				});
-		// ����
+	
 		btn_item_result_search_share = (TextView) book_action_bar
 				.findViewById(R.id.btn_item_share);
 		btn_item_result_search_share.setOnClickListener(new OnClickListener() {
@@ -183,7 +183,7 @@ public class DetailBookActivity extends BaseActivity {
 			}
 		});
 
-		// ����
+	
 		btn_item_result_search_buzz = (TextView) book_action_bar
 				.findViewById(R.id.btn_item_buzz);
 		if (fromFlage == 1) {
@@ -196,7 +196,7 @@ public class DetailBookActivity extends BaseActivity {
 				if (GlobleData.islogin) {
 					Tool.bookbuzz(DetailBookActivity.this, dBook);
 				} else {
-					// ֻ�ǵ�½����
+					
 					showLoginDialog(4);
 				}
 			}
@@ -207,7 +207,7 @@ public class DetailBookActivity extends BaseActivity {
 		btn_item_result_search_download.setVisibility(View.GONE);
 	}
 
-	// ��ʾ�Ի���
+
 	private void showLoginDialog(int id) {
 		MainMenuActivity.cantouch = true;
 		Intent intent = new Intent(context, ActivityDlg.class);
@@ -289,7 +289,7 @@ public class DetailBookActivity extends BaseActivity {
 		customProgressDialog.show();
 		gparams = new HashMap<String, String>();
 		gparams.put("recordid", recordid);
-		gparams.put("tablename", "bibliosm");// �鼮
+		gparams.put("tablename", "bibliosm");// 
 		gparams.put("library", GlobleData.SZLG_LIB_ID);
 		requestVolley(GlobleData.SERVER_URL + "/library/bookquery/detail.aspx",
 				back_ls, Method.POST);

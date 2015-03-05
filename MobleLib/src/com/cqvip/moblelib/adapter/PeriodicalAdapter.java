@@ -66,12 +66,12 @@ public class PeriodicalAdapter extends BaseAdapter{
 		}
 	}
 	/**
-	 * ���Ӹ�����
+	 * 增加更多数据
 	 * @param moreStatus
 	 */
 	public void addMoreData(List<Periodical> moreStatus)
 	{
-		this.lists.addAll(moreStatus);//����������ӵ�ԭ�м���
+		this.lists.addAll(moreStatus);//把新数据增加到原有集合
 		this.notifyDataSetChanged();
 	}
 
@@ -88,7 +88,7 @@ public class PeriodicalAdapter extends BaseAdapter{
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder = null;
-		//���
+		//更多
 //		if (position == this.getCount() - 1) {
 //			convertView = LayoutInflater.from(context).inflate(R.layout.moreitemsview, null);
 //			return convertView;
@@ -106,7 +106,7 @@ public class PeriodicalAdapter extends BaseAdapter{
 		}else{
 			holder = (ViewHolder) convertView.getTag();
 		}
-		// ͼƬ
+		// 图片
 		    Periodical periodical = lists.get(position);
 		    if (!TextUtils.isEmpty(periodical.getImgurl())) {
 		    	holder.icon.setImageUrl(periodical.getImgurl(), mImageLoader);
@@ -118,7 +118,7 @@ public class PeriodicalAdapter extends BaseAdapter{
 	        holder.ename.setText(periodical.getEname());
 //	        holder.cnno.setText(context.getResources().getString(R.string.title_cnno)+periodical.getCnno());
 //	        holder.issn.setText(context.getResources().getString(R.string.title_issn)+periodical.getIssn());
-	        //����
+	        //分享
 		return convertView;
 	}
 }

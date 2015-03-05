@@ -46,7 +46,7 @@ import android.util.Log;
 import com.cqvip.moblelib.sychild.BuildConfig;
 
 /**
- * �����ļ����ڴ滺��
+ * 
  * This class handles disk and memory caching of bitmaps in conjunction with the
  * {@link ImageWorker} class and its subclasses. Use
  * {@link ImageCache#getInstance(FragmentManager, ImageCacheParams)} to get an instance of this
@@ -56,27 +56,27 @@ import com.cqvip.moblelib.sychild.BuildConfig;
 public class ImageCache {
     private static final String TAG = "ImageCache";
 
-    // Default memory cache size in kilobytes �ڴ滺�� 5M
+    // Default memory cache size in kilobytes 5M
     private static final int DEFAULT_MEM_CACHE_SIZE = 1024 * 5; // 5MB
 
-    // Default disk cache size in bytes �ļ�����10M
+    // Default disk cache size in bytes 10M
     private static final int DEFAULT_DISK_CACHE_SIZE = 1024 * 1024 * 10; // 10MB
 
-    // Compression settings when writing images to disk cache ѹ����ʽJPEG
+    // Compression settings when writing images to disk cache JPEG
     private static final CompressFormat DEFAULT_COMPRESS_FORMAT = CompressFormat.JPEG;
-    private static final int DEFAULT_COMPRESS_QUALITY = 70; //ѹ������ 70
+    private static final int DEFAULT_COMPRESS_QUALITY = 70; // 70
     private static final int DISK_CACHE_INDEX = 0;
 
     // Constants to easily toggle various caches
-    private static final boolean DEFAULT_MEM_CACHE_ENABLED = true; //�ڴ�
-    private static final boolean DEFAULT_DISK_CACHE_ENABLED = true; //�ļ��洢
+    private static final boolean DEFAULT_MEM_CACHE_ENABLED = true; //
+    private static final boolean DEFAULT_DISK_CACHE_ENABLED = true; //
     private static final boolean DEFAULT_INIT_DISK_CACHE_ON_CREATE = false; 
 
     private DiskLruCache mDiskLruCache;  
-    private LruCache<String, BitmapDrawable> mMemoryCache; //λͼ���棬���softreference
-    private ImageCacheParams mCacheParams;//holer ���棬�������
-    private final Object mDiskCacheLock = new Object(); //��
-    private boolean mDiskCacheStarting = true;//���濪ʼ��ʶ
+    private LruCache<String, BitmapDrawable> mMemoryCache; //
+    private ImageCacheParams mCacheParams;//hole
+    private final Object mDiskCacheLock = new Object(); //
+    private boolean mDiskCacheStarting = true;//
 
     private HashSet<SoftReference<Bitmap>> mReusableBitmaps;
 
@@ -92,7 +92,7 @@ public class ImageCache {
         init(cacheParams);
     }
     /**
-     * ����ͼƬ����ʵ��
+     *
      * @param cacheParams
      * @return
      */

@@ -22,7 +22,7 @@ public class GridViewImgAdapter extends BaseAdapter {
 	private  Class[] activities;
 	private Context mContext;
 
-	// ������������ ��ͼƬԴ
+	// 定义整型数组 即图片源
 
 	private Integer[] mImageIds = { R.drawable.sy_anniu_03,
 			R.drawable.sy_anniu_05, R.drawable.sy_anniu_07,
@@ -63,13 +63,13 @@ public class GridViewImgAdapter extends BaseAdapter {
 		return position;
 	}
 
-	// ��ȡͼƬID
+	// 获取图片ID
 	@Override
 	public long getItemId(int position) {
 		return position;
 	}
 
-	//��ʾ�Ի���
+	//显示对话框
 	private void showLoginDialog(int id) {
 		MainMenuActivity.cantouch = true;
 		Intent intent = new Intent(mContext, ActivityDlg.class);
@@ -113,15 +113,15 @@ public class GridViewImgAdapter extends BaseAdapter {
 					case 3:
 						intent.setClass(mContext, activities[tag]);
 						mContext.startActivity(intent);
-						break;					//��������	
+						break;					//个人中心	
 					case 4:
-					//�ҵ��ղ�	
+					//我的收藏	
 					case 5:
-					//���Ĺ���	
+					//借阅管理	
 					case 7:
-					//����Ȧ	
+					//书友圈	
 					case 8:
-						//�ж��Ƿ��¼
+						//判断是否登录
 						if (GlobleData.islogin) {
 							intent.setClass(mContext, activities[tag]);
 							mContext.startActivity(intent);

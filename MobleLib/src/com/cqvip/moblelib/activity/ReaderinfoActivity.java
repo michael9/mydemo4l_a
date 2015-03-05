@@ -186,7 +186,7 @@ public class ReaderinfoActivity extends BaseActivity {
 		}
 	}
 
-	// ��ȡ������Ϣ
+	// 获取读者信息
 	private void getuser() {
 		String readercardid=getSharedPreferences("mobliereader", MODE_PRIVATE).getString("readercardid", "");
 		if (!TextUtils.isEmpty(readercardid)) {
@@ -212,8 +212,8 @@ public class ReaderinfoActivity extends BaseActivity {
 						reader.getUsername(), reader.getCardbegdate(),
 						reader.getCardenddate(), reader.getStatus(),
 						reader.getPhone(), reader.getAddress() };
-				String[] attrs = { "����", "ע�����ڣ�", "֤�ţ�", "�������ڣ�", "��ֹ���ڣ�",
-						"֤״̬��", "�绰��", "��ַ��" };
+				String[] attrs = { "姓名：", "注册日期：", "证号：", "启用日期：", "终止日期：",
+						"证状态：", "电话：", "地址：" };
 				mList.setAdapter(new ReaderInfoAdapter(ReaderinfoActivity.this,
 						attrs, values));
 			} catch (Exception e) {

@@ -55,11 +55,11 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 	public static final int GETFIRSTPAGE_ZK = 2;
 	public static final int GETNEXT = 3;
 
-	private int curpage = 1;// �ڼ�ҳ
-	private int perpage = Constant.DEFAULT_COUNT;// ÿҳ��ʾ����
+	private int curpage = 1;// 第几页
+	private int perpage = Constant.DEFAULT_COUNT;// 每页显示条数
 	private Favorite del_favorite;
 	private View moreprocess;
-	private int curpage_sz = 1, curpage_zk = 1;// �ڼ�ҳ
+	private int curpage_sz = 1, curpage_zk = 1;// 第几页
 
 	MyGridViewAdapter adapter_zk, adapter_sz;
 	/**
@@ -86,7 +86,7 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 	private int indicatorWidth;
 	private LayoutInflater mInflater;
 	private int currentIndicatorLeft = 0;
-	public String[] tabTitle = new String[2]; // ����
+	public String[] tabTitle = new String[2]; // 标题
 
 	protected CustomProgressDialog customProgressDialog;
 	Map<Integer, List<Favorite>> arrayLists_sz, arrayLists_zk;
@@ -94,7 +94,7 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 	ArrayList<Favorite> arrayList_sz = new ArrayList<Favorite>();
 	private int listviewpagetag = GlobleData.BOOK_SZ_TYPE;
 
-	private int sz_count, zk_count; // ����
+	private int sz_count, zk_count; // 条数
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -110,7 +110,7 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 
 		// Set up the ViewPager with the sections adapter.
 		mViewPager.setAdapter(mSectionsPagerAdapter);
-		// ��ȡ���
+		// 获取数据
 		getfavorlist(curpage, perpage, GlobleData.BOOK_SZ_TYPE, GETFIRSTPAGE_SZ);
 		getfavorlist(curpage, perpage, GlobleData.BOOK_ZK_TYPE, GETFIRSTPAGE_ZK);
 	}
@@ -120,7 +120,7 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 				.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 					@Override
 					public void onPageSelected(int position) {
-						// RadioButton��� performClick()
+						// RadioButton点击 performClick()
 						if (rg_nav_content != null
 								&& rg_nav_content.getChildCount() > position) {
 							((RadioButton) rg_nav_content.getChildAt(position))
@@ -149,7 +149,7 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 					@Override
 					public void onCheckedChanged(RadioGroup group, int checkedId) {
 						if (rg_nav_content.getChildAt(checkedId) != null) {
-							// ��������
+							// 滑动动画
 							TranslateAnimation animation = new TranslateAnimation(
 									currentIndicatorLeft,
 									((RadioButton) rg_nav_content
@@ -158,11 +158,11 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 							animation.setInterpolator(new LinearInterpolator());
 							animation.setDuration(100);
 							animation.setFillAfter(true);
-							// ����ִ��λ�ƶ���
+							// 滑块执行位移动画
 							iv_nav_indicator.startAnimation(animation);
 							mViewPager.setCurrentItem(checkedId); // ViewPager
-																	// ����һ�� �л�
-							// ��¼��ǰ �±�ľ������� ����
+																	// 跟随一起 切换
+							// 记录当前 下标的距最左侧的 距离
 							currentIndicatorLeft = ((RadioButton) rg_nav_content
 									.getChildAt(checkedId)).getLeft();
 							// Log.i("PeriodicalClassfyActivity", ""+((checkedId
@@ -191,7 +191,7 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 				HashMap<String, String> map = new HashMap<String, String>();
 				map.put("libid", GlobleData.LIBIRY_ID);
 				map.put("vipuserid", GlobleData.cqvipid);
-				Log.i("ɾ���ղ�", GlobleData.cqvipid);
+				Log.i("删除收藏", GlobleData.cqvipid);
 				map.put("keyid", del_favorite.getFavoritekeyid());
 				// Log.i("keyid", favorite.getFavoritekeyid());
 				map.put("typeid", "" + del_favorite.getTypeid());
@@ -211,7 +211,7 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 		Intent intent = new Intent();
 		intent.setClass(MyFavorActivity.this, ActivityDlg.class);
 		intent.putExtra("ACTIONID", 0);
-		intent.putExtra("MSGBODY", "ȷ��ɾ����ղ�");
+		intent.putExtra("MSGBODY", "确定删除该收藏");
 		intent.putExtra("BTN_CANCEL", 1);
 		startActivityForResult(intent, 101);
 	}
@@ -344,7 +344,7 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 						.get(GlobleData.BOOK_ZK_TYPE).isEmpty())
 						&& (arrayLists_sz.get(GlobleData.BOOK_SZ_TYPE) == null || arrayLists_sz
 								.get(GlobleData.BOOK_SZ_TYPE).isEmpty())) {
-					Tool.ShowMessages(context, "û�и�����ݿɹ�����");
+					Tool.ShowMessages(context, "没有更多内容可供加载");
 					moreprocess.setVisibility(View.GONE);
 					return;
 				}
@@ -384,7 +384,7 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 			}
 			if (res != null) {
 				if (res.getSuccess()) {
-					Tool.ShowMessages(context, "ȡ���ղسɹ�");
+					Tool.ShowMessages(context, "取消收藏成功");
 					int temp_pagecount = 0;
 					if (listview_id == GlobleData.BOOK_SZ_TYPE) {
 						isdeleted_sz = true;
@@ -403,7 +403,7 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 					}
 
 				} else {
-					Tool.ShowMessages(context, "ȡ���ղ�ʧ��");
+					Tool.ShowMessages(context, "取消收藏失败");
 				}
 			}
 		}
@@ -445,7 +445,7 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 		}
 
 		/**
-		 * ��д�˷���Ϊ��ʹnotifyDataSetChanged��Ч Called when the host view is
+		 * 重写此方法为了使notifyDataSetChanged有效 Called when the host view is
 		 * attempting to determine if an item's position has changed. Returns
 		 * POSITION_UNCHANGED if the position of the given item has not changed
 		 * or POSITION_NONE if the item is no longer present in the adapter. The
@@ -539,12 +539,12 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 				if (parent.getAdapter().getCount() == 1) {
 					return;
 				}
-				// �����
+				// 进度条
 				moreprocess = view.findViewById(R.id.footer_progress);
 				moreprocess.setVisibility(View.VISIBLE);
 				// Log.i("parent.getTag()", "" + parent.getTag());
 				listviewpagetag = (Integer) parent.getTag();
-				// ����������
+				// 请求网络更多
 				if (listviewpagetag == GlobleData.BOOK_SZ_TYPE) {
 					getfavorlist(curpage_sz + 1, perpage,
 							GlobleData.BOOK_SZ_TYPE, GETNEXT);
@@ -610,10 +610,10 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 
 	static class ViewHolder {
 
-		TextView title;// ����
-		TextView author;// ����
-		TextView publisher;// ������
-		ImageView img;// ʱ��ͼƬ �����޸�
+		TextView title;// 书名
+		TextView author;// 作者
+		TextView publisher;// 出版社
+		ImageView img;// 时间图片 不用修改
 		TextView isbn;
 		TextView favor_cancel;
 		// Button btn_comment, btn_item_result_search_share, favorite;
@@ -678,12 +678,12 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 				convertView.setClickable(false);
 				TextView tv = (TextView) convertView
 						.findViewById(R.id.footer_txt);
-				tv.setText("�ף������ڷ���û���ղ�Ŷ");
+				tv.setText("亲，您所在分类没有收藏哦");
 				tv.setTextAppearance(myContext, R.style.TextStyle_nullcontent);
 				tv.setClickable(false);
 				return convertView;
 			}
-			// ���
+			// 更多
 			if (position == this.getCount() - 1) {
 				convertView = LayoutInflater.from(myContext).inflate(
 						R.layout.moreitemsview, null);
@@ -728,7 +728,7 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 			holder.author.setText(author + favorite.getWriter());
 			// holder.publisher.setText(publish +
 			// favorite.getOrgan()+","+favorite.getYears());
-			holder.isbn.setText("�ղ�ʱ��:" + favorite.getFavoritetime());
+			holder.isbn.setText("收藏时间:" + favorite.getFavoritetime());
 			final ViewGroup temp_parent = parent;
 			final int temp_position = position;
 			holder.favor_cancel.setOnClickListener(new View.OnClickListener() {
@@ -744,7 +744,7 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 			if (favorite.getTypeid().equals(GlobleData.BOOK_ZK_TYPE + "")) {
 				holder.img.setVisibility(View.GONE);
 			} else {
-				// ͼƬ
+				// 图片
 				if (!TextUtils.isEmpty(favorite.getImgurl())) {
 					fetch.loadImage(favorite.getImgurl(), holder.img);
 				} else {
@@ -762,7 +762,7 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 
 		rl_nav = (RelativeLayout) findViewById(R.id.rl_nav);
 		mHsv = (SwipHorizontalScrollView) findViewById(R.id.mHsv);
-		// ����
+		// 内容
 		rg_nav_content = (RadioGroup) findViewById(R.id.rg_nav_content);
 		iv_nav_indicator = (ImageView) findViewById(R.id.iv_nav_indicator);
 		iv_nav_left = (ImageView) findViewById(R.id.iv_nav_left);
@@ -773,15 +773,15 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 		DisplayMetrics dm = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(dm);
 		indicatorWidth = dm.widthPixels / tabTitle.length;
-		// TODO step0 ��ʼ�������±�Ŀ� �����Ļ��ȺͿɼ����� ������RadioButton�Ŀ��)
+		// TODO step0 初始化滑动下标的宽 根据屏幕宽度和可见数量 来设置RadioButton的宽度)
 		LayoutParams cursor_Params = iv_nav_indicator.getLayoutParams();
-		cursor_Params.width = indicatorWidth;// ��ʼ�������±�Ŀ�
+		cursor_Params.width = indicatorWidth;// 初始化滑动下标的宽
 		iv_nav_indicator.setLayoutParams(cursor_Params);
 		mHsv.setSomeParam(rl_nav, iv_nav_left, iv_nav_right, this);
-		// ��ȡ���������
+		// 获取布局填充器
 		mInflater = (LayoutInflater) this
 				.getSystemService(LAYOUT_INFLATER_SERVICE);
-		// ��һ�ַ�ʽ��ȡ
+		// 另一种方式获取
 		// LayoutInflater mInflater = LayoutInflater.from(this);
 		initNavigationHSV();
 		
@@ -826,7 +826,7 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 		if (customProgressDialog != null && customProgressDialog.isShowing()) {
 			customProgressDialog.dismiss();
 		}
-		if (a == 2) {// ����ʧ��
+		if (a == 2) {// 加载失败
 			Tool.ShowMessages(this, getResources().getString(R.string.loadfail));
 		} else if (a == 6) {
 			Tool.ShowMessages(this,

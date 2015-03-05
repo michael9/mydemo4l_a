@@ -19,30 +19,27 @@ import android.widget.Toast;
 import com.cqvip.moblelib.activity.CommentActivity;
 import com.cqvip.moblelib.model.Book;
 import com.cqvip.moblelib.model.EBook;
+import com.cqvip.moblelib.sychild.R;
 
 /**
- * ¹¤¾ßÄÚ£¬¹¹Ôì×Ö·û´®£¬½âÎö×Ö·û´®£¬×Ö·û´®×ª»»
  * 
  * @author lj 20121128
  * 
  */
 public class Tool {
 
-	
+	// åˆ†äº«
 	public static void bookEshare(Context mcontext, EBook mbook) {
 		if (mbook != null) {
 			Intent intent = new Intent(Intent.ACTION_SEND);
 			intent.setType("image/*");
-			intent.putExtra(Intent.EXTRA_SUBJECT, "Áú¸ÚÍ¼Êé¹İÓÑÇé·ÖÏí");
+			intent.putExtra(Intent.EXTRA_SUBJECT, mcontext.getResources().getString(R.string.tips_share_local));
 			intent.putExtra(Intent.EXTRA_TEXT,
-					("Áú¸ÚÍ¼Êé¹İÓÑÇé·ÖÏí:¡¶" + mbook.getTitle_c() +"¡·"));
-//			intent.putExtra(Intent.EXTRA_STREAM,
-//					Uri.decode("http://www.szlglib.com.cn/images/logo.jpg")); // ·ÖÏíÍ¼Æ¬"http://www.szlglib.com.cn/images/logo.jpg"
-			mcontext.startActivity(Intent.createChooser(intent, "·ÖÏíµ½"));
+					(mcontext.getResources().getString(R.string.tips_share_local)+"ï¼šã€Š" + mbook.getTitle_c() +"ã€‹"));
+			mcontext.startActivity(Intent.createChooser(intent, mcontext.getResources().getString(R.string.tips_share)));
 		}
 	}
-
-	// ÆÀÂÛ
+	// è¯„è®º
 	public static void bookEbuzz(Context mcontext, EBook mbook) {
 		if (mbook != null) {
 //			Intent intent = new Intent(mcontext, CommentActivity.class);
@@ -53,22 +50,21 @@ public class Tool {
 		}
 	}
 
-
-	// ·ÖÏí
+	// åˆ†äº«
 	public static void bookshare(Context mcontext, Book mbook) {
 		if (mbook != null) {
 			Intent intent = new Intent(Intent.ACTION_SEND);
 			intent.setType("image/*");
-			intent.putExtra(Intent.EXTRA_SUBJECT, "Áú¸ÚÍ¼Êé¹İÓÑÇé·ÖÏí");
+			intent.putExtra(Intent.EXTRA_SUBJECT, mcontext.getResources().getString(R.string.tips_share_local));
 			intent.putExtra(Intent.EXTRA_TEXT,
-					("Áú¸ÚÍ¼Êé¹İÓÑÇé·ÖÏí:¡¶" + mbook.getTitle()+"¡·"));
+					(mcontext.getResources().getString(R.string.tips_share_local)+"ï¼šã€Š"+ mbook.getTitle()+"ã€‹"));
 //			intent.putExtra(Intent.EXTRA_STREAM,
-//					Uri.decode("http://www.szlglib.com.cn/images/logo.jpg")); // ·ÖÏíÍ¼Æ¬"http://www.szlglib.com.cn/images/logo.jpg"
-			mcontext.startActivity(Intent.createChooser(intent, "Áú¸ÚÍ¼Êé¹İÓÑÇé·ÖÏí"));
+//					Uri.decode("http://www.szlglib.com.cn/images/logo.jpg")); //"http://www.szlglib.com.cn/images/logo.jpg"
+			mcontext.startActivity(Intent.createChooser(intent, mcontext.getResources().getString(R.string.tips_share_local)));
 		}
 	}
 
-	// ÆÀÂÛ
+	// è¯„è®º
 	public static void bookbuzz(Context mcontext, Book mbook) {
 		if (mbook != null) {
 			Intent intent = new Intent(mcontext, CommentActivity.class);
@@ -79,7 +75,7 @@ public class Tool {
 		}
 	}
 	
-	// »ñÈ¡Ä³±¾Êé¼®ÏÂÃæµÄËùÓĞÆÀÂÛ
+	// è·å–æŸæœ¬ä¹¦ç±ä¸‹é¢çš„æ‰€æœ‰è¯„è®º
 	public static void getCommentList(Context mcontext, Book mbook,int type) {
 		if (mbook != null) {
 			Intent intent = new Intent(mcontext, CommentActivity.class);
@@ -87,11 +83,10 @@ public class Tool {
 			bundle.putSerializable("book", mbook);
 			intent.putExtra("detaiinfo", bundle);
 			intent.putExtra("type", type);
-			intent.putExtra("from", 1);// //1±íÊ¾´ÓGroupActivityÆÀÂÛÈë¿Ú½øÀ´µÄ
+			intent.putExtra("from", 1); //1è¡¨ç¤ºä»GroupActivityè¯„è®ºå…¥å£è¿›æ¥çš„
 			mcontext.startActivity(intent);
 		}
 	}
-//	// ÊÕ²Ø
 //	public static Map<String, String> bookfavorite(Map<String, String> params,Book mbook) {
 //			params=new HashMap<String, String>();
 //			params.put("libid",  GlobleData.LIBIRY_ID);
@@ -100,7 +95,6 @@ public class Tool {
 //			params.put("keyid", Tool.formSZbookID(mbook.getCallno(),mbook.getRecordid()));
 //		return params;
 //	}
-//	// ÊÕ²Ø
 //	public static  Map<String, String> bookEfavorite(Map<String, String> params, EBook mbook) {
 //		params=new HashMap<String, String>();
 //		params.put("libid",  GlobleData.LIBIRY_ID);
@@ -110,7 +104,7 @@ public class Tool {
 //		return params;
 //	}
 	/**
-	 * ToastÌáÊ¾
+	 * Toastæç¤º
 	 * 
 	 * @param context
 	 * @param msg
@@ -124,7 +118,7 @@ public class Tool {
 	}
 
 	/**
-	 * ¼ì²âÍøÂçÊÇ·ñ¿ÉÓÃ
+	 * æ£€æµ‹ç½‘ç»œæ˜¯å¦å¯ç”¨
 	 * 
 	 * @param context
 	 * @return
@@ -137,13 +131,13 @@ public class Tool {
 		if (networkInfo != null && networkInfo.isConnected()) {
 			netWorkIsOK = true;
 		} else {
-			Toast.makeText(context, "ÁªÍøÊ§°Ü£¬Çë¼ì²éÍøÂç£¡", Toast.LENGTH_LONG).show();
+			Toast.makeText(context, "è”ç½‘å¤±è´¥ï¼Œè¯·æ£€æŸ¥ç½‘ç»œï¼", Toast.LENGTH_LONG).show();
 		}
 		return netWorkIsOK;
 	}
 
 	/**
-	 * MD5¼ÓÃÜ
+	 *  MD5åŠ å¯†
 	 * 
 	 * @param plainText
 	 * @return
@@ -171,7 +165,7 @@ public class Tool {
 	}
 
 	/**
-	 * isbnÕıÔò±í´ïÊ½Æ¥Åä
+	 * isbnæ­£åˆ™è¡¨è¾¾å¼åŒ¹é…
 	 * 
 	 * @param str
 	 * @return
@@ -183,7 +177,7 @@ public class Tool {
 		return matcher.find();
 	}
 	/**
-	 * Æ´½ÓÇëÇó×Ö·û´®
+	 * æ‹¼æ¥è¯·æ±‚å­—ç¬¦ä¸²
 	 * @param callno
 	 * @param recordid
 	 * @return
@@ -193,7 +187,7 @@ public class Tool {
 		return result;
 	}
 	/**
-	 * ·µ»Ø Ê±¼äÑùÊ½ £º¼¸Ğ¡Ê±Ç°
+	  * è¿”å› æ—¶é—´æ ·å¼ ï¼šå‡ å°æ—¶å‰
 	 * @param date
 	 * @return
 	 */
@@ -207,9 +201,9 @@ public class Tool {
 			lSubTime = 1;
 		}
 		if(lSubTime < 60){
-			strTime = "" + lSubTime + "·ÖÖÓÇ°";
+			strTime = "" + lSubTime + "åˆ†é’Ÿå‰";
 		}else if(lSubTime >= 60 && lSubTime < (24*60)){
-			strTime = "" + lSubTime/60 + "Ğ¡Ê±Ç°";
+			strTime = "" + lSubTime/60 + "å°æ—¶å‰";
 		}else{
 			try {
 				SimpleDateFormat df = (SimpleDateFormat) new SimpleDateFormat(
@@ -223,7 +217,7 @@ public class Tool {
 	}
 
 	/**
-	 *  »ñÈ¡´óÍ¼Æ¬url
+	 *  è·å–å¤§å›¾ç‰‡url
 	 * @param strr
 	 * @return
 	 */
@@ -232,15 +226,15 @@ public class Tool {
 		  return strr.substring(0,i) +"l"+ strr.substring(i+1);
 	   }
 	 /**
-	  * ¼ì²âÊÇ·ñÓĞsdcard
+	  * æ£€æµ‹æ˜¯å¦æœ‰sdcard
 	  * @param context
 	  * @return
 	  */
 	 public static boolean hasSDcard(Context context){
-		//¼ì²âsd¿¨
+		//æ£€æµ‹sdå¡
 			String sdStatus = Environment.getExternalStorageState();
 			 if(!sdStatus.equals(Environment.MEDIA_MOUNTED)){
-				Tool.ShowMessages(context, "Ã»ÓĞÕÒµ½SD¿¨");
+				Tool.ShowMessages(context, "æ²¡æœ‰æ‰¾åˆ°SDå¡");
 				 return false;
 			 }
 			 return true;

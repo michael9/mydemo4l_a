@@ -41,8 +41,8 @@ import com.cqvip.moblelib.view.KeywordsView;
 
 /**
  * <p>
- * �ļ����: EBookActiviy.java �ļ�����: ������ ��Ȩ����: ��Ȩ����(C)2013-2020 �� ˾: ����ά����ѯ���޹�˾
- * ����ժҪ: ����˵��: ������ڣ� 201��5��10�� �޸ļ�¼:
+ * 文件名称: EBookActiviy.java 文件描述: 电子书 版权所有: 版权所有(C)2013-2020 公 司: 重庆维普咨询有限公司
+ * 内容摘要: 其他说明: 完成日期： 201年5月10日 修改记录:
  * </p>
  * 
  * @author LHP,LJ
@@ -51,7 +51,7 @@ public class EBookActiviy extends BaseActivity implements
 View.OnClickListener{
 
 	// private static final String[] EBOOKTYPE = new String[] {
-	// "�ݲ���Ŀ", "ά���ڿ�", "���ڿ�","����ͼ��","����ͼ��"
+	// "馆藏书目", "维普期刊", "万方期刊","超星图书","内置图书"
 	// };
 	private Context context;
 	private String[] EBOOKTYPE;
@@ -68,7 +68,7 @@ View.OnClickListener{
 	private LinearLayout searchLayout = null;
 	private GestureDetector mggd;
 	/**
-	 * �ж�������ҳ�滹����ҳ��
+	 * 判断是在外页面还是内页面
 	 */
 	private boolean isOutter;
 	private ImageView delete_iv;
@@ -90,7 +90,7 @@ View.OnClickListener{
 		});
 		hideinputmethod();
 		
-		//������ʷ
+		//搜索历史
 		searchLayout = (LinearLayout) this.findViewById(R.id.searchContent);
 		delete_iv = (ImageView) findViewById(R.id.delete_iv);
 		showKeywords = (KeywordsView) this.findViewById(R.id.word);
@@ -103,7 +103,7 @@ View.OnClickListener{
 			public boolean onTouch(View v, MotionEvent event) {
 				boolean a= mggd.onTouchEvent(event);
 				Log.i("EBookAct", "onTouch_return:"+a);
-				return a; // ע�����¼�
+				return a; 
 				
 			}
 		});
@@ -160,7 +160,7 @@ View.OnClickListener{
 	}
 	
 	private void setListViewHeightBasedOnChildren(ListView listView) {
-		//��ȡListView��Ӧ��Adapter
+		//获取ListView对应的Adapter
 		ListAdapter listAdapter = listView.getAdapter(); 
 		if (listAdapter == null) {
 		// pre-condition
@@ -168,16 +168,16 @@ View.OnClickListener{
 		}
 
 		int totalHeight = 0;
-		for (int i = 0, len = listAdapter.getCount(); i < len; i++) { //listAdapter.getCount()������������Ŀ
+		for (int i = 0, len = listAdapter.getCount(); i < len; i++) { //listAdapter.getCount()返回数据项的数目
 		View listItem = listAdapter.getView(i, null, listView);
-		listItem.measure(0, 0); //��������View �Ŀ��
-		totalHeight += listItem.getMeasuredHeight(); //ͳ������������ܸ߶�
+		listItem.measure(0, 0); //计算子项View 的宽高
+		totalHeight += listItem.getMeasuredHeight(); //统计所有子项的总高度
 		}
 
 		ViewGroup.LayoutParams params = listView.getLayoutParams();
 		params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
-		//listView.getDividerHeight()��ȡ�����ָ���ռ�õĸ߶�
-		//params.height���õ����ListView������ʾ��Ҫ�ĸ߶�
+		//listView.getDividerHeight()获取子项间分隔符占用的高度
+		//params.height最后得到整个ListView完整显示需要的高度
 		listView.setLayoutParams(params);
 		}
 
@@ -360,7 +360,7 @@ View.OnClickListener{
 		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
 				float velocityY) {
 			if(e1!=null){
-				if (e2.getX() - e1.getX() > MinDistance&&(Math.abs(velocityX)>minVelocitx||Math.abs(velocityY)>velocityY)) { // �һ�
+				if (e2.getX() - e1.getX() > MinDistance&&(Math.abs(velocityX)>minVelocitx||Math.abs(velocityY)>velocityY)) { // 右滑
 					key_words = getRandomArray();
 					showKeywords.rubKeywords();
 					feedKeywordsFlow(showKeywords, key_words);
@@ -368,21 +368,21 @@ View.OnClickListener{
 					return false;
 				}
 
-			if (e2.getX() - e1.getX() < -MinDistance&&(Math.abs(velocityX)>minVelocitx||Math.abs(velocityY)>velocityY)) {// ��
+			if (e2.getX() - e1.getX() < -MinDistance&&(Math.abs(velocityX)>minVelocitx||Math.abs(velocityY)>velocityY)) {// 左滑
 				key_words = getRandomArray();
 				showKeywords.rubKeywords();
 				feedKeywordsFlow(showKeywords, key_words);
 				showKeywords.go2Shwo(KeywordsView.ANIMATION_IN);
 				return false;
 			}
-			if (e2.getY() - e1.getY() < -MinDistance&&(Math.abs(velocityX)>minVelocitx||Math.abs(velocityY)>velocityY)) {// �ϻ�
+			if (e2.getY() - e1.getY() < -MinDistance&&(Math.abs(velocityX)>minVelocitx||Math.abs(velocityY)>velocityY)) {// 上滑
 				key_words = getRandomArray();
 				showKeywords.rubKeywords();
 				feedKeywordsFlow(showKeywords, key_words);
 				showKeywords.go2Shwo(KeywordsView.ANIMATION_IN);
 				return false;
 			}
-			if (e2.getY() - e1.getY() > MinDistance&&(Math.abs(velocityX)>minVelocitx||Math.abs(velocityY)>velocityY)) {// �»�
+			if (e2.getY() - e1.getY() > MinDistance&&(Math.abs(velocityX)>minVelocitx||Math.abs(velocityY)>velocityY)) {// 下滑
 				key_words = getRandomArray();
 				showKeywords.rubKeywords();
 				feedKeywordsFlow(showKeywords, key_words);
@@ -407,7 +407,6 @@ View.OnClickListener{
 		// searchLayout.removeAllViews();
 		//
 		// }
-		// Toast.makeText(this, "ѡ�е������ǣ�" + ((TextView) v).getText().toString(),
 		// 1)
 		// .show();
 		// }
@@ -434,13 +433,13 @@ View.OnClickListener{
 	}
 
 	/**
-	 * ɾ��Ի���
+	 * 
 	 */
 	public void senddel(int type) {
 		Intent intent = new Intent();
 		intent.setClass(this, ActivityDlg.class);
 		intent.putExtra("ACTIONID", 0);
-		intent.putExtra("MSGBODY", "ȷ��ɾ��������ʷ��");
+		intent.putExtra("MSGBODY", "确定删除搜索历史？");
 		intent.putExtra("BTN_CANCEL", 1);
 		startActivityForResult(intent, type);
 	}
@@ -466,12 +465,6 @@ View.OnClickListener{
 //	public boolean onTouch(View v, MotionEvent event) {
 //		ScrollView scrollView=(ScrollView)v;
 //		if(event.getAction()==MotionEvent.ACTION_MOVE){
-//			
-//
-//			//���Լ���ScrollView�Ĺ����¼�
-//
-//			
-//
 //			}
 //
 //			return false;

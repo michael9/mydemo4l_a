@@ -1,7 +1,7 @@
 package com.cqvip.moblelib.model;
 
 /**
- * ½á¹ûÀà
+ * ç»“æžœç±»
  */
 import org.json.JSONException;
 import org.json.JSONObject;

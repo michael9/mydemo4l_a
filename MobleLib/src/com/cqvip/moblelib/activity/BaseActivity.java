@@ -76,27 +76,27 @@ public class BaseActivity extends Activity {
 
 	}
 
-	public void onError(int a) {
-		if (customProgressDialog != null && customProgressDialog.isShowing()) {
-			customProgressDialog.dismiss();
+		public void onError(int a) {
+			if (customProgressDialog != null && customProgressDialog.isShowing()) {
+				customProgressDialog.dismiss();
+			}
+			if (a == 1) {// 登录失败
+				Tool.ShowMessages(this, getResources()
+						.getString(R.string.loginfail));
+			} else if (a == 2) {// 加载失败
+				Tool.ShowMessages(this, getResources()
+						.getString(R.string.loadfail));
+			} else if (a == 3) {// 续借失败
+				Tool.ShowMessages(this, getResources()
+						.getString(R.string.renewfail));
+			} else if (a == 4) {// 修改失败
+				Tool.ShowMessages(this, getResources()
+						.getString(R.string.modifyfail));
+			}else if (a == 5) {// 收藏失败
+				Tool.ShowMessages(this, getResources()
+						.getString(R.string.favorfail));
+			}
 		}
-		if (a == 1) {// ��¼ʧ��
-			Tool.ShowMessages(this, getResources()
-					.getString(R.string.loginfail));
-		} else if (a == 2) {// ����ʧ��
-			Tool.ShowMessages(this, getResources()
-					.getString(R.string.loadfail));
-		} else if (a == 3) {// ���ʧ��
-			Tool.ShowMessages(this, getResources()
-					.getString(R.string.renewfail));
-		} else if (a == 4) {// �޸�ʧ��
-			Tool.ShowMessages(this, getResources()
-					.getString(R.string.modifyfail));
-		}else if (a == 5) {// �ղ�ʧ��
-			Tool.ShowMessages(this, getResources()
-					.getString(R.string.favorfail));
-		}
-	}
 	
 	@Override
 	protected void onStop() {

@@ -74,21 +74,21 @@ public class BookAdapter extends BaseAdapter {
 	}
 
 	/**
-	 * ���Ӹ�����
+	 * 增加更多数据
 	 * 
 	 * @param moreStatus
 	 */
 	public void addMoreData(List<Book> moreStatus) {
-		this.lists.addAll(moreStatus);// ����������ӵ�ԭ�м���
+		this.lists.addAll(moreStatus);// 把新数据增加到原有集合
 		this.notifyDataSetChanged();
 	}
 
 	static class ViewHolder {
-		TextView title;// ����
-		TextView author;// ����
-		TextView publisher;// ������
-		NetworkImageView img;// ʱ��ͼƬ �����޸�
-		TextView u_abstract;// ���
+		TextView title;// 书名
+		TextView author;// 作者
+		TextView publisher;// 出版社
+		NetworkImageView img;// 时间图片 不用修改
+		TextView u_abstract;// 简介
 		// Button btn_comment,btn_item_result_search_share,favorite;
 	}
 

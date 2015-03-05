@@ -46,11 +46,11 @@ public class CaptureActivity extends Activity implements Callback {
 		super.onCreate(savedInstanceState);
 		
 		setContentView(R.layout.scan);
-		//��ʼ�� CameraManager
+		//初始化 CameraManager
 		CameraManager.init(getApplication());
 		viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);
 		txtResult = (TextView) findViewById(R.id.txtResult);
-		//��ȡ״̬���߶�
+		//获取状态栏高度
 		txtResult.post(new Runnable() {
             public void run() {
                     init_statusheight();
@@ -65,11 +65,11 @@ public class CaptureActivity extends Activity implements Callback {
          Rect rect = new Rect();
          Window window = getWindow();
          txtResult.getWindowVisibleDisplayFrame(rect);
-         // ״̬���ĸ߶�
+         // 状态栏的高度
         statusBarHeight = rect.top;
-//         // ��������״̬��������߶�
+//         // 标题栏跟状态栏的总体高度
 //         int contentViewTop = window.findViewById(Window.ID_ANDROID_CONTENT).getTop();
-//         // �������ĸ߶ȣ��������ֵ��ȥ״̬���ĸ߶ȼ�Ϊ�������߶�
+//         // 标题栏的高度：用上面的值减去状态栏的高度及为标题栏高度
 //         int titleBarHeight = contentViewTop - statusBarHeight;
 //         System.out.println(statusBarHeight+"..."+contentViewTop+"..."+titleBarHeight);
  }

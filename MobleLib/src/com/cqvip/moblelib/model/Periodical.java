@@ -14,7 +14,7 @@ import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.net.BookException;
 
 /**
- * ÆÚ¿¯ÏêÏ¸
+ * æœŸåˆŠè¯¦ç»†
  * 
  * @author luojiang
  * 
@@ -26,26 +26,26 @@ public class Periodical implements Serializable {
 	 */
 	private static final long serialVersionUID = -3844606467162617902L;
 	private String gch; // id
-	private String name; // ÌâÃû
-	private String ename;// Ó¢ÎÄÌâÃû
-	private String imgurl;// Í¼Æ¬
-	private String isrange;// ÅÅĞò
-	private String cnno; // Í³Ò»¿¯ºÅ
+	private String name; // é¢˜å
+	private String ename;// è‹±æ–‡é¢˜å
+	private String imgurl;// å›¾ç‰‡
+	private String isrange;// æ’åº
+	private String cnno; // ç»Ÿä¸€åˆŠå·
 
-	private String issn;// ¹ú¼ÊÍ³Ò»¿¯ºÅ
-	private String changestate;// ¸ÄÃû
-	private String remark; // ¼ò½é
-	private String directordept;// Ö÷¹Üµ¥Î»
-	private String publisher; // Ö÷°ìµ¥Î»
-	private String chiefeditor;// Ö÷±à
-	private String pubcycle;// ÔÂ¿¯
-	private String size;// ¶àÉÙ¿ª
+	private String issn;// å›½é™…ç»Ÿä¸€åˆŠå·
+	private String changestate;// æ”¹å
+	private String remark; // ç®€ä»‹
+	private String directordept;// ä¸»ç®¡å•ä½
+	private String publisher; // ä¸»åŠå•ä½
+	private String chiefeditor;// ä¸»ç¼–
+	private String pubcycle;// æœˆåˆŠ
+	private String size;// å¤šå°‘å¼€
 	private ArrayList<PeriodicalYear> yearsnumlist;
 
-	// »ñÈ¡ÆÚ¿¯·ÖÀàÁĞ±í
+	// è·å–æœŸåˆŠåˆ†ç±»åˆ—è¡¨
 	public LinkedHashMap<String, String> classfylist;
 
-	// »ñÈ¡ÆÚ¿¯·ÖÀàÏÂµÄÆÚ¿¯ÁĞ±í
+	// è·å–æœŸåˆŠåˆ†ç±»ä¸‹çš„æœŸåˆŠåˆ—è¡¨
 	private String recordcount;
 	public  List<Periodical> qklist;
 	
@@ -109,7 +109,7 @@ public class Periodical implements Serializable {
 		}
 	}
 
-	// sort --1: »ñÈ¡ÆÚ¿¯·ÖÀàÁĞ±í 2: »ñÈ¡ÆÚ¿¯·ÖÀàÏÂµÄÆÚ¿¯ÁĞ±í 3:»ñÈ¡ÆÚÆÚ¿¯ÏêÏ¸
+	// sort --1: è·å–æœŸåˆŠåˆ†ç±»åˆ—è¡¨ 2: è·å–æœŸåˆŠåˆ†ç±»ä¸‹çš„æœŸåˆŠåˆ—è¡¨ 3:è·å–æœŸæœŸåˆŠè¯¦ç»†
 	public static Periodical formObject(String str, int sort)
 			throws BookException {
 		if (sort == Task.TASK_PERIODICAL_TYPE) {
@@ -169,7 +169,7 @@ public class Periodical implements Serializable {
 				 }
 				 Periodical periodical=new Periodical();
 				 periodical.qklist=new ArrayList<Periodical>();
-				 //²»ÏÔÊ¾×îĞÂÆÚ¿¯ modified by lj 20130821
+				 //ä¸æ˜¾ç¤ºæœ€æ–°æœŸåˆŠ modified by lj 20130821
 				 for(int i = 1;i<count;i++){
 					 
 					 JSONArray array = ary.getJSONObject(i).getJSONArray("qklist");
@@ -186,7 +186,7 @@ public class Periodical implements Serializable {
 		return null;
 	}
 	/**
-	 * ÆÚ¿¯ÊıÁ¿
+	 * æœŸåˆŠæ•°é‡
 	 * @param result
 	 * @return
 	 * @throws BookException

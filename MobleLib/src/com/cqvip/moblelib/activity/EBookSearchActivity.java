@@ -61,7 +61,7 @@ public class EBookSearchActivity extends BaseActivity implements
 	private BitmapCache cache;
 	private Map<String, String> gparams;
 
-	public static HashMap<String, Boolean> favors = new HashMap<String, Boolean>();// �����ղ�״̬�����½���
+	public static HashMap<String, Boolean> favors = new HashMap<String, Boolean>();// 保持收藏状态，更新界面
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +74,7 @@ public class EBookSearchActivity extends BaseActivity implements
 		listview = (DropDownListView) findViewById(R.id.search_res_lv);
 		listview.setOnItemClickListener((OnItemClickListener) this);
 		noResult_rl = (RelativeLayout) findViewById(R.id.noresult_rl);
-		// ��ȡ���
+		// 获取更多
 		listview.setOnBottomListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -89,7 +89,7 @@ public class EBookSearchActivity extends BaseActivity implements
 			public void onClick(View v) {
 				hideKeybord();
 				if (TextUtils.isEmpty(edit.getText().toString().trim())) {
-					Tool.ShowMessages(context, "������ؼ���");
+					Tool.ShowMessages(context, "请输入关键字");
 					return;
 				}
 				if (!Tool.checkNetWork(context)) {
@@ -99,7 +99,7 @@ public class EBookSearchActivity extends BaseActivity implements
 				page = 1;
 				getHomePage(edit.getText().toString().trim(), page,
 						DEFAULT_COUNT, 0);
-				//������ݿ�
+				//加入数据库
 				addDatabase(edit.getText().toString().trim());
 			}
 		});
@@ -111,18 +111,18 @@ public class EBookSearchActivity extends BaseActivity implements
 				if (TextUtils.isEmpty(edit.getText().toString())) {
 					return true;
 				}
-				// ���ؼ���
+				// 隐藏键盘
 				hideKeybord();
-				// �������
+				// 检查网络
 				if (!Tool.checkNetWork(context)) {
 					return false;
 				}
-				// �������,��ȡ��ҳ
+				// 网络访问,获取首页
 				customProgressDialog.show();
 				page = 1;
 				getHomePage(edit.getText().toString().trim(), 1, DEFAULT_COUNT,
 						0);
-				//������ݿ�
+				//加入数据库
 				addDatabase(edit.getText().toString().trim());
 				return true;
 			}
@@ -200,7 +200,7 @@ public class EBookSearchActivity extends BaseActivity implements
 	}
 
 	/**
-	 * ���ؼ���
+	 * 隐藏键盘
 	 */
 	private void hideKeybord() {
 		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -217,13 +217,13 @@ public class EBookSearchActivity extends BaseActivity implements
 					&& customProgressDialog.isShowing())
 				customProgressDialog.dismiss();
 			try {
-				// ��ȡ���ؼ�¼��
+				// 获取返回记录数
 				int count = EBook.ebookCount(response);
 				if (count > 0) {
 					searchCount.setVisibility(View.VISIBLE);
-					String temp = "�������� \"<font face=\"arial\" color=\"red\">"
+					String temp = "搜索到与 \"<font face=\"arial\" color=\"red\">"
 							+ edit.getText().toString().trim()
-							+ "</font>\"  ������� " + count + " ��";
+							+ "</font>\"  相关内容 " + count + " 个";
 					searchCount.setText(Html.fromHtml(temp));
 				} else {
 					searchCount.setVisibility(View.GONE);
@@ -310,7 +310,7 @@ public class EBookSearchActivity extends BaseActivity implements
 	}
 
 	/**
-	 * �������磬��ȡ���
+	 * 请求网络，获取数据
 	 * 
 	 * @param key
 	 * @param page
@@ -319,8 +319,8 @@ public class EBookSearchActivity extends BaseActivity implements
 	private void getHomePage(String key, int page, int count, int type) {
 		gparams = new HashMap<String, String>();
 		gparams.put("title", key);
-		gparams.put("curpage", "" + page);// ��ǰҳ��
-		gparams.put("perpage", "" + count);// ����
+		gparams.put("curpage", "" + page);// 当前页数
+		gparams.put("perpage", "" + count);// 条数
 
 		if (type == 0) {
 			if (listview.getFooterViewsCount() == 0) {

@@ -12,16 +12,7 @@ import dalvik.system.DexFile;
 
 public class PackageUtils {
 		
-	    /** 
-	     * 获取某包下属于某个类的所有子类 
-	     * @param context 
-	     * 		Context对象 
-	     * @param packageName 
-	     * 		包名 
-	     * @param parentClass 
-	     * 		父类 
-	     * @return 类的列表 
-	     */ 
+	   
 		public static List<Class<?>> getPackageClasses(Context context, String packageName, Class<?> parentClass) {
 			List<Class<?>> classes = new ArrayList<Class<?>>();
 		    ApplicationInfo ai = context.getApplicationInfo();
@@ -65,14 +56,6 @@ public class PackageUtils {
 		    return classes;
 		}
 		
-		/**
-		 * 跟据服务类名判断此服务是否正在运行
-		 * @param conext
-		 * 		Context对象 
-		 * @param className
-		 * 		类型（包含包）
-		 * @return 是否正在运行
-		 */
 	    public static boolean isServiceRunning(Context conext, String className) {
 	    	ActivityManager mActivityManager = (ActivityManager)conext.getSystemService(Context.ACTIVITY_SERVICE); 
 	    	List<ActivityManager.RunningServiceInfo> serviceList = mActivityManager.getRunningServices(100);

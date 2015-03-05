@@ -7,7 +7,7 @@ import com.cqvip.dao.Model;
 import com.cqvip.dao.PrimaryKey;
 
 /**
- * ËÑË÷ÀúÊ·¡ª¡ªsz
+ * æœç´¢å†å²â€•â€•sz
  * @author luojiang
  *
  */

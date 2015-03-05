@@ -71,7 +71,7 @@ public class MyImageView extends ScaleImageView
 	}
 	int x,y;
 	@Override
-	public boolean onTouchEvent(MotionEvent event)//���������� true �����Activity �� onTouchEvent() ���ᱻϵͳ�ص�
+	public boolean onTouchEvent(MotionEvent event)//这个方法如果 true 则整个Activity 的 onTouchEvent() 不会被系统回调
 	{
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:

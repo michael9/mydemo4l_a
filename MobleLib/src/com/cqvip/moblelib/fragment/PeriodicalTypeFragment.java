@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,29 +22,26 @@ import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.cqvip.moblelib.sychild.R;
-import com.cqvip.moblelib.activity.EbookDetailActivity;
 import com.cqvip.moblelib.activity.PeriodicalClassfyActivity;
 import com.cqvip.moblelib.activity.PeriodicalListActivity;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.Constant;
 import com.cqvip.moblelib.constant.GlobleData;
-import com.cqvip.moblelib.fragment.basefragment.BaseAbstractFragment;
 import com.cqvip.moblelib.model.ShortBook;
+import com.cqvip.moblelib.sychild.R;
 import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.utils.Tool;
 
 /**
- * �����б� ��ҽҩ�����̣����...
+ * 分类列表 ，医药，工程，社会...
  * @author luojiang
  *
  */
 public class PeriodicalTypeFragment extends Fragment {
 
 	private ListView listview;
-	private int sendtype;// ����
-	private HashMap<String, String> gparams; // ����
+	private int sendtype;// 类型
+	private HashMap<String, String> gparams; // 参数
 	private MyAdapter adapter;
 	private RequestQueue mQueue;
 	private CustomProgressDialog customProgressDialog;
@@ -86,10 +82,10 @@ public class PeriodicalTypeFragment extends Fragment {
 		int type = bundle.getInt("type");
 		// TextView tv = (TextView) rootView.findViewById(R.id.txt_periodical);
 		// tv.setText(title);
-		// �ж����ĸ�����
+		// 判断是哪个界面
 		listview = (ListView) rootView.findViewById(R.id.lv_periodical_type);
 		getHomePage(type);
-		// ��ȡ���
+		// 获取数据
 		listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 			@Override
@@ -110,7 +106,7 @@ public class PeriodicalTypeFragment extends Fragment {
 	private void getHomePage(int type) {
 		gparams = new HashMap<String, String>();
 		switch (type) {
-		// ҽҩ����
+		// 医药卫生
 		case Constant.MEDIAL:
 			gparams.put("classid", GlobleData.MEDIAL_TYPEID + "");
 			// requestVolley

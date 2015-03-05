@@ -15,7 +15,7 @@ import android.util.DisplayMetrics;
 
 public class Phinfo {
 
-    String phone_manufacturer = "";//Éú²úÉÌ
+    String phone_manufacturer = "";
     String phone_mode = "";
     String rom_vesion = "";
     String sdk_vesion = "";

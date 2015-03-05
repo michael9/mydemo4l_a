@@ -22,27 +22,27 @@ public class EBook implements Serializable{
 	private static final long serialVersionUID = -7393037851968299461L;
 			private String lngid;//id
 		    private String gch;//
-		    private String years;//Äê
-		    private String num;//ÆÚÊı µÚ¼¸ÆÚ
+		    private String years;//å¹´
+		    private String num;//æœŸæ•° ç¬¬å‡ æœŸ
 		    private String vol;//
-		    private String title_c;//±êÌâ£¨ÖĞÎÄ£©
-		    private String title_e;//±êÌâ£¨Ó¢ÎÄ£©
+		    private String title_c;//æ ‡é¢˜ï¼ˆä¸­æ–‡ï¼‰
+		    private String title_e;//æ ‡é¢˜ï¼ˆè‹±æ–‡ï¼‰
 		    private String keyword_c;//
 		    private String keyword_e;
-		    private String name_c;//À´Ô´ÔÓÖ¾
+		    private String name_c;//æ¥æºæ‚å¿—
 		    private String name_e;
-		    private String remark_c;//¼ò½é
+		    private String remark_c;//ç®€ä»‹
 		    private String remark_e;
 		    private String classtype;
-		    private String writer;//×÷Õß
-		    private String organ;//À´Ô´
-		    private String beginpage;//¿ªÊ¼Ò³
-		    private String endpage;//½áÊøÒ³
-		    private int pagecount;//Ò³Êı
-		    private long pdfsize;//´óĞ¡
-		    private String imgurl;//Í¼Æ¬
-		    private boolean isfavorite;//ÊÇ·ñÊÕ²Ø
-		    private boolean allowdown;//ÊÇ·ñ
+		    private String writer;//ä½œè€…
+		    private String organ;//æ¥æº
+		    private String beginpage;//å¼€å§‹é¡µ
+		    private String endpage;//ç»“æŸé¡µ
+		    private int pagecount;//é¡µæ•°
+		    private long pdfsize;//å¤§å°
+		    private String imgurl;//å›¾ç‰‡
+		    private boolean isfavorite;//æ˜¯å¦æ”¶è—
+		    private boolean allowdown;//æ˜¯å¦
 	
 		    
 		    public EBook(String lngid, String years, String num, String title_c,

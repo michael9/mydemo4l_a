@@ -26,16 +26,16 @@ import android.widget.TextView;
 
 /**
  * <p>
- * [�� Ҫ] ��Ч���listview
+ * [概 要] 带效果的listview
  * </p>
  * <p>
- * [�� ϸ] �»�Ч��listview��OnRefreshListener��onRefreshCompleteʵ��
+ * [详 细] 下滑效果listview，OnRefreshListener，onRefreshComplete实现
  * </p>
  * <p>
- * [�� ��]
+ * [备 考]
  * </p>
  * <p>
- * [�� ��] J2SE 1.6
+ * [环 境] J2SE 1.6
  * </p>
  * *
  * 
@@ -47,29 +47,29 @@ implements OnScrollListener,android.widget.AdapterView.OnItemLongClickListener{
 	  
     private static final String TAG = "DownFreshListView";  
   
-    private final static int RELEASE_To_REFRESH = 0;  //�ͷ�ˢ��
-    private final static int PULL_To_REFRESH = 1;  //����
-    private final static int REFRESHING = 2;  //ˢ����
-    private final static int DONE = 3;  //ˢ�����
-    private final static int LOADING = 4;  //����
+    private final static int RELEASE_To_REFRESH = 0;  //释放刷新
+    private final static int PULL_To_REFRESH = 1;  //下拉
+    private final static int REFRESHING = 2;  //刷新中
+    private final static int DONE = 3;  //刷新完成
+    private final static int LOADING = 4;  //加载
   
-    // ʵ�ʵ�padding�ľ����������ƫ�ƾ���ı���  
+    // 实际的padding的距离与界面上偏移距离的比例  
     private final static int RATIO = 3;  
   
     private LayoutInflater inflater;  
   
     private LinearLayout headView;  
   
-    private TextView tipsTextview;   //��ʾ
-    private TextView lastUpdatedTextView;  //������
-   // private ImageView arrowImageView;  //ͼ��
-    private ProgressBar progressBar;  //ȦȦ
+    private TextView tipsTextview;   //提示
+    private TextView lastUpdatedTextView;  //最后更新
+   // private ImageView arrowImageView;  //图标
+    private ProgressBar progressBar;  //圈圈
   
   
-    private RotateAnimation animation;   //��ת����
+    private RotateAnimation animation;   //旋转动画
     private RotateAnimation reverseAnimation;   
   
-    // ���ڱ�֤startY��ֵ��һ�������touch�¼���ֻ����¼һ��  
+    // 用于保证startY的值在一个完整的touch事件中只被记录一次  
     private boolean isRecored;  
   
     private int headContentWidth;  
@@ -167,7 +167,7 @@ implements OnScrollListener,android.widget.AdapterView.OnItemLongClickListener{
                 if (firstItemIndex == 0 && !isRecored) {  
                     isRecored = true;  
                     startY = (int) event.getY();  
-//                    Log.v(TAG, "��downʱ���¼��ǰλ�á�");  
+//                    Log.v(TAG, "在down时候记录当前位置‘");  
                 }  
                 break;  
   
@@ -175,20 +175,20 @@ implements OnScrollListener,android.widget.AdapterView.OnItemLongClickListener{
   
                 if (state != REFRESHING && state != LOADING) {  
                     if (state == DONE) {  
-                        // ʲô������  
+                        // 什么都不做  
                     }  
                     if (state == PULL_To_REFRESH) {  
                         state = DONE;  
                         changeHeaderViewByState();  
   
-//                        Log.v(TAG, "������ˢ��״̬����done״̬");  
+//                        Log.v(TAG, "由下拉刷新状态，到done状态");  
                     }  
                     if (state == RELEASE_To_REFRESH) {  
                         state = REFRESHING;  
                         changeHeaderViewByState();  
                         onRefresh();  
   
-//                        Log.v(TAG, "���ɿ�ˢ��״̬����done״̬");  
+//                        Log.v(TAG, "由松开刷新状态，到done状态");  
                     }  
                 }  
   
@@ -201,63 +201,63 @@ implements OnScrollListener,android.widget.AdapterView.OnItemLongClickListener{
                 int tempY = (int) event.getY();  
   
                 if (!isRecored && firstItemIndex == 0) {  
-//                    Log.v(TAG, "��moveʱ���¼��λ��");  
+//                    Log.v(TAG, "在move时候记录下位置");  
                     isRecored = true;  
                     startY = tempY;  
                 }  
   
                 if (state != REFRESHING && isRecored && state != LOADING) {  
   
-                    // ��֤������padding�Ĺ���У���ǰ��λ��һֱ����head����������б?����Ļ�Ļ����������Ƶ�ʱ���б��ͬʱ���й���  
+                    // 保证在设置padding的过程中，当前的位置一直是在head，否则如果当列表超出屏幕的话，当在上推的时候，列表会同时进行滚动  
   
-                    // ��������ȥˢ����  
+                    // 可以松手去刷新了  
                     if (state == RELEASE_To_REFRESH) {  
   
                         setSelection(0);  
   
-                        // �������ˣ��Ƶ�����Ļ�㹻�ڸ�head�ĳ̶ȣ����ǻ�û���Ƶ�ȫ���ڸǵĵز�  
+                        // 往上推了，推到了屏幕足够掩盖head的程度，但是还没有推到全部掩盖的地步  
                         if (((tempY - startY) / RATIO < headContentHeight)  
                                 && (tempY - startY) > 0) {  
                             state = PULL_To_REFRESH;  
                             changeHeaderViewByState();  
   
-//                            Log.v(TAG, "���ɿ�ˢ��״̬ת�䵽����ˢ��״̬");  
+//                            Log.v(TAG, "由松开刷新状态转变到下拉刷新状态");  
                         }  
-                        // һ�����Ƶ�����  
+                        // 一下子推到顶了  
                         else if (tempY - startY <= 0) {  
                             state = DONE;  
                             changeHeaderViewByState();  
   
-//                            Log.v(TAG, "���ɿ�ˢ��״̬ת�䵽done״̬");  
+//                            Log.v(TAG, "由松开刷新状态转变到done状态");  
                         }  
-                        // �������ˣ����߻�û�����Ƶ���Ļ�����ڸ�head�ĵز�  
+                        // 往下拉了，或者还没有上推到屏幕顶部掩盖head的地步  
                         else {  
-                            // ���ý����ر�Ĳ�����ֻ�ø���paddingTop��ֵ������  
+                            // 不用进行特别的操作，只用更新paddingTop的值就行了  
                         }  
                     }  
-                    // ��û�е�����ʾ�ɿ�ˢ�µ�ʱ��,DONE������PULL_To_REFRESH״̬  
+                    // 还没有到达显示松开刷新的时候,DONE或者是PULL_To_REFRESH状态  
                     if (state == PULL_To_REFRESH) {  
   
                         setSelection(0);  
   
-                        // ���������Խ���RELEASE_TO_REFRESH��״̬  
+                        // 下拉到可以进入RELEASE_TO_REFRESH的状态  
                         if ((tempY - startY) / RATIO >= headContentHeight) {  
                             state = RELEASE_To_REFRESH;  
                             isBack = true;  
                             changeHeaderViewByState();  
   
-//                            Log.v(TAG, "��done��������ˢ��״̬ת�䵽�ɿ�ˢ��");  
+//                            Log.v(TAG, "由done或者下拉刷新状态转变到松开刷新");  
                         }  
-                        // ���Ƶ�����  
+                        // 上推到顶了  
                         else if (tempY - startY <= 0) {  
                             state = DONE;  
                             changeHeaderViewByState();  
   
-//                            Log.v(TAG, "��DOne��������ˢ��״̬ת�䵽done״̬");  
+//                            Log.v(TAG, "由DOne或者下拉刷新状态转变到done状态");  
                         }  
                     }  
   
-                    // done״̬��  
+                    // done状态下  
                     if (state == DONE) {  
                         if (tempY - startY > 0) {  
                             state = PULL_To_REFRESH;  
@@ -265,14 +265,14 @@ implements OnScrollListener,android.widget.AdapterView.OnItemLongClickListener{
                         }  
                     }  
   
-                    // ����headView��size  
+                    // 更新headView的size  
                     if (state == PULL_To_REFRESH) {  
                         headView.setPadding(0, -1 * headContentHeight  
                                 + (tempY - startY) / RATIO, 0, 0);  
   
                     }  
   
-                    // ����headView��paddingTop  
+                    // 更新headView的paddingTop  
                     if (state == RELEASE_To_REFRESH) {  
                         headView.setPadding(0, (tempY - startY) / RATIO  
                                 - headContentHeight, 0, 0);  
@@ -287,7 +287,7 @@ implements OnScrollListener,android.widget.AdapterView.OnItemLongClickListener{
         return super.onTouchEvent(event);  
     }  
   
-    // ��״̬�ı�ʱ�򣬵��ø÷������Ը��½���  
+    // 当状态改变时候，调用该方法，以更新界面  
     private void changeHeaderViewByState() {  
         try{
         switch (state) {  
@@ -300,9 +300,9 @@ implements OnScrollListener,android.widget.AdapterView.OnItemLongClickListener{
            // arrowImageView.clearAnimation();  
            // arrowImageView.startAnimation(animation);  
   
-            tipsTextview.setText("�ɿ�����ˢ��");  
+            tipsTextview.setText("松开进行刷新");  
   
-//            Log.v(TAG, "��ǰ״̬���ɿ�ˢ��");  
+//            Log.v(TAG, "当前状态，松开刷新");  
             break;  
         case PULL_To_REFRESH:  
             progressBar.setVisibility(View.GONE);  
@@ -310,17 +310,17 @@ implements OnScrollListener,android.widget.AdapterView.OnItemLongClickListener{
             lastUpdatedTextView.setVisibility(View.VISIBLE);  
             //arrowImageView.clearAnimation();  
            // arrowImageView.setVisibility(View.VISIBLE);  
-            // ����RELEASE_To_REFRESH״̬ת������  
+            // 是由RELEASE_To_REFRESH状态转变来的  
             if (isBack) {  
                 isBack = false;  
               //  arrowImageView.clearAnimation();  
                // arrowImageView.startAnimation(reverseAnimation);  
   
-                tipsTextview.setText("�����϶�����ˢ��");  
+                tipsTextview.setText("向下拖动进行刷新");  
             } else {  
-                tipsTextview.setText("�����϶�����ˢ��");  
+                tipsTextview.setText("向下拖动进行刷新");  
             }  
-//            Log.v(TAG, "��ǰ״̬������ˢ��");  
+//            Log.v(TAG, "当前状态，下拉刷新");  
             break;  
   
         case REFRESHING:  
@@ -330,10 +330,10 @@ implements OnScrollListener,android.widget.AdapterView.OnItemLongClickListener{
             progressBar.setVisibility(View.VISIBLE);  
             //arrowImageView.clearAnimation();  
            // arrowImageView.setVisibility(View.GONE);  
-            tipsTextview.setText("����ˢ��...");  
+            tipsTextview.setText("正在刷新...");  
             lastUpdatedTextView.setVisibility(View.VISIBLE);  
   
-//            Log.v(TAG, "��ǰ״̬,����ˢ��...");  
+//            Log.v(TAG, "当前状态,正在刷新...");  
             break;  
         case DONE:  
             headView.setPadding(0, -1 * headContentHeight, 0, 0);  
@@ -341,10 +341,10 @@ implements OnScrollListener,android.widget.AdapterView.OnItemLongClickListener{
             progressBar.setVisibility(View.GONE);  
            // arrowImageView.clearAnimation();  
            // arrowImageView.setImageResource(R.drawable.ic_pulltorefresh_arrow);  
-            tipsTextview.setText("�ɿ�����ˢ��");  
+            tipsTextview.setText("松开进行刷新");  
             lastUpdatedTextView.setVisibility(View.VISIBLE);  
   
-//            Log.v(TAG, "��ǰ״̬��done");  
+//            Log.v(TAG, "当前状态，done");  
             break;  
         }  
         }catch (Exception e) {
@@ -364,9 +364,9 @@ implements OnScrollListener,android.widget.AdapterView.OnItemLongClickListener{
   
     public void onRefreshComplete() {  
         state = DONE;  
-        SimpleDateFormat format=new SimpleDateFormat("yyyy��MM��dd��  HH:mm");  
+        SimpleDateFormat format=new SimpleDateFormat("yyyy年MM月dd日  HH:mm");  
         String date=format.format(new Date());  
-        lastUpdatedTextView.setText("�ϴ�ˢ�� ��" + date);  
+        lastUpdatedTextView.setText("上次刷新 ：" + date);  
         changeHeaderViewByState();  
     }  
   
@@ -376,7 +376,7 @@ implements OnScrollListener,android.widget.AdapterView.OnItemLongClickListener{
         }  
     }  
   
-    // �˷���ֱ���հ��������ϵ�һ������ˢ�µ�demo���˴��ǡ����ơ�headView��width�Լ�height  
+    // 此方法直接照搬自网络上的一个下拉刷新的demo，此处是“估计”headView的width以及height  
     private void measureView(View child) {  
          ViewGroup.LayoutParams p = child.getLayoutParams();  
             if (p == null) {  
@@ -398,9 +398,9 @@ implements OnScrollListener,android.widget.AdapterView.OnItemLongClickListener{
     }  
 
     public void setAdapter(BaseAdapter adapter) {  
-        SimpleDateFormat format=new SimpleDateFormat("yyyy��MM��dd��  HH:mm");  
+        SimpleDateFormat format=new SimpleDateFormat("yyyy年MM月dd日  HH:mm");  
         String date=format.format(new Date());  
-        lastUpdatedTextView.setText("�ϴ�ˢ�� ��" + date);  
+        lastUpdatedTextView.setText("上次刷新 ：" + date);  
         super.setAdapter(adapter);  
     }
 
