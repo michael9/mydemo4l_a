@@ -23,9 +23,9 @@ public class GlobleData {
 	 * */
 	public final static   String SERVER_URL = "http://mobile.cqvip.com";
 	/**
-	 * 图书馆id,1代表深圳图书馆
+	 * 图书馆id,3代码沈阳少儿图书馆，1代表深圳图书馆 
 	 * */
-	public final static   String LIBIRY_ID = "1";
+	public final static   String LIBIRY_ID = "3";
 	/**
 	 * 龙岗图书馆id 
 	 * */

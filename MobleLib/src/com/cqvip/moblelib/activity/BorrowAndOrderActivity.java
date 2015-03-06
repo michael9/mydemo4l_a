@@ -1,30 +1,31 @@
 package com.cqvip.moblelib.activity;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.android.volley.Request.Method;
 import com.android.volley.Response;
-import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.cqvip.moblelib.sychild.R;
 import com.cqvip.moblelib.adapter.BorrowBookAdapter;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.BorrowBook;
 import com.cqvip.moblelib.model.ShortBook;
+import com.cqvip.moblelib.sychild.R;
+import com.cqvip.moblelib.utils.HttpUtils;
 import com.cqvip.utils.Tool;
 
 /**
@@ -47,10 +48,29 @@ public class BorrowAndOrderActivity extends BaseActivity {
 	public static final int RENEW = 2;
 	private ListView listview;
 	private BorrowBookAdapter adapter;
-	private List<BorrowBook>  lists;
+	private List<BorrowBook>  lists = new ArrayList<BorrowBook>();
 	private RelativeLayout noborrow_rl;
 	private Map<String, String> gparams;
+	private static final int RENEWSUSS = 0;
+	private static final int RENEWFAIL = 0;
 	
+	private Handler handler = new Handler() {
+		
+		 @Override
+	        public void handleMessage(Message message) {
+			 Bundle bundle = message.getData();
+			 	switch (message.what) {
+				case RENEWSUSS:
+					Tool.ShowMessages(BorrowAndOrderActivity.this, bundle.getString("msg"));
+					adapter.notifyDataSetChanged();
+					break;
+				default:
+					Tool.ShowMessages(BorrowAndOrderActivity.this, bundle.getString("msg"));
+					break;
+				}
+			 	
+		 }
+	};
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -83,14 +103,14 @@ public class BorrowAndOrderActivity extends BaseActivity {
 			if(customProgressDialog!=null&&customProgressDialog.isShowing())
 			customProgressDialog.dismiss();
 			try {
-				List<BorrowBook>lists = BorrowBook.formList(response);
+				lists = BorrowBook.formList(response);
 				if(lists==null||lists.isEmpty()){
 					listview.setVisibility(View.GONE);
 					noborrow_rl.setVisibility(View.VISIBLE);
 				}else {
 					listview.setVisibility(View.VISIBLE);
 					noborrow_rl.setVisibility(View.GONE);
-					adapter = new BorrowBookAdapter(BorrowAndOrderActivity.this,lists,mQueue,cl_renew,el_new);
+					adapter = new BorrowBookAdapter(BorrowAndOrderActivity.this,lists,mQueue,cl_renew,el);
 					listview.setAdapter(adapter);
 				}			
 			} catch (Exception e) {
@@ -100,15 +120,6 @@ public class BorrowAndOrderActivity extends BaseActivity {
 		}
 	};
 	
-	ErrorListener el = new ErrorListener() {
-		@Override
-		public void onErrorResponse(VolleyError arg0) {
-			// TODO Auto-generated method stub
-			if(customProgressDialog!=null&&customProgressDialog.isShowing())
-			customProgressDialog.dismiss();
-			onError(2);
-		}
-	};
 
 	private void requestVolley(String addr, Listener<String> bl, int method) {
 		try {
@@ -119,7 +130,7 @@ public class BorrowAndOrderActivity extends BaseActivity {
 					return gparams;
 				};
 			};
-			mQueue.add(mys);
+			mys.setRetryPolicy(HttpUtils.setTimeout());mQueue.add(mys);
 			mQueue.start();
 		} catch (Exception e) {
 			onError(2);
@@ -129,7 +140,9 @@ public class BorrowAndOrderActivity extends BaseActivity {
   private void getlist() {
 	  customProgressDialog.show();
 	  gparams=new HashMap<String, String>();
-	  gparams.put("userid", GlobleData.readerid);	  
+	  gparams.put("libid", GlobleData.LIBIRY_ID);	  
+	 // gparams.put("userid", GlobleData.readerid);	  
+	   gparams.put("userid","109248");	  
 		requestVolley(GlobleData.SERVER_URL
 				+ "/library/user/borrowlist.aspx", borrowlist_ls,
 				Method.POST);
@@ -143,39 +156,40 @@ public class BorrowAndOrderActivity extends BaseActivity {
 	          public void onResponse(String response) {
 	        	  if(customProgressDialog!=null&&customProgressDialog.isShowing())
 	        		customProgressDialog.dismiss();
+	        	  Log.i("book",response);
 	    			try {
 	    				ShortBook result = new ShortBook(Task.TASK_BOOK_RENEW,response);
-	    				if(result!=null){
+	    				 Log.i("book",result.toString());
+	    				 Log.i("book",lists.size()+","+lists.toString());
+	    				 Message msg = new Message();
+	    				 Bundle bundle = new Bundle();
+	    					bundle.putString("msg", result .getMessage());
+	    					msg.setData(bundle);
 	    				if(result.getSucesss().equals("true")){
-	    				for(int i=0;i<lists.size();i++){
-	    					if(result.getId().equals(lists.get(i).getBarcode())){
-	    						lists.get(i).setRenew(1);
-	    						lists.get(i).setReturndate(result.getDate()+getResources().getString(R.string.alreadyrenew));
-	    						adapter.notifyDataSetChanged();
+	    					if(lists==null||lists.isEmpty()){
+	    						for(int i=0;i<lists.size();i++){
+	    							BorrowBook book	= lists.get(i);
+	    					if(book.getBarcode().equals(result.getId())){
+	    						book.setRenew(1);
+	    						book.setReturndate(result.getDate()+getResources().getString(R.string.alreadyrenew));
+	    						msg.what = RENEW;
+	    						handler.sendMessage(msg);
+	    						 Log.i("book",book.toString());
 	    						break;
 	    					}
 	    				  }
 	    				}
-	    				Tool.ShowMessages(BorrowAndOrderActivity.this, result.getMessage());
-	    			}
+	    					//Tool.ShowMessages(BorrowAndOrderActivity.this, result.getMessage());
+	    				}
+	    				msg.what = RENEWFAIL;
+	    				handler.sendMessage(msg);
+	    				
 	    			} catch (Exception e) {
+	    				e.printStackTrace();
 	    				onError(2);
 	    				return;
 	    			}
 
-	          }
-	      };
-  	  /**
-  	   * 续借异常
-  	   * @return
-  	   */
-	  private Response.ErrorListener el_new = new Response.ErrorListener() {
-	          @Override
-	          public void onErrorResponse(VolleyError error) {
-	        	  if(customProgressDialog!=null&&customProgressDialog.isShowing())
-	        	  customProgressDialog.dismiss();
-	        	  //提示用户异常
-	        	  onError(2);
 	          }
 	      };
 

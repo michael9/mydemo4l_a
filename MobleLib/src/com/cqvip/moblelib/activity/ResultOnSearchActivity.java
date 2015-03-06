@@ -82,7 +82,7 @@ public class ResultOnSearchActivity extends BaseActivity implements
 							GlobleData.QUERY_ISBN);
 				} else {
 					getHomePage(key, page + 1, DEFAULT_COUNT, GETNEXTPAGE,
-							GlobleData.QUERY_ALL);
+							GlobleData.QUERY_TITLE);
 				}
 				page = page + 1;
 			}
@@ -95,7 +95,7 @@ public class ResultOnSearchActivity extends BaseActivity implements
 			imgsearch.setFocusable(true);
 			customProgressDialog.show();
 			getHomePage(key, GETFIRSTPAGE, DEFAULT_COUNT, GETFIRSTPAGE,
-					GlobleData.QUERY_ALL);
+					GlobleData.QUERY_TITLE);
 			this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 		}
 
@@ -120,7 +120,7 @@ public class ResultOnSearchActivity extends BaseActivity implements
 							GlobleData.QUERY_ISBN);
 				} else {
 					getHomePage(key, GETFIRSTPAGE, DEFAULT_COUNT, GETFIRSTPAGE,
-							GlobleData.QUERY_ALL);
+							GlobleData.QUERY_TITLE);
 					//加入数据库
 					addDatabase(edit.getText().toString().trim());
 				}
@@ -151,7 +151,7 @@ public class ResultOnSearchActivity extends BaseActivity implements
 							GlobleData.QUERY_ISBN);
 				} else {
 					getHomePage(key, GETFIRSTPAGE, DEFAULT_COUNT, GETFIRSTPAGE,
-							GlobleData.QUERY_ALL);
+							GlobleData.QUERY_TITLE);
 					//加入数据库
 					addDatabase(edit.getText().toString().trim());
 				}
@@ -338,7 +338,7 @@ public class ResultOnSearchActivity extends BaseActivity implements
 		gparams.put("keyword", key);
 		gparams.put("curpage", "" + page);
 		gparams.put("perpage", "" + count);
-		gparams.put("library", GlobleData.SZLG_LIB_ID);
+		gparams.put("libid", GlobleData.LIBIRY_ID);
 		gparams.put("field", field);
 
 		if (type == GETFIRSTPAGE) {

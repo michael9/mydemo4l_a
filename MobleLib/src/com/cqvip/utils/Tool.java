@@ -9,12 +9,14 @@ import java.util.regex.Pattern;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.text.TextUtils;
 import android.widget.Toast;
+import cn.sharesdk.onekeyshare.OnekeyShare;
 
 import com.cqvip.moblelib.activity.CommentActivity;
 import com.cqvip.moblelib.model.Book;
@@ -51,18 +53,83 @@ public class Tool {
 	}
 
 	// 分享
-	public static void bookshare(Context mcontext, Book mbook) {
+//	public static void bookshare(Context mcontext, Book mbook) {
+//		if (mbook != null) {
+//			Intent intent = new Intent(Intent.ACTION_SEND);
+//			intent.setType("image/*");
+//			intent.putExtra(Intent.EXTRA_SUBJECT, "深职院图书馆友情分享");
+//			intent.putExtra(Intent.EXTRA_TEXT,
+//					("深职院图书馆友情分享:《" + mbook.getTitle()+"》"));
+////			intent.putExtra(Intent.EXTRA_STREAM,
+////					Uri.decode("http://www.szlglib.com.cn/images/logo.jpg")); // 分享图片"http://www.szlglib.com.cn/images/logo.jpg"
+//			mcontext.startActivity(Intent.createChooser(intent, "深职院图书馆友情分享"));
+//		}
+//	}
+	
+	// 分享--sz
+	public static void bookshare_bysharesdk(Context mcontext, Book mbook,Bitmap bitmap) {
 		if (mbook != null) {
-			Intent intent = new Intent(Intent.ACTION_SEND);
-			intent.setType("image/*");
-			intent.putExtra(Intent.EXTRA_SUBJECT, mcontext.getResources().getString(R.string.tips_share_local));
-			intent.putExtra(Intent.EXTRA_TEXT,
-					(mcontext.getResources().getString(R.string.tips_share_local)+"：《"+ mbook.getTitle()+"》"));
-//			intent.putExtra(Intent.EXTRA_STREAM,
-//					Uri.decode("http://www.szlglib.com.cn/images/logo.jpg")); //"http://www.szlglib.com.cn/images/logo.jpg"
-			mcontext.startActivity(Intent.createChooser(intent, mcontext.getResources().getString(R.string.tips_share_local)));
+			final OnekeyShare oks = new OnekeyShare();
+			oks.setNotification(R.drawable.ic_launcher, mcontext.getResources().getString(R.string.app_name));
+			oks.setAddress("12345678901");
+			oks.setTitle(mcontext.getResources().getString(R.string.share));
+			oks.setTitleUrl("http://www.cqvip.com/");
+			oks.setText("深职院图书馆友情分享:《" + mbook.getTitle()+"》");
+			oks.setImagePath("");
+			String imageurl=mbook.getCover_path();
+			if(!TextUtils.isEmpty(imageurl)){
+			oks.setImageUrl(imageurl);
+			}
+			oks.setUrl("http://oldweb.cqvip.com/downloadcenter/soft/MobleLib.apk");
+			oks.setImage(bitmap);
+			//oks.setFilePath(TEST_IMAGE);
+			//oks.setComment(this.getString(R.string.share));
+			//oks.setSite(this.getString(R.string.app_name));
+			//oks.setSiteUrl("http://oldweb.cqvip.com/downloadcenter/soft/MobleLib.apk");
+//			oks.setVenueName("Southeast in China");
+//			oks.setVenueDescription("This is a beautiful place!");
+//			oks.setLatitude(35.4964560f);
+//			oks.setLongitude(139.746093f);
+			oks.setSilent(false);
+//			if (platform != null) {
+//				oks.setPlatform(platform);
+//			}
+			oks.show(mcontext);
 		}
 	}
+	
+	// 分享--zk
+		public static void ebookshare_bysharesdk(Context mcontext, EBook mbook,Bitmap bitmap) {
+			if (mbook != null) {
+				final OnekeyShare oks = new OnekeyShare();
+				oks.setNotification(R.drawable.ic_launcher, mcontext.getResources().getString(R.string.app_name));
+				oks.setAddress("12345678901");
+				oks.setTitle(mcontext.getResources().getString(R.string.share));
+				oks.setTitleUrl("http://www.cqvip.com/");
+				String wUrl = "";
+				if(!TextUtils.isEmpty(mbook.getWeburl())){
+					wUrl = mbook.getWeburl();
+				}
+				oks.setText("深职院图书馆友情分享:《" + mbook.getTitle_c()+"》"+"："+wUrl);
+				oks.setImagePath("");
+				//oks.setImageUrl("");
+				oks.setUrl("http://oldweb.cqvip.com/downloadcenter/soft/MobleLib.apk");
+				oks.setImage(bitmap);
+				//oks.setFilePath(TEST_IMAGE);
+				//oks.setComment(this.getString(R.string.share));
+				//oks.setSite(this.getString(R.string.app_name));
+				//oks.setSiteUrl("http://oldweb.cqvip.com/downloadcenter/soft/MobleLib.apk");
+//				oks.setVenueName("Southeast in China");
+//				oks.setVenueDescription("This is a beautiful place!");
+//				oks.setLatitude(35.4964560f);
+//				oks.setLongitude(139.746093f);
+				oks.setSilent(false);
+//				if (platform != null) {
+//					oks.setPlatform(platform);
+//				}
+				oks.show(mcontext);
+			}
+		}
 
 	// 评论
 	public static void bookbuzz(Context mcontext, Book mbook) {

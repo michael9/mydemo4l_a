@@ -19,10 +19,10 @@ import com.cqvip.moblelib.net.BookException;
  */
 public class ShortBook {
 
-	private String sucesss;//�ɹ�ʧ��
-	private String id;//�ֶ�1
-	private String date;//�ֶ�2
-	private String message;//��ʾ��Ϣ
+	private String sucesss;//成功失败
+	private String id;//字段1
+	private String date;//字段2
+	private String message;//提示信息
 	
 	public ShortBook(int type,String result) throws BookException{
 		switch(type){
@@ -30,13 +30,12 @@ public class ShortBook {
 			try {
 				JSONObject js = new JSONObject(result);
 				sucesss = js.getString("success");
+				message = js.getString("message");
 				if(sucesss.equalsIgnoreCase("true")){
 				JSONObject json = js.getJSONObject("renewinfo");
 				id = json.getString("barcode");
-				date = json.getString("returndate");
-				message = json.getString("returnmessage");
-				}else{
-				  message = js.getString("message");
+				date = json.getString("eventtime");
+			
 				}
 			} catch (JSONException e) {
 				throw new BookException(e);
@@ -79,8 +78,8 @@ public class ShortBook {
 				JSONObject json = new JSONObject(result);
 				id = json.getString("id");
 				message = json.getString("title");
-				date = json.getString("imgurl_s");//СͼƬ
-				sucesss = json.getString("imgurl");//��ͼƬ
+				date = json.getString("imgurl_s");//小图片
+				sucesss = json.getString("imgurl");//大图片
 			} catch (JSONException e) {
 				throw new BookException(e);
 			}
@@ -90,8 +89,8 @@ public class ShortBook {
 			try {
 				JSONObject json = new JSONObject(result);
 				message = json.getString("title");
-				id = json.getString("contents");//СͼƬ
-				sucesss = json.getString("imgurl");//��ͼƬ
+				id = json.getString("contents");//小图片
+				sucesss = json.getString("imgurl");//大图片
 			} catch (JSONException e) {
 				throw new BookException(e);
 			}
@@ -99,8 +98,8 @@ public class ShortBook {
 		case Task.TASK_PERIODICAL_TYPE:
 			try {
 				JSONObject json = new JSONObject(result);
-				id = json.getString("classid");//СͼƬ
-				date = json.getString("classname");//СͼƬ
+				id = json.getString("classid");//小图片
+				date = json.getString("classname");//小图片
 			} catch (JSONException e) {
 				throw new BookException(e);
 			}

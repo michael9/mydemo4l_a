@@ -6,34 +6,48 @@ import java.util.Map;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.Html;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import cn.sharesdk.framework.ShareSDK;
 
 import com.android.volley.Request.Method;
-import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.ImageLoader.ImageContainer;
 import com.android.volley.toolbox.ImageLoader.ImageListener;
 import com.android.volley.toolbox.StringRequest;
-import com.cqvip.moblelib.sychild.R;
 import com.cqvip.moblelib.adapter.BookLocAdapter;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.model.Book;
 import com.cqvip.moblelib.model.BookLoc;
 import com.cqvip.moblelib.model.Result;
+import com.cqvip.moblelib.sychild.R;
+import com.cqvip.moblelib.utils.HttpUtils;
 import com.cqvip.utils.BitmapCache;
 import com.cqvip.utils.Tool;
 
+/**
+ * <p>
+ * 文件名称: DetailBookActivity.java
+ * 文件描述: 馆藏图书详细
+ * 版权所有: 版权所有(C)2013-2020
+ * 公          司: 重庆维普咨询有限公司
+ * 内容摘要: 
+ * 其他说明:
+ * 完成日期： 201年11月20日
+ * 修改记录: 修改收藏的方式，图书id，直接取recordid 2013.ll.l6 by lj
+ * </p>
+ * 
+ * @author LHP,LJ
+ */
 public class DetailBookActivity extends BaseActivity {
 	public final int GETBOOKINFO = 1;
 	public final int FAVOR = 2;
@@ -50,8 +64,11 @@ public class DetailBookActivity extends BaseActivity {
 			btn_item_result_search_share, btn_item_result_search_buzz,
 			btn_item_result_search_download;
 
-	private int fromFlage;
+	private int fromFlage;// 表示从哪个activity跳转过来，评论过来不显示评论按钮
 
+	//private static final String FILE_NAME = "/pic.jpg";
+	//public static String TEST_IMAGE=null;
+	Bitmap bitmap;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -67,40 +84,47 @@ public class DetailBookActivity extends BaseActivity {
 		textView9 = (TextView) findViewById(R.id.textView9);
 		textView10 = (TextView) findViewById(R.id.textView10);
 		textView11 = (TextView) findViewById(R.id.textView11);
-
-		ImageLoader mImageLoader = new ImageLoader(mQueue, new BitmapCache(
-				Tool.getCachSize()));
+		//if(!TextUtils.isEmpty(dBook.getCover_path())){
+		if(cache==null){
+			cache = new BitmapCache(Tool.getCachSize());
+		}
+		ImageLoader mImageLoader = new ImageLoader(mQueue, cache);
 		ImageListener listener = ImageLoader.getImageListener(imgview,
 				R.drawable.defaut_book, R.drawable.defaut_book);
-		mImageLoader.get(dBook.getCover_path(), listener);
-
+      	ImageContainer imageContainer=mImageLoader.get(dBook.getCover_path(), listener);
+      	bitmap=imageContainer.getBitmap();
+//		}else{
+//			bitmap = null;
+//		}
+		ShareSDK.initSDK(this);
+		
 		imgview.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				if (TextUtils.isEmpty(dBook.getCover_path())) {
+				if (TextUtils.isEmpty(dBook.getCover_path_big())) {
 					return;
 				}
-				String bigimg = Tool.getBigImg(dBook.getCover_path());
+				String bigimg = dBook.getCover_path_big();
 				Intent intent = new Intent(context, BigImgActivity.class);
 				intent.putExtra("bigurl", bigimg);
 				startActivity(intent);
 			}
 		});
 		booktitle_tv.setText(dBook.getTitle());
-	
+		// 从我的收藏传过来的isbn都是空字符串，
 		String isbn = "";
 		if (!TextUtils.isEmpty(dBook.getIsbn())) {
 			isbn = "ISBN:" + dBook.getIsbn() + "\n";
 		}
-	
+		// 从我的收藏传过来的是出版时间而非主题
 		String timeortheme = "";
 		if (ismyfavor) {
 			timeortheme = getString(R.string.item_time) + dBook.getSubject();
 		} else {
 			timeortheme = getString(R.string.item_subject) + dBook.getSubject();
 		}
-		
+		// 从我的收藏传过来的recordid存储在Book的callno
 		String recordid = "";
 		if (ismyfavor) {
 			recordid = dBook.getCallno();
@@ -144,7 +168,7 @@ public class DetailBookActivity extends BaseActivity {
 			}
 		});
 		book_action_bar = findViewById(R.id.book_action_bar);
-
+		// 收藏
 		btn_item_result_search_collect = (TextView) book_action_bar
 				.findViewById(R.id.btn_item_collect);
 		btn_item_result_search_collect
@@ -157,21 +181,22 @@ public class DetailBookActivity extends BaseActivity {
 							gparams.put("libid", GlobleData.LIBIRY_ID);
 							gparams.put("vipuserid", GlobleData.cqvipid);
 							gparams.put("typeid", "" + GlobleData.BOOK_SZ_TYPE);
-							gparams.put(
-									"keyid",
-									Tool.formSZbookID(dBook.getCallno(),
-											dBook.getRecordid()));
+//							gparams.put(
+//									"keyid",
+//									Tool.formSZbookID(dBook.getCallno(),
+//											dBook.getRecordid()));
+							gparams.put("keyid",dBook.getRecordid());//深职院修改为recordid
 							customProgressDialog.show();
 							requestVolley(GlobleData.SERVER_URL
 									+ "/cloud/favorite.aspx", bookfavorite_ls,
 									Method.POST);
 						} else {
-							
+							// 只是登陆而已
 							showLoginDialog(4);
 						}
 					}
 				});
-	
+		// 分享
 		btn_item_result_search_share = (TextView) book_action_bar
 				.findViewById(R.id.btn_item_share);
 		btn_item_result_search_share.setOnClickListener(new OnClickListener() {
@@ -179,11 +204,11 @@ public class DetailBookActivity extends BaseActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Tool.bookshare(DetailBookActivity.this, dBook);
+				Tool.bookshare_bysharesdk(DetailBookActivity.this, dBook,bitmap);
 			}
 		});
 
-	
+		// 评论
 		btn_item_result_search_buzz = (TextView) book_action_bar
 				.findViewById(R.id.btn_item_buzz);
 		if (fromFlage == 1) {
@@ -196,7 +221,7 @@ public class DetailBookActivity extends BaseActivity {
 				if (GlobleData.islogin) {
 					Tool.bookbuzz(DetailBookActivity.this, dBook);
 				} else {
-					
+					// 只是登陆而已
 					showLoginDialog(4);
 				}
 			}
@@ -207,7 +232,13 @@ public class DetailBookActivity extends BaseActivity {
 		btn_item_result_search_download.setVisibility(View.GONE);
 	}
 
-
+	@Override
+	protected void onDestroy() {
+		ShareSDK.stopSDK(this);
+		super.onDestroy();
+	}
+	
+	// 显示对话框
 	private void showLoginDialog(int id) {
 		MainMenuActivity.cantouch = true;
 		Intent intent = new Intent(context, ActivityDlg.class);
@@ -252,22 +283,12 @@ public class DetailBookActivity extends BaseActivity {
 				}).start();
 
 			} catch (Exception e) {
-				e.printStackTrace();
+				onError(2);
 				return;
 			}
 		}
 	};
 
-	ErrorListener el = new ErrorListener() {
-		@Override
-		public void onErrorResponse(VolleyError arg0) {
-			// TODO Auto-generated method stub
-			if (customProgressDialog != null
-					&& customProgressDialog.isShowing())
-				customProgressDialog.dismiss();
-			onError(2);
-		}
-	};
 
 	private void requestVolley(String addr, Listener<String> bl, int method) {
 		try {
@@ -278,7 +299,7 @@ public class DetailBookActivity extends BaseActivity {
 					return gparams;
 				};
 			};
-			mQueue.add(mys);
+			mys.setRetryPolicy(HttpUtils.setTimeout());mQueue.add(mys);
 			mQueue.start();
 		} catch (Exception e) {
 			onError(2);
@@ -289,8 +310,7 @@ public class DetailBookActivity extends BaseActivity {
 		customProgressDialog.show();
 		gparams = new HashMap<String, String>();
 		gparams.put("recordid", recordid);
-		gparams.put("tablename", "bibliosm");// 
-		gparams.put("library", GlobleData.SZLG_LIB_ID);
+		gparams.put("libid", GlobleData.LIBIRY_ID);
 		requestVolley(GlobleData.SERVER_URL + "/library/bookquery/detail.aspx",
 				back_ls, Method.POST);
 	}

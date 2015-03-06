@@ -189,8 +189,8 @@ public class Favorite implements Serializable{
 					}else{
 						map.put(GlobleData.BOOK_ZK_TYPE, null);
 					}
-					if(hasObject(json,"zkbooks")){
-					JSONArray sz = json.getJSONArray("szbooks");
+					if(hasObject(json,"szybooks")){
+					JSONArray sz = json.getJSONArray("szybooks");
 					int szcount = sz.length();
 					if (szcount <= 0) {
 						map.put(GlobleData.BOOK_SZ_TYPE, null);

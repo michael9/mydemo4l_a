@@ -1,11 +1,9 @@
 package com.cqvip.moblelib.activity;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
@@ -14,7 +12,6 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,21 +19,17 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.android.volley.VolleyError;
 import com.android.volley.Request.Method;
-import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.toolbox.StringRequest;
 import com.cqvip.dao.DaoException;
-import com.cqvip.moblelib.sychild.R;
-import com.cqvip.moblelib.base.IBookManagerActivity;
-import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.GlobleData;
 import com.cqvip.moblelib.db.MUserDao;
 import com.cqvip.moblelib.entity.MUser;
-import com.cqvip.moblelib.model.BookLoc;
 import com.cqvip.moblelib.model.Result;
 import com.cqvip.moblelib.model.User;
+import com.cqvip.moblelib.sychild.R;
+import com.cqvip.moblelib.utils.HttpUtils;
 import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.utils.Tool;
 
@@ -52,12 +45,12 @@ public class ActivityDlg extends BaseActivity  {
 	private TextView msg_box_txt;
 	private Context context;
 	private Map<String, String> gparams;
+	//保存用户名
 	private Editor editor;
 	private SharedPreferences localUsers;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_dlg);
 		context = this;
@@ -114,7 +107,7 @@ public class ActivityDlg extends BaseActivity  {
 				gparams=new HashMap<String, String>();			
 				gparams.put("username", name);
 				gparams.put("password", pwd);
-				gparams.put("libid", "2");
+				gparams.put("libid",GlobleData.LIBIRY_ID);
 				requestVolley(GlobleData.SERVER_URL + "/library/user/login.aspx",
 						back_ls, Method.POST);
 			
@@ -178,6 +171,8 @@ public class ActivityDlg extends BaseActivity  {
 //						"0441200001098", "0440061012345" });
 //		log_in_username.setThreshold(0);
 //		log_in_username.setAdapter(adapter);
+//		// 初始化 service
+//		// 检查网络是否可用
 //		if (Tool.checkNetWork(this)) {
 //			if (!ManagerService.isrun) {
 //				ManagerService.isrun = true;
@@ -217,13 +212,13 @@ public class ActivityDlg extends BaseActivity  {
 					GlobleData.islogin = true;
 					User user = new User(response);
 					GlobleData.userid = user.getCardno();
-					GlobleData.readerid = user.getReaderno();
+					GlobleData.readerid = user.getUserid();
 					GlobleData.cqvipid = user.getVipuserid()+"";
 					editor.putString("readercardid",GlobleData.userid);
 					editor.commit();
 					MUser muser = new MUser();
 					muser.setCardno(user.getCardno());
-					muser.setReaderno(user.getReaderno());
+					muser.setReaderno(user.getUserid());
 					muser.setPwd(pwd);
 					muser.setName(user.getName());
 					muser.setCqvipid(user.getVipuserid()+"");
@@ -233,36 +228,26 @@ public class ActivityDlg extends BaseActivity  {
 					try {
 						// dao.delInfo(muser.getCardno());
 						dao.saveInfo(muser);
-						Log.i("database", "�洢�ɹ�");
+						Log.i("database", "存储成功");
 					} catch (DaoException e) {
 						e.printStackTrace();
 					}
 					// if (dialog.isShowing()) {
 					// dialog.dismiss();
 					// }
-					// ��ʾ��½�ɹ�
-//					Tool.ShowMessages(this, "��½�ɹ�");
+					// 提示登陆成功
+//					Tool.ShowMessages(this, "登陆成功");
 					winexit(0);
 				} else {
 					GlobleData.islogin = false;
 					// dialog.dismiss();
-					// ��ʾ��½ʧ��
+					// 提示登陆失败
 					Tool.ShowMessages(ActivityDlg.this, res.getMessage());
 				}
 			} catch (Exception e) {
 				onError(2);
 				return;
 			}
-		}
-	};
-
-	ErrorListener el = new ErrorListener() {
-		@Override
-		public void onErrorResponse(VolleyError arg0) {
-			// TODO Auto-generated method stub
-			if(customProgressDialog!=null&&customProgressDialog.isShowing())
-			customProgressDialog.dismiss();
-			onError(2);
 		}
 	};
 
@@ -275,7 +260,7 @@ public class ActivityDlg extends BaseActivity  {
 					return gparams;
 				};
 			};
-			mQueue.add(mys);
+			mys.setRetryPolicy(HttpUtils.setTimeout());mQueue.add(mys);
 			mQueue.start();
 		} catch (Exception e) {
 			onError(2);

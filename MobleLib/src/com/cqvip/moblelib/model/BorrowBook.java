@@ -42,7 +42,7 @@ public class BorrowBook{
 			title = json.getString("title");
 			loandate = json.getString("loandate");
 			returndate = json.getString("returndate");
-			//local = json.getString("local");
+			local = json.getString("local");
 			price = json.getString("price");
 			renew = json.getInt("renew");
 			

@@ -32,12 +32,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.Request.Method;
-import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.cqvip.mobelib.imgutils.ImageFetcher;
-import com.cqvip.moblelib.sychild.R;
 import com.cqvip.moblelib.biz.Task;
 import com.cqvip.moblelib.constant.Constant;
 import com.cqvip.moblelib.constant.GlobleData;
@@ -46,9 +43,26 @@ import com.cqvip.moblelib.model.EBook;
 import com.cqvip.moblelib.model.Favorite;
 import com.cqvip.moblelib.model.Result;
 import com.cqvip.moblelib.net.BookException;
+import com.cqvip.moblelib.sychild.R;
+import com.cqvip.moblelib.utils.HttpUtils;
 import com.cqvip.moblelib.view.CustomProgressDialog;
 import com.cqvip.moblelib.view.SwipHorizontalScrollView;
 import com.cqvip.utils.Tool;
+
+/**
+ * <p>
+ * 文件名称: MyFavorActivity.java
+ * 文件描述: 我的收藏
+ * 版权所有: 版权所有(C)2013-2020
+ * 公          司: 重庆维普咨询有限公司
+ * 内容摘要: 
+ * 其他说明:
+ * 完成日期： 2014年11月22日
+ * 修改记录: 
+ * </p>
+ * 
+ * @author LHP,LJ
+ */
 
 public class MyFavorActivity extends BaseFragmentImageActivity {
 	public static final int GETFIRSTPAGE_SZ = 1;
@@ -125,11 +139,6 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 								&& rg_nav_content.getChildCount() > position) {
 							((RadioButton) rg_nav_content.getChildAt(position))
 									.performClick();
-						}
-						if (position == 0) {
-							isLeftFragment = true;
-						} else {
-							isLeftFragment = false;
 						}
 					}
 
@@ -254,7 +263,7 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 				return gparams_t;
 			};
 		};
-		mQueue.add(mys);
+		mys.setRetryPolicy(HttpUtils.setTimeout());mQueue.add(mys);
 		mQueue.start();
 
 	}
@@ -283,13 +292,13 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 				arrayList_sz.clear();
 				isdeleted_sz = false;
 			}
-			if (arrayLists_sz != null && !arrayLists_sz.isEmpty()) {
-				if (arrayLists_sz.get(GlobleData.BOOK_SZ_TYPE).isEmpty()) {
+			if (arrayLists_sz == null ||arrayLists_sz.isEmpty()) {
+				return;
+			}else if (arrayLists_sz.get(GlobleData.BOOK_SZ_TYPE)==null||arrayLists_sz.get(GlobleData.BOOK_SZ_TYPE).isEmpty()) {
 					return;
 				}
 				arrayList_sz.addAll(arrayLists_sz.get(GlobleData.BOOK_SZ_TYPE));
 				adapter_sz.notifyDataSetChanged();
-			}
 		}
 	};
 
@@ -317,13 +326,13 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 				arrayList_zk.clear();
 				isdeleted_zk = false;
 			}
-			if (arrayLists_zk != null && !arrayLists_zk.isEmpty()) {
-				if (arrayLists_zk.get(GlobleData.BOOK_ZK_TYPE).isEmpty()) {
+			if (arrayLists_zk == null || arrayLists_zk.isEmpty()) {
+				return;
+			}else if (arrayLists_zk.get(GlobleData.BOOK_ZK_TYPE)==null||arrayLists_zk.get(GlobleData.BOOK_ZK_TYPE).isEmpty()) {
 					return;
 				}
 				arrayList_zk.addAll(arrayLists_zk.get(GlobleData.BOOK_ZK_TYPE));
 				adapter_zk.notifyDataSetChanged();
-			}
 		}
 	};
 
@@ -409,17 +418,6 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 		}
 	};
 
-	ErrorListener el = new ErrorListener() {
-		@Override
-		public void onErrorResponse(VolleyError arg0) {
-			// TODO Auto-generated method stub
-			if (customProgressDialog != null
-					&& customProgressDialog.isShowing())
-				customProgressDialog.dismiss();
-			arg0.printStackTrace();
-			onError(2);
-		}
-	};
 
 	/**
 	 * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
@@ -555,9 +553,9 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 			} else {
 				if ((Integer) parent.getTag() == GlobleData.BOOK_SZ_TYPE) {
 					favorite = arrayList_sz.get(positon);
-					String lngid = favorite.getLngid();// J228.5/1:4,863174
-
-					Book book = new Book("", favorite.getOrgan(),
+					String lngid = favorite.getLngid();// 
+					//深职院的书籍直接使用recordid modify by lj 20131212
+					Book book = new Book(favorite.getLngid(), favorite.getOrgan(),
 							favorite.getTitle(), favorite.getWriter(), lngid,
 							favorite.getYears(), favorite.getPrice(),
 							favorite.getRemark(), favorite.getImgurl());
@@ -576,7 +574,7 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 							favorite.getYears(), favorite.getNum(),
 							favorite.getTitle(), favorite.getOrgan(),
 							favorite.getRemark(), favorite.getWriter(),
-							favorite.getPagecount(), 0, favorite.getImgurl());
+							favorite.getPagecount(), 0, favorite.getImgurl(),favorite.getWeburl());
 					if (book != null) {
 						Intent _intent = new Intent(context,
 								EbookDetailActivity.class);
@@ -787,9 +785,7 @@ public class MyFavorActivity extends BaseFragmentImageActivity {
 		
 		TextView title = (TextView) findViewById(R.id.txt_header);
 		title.setText(R.string.serv_favorite);
-		ImageView topImageView = (ImageView) findViewById(R.id.main02_iv);
-		topImageView.setImageResource(R.drawable.main_08);
-		ImageView back = (ImageView) findViewById(R.id.return_iv);
+		ImageView back = (ImageView) findViewById(R.id.img_back_header);
 		back.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

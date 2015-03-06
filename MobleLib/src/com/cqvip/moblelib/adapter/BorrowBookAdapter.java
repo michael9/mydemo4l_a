@@ -148,9 +148,11 @@ public class BorrowBookAdapter extends BaseAdapter{
                                          createMyReqErrorListener) {
 							     protected Map<String, String> getParams() throws com.android.volley.AuthFailureError {
 							         Map<String, String> params = new HashMap<String, String>();
-							         params.put("userind", GlobleData.readerid);
+							        // params.put("userid", GlobleData.readerid);
+							         params.put("libid", GlobleData.LIBIRY_ID);
+							         params.put("userid", "109248");
 							         params.put("barcode", book.getBarcode());
-							         Log.i("mobile",GlobleData.readerid+","+book.getBarcode());
+							         Log.i("mobile","109248,"+book.getBarcode());
 							         return params;
 							     }; 
 							 };
