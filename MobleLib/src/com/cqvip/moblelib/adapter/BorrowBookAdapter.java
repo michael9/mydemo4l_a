@@ -126,14 +126,14 @@ public class BorrowBookAdapter extends BaseAdapter{
 	        holder.borrowtime.setText(borrowtime+book.getLoandate());
 	        holder.renew.setTag(position);
 	        //判断是否续借过
-	        if(book.getRenew()!=0){
+	        if(book.getRenew()==0){
 	        holder.returntime.setText(returntime+book.getReturndate()+context.getResources().getString(R.string.alreadyrenew));
 	        holder.renew.setVisibility(View.GONE);
 	        }else{
 	        	holder.returntime.setText(returntime+book.getReturndate());
-	        	if(holder.renew.getVisibility()==View.GONE){
+	        	//if(holder.renew.getVisibility()==View.GONE){
 	        		holder.renew.setVisibility(View.VISIBLE);
-	        	}
+	        	//}
 	        }
 	        		holder.renew.setOnClickListener(new View.OnClickListener() {
 						
@@ -141,7 +141,7 @@ public class BorrowBookAdapter extends BaseAdapter{
 						public void onClick(View v) {
 							//发送续借请求
 							int p=(Integer)v.getTag();
-							if(lists.get(p).getRenew()==0){								
+							if(lists.get(p).getRenew()==1){								
 						   //续借
 						    StringRequest myReq = new StringRequest(Method.POST,GlobleData.SERVER_URL+"/library/user/renew.aspx",
                                          createRenewSuccessListener,
@@ -150,9 +150,9 @@ public class BorrowBookAdapter extends BaseAdapter{
 							         Map<String, String> params = new HashMap<String, String>();
 							        // params.put("userid", GlobleData.readerid);
 							         params.put("libid", GlobleData.LIBIRY_ID);
-							         params.put("userid", "109248");
+							         params.put("userid", book.getBarcode());
 							         params.put("barcode", book.getBarcode());
-							         Log.i("mobile","109248,"+book.getBarcode());
+							         Log.i("mobile",book.getBarcode());
 							         return params;
 							     }; 
 							 };

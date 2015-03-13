@@ -141,8 +141,8 @@ public class BorrowAndOrderActivity extends BaseActivity {
 	  customProgressDialog.show();
 	  gparams=new HashMap<String, String>();
 	  gparams.put("libid", GlobleData.LIBIRY_ID);	  
-	 // gparams.put("userid", GlobleData.readerid);	  
-	   gparams.put("userid","109248");	  
+	  gparams.put("userid", GlobleData.readerid);	  
+	 Log.i("book1",GlobleData.readerid);  
 		requestVolley(GlobleData.SERVER_URL
 				+ "/library/user/borrowlist.aspx", borrowlist_ls,
 				Method.POST);
@@ -160,13 +160,13 @@ public class BorrowAndOrderActivity extends BaseActivity {
 	    			try {
 	    				ShortBook result = new ShortBook(Task.TASK_BOOK_RENEW,response);
 	    				 Log.i("book",result.toString());
-	    				 Log.i("book",lists.size()+","+lists.toString());
+	    				
 	    				 Message msg = new Message();
 	    				 Bundle bundle = new Bundle();
 	    					bundle.putString("msg", result .getMessage());
 	    					msg.setData(bundle);
 	    				if(result.getSucesss().equals("true")){
-	    					if(lists==null||lists.isEmpty()){
+	    					if(lists!=null&&!lists.isEmpty()){
 	    						for(int i=0;i<lists.size();i++){
 	    							BorrowBook book	= lists.get(i);
 	    					if(book.getBarcode().equals(result.getId())){
@@ -175,7 +175,11 @@ public class BorrowAndOrderActivity extends BaseActivity {
 	    						msg.what = RENEW;
 	    						handler.sendMessage(msg);
 	    						 Log.i("book",book.toString());
-	    						break;
+	    						
+	    						 Log.i("book",lists.size()+","+lists.toString()); 
+	    						 
+	    						 
+	    						return;
 	    					}
 	    				  }
 	    				}
