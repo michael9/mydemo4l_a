@@ -17,10 +17,13 @@ import android.util.Log;
 import android.view.Display;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.Toast;
@@ -62,7 +65,9 @@ public class MainMenuActivity extends BaseActivity {
 	private EditText _pwd;
 	private LinearLayout login_status_ll;
 	private ScrollView login_form_sv;
-	private StableGridView gridview;
+//	private StableGridView gridview;
+	private Button  activity_main_bt_rgzl,activity_main_bt_gngg,activity_main_bt_xstj,activity_main_bt_dzzy;
+	private ImageButton activity_main_bt_user;
 	static public boolean cantouch;// ·ÀÖ¹¶à´Îµã»÷
 	private MUserDao dao;
 	// private WebView adwebview;
@@ -130,9 +135,9 @@ public class MainMenuActivity extends BaseActivity {
 		// adwebview
 		// .loadUrl("http://www.szlglib.com.cn/uploads/Image/2013/06/24/20130624154214468.jpg");
 		dao = new MUserDao(this);
-		gridview = (StableGridView) findViewById(R.id.grid_main);
-		adapter = new GridViewImgAdapter(this, activities);
-		gridview.setAdapter(adapter);
+//		gridview = (StableGridView) findViewById(R.id.grid_main);
+//		adapter = new GridViewImgAdapter(this, activities);
+//		gridview.setAdapter(adapter);
 		init_login();
 //		mtimer = new Timer();
 //		mtimer.schedule(new time_check_task(), 8 * 1000, 6 * 1000);
@@ -147,7 +152,68 @@ public class MainMenuActivity extends BaseActivity {
 		String info = phinfo.tojson(phinfo);
 		Log.i("phinfo", info);
 
-		gridview.setOnItemClickListener(onItemClickListener);
+//		gridview.setOnItemClickListener(onItemClickListener);
+		activity_main_bt_rgzl=(Button)findViewById(R.id.activity_main_rgzl);
+		activity_main_bt_gngg=(Button)findViewById(R.id.activity_main_gngg);
+		activity_main_bt_xstj=(Button)findViewById(R.id.activity_main_xstj);
+		activity_main_bt_dzzy=(Button)findViewById(R.id.activity_main_dzzy);
+		activity_main_bt_user=(ImageButton)findViewById(R.id.activity_main_user);
+		
+		activity_main_bt_rgzl.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent();
+				intent.setClass(MainMenuActivity.this, activities[0]);
+				startActivity(intent);
+			}
+		});
+		activity_main_bt_gngg.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent();
+				intent.setClass(MainMenuActivity.this, activities[6]);
+				startActivity(intent);
+			}
+		});
+		activity_main_bt_xstj.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent();
+				intent.setClass(MainMenuActivity.this, activities[3]);
+				startActivity(intent);
+			}
+		});
+		activity_main_bt_dzzy.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent();
+				intent.setClass(MainMenuActivity.this, activities[2]);
+				startActivity(intent);
+			}
+		});
+		activity_main_bt_user.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				if (GlobleData.islogin) {
+					Intent intent = new Intent();
+				intent.setClass(MainMenuActivity.this, activities[4]);
+				startActivity(intent);
+			} else {
+				showLoginDialog(8);
+			}
+				
+			}
+		});
 		
 		umeng();
 	}

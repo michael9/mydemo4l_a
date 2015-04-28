@@ -230,7 +230,8 @@ public class ReaderinfoActivity extends BaseActivity {
 					return gparams;
 				};
 			};
-			mys.setRetryPolicy(HttpUtils.setTimeout());mQueue.add(mys);
+			mys.setRetryPolicy(HttpUtils.setTimeout());
+			mQueue.add(mys);
 			mQueue.start();
 		} catch (Exception e) {
 			onError(2);

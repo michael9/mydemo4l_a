@@ -29,7 +29,7 @@ public class GlobleData {
 	/**
 	 * 图书馆id,2代表深圳职业技术学院图书馆
 	 * */
-	public final static   String LIBIRY_ID = "2";
+	public final static   String LIBIRY_ID = "5";
 	/**
 	 * 深职院图书馆id 
 	 * */

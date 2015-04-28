@@ -59,11 +59,13 @@
         </LinearLayout>
 
         <View
+            android:visibility="gone"
                 android:layout_width="fill_parent"
                 android:layout_height="1dp"
                 android:background="@drawable/xuxian" />
         
         <LinearLayout
+            android:visibility="gone"
             android:id="@+id/borrowLayout"
             android:layout_width="fill_parent"
             android:layout_height="45.0dip"
@@ -96,12 +98,15 @@
                 android:layout_marginRight="20.0dip"
                 android:src="@drawable/eg_arrow" />
         </LinearLayout>
+        
         <View
+            android:visibility="gone"
                 android:layout_width="fill_parent"
                 android:layout_height="1dp"
                 android:background="@drawable/xuxian" />
         
         <LinearLayout
+            android:visibility="gone"
             android:id="@+id/favoriteLayout"
             android:layout_width="fill_parent"
             android:layout_height="45.0dip"
