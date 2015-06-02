@@ -200,6 +200,7 @@ public class MainMenuActivity extends BaseActivity {
 				break;
 
 			case 5:// 信息素养，暂不开放
+				break;
 			case 7:// 参考咨询，暂不开放
 				MainMenuActivity.cantouch = true;
 				Toast.makeText(MainMenuActivity.this, "该功能正紧张开发中..",
