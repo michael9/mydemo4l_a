@@ -200,6 +200,9 @@ public class MainMenuActivity extends BaseActivity {
 				break;
 
 			case 5:// 信息素养，暂不开放
+				intent.setClass(MainMenuActivity.this,WebViewAnnouceActivity.class);
+				intent.putExtra("urlstr", "http://weixin.mobcld.com/webcld/tmp/ahslsd_sz.php");
+				startActivity(intent);
 				break;
 			case 7:// 参考咨询，暂不开放
 				MainMenuActivity.cantouch = true;
