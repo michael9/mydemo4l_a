@@ -4,7 +4,7 @@ public class Constant {
 
 	public static final int GETFIRSTPAGE = 1;//获取首页
 	public static final int GETNEXTPAGE = 2; //获取下一页
-	public static final int DEFAULT_COUNT = 20;//默认20条
+	public static final int DEFAULT_COUNT = 10;//默认20条
 	public static final int DEFAULT_TEXT_COUNT = 20;//默认20条
 	public static final int DEFAULT_COUNT_SuggestedReading = 100;//默认20条
 	
@@ -26,6 +26,6 @@ public class Constant {
 	
 	public static final int SOCKET_TIMEOUT = 20000;//网络超时设置
 	
-	public static final boolean isUserDisable = true;
+	public static final boolean isUserDisable = false;
 	
 }

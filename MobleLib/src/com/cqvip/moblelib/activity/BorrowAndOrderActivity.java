@@ -122,7 +122,7 @@ public class BorrowAndOrderActivity extends BaseActivity {
 	  customProgressDialog.show();
 	  gparams=new HashMap<String, String>();
 	  gparams.put("libid", GlobleData.LIBIRY_ID);	  
-	  gparams.put("userid", GlobleData.readerid);	  
+	  gparams.put("userid", GlobleData.userid);	  
 		requestVolley(GlobleData.SERVER_URL
 				+ "/library/user/borrowlist.aspx", borrowlist_ls,
 				Method.POST);

@@ -184,18 +184,21 @@ public class MainMenuActivity extends BaseActivity {
 
 			case 8:// 书友圈
 					// 判断是否登录
-//				if (GlobleData.islogin) {
-//					intent.setClass(MainMenuActivity.this, activities[position]);
-//					startActivity(intent);
-//				} else {
-//					showLoginDialog(position);
-//				}
-				MainMenuActivity.cantouch = true;
-				Toast.makeText(MainMenuActivity.this, getString(R.string.tips_undo),
-						Toast.LENGTH_SHORT).show();
+				if (GlobleData.islogin) {
+					intent.setClass(MainMenuActivity.this, activities[position]);
+					startActivity(intent);
+				} else {
+					showLoginDialog(position);
+				}
+//				MainMenuActivity.cantouch = true;
+//				Toast.makeText(MainMenuActivity.this, getString(R.string.tips_undo),
+//						Toast.LENGTH_SHORT).show();
 				break;
 			case 6:// 馆内公告
-				intent.setClass(MainMenuActivity.this, activities[position]);
+//				intent.setClass(MainMenuActivity.this, activities[position]);
+//				startActivity(intent);
+				intent.setClass(MainMenuActivity.this,WebViewAnnouceActivity.class);
+				intent.putExtra("urlstr", "http://weixin.mobcld.com/webcld/tmp/ahslsd_newslist.php");
 				startActivity(intent);
 				break;
 
@@ -205,9 +208,16 @@ public class MainMenuActivity extends BaseActivity {
 				startActivity(intent);
 				break;
 			case 7:// 参考咨询，暂不开放
-				MainMenuActivity.cantouch = true;
-				Toast.makeText(MainMenuActivity.this, "该功能正紧张开发中..",
-						Toast.LENGTH_SHORT).show();
+				Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+				String[] recipients = new String[]{"3170198763@qq.com"};
+				emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, recipients);
+				emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "参考咨询");
+				emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "请提交你的参考咨询题目说明");
+				emailIntent.setType("text/plain");
+				startActivity(Intent.createChooser(emailIntent, "发送参考咨询邮件"));
+//				MainMenuActivity.cantouch = true;
+//				Toast.makeText(MainMenuActivity.this, "该功能正紧张开发中..",
+//						Toast.LENGTH_SHORT).show();
 				break;
 			default:
 				break;

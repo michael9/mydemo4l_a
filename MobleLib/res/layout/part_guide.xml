@@ -29,6 +29,37 @@
             android:background="@drawable/linearlayout_shape1"
             android:gravity="center"
             android:orientation="vertical" >
+            
+              <LinearLayout
+                android:id="@+id/bgjs_btn"
+                android:layout_width="fill_parent"
+                android:layout_height="45.0dip"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20.0dip"
+                    android:paddingRight="20.0dip"
+                    android:src="@drawable/ic_action_map" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0"
+                    android:duplicateParentState="true"
+                    android:gravity="center_vertical"
+                    android:text="本馆介绍"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="20.0dip"
+                    android:src="@drawable/eg_arrow" />
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/enterguideLayout"

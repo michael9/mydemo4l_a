@@ -121,29 +121,29 @@ public class ResultOnSearchActivity extends BaseActivity implements
 			@Override
 			public void onClick(View v) {
 				hideKeybord();
-//				key = edit.getText().toString().trim();
-//				if (!Tool.checkNetWork(context)) {
-//					return;
-//				}
-//				if (TextUtils.isEmpty(key)) {
-//					Tool.ShowMessages(context,
-//							getResources()
-//									.getString(R.string.tips_nosearch_key));
-//					return;
-//				}
-//				// ≈–∂œ «∑Ò «isbn∫≈≤È—Ø
-//				customProgressDialog.show();
-//				page = 1;
-//				if (Tool.isbnMatch(key)) {
-//					getHomePage(key, GETFIRSTPAGE, DEFAULT_COUNT, GETFIRSTPAGE,
-//							GlobleData.QUERY_ISBN);
-//				} else {
-//					getHomePage(key, GETFIRSTPAGE, DEFAULT_COUNT, GETFIRSTPAGE,
-//							search_condition);
-//				}
-				Toast.makeText(ResultOnSearchActivity.this,
-						getString(R.string.tips_undo), Toast.LENGTH_SHORT)
-						.show();
+				key = edit.getText().toString().trim();
+				if (!Tool.checkNetWork(context)) {
+					return;
+				}
+				if (TextUtils.isEmpty(key)) {
+					Tool.ShowMessages(context,
+							getResources()
+									.getString(R.string.tips_nosearch_key));
+					return;
+				}
+				// ≈–∂œ «∑Ò «isbn∫≈≤È—Ø
+				customProgressDialog.show();
+				page = 1;
+				if (Tool.isbnMatch(key)) {
+					getHomePage(key, GETFIRSTPAGE, DEFAULT_COUNT, GETFIRSTPAGE,
+							GlobleData.QUERY_ISBN);
+				} else {
+					getHomePage(key, GETFIRSTPAGE, DEFAULT_COUNT, GETFIRSTPAGE,
+							search_condition);
+				}
+//				Toast.makeText(ResultOnSearchActivity.this,
+//						getString(R.string.tips_undo), Toast.LENGTH_SHORT)
+//						.show();
 			}
 
 		});
@@ -181,34 +181,34 @@ public class ResultOnSearchActivity extends BaseActivity implements
 			@Override
 			public boolean onEditorAction(TextView v, int actionId,
 					KeyEvent event) {
-				// if (TextUtils.isEmpty(edit.getText().toString())) {
-				// return true;
-				// }
-				// key = edit.getText().toString().trim();
-				// // “˛≤ÿº¸≈Ã
-				// hideKeybord();
-				// // ºÏ≤È0Õ¯¬Á
-				// if (!Tool.checkNetWork(context)) {
-				// return false;
-				// }
-				// // Õ¯¬Á∑√Œ ,ªÒ»° ◊“≥
-				// customProgressDialog.show();
-				// page = 1;
-				// if (Tool.isbnMatch(key)) {
-				// getHomePage(key, GETFIRSTPAGE, DEFAULT_COUNT, GETFIRSTPAGE,
-				// GlobleData.QUERY_ISBN);
-				// } else {
-				// getHomePage(key, GETFIRSTPAGE, DEFAULT_COUNT, GETFIRSTPAGE,
-				// search_condition);
-				// }
-				// return true;
-				// }
-				Toast.makeText(ResultOnSearchActivity.this,
-						getString(R.string.tips_undo), Toast.LENGTH_SHORT)
-						.show();
-				return false;
+				 if (TextUtils.isEmpty(edit.getText().toString())) {
+				 return true;
+				 }
+				 key = edit.getText().toString().trim();
+				 // “˛≤ÿº¸≈Ã
+				 hideKeybord();
+				 // ºÏ≤È0Õ¯¬Á
+				 if (!Tool.checkNetWork(context)) {
+				 return false;
+				 }
+				 // Õ¯¬Á∑√Œ ,ªÒ»° ◊“≥
+				 customProgressDialog.show();
+				 page = 1;
+				 if (Tool.isbnMatch(key)) {
+				 getHomePage(key, GETFIRSTPAGE, DEFAULT_COUNT, GETFIRSTPAGE,
+				 GlobleData.QUERY_ISBN);
+				 } else {
+				 getHomePage(key, GETFIRSTPAGE, DEFAULT_COUNT, GETFIRSTPAGE,
+				 search_condition);
+				 }
+				 return true;
+				 }
+//				Toast.makeText(ResultOnSearchActivity.this,
+//						getString(R.string.tips_undo), Toast.LENGTH_SHORT)
+//						.show();
+//				return false;
 
-			}
+//			}
 		});
 
 		title_bar = findViewById(R.id.head_bar);

@@ -49,7 +49,7 @@ public class EntanceGuideActivity extends BaseActivity {
 				finish();
 			}
 		});
-
+		LinearLayout l2 = (LinearLayout) findViewById(R.id.bgjs_btn);
 		LinearLayout l1 = (LinearLayout) findViewById(R.id.enterguideLayout);
 //		LinearLayout l2 = (LinearLayout) findViewById(R.id.cardLayout);
 		LinearLayout l3 = (LinearLayout) findViewById(R.id.timeLayout);
@@ -63,32 +63,33 @@ public class EntanceGuideActivity extends BaseActivity {
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(context, DetailTextActivity.class);
-				intent.putExtra("enter", 1);
+//				Intent intent = new Intent(context, DetailTextActivity.class);
+				Intent intent = new Intent(context, WebViewAnnouceActivity.class);
+				intent.putExtra("urlstr", "http://weixin.mobcld.com/webcld/tmp/ahslsd_xz.html");
 				startActivity(intent);
 				// overridePendingTransition(R.anim.slide_right_in,
 				// R.anim.slide_left_out);
 			}
 		});
-//		l2.setOnClickListener(new View.OnClickListener() {
-//
-//			@Override
-//			public void onClick(View v) {
-//				Intent intent = new Intent(context, DetailTextActivity.class);
-//				intent.putExtra("enter", 2);
-//				startActivity(intent);
-//				// overridePendingTransition(R.anim.slide_right_in,
-//				// R.anim.slide_left_out);
-//
-//			}
-//		});
+		l2.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(context, WebViewAnnouceActivity.class);
+				intent.putExtra("urlstr", "http://weixin.mobcld.com/webcld/tmp/ahslsd_js.html");
+				startActivity(intent);
+				// overridePendingTransition(R.anim.slide_right_in,
+				// R.anim.slide_left_out);
+
+			}
+		});
 		l3.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 
-				Intent intent = new Intent(context, DetailTextActivity.class);
-				intent.putExtra("enter", 3);
+				Intent intent = new Intent(context, WebViewAnnouceActivity.class);
+				intent.putExtra("urlstr", "http://weixin.mobcld.com/webcld/tmp/ahslsd_kg.html");
 				startActivity(intent);
 				// overridePendingTransition(R.anim.slide_right_in,
 				// R.anim.slide_left_out);
@@ -147,15 +148,15 @@ public class EntanceGuideActivity extends BaseActivity {
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(context, DetailTextActivity.class);
-				intent.putExtra("enter", 8);
+				Intent intent = new Intent(context, WebViewAnnouceActivity.class);
+				intent.putExtra("urlstr", "http://weixin.mobcld.com/webcld/tmp/ahslsd_lx.html");
+				startActivity(intent);
 				//startActivity(intent);
 				//Tool.ShowMessages(EntanceGuideActivity.this, "‘›ŒﬁŒ Ã‚");
 				// overridePendingTransition(R.anim.slide_right_in,
 				// R.anim.slide_left_out);
 //				Intent mintent = new Intent(context, AnnouceListActivity.class);
 //				mintent.putExtra("type",Constant.QUESTION);
-				startActivity(intent);
 
 			}
 		});
