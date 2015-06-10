@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/head_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/header" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal" >
+
+        <com.android.volley.toolbox.NetworkImageView
+            android:id="@+id/epub_detail_img"
+            android:layout_width="160dp"
+            android:layout_height="210dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="2.0dip"
+            android:layout_marginTop="2.0dip"
+            android:background="@android:color/transparent"
+            android:saveEnabled="true"
+            android:scaleType="fitXY" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="5dp" >
+
+            <TextView
+                android:id="@+id/epub_detail_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="标题" />
+
+            <TextView
+                android:id="@+id/epub_detail_writer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="作者" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/epub_detail_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+    <Button
+        android:id="@+id/epub_detail_read"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:text="阅读" />
+
+</LinearLayout>

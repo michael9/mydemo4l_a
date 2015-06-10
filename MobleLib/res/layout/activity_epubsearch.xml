@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+      <include
+        android:id="@+id/head_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/header" />
+      
+     <include
+        android:id="@+id/searchbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="3dp"
+        android:layout_marginLeft="@dimen/searchbar_horizontal_margin"
+        android:layout_marginRight="@dimen/searchbar_horizontal_margin"
+        android:layout_below="@id/head_bar"
+        layout="@layout/search_bar" />
+
+   <LinearLayout
+        android:id="@+id/ll_total_esearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:paddingLeft="5dp"
+        android:gravity="center_vertical"
+        android:layout_below="@id/searchbar"
+        android:orientation="horizontal" android:visibility="gone">
+
+        <TextView
+            android:id="@+id/txt_total_esearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:text=""
+            android:drawableLeft="@drawable/jiansuo_count"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/serchcount_txtcolor"
+            android:textStyle="bold"
+            android:textSize="12sp" />
+    </LinearLayout>
+    
+    <com.handmark.pulltorefresh.library.PullToRefreshGridView
+        
+        xmlns:ptr="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/epubgrid"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:columnWidth="160dp"
+        android:gravity="center_horizontal"
+        android:horizontalSpacing="1dp"
+        android:numColumns="auto_fit"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="1dp"
+        ptr:ptrAnimationStyle="flip"
+        ptr:ptrHeaderBackground="#00ff00"
+        ptr:ptrHeaderSubTextColor="#ff0000"
+        ptr:ptrHeaderTextColor="#0000ff"
+        
+        ptr:ptrMode="both"       
+        
+         />
+    <!-- 
+    ptr:ptrListViewExtrasEnabled="false"
+     ptr:ptrRefreshableViewBackground="#ff0000"
+    ptr:ptrShowIndicator="true"
+     -->
+
+</LinearLayout>

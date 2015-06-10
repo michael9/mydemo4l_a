@@ -11,7 +11,11 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
+    <!-- 
+        <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+ -->
     <!-- scan -->
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -101,6 +105,15 @@
         <activity
             android:name="com.cqvip.moblelib.activity.ReaderinfoActivity"
             android:screenOrientation="portrait" />
+         <activity
+            android:name="com.cqvip.moblelib.activity.EpubSearchActivity"
+            android:screenOrientation="portrait" />
+           <activity
+            android:name="com.cqvip.moblelib.activity.EpubShowActivity"
+            android:screenOrientation="portrait" />
+            <activity
+            android:name="com.cqvip.moblelib.activity.EpubDetailActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.cqvip.moblelib.activity.LoginActivity"
             android:label="@string/title_activity_login"
@@ -181,6 +194,9 @@
             android:name="com.cqvip.moblelib.activity.TableTextActivity"
             android:screenOrientation="portrait" >
         </activity>
+          <activity
+            android:name="com.google.ads.AdActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
         <!-- pdf -->
         <activity
             android:name="com.artifex.mupdfdemo.MuPDFActivity"
@@ -199,6 +215,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
 
                 <data android:mimeType="application/pdf" />
+                
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />

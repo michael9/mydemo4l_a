@@ -40,22 +40,23 @@
         android:layout_weight="1"
         android:id="@+id/activity_main_rgzl"
         android:text="入馆指南"/>
+         <Button 
+           android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+         android:id="@+id/activity_main_xstj"
+        android:text="推荐阅读"/>
           <Button 
            android:layout_width="fill_parent"
         android:layout_height="wrap_content"
          android:layout_weight="0"
           android:id="@+id/activity_main_gngg"
-        android:text="管内动态"/>
-           <Button 
-           android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-         android:id="@+id/activity_main_xstj"
-        android:text="推荐阅读"/>
+        android:text="电子图书"/>
+          
              <Button 
            android:layout_width="fill_parent"
         android:layout_height="wrap_content"
          android:id="@+id/activity_main_dzzy"
-        android:text="电子资源"/>  
+        android:text="电子期刊"/>  
           
     </LinearLayout>     
 

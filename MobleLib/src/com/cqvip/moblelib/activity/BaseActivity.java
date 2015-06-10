@@ -34,6 +34,8 @@ public class BaseActivity extends Activity {
 		mQueue=Volley.newRequestQueue(this);
 		customProgressDialog=CustomProgressDialog.createDialog(this);
 		el = new  ErrorVolleyThrow(this, customProgressDialog);
+		
+		cache = new BitmapCache(Tool.getCachSize());
 		Log.i("BaseActivity", getClass().getSimpleName());
 	}
 	

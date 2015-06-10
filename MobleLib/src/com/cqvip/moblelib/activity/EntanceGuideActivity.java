@@ -55,15 +55,16 @@ public class EntanceGuideActivity extends BaseActivity {
 		LinearLayout l3 = (LinearLayout) findViewById(R.id.enterguideLayout3);
 		LinearLayout l4 = (LinearLayout) findViewById(R.id.enterguideLayout4);
 		LinearLayout l5 = (LinearLayout) findViewById(R.id.enterguideLayout5);
-		LinearLayout l6 = (LinearLayout) findViewById(R.id.enterguideLayout6);
+//		LinearLayout l6 = (LinearLayout) findViewById(R.id.enterguideLayout6);
 	
 
 		l1.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(context, DetailTextActivity.class);
-				intent.putExtra("enter", 1);
+//				Intent intent = new Intent(context, DetailTextActivity.class);
+				Intent intent = new Intent(context, WebViewAnnouceActivity.class);
+				intent.putExtra("urlstr", "http://weixin.mobcld.com/webcld/smzyxy/gk/11.html");
 				startActivity(intent);
 				// overridePendingTransition(R.anim.slide_right_in,
 				// R.anim.slide_left_out);
@@ -73,8 +74,8 @@ public class EntanceGuideActivity extends BaseActivity {
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(context, TableTextActivity.class);
-				intent.putExtra("enter", 2);
+				Intent intent = new Intent(context, WebViewAnnouceActivity.class);
+				intent.putExtra("urlstr", "http://weixin.mobcld.com/webcld/smzyxy/gk/12.html");
 				startActivity(intent);
 				// overridePendingTransition(R.anim.slide_right_in,
 				// R.anim.slide_left_out);
@@ -86,8 +87,8 @@ public class EntanceGuideActivity extends BaseActivity {
 			@Override
 			public void onClick(View v) {
 
-				Intent intent = new Intent(context, DetailTextActivity.class);
-				intent.putExtra("enter", 3);
+				Intent intent = new Intent(context, WebViewAnnouceActivity.class);
+				intent.putExtra("urlstr", "http://weixin.mobcld.com/webcld/smzyxy/gk/13.html");
 				startActivity(intent);
 				// overridePendingTransition(R.anim.slide_right_in,
 				// R.anim.slide_left_out);
@@ -98,8 +99,8 @@ public class EntanceGuideActivity extends BaseActivity {
 			@Override
 			public void onClick(View v) {
 
-				Intent intent = new Intent(context, DetailTextActivity.class);
-				intent.putExtra("enter", 4);
+				Intent intent = new Intent(context, WebViewAnnouceActivity.class);
+				intent.putExtra("urlstr", "http://weixin.mobcld.com/webcld/smzyxy/gk/14.html");
 				startActivity(intent);
 				// overridePendingTransition(R.anim.slide_right_in,
 				// R.anim.slide_left_out);
@@ -109,25 +110,25 @@ public class EntanceGuideActivity extends BaseActivity {
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(context, TableTextActivity.class);
-				intent.putExtra("enter", 5);
+				Intent intent = new Intent(context, WebViewAnnouceActivity.class);
+				intent.putExtra("urlstr", "http://weixin.mobcld.com/webcld/smzyxy/gk/15.html");
 				startActivity(intent);
 				// overridePendingTransition(R.anim.slide_right_in,
 				// R.anim.slide_left_out);
 
 			}
 		});
-		l6.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(context, DetailTextActivity.class);
-				intent.putExtra("enter", 6);
-				startActivity(intent);
-				// overridePendingTransition(R.anim.slide_right_in,
-				// R.anim.slide_left_out);		
-			}
-		});
+//		l6.setOnClickListener(new View.OnClickListener() {
+//
+//			@Override
+//			public void onClick(View v) {
+//				Intent intent = new Intent(context, DetailTextActivity.class);
+//				intent.putExtra("enter", 6);
+//				startActivity(intent);
+//				// overridePendingTransition(R.anim.slide_right_in,
+//				// R.anim.slide_left_out);		
+//			}
+//		});
 		
 	}
 

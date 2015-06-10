@@ -1,11 +1,16 @@
 package com.cqvip.moblelib.activity;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import android.app.DownloadManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.database.ContentObserver;
@@ -37,6 +42,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.artifex.mupdfdemo.MuPDFActivity;
 import com.cqvip.dao.DaoException;
@@ -474,11 +480,49 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 						// "application/pdf");
 						// intent.setAction("android.intent.action.VIEW");
 						// startActivity(intent);
+						if(getExtensionName(file.getName()).equalsIgnoreCase("pdf"))
+						{
 						Uri uri = Uri.parse(filepath);
 						Intent intent = new Intent(context, MuPDFActivity.class);
 						intent.setAction(Intent.ACTION_VIEW);
 						intent.setData(uri);
 						startActivity(intent);
+							
+						}
+						else
+							if(getExtensionName(file.getName()).equalsIgnoreCase("epub"))
+							{
+//								Uri uri = Uri.parse(filepath);
+//								Intent mIntent = new Intent( );   
+//								mIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);  
+//								ComponentName comp =new ComponentName("org.geometerplus.zlibrary.ui.android","org.geometerplus.android.fbreader.FBReader");  
+//								mIntent.setComponent(comp);     
+//							    mIntent.setAction("android.intent.action.VIEW");   
+//							    mIntent.setDataAndType(Uri.parse(filepath),   
+//				                        "application/vnd.android.package-archive");  
+//							    startActivity(mIntent);
+							    
+							    Intent mIntent =  DownLoadManagerActivity.this.getPackageManager().getLaunchIntentForPackage("org.geometerplus.zlibrary.ui.android");
+							    if(mIntent!=null)
+							    {
+							    	 mIntent.setAction("android.intent.action.VIEW");   
+									    mIntent.setDataAndType(Uri.parse(filepath),   
+						                        "application/vnd.android.package-archive");  
+									    startActivity(mIntent);
+							    }
+							    else
+							    {
+							    	
+							    	Toast.makeText(DownLoadManagerActivity.this, "请安装开源阅读器FBReader，来阅读本书。", Toast.LENGTH_SHORT).show();
+							    	try{
+							    	copyBigDataToSD(GlobleData.FBReaderJapk);
+							    	}catch(Exception e)
+							    	{
+							    		
+							    	}
+							    }
+								  
+							}
 					} else {
 						Tool.ShowMessagel(context, "文件" + filename + "不存在");
 					}
@@ -505,6 +549,45 @@ public class DownLoadManagerActivity extends BaseFragmentImageActivity {
 		// return false;
 		// }
 	}
+	
+	private void setupapk()
+	{
+		
+		Intent intent = new Intent(Intent.ACTION_VIEW);  
+		intent.setDataAndType(Uri.parse("file://" + GlobleData.FBReaderJapk), "application/vnd.android.package-archive");  
+		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		startActivity(intent);
+   	
+	}
+	
+	private void copyBigDataToSD(String strOutFileName) throws IOException 
+    {  
+        InputStream myInput;  
+        FileOutputStream myOutput = new FileOutputStream(strOutFileName);  
+        myInput = this.getAssets().open("FBReaderJ.mp3");  
+        byte[] buffer = new byte[1024];  
+        int length = myInput.read(buffer);
+        while(length > 0)
+        {
+            myOutput.write(buffer, 0, length); 
+            length = myInput.read(buffer);
+        }
+        
+        myOutput.flush();  
+        myInput.close();  
+        myOutput.close();      
+        setupapk();
+    } 
+	
+	 public static String getExtensionName(String filename) {    
+	        if ((filename != null) && (filename.length() > 0)) {    
+	            int dot = filename.lastIndexOf('.');    
+	            if ((dot >-1) && (dot < (filename.length() - 1))) {    
+	                return filename.substring(dot + 1);    
+	            }    
+	        }    
+	        return filename;    
+	    }    
 
 	static class ViewHolder {
 		ImageView download_image;

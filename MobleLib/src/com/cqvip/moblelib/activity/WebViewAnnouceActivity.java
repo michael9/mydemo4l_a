@@ -14,7 +14,7 @@ public class WebViewAnnouceActivity extends BaseActivity{
 	
 	 private WebView myWebView;  
 	 private ProgressDialog dialog;
-	private static final String targenUrl = "http://weixin.mobcld.com/webcld/smzyxy/smzyjs_newslist.html";
+//	private static final String targenUrl = "http://weixin.mobcld.com/webcld/smzyxy/smzyjs_newslist.html";
    @Override
    protected void onCreate(Bundle savedInstanceState) {
        super.onCreate(savedInstanceState);
@@ -31,7 +31,7 @@ public class WebViewAnnouceActivity extends BaseActivity{
               }
              });
         	
-       myWebView.loadUrl(targenUrl);
+       myWebView.loadUrl(getIntent().getStringExtra("urlstr"));
        WebSettings webSettings = myWebView.getSettings();
        webSettings.setJavaScriptEnabled(true);
        
