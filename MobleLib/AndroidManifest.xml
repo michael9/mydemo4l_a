@@ -107,6 +107,7 @@
             android:screenOrientation="portrait" />
          <activity
             android:name="com.cqvip.moblelib.activity.EpubSearchActivity"
+             android:windowSoftInputMode="adjustUnspecified|stateHidden"
             android:screenOrientation="portrait" />
            <activity
             android:name="com.cqvip.moblelib.activity.EpubShowActivity"

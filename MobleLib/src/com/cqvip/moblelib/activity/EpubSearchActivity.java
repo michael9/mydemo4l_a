@@ -35,7 +35,9 @@ import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView;
@@ -68,6 +70,32 @@ public class EpubSearchActivity extends BaseActivity {
 		searchbar=(View)findViewById(R.id.searchbar);
 		edit=(EditText)searchbar.findViewById(R.id.et_search);
 		imgsearch=(ImageView)searchbar.findViewById(R.id.im_seach_icon);
+		imgsearch.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				gpage=1;
+				getsearch(edit.getText().toString(),gpage,6);
+			}
+		});
+		edit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+
+			@Override
+			public boolean onEditorAction(TextView v, int actionId,
+					KeyEvent event) {
+				if (TextUtils.isEmpty(edit.getText().toString())) {
+					return true;
+				}
+				// Òþ²Ø¼üÅÌ
+				hideKeybord();
+				gpage=1;
+				getsearch(edit.getText().toString(),gpage,6);
+				return true;
+			}
+
+		});
+		
 		
 		title_bar = findViewById(R.id.head_bar);
 		TextView title = (TextView) title_bar.findViewById(R.id.txt_header);
@@ -84,7 +112,6 @@ public class EpubSearchActivity extends BaseActivity {
 		
 		gpage=1;
 		getsearch("",gpage,6);
-		
 		
 		epubgrid=(PullToRefreshGridView)findViewById(R.id.epubgrid);
 		
@@ -123,6 +150,7 @@ public class EpubSearchActivity extends BaseActivity {
 				getsearchmore("",gpage,6);
 			}
 		});
+	
 	}
 	@Override
 	protected void onResume() {
@@ -143,6 +171,7 @@ public class EpubSearchActivity extends BaseActivity {
 	
 	private void  getsearch(String key,int page,int pagesize)
 	{
+		customProgressDialog.show();
 		gparams = new HashMap<String, String>();
 		gparams.put("keyword", key);
 		gparams.put("page", "" +page);// µ±Ç°Ò³Êý

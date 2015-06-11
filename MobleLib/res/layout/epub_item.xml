@@ -15,6 +15,7 @@
         android:layout_marginTop="2.0dip"
         android:background="@android:color/transparent"
         android:saveEnabled="true"
+        android:src="@drawable/defaut_book"
         />
     
     <TextView
