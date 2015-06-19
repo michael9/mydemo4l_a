@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.opengl.Visibility;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -78,7 +79,8 @@ public class EbookDetailActivity extends BaseActivity {
 		//设置标题，显示下载按钮
 		View v = findViewById(R.id.head_bar);
 		ImageView download = (ImageView)v.findViewById(R.id.btn_right_header);
-		download.setVisibility(View.VISIBLE);
+//		download.setVisibility(View.GONE);
+//		download.setVisibility(View.VISIBLE);
 		
 		Bundle bundle = getIntent().getBundleExtra("detaiinfo");
 		dBook = (EBook) bundle.getSerializable("book");

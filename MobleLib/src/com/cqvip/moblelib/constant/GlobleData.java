@@ -23,7 +23,8 @@ public class GlobleData {
 	 * 服务器地址
 	 * */
 	public final static   String SERVER_URL = "http://mobile.cqvip.com";
-	public final static   String EPUB_HOME_URL = "http://222.180.195.154:2300/";
+//	public final static   String EPUB_HOME_URL = "http://222.180.195.154:2300/";
+	public final static   String EPUB_HOME_URL = "http://113.31.19.26:9093/";
 	//public final static   String SERVER_URL = "http://192.168.20.61:8080";
 	/**
 	 * 服务器地址
