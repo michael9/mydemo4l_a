@@ -176,10 +176,16 @@ public class MainMenuActivity extends BaseActivity {
 			case 0:
 			case 1:
 			case 2:
-			case 3:
 				intent.setClass(MainMenuActivity.this, activities[position]);
 				startActivity(intent);
 				break;
+				
+			case 3:
+				intent.setClass(MainMenuActivity.this,WebViewAnnouceActivity.class);
+				intent.putExtra("urlstr", "http://weixin.mobcld.com/webcld/tmp/ahslsd_newbook/NewBook.htm");
+				startActivity(intent);
+				break;
+				
 			case 4:// 个人中心,需登录
 
 			case 8:// 书友圈
